@@ -71,7 +71,7 @@ markdown_extensions:
 # 使用缩进来表示子目录。
 nav:
   - Preface: index.md
-    - 杂项:
+    - I 杂项:
       - 1 新博客建立啦: misc/new.md
   # - I Foundations:
   #     - 1 The Role of Algorithms in Computing:
