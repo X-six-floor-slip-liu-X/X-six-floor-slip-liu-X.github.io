@@ -1,15 +1,15 @@
 # Project information 
-site_name: CLRS Solutions
-site_description: Solutions to Introduction to Algorithms Third Edition. CLRS Solutions. The textbook that a Computer Science (CS) student must read.
-site_author: robinyqc
-site_url: https://CLRS.robinyqc.cn/CLRS
+site_name: 六楼溜刘的小窝
+site_description: 这是一个中学 OIer 的博客，他会在这里分享一些算法和题解，喜欢可以进来贴贴。
+site_author: 六楼溜刘 aka six-floor-slip-liu
+site_url: https://x-six-floor-slip-liu-x.github.io/
 
 # Repository 
-repo_name: robinyqc/CLRS-Solution
-repo_url: https://github.com/robinyqc/CLRS-Solution
+repo_name: X-six-floor-slip-liu-X/六楼溜刘的小窝
+repo_url: https://github.com/X-six-floor-slip-liu-X/X-six-floor-slip-liu-X.github.io
 
 # Copyright 
-copyright: Built by <a href="http://robinyqc.cn"> robinyqc.</a> Forked form <a href="https://github.com/walkccc/CLRS"> walkccc.me</a>.
+copyright: Built by <a href="http://robinyqc.cn"> robinyqc.</a> 
 
 # Configuration
 theme:
@@ -43,7 +43,7 @@ theme:
     repo: fontawesome/brands/github
 
   features:
-    # - navigation.tabs # 这一项将 nav 的顶级标题置顶
+    - navigation.tabs # 这一项将 nav 的顶级标题置顶
     - navigation.top # 返回顶部标签
 
 # Customization
@@ -71,12 +71,14 @@ markdown_extensions:
 # 使用缩进来表示子目录。
 nav:
   - Preface: index.md
-  - I Foundations:
-      - 1 The Role of Algorithms in Computing:
-          - 1.1 Algorithms: Chap01/1.1.md
-          - 1.2 Algorithms as a technology: Chap01/1.2.md
-          - Chap 1 Problems:
-              - Problem 1-1: Chap01/Problems/1-1.md
+    - 杂项:
+      - 1 新博客建立啦: misc/new.md
+  # - I Foundations:
+  #     - 1 The Role of Algorithms in Computing:
+  #         - 1.1 Algorithms: Chap01/1.1.md
+  #         - 1.2 Algorithms as a technology: Chap01/1.2.md
+  #         - Chap 1 Problems:
+  #             - Problem 1-1: Chap01/Problems/1-1.md
 #       - 2 Getting Started:
 #           - 2.1 Insertion sort: Chap02/2.1.md
 #           - 2.2 Analyzing algorithms: Chap02/2.2.md
