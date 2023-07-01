@@ -15,9 +15,9 @@ copyright: Built by <a href="http://robinyqc.cn"> robinyqc.</a>
 theme:
   name: material # 不能改
   language: zh # 中文   
-#   language: en # English 
+  language: en # English 
   custom_dir: custom # 不能改
-  favicon: assets/favicon.png 
+  favicon: assets/favicon.png   
   palette:
     # Light mode
     - media: '(prefers-color-scheme: light)'
@@ -71,5 +71,6 @@ markdown_extensions:
 # 使用缩进来表示子目录。
 nav:
   - Preface: index.md
-    - I 杂项:
-      - 1 新博客建立啦: misc/new.md
+  - I 杂项:
+    - 1 新博客建立啦: misc/new.md
+    - 2 MarkDown 常用语法: misc/try_md.md

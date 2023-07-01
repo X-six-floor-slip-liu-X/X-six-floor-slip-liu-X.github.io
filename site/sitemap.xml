@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://CLRS.robinyqc.cn/CLRS/</loc>
+         <loc>https://x-six-floor-slip-liu-x.github.io/</loc>
          <lastmod>2023-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://CLRS.robinyqc.cn/CLRS/Chap01/1.1/</loc>
+         <loc>https://x-six-floor-slip-liu-x.github.io/misc/new/</loc>
          <lastmod>2023-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://CLRS.robinyqc.cn/CLRS/Chap01/1.2/</loc>
-         <lastmod>2023-07-01</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://CLRS.robinyqc.cn/CLRS/Chap01/Problems/1-1/</loc>
+         <loc>https://x-six-floor-slip-liu-x.github.io/misc/try_md/</loc>
          <lastmod>2023-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
