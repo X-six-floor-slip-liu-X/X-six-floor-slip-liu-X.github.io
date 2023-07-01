@@ -9,7 +9,7 @@ repo_name: X-six-floor-slip-liu-X/六楼溜刘的小窝
 repo_url: https://github.com/X-six-floor-slip-liu-X/X-six-floor-slip-liu-X.github.io
 
 # Copyright 
-copyright: Built by <a href="http://robinyqc.cn"> robinyqc.</a> 
+copyright: Built by 六楼溜刘.
 
 # Configuration
 theme:
@@ -50,7 +50,7 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github 
-      link: https://github.com/robinyqc
+      link: https://github.com/X-six-floor-slip-liu-X
 
 extra_javascript:
   - js/mathjax/tex-chtml.js # 不能改
@@ -71,7 +71,7 @@ markdown_extensions:
 # 格式： - 名称: 路径（通常是相对路径）
 # 使用缩进来表示子目录。
 nav:
-  - Preface: index.md
-  - I 杂项:
+  - 主页: index.md
+  - 杂项:
     - 1 新博客建立啦: misc/new.md
     - 2 MarkDown 常用语法: misc/try_md.md
