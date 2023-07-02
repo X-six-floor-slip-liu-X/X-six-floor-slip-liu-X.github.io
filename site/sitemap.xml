@@ -2,17 +2,92 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://x-six-floor-slip-liu-x.github.io/</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://x-six-floor-slip-liu-x.github.io/misc/new/</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://x-six-floor-slip-liu-x.github.io/misc/try_md/</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230113D_D/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230407C_C/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230411C_C/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230418C_C/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230420C_ABC/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230426C_ABC/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230428C_ABC/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230430C_ABCD/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230524C_D/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230617C_C/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230624B_ABCD/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230626B_ABC/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230626B_D/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/20230630B_C/</loc>
+         <lastmod>2023-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://x-six-floor-slip-liu-x.github.io/solution/about/</loc>
+         <lastmod>2023-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
