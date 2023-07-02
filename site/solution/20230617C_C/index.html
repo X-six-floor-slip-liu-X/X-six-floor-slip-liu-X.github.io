@@ -821,6 +821,8 @@ $$</p>
 <p>容易想到先把 $K$ 和 $O_i$ 离线下来从小到大排序，每次碰到 $K$ 维护一个指针把小于等于它的 $O_i$ 对应的 $- 2\left\lfloor\frac{O_i}{c}\right\rfloor+r_i$ 的全部加进一棵 按 $O_i \bmod c$ 维护线段树里，然后查询前缀、后缀最小值还有情况一的后缀最小值分别代式子就完事了。</p>
 <p>有一堆细节要处理，具体看代码。</p>
 <h3 id="code">code</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#define mem(a,b) memset(a,b,sizeof(a))</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cp">#define forup(i,s,e) for(i64 i=(s);i&lt;=(e);i++)</span>
@@ -980,6 +982,7 @@ $$</p>
 </span><span id="__span-0-157"><a id="__codelineno-0-157" name="__codelineno-0-157" href="#__codelineno-0-157"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-0-158"><a id="__codelineno-0-158" name="__codelineno-0-158" href="#__codelineno-0-158"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 
 
 

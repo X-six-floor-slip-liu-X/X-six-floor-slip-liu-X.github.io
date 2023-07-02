@@ -843,6 +843,8 @@
 <p>所以我们不能直接当成完备匹配来做，但我们设右部某点为 $W$，汇点为 $T$，假如 $W$ 为非匹配点，$W \to T$ 的残量必定为 $1$，反之，假如 $W'$ 为匹配点，$W \to T$ 的残量必定为 $0$，即 $T \to W'$ 的残量为 $1$，换言之，存在一条路径 $W \to T \to W'$。假如二分图中有一条 $V$ 到 $U$ 的增广路，那么必定能从 $U$ 经过残量网络到达 $W$，进而到达 $V$，$U,V$ 仍在同一个强连通分量中。</p>
 <p>在这一步中，跑一遍强连通的复杂度为 $O((n+m)+(nm-k))$，最终枚举求解的复杂度为 $O(m)$，故整个算法的复杂度是 $O((n+m)\sqrt{nm-k}+(n+m)+(nm-k)+m)$，差不多是 $O(n^2)$ 级别的，可以通过此题。</p>
 <h3 id="code">code</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#include</span><span class="cpf">&lt;algorithm&gt;</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span>
@@ -1019,6 +1021,7 @@
 </span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174" href="#__codelineno-0-174"></a><span class="w">    </span><span class="n">print</span><span class="p">();</span>
 </span><span id="__span-0-175"><a id="__codelineno-0-175" name="__codelineno-0-175" href="#__codelineno-0-175"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 
 
 

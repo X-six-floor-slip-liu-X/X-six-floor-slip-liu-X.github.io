@@ -955,6 +955,8 @@ $$</p>
 <h3 id="code">code</h3>
 <p>我的代码写的很丑，这里贴一下 <a href="https://www.luogu.com.cn/user/480292"><img alt="_Cyan_" src="https://cdn.luogu.com.cn/upload/usericon/480292.png" /></a> 的代码。</p>
 <p>开两个树状数组分别维护前后缀最大值。</p>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">//author: _Cyan_</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -993,6 +995,7 @@ $$</p>
 </span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">    </span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
 </span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 <h2 id="t2">T2 题解</h2>
 <p>首先容易发现长度为 $k$ 的字符串 $P$ 和 $Q$ 能匹配当且仅当：</p>
 <p>$$\nexists 1 \le i,j \le k,i \ne j\;s.t.\;P_i=P_j,Q_i \ne Q_j \;or\;P_i \ne P_j,Q_i=Q_j$$</p>
@@ -1016,6 +1019,8 @@ $$</p>
 <p>最后 $B_2$ 会对哈希值加上 $B_2-B_1$ 的贡献。</p>
 <p>然后直接做就行了，比较板。</p>
 <h3 id="code_1">code</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">//author:six-floor-slip-liu</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -1101,12 +1106,15 @@ $$</p>
 </span><span id="__span-1-83"><a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">Q</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="n">solve</span><span class="p">();</span>
 </span><span id="__span-1-84"><a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 <h2 id="t3">T3 题解</h2>
 <p>这道题想到了做法就爆简单，没想到就爆难。</p>
 <p>首先容易想到这道题类似于求出网络流图的所有割并输出方案，<del>然后我赛时因为觉得和网络流有关就直接放弃了。</del></p>
 <p>首先答案的 $K$ 肯定小于等于从 $S$ 到 $T$ 的最短路长度，因为假设 $K$ 大于最短路长度，那么必然存在一个权值 $x$ 使得删掉它对最短路没影响，那么 $S$ 和 $T$ 就连通了。</p>
 <p>知道了这个结论考虑如何构造方案，容易发现在网络流分层图中假如删掉了某一层的所有结点和与之相连的边，那么源点 $S$ 和汇点 $T$ 必定不连通，这道题我们可以用一样的思路给图分层，然后就做完了。</p>
 <h3 id="code_2">code</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">//author:six-floor-slip-liu</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -1164,6 +1172,7 @@ $$</p>
 </span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-2-56"><a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 <h2 id="t4">T4 题解</h2>
 <p>首先看到异或就想到 01Trie，考虑这个问题在 Trie 上应该如何解决。</p>
 <blockquote>
@@ -1172,7 +1181,7 @@ $$</p>
 <p>设 $f(i,p)$ 表示考虑 $2^{p+1}\sim2^{60}$ 这些位数全都相等的数中，当前在 $i$ 结点合法的方案数，即只考虑以 $i$ 为根的子树的方案数，易得递归式：</p>
 <p>$$
 f(i,p)=\begin{cases}
-f(ls(i),p-1)\cdot f(rs(i),p-1) &amp;x \le 2^p\
+f(ls(i),p-1)\cdot f(rs(i),p-1) &amp;x \le 2^p\\
 ? &amp;x&gt;2^p
 \end{cases}
 $$</p>
@@ -1181,7 +1190,7 @@ $$</p>
 <p>但是假如这一层必定产生分支，我们只用 $f$ 就无法处理了，这时候不妨令 $g(i,j,p,w)$ 表示考虑在 $i$ 的子树中选恰好一个，$j$ 的子树中选恰好一个，$x$ 减去 $p$ 以上位数产生的贡献后还剩下 $w$ 的方案数，这时候就能把上面的递归式补齐了:</p>
 <p>$$
 f(i,p)=\begin{cases}
-f(ls(i),p-1)\cdot f(rs(i),p-1) &amp;x \le 2^p\
+f(ls(i),p-1)\cdot f(rs(i),p-1) &amp;x \le 2^p\\
 g(ls(i),rs(i),p-1,x-2^p)+cnt_i+1 &amp;x&gt;2^p
 \end{cases}
 $$</p>
@@ -1189,8 +1198,8 @@ $$</p>
 <p>这时候我们考虑如何求 $g(i,j,p,w)$，先上递归式：</p>
 <p>$$
 g(i,j,p,w)=\begin{cases}
-g(ls(i),rs(j),p-1,w-2^p)+g(rs(i),ls(j),p-1,w-2^p) &amp;w \And 2^p =1\
-g(rs(i),rs(j),p-1,w)+g(ls(i),ls(j),p-1,w)\+g(ls(i),rs(j),p-1,w-2^p)+g(rs(i),ls(j),p-1,w-2^p) &amp;w \And 2^p \ne1
+g(ls(i),rs(j),p-1,w-2^p)+g(rs(i),ls(j),p-1,w-2^p) &amp;w \And 2^p =1\\
+g(rs(i),rs(j),p-1,w)+g(ls(i),ls(j),p-1,w)\\+g(ls(i),rs(j),p-1,w-2^p)+g(rs(i),ls(j),p-1,w-2^p) &amp;w \And 2^p \ne1
 \end{cases}
 $$</p>
 <p><del>他妈的好长。</del></p>
@@ -1199,6 +1208,8 @@ $$</p>
 <p>总之大体实现就是写两个递归函数互相调用就行了。</p>
 <p>另外注意一下我的递归式默认 Trie 是一棵满二叉树，实现时注意判一下结点的存在性。</p>
 <h3 id="code_3">code</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">//author:six-floor-slip-liu</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -1253,6 +1264,7 @@ $$</p>
 </span><span id="__span-3-52"><a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lld&quot;</span><span class="p">,</span><span class="n">solve</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">60</span><span class="p">)</span><span class="mi">-1</span><span class="p">);</span>
 </span><span id="__span-3-53"><a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 
 
 

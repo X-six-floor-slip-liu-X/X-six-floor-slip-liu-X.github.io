@@ -876,6 +876,8 @@
 <p>首先我们发现 $f(n)$ 非常难处理，我们考虑对每个不同的 $f(n)$ 分别计算。</p>
 <p>容易发现，$f(n)=x$ 的 $n$ 中，任意一个数都可以表示为 $p\cdot 2^x+c\cdot x$，其中 $p$ 是一个奇数，所以 $f=x$ 的第 $m$ 个数即可表示为 $(2m-1)\cdot 2^x+c\cdot x$，化简一下就是 $m\cdot 2^{x+1}-2^x+c\cdot x$，容易发现这是个关于 $m$ 的一次函数（由于是离散的所以其实也是个等差数列）的形式，我们可以二分第 $k$ 大的 $a$，对于每个 $f$，求出有几个 $a$ 大于它。得到答案后用等差数列求和解决，复杂度 $O(\log^2V)$，其中 $V$ 为值域。</p>
 <h3 id="code">code</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#define ll long long</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cp">#define mem(a,b) memset(a,b,sizeof(a))</span>
@@ -961,6 +963,7 @@
 </span><span id="__span-0-83"><a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-0-84"><a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 <h2 id="t2">T2 题解</h2>
 <p><del>因为我赛时就切出来了所以我不知道部分分怎么写。</del></p>
 <p>由于三种手势是等价的所以只讲 $R$ 的情况。</p>
@@ -988,6 +991,8 @@ $$dp_{i,0}=\max{dp_{ns,0},dp_{nq-1,0},dp_{nq-1,1}}$$</p>
 <p>大体思路和 $S$ 的一样就不多赘述，需要注意如果前面没有需要处理的 $P$，那么 $?$ 是可以做出贡献的，加个一。</p>
 <p>另外容易发现每次 $dp_{i}$ 都是从 $dp_{i-1}$ 或者 $ns,nq$ 转移过来的，所以我们可以把 $i$ 这一维压掉，卷空间和长度最优解。</p>
 <h3 id="code_1">code</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="cp">#define mem(a,b) memset(a,b,sizeof(a))</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="cp">#define forup(i,s,e) for(register int i=(s);i&lt;=(e);i++)</span>
@@ -1024,6 +1029,7 @@ $$dp_{i,0}=\max{dp_{ns,0},dp_{nq-1,0},dp_{nq-1,1}}$$</p>
 </span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 <p>附件：<a href="https://cdn.luogu.com.cn/upload/image_hosting/w2ga96ie.png">官方题解</a>。</p>
 <h2 id="t3">T3 题解</h2>
 <p>首先不考虑删除操作，这道题应该怎么做。</p>
@@ -1035,6 +1041,8 @@ $$dp_{i,0}=\max{dp_{ns,0},dp_{nq-1,0},dp_{nq-1,1}}$$</p>
 <p>操作一十分简单，假如比原来位置靠前就不动，靠后就先减去原来的再加上新的就行了。</p>
 <p>复杂度就是线段树模板的复杂度，完全能过，需要注意空间要开三倍（因为最开始要加 $2n$ 个操作）。</p>
 <h3 id="code_2">code</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="cp">#define ll long long</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="cp">#define mem(a,b) memset(a,b,sizeof(a))</span>
@@ -1167,6 +1175,7 @@ $$dp_{i,0}=\max{dp_{ns,0},dp_{nq-1,0},dp_{nq-1,1}}$$</p>
 </span><span id="__span-2-130"><a id="__codelineno-2-130" name="__codelineno-2-130" href="#__codelineno-2-130"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-2-131"><a id="__codelineno-2-131" name="__codelineno-2-131" href="#__codelineno-2-131"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 
 
 

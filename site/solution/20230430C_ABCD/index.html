@@ -915,6 +915,8 @@
 <p>思考一下，首先最大的子段和肯定是整个数组，对于一个长度为 $l$ 的子段，删除两端其中·一个数得到的两个长度为 $l-1$ 的子段的和肯定小于原先的那个子段（显而易见，因为都是正整数）。</p>
 <p>容易想到用一个平衡树（<code>set</code>），维护子段的左右端点（闭区间）和子段和，按子段和为第一关键字，左右端点为第二、第三关键字排序。最初压入整个数组（即最大的子段），每次取出堆顶的数后再把删除两端得到的新子段分别压入。每次压入时会去重所以不用担心重复的问题。这样做必然会先找到较大的子段后再找到较小的，原因上面已经证了。</p>
 <h3 id="code">code</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#include</span><span class="cpf">&lt;algorithm&gt;</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span>
@@ -963,6 +965,7 @@
 </span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="w">     </span><span class="p">}</span>
 </span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 <h2 id="t2">T2 题解</h2>
 <p>很显然这是一道树形 dp。</p>
 <p>设 $dp_{u,i}$ 表示考虑以点 $u$ 为根的子树，点 $u$ 取 $i$ 的方案数，有一个显然的转移方程。</p>
@@ -982,6 +985,8 @@
 <p>所以我们可以只存开头 $k\cdot(n-1)$ 个值，中间只用存一个，转移也只算这 $k \cdot (n-1)+1$ 个值，复杂度 $O(n^2k)$。</p>
 <p>另外我小数据用暴力过的，因为我不知道怎么把这个结论用在数据较小（指 $m &lt; k\cdot(n-1)$）的情况。</p>
 <h3 id="code_1">code（比较屎山）</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="cp">#include</span><span class="cpf">&lt;algorithm&gt;</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span>
@@ -1085,6 +1090,7 @@
 </span><span id="__span-1-101"><a id="__codelineno-1-101" name="__codelineno-1-101" href="#__codelineno-1-101"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-1-102"><a id="__codelineno-1-102" name="__codelineno-1-102" href="#__codelineno-1-102"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 <h2 id="t3">T3 题解</h2>
 <p>这道题给了很多部分分，每个部分分都有对应的做法，但是我只讲正解。</p>
 <p>首先我们很好求以每个点为右下角的最大的正方形。</p>
@@ -1096,6 +1102,8 @@ $$\forall a_{i,j}=1,f_{i,j}=\min{f_{i-1,j},f_{i,j-1},f_{i-1,j-1}}+1$$</p>
 <p>但是这样的复杂度 $O(n^2 \log n)$ 显然过不了，注意到我们只需要查询矩阵内最大的 $f$，这是一个二维 $rmq$，可以 $O(n^2\log^2n)$ 预处理，$O(1)$ 查询。</p>
 <p>故总复杂度为 $O(n^2+n^2\log^2n+T)$，注意常数优化。</p>
 <h3 id="code_2">code</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="cp">#define mem(a,b) memset(a,b,sizeof(a))</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="cp">#define forup(i,s,e) for(int i=(s);i&lt;=(e);i++)</span>
@@ -1166,11 +1174,14 @@ $$\forall a_{i,j}=1,f_{i,j}=\min{f_{i-1,j},f_{i,j-1},f_{i-1,j-1}}+1$$</p>
 </span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-2-69"><a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 <h2 id="t4">T4 题解</h2>
 <p>这题不难。</p>
 <p>首先，这条最短路一定是以某个特殊城市开始，以某个特殊城市结束的，不然它必定不优。容易得到 $40pts$ 做法，对于每个特殊城市跑一遍 dijkstra，除了距离外，设 $dp_{i,j}$ 表示 $i$ 到 $j$ 的最短路至多经过多少个特殊城市，最后统计 $dp_{i,j}=k$ 的最小距离即可。复杂度 $O(n^2\log n)$（堆优化）。</p>
 <p>考虑能否快速找到正解的起始点，发现假如我们对任意一个特殊点跑 dijkstra，距离它最远的点即为一个可行的起点，因为如果从其它点开始就要往那边绕一圈，那必定不优（感性理解一下），复杂度为 $O(n\log n)$。</p>
 <h3 id="code_3">code</h3>
+<details class="success">
+<summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cp">#include</span><span class="cpf">&lt;algorithm&gt;</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span>
@@ -1247,6 +1258,7 @@ $$\forall a_{i,j}=1,f_{i,j}=\min{f_{i-1,j},f_{i,j-1},f_{i-1,j-1}}+1$$</p>
 </span><span id="__span-3-74"><a id="__codelineno-3-74" name="__codelineno-3-74" href="#__codelineno-3-74"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
 </span><span id="__span-3-75"><a id="__codelineno-3-75" name="__codelineno-3-75" href="#__codelineno-3-75"></a><span class="p">}</span>
 </span></code></pre></div>
+</details>
 
 
 
