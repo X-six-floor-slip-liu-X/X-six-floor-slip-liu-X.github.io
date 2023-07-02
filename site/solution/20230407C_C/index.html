@@ -502,9 +502,47 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          20230407C 进化
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         20230407C 进化
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    题解
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    code
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -705,6 +743,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    题解
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    code
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -723,7 +783,7 @@
 
 <h1 id="dcpp-1s-512m">进化（D.cpp 1S 512M）</h1>
 <p><a href="https://local.cwoi.com.cn:8443/contest/C0216/problem/C">传送门</a></p>
-<h1 id="_1">题解</h1>
+<h2 id="_1">题解</h2>
 <p>首先，$b[i]=(a[i+1]+a[i-1])\bmod 2$ 等价于 $b[i]=a[i+1] \oplus a[i-1]$。</p>
 <p>我们考虑一种暴力做法。</p>
 <p>假设进化 $m$ 次后的数组为 $a_m$，那么注意到 $a_m[i]$ 可以转移到 $a_{m+1}[i+1]$ 和 $a_{m+1}[i-1]$。</p>

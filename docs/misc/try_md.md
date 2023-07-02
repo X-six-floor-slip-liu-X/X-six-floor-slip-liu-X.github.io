@@ -128,7 +128,7 @@ $$
 
 ## Mkdocs 拓展 MarkDown 语法
 
-### 提示框
+### PyMdown blocks
 
 !!! note "这是 note 类型的提示框"
     提示
@@ -162,6 +162,59 @@ $$
     发现一个 bug，请尽快修复！
 ```
 
+/// admonition | 新写法
+    type: note
+这是一种不用缩进的写法。
+///
+
+/// tab | Tab 1
+相邻的 tab 会并排显示。
+///
+
+/// tab | Tab 2
+这里 Tab 1 和 Tab 2 就并排显示了。
+///
+
+```
+/// admonition | 新写法
+    type: note
+这是一种不用缩进的写法。
+///
+
+/// tab | Tab 1
+相邻的 tab 会并排显示。
+///
+
+/// tab | Tab 2
+这里 Tab 1 和 Tab 2 就并排显示了。
+///
+```
+
+/// details | 折叠的提示框
+    open: False
+    type: note
+这是一个默认折叠的 note 类型的提示框
+///
+
+/// details | 折叠的提示框
+    open: True
+    type: success
+这是一个默认开启的 success 类型的提示框
+///
+
+```
+/// details | 折叠的提示框
+    open: False
+    type: note
+这是一个默认折叠的 note 类型的提示框
+///
+
+/// details | 折叠的提示框
+    open: True
+    type: success
+这是一个默认开启的 success 类型的提示框
+///
+```
 ### 代码块拓展
 
 ```cpp title='A+B' linenums="1" hl_lines="3 4"

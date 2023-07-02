@@ -569,8 +569,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           20230428C
@@ -587,8 +585,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -597,9 +593,62 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#t1" class="md-nav__link">
+    T1 题解
+  </a>
+  
+    <nav class="md-nav" aria-label="T1 题解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#code" class="md-nav__link">
     code
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#t2" class="md-nav__link">
+    T2 题解
+  </a>
+  
+    <nav class="md-nav" aria-label="T2 题解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code_1" class="md-nav__link">
+    code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#t3" class="md-nav__link">
+    T3 题解
+  </a>
+  
+    <nav class="md-nav" aria-label="T3 题解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code_2" class="md-nav__link">
+    code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -733,8 +782,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -743,9 +790,62 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#t1" class="md-nav__link">
+    T1 题解
+  </a>
+  
+    <nav class="md-nav" aria-label="T1 题解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#code" class="md-nav__link">
     code
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#t2" class="md-nav__link">
+    T2 题解
+  </a>
+  
+    <nav class="md-nav" aria-label="T2 题解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code_1" class="md-nav__link">
+    code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#t3" class="md-nav__link">
+    T3 题解
+  </a>
+  
+    <nav class="md-nav" aria-label="T3 题解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code_2" class="md-nav__link">
+    code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -767,9 +867,11 @@
   
 
 
+  <h1>20230428C</h1>
+
 <p><a href="https://local.cwoi.com.cn:8443/contest/C0232/problem/A">传送门</a></p>
 <p>因为黑树说最好不要放出来我就把搬运删掉了。</p>
-<h1 id="t1">T1 题解</h1>
+<h2 id="t1">T1 题解</h2>
 <p><del>这道题我赛时部分分炸掉了，所以我不会部分分。</del></p>
 <p>首先我们发现 $f(n)$ 非常难处理，我们考虑对每个不同的 $f(n)$ 分别计算。</p>
 <p>容易发现，$f(n)=x$ 的 $n$ 中，任意一个数都可以表示为 $p\cdot 2^x+c\cdot x$，其中 $p$ 是一个奇数，所以 $f=x$ 的第 $m$ 个数即可表示为 $(2m-1)\cdot 2^x+c\cdot x$，化简一下就是 $m\cdot 2^{x+1}-2^x+c\cdot x$，容易发现这是个关于 $m$ 的一次函数（由于是离散的所以其实也是个等差数列）的形式，我们可以二分第 $k$ 大的 $a$，对于每个 $f$，求出有几个 $a$ 大于它。得到答案后用等差数列求和解决，复杂度 $O(\log^2V)$，其中 $V$ 为值域。</p>
@@ -859,7 +961,7 @@
 </span><span id="__span-0-83"><a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-0-84"><a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a><span class="p">}</span>
 </span></code></pre></div>
-<h1 id="t2">T2 题解</h1>
+<h2 id="t2">T2 题解</h2>
 <p><del>因为我赛时就切出来了所以我不知道部分分怎么写。</del></p>
 <p>由于三种手势是等价的所以只讲 $R$ 的情况。</p>
 <p>首先假设不处理问号，即每个人的手势都是已知的。</p>
@@ -923,7 +1025,7 @@ $$dp_{i,0}=\max{dp_{ns,0},dp_{nq-1,0},dp_{nq-1,1}}$$</p>
 </span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>附件：<a href="https://cdn.luogu.com.cn/upload/image_hosting/w2ga96ie.png">官方题解</a>。</p>
-<h1 id="t3">T3 题解</h1>
+<h2 id="t3">T3 题解</h2>
 <p>首先不考虑删除操作，这道题应该怎么做。</p>
 <p>容易发现，每个数最后一次修改为 $0$ 之前的所有操作都不会有贡献，所以每个数对最大值的贡献就是它最后一次修改为 $0$ 后，所有操作 $2$ 的最大值。换言之，即为操作队列的后缀最大值。但是有些数从头到尾都没有被赋为 $0$ 过，为了解决这个问题，我们可以再开头加 $2n$ 个操作代替数组的初始化。</p>
 <p>接下来考虑如何维护删除。发现维护删除非常麻烦，但是我们可以先加入所有没被删除过的操作，然后按删除的倒序加入操作，每加入一个统计答案，这就比较好处理。</p>

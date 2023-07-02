@@ -87,6 +87,27 @@ markdown_extensions:
   - pymdownx.tilde
   - toc:
       permalink: false
+  - pymdownx.blocks.admonition:
+      types:
+      - new # type 能填哪些项，从这里就能找到
+      - settings
+      - note
+      - abstract
+      - info
+      - tip
+      - success
+      - question
+      - warning
+      - failure
+      - danger
+      - bug
+      - example
+      - quote
+  - pymdownx.blocks.details:
+  - pymdownx.blocks.html:
+  - pymdownx.blocks.definition:
+  - pymdownx.blocks.tab:
+      alternate_style: True
 
 # 目录（导航）
 # 格式： - 名称: 路径（通常是相对路径）

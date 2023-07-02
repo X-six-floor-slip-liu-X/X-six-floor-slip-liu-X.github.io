@@ -516,9 +516,81 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          20230411C 逆序对
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         20230411C 逆序对
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    题解
+  </a>
+  
+    <nav class="md-nav" aria-label="题解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10pts" class="md-nav__link">
+    10pts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20pts" class="md-nav__link">
+    20pts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4080pts" class="md-nav__link">
+    40~80pts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#100pts" class="md-nav__link">
+    100pts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    code
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -705,6 +777,62 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    题解
+  </a>
+  
+    <nav class="md-nav" aria-label="题解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10pts" class="md-nav__link">
+    10pts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20pts" class="md-nav__link">
+    20pts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4080pts" class="md-nav__link">
+    40~80pts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#100pts" class="md-nav__link">
+    100pts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    code
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -723,7 +851,7 @@
 
 <h1 id="t3">T3</h1>
 <p><a href="https://local.cwoi.com.cn:8443/contest/C0217/problem/C">传送门</a></p>
-<h1 id="_1">题解</h1>
+<h2 id="_1">题解</h2>
 <h5 id="10pts">10pts</h5>
 <p>暴力 dfs。</p>
 <h5 id="20pts">20pts</h5>
@@ -759,7 +887,7 @@
 <p>综上所述，预处理 $f$ 后，长度为 $n$ 的错排中逆序对数为 $\frac{f_{n}+f_{n-2}}{2}\times\frac{n\cdot(n-1)}{2}+\frac{2\cdot(f_{n-2}+f_{n-3})}{2}\times\frac{n\cdot(n-1)\cdot(n-2)}{6}$（$\frac{n\cdot(n-1)\cdot(n-2)}{6}$ 为三元组的个数）。</p>
 <p>我们可以进行一些简单的化简，容易发现 $f_{n-2}+f_{n-3}=\frac{f_{n-1}}{n-2}$，故最终式子为：</p>
 <p>$$\frac{f_{n}+f_{n-2}}{2}\times\frac{n\cdot(n-1)}{2}+\frac{f_{n-1}\cdot n\cdot(n-1)}{6}$$</p>
-<h3 id="code">code</h3>
+<h2 id="code">code</h2>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#include</span><span class="cpf">&lt;algorithm&gt;</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span>
