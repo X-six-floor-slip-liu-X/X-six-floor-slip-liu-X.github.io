@@ -117,6 +117,16 @@ nav:
   - 杂项:
     - 新博客建立啦: misc/new.md
     - MarkDown 常用语法: misc/try_md.md
+  - 算法笔记:
+    - 关于: algo/about.md
+    # - 基础算法:
+    # - 动态规划:
+    # - 数据结构:
+    # - 数学:
+    - 图论:
+      - 网络流基础: algo/graph/flow.md
+    # - 字符串:
+    # - 杂项:
   - 题解:
     - 关于: solution/about.md
     - 20230113D 染色: solution/20230113D_D.md
