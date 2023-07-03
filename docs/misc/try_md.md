@@ -57,6 +57,8 @@ int main(){
 ###### 六级标题
 ```
 
+因为标题行会让右侧的子目录变得非常奇怪我就不贴了。
+
 ## 列表
 
 ### 有序列表
@@ -213,6 +215,71 @@ $$
     open: True
     type: success
 这是一个默认开启的 success 类型的提示框
+///
+```
+
+所有可以用的提示框类型：
+
+/// admonition | quote
+    type: quote
+///
+
+/// admonition | example
+    type: example
+///
+
+/// admonition | new
+    type: new
+///
+
+/// admonition | settings
+    type: settings
+///
+
+/// admonition | note
+    type: note
+///
+
+/// admonition | abstract
+    type: abstract
+///
+
+/// admonition | info
+    type: info
+///
+
+/// admonition | tip
+    type: tip
+///
+
+/// admonition | success
+    type: success
+///
+
+/// admonition | question
+    type: question
+///
+
+/// admonition | warning
+    type: warning
+///
+
+/// admonition | failure
+    type: failure
+///
+
+/// admonition | danger
+    type: danger
+///
+
+/// admonition | bug
+    type: bug
+///
+
+
+```
+/// admonition | ...
+    type: ...
 ///
 ```
 ### 代码块拓展
