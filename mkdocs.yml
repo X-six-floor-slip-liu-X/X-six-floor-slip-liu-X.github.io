@@ -16,7 +16,7 @@ theme:
   name: material # 不能改
   language: zh # 中文   
   language: en # English 
-  custom_dir: custom # 不能改
+  custom_dir: overrides # 不能改
   favicon: assets/favicon.png   
   palette:
     # Light mode
