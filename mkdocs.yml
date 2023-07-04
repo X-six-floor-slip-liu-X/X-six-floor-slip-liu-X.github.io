@@ -118,6 +118,7 @@ nav:
     - 关于: misc/about.md
     - 新博客建立啦: misc/new.md
     - MarkDown 常用语法: misc/try_md.md
+    - 挂分秘籍: misc/how_to_get_0pts.md
   - 算法笔记:
     - 关于: algo/about.md
     # - 基础算法:
@@ -145,3 +146,4 @@ nav:
     - 20230626B 敢览求: solution/20230626B_D.md
     - 20230630B 愿: solution/20230630B_C.md
     - 20230630B: solution/20230630B_ABD.md
+    - 20230704B: solution/20230704B_ABCD.md
