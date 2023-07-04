@@ -115,6 +115,7 @@ markdown_extensions:
 nav:
   - 主页: index.md
   - 杂项:
+    - 关于: misc/about.md
     - 新博客建立啦: misc/new.md
     - MarkDown 常用语法: misc/try_md.md
   - 算法笔记:
