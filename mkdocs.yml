@@ -67,6 +67,8 @@ extra:
   social:
     - icon: fontawesome/brands/github 
       link: https://github.com/X-six-floor-slip-liu-X
+    - icon: fontawesome/solid/envelope
+      link: mailto:six_floor_slip_liu@163.com
 
 extra_javascript:
   - js/mathjax/tex-chtml.js # 不能改
@@ -147,3 +149,5 @@ nav:
     - 20230630B 愿: solution/20230630B_C.md
     - 20230630B: solution/20230630B_ABD.md
     - 20230704B: solution/20230704B_ABCD.md
+  - 关于: about.md
+  - 友链: friendslinks.md
