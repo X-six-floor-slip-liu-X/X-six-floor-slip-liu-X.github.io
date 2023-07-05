@@ -5,6 +5,7 @@
 | [![](https://avatars.githubusercontent.com/u/87306476?v=4&size=100)](https://fat-old-eight.github.io/friendlinks.html) | FatOldEight | Tip：如何提升自己的技术，根据所有大佬的建（fu）议（du）…多练 |
 | [![](https://avatars.githubusercontent.com/u/49364506?v=4&size=100)](https://blog.earthmessenger.xyz/) | Earthmessenger | EarthMessenger 的极简博客 |
 | [![](https://cdn.luogu.com.cn/upload/usericon/242089.png)](https://www.luogu.com.cn/blog/luohanzhao/) | luohanzhao | 好朋友的洛谷博嗑儿 |
+| [![](https://avatars.githubusercontent.com/u/116617515?v=4&size=100)](https://robinyqc.cn/) | robinyqc | 中学 OIer。什么语言都不会。玩 MC。 |
 | [![](https://cdn.luogu.com.cn/upload/usericon/217233.png)](https://www.cnblogs.com/sqrtsecond/) | SqrtSecond | 诈骗好闪，拜谢诈骗 |
 | [![](https://cdn.luogu.com.cn/upload/usericon/329071.png)](https://www.cnblogs.com/xx019/) | xx019 | 乂？ |
 | [![](https://avatars.githubusercontent.com/u/77879721?v=4&size=100)](https://enonya.github.io/) | Enonya | “if you like. 你想填什么填什么，如果要我建议那最好填**傻逼**”——Enoya |
