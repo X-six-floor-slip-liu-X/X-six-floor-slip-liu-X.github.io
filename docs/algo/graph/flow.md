@@ -2,7 +2,7 @@
 comments: true
 ---
 
-# 网络流学习笔记
+# 网络流基础
 
 ## 前言
 
@@ -326,3 +326,286 @@ $$f(s,t) = \sum\limits_{u\in S, v\in T,(u,v)\in E}f(u,v)-\sum\limits_{u\in T, v\
 ///
 
 所以求最小割也是跑一遍 dinic 就行了，甚至还能算出方案，只要遍历一下在残量网络上 $s$ 能到达的所有结点即可。
+
+### 费用流
+
+费用流，全称**最小费用最大流**。我们学最大流时或多或少都会意识到一个网络取到最大流的流不止一个。再某些问题上，网络上的边会有使用代价（比如现实中自来水引水之类的问题），我们需要一种算法来解决在流量等于最大流的情况下，最小化费用的问题。
+
+形式化地，给定一个网络 $G=(V,E)$，每条边除了容量限制 $c(u,v)$，还有一个单位费用 $w(u,v)$，当 $(u,v)$ 的流量为 $f(u,v)$ 时，需要花费 $f(u,v)\times w(u,v)$ 的代价。
+
+
+则在该网络种总花费最小的最大流称为**最下费用最大流**，即在最大化 $\sum_{(s,v)\in E}f(s,v)$ 的前提下最小化 $\sum_{(u,v)\in E}f(u,v)\times w(u,v)$。
+
+然后反向边的费用为 $w(v,u)=-w(u,v)$，如果你理解了建反向边的意义这是显而易见的。
+
+#### SSP 算法
+
+容易发现找增广路的具体顺序不影响最终最大流具体是多少，这就是 SSP（Successive Shortest Path）算法的核心思路。SSP 算法是一个贪心的算法，它的思路是每次找总的单位费用最小的增广路进行增广，从而使最大流更容易取到最小费用。
+
+注意如果网络上存在单位费用为负的圈，SSP 算法无法正确求出最小费用最大流，但常见的问题通常不会出现负环，所以一般 SSP 就够用了。
+
+/// details | SSP 算法正确性证明
+    open: False
+    type: info
+
+我们考虑使用数学归纳法与反证法。
+
+假设流量为 $i$ 最小费用为 $w_i$，由于图上没有负圈，所以 $w_0$ 只有一种取值为 $0$。
+
+假如现在费用为 $w_i$，我们找到了一条单位费用总和最小的增广路并增加了 $1$ 流量，那么新的费用就是 $w_{i+1}$，说明这条增广路的单位费用总和为 $w_{i+1}-w_{i}$。
+
+假如存在 $w_{i+1}'<w_{i+1}$，那么肯定存在一条增广路单位费用为 $w_{i+1}'-w_i<w_{i+1}-w_i$，与之前的“单位费用最小”矛盾，故 $w_{i+1}$ 为流量为 $i+1$ 的最小费用。
+
+证毕。
+
+///
+
+实现非常自然，只要把 dinic 中的 BFS 分层换成 Bellman–Ford 或者 SPFA 即可。
+
+/// details | Bellman-Ford + dinic 参考代码
+    open: False
+    type: success
+
+```cpp
+	int dis[N],cur[N],cst,vis[N];
+	bool bellman(){
+		forup(i,1,n){
+			cur[i]=head[i];
+		}
+		mem(dis,0x3f);mem(vis,0);
+		dis[s]=0;
+		forup(i,1,n){
+			bool flag=false;
+			forup(u,1,n){
+				if(dis[u]==inf) continue;
+				for(int i=head[u];i;i=e[i].nxt){
+					int v=e[i].v,w=e[i].w,c=e[i].c;
+					if(c==0) continue;
+					if(dis[v]>dis[u]+w){
+						dis[v]=dis[u]+w;
+						flag=true;
+					}
+				}
+			}
+			if(!flag) break;// (1)!
+		}
+		return dis[t]!=inf;
+	}
+	int dfs(int x,int flow){
+		if(x==t||!flow) return flow;
+		vis[x]=true;
+		int res=0;
+		for(int &i=cur[x];i;i=e[i].nxt){
+			int v=e[i].v,w=e[i].w;
+			if(vis[v]) continue;// (2)!
+			if(dis[v]==dis[x]+w){
+				int get=dfs(v,min(flow-res,e[i].c));
+				if(get){
+					res+=get;
+					cst+=get*w;
+					e[i].c-=get;
+					e[i^1].c+=get;
+					if(res==flow) break;
+				}
+			}
+		}
+		return res;
+	}
+	pii SSP(){
+		int ans=0;
+		while(bellman()){
+			ans+=dfs(s,inf);
+		}
+		return mkp(ans,cst);
+	}
+
+```
+
+1. 如果没有可以松弛的边直接结束。
+2. 注意反向边是负边权的所以只判 `dis[v]==dis[x]+w` 会死循环，所以在费用流中 dinic 相对 EK 算法没什么优势（但也没什么劣势就对了）。
+
+///
+
+然后 Bellman-Ford 过不了[洛谷模板题](https://www.luogu.com.cn/problem/P3381)/kk。
+
+![图示 7    ](../../pictures/graph_flow_7.png)
+
+考虑使用 SPFA。
+
+/// details | SPFA 参考代码
+    open: False
+    type: success
+
+```cpp title='只有 SPFA 部分，其余部分一模一样'
+	queue<int> q;
+	bool spfa(){
+		forup(i,1,n){
+			cur[i]=head[i];
+		}
+		mem(dis,0x3f);mem(vis,0);
+		dis[s]=0;
+		while(q.size()) q.pop();
+		q.push(s);vis[s]=1;
+		while(q.size()){
+			int u=q.front();q.pop();
+			vis[u]=0;
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v,w=e[i].w;
+				if(e[i].c&&dis[v]>dis[u]+w){
+					dis[v]=dis[u]+w;
+					if(!vis[v]){
+						q.push(v);
+						vis[v]=1;
+					}
+				}
+			}
+		}
+		mem(vis,0);// (1)!
+		return dis[t]!=inf;
+	}
+```
+
+1. 注意在 dfs 前再次清空 vis 数组。
+
+///
+
+能过模板题。
+
+![图示 8](../../pictures/graph_flow_8.png)
+
+如果用 Bellman-Ford 求解，每次找增广路的复杂度是 $O(nm)$ 的，故复杂度上界是 $O(nmf)$，如果用 SPFA 就是 $O(nkf)$ 的， ~~可以证明 $k$ 通常不大于 $2$。~~
+
+#### Primal-Dual 原始对偶算法
+
+众所周知 Bellman-Ford 的复杂度为 $O(nm)$，SPFA 也能被卡到 $O(nm)$，在稀疏图和稠密图上都比不上优先队列优化的 Dijkstra 算法 $O(m \log m)$ 的复杂度，但假如一张图上存在负边权的边就不得不用。
+
+而在图论中，有一个叫 Johnson 全源最短路的算法，它求解全源最短路只跑一遍 SPFA，通过给每个点设置势能使得边权全变为正，然后用 Dijkstra 求解，这种算法效率非常高，是 $O(nm\log m)$ 的。
+
+而在费用流中，我们同样需要多次求解最短路，是否有类似的算法呢？答案是肯定的：Primal-Dual 原始对偶算法（简称原始对偶算法）。
+
+首先跑一遍 SPFA 算出源点到每个店的初始距离 $h_i$ 作为改点的初始势能，接下来把每条边边权 $w(u,v)$ 重置为 $w(u,v)+h_u-h_v$，这样所有边权都变为非负的并且最短路一定对应原图的最短路，证明可以参考 [OI Wiki](https://oi-wiki.org/graph/shortest-path/#%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E_1)，或者我未来的最短路文章。
+
+注意到一个问题，每轮增广后残量网络的形态会变化，相应的，势能也应该变化。但我们不可能重新跑一遍 SPFA ~~不然那还不如 SSP 算法~~ 。那具体如何更新呢？设增广后源点到 $i$ 号点的距离为 $d_i$（就是跑 Dijkstra 时求出来的），只需给 $h_i$ 加上 $d_i$ 即可。
+
+/// admonition | 正确性证明
+    type: info
+
+首先容易发现这样仍会使最短路对应原图的最短路，对势能分析即可。
+
+然后证明边权非负。
+
+首先这轮增广后，由于可能有一些增广前 $f(i,j)=0$ 在增广路上，残量网络上就会多出一些 $(j,i)$ 的边，一定会满足 $d_j=d_i+w(i,j)+h_i-h_j$，不然 $(i,j)$ 就不在会增广路上了，故 $w(i,j)+(h_i+d_i)-(h_j+d_j)=0$，非负。
+
+对于原有的边，$d_i+w(i,j)+h_i-h_j \ge d_j$，这由最短路“最短”的性质可以得到。故 $w(i,j)+(h_i+d_i)-(h_j+d_j) \ge 0$，同样非负。
+
+故可以用 Dijkstra 算法正确地求出最短路。
+
+///
+
+/// details | 原始对偶算法 +dinic 参考代码
+    open: False
+    type: success
+
+```cpp linenums="1"
+	int cur[N],cst,vis[N],h[N];
+	void spfa(){
+		queue<int> q;
+		mem(h,0x3f);mem(vis,0);
+		h[s]=0;
+		q.push(s);vis[s]=1;
+		while(q.size()){
+			int u=q.front();q.pop();
+			vis[u]=0;
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v,w=e[i].w;
+				if(e[i].c&&dis[v]>dis[u]+w){
+					h[v]=h[u]+w;
+					if(!vis[v]){
+						q.push(v);
+						vis[v]=1;
+					}
+				}
+			}
+		}
+	}
+	struct Node{
+		int dis,u;
+		bool operator <(const Node &r)const{return dis>r.dis;}
+		Node(int _dis,int _u){
+			dis=_dis;u=_u;
+		}
+	};
+	int dis[N];
+	bool dij(){
+		priority_queue<Node> q;
+		mem(vis,0);
+		forup(i,1,n){cur[i]=head[i];}
+		mem(dis,inf);dis[s]=0;
+		q.push(Node{0,s});
+		while(q.size()){
+			int u=q.top().u;q.pop();
+			if(vis[u]) continue;
+			vis[u]=1;
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v,w=e[i].w;
+				if(e[i].c&&dis[v]>dis[u]+w+h[u]-h[v]){
+					dis[v]=dis[u]+w+h[u]-h[v];
+					q.push(Node{dis[v],v});
+				}
+			}
+		}
+		mem(vis,0);// (3)!
+		return dis[t]!=inf;
+	}
+	int dfs(int x,int flow){
+		if(x==t||!flow) return flow;
+		vis[x]=true;
+		int res=0;
+		for(int &i=cur[x];i;i=e[i].nxt){
+			int v=e[i].v,w=e[i].w;
+			if(vis[v]) continue;
+			if(dis[v]==dis[x]+w+h[x]-h[v]){
+				int get=dfs(v,min(flow-res,e[i].c));
+				if(get){
+					res+=get;
+					cst+=get*w;
+					e[i].c-=get;
+					e[i^1].c+=get;
+					if(res==flow) break;
+				}
+			}
+		}
+		return res;
+	}
+	pii PD(){
+		int ans=0;
+		spfa();// (1)!
+		while(dij()){
+			ans+=dfs(s,inf);
+			forup(i,1,n){
+				h[i]+=dis[i];// (2)!
+			}
+		}
+		return mkp(ans,cst);
+	}
+```
+
+1. 先初始化势能。
+2. 每次更新势能。
+3. 一定要记得清空 `vis` 数组。
+
+~~但其实费用流写 EK 要好一点。~~
+
+///
+
+跑得快了不少。
+
+![图示 9](../../pictures/graph_flow_9.png)
+
+## 结语
+
+这篇博客介绍了网络流比较基础的内容，与真正的网络流相比还只是冰山一角，这里引用一句经典的话：
+
+> 这不是结束，甚至不是结束的开始，只是开始的结束。
+
+网络流学习道阻且长，我也要努力啊！
