@@ -17,3 +17,5 @@
 ///
 
 竞赛方面比较喜欢打 Codeforces 的比赛，Atcoder 打的少，平时主要在洛谷上刷题。
+
+你可以称呼我为“六楼溜刘”或“six-floor-slip-liu”，也可以简称为“six-floor”或者“6666”。
