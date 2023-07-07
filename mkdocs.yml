@@ -130,6 +130,7 @@ nav:
     - 图论:
       - 网络流基础: algo/graph/flow.md
     # - 字符串:
+    #   - KMP 算法与 AC 自动机: algo/string/kmp_and_ac_automaton.md
     # - 杂项:
   - 题解:
     - 关于: solution/about.md
@@ -149,5 +150,6 @@ nav:
     - 20230630B 愿: solution/20230630B_C.md
     - 20230630B: solution/20230630B_ABD.md
     - 20230704B: solution/20230704B_ABCD.md
+    - 20230707NOIP集训 : solution/2023NOIP_1_ABCD.md
   - 关于: about.md
   - 友链: friendslinks.md
