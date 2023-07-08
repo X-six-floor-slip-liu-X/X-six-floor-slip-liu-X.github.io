@@ -151,5 +151,8 @@ nav:
     - 20230630B: solution/20230630B_ABD.md
     - 20230704B: solution/20230704B_ABCD.md
     - 20230707NOIP集训 : solution/20230707NOIP_ABCD.md
+  - 记录:
+    - 关于: records/about.md
+    - 2023NOIP 集训杂题: records/2023NOIP.md
   - 关于: about.md
   - 友链: friendslinks.md
