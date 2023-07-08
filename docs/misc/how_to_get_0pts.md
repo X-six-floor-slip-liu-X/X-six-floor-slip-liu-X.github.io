@@ -8,9 +8,51 @@ comments: true
 
 ## 常见错误
 
-> 数列中有负数要算最大值，但 `mx` 初始化为 $0$。
+数列中有负数要算最大值，但 `mx` 初始化为 $0$。
 
-> 忘开 `long long`。
+忘开 `long long`。
+
+线段树/平衡树等数据结构修改时不 `PushUp`。
+
+```cpp title='线段树上二分修改时先修改再引用'
+	void Erase(i64 N,i64 l=0,i64 r=maxn,i64 id=1){
+		if(l<r&&mark[id]) PushDown(id);
+		if(l==r){
+			querycnt[id]-=N;
+			querysum[id]-=lsh[l]*N;
+			return;
+		}
+		if(N<=querycnt[id<<1]){
+			Erase(N,lson);
+		}else{
+			mark[id<<1]=1;// (1)!
+			querycnt[id<<1]=0;
+			querysum[id<<1]=0;
+			Erase(N-querycnt[id<<1],rson);
+		}
+		PushUp(id);
+	}
+/// 正确写法
+	void Erase(i64 N,i64 l=0,i64 r=maxn,i64 id=1){
+		if(l<r&&mark[id]) PushDown(id);
+		if(l==r){
+			querycnt[id]-=N;
+			querysum[id]-=lsh[l]*N;
+			return;
+		}
+		if(N<=querycnt[id<<1]){
+			Erase(N,lson);
+		}else{
+			Erase(N-querycnt[id<<1],rson);
+			mark[id<<1]=1;
+			querycnt[id<<1]=0;
+			querysum[id<<1]=0;
+		}
+		PushUp(id);
+	}
+```
+
+1. $\leftarrow$ SB。
 
 待补充...
 
@@ -22,10 +64,8 @@ set<int> s;
 for(set<int>::iterator it=st;it!=ed;++it){
     s.erase(it);
 }
-```
 
-
-```cpp title='正确写法'
+//正确写法
 set<int> s;
 //do something...
 for(set<int>::iterator it=st;it!=ed;){

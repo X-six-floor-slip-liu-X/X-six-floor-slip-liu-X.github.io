@@ -240,8 +240,8 @@ bool bfs(){
 int dfs(int x,int flow){
     if(x==t||!flow) return flow;
     int res=0;
-    for(int &i=cur[x];i;i=e[i].nxt){// (1)!
-        int v=e[i].v;
+    for(int i=cur[x];i;i=e[i].nxt){// (1)!
+        cur[x]=i;int v=e[i].v;
         if(dpt[v]==dpt[x]+1){
             int get=dfs(v,min(flow-res,e[i].rst));
             if(get){
@@ -395,8 +395,8 @@ $$f(s,t) = \sum\limits_{u\in S, v\in T,(u,v)\in E}f(u,v)-\sum\limits_{u\in T, v\
 		if(x==t||!flow) return flow;
 		vis[x]=true;
 		int res=0;
-		for(int &i=cur[x];i;i=e[i].nxt){
-			int v=e[i].v,w=e[i].w;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;int v=e[i].v,w=e[i].w;
 			if(vis[v]) continue;// (2)!
 			if(dis[v]==dis[x]+w){
 				int get=dfs(v,min(flow-res,e[i].c));
@@ -561,8 +561,8 @@ $$f(s,t) = \sum\limits_{u\in S, v\in T,(u,v)\in E}f(u,v)-\sum\limits_{u\in T, v\
 		if(x==t||!flow) return flow;
 		vis[x]=true;
 		int res=0;
-		for(int &i=cur[x];i;i=e[i].nxt){
-			int v=e[i].v,w=e[i].w;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;int v=e[i].v,w=e[i].w;
 			if(vis[v]) continue;
 			if(dis[v]==dis[x]+w+h[x]-h[v]){
 				int get=dfs(v,min(flow-res,e[i].c));
