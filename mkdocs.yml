@@ -125,8 +125,9 @@ nav:
     - 关于: algo/about.md
     # - 基础算法:
     # - 动态规划:
-    # - 数据结构:
-    #   - 线段树与 BIT: algo/ds/SegT_BIT.md
+    - 数据结构:
+      # - 线段树与 BIT: algo/ds/SegT_BIT.md
+      - 平衡树入门与 Treap: algo/ds/Treap.md
     # - 数学:
     - 图论:
       - 网络流基础: algo/graph/flow.md
