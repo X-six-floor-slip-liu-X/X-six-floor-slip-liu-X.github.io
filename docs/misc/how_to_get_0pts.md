@@ -54,6 +54,10 @@ comments: true
 
 1. $\leftarrow$ SB。
 
+线段树单点修改 `querymin[id]=P`（其中 $P$ 是要改的位置，要改成的值是 $X$）。
+
+高精度把高位和低位搞反。
+
 待补充...
 
 ## STL 相关错误。
