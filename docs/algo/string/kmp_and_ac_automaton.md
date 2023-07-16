@@ -165,14 +165,7 @@ AC 自动机是**以 Trie 的结构为基础**，结合**KMP 的思想**建立�
 
 我找到一个[算法可视化](https://www.bilibili.com/video/BV14v4y1Z7fu/?spm_id_from=333.337.search-card.all.click&vd_source=59ffc95a9a04191aaa6f5fcf5ccffbe5)。
 
-如果不想/不能上 B 站的我直接放在这里↓了。但请有能力的一定去支持原作者。
-
-<video width="1080" height="960" controls>
-  <source src="../../videos/AC_Automaton.mp4" type="video/mp4">
-  <object data="../../videos/AC_Automaton.mp4" width="1080" height = "960">
-    你的浏览器不支持播放这个视频。
-  </object>
-</video>
+如果不想/不能上 B 站的我直接放在[这里](../../videos/AC_Automaton.mp4)了。但请有能力的一定去支持原作者。
 
 #### 字典图
 
