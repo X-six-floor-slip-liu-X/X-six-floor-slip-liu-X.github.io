@@ -5,9 +5,9 @@ comments: true
 
 # 关于
 
-这是一个普通 Oier 的 blog，利用 Mkdocs-Material 搭建，配备 giscus 评论区，未经允许禁止转载。
+这是一个普通 Oier 的 blog，利用 Mkdocs-Material 搭建，配备 giscus 评论区，托管在 Github Pages 上，未经允许禁止转载。
 
-## 各种刷题网站的账号
+## 各种刷题网站的账号（图片上有超链接）
 
 [![洛谷](https://api.jerryz.com.cn/shield?id=537230)](https://www.luogu.com.cn/user/537230)
 
