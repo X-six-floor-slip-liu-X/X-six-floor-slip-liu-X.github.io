@@ -58,9 +58,7 @@ comments: true
 
 高精度把高位和低位搞反。
 
-待补充...
-
-## STL 相关错误。
+启发式合并写成 `if(sz[u]>sz[u]) swap(u,v);`
 
 ```cpp title='对不存在的迭代器自增'
 set<int> s;
@@ -77,3 +75,5 @@ for(set<int>::iterator it=st;it!=ed;){
     s.erase(prev(it));
 }
 ```
+
+待补充...

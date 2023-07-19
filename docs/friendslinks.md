@@ -1,5 +1,10 @@
 # 友链
 
+如果你要挂我的友链：
+- [头像](./assets/favicon.png)
+- 名字：六楼溜刘/six-floor-slip-liu（取决于你是英文主题还是中文主题）
+- 介绍：我是超级题解王/一个爱写题解的 Oier（取决于你想要逗比一点的还是正经一点的）
+
 | 头像 | 名字 | 介绍 |
 | :----------: | :----------: | :----------: |
 | [![](./pictures/FatOldEight.png)](https://fat-old-eight.github.io/friendlinks.html) | FatOldEight | Tip：如何提升自己的技术，根据所有大佬的建（fu）议（du）…多练 |
