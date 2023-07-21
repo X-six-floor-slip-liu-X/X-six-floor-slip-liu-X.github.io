@@ -121,6 +121,8 @@ nav:
     - 新博客建立啦: misc/new.md
     - MarkDown 常用语法: misc/try_md.md
     - 挂分秘籍: misc/how_to_get_0pts.md
+    - 游记:
+      - 2023CW NOIP 集训: misc/travels/2023NOIP_taining.md
   - 算法笔记:
     - 关于: algo/about.md
     # - 基础算法:
