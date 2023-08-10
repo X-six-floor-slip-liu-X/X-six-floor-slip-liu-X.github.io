@@ -76,4 +76,24 @@ for(set<int>::iterator it=st;it!=ed;){
 }
 ```
 
+```cpp title='错误的 popcount' hl_lines="5 14"
+int ppcnt(int x){
+	int res=0;
+	while(x){
+		x-=x&-x;
+		res+=x;
+	}
+	return res;
+}
+// 正确写法
+int ppcnt(int x){
+	int res=0;
+	while(x){
+		x-=x&-x;
+		res++;
+	}
+	return res;
+}
+```
+
 待补充...

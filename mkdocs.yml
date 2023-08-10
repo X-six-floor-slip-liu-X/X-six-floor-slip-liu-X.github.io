@@ -123,6 +123,7 @@ nav:
     - 挂分秘籍: misc/how_to_get_0pts.md
     - 游记:
       - 2023CW NOIP 集训: misc/travels/2023NOIP_taining.md
+      - 2023 南京集训: misc/travels/2023NanJing.md
   - 算法笔记:
     - 关于: algo/about.md
     # - 基础算法:
@@ -135,6 +136,7 @@ nav:
       - 网络流基础: algo/graph/flow.md
     - 字符串:
       - KMP 算法与 AC 自动机: algo/string/kmp_and_ac_automaton.md
+      # - 后缀数组: algo/string/SA.md
     # - 杂项:
   - 题解:
     - 关于: solution/about.md
@@ -158,5 +160,6 @@ nav:
   - 记录:
     - 关于: records/about.md
     - 2023NOIP 集训杂题: records/2023NOIP.md
+    - 2023 南京集训杂题: records/2023NanJing.md
   - 关于: about.md
   - 友链: friendslinks.md
