@@ -374,3 +374,115 @@ signed main(){
 ```
 
 ///
+
+## [AGC033D] Complexity
+
+[传送门](https://www.luogu.com.cn/problem/AT_agc033_d)
+
+貌似是很经典的一道套路题。
+
+首先 $O(n^5)$ 的记忆化搜索很简单，不多讲了。设状态 $f_{x_1,y_1,x_2,y_2}$ 表示左上角为 $(x_1,y_1)$，右下角为 $(x_2,y_2)$ 的矩形的复杂度。这种情况状态是 $O(n^4)$ 级别的，考虑先想办法压一维状态，然后把转移控制在大约 $\log$ 的复杂度内。
+
+首先考虑最坏情况，即要把整个矩阵剁成一格一格的臊子。发现此时答案为 $\left\lceil\log n\right\rceil+\left\lceil\log m\right\rceil\le 20$。
+
+那么发现答案的级别很小，考虑把答案和状态的某一维交换。
+
+具体来说，设 $f_{x_1,x_2,y,c}$ 表示矩阵左边为一条从 $(x_1,y)$ 到 $(x_2,y)$ 的线段，复杂度为 $c$ 的矩阵右边缘最多延伸到多远（我定义的是左闭右闭区间，貌似左闭右开会好写一点）。
+
+那么转移分两种，横着切的转移和竖着切的转移。
+
+首先是竖着切的转移，由于切一刀只会增加 $1$ 复杂度，所以转移和倍增类似，即：
+
+$$dp_{x_1,x_2,y,c}=dp_{x_1,x_2,dp_{x_1,x_2,y,c-1}+1,c-1}$$
+
+然后考虑横着切的转移，发现其实就是要求这个式子（类似于区间 DP）：
+
+$$dp_{x_1,x_2,y,c}=\max_{mid=x_1}^{x_2}\begin{Bmatrix}\min(dp_{x_1,mid,y,c-1},dp_{mid+1,x_2,y,c-1})\end{Bmatrix}$$
+
+容易发现 $dp_{x_1,mid,y,c-1}$ 随着 $mid$ 的增加单调不增，$dp_{mid+1,x_2,y,c-1}$ 随着 $mid$ 增加单调不减，那么在它们取等的时候显然 $\min(dp_{x_1,mid,y,c-1},dp_{mid+1,x_2,y,c-1})$ 取到最大值，我们可以二分这个点。
+
+复杂度 $O(n^2m(\log n+\log m)\log n)$ 带小常数，随便过。
+
+/// details | 参考代码
+    oprn: False
+    type: success
+
+```
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+using namespace std;
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=200,inf=0x3f3f3f3f;
+int n,m,a[N][N],sum[N][N],dp[25][N][N][N];
+char str[N];
+int calc(int x1,int x2,int y1,int y2){
+    return sum[x2][y2]-sum[x1-1][y2]-sum[x2][y1-1]+sum[x1-1][y1-1];
+}
+signed main(){
+    n=read();m=read();
+    forup(i,1,n){
+        scanf(" %s",str+1);
+        forup(j,1,m){
+            a[i][j]=(str[j]=='#');
+            sum[i][j]=a[i][j]+sum[i-1][j]+sum[i][j-1]-sum[i-1][j-1];
+        }
+    }
+    forup(x1,1,n){
+        forup(x2,x1,n){
+            forup(y,1,m){
+                if(calc(x1,x2,y,y)!=0&&calc(x1,x2,y,y)!=(x2-x1+1)){
+                    continue;
+                }
+                int ll=y,rr=m,mid;
+                while(ll<rr){
+                    mid=(ll+rr+1)>>1;
+                    if(calc(x1,x2,y,mid)==0||calc(x1,x2,y,mid)==(x2-x1+1)*(mid-y+1)) ll=mid;
+                    else rr=mid-1;
+                }
+                dp[0][x1][x2][y]=ll;
+            }
+        }
+    }
+    forup(i,1,20){
+        forup(len,1,n){
+            forup(x1,1,n-len+1){
+                int x2=x1+len-1;
+                fordown(y,m,1){
+                    if(dp[i][x1][x2][y]) continue;
+                    if(dp[i-1][x1][x2][y]==m){
+                        dp[i][x1][x2][y]=m;
+                        continue;
+                    }
+                    if(dp[i-1][x1][x2][y]!=0){
+                        dp[i][x1][x2][y]=max(dp[i][x1][x2][y],dp[i-1][x1][x2][dp[i-1][x1][x2][y]+1]);
+                    }
+                    int ll=x1,rr=x2,mid;
+                    while(ll<rr){
+                        mid=(ll+rr)>>1;
+                        if(dp[i-1][x1][mid][y]>=dp[i-1][mid+1][x2][y]) ll=mid+1;
+                        else rr=mid;
+                    }
+                    dp[i][x1][x2][y]=max({dp[i][x1][x2][y],min(dp[i-1][x1][ll][y],dp[i-1][ll+1][x2][y]),min(dp[i-1][x1][ll-1][y],dp[i-1][ll][x2][y])});
+                }
+            }
+        }        
+    }
+    forup(i,0,20){
+        if(dp[i][1][n][1]>=m){
+            printf("%d\n",i);
+            return 0;
+        }
+    }
+}
+```
+
+///
