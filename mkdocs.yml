@@ -137,7 +137,8 @@ nav:
     - 字符串:
       - KMP 算法与 AC 自动机: algo/string/kmp_and_ac_automaton.md
       # - 后缀数组: algo/string/SA.md
-    # - 杂项:
+    - 杂项:
+      - Barrett 取模优化: algo/misc/Barrett.md
   - 题解:
     - 关于: solution/about.md
     - 20230113D 染色: solution/20230113D_D.md
@@ -160,6 +161,8 @@ nav:
     - 20230823B: solution/20230823B_ABC.md
     - 20230824B 大脑过载: solution/20230824B_C.md
     - 20230828B: solution/20230828B_ABCD.md
+    - 20230831B: solution/20230831B_ACD.md
+    - 20230902B: solution/20230902B_ABC.md
   - 记录:
     - 关于: records/about.md
     - 2023NOIP 集训杂题: records/2023NOIP.md
