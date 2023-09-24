@@ -38,7 +38,7 @@ $$next_i=\max_{k=1}^i\begin{Bmatrix}k|s[1\dots k]=s[i-(k-1)\dots i]\end{Bmatrix}
 
 容易发现一个性质，以 $i$ 结尾前缀所有 Border 长度分别是 $next_i,next_{next_i},next_{next_{next_i}}\cdots$，为了方便叙述后文写作 $next_i^{k}$。这是显然的，我们画个图理解一下：
 
-![图示 1](../../pictures/kmp_and_ac_automaton_1.png)
+![图示 1](../../img/kmp_and_ac_automaton_1.png)
 
 其中黑色矩形代表我们的前缀 $i$，红色矩形是 $next_i$，黄色和绿色矩形是 $next_{i}^2$
 

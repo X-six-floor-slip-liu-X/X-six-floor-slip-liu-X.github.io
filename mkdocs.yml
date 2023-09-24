@@ -129,8 +129,9 @@ nav:
     # - 基础算法:
     # - 动态规划:
     - 数据结构:
-      # - 线段树与 BIT: algo/ds/SegT_BIT.md
+      - 线段树、BIT 与 ST 表: algo/ds/SegT_BIT.md
       - 平衡树入门与 Treap: algo/ds/Treap.md
+      - FHQ 文艺平衡树: algo/ds/wenyi_FHQ_Treap.md
     # - 数学:
     - 图论:
       - 网络流基础: algo/graph/flow.md
@@ -163,9 +164,12 @@ nav:
     - 20230828B: solution/20230828B_ABCD.md
     - 20230831B: solution/20230831B_ACD.md
     - 20230902B: solution/20230902B_ABC.md
+    - 20230909B: solution/20230909B_AB.md
+    - 20230913B: solution/20230913B_ABCD.md
   - 记录:
     - 关于: records/about.md
     - 2023NOIP 集训杂题: records/2023NOIP.md
     - 2023 南京集训杂题: records/2023NanJing.md
+    - 2023 CSP 考前杂题: records/CSP2023.md
   - 关于: about.md
   - 友链: friendslinks.md
