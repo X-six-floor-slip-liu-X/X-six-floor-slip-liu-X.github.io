@@ -53,3 +53,157 @@ comments: true
 然后我们就可以考虑 $p<i$ 的情况了，容易发现这直接可以相当于图 $3$ 下面的那种情况，就不多赘述了。
 
 复杂度 $O(n)$。
+
+/// details | 参考代码
+    open: False
+    type: success
+
+```cpp
+void getnxt(){
+	i64 k=1,p=0;
+	while(p+1<n&&s[p]==s[p+1]) ++p;
+	nxt[1]=p;nxt[0]=n;
+	forup(i,2,n-1){
+		i64 p=k+nxt[k]-1,l=nxt[i-k];
+		if(i+l<=p){
+			nxt[i]=l;
+		}else{
+			i64 j=max(0ll,p-i+1);
+			while(i+j<n&&s[i+j]==s[j]) ++j;
+			nxt[i]=j;
+			k=i;
+		}
+	}
+}
+```
+
+///
+
+## 例题
+
+### 字符串匹配
+
+首先类似于普通的 KMP，exKMP 也可以做字符串匹配，具体来说，可以类似于 $nxt$ 的求法，求出模式串和文本串每个后缀的 LCP（类比普通 KMP），代码类似 $nxt$ 数组的求法。
+
+/// details | 参考代码
+    open: False
+    type: success
+
+```cpp
+void getf(){
+	i64 k=0,p=0;
+	while(p<n&&p<m&&s[p]==t[p]) ++p;
+	f[0]=p;
+	forup(i,1,m-1){
+		i64 p=k+f[k]-1,l=nxt[i-k];
+		if(i+l<=p){
+			f[i]=l;
+		}else{
+			i64 j=max(0ll,p-i+1);
+			while(i+j<m&&j<n&&t[i+j]==s[j]) ++j;
+			f[i]=j;
+			k=i;
+		}
+	}
+}
+```
+
+///
+
+
+### P7114 [NOIP2020] 字符串匹配
+
+[传送门](https://www.luogu.com.cn/problem/P7114)
+
+题意就是给你一个字符串，让你求出把字符串分为 $(AB)^iC$ 的方案数，其中 $A^i$ 表示把字符串 $A$ 循环 $i$ 遍，且要求 $A$ 中出现奇数次的字符个数小于 $C$。
+
+先不考虑 $A$ 中出现奇数次的字符个数小于 $C$ 的条件，那么我们可以考虑枚举 $AB$ 及其循环次数。
+
+这个问题就可以用 exKMP 解决（和 KMP 求出字符串最短循环节长度类似），先说结论，字符串 $s$ 中以长度为 $i$ 的前缀为循环节的前缀个数为：
+
+$$\left\lfloor\frac{nxt_i}{i}\right\rfloor+1$$
+
+---
+证明：
+
+考虑画图：
+
+![图示 4](../../img/string_exKMP_4.png)
+
+假如图中的绿色线段是一个 $nxt$，那么显然，两绿色段相等，因此两青色段相等，因此两橙色与青色段均相等，那么显然青色段就是一个循环节，而最多的循环次数为 $3$ 次，是 $\left\lfloor\frac{nxt_i}{i}\right\rfloor+1$。
+
+---
+
+然后考虑字符出现的次数，由于循环节是相等的，那么 $c$ 中字符出现次数的奇偶性只与 $AB$ 循环次数的奇偶性有关，用桶预处理一下每个前后缀奇数个数字符出现次数，分奇偶讨论后树状数组维护即可，具体方法参考原题题解。
+
+/// details | 参考代码
+    open: False
+    type: success
+
+```cpp
+const i64 N=2e6+5,inf=0x3f3f3f3f;
+i64 t,n,nxt[N],pre[N],suf[N],nw,ans;
+char s[N];
+void getnxt(){
+	i64 k=1,p=0;
+	while(p+1<n&&s[p]==s[p+1]) ++p;
+	nxt[1]=p;nxt[0]=n;
+	forup(i,2,n-1){
+		i64 p=k+nxt[k]-1,l=nxt[i-k];
+		if(i+l<=p){
+			nxt[i]=l;
+		}else{
+			i64 j=max(0ll,p-i+1);
+			while(i+j<n&&s[i+j]==s[j]) ++j;
+			nxt[i]=j;
+			k=i;
+		}
+	}
+}
+int bkt[26];
+struct BIT{
+	int c[30];
+	void clear(){mem(c,0);}
+	void upd(int x,int k){++x;for(;x<=27;x+=x&-x)c[x]+=k;}
+	int sum(int x){++x;int res=0;for(;x>0;x-=x&-x)res+=c[x];return res;}
+}mt;
+signed main(){
+	t=read();
+	while(t--){
+		scanf(" %s",s);
+		n=strlen(s);
+		getnxt();
+		mem(bkt,0);
+		pre[0]=nw=1;bkt[s[0]-'a']=1;
+		forup(i,1,n-1){
+			nw-=bkt[s[i]-'a']%2;
+			bkt[s[i]-'a']++;
+			nw+=bkt[s[i]-'a']%2;
+			pre[i]=nw;
+		}
+		mem(bkt,0);
+		suf[n-1]=nw=1;bkt[s[n-1]-'a']=1;
+		fordown(i,n-2,0){
+			nw-=bkt[s[i]-'a']%2;
+			bkt[s[i]-'a']++;
+			nw+=bkt[s[i]-'a']%2;
+			suf[i]=nw;
+		}
+		mt.clear();
+		ans=0;
+		forup(i,2,n-1){
+			int p1=nxt[i]/i+1,t1=p1-p1/2,t2=p1/2;
+			mt.upd(pre[i-2],1);
+			if(p1*i==n){
+				if(p1&1) --t1;
+				else --t2;
+			}
+			ans+=mt.sum(suf[i])*t1;
+			ans+=mt.sum(suf[0])*t2;
+		}
+		printf("%lld\n",ans);
+	}
+}
+```
+
+///

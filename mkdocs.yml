@@ -127,11 +127,13 @@ nav:
   - 算法笔记:
     - 关于: algo/about.md
     # - 基础算法:
-    # - 动态规划:
+    - 动态规划:
+      - 高维前缀和/SOSDP: algo/dp/SOSDP.md
     - 数据结构:
       - 线段树、BIT 与 ST 表: algo/ds/SegT_BIT.md
       - 平衡树入门与 Treap: algo/ds/Treap.md
       - FHQ 文艺平衡树: algo/ds/wenyi_FHQ_Treap.md
+      - 线段树分治: algo/ds/SegT_divide_and_conquer.md
     # - 数学:
     - 图论:
       - 网络流基础: algo/graph/flow.md
@@ -166,6 +168,8 @@ nav:
     - 20230902B: solution/20230902B_ABC.md
     - 20230909B: solution/20230909B_AB.md
     - 20230913B: solution/20230913B_ABCD.md
+    - 20230923B 发怒: solution/20230923B_D.md
+    - 20230926B: solution/20230923B_ABCD.md
   - 记录:
     - 关于: records/about.md
     - 2023NOIP 集训杂题: records/2023NOIP.md
