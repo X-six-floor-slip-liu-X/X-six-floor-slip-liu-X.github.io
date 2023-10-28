@@ -124,6 +124,7 @@ nav:
     - 游记:
       - 2023CW NOIP 集训: misc/travels/2023NOIP_taining.md
       - 2023 南京集训: misc/travels/2023NanJing.md
+      - CSPS2023: misc/travels/CSPS2023.md
   - 算法笔记:
     - 关于: algo/about.md
     # - 基础算法:
@@ -134,12 +135,16 @@ nav:
       - 平衡树入门与 Treap: algo/ds/Treap.md
       - FHQ 文艺平衡树: algo/ds/wenyi_FHQ_Treap.md
       - 线段树分治: algo/ds/SegT_divide_and_conquer.md
+      - 猫树: algo/ds/Cat_Tree.md
+      - 李超线段树: algo/ds/LiChaoTree.md
     # - 数学:
     - 图论:
       - 网络流基础: algo/graph/flow.md
+      - 最小生成树与 Kruskal 重构树: algo/graph/MST.md
     - 字符串:
       - KMP 算法与 AC 自动机: algo/string/kmp_and_ac_automaton.md
       # - 后缀数组: algo/string/SA.md
+      - Manacher: algo/string/Manacher.md
     - 杂项:
       - Barrett 取模优化: algo/misc/Barrett.md
   - 题解:
@@ -170,6 +175,12 @@ nav:
     - 20230913B: solution/20230913B_ABCD.md
     - 20230923B 发怒: solution/20230923B_D.md
     - 20230926B: solution/20230923B_ABCD.md
+    - 20230928B: solution/20230928B_AD.md
+    - 20231003B: solution/20231003B_ABCD.md
+    - 20231005B: solution/20231005B_ABC.md
+    - 20231007B: solution/20231007B_ABCD.md
+    - 20231010B: solution/20231010B_ABCD.md
+    - 20231019B: solution/20231019B_ABCD.md
   - 记录:
     - 关于: records/about.md
     - 2023NOIP 集训杂题: records/2023NOIP.md
