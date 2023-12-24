@@ -117,74 +117,94 @@ markdown_extensions:
 nav:
   - 主页: index.md
   - 杂项:
-    - 关于: misc/about.md
-    - 新博客建立啦: misc/new.md
-    - MarkDown 常用语法: misc/try_md.md
-    - 挂分秘籍: misc/how_to_get_0pts.md
+    - 关于: misc\about.md
+    - 新博客建立啦: misc\new.md
+    - MarkDown 常用语法: misc\try_md.md
+    - 挂分秘籍: misc\how_to_get_0pts.md
     - 游记:
-      - 2023CW NOIP 集训: misc/travels/2023NOIP_taining.md
-      - 2023 南京集训: misc/travels/2023NanJing.md
-      - CSPS2023: misc/travels/CSPS2023.md
+      - 2023CW NOIP 集训: misc\travels\2023NOIP_taining.md
+      - 2023 南京集训: misc\travels\2023NanJing.md
+      - CSPS2023: misc\travels\CSPS2023.md
   - 算法笔记:
-    - 关于: algo/about.md
+    - 关于: algo\about.md
     # - 基础算法:
     - 动态规划:
-      - 高维前缀和/SOSDP: algo/dp/SOSDP.md
+      - 高维前缀和\SOSDP: algo\dp\SOSDP.md
     - 数据结构:
-      - 线段树、BIT 与 ST 表: algo/ds/SegT_BIT.md
-      - 平衡树入门与 Treap: algo/ds/Treap.md
-      - FHQ 文艺平衡树: algo/ds/wenyi_FHQ_Treap.md
-      - 线段树分治: algo/ds/SegT_divide_and_conquer.md
-      - 猫树: algo/ds/Cat_Tree.md
-      - 李超线段树: algo/ds/LiChaoTree.md
+      - 线段树、BIT 与 ST 表: algo\ds\SegT_BIT.md
+      - 平衡树入门与 Treap: algo\ds\Treap.md
+      - FHQ 文艺平衡树: algo\ds\wenyi_FHQ_Treap.md
+      - 线段树分治: algo\ds\SegT_divide_and_conquer.md
+      - 猫树: algo\ds\Cat_Tree.md
+      - 李超线段树: algo\ds\LiChaoTree.md
     # - 数学:
     - 图论:
-      - 网络流基础: algo/graph/flow.md
-      - 最小生成树与 Kruskal 重构树: algo/graph/MST.md
+      - 网络流基础: algo\graph\flow.md
+      - 最小生成树与 Kruskal 重构树: algo\graph\MST.md
+      - 双连通分量: algo\graph\BCC.md
+      - 最短路: algo\graph\shortest_path.md
+      - 2-SAT 问题: algo\graph\2_SAT.md
+      - Dilworth 定理: algo\graph\Dilworth.md
     - 字符串:
-      - KMP 算法与 AC 自动机: algo/string/kmp_and_ac_automaton.md
-      # - 后缀数组: algo/string/SA.md
-      - Manacher: algo/string/Manacher.md
+      - 字符串基础: algo\string\string_base.md
+      - KMP 算法与 AC 自动机: algo\string\kmp_and_ac_automaton.md
+      - 扩展 KMP 算法 (Z 函数): algo\string\exKMP.md
+      - 后缀数组: algo\string\SA.md
+      - 后缀自动机: algo\string\SAM.md
+      - Manacher: algo\string\Manacher.md
     - 杂项:
-      - Barrett 取模优化: algo/misc/Barrett.md
+      - Barrett 取模优化: algo\misc\Barrett.md
+      - wqs 二分: algo\misc\wqs_binary_search.md
   - 题解:
-    - 关于: solution/about.md
-    - 20230113D 染色: solution/20230113D_D.md
-    - 20230407C 进化: solution/20230407C_C.md
-    - 20230411C 逆序对: solution/20230411C_C.md
-    - 20230418C 金条争夺: solution/20230418C_C.md
-    - 20230420C: solution/20230420C_ABC.md
-    - 20230426C: solution/20230426C_ABC.md
-    - 20230428C: solution/20230428C_ABC.md
-    - 20230430C: solution/20230430C_ABCD.md
-    - 20230524C 数数题: solution/20230524C_D.md
-    - 20230617C 树: solution/20230617C_C.md
-    - 20230624B: solution/20230624B_ABCD.md
-    - 20230626B: solution/20230626B_ABC.md
-    - 20230626B 敢览求: solution/20230626B_D.md
-    - 20230630B 愿: solution/20230630B_C.md
-    - 20230630B: solution/20230630B_ABD.md
-    - 20230704B: solution/20230704B_ABCD.md
-    - 20230707NOIP集训 : solution/20230707NOIP_ABCD.md
-    - 20230823B: solution/20230823B_ABC.md
-    - 20230824B 大脑过载: solution/20230824B_C.md
-    - 20230828B: solution/20230828B_ABCD.md
-    - 20230831B: solution/20230831B_ACD.md
-    - 20230902B: solution/20230902B_ABC.md
-    - 20230909B: solution/20230909B_AB.md
-    - 20230913B: solution/20230913B_ABCD.md
-    - 20230923B 发怒: solution/20230923B_D.md
-    - 20230926B: solution/20230926B_ABCD.md
-    - 20230928B: solution/20230928B_AD.md
-    - 20231003B: solution/20231003B_ABCD.md
-    - 20231005B: solution/20231005B_ABC.md
-    - 20231007B: solution/20231007B_ABCD.md
-    - 20231010B: solution/20231010B_ABCD.md
-    - 20231019B: solution/20231019B_ABCD.md
+    - 关于: solution\about.md
+    - 20230113D 染色: solution\20230113D_D.md
+    - 20230407C 进化: solution\20230407C_C.md
+    - 20230411C 逆序对: solution\20230411C_C.md
+    - 20230418C 金条争夺: solution\20230418C_C.md
+    - 20230420C: solution\20230420C_ABC.md
+    - 20230426C: solution\20230426C_ABC.md
+    - 20230428C: solution\20230428C_ABC.md
+    - 20230430C: solution\20230430C_ABCD.md
+    - 20230524C 数数题: solution\20230524C_D.md
+    - 20230617C 树: solution\20230617C_C.md
+    - 20230624B: solution\20230624B_ABCD.md
+    - 20230626B: solution\20230626B_ABC.md
+    - 20230626B 敢览求: solution\20230626B_D.md
+    - 20230630B 愿: solution\20230630B_C.md
+    - 20230630B: solution\20230630B_ABD.md
+    - 20230704B: solution\20230704B_ABCD.md
+    - 20230707NOIP集训 : solution\20230707NOIP_ABCD.md
+    - 20230823B: solution\20230823B_ABC.md
+    - 20230824B 大脑过载: solution\20230824B_C.md
+    - 20230828B: solution\20230828B_ABCD.md
+    - 20230831B: solution\20230831B_ACD.md
+    - 20230902B: solution\20230902B_ABC.md
+    - 20230909B: solution\20230909B_AB.md
+    - 20230913B: solution\20230913B_ABCD.md
+    - 20230923B 发怒: solution\20230923B_D.md
+    - 20230926B: solution\20230926B_ABCD.md
+    - 20230928B: solution\20230928B_AD.md
+    - 20231003B: solution\20231003B_ABCD.md
+    - 20231005B: solution\20231005B_ABC.md
+    - 20231007B: solution\20231007B_ABCD.md
+    - 20231010B: solution\20231010B_ABCD.md
+    - 20231014B: solution\20231014B_ABCD.md
+    - 20231016B: solution\20231016B_ABCD.md
+    - 20231017B: solution\20231017B_ABCD.md
+    - 20231019B: solution\20231019B_ABCD.md
+    - 20231023B: solution\20231023B_ABCD.md
+    - 20231024B: solution\20231024B_ABCD.md
+    - 20231026B: solution\20231026B_BCD.md
+    - 20231027B: solution\20231027B_ABD.md
+    - 20231030B: solution\20231030B_ABCD.md
+    - 20231031B: solution\20231031B_ABC.md
+    - 20231202A: solution\20231202A_ABC.md
+    - 20231204A: solution\20231204A_ABC.md
   - 记录:
-    - 关于: records/about.md
-    - 2023NOIP 集训杂题: records/2023NOIP.md
-    - 2023 南京集训杂题: records/2023NanJing.md
-    - 2023 CSP 考前杂题: records/CSP2023.md
+    - 关于: records\about.md
+    - 2023NOIP 集训杂题: records\2023NOIP.md
+    - 2023 南京集训杂题: records\2023NanJing.md
+    - 2023 CSP 考前杂题: records\CSP2023.md
+    - 2023 11 月杂题: records\2023Dec.md
   - 关于: about.md
   - 友链: friendslinks.md

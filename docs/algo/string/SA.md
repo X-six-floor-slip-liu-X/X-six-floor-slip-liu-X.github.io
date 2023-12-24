@@ -2,13 +2,13 @@
 comments: true
 ---
 
-# 后缀数组学习笔记
+# 后缀数组（SA）学习笔记
 
 ## 前言
 
 事实证明字符串算法就是一堆看起来卵用没有实际上巨有用的东西。
 
-本文中所有字符串下标从 $1$ 开始。用 $suf_i$ 表示字符串 $s$ 从 $i$ 开始的后缀。
+本文中所有字符串下标从 $1$ 开始。用 $suf(i)$ 表示字符串 $s$ 从 $i$ 开始的后缀。
 
 ## 什么是后缀数组
 
@@ -163,9 +163,50 @@ signed main(){
 
 但是没有预料中那么显著，毕竟一个 $\log 10^6$ 的差距显然不止两倍。
 
-原因在于我们遍历了八遍数组，常数巨大。其实倍增+基排求 SA 还有常数优化。但鉴于 CCF 最近在避免常数对考生成绩的影响我觉得没必要学。问就是上 OI Wiki。
+原因在于我们遍历了八遍数组，常数巨大。考虑进行一些常数优化。
 
-另外还有很多 $O(n)$ 的做法。等以后有机会了说不定会分享一下
+首先简单地，当 $m=n$，即每个后缀在当前阶段已经两两不同，说明后缀排序已经完成，两两之间大小关系已经确定，就可以退出了。
+
+然后另外，容易发现其实不需要对第二关键字进行计数排序。因为第二关键字其实在 $w-1$ 阶段已经排好了，除去末尾 $i+2^w>n$ 的一部分以外，但这部分显然可以直接塞到序列开头。
+
+/// details | 优化后代码
+    open: False
+    type: success
+
+除去这一段以外其余是一样的。
+
+```cpp
+    for(w=1;w<n;w<<=1){
+        int p=0;
+		forup(i,1,n) ssa[i]=sa[i];
+        fordown(i,n,n-w+1) sa[++p]=i;
+		forup(i,1,n) if(ssa[i]>w) sa[++p]=ssa[i]-w;
+        mem(cnt,0);
+        forup(i,1,n) ssa[i]=sa[i];
+        forup(i,1,n) cnt[rk[ssa[i]]]++;
+        forup(i,1,m) cnt[i]+=cnt[i-1];
+        fordown(i,n,1) sa[cnt[rk[ssa[i]]]--]=ssa[i];
+        forup(i,1,n) ork[i]=rk[i];
+        p=0;
+        forup(i,1,n){
+            if(ork[sa[i]]==ork[sa[i-1]]&&ork[sa[i]+w]==ork[sa[i-1]+w]){
+                rk[sa[i]]=p;
+            }else{
+                rk[sa[i]]=++p;
+            }
+        }
+        m=p;
+        if(m==n) break; 
+    }
+```
+
+///
+
+效率更加显著地提升。
+
+![图示 3](../../img/SA_3.png)
+
+另外还有很多 $O(n)$ 的做法。但是这个已经不在 OI 学习范畴了。
 
 ## 后缀数组有什么用
 
@@ -192,13 +233,13 @@ signed main(){
 
 两个字符串 $S$ 和 $T$ 的 LCP（longest common prefix，最长公共前缀）就是最大的 $x(x\le \min(|S|, |T|))$ 使得 $S_i=T_i\ (\forall\ 1\le i\le x)$。
 
-下文中以 $\operatorname{lcp}(i,j)$ 表示后缀 $i$ 和后缀 $j$ 的最长公共前缀（的长度）。
+下文中以 $\operatorname{lcp}(i,j)$（Longest Common Prefix）表示后缀 $i$ 和后缀 $j$ 的最长公共前缀的长度。
 
 ///
 
 #### height 数组
 
-height 数组的定义为 $height_i=\operatorname{lcp}(sa_i,sa_{i-1})$（这里的 $sa$ 是那个后缀对应的字符串），特别地，令 $height_1=0$。
+height 数组的定义为 $height_i=\operatorname{lcp}(sa_i,sa_{i-1})$（这里的 $sa$ 是那个后缀对应的字符串），特别地，令 $height_1=0$（其实就相当于和空字符串的 $\operatorname{lcp}$）。
 
 #### 求 height 数组
 
@@ -212,8 +253,103 @@ height 数组可以 $O(n)$ 求出，但需要一个引理：
 
 证明：
 
-当 $height_{rk_{i-1}}\le 1$ 时，引理显然成立，因为此时不等式右侧小于等于 $0$。
+其实很简单，考虑设 $suf(i-1)=cAB$，其中 $c$ 是一个字符，$AB$ 均是字符串，$cA$ 是 $height_{rk_{i-1}}$ 对应的那个 $\operatorname{lcp}$，这说明 $suf(sa_{rk_{i-1}-1})=cAD$，其中 $D$ 也是一个字符串。
 
+容易发现 $suf(i)=AB$，并且由于存在 $suf(sa_{rk_{i-1}-1}+1)=AD$，所以 $height_{rk_i}$ 至少也是 $A$，并且由于去掉了一个 $c$，还可能存在一个 $\operatorname{lcp}$ 更长的后缀。
 
+///
+
+那么就可以直接暴力了：
+
+/// details | 参考代码
+    open: False
+    type: success
+
+```cpp
+	int k=0;
+	forup(i,1,n){
+		if(rk[i]==1) continue;
+		if(k) --k;
+		while(str[i+k]==str[sa[rk[i]-1]+k]) ++k;
+		ht[rk[i]]=k;
+	}
+```
+
+///
+
+由于 $k$ 至多只会减小 $n$ 次，且 $k$ 最大时不会超过 $n$，故至多对 $k$ 进行 $2n$ 次操作，复杂度 $O(n)$。
+
+### 任意两后缀的最长公共前缀
+
+那么 height 数组有什么用呢？
+
+首先，可以求任意两后缀的 $\operatorname{lcp}$。
+
+考虑把所有后缀压入一棵 Trie，那么两后缀的 $\operatorname{lcp}$ 就是对应结束状态在 Trie 上的 $\operatorname{lca}$。
+
+然后根据经典结论，序列上两点 $u,v$ 的 $\operatorname{lca}$ 就是按 dfn 排序后，区间 $[u,v]$ 中所有相邻两点的 $\operatorname{lca}$ 中深度最小的。
+
+而容易发现，按字典序排序恰好就是 Trie 上的 dfn 序列，而 $height_i$ 就是 $\operatorname{lca}(sa_i,sa_{i-1})$，那么做个 RMQ 即可。
+
+### 本质不同子串个数
+
+height 数组还可以求本质不同子串个数。
+
+考虑多个字符串的本质不同前缀个数怎么求（求出 SA 后就转化成这个问题了）。
+
+容易想到压入一棵 Trie，那么这个问题的答案就是 Trie 上的结点数量了。
+
+然后同样用 dfn 的结论，每次新增的结点数量就是 $n-sa_i+1-height_i$。
+
+代码就不贴了。
+
+### 排名第 k 小的子串
+
+如果只算本质不同的子串，那么就是上一个问题略微转化一下。
+
+如果长得一样但位置不同的子串算作不同的，应该怎么做呢？
+
+仍然考虑 Trie，容易发现对于一条没有分叉的树链中的每个状态的数量是可以计算的，就是这条树链被经过的次数。而显然 Trie 中状态的字典序就是先序遍历，那么考虑按先序遍历枚举关键点（就是所有 $sa_i,height_i$）即可。
+
+可以得到一个长得像分治的做法：
+
+/// details | 参考代码
+    open: False
+    type: success
+
+感觉讲的太抽象了还是挂个代码。
+
+```cpp
+	void work(int l,int r,int lst){
+		if(l==r){// (2)!
+			int ad=n-sa[l]+1-lst;
+			if(ad>=k){
+				forup(i,0,lst+k-1){
+					printf("%1c",str[sa[l]+i]);
+				}
+				exit(0);
+			}
+			k-=ad;
+			return;
+		}
+		int mid=query(l+1,r),ad=(r-l+1)*(ht[mid]-lst);// (1)!
+		if(ad>=k){// (3)!
+			forup(i,0,lst+(k-1)/(r-l+1)){
+				printf("%1c",str[sa[l]+i]);
+			}
+			exit(0);
+		}
+		k-=ad;
+		work(l,mid-1,ht[mid]);work(mid,r,ht[mid]);
+	}
+	void solve(){
+		init();//初始化区间 RMQ
+		work(1,n,0);
+	}
+```
+
+1. `query(l,r)` 会返回区间内 `ht` 最小的下标，`ht` 就是上文的 $height$ 数组。
+2. 相当于遍历到 $sa_i$。
+3. 相当于中间的树链。
 
 ///

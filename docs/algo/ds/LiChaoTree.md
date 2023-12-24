@@ -110,7 +110,7 @@ struct LiChaoTree{
 
 然后查询注意我们是标记永久化了，要求出路径上所有结点的最大值。
 
-/// detials | 查询参考代码
+/// details | 查询参考代码
     open: False
     type: success
 
