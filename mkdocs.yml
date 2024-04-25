@@ -209,11 +209,14 @@ nav:
     - 20240222A 代码待补: solution/20240222A_hu.md
   - 记录:
     - 关于: records/about.md
-    - 2023NOIP 集训杂题: records/2023NOIP.md
-    - 2023 南京集训杂题: records/2023NanJing.md
-    - 2023 CSP 考前杂题: records/CSP2023.md
-    - 2023 11 月杂题: records/2023Nov.md
-    - 2023 12 月杂题: records/2023Dec.md
-    - 2024 1 月杂题: records/2024Jan.md
+    - 按算法分类:
+      - 网络流杂题: records/flow_example.md
+    - 按时间分类:
+      - 2023NOIP 集训杂题: records/2023NOIP.md
+      - 2023 南京集训杂题: records/2023NanJing.md
+      - 2023 CSP 考前杂题: records/CSP2023.md
+      - 2023 11 月杂题: records/2023Nov.md
+      - 2023 12 月杂题: records/2023Dec.md
+      - 2024 1 月杂题: records/2024Jan.md
   - 关于: about.md
   - 友链: friendslinks.md

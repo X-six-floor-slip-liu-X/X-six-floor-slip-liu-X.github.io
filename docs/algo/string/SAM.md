@@ -46,7 +46,7 @@ SAM 被创造出来的目的是一个**能接受指定 $S$ 字符串所有后缀
 
 注意到对于多个本质相同的子串，由于我们读入字符串 $t$ 时只考虑它**是不是** $s$ 的子串，而不考虑它的位置。所以本质相同的子串显然可以合并为同一个状态。而转移就是这些子串所有结束位置 $e$ 的下一个字符 $s_{e+1}$。考虑令 $\mathrm{endpos_{\mathit{a}}}$ 表示子串 $a$ 的所有结束位置构成的集合。
 
-而容易发现，对于两个子串 $a,b$（钦定 $|a|\ge |b|$），若 $b$ 不是 $a$ 的后缀，那么 $\mathrm{endpos}_b\cap \mathrm{endpos_{\mathit{a}}}=\varnothing$，因为任意出现 $b$ 的位置都无法通过向前拓展的方式得到 $a$。而若 $b$ 是 $a$ 的后缀，那么有 $\mathrm{endpos_{\mathit{a}}}\subseteq \mathrm{endpos_{\mathit{b}}}$，因为任意出现了 $a$ 的位置都能通过删掉开头若干个字符得到 $b$，并且显然 $b$ 还可能在其他地方出现。那么显然，对于两个字符串 $a,b(|a|\ge|b|)$，它们 $\mathrm{endpos}$ 的交不是空集就是 $\mathrm{endpos_{\mathit{b}}}$
+而容易发现，对于两个子串 $a,b$（钦定 $|a|\ge |b|$），若 $b$ 不是 $a$ 的后缀，那么 $\mathrm{endpos_{\mathit{b}}}\cap \mathrm{endpos_{\mathit{a}}}=\varnothing$，因为任意出现 $b$ 的位置都无法通过向前拓展的方式得到 $a$。而若 $b$ 是 $a$ 的后缀，那么有 $\mathrm{endpos_{\mathit{a}}}\subseteq \mathrm{endpos_{\mathit{b}}}$，因为任意出现了 $a$ 的位置都能通过删掉开头若干个字符得到 $b$，并且显然 $b$ 还可能在其他地方出现。那么显然，对于两个字符串 $a,b(|a|\ge|b|)$，它们 $\mathrm{endpos}$ 的交不是空集就是 $\mathrm{endpos_{\mathit{b}}}$
 
 然后着重考虑多个 $\mathrm{endpos}$ 相同的情况。容易想到若 $\mathrm{endpos}$ 那么对应的转移也相同，或许可以合并为同一个状态，考虑寻找性质。令 $t_1,t_2,\dots t_k$ 为某个满足 $\mathrm{endpos_{\mathit{t_1}}}=\mathrm{endpos_{\mathit{t_2}}}=\cdots=\mathrm{endpos_{\mathit{t_k}}}$ 的极大字符串集合（“极大”是指不存在其它字符串 $\mathrm{endpos}$ 和它们相同），且钦定 $|t_1|\ge |t_2|\ge\dots\ge |t_k|$。首先注意到两长度相同的本质不同子串 $\mathrm{endpos}$ 显然不可能相同，故上面对 $t$ 排列的要求就可以不取等了。由于它们的交不为空，那么所有 $t_i$ 必定都是 $t_1$ 的后缀，不妨从 $t_1$ 每次删掉开头字符考虑，容易发现每删掉一个字符，$\mathrm{endpos}$ 内部的元素是单调变多的，也就是说随着删开头字符，不可能出现 $\mathrm{endpos}$ 从等于 $\mathrm{endpos_{\mathit{t_1}}}$ 变成不等于 $\mathrm{endpos_{\mathit{t_1}}}$ 又变回 $\mathrm{endpos_{\mathit{t_1}}}$ 的情况。换句话说，$\forall i\in[1,k),t_{i+1}$ 必定是由 $t_i$ 删掉开头字符得到的。
 
@@ -217,7 +217,7 @@ SAM 肯定是一个 DAG。因为任意一个转移 $(p,q)$，都有 $\mathrm{len
 
 经典 $O(n\log n)$ SA 例题，但是 SAM 可以做到 $O(n)$，还能求出每个前缀的答案。
 
-本质不同子串个数就是每个等价类的 $\mathrm{len}-\mathrm{minlen}+1=\mathrm{len}-\mathrm{len}_{\mathrm{link}}$，每次插入的时候动态维护即可，另外显然分裂 $q$ 的时候不会增加本质不同子串个数。
+本质不同子串个数就是每个等价类的 $\mathrm{len}-\mathrm{minlen}+1=\mathrm{len}-\mathrm{len_{link}}$，每次插入的时候动态维护即可，另外显然分裂 $q$ 的时候不会增加本质不同子串个数。
 
 例题 [P4070 [SDOI2016] 生成魔咒](https://www.luogu.com.cn/problem/P4070)。
 
@@ -305,4 +305,4 @@ $$T=C_1+S_1+C_2+S_2\dots +C_k+S_k$$
 
 10. 区间本质不同子串
 
-代码比较毒瘤，但思路其实还算好，参考[这篇博客](../../records/2024Jan.md)
+代码比较毒瘤，但思路其实还算好，参考[这篇博客](../../records/2024Jan.md/#p6292)
