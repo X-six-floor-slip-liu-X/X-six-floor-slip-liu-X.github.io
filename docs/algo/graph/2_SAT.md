@@ -93,12 +93,12 @@ signed main(){
 
 //// admonition | [CF1697F Too Many Constraints](https://www.luogu.com.cn/problem/CF1697F)
 
-考虑转化成 2-SAT 问题，参考[这篇博客]()。
+考虑转化成 2-SAT 问题，参考[这篇博客](../../records/2023Nov.md)。
 
 ////
 
 //// admonition | [QOJ#5504 Flower Garden](https://qoj.ac/problem/5504)
 
-不太一样的 2-SAT 问题，因为在 2-SAT 层面是必定有解的，这时候可以考虑用图论性质解决其他条件，参考[这篇博客]()
+不太一样的 2-SAT 问题，因为在 2-SAT 层面是必定有解的，这时候可以考虑用图论性质解决其他条件，参考[这篇博客](../../records/2023Nov.md)
 
 ////

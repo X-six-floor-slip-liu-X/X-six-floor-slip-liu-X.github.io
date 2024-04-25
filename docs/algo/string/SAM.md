@@ -44,27 +44,27 @@ SAM 被创造出来的目的是一个**能接受指定 $S$ 字符串所有后缀
 
 为方便叙述，称一个子串的**出现位置**为它最后一个字符的位置，比如 $s[3:5]$ 的出现位置就是 $5$。
 
-注意到对于多个本质相同的子串，由于我们读入字符串 $t$ 时只考虑它**是不是** $s$ 的子串，而不考虑它的位置。所以本质相同的子串显然可以合并为同一个状态。而转移就是这些子串所有结束位置 $e$ 的下一个字符 $s_{e+1}$。考虑令 $\mathrm{endpos}_a$ 表示子串 $a$ 的所有结束位置构成的集合。
+注意到对于多个本质相同的子串，由于我们读入字符串 $t$ 时只考虑它**是不是** $s$ 的子串，而不考虑它的位置。所以本质相同的子串显然可以合并为同一个状态。而转移就是这些子串所有结束位置 $e$ 的下一个字符 $s_{e+1}$。考虑令 $\mathrm{endpos_{\mathit{a}}}$ 表示子串 $a$ 的所有结束位置构成的集合。
 
-而容易发现，对于两个子串 $a,b$（钦定 $|a|\ge |b|$），若 $b$ 不是 $a$ 的后缀，那么 $\mathrm{endpos}_b\cap \mathrm{endpos}_a=\varnothing$，因为任意出现 $b$ 的位置都无法通过向前拓展的方式得到 $a$。而若 $b$ 是 $a$ 的后缀，那么有 $\mathrm{endpos}_a\subseteq \mathrm{endpos}_b$，因为任意出现了 $a$ 的位置都能通过删掉开头若干个字符得到 $b$，并且显然 $b$ 还可能在其他地方出现。那么显然，对于两个字符串 $a,b(|a|\ge|b|)$，它们 $\mathrm{endpos}$ 的交不是空集就是 $\mathrm{endpos}_b$
+而容易发现，对于两个子串 $a,b$（钦定 $|a|\ge |b|$），若 $b$ 不是 $a$ 的后缀，那么 $\mathrm{endpos}_b\cap \mathrm{endpos_{\mathit{a}}}=\varnothing$，因为任意出现 $b$ 的位置都无法通过向前拓展的方式得到 $a$。而若 $b$ 是 $a$ 的后缀，那么有 $\mathrm{endpos_{\mathit{a}}}\subseteq \mathrm{endpos_{\mathit{b}}}$，因为任意出现了 $a$ 的位置都能通过删掉开头若干个字符得到 $b$，并且显然 $b$ 还可能在其他地方出现。那么显然，对于两个字符串 $a,b(|a|\ge|b|)$，它们 $\mathrm{endpos}$ 的交不是空集就是 $\mathrm{endpos_{\mathit{b}}}$
 
-然后着重考虑多个 $\mathrm{endpos}$ 相同的情况。容易想到若 $\mathrm{endpos}$ 那么对应的转移也相同，或许可以合并为同一个状态，考虑寻找性质。令 $t_1,t_2,\dots t_k$ 为某个满足 $\mathrm{endpos}_{t_1}=\mathrm{endpos}_{t_2}=\cdots=\mathrm{endpos}_{t_k}$ 的极大字符串集合（“极大”是指不存在其它字符串 $\mathrm{endpos}$ 和它们相同），且钦定 $|t_1|\ge |t_2|\ge\dots\ge |t_k|$。首先注意到两长度相同的本质不同子串 $\mathrm{endpos}$ 显然不可能相同，故上面对 $t$ 排列的要求就可以不取等了。由于它们的交不为空，那么所有 $t_i$ 必定都是 $t_1$ 的后缀，不妨从 $t_1$ 每次删掉开头字符考虑，容易发现每删掉一个字符，$\mathrm{endpos}$ 内部的元素是单调变多的，也就是说随着删开头字符，不可能出现 $\mathrm{endpos}$ 从等于 $\mathrm{endpos}_{t_1}$ 变成不等于 $\mathrm{endpos}_{t_1}$ 又变回 $\mathrm{endpos}_{t_1}$ 的情况。换句话说，$\forall i\in[1,k),t_{i+1}$ 必定是由 $t_i$ 删掉开头字符得到的。
+然后着重考虑多个 $\mathrm{endpos}$ 相同的情况。容易想到若 $\mathrm{endpos}$ 那么对应的转移也相同，或许可以合并为同一个状态，考虑寻找性质。令 $t_1,t_2,\dots t_k$ 为某个满足 $\mathrm{endpos_{\mathit{t_1}}}=\mathrm{endpos_{\mathit{t_2}}}=\cdots=\mathrm{endpos_{\mathit{t_k}}}$ 的极大字符串集合（“极大”是指不存在其它字符串 $\mathrm{endpos}$ 和它们相同），且钦定 $|t_1|\ge |t_2|\ge\dots\ge |t_k|$。首先注意到两长度相同的本质不同子串 $\mathrm{endpos}$ 显然不可能相同，故上面对 $t$ 排列的要求就可以不取等了。由于它们的交不为空，那么所有 $t_i$ 必定都是 $t_1$ 的后缀，不妨从 $t_1$ 每次删掉开头字符考虑，容易发现每删掉一个字符，$\mathrm{endpos}$ 内部的元素是单调变多的，也就是说随着删开头字符，不可能出现 $\mathrm{endpos}$ 从等于 $\mathrm{endpos_{\mathit{t_1}}}$ 变成不等于 $\mathrm{endpos_{\mathit{t_1}}}$ 又变回 $\mathrm{endpos_{\mathit{t_1}}}$ 的情况。换句话说，$\forall i\in[1,k),t_{i+1}$ 必定是由 $t_i$ 删掉开头字符得到的。
 
-考虑把这些 $t_i$ 视为同一个等价类 $x$，那么根据之前的猜想，可以把一个等价类作为一个状态（下文的所有 $x$ 以及带任意下标的 $x$ 若没有另行说明均指代某自动机状态或其代表的等价类）。如果删掉 $t_k$ 的开头字符得到 $t'$，它必定属于另一个等价类，记为 $\mathrm{link}_x$。容易发现 $x\to \mathrm{link}_x$ 的关系形成了一个以初始状态 $S_0$ 为根的树形结构。其中对于任意一条树边，有 $\mathrm{endpos}_x\subsetneq \mathrm{endpos}_{\mathrm{link}_x}$，对于任意一个 $x$，它的所有儿子对应的 $\mathrm{endpos}$ 必定互不相交（因为如果两 $\mathrm{endpos}$ 相交，那么它们对应的状态必定是祖先和后代的关系）。
+考虑把这些 $t_i$ 视为同一个等价类 $x$，那么根据之前的猜想，可以把一个等价类作为一个状态（下文的所有 $x$ 以及带任意下标的 $x$ 若没有另行说明均指代某自动机状态或其代表的等价类）。如果删掉 $t_k$ 的开头字符得到 $t'$，它必定属于另一个等价类，记为 $\mathrm{link_{\mathit{x}}}$。容易发现 $x\to \mathrm{link_{\mathit{x}}}$ 的关系形成了一个以初始状态 $S_0$ 为根的树形结构。其中对于任意一条树边，有 $\mathrm{endpos_{\mathit{x}}}\subsetneq \mathrm{endpos_{link_{\mathit{x}}}}$，对于任意一个 $x$，它的所有儿子对应的 $\mathrm{endpos}$ 必定互不相交（因为如果两 $\mathrm{endpos}$ 相交，那么它们对应的状态必定是祖先和后代的关系）。
 
-对于一个等价类 $x$，它必定有一个最长的字符串 $\mathrm{longest}_x$，它的长度记作 $\mathrm{len}_x$。以及最短的字符串 $\mathrm{shortest}_x$，它的长度记作 $\mathrm{minlen}_x$。只要找到了这两个字符串就能确定等价类 $x$ 内所有字符串。注意到 $\mathrm{len}_{\mathrm{link}_x}+1=\mathrm{minlen}_x$（除非 $x=S_0$），所以我们其实不需要维护 $\mathrm{minlen}_x$ 和 $\mathrm{shortest}_x$。在后文我会说明其实 $\mathrm{longest}_x$ 也不需要维护。此外，容易发现从任意结点 $x$ 每次跳 $\mathrm{link}_x$ 直到 $S_0$，路径上所有等价类内字符串恰好是从 $\mathrm{longest}_x$ 开始每次删掉开头字符直到变为空串的所有字符串。
+对于一个等价类 $x$，它必定有一个最长的字符串 $\mathrm{longest_{\mathit{x}}}$，它的长度记作 $\mathrm{len_{\mathit{x}}}$。以及最短的字符串 $\mathrm{shortest_{\mathit{x}}}$，它的长度记作 $\mathrm{minlen_{\mathit{x}}}$。只要找到了这两个字符串就能确定等价类 $x$ 内所有字符串。注意到 $\mathrm{len_{link_{\mathit{x}}}}+1=\mathrm{minlen_{\mathit{x}}}$（除非 $x=S_0$），所以我们其实不需要维护 $\mathrm{minlen_{\mathit{x}}}$ 和 $\mathrm{shortest_{\mathit{x}}}$。在后文我会说明其实 $\mathrm{longest_{\mathit{x}}}$ 也不需要维护。此外，容易发现从任意结点 $x$ 每次跳 $\mathrm{link_{\mathit{x}}}$ 直到 $S_0$，路径上所有等价类内字符串恰好是从 $\mathrm{longest_{\mathit{x}}}$ 开始每次删掉开头字符直到变为空串的所有字符串。
 
 根据前文的猜想，考虑已经构建好了 $s[1:k-1]$ 的 SAM，如何插入 $s_k$，令 $c=s_k$。
 
-首先显然地，子串 $s[1:k]$ 此时必定只出现了一次。那么新建一个结点 $x$ 包含所有**第一次出现** 的字符串，显然它们必然都是 $s[1:k]$ 的后缀，那么设 $x_0$ 为 $s[1:k-1]$ 所在的自动机状态。那么有 $\mathrm{len}_x=\mathrm{len}_{x_0}+1$ 显然所有**有可能**存在转移边 $\delta(x',c)=x$ 的 $x'$ 必定是 $x_0$ 的**祖先**（包括它自己）。
+首先显然地，子串 $s[1:k]$ 此时必定只出现了一次。那么新建一个结点 $x$ 包含所有**第一次出现** 的字符串，显然它们必然都是 $s[1:k]$ 的后缀，那么设 $x_0$ 为 $s[1:k-1]$ 所在的自动机状态。那么有 $\mathrm{len_{\mathit{x}}}=\mathrm{len_{\mathit{x_0}}}+1$ 显然所有**有可能**存在转移边 $\delta(x',c)=x$ 的 $x'$ 必定是 $x_0$ 的**祖先**（包括它自己）。
 
 考虑从 $x_0$ 开始一步一步往上跳 $\mathrm{link}$，最下面的一些状态本来就不存在转移边 $\delta(x',c)$，可以直接令 $\delta(x',c)=x$。考虑找到第一个存在 $\delta(x',c)$ 的 $x'$，记这个 $x'$ 为 $p$，又记 $\delta(p,c)=q$（注意可能找不到这个 $x'$，即 $\delta(S_0,c)$ 不存在，但是如果 $x'=S_0$ 也要进行下一步）。接下来分两种情况：
 
-1. $\mathrm{len}_q=\mathrm{len}_p+1$
+1. $\mathrm{len_{\mathit{q}}}=\mathrm{len_{\mathit{p}}}+1$
 
-说明 $q$ 内所有字符串均能通过 $p$ 及其祖先内的字符串加上字符 $c$ 得到，即它们全都是子串 $s[1:k]$ 的后缀，由于 $p$ 是 $x_0$ 的祖先中最深的拥有 $\delta(p,c)$ 转移边的结点，也就是说 $\mathrm{longest}_q$ 是从 $s[1:k]$ 开始依次删除开头字符能得到的第一个 $\mathrm{endpos}$ 与 $x$ 不同的字符串，即 $q=\mathrm{link}_x$。
+说明 $q$ 内所有字符串均能通过 $p$ 及其祖先内的字符串加上字符 $c$ 得到，即它们全都是子串 $s[1:k]$ 的后缀，由于 $p$ 是 $x_0$ 的祖先中最深的拥有 $\delta(p,c)$ 转移边的结点，也就是说 $\mathrm{longest_{\mathit{q}}}$ 是从 $s[1:k]$ 开始依次删除开头字符能得到的第一个 $\mathrm{endpos}$ 与 $x$ 不同的字符串，即 $q=\mathrm{link_{\mathit{x}}}$。
 
-2. $\mathrm{len}_q\ne \mathrm{len}_p+1$。
+2. $\mathrm{len_{\mathit{q}}}\ne \mathrm{len_{\mathit{p}}}+1$。
 
 此时 $q$ 只有一部分（更具体地说，是长度小于 $len_p+1$ 的那一部分）能通过 $p$ 及其祖先内的字符串加上字符 $c$ 得到，考虑把这一部分分裂出来，得到一个新状态 $q'$，然后剩下的字符串视作 $q''$。
 
@@ -72,9 +72,9 @@ SAM 被创造出来的目的是一个**能接受指定 $S$ 字符串所有后缀
 
 首先对于 $\delta$，由于 $q$ 的转移边 $q'$ 和 $q''$ 显然都能转移（在对应位置都出现过），所以直接复制即可。
 
-然后是 $\mathrm{link}$，显然 $\mathrm{link}_x=\mathrm{link}_{q''}=q',\mathrm{link}_{q'}=\mathrm{link}_q$。
+然后是 $\mathrm{link}$，显然 $\mathrm{link_{\mathit{x}}}=\mathrm{link_{\mathit{q''}}}=q',\mathrm{link_{\mathit{q'}}}=\mathrm{link_{\mathit{q}}}$。
 
-接下来是 $\mathrm{len}$，根据定义可得 $\mathrm{len}_{q'}=len_{p}+1,\mathrm{len}_{q''}=\mathrm{len}_q$。
+接下来是 $\mathrm{len}$，根据定义可得 $\mathrm{len_{\mathit{q'}}}=len_{p}+1,\mathrm{len_{\mathit{q''}}}=\mathrm{len_{\mathit{q}}}$。
 
 然后从 $p$ 往上的一段链本来转移到 $q$，由于从 $p$ 分裂开，故这些 $\delta'(p',c)$ 一直到某位置的 $\delta(p',c)$ 是 $q$ 的祖先为止都要重新赋值为 $q'$。
 
@@ -92,7 +92,7 @@ SAM 被创造出来的目的是一个**能接受指定 $S$ 字符串所有后缀
 
 ---
 
-然后是边数。容易发现对于任意一个状态 $q$，都存在一个转移 $(p,q)$ 使得 $\mathrm{len}_q=\mathrm{len}_p+1$。我们称这样的转移是**连续的**。
+然后是边数。容易发现对于任意一个状态 $q$，都存在一个转移 $(p,q)$ 使得 $\mathrm{len_{\mathit{q}}}=\mathrm{len_{\mathit{p}}}+1$。我们称这样的转移是**连续的**。
 
 容易发现连续的边必定能组成一棵以 $S_0$ 为根的外向树，故这一部分边数上界是 $2n-2$。考虑非连续转移的数量。
 
@@ -108,7 +108,7 @@ SAM 被创造出来的目的是一个**能接受指定 $S$ 字符串所有后缀
 
 仍沿用之前实现过程中的变量名。
 
-首先 $p$ 必定是 $\mathrm{link}_{x_0}$ 或其祖先，然后一直到某个 $p'$ 使得 $\delta(p',c)\ne q$ 为止的一段都需要赋值。这个 $p'$ 必然是 $\mathrm{link}_{\mathrm{link}_{x_0}}$ 或其祖先，并且它会转移到 $\mathrm{link}_{\mathrm{link}_{x}}$，即 $\mathrm{len}_{\mathrm{link}_{\mathrm{link}_{x}}}=\mathrm{len}_{p'}+1$。那么每跳一次都会使 $\mathrm{len}_{p'}$ 至少减少 $1$，而转移到的 $\mathrm{link}_{\mathrm{link}_{x}}$ 就会成为下一次“可能的最大的 $p'$”，那么假如你取一个指针维护这个东西，他就至多会变化 $O(n)$ 次（虽然一般不这么写）。
+首先 $p$ 必定是 $\mathrm{link_{\mathit{x_{\mathrm{0}}}}}$ 或其祖先，然后一直到某个 $p'$ 使得 $\delta(p',c)\ne q$ 为止的一段都需要赋值。这个 $p'$ 必然是 $\mathrm{link_{link_{\mathit{x_{\mathrm{0}}}}}}$ 或其祖先，并且它会转移到 $\mathrm{link_{link_{\mathit{x}}}}$，即 $\mathrm{len_{link_{link_{\mathit{x}}}}}=\mathrm{len_{\mathit{p'}}}+1$。那么每跳一次都会使 $\mathrm{len_{\mathit{p'}}}$ 至少减少 $1$，而转移到的 $\mathrm{link_{link_{\mathit{x}}}}$ 就会成为下一次“可能的最大的 $p'$”，那么假如你取一个指针维护这个东西，他就至多会变化 $O(n)$ 次（虽然一般不这么写）。
 
 /// details | [模板题](https://www.luogu.com.cn/problem/P3804)参考代码
     open: False
@@ -191,7 +191,7 @@ signed main(){
 }
 ```
 
-1. 把 $\mathrm{link}_0$ 设为 $-1$，此处 $-1$ 相当于 $\mathrm{null}$ 状态，即一个不能到达任何接收状态的状态。这样实现起来也更方便。
+1. 把 $\mathrm{link_{0}}$ 设为 $-1$，此处 $-1$ 相当于 $\mathrm{null}$ 状态，即一个不能到达任何接收状态的状态。这样实现起来也更方便。
 
 ///
 
@@ -201,7 +201,7 @@ signed main(){
 
 显然 $\mathrm{link}$ 关系会形成一棵树，我们称之为 parent tree。
 
-SAM 肯定是一个 DAG。因为任意一个转移 $(p,q)$，都有 $\mathrm{len}_q\le \mathrm{len}_p+1$，显然不会形成环。并且这个 DAG 的总路径数小到令人发指，是 $O(n^2)$ 级别（原串中本质不同子串个数）的（随机 DAG 路径数是指数级别的）。因为任意一个是原串子串的字符串都有唯一一条路径与它对应，而对于任意一条不是原串子串的字符串，都必定不存在一条对应的路径。
+SAM 肯定是一个 DAG。因为任意一个转移 $(p,q)$，都有 $\mathrm{len_{\mathit{q}}}\le \mathrm{len_{\mathit{p}}}+1$，显然不会形成环。并且这个 DAG 的总路径数小到令人发指，是 $O(n^2)$ 级别（原串中本质不同子串个数）的（随机 DAG 路径数是指数级别的）。因为任意一个是原串子串的字符串都有唯一一条路径与它对应，而对于任意一条不是原串子串的字符串，都必定不存在一条对应的路径。
 
 并且，同一个等价类内部不可能出现“存在两字符串 $s,t$，使得 $s$ 在 $t$ 中能匹配两次”的情况。因为等价类的意义是 $\mathrm{endpos}$ 相同，如果 $s$ 能匹配两次 $t$ 那么必然 $t$ 在前面一次也出现了，这就无限递归了。
 
@@ -302,3 +302,7 @@ $$T=C_1+S_1+C_2+S_2\dots +C_k+S_k$$
 那么 DAG 上 DP，状压统计可达性即可。
 
 这种题 $k$ 不会太大。
+
+10. 区间本质不同子串
+
+代码比较毒瘤，但思路其实还算好，参考[这篇博客](../../records/2024Jan.md)

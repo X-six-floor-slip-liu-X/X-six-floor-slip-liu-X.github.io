@@ -46,7 +46,7 @@ $$
 
 现在想一下如何保证 $\dfrac{a\lambda}{2^k}<1$，容易发现 $a$ 最大是 $P-1$，那么 $2^k\ge P$ 即可，为了方便我们一般取 $k=64$（`unsigned long long` 的最大值加一），注意会爆 `unsigned long long`，所以中间要转化成 128 位无符号整数 `__uint128_t`。
 
-可以用一个结构体写个仿函数封装一下。
+可以用一个结构体封装一下，然后重载一下 `%` 符号。
 
 /// details | 参考代码
     open: False
@@ -56,15 +56,15 @@ $$
 #define ull unsigned long long 
 #define ui128 __uint128_t
 struct Barrett{
-	ull d;ui128 m;
-	void init(ull _d){
-		d=_d,m=(((ui128)(1)<<64)/d);
-	}
-	ull operator()(ull a){
-		ull w=(m*a)>>64;w=a-w*d;
-		if(w>=d)w-=d;return w;
-	}
-}MOD;
+    ull d;ui128 m;
+    void init(ull _d){
+        d=_d,m=(((ui128)(1)<<64)/d);
+    }
+}mod;
+ull operator %(int a,Barrett mod){
+    ull w=(mod.m*a)>>64;w=a-w*mod.d;
+    if(w>=mod.d)w-=mod.d;return w;
+}
 ```
 
 ///
