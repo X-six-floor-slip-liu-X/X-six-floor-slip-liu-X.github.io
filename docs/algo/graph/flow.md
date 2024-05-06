@@ -425,7 +425,7 @@ $$f(A,B)+f(A,D)+f(C,B)+f(C,D)\le f(A,B)+f(C,B)+f(D,B)$$
 
 综上，若 $c(s,t) \le c(s,u),c(t,v)$，此时 $c(u,v)\le c(s,t)$，且 $c(u,v) \ge c(s,t)$。故 $c(u,v)=c(s,t)$。
 
-若 $c(s,t)$ 不是三者中的最小值，那么若 $c(s,u)<c(t,v)$，则 $c(u,v)\ge c(s,u)$ 且 $c(u,v)\le c(s,u)$，此时 $c(u,v)=c(s,u)$，$c(s,u)>c(t,v)$ 时同理。
+若 $c(s,t)$ 不是三者中的最小值，那么若 $c(s,u)\le c(t,v)$，则 $c(u,v)\ge c(s,u)$ 且 $c(u,v)\le c(s,u)$，此时 $c(u,v)=c(s,u)$，$c(s,u)>c(t,v)$ 时同理。
 
 故 $c(u,v)=\min\begin{Bmatrix}c(u,s),c(s,t),c(t,v)\end{Bmatrix}$，得证。
 
