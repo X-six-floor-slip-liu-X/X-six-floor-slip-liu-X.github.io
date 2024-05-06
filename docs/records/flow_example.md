@@ -6,6 +6,124 @@ comments: true
 
 ## 最大流与二分图匹配
 
+### P2764 最小路径覆盖问题
+
+[传送门](https://www.luogu.com.cn/problem/P2764)
+
+模板题里比较不显然的。
+
+考虑路径数怎么概括，容易发现路径数等于路径起点数，那么考虑起点和其它点的本质区别是什么，即**入度为** $0$，换句话说，路径数 $= n-\sum d_i$ 其中 $d_i$ 是 $i$ 的入度（显然只能为 $0$ 或 $1$）。
+
+那么就要最大化入度总数了，容易发现每个入度必须要一个出度来匹配（一条有向边终点的入度与起点的出度匹配），就容易想到二分图最大匹配。左部点 $(i,0)$ 代表 $i$ 的出度，右部点 $(i,1)$ 代表 $i$ 的入度，然后左右点连边 $(i,0)\to (j,1)$ 当且仅当对应 $(i,j)$ 间有边。最小路径覆盖即最大匹配。
+
+对于输出方案，容易发现匹配边 $(i,0)\to (j,1)$ 对应方案中的边 $(i,j)$。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+using namespace std;
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=160,M=6000,inf=0x3f3f3f3f;
+int n,m,s,t,ans;
+struct edge{
+	int v,rst,nxt;
+}e[M<<2];
+int cnte=1,head[N<<1];
+void adde(int u,int v){
+	e[++cnte]=edge{v,1,head[u]};head[u]=cnte;
+	e[++cnte]=edge{u,0,head[v]};head[v]=cnte;
+}
+int dpt[N<<1],cur[N<<1];
+queue<int> q;
+bool bfs(){
+	forup(i,1,(n<<1)+2){
+		cur[i]=head[i];
+	}
+	mem(dpt,-1);
+	while(q.size()) q.pop();
+	q.push(s);
+	dpt[s]=0;
+	while(q.size()){
+		int u=q.front();q.pop();
+		for(int i=head[u];i;i=e[i].nxt){
+			if(!e[i].rst||dpt[e[i].v]!=-1) continue;
+			dpt[e[i].v]=dpt[u]+1;
+			q.push(e[i].v);
+		}
+	}
+	return dpt[t]!=-1;
+}
+int dfs(int x,int flow){
+	if(x==t||!flow) return flow;
+	for(int i=cur[x];i;i=e[i].nxt){
+		cur[x]=i;
+		if(dpt[e[i].v]==dpt[x]+1){
+			int res=dfs(e[i].v,min(flow,e[i].rst));
+			if(res){
+				e[i].rst-=res;
+				e[i^1].rst+=res;
+				return res;
+			}
+		}
+	}
+	return 0;
+}
+int dinic(){
+	int ans=0;
+	while(bfs()){
+		ans+=dfs(s,inf);
+	}
+	return ans;
+}
+signed main(){
+	n=read();m=read();
+	forup(i,1,m){
+		int u=read(),v=read();
+		adde(u,v+n);
+	}
+	s=(n<<1)+1;t=(n<<1)+2;
+	forup(i,1,n) adde(s,i);
+	forup(i,n+1,n<<1) adde(i,t);
+	int ans=n-dinic();
+	forup(i,1,n){
+		if(e[head[i+n]].rst){
+			int l=i;
+			bool flag=true;
+			while(flag){
+				printf("%d ",l);
+				flag=false;
+				for(int j=head[l];j;j=e[j].nxt){
+					if(e[j].v>(n<<1)) continue;
+					if(!e[j].rst){
+						l=e[j].v-n;flag=true;
+						break;
+					}
+				}
+			}
+			puts("");
+		}
+	}
+	printf("%d\n",ans);
+}
+```
+
+///
+
+具体来说
+
 ### P3163 [CQOI2014] 危桥
 
 [传送门](https://www.luogu.com.cn/problem/P3163)
@@ -815,21 +933,154 @@ signed main(){
 
 ///
 
+### CF1630F Making It Bipartite
+
+[传送门](https://www.luogu.com.cn/problem/CF1630F)
+
+远看二分图，近看最小割，细看还是二分图。
+
+考虑什么时候不是二分图，即什么时候会出现奇环。
+
+手模一下可以得到若出现奇环，则必然存在三个点 $i,j,k$，使得 $a_j=\lambda_1a_i,a_k=\lambda_2a_j$，即 $a_j$ 既做因数又做倍数。故答案中**不能存在 $a_i$ 既做因数又做倍数**。感觉上和最小割比较类似（但不是最小割，因为一个点有三种选法，做因数、做倍数和删掉这个点），那么容易想到拆点，具体来说，将点 $i$ 拆成 $(i,0),(i,1)$ 两点，表示 $i$ 做因数或 $i$ 做倍数。因为这两个不能共存，而倍数关系又是偏序关系，可以考虑建模成最大反链。具体来说，$(i,0)\to (i,1)$ 连一条边（这个显然），然后 $\forall j,a_i=\lambda a_j$，连边 $(i,0)\to (j,0),(i,1)\to (j,1),(i,0)\to (j,1)$（由于 $a_i$ 是 $a_j$ 的倍数，所以 $a_i$ 不能做因数，$a_j$ 不能做倍数），求出这张图的最大反链即可。这个考虑 Dilworth 定理转化成最小链覆盖，那么可以二分图匹配求。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=5e4+5,inf=0x3f3f3f3f;
+int n,a[N];
+vector<int> po[N];
+namespace flow{
+	struct edge{
+		int v,rst,nxt;
+	}e[N*100];
+	int head[N<<2],cur[N<<2],dpt[N<<2],s,t,cnte=1;
+	void build(){
+		s=n*4+1;t=n*4+2;cnte=1;
+		forup(i,1,t){
+			head[i]=0;
+		}
+	}
+	void adde(int u,int v,int w){
+		e[++cnte]=edge{v,w,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,head[v]};head[v]=cnte;
+	}
+	bool bfs(){
+		forup(i,1,t){
+			dpt[i]=-1;
+			cur[i]=head[i];
+		}
+		queue<int> q;
+		q.push(s);dpt[s]=0;
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v;
+				if(dpt[v]!=-1||!e[i].rst) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return dpt[t]!=-1;
+	}
+	int dfs(int x,int flow){
+		if(x==t||!flow) return flow;
+		int res=0;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;
+			int v=e[i].v,rst=e[i].rst;
+			if(!rst||dpt[v]!=dpt[x]+1) continue;
+			int gt=dfs(v,min(rst,flow-res));
+			if(gt){
+				res+=gt;
+				e[i].rst-=gt;
+				e[i^1].rst+=gt;
+				if(res==flow) break;
+			}
+		}
+		return res;
+	}
+	int dinic(){
+		int ans=0;
+		while(bfs()){
+			ans+=dfs(s,inf);
+		}
+		return ans;
+	}
+}
+void solve(){
+	n=read();
+	flow::build();
+	int maxa=0;
+	forup(i,1,n){
+		a[i]=read();
+		maxa=max(maxa,a[i]);
+		po[a[i]].push_back(i);
+	}
+	forup(i,1,n){
+		flow::adde(flow::s,i,1);
+		flow::adde(i+n*2,flow::t,1);
+		flow::adde(flow::s,i+n,1);
+		flow::adde(i+n+n*2,flow::t,1);
+		flow::adde(i,i+n+n*2,1);
+		for(int j=a[i]*2;j<=maxa;j+=a[i]){
+			for(auto k:po[j]){
+				flow::adde(k,i+n+n*2,1);
+				flow::adde(k,i+n*2,1);
+				flow::adde(k+n,i+n+n*2,1);
+			}
+		}
+	}
+	int res=flow::dinic();
+	printf("%d\n",n-(2*n-res));
+	forup(i,1,n){
+		po[a[i]].clear();
+	}
+}
+signed main(){
+	int t=read();
+	while(t--){
+		solve();
+	}
+}
+```
+
+///
+
 ## 费用流
 
 ### P4249 [WC2007] 剪刀石头布
 
 [传送门](https://www.luogu.com.cn/problem/P4249)
 
-最大化竞赛图三元环。
+给部分边定向，其余边已给出，最大化竞赛图三元环数量。
 
-考虑如果要判三元环，那么和三行都有关，不好搞。但是“从 $n$ 个点中选三个”这个问题是简单的。那么考虑用总的减去不是三元环的。
+考虑如果要判三元环，那么和三行都有关，不好搞。但是“从 $n$ 个点中选三个”这个问题是简单的。那么考虑用总的减去不是三元环的三元组数量。
 
-容易发现，竞赛图上三个点不组成三元环，当且仅当其中一个点指向剩下的两个。换句话说，**存在一个点在导出子图中出度为二**。那么容易发现，令 $d_u$ 为 $u$ 的出度，那么要减去的就是 $\sum_{i=1}^n\frac{d_i(d_i-1)}{2}$。
+容易发现，竞赛图上三个点不组成三元环，当且仅当其中一个点指向剩下的两个。换句话说，**存在一个点在导出子图中出度为二**。容易发现，令 $d_u$ 为 $u$ 的出度，那么要减去的就是 $\sum_{i=1}^n\frac{d_i(d_i-1)}{2}$。
 
 对于一条边 $(u,v)$，若它是 $u\to v$ 的有向边，那么会向 $u$ 提供一个出度。若是无向边，那么有可能向 $u$ 或者 $v$ 提供出度。容易想到可以用 flow 做。
 
-那么具体怎么做呢？注意到 $\frac{d_i(d_i-1)}{2}$ 这个式子长得像等差数列求和（其实手模一遍会发现者本质上就是等差数列求和）。那么容易想到费用流，从每个“点”向汇点连 $n$ 条流量为 $1$，费用分别为 $0,1,\dots n-1$ 的边，然后就解决了。
+那么具体怎么做呢？注意到 $\frac{d_i(d_i-1)}{2}$ 这个式子长得像等差数列求和（其实手模一遍会发现这个问题本质上就是等差数列求和）。那么容易想到费用流，对每条边开一个点作为第一层，源点向第一层连费用为 $0$ 容量为 $1$ 的边。然后第二层是原图的点，从每个点向汇点连 $n$ 条流量为 $1$，费用分别为 $0,1,\dots n-1$ 的边。最后第一层向第二层中对应边的起点（如果是无向边就两端点都连）连一条费用为 $0$ 容量为 $1$ 的边（表示提供一个出度），然后就解决了。
 
 /// details | 参考代码
 	open: False
@@ -1457,6 +1708,163 @@ signed main(){
 		}
 	}
 	printf("%d\n",ans-flow::dinic());
+}
+```
+
+///
+
+### [AGC038F] Two Permutations
+
+可以把问题视作 $A,B$ 本来是 $1\sim N$ 的排列，然后要将某些 $A_i$ 替换为 $P_i$，$B_i$ 替换为 $Q_i$。
+
+考虑问题的转化。由于 $A,B$ 最终是 $N$ 阶排列，这其实就相当于你一次替换必须替换整个置换环。也就是说这是个决策**是否替换某个置换环**的问题，是经典最小割建模的设问类型。
+
+为方便叙述，记 $x_i$ 表示 $P_i$ 所在置换环是否被替换，$y_i$ 表示 $Q_i$ 所在置换环是否被替换。分情况讨论一下每个 $i$ 何时会做贡献。
+
+1. $P_i=i,Q_i=i$：无论如何都会产生贡献，直接统计答案，不加入网络流图。
+2. $P_i\ne i,Q_i=i$：当 $x_i=0$ 时会产生贡献。
+3. $P_i=i,Q_i\ne i$：同理。
+4. $P_i\ne i,Q_i\ne i,P_i\ne Q_i$：在 $x_i\lor y_i$ 时不会产生贡献。
+5. $P_i\ne i,Q_i\ne i,P_i = Q_i$：在 $x_i\oplus y_i$ 时不会产生贡献，其中 $\oplus$ 表示异或。
+
+那么考虑如何建模。首先容易想到源点向 $P$ 中所有置换环连边，$Q$ 中所有置换环向汇点连边。然后令割开后，$P$ 在 $S$ 集合中的置换环是被替换的，$Q$ 在 $T$ 集合中的置换环是被替换的。
+
+为方便叙述，记 $P_i$ 所在的置换环为 $c(P_i)$。
+
+首先情况 $2$，容易发现会在 $S\to c(P_i)$ 被割掉后产生贡献，即使 $S\to c(P_i)$ 的容量 $+1$。情况 $3$ 同理。
+
+然后考虑情况 $4$，容易发现它在 $c(P_i)\in T，c(Q_i)\in S$ 的时候产生贡献，那么连一条 $c(Q_i)\to c(P_i)$ 的边，容量为 $1$ 即可。
+
+最后考虑最复杂的情况 $5$，他在  $c(P_i)\in T\land c(Q_i)\in S$ 或 $c(P_i)\notin T\land c(Q_i)\notin S$ 时产生贡献。那么连一条 $c(P_i)\to c(Q_i)$ 的容量为 $1$ 的边，再连一条 $c(Q_i)\to c(P_i)$ 的容量为 $1$ 的边。它们其中之一被割掉都会产生贡献。
+
+/// details | 参考代码
+    open: False
+    type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+using namespace std;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=1e5+5,inf=0x3f3f3f3f;
+int n,a[N],b[N],c[N],d[N],ans,visa[N],visb[N];
+vector<vector<int> > va,vb;
+void find(int *a,int &la,int *vis){
+	int cnt=0;
+	forup(i,1,n){
+		if(vis[i]||a[i]==i) continue;
+		int l=i;
+		++cnt;
+		do{
+			vis[l]=cnt;
+			l=a[l];
+		}while(l!=i);
+		++la;
+	}
+}
+struct dinic{
+	struct edge{
+		int v,rst,nxt;
+	}e[N<<3];
+	int head[N<<1],cur[N<<1],dpt[N<<1],cnte=1,s,t,szn;
+	void adde(int u,int v,int w){
+		e[++cnte]=edge{v,w,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,head[v]};head[v]=cnte;
+	}
+	bool bfs(){
+		forup(i,1,szn){
+			cur[i]=head[i];
+			dpt[i]=-1;
+		}
+		queue<int> q;q.push(s);
+		dpt[s]=0;
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				if(!e[i].rst) continue;
+				int v=e[i].v;
+				if(dpt[v]!=-1) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return dpt[t]!=-1;
+	}
+	int dfs(int x,int flow){
+		if(x==t||!flow) return flow;
+		int res=0;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;
+			int v=e[i].v;
+			if(dpt[v]==dpt[x]+1){
+				int gt=dfs(v,min(e[i].rst,flow-res));
+				if(gt){
+					res+=gt;
+					e[i].rst-=gt;
+					e[i^1].rst+=gt;
+					if(res==flow) break;
+				}
+			}
+		}
+		return res;
+	}
+	int maxflow(){
+		int ans=0;
+		while(bfs()){
+			ans+=dfs(s,inf);
+		}
+		return ans;
+	}
+}mf;
+map<pii,int> mp;
+signed main(){
+	n=read();
+	forup(i,1,n){
+		a[i]=read();
+	}
+	forup(i,1,n){
+		b[i]=read();
+	}
+	int la=0,lb=0; 
+	find(a,la,visa);find(b,lb,visb);
+	mf.s=la+lb+1;mf.t=mf.s+1;
+	mf.szn=mf.t;
+	forup(i,1,n){
+		if(a[i]==i){
+			if(b[i]==i){
+				++ans;
+			}else{
+				mp[mkp(la+visb[i],mf.t)]++;
+			}
+		}else{
+			if(b[i]==i){
+				mp[mkp(mf.s,visa[i])]++;
+			}else if(a[i]==b[i]){
+				mp[mkp(visa[i],la+visb[i])]++;
+				mp[mkp(la+visb[i],visa[i])]++;
+			}else{
+				mp[mkp(la+visb[i],visa[i])]++;
+			}
+		}
+	}
+	for(auto i:mp){
+		int u=i.fi.fi,v=i.fi.se,w=i.se;
+		mf.adde(u,v,w);
+	}
+	printf("%d\n",ans+mf.maxflow());
 }
 ```
 
