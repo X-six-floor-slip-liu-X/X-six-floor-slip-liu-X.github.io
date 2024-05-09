@@ -1869,3 +1869,336 @@ signed main(){
 ```
 
 ///
+
+### CF343E Pumping Stations
+
+[传送门](https://www.luogu.com.cn/problem/CF343E)
+
+[最小割树](../algo/graph/flow/#gomory-hu-tree)版题。
+
+考虑把最小割树建出来，问题就转化成了设 $f(u,v)$ 表示路径 $u,v$ 上边权最小值，构造一个 $n$ 阶排列 $p_i$，最大化 $\sum_{i=1}^{n-1}f(p_i,p_{i+1})$（怎么感觉和网络流没什么关系捏）。
+
+容易发现，最大边权至多只会产生一次贡献（只有那条仅含有它的链上它会产生贡献），此后，次大边权至多也只产生一次贡献（就算两边是相邻的也是这样），后面同理。那么容易发现答案的上界就是每条边都产生恰好一次贡献。考虑能否构造出来。
+
+考虑如何让最大边产生贡献，即把它的两端点放在一起。然后容易发现从这两点引出的任意一条路径只要终点相同 $f$ 就相同。那不妨把这两个点缩在一起（可以用并查集维护），同时用单向链表维护答案序列。
+
+复杂度 $O(n^3m)$，瓶颈在于建树，卡不满。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=205,inf=0x3f3f3f3f;
+int n,m,ans;
+namespace flow{
+	struct edge{
+		int v,rst,nxt,pw;
+	}e[2005];
+	int head[N],cur[N],dpt[N],s,t,cnte=1,vis[N];
+	void clear(int _s,int _t){
+		s=_s;t=_t;
+		forup(i,1,cnte){
+			e[i].rst=e[i].pw;
+		}
+		mem(vis,0);
+	}
+	void adde(int u,int v,int w){
+		e[++cnte]=edge{v,w,head[u],w};head[u]=cnte;
+		e[++cnte]=edge{u,w,head[v],w};head[v]=cnte;
+	}
+	bool bfs(){
+		queue<int> q;
+		forup(i,1,n){
+			dpt[i]=-1;
+			cur[i]=head[i];
+		}
+		q.push(s);dpt[s]=0;
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v;
+				if(!e[i].rst||dpt[v]!=-1) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return dpt[t]!=-1;
+	}
+	int dfs(int x,int flow){
+		if(x==t||!flow) return flow;
+		int res=0;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;
+			int v=e[i].v,rst=e[i].rst;
+			if(dpt[v]!=dpt[x]+1||!rst) continue;
+			int gt=dfs(v,min(rst,flow-res));
+			if(gt){
+				res+=gt;
+				e[i].rst-=gt;
+				e[i^1].rst+=gt;
+				if(res==flow) break;
+			}
+		}
+		return res;
+	}
+	int dinic(){
+		int ans=0;
+		while(bfs()){
+			ans+=dfs(s,inf);
+		}
+		return ans;
+	}
+	void dfs1(int x){
+		vis[x]=1;
+		for(int i=head[x];i;i=e[i].nxt){
+			if(vis[e[i].v]||!e[i].rst) continue;
+			dfs1(e[i].v);
+		}
+	}
+}
+struct edge{
+	int u,v,w;
+}e[N];
+int a[N],cnte;
+void build(int l,int r){
+	if(l>=r) return;
+	flow::clear(a[l],a[l+1]);
+	int f=flow::dinic();
+	e[++cnte]=edge{a[l],a[l+1],f};
+	ans+=f;
+	flow::dfs1(flow::s);
+	vector<int> v1,v2;
+	forup(i,l,r){
+		if(flow::vis[a[i]]){
+			v1.push_back(a[i]);
+		}else{
+			v2.push_back(a[i]);
+		}
+	}
+	int pl=l;
+	for(auto i:v1) a[pl++]=i;
+	for(auto i:v2) a[pl++]=i;
+	build(l,l+v1.size()-1);
+	build(l+v1.size(),r);
+}
+mt19937 mr(time(0));
+int fa[N],st[N],ed[N],nxt[N];
+int getfa(int x){return x==fa[x]?x:fa[x]=getfa(fa[x]);}
+void merge(int u,int v){
+	u=getfa(u);v=getfa(v);
+	if(u==v) return msg("WARNING"),void();
+	nxt[ed[u]]=st[v];
+	fa[u]=v;st[v]=st[u];
+}
+signed main(){
+	n=read();m=read();
+	forup(i,1,n) a[i]=i;
+	shuffle(a+1,a+n+1,mr);
+	forup(i,1,m){
+		int u=read(),v=read(),w=read();
+		flow::adde(u,v,w);
+	}
+	build(1,n);
+	printf("%d\n",ans);
+	sort(e+1,e+n,[&](edge a,edge b){
+		return a.w>b.w;
+	});
+	forup(i,1,n){
+		fa[i]=st[i]=ed[i]=i;
+		nxt[i]=0;
+	}
+	forup(i,1,n-1){
+		merge(e[i].u,e[i].v);
+	}
+	forup(i,1,n){
+		if(fa[i]==i){
+			for(int j=st[i];j;j=nxt[j]){
+				printf("%d ",j);
+			}
+			break;
+		}
+	}
+}
+```
+
+///
+
+### [ARC161F] Everywhere is Sparser than Whole (Judge)
+
+[传送门](https://www.luogu.com.cn/problem/AT_arc161_f)
+
+乐，这一场我们打过，F 是 D 的 spj。
+
+题意就是判断一张 $N$ 个点 $N\cdot D$ 条边无向图的所有导出真子图是否都有 $\frac{|E'|}{|V'|}< D$（严格小于）。
+
+容易发现 $\frac{|E'|}{|V'|}< D$ 等价于 $|E'|-|V'|\cdot D<0$，那么容易想到计算 $|E'|-|V'|\cdot D$ 的最大值看是否大于等于 $0$。
+
+容易（？）想到，“真子图”的条件相当于每选一条边那么它的两端点必选，这种“如果选了 $A$ 则必须选 $B$”让人联想到最大闭合子图建模。那么设计一个二分图，将原图的**边**作为左部点，每条边的权值为 $1$，**点**作为右部点，每个点的权值为 $-D$，然后每条边向它的两端点连有向边。容易发现这张图的最大闭合子图就是 $|E'|-|V'|\cdot D$ 的最大值，跑个经典最小割建模即可判断是否存在真子图使得 $|E'|-|V'|\cdot D>0$。
+
+问题就在于 $|E|-|V|\cdot D=0$ 的情况，因为原图的这个就等于 $0$，无论何时都会有至少两个最小割恰好等于 $N\cdot D$（即 $(\begin{Bmatrix}s\end{Bmatrix},V\setminus\begin{Bmatrix}s\end{Bmatrix})$ 和 $(\begin{Bmatrix}t\end{Bmatrix},V\setminus\begin{Bmatrix}t\end{Bmatrix})$），怎么统计到其它最小割呢？容易发现只要找到一个不是上述两者的最小割即可，那么考虑钦定一条边被割掉/不被割掉。
+
+具体来说，先随便找一条边（设左部点为 $L_1,L_2\dots L_{N\cdot D}$，右部点为 $R_1 \dots$，不妨设 $s\to L_1$ 这条边）钦定它不割掉（可以把容量设成 $\inf$）然后跑一遍最大流，假设原图合法，那么新图上必定只有一个最小割是 $(\begin{Bmatrix}t\end{Bmatrix},V\setminus\begin{Bmatrix}t\end{Bmatrix})$，若存在某最小割割掉 $s\to L_i$ 的一条边即可说明原图不合法。
+
+显然，此时残量网络上 $s$ 能到达的点集就是一个最小割，那么**存在 $L_i$ 无法从 $s$ 到达**显然是**存在最小割割掉 $s\to L_i$ 这条边**的充分条件。考虑证明必要性，如果 $s\to L_i$ 的边被割掉，说明存在一种划分点集的方式，使得集合 $S$ 包含 $s$，集合 $T$ 包含 $L_i$，且所有 $S\to T$ 的边都不在残量网络上，说明 $s$ 不可达 $L_i$。
+
+但是有可能 $L_1$ 就是那个 $L_i$ 捏，这时候就要考虑割 $L_1$ 了。但又出现了新的问题，就是那个存在的割可能要把 $L_1,L_2$ 一起割掉！显然这样是行不通的，因为你不能求 $N\cdot D$ 次最小割。
+
+那考虑钦定 $s\to L_1$ 这条边要割掉（容量设为 $0$），那么就能得到最小割的容量为 $N\cdot D-1$，而这可以对应原图容量恰好为 $N\cdot D$ 的最小割，因为总存在一种方式使得 $s\to L_1$ 属于最小割的边集。若原图合法，那么新图上必定只有 $(\begin{Bmatrix}s\end{Bmatrix},V\setminus\begin{Bmatrix}s\end{Bmatrix})$ 一个最小割。那么同理可得到若存在 $R_i$ 在残量网络上不可达 $T$ 则说明原图不合法。这部分具体实现可以考虑把源点汇点交换。
+
+然后容易发现这个也能直接解决 $|E|-|V|\cdot D>0$ 的情况，因为它不存在任何一个最小割全割左边（或右边），显然能被判断出来。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(int i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(int i=(s),E123123123=(e);i.=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+#define gc getchar()
+int read(){
+	int x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const int N=1e5+5,inf=0x3f3f3f3f;
+int n,d;
+namespace flow{
+	struct edge{
+		int v,rst,nxt;
+	}e[N*15];
+	int head[N*2],cur[N*2],dpt[N*2],cnte,s,t;
+	void adde(int u,int v,int w){
+		e[++cnte]=edge{v,w,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,head[v]};head[v]=cnte;
+	}
+	void clear(){
+		s=n*d+n+1;t=n*d+n+2;
+		forup(i,1,t){
+			head[i]=cur[i]=0;
+		}
+		cnte=1;
+	}
+	bool bfs(){
+		queue<int> q;
+		q.push(s);
+		forup(i,1,t){
+			dpt[i]=-1;
+			cur[i]=head[i];
+		}
+		dpt[s]=0;
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v;
+				if(dpt[v]!=-1||!e[i].rst) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return dpt[t]!=-1;
+	}
+	int dfs(int x,int flow){
+		if(x==t||!flow) return flow;
+		int res=0;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;int v=e[i].v,rst=e[i].rst;
+			if(dpt[v]!=dpt[x]+1||!rst) continue;
+			int gt=dfs(v,min(rst,flow-res));
+			if(gt){
+				res+=gt;
+				e[i].rst-=gt;
+				e[i^1].rst+=gt;
+				if(res==flow) break;
+			}
+		}
+		return res;
+	}
+	int dinic(){
+		int ans=0;
+		while(bfs()){
+			ans+=dfs(s,inf);
+		}
+		return ans;
+	}
+}
+int u[N],v[N];
+void solve(){
+	n=read();d=read();
+	forup(i,1,n*d){
+		u[i]=read();v[i]=read();
+	}
+	flow::clear();
+	forup(i,1,n*d){
+		flow::adde(flow::s,i,i==1?inf:1);
+		flow::adde(i,u[i]+n*d,inf);flow::adde(i,v[i]+n*d,inf);
+	}
+	forup(i,1,n){
+		flow::adde(i+n*d,flow::t,d);	
+	}
+	flow::dinic();
+	forup(i,1,n*d){
+		if(flow::dpt[i]==-1){
+			msg("2");puts("No");
+			return;
+		}
+	}
+	flow::clear();
+	forup(i,1,n*d){
+		flow::adde(i,flow::t,i==1?0:1);
+		flow::adde(u[i]+n*d,i,inf);flow::adde(v[i]+n*d,i,inf);
+	}
+	forup(i,1,n){
+		flow::adde(flow::s,i+n*d,d);
+	}
+	flow::dinic();
+	forup(i,n*d+1,n*d+n){
+		if(flow::dpt[i]==-1){
+			msg("3");puts("No");
+			return;
+		}
+	}
+	puts("Yes");
+}
+signed main(){
+	int t=read();
+	while(t--){
+		solve();
+	}
+}
+```
+
+///

@@ -431,7 +431,179 @@ $$f(A,B)+f(A,D)+f(C,B)+f(C,D)\le f(A,B)+f(C,B)+f(D,B)$$
 
 这样我们就证明了 $|R|\ne 1$ 时性质仍成立，故这样构造是正确的。
 
-复杂度是 $O(n^3m)$（dinic 复杂度乘以 $n$，跑不满）。
+复杂度是 $O(n^3m)$（dinic 复杂度乘以 $n$）。
+
+/// details | [模板题](https://www.luogu.com.cn/problem/P4897)参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=505,inf=0x3f3f3f3f;
+int n,m;
+namespace flow{
+	struct edge{
+		int v,rst,nxt,pw;
+	}e[N*8];
+	int head[N],cur[N],dpt[N],s,t,cnte=1,vis[N];
+	void clear(int _s,int _t){
+		s=_s;t=_t;
+		forup(i,1,cnte){
+			e[i].rst=e[i].pw;
+		}
+		mem(vis,0);
+	}
+	void adde(int u,int v,int w){
+		e[++cnte]=edge{v,w,head[u],w};head[u]=cnte;
+		e[++cnte]=edge{u,w,head[v],w};head[v]=cnte;
+	}
+	bool bfs(){
+		queue<int> q;
+		forup(i,1,n){
+			dpt[i]=-1;
+			cur[i]=head[i];
+		}
+		q.push(s);dpt[s]=0;
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v;
+				if(!e[i].rst||dpt[v]!=-1) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return dpt[t]!=-1;
+	}
+	int dfs(int x,int flow){
+		if(x==t||!flow) return flow;
+		int res=0;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;
+			int v=e[i].v,rst=e[i].rst;
+			if(dpt[v]!=dpt[x]+1||!rst) continue;
+			int gt=dfs(v,min(rst,flow-res));
+			if(gt){
+				res+=gt;
+				e[i].rst-=gt;
+				e[i^1].rst+=gt;
+				if(res==flow) break;
+			}
+		}
+		return res;
+	}
+	int dinic(){
+		int ans=0;
+		while(bfs()){
+			ans+=dfs(s,inf);
+		}
+		return ans;
+	}
+	void dfs1(int x){
+		vis[x]=1;
+		for(int i=head[x];i;i=e[i].nxt){
+			if(vis[e[i].v]||!e[i].rst) continue;
+			dfs1(e[i].v);
+		}
+	}
+}
+struct edge{
+	int v,w;
+};
+vector<edge> e[N];
+int a[N];
+void build(int l,int r){
+	if(l>=r) return;
+	flow::clear(a[l],a[l+1]);
+	int f=flow::dinic();
+	e[a[l]].push_back(edge{a[l+1],f});
+	e[a[l+1]].push_back(edge{a[l],f});
+	flow::dfs1(flow::s);
+	vector<int> v1,v2;
+	forup(i,l,r){
+		if(flow::vis[a[i]]){
+			v1.push_back(a[i]);
+		}else{
+			v2.push_back(a[i]);
+		}
+	}
+	int pl=l;
+	for(auto i:v1) a[pl++]=i;
+	for(auto i:v2) a[pl++]=i;
+	build(l,l+v1.size()-1);
+	build(l+v1.size(),r);
+}
+int f[10][N],g[10][N],dpt[N];
+void dfs(int x,int fa){
+	f[0][x]=fa;dpt[x]=dpt[fa]+1;
+	forup(i,1,9){
+		f[i][x]=f[i-1][f[i-1][x]];
+		g[i][x]=min(g[i-1][x],g[i-1][f[i-1][x]]);
+	}
+	for(auto i:e[x]){
+		if(i.v==fa) continue;
+		g[0][i.v]=i.w;
+		dfs(i.v,x);
+	}
+}
+int Query(int x,int y){
+	if(dpt[x]>dpt[y]) swap(x,y);
+	int res=inf;
+	for(int i=9;i>=0&&dpt[y]>dpt[x];--i){
+		if(dpt[f[i][y]]>=dpt[x]){
+			res=min(res,g[i][y]);
+			y=f[i][y];
+		}
+	}
+	if(x==y) return res;
+	for(int i=9;i>=0&&f[0][x]!=f[0][y];--i){
+		if(f[i][x]!=f[i][y]){
+			res=min(res,g[i][x]);
+			res=min(res,g[i][y]);
+			x=f[i][x];y=f[i][y];
+		}
+	}
+	res=min(res,g[0][x]);
+	res=min(res,g[0][y]);
+	return res;
+}
+mt19937 mr(time(0));
+signed main(){
+	n=read();m=read();
+	forup(i,1,n) a[i]=i;
+	shuffle(a+1,a+n+1,mr);
+	forup(i,1,m){
+		int u=read(),v=read(),w=read();
+		flow::adde(u,v,w);
+	}
+	build(1,n);
+	dfs(1,0);
+	int q=read();
+	forup(i,1,q){
+		int u=read(),v=read();
+		printf("%d\n",Query(u,v));
+	}
+}
+```
+
+///
 
 ### 费用流
 
