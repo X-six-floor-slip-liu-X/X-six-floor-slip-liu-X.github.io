@@ -125,6 +125,8 @@ nav:
       - 2023CW NOIP 集训: misc/travels/2023NOIP_taining.md
       - 2023 南京集训: misc/travels/2023NanJing.md
       - CSPS2023: misc/travels/CSPS2023.md
+    - P:
+      - 2024 批话合集: misc/2024P.md
   - 算法笔记:
     - 关于: algo/about.md
     # - 基础算法:
@@ -219,5 +221,6 @@ nav:
       - 2023 12 月杂题: records/2023Dec.md
       - 2024 1 月杂题: records/2024Jan.md
       - 2024 4 月杂题: records/2024Apr.md
+      - 2024 5 月杂题: records/2024May.md
   - 关于: about.md
   - 友链: friendslinks.md
