@@ -1344,6 +1344,119 @@ signed main(){
 
 ///
 
+### P1251 餐巾计划问题
+
+[传送门](https://www.luogu.com.cn/problem/P1251)
+
+神秘建模。
+
+首先不同操作的费用不同，容易想到费用流建模
+
+考虑把新餐巾和脏餐巾分开处理，那么对每一天开两个点，表示新餐巾输入和脏餐巾输出。注意到一个问题是脏餐巾和新餐巾会互相转化，不好用网络流概括。
+
+由于第 $i$ 天必须恰好用 $r_i$ 条餐巾，所以每天新餐巾的用量是固定的 $r_i$，那么考虑新餐巾向汇点连容量为 $r_i$，费用为 $0$ 的边，这样每条边的流量就必定是每天餐巾用量了。
+
+考虑同样的，每天必有 $r_i$ 条脏餐巾产出，那么远点向脏餐巾连 $(r_i,0)$ 的边。
+
+容易发现这样就不会有新餐巾转化为脏餐巾的问题了，那么考虑脏餐巾变成新餐巾的两种途径，连两条出边。然后考虑脏餐巾留至下一天，连一条出边。以及买新餐巾，从源点向新餐巾连边。具体边权是简单的。边数点数均为 $O(n)$。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<i64,i64>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=2005,inf=0x3f3f3f3f;
+int n,a[N],p,c1,d1,c2,d2;
+struct flow{
+	struct edge{
+		int v,rst,c,nxt;
+	}e[N*15];
+	int head[N<<1],dis[N<<1],incf[N<<1],pre[N<<1],h[N<<1],vis[N<<1],cnte=1,s,t;
+	void adde(int u,int v,int w,int c){
+		e[++cnte]=edge{v,w,c,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,-c,head[v]};head[v]=cnte;
+	}
+	bool dijkstra(){
+		priority_queue<pii,vector<pii>,greater<pii> >q;
+		forup(i,1,t){
+			dis[i]=inf;vis[i]=0;
+		}
+		dis[s]=0;q.push(mkp(0,s));
+		incf[s]=inf;incf[t]=-1;
+		while(q.size()){
+			int u=q.top().se;q.pop();
+			if(vis[u]) continue;
+			vis[u]=1;
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v,rst=e[i].rst,c=e[i].c;
+				if(!rst) continue;
+				if(dis[u]+c+h[u]-h[v]<dis[v]){
+					dis[v]=dis[u]+c+h[u]-h[v];
+					q.push(mkp(dis[v],v));
+					pre[v]=i;incf[v]=min(incf[u],rst);
+				}
+			}
+		}
+		forup(i,1,t) h[i]+=dis[i];
+		return incf[t]!=-1;
+	}
+	pii calc(){
+		i64 mnc=0,mxf=0;
+		while(dijkstra()){
+			mxf+=incf[t];
+			for(int u=t;u!=s;u=e[pre[u]^1].v){
+				e[pre[u]].rst-=incf[t];e[pre[u]^1].rst+=incf[t];
+				mnc+=1ll*e[pre[u]].c*incf[t];
+			}
+		}
+		return mkp(mxf,mnc);
+	}
+}mf;
+signed main(){
+	n=read();
+	mf.s=n*2+1;mf.t=n*2+2;
+	forup(i,1,n){
+		a[i]=read();
+	}
+	p=read();d1=read();c1=read();d2=read();c2=read();
+	forup(i,1,n){
+		mf.adde(mf.s,i+n,a[i],0);
+		mf.adde(mf.s,i,inf,p);
+		mf.adde(i,mf.t,a[i],0);
+		if(i<n) mf.adde(i+n,i+1+n,inf,0);
+		if(i+d1<=n) mf.adde(i+n,i+d1,inf,c1);
+		if(i+d2<=n) mf.adde(i+n,i+d2,inf,c2);
+	}
+	pii res=mf.calc();
+	printf("%lld\n",res.se);
+}
+```
+
+///
+
 ## 最小割
 
 ### P1791 [国家集训队] 人员雇佣
