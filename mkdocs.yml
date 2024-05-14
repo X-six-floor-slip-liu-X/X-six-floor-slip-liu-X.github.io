@@ -159,56 +159,69 @@ nav:
       - wqs 二分: algo/misc/wqs_binary_search.md
   - 题解:
     - 关于: solution/about.md
-    - 20230113D 染色: solution/20230113D_D.md
-    - 20230407C 进化: solution/20230407C_C.md
-    - 20230411C 逆序对: solution/20230411C_C.md
-    - 20230418C 金条争夺: solution/20230418C_C.md
-    - 20230420C: solution/20230420C_ABC.md
-    - 20230426C: solution/20230426C_ABC.md
-    - 20230428C: solution/20230428C_ABC.md
-    - 20230430C: solution/20230430C_ABCD.md
-    - 20230524C 数数题: solution/20230524C_D.md
-    - 20230617C 树: solution/20230617C_C.md
-    - 20230624B: solution/20230624B_ABCD.md
-    - 20230626B: solution/20230626B_ABC.md
-    - 20230626B 敢览求: solution/20230626B_D.md
-    - 20230630B 愿: solution/20230630B_C.md
-    - 20230630B: solution/20230630B_ABD.md
-    - 20230704B: solution/20230704B_ABCD.md
-    - 20230707NOIP集训 : solution/20230707NOIP_ABCD.md
-    - 20230823B: solution/20230823B_ABC.md
-    - 20230824B 大脑过载: solution/20230824B_C.md
-    - 20230828B: solution/20230828B_ABCD.md
-    - 20230831B: solution/20230831B_ACD.md
-    - 20230902B: solution/20230902B_ABC.md
-    - 20230909B: solution/20230909B_AB.md
-    - 20230913B: solution/20230913B_ABCD.md
-    - 20230923B 发怒: solution/20230923B_D.md
-    - 20230926B: solution/20230926B_ABCD.md
-    - 20230928B: solution/20230928B_AD.md
-    - 20231003B: solution/20231003B_ABCD.md
-    - 20231005B: solution/20231005B_ABC.md
-    - 20231007B: solution/20231007B_ABCD.md
-    - 20231010B: solution/20231010B_ABCD.md
-    - 20231014B: solution/20231014B_ABCD.md
-    - 20231016B: solution/20231016B_ABCD.md
-    - 20231017B: solution/20231017B_ABCD.md
-    - 20231019B: solution/20231019B_ABCD.md
-    - 20231023B: solution/20231023B_ABCD.md
-    - 20231024B: solution/20231024B_ABCD.md
-    - 20231026B: solution/20231026B_BCD.md
-    - 20231027B: solution/20231027B_ABD.md
-    - 20231030B: solution/20231030B_ABCD.md
-    - 20231031B: solution/20231031B_ABC.md
-    - 20231202A: solution/20231202A_ABC.md
-    - 20231204A: solution/20231204A_ABC.md
-    - 20240108A: solution/20240108A_ABC.md
-    - 20240112A: solution/20240112A_ABC.md
-    - 20240119A: solution/20240119A_ABC.md
-    - 20240123A: solution/20240123A_ABC.md
-    - 20240130A: solution/20240130A_AB.md
-    - 20240201A: solution/20240201A_ABC.md
-    - 20240222A 代码待补: solution/20240222A_hu.md
+    - 2023 年:
+      - 一月:
+        - 20230113D 染色: solution/20230113D_D.md
+      - 四月:
+        - 20230407C 进化: solution/20230407C_C.md
+        - 20230411C 逆序对: solution/20230411C_C.md
+        - 20230418C 金条争夺: solution/20230418C_C.md
+        - 20230420C: solution/20230420C_ABC.md
+        - 20230426C: solution/20230426C_ABC.md
+        - 20230428C: solution/20230428C_ABC.md
+        - 20230430C: solution/20230430C_ABCD.md
+      - 五月:
+        - 20230524C 数数题: solution/20230524C_D.md
+      - 六月:
+        - 20230617C 树: solution/20230617C_C.md
+        - 20230624B: solution/20230624B_ABCD.md
+        - 20230626B: solution/20230626B_ABC.md
+        - 20230626B 敢览求: solution/20230626B_D.md
+        - 20230630B 愿: solution/20230630B_C.md
+        - 20230630B: solution/20230630B_ABD.md
+      - 七月:
+        - 20230704B: solution/20230704B_ABCD.md
+        - 20230707NOIP集训 : solution/20230707NOIP_ABCD.md
+      - 八月:
+        - 20230823B: solution/20230823B_ABC.md
+        - 20230824B 大脑过载: solution/20230824B_C.md
+        - 20230828B: solution/20230828B_ABCD.md
+        - 20230831B: solution/20230831B_ACD.md
+      - 九月:
+        - 20230902B: solution/20230902B_ABC.md
+        - 20230909B: solution/20230909B_AB.md
+        - 20230913B: solution/20230913B_ABCD.md
+        - 20230923B 发怒: solution/20230923B_D.md
+        - 20230926B: solution/20230926B_ABCD.md
+        - 20230928B: solution/20230928B_AD.md
+      - 十月:
+        - 20231003B: solution/20231003B_ABCD.md
+        - 20231005B: solution/20231005B_ABC.md
+        - 20231007B: solution/20231007B_ABCD.md
+        - 20231010B: solution/20231010B_ABCD.md
+        - 20231014B: solution/20231014B_ABCD.md
+        - 20231016B: solution/20231016B_ABCD.md
+        - 20231017B: solution/20231017B_ABCD.md
+        - 20231019B: solution/20231019B_ABCD.md
+        - 20231023B: solution/20231023B_ABCD.md
+        - 20231024B: solution/20231024B_ABCD.md
+        - 20231026B: solution/20231026B_BCD.md
+        - 20231027B: solution/20231027B_ABD.md
+        - 20231030B: solution/20231030B_ABCD.md
+        - 20231031B: solution/20231031B_ABC.md
+      - 十二月:
+        - 20231202A: solution/20231202A_ABC.md
+        - 20231204A: solution/20231204A_ABC.md
+    - 2024 年:
+      - 一月:
+        - 20240108A: solution/20240108A_ABC.md
+        - 20240112A: solution/20240112A_ABC.md
+        - 20240119A: solution/20240119A_ABC.md
+        - 20240123A: solution/20240123A_ABC.md
+        - 20240130A: solution/20240130A_AB.md
+      - 二月:
+        - 20240201A: solution/20240201A_ABC.md
+        - 20240222A 代码待补: solution/20240222A_hu.md
   - 记录:
     - 关于: records/about.md
     - 按算法分类:
