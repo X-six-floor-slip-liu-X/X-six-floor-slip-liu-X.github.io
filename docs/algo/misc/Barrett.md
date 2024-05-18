@@ -61,7 +61,7 @@ struct Barrett{
         d=_d,m=(((ui128)(1)<<64)/d);
     }
 }mod;
-ull operator %(int a,Barrett mod){
+ull operator %(ull a,Barrett mod){
     ull w=(mod.m*a)>>64;w=a-w*mod.d;
     if(w>=mod.d)w-=mod.d;return w;
 }

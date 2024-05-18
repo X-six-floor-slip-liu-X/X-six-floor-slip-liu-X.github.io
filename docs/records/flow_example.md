@@ -1066,6 +1066,155 @@ signed main(){
 
 ///
 
+### P2754 [CTSC1999] 家园 / 星际转移问题
+
+[传送门](https://www.luogu.com.cn/problem/P2754)
+
+第一眼：欸这有俩权值不是费用流吗？
+
+但是显然不对，因为“时间”在每艘船上不是独立的，不能简单相加。这个可以考虑建分层图跑最大流。
+
+具体来说，每一层表示一个时刻，每个时刻向下一时刻连对应边（两种，用船运一站和留在原地不动）即可。这样就能判断是否能在 $t$ 时刻内到达了。于是考虑二分答案。
+
+显然，当 $-1,0$ 不连通时无解，否则容易发现答案不会太大，考虑最差情况是每个点都经过一次，每次都等对应船走完一轮，每艘船都只能载一个人，上限是 $12\times 15\times 50=9750$，但是显然卡不满，而且多人可以同时坐船，实际上答案不会大于 $1000$。注意边数，每个时刻要连 $n+m$ 条边。
+
+总结下来就是遇到**时间**之类的限制可以考虑分层图最大流。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=25,inf=0x3f3f3f3f;
+int n,m,k,h[N],r[N],s[N][N];
+namespace flow{
+	const int N=15000;
+	struct edge{
+		int v,rst,nxt;
+	}e[N*40];
+	int head[N],cur[N],dpt[N],cnte=1,s,t;
+	void clear(){
+		cnte=1;
+		forup(i,0,t){
+			head[i]=0;
+		}
+	}
+	void adde(int u,int v,int w){
+		e[++cnte]=edge{v,w,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,head[v]};head[v]=cnte;
+	}
+	bool bfs(){
+		queue<int> q;
+		forup(i,0,t){
+			cur[i]=head[i];dpt[i]=-1;
+		}
+		dpt[s]=0;q.push(s);
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v;
+				if(!e[i].rst||dpt[v]!=-1) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return dpt[t]!=-1;
+	}
+	int dfs(int x,int flow){
+		if(x==t||!flow) return flow;
+		int res=0;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;
+			int v=e[i].v,rst=e[i].rst;
+			if(dpt[v]!=dpt[x]+1||!rst) continue;
+			int gt=dfs(v,min(rst,flow-res));
+			if(gt){
+				e[i].rst-=gt;
+				e[i^1].rst+=gt;
+				res+=gt;
+				if(res==flow) break;
+			}
+		}
+		return res;
+	}
+	int dinic(){
+		int ans=0;
+		while(bfs()){
+			ans+=dfs(s,inf);
+		}
+		return ans;
+	}
+}
+int fa[N];
+int getfa(int x){return x==fa[x]?x:fa[x]=getfa(fa[x]);}
+void merge(int u,int v){
+	u=getfa(u),v=getfa(v);
+	if(u==v) return;
+	fa[u]=v;
+}
+bool chk(int mm){
+	flow::clear();
+	flow::s=(n+2)*(mm+1);flow::t=flow::s+1;
+	forup(t,1,mm){
+		forup(i,1,m){
+			int u=s[i][(t-1)%r[i]],v=s[i][t%r[i]];
+			flow::adde(u+(t-1)*(n+2),v+t*(n+2),h[i]);
+		}
+		forup(i,0,n+1){
+			flow::adde(i+(t-1)*(n+2),i+t*(n+2),inf);
+		}
+	}
+	flow::adde(flow::s,0,k);
+	flow::adde((n+2)*(mm+1)-1,flow::t,inf);
+	return flow::dinic()==k;
+}
+signed main(){
+	n=read();m=read();k=read();
+	forup(i,0,n+1) fa[i]=i;
+	forup(i,1,m){
+		h[i]=read(),r[i]=read();
+		forup(j,0,r[i]-1){
+			s[i][j]=read();
+			if(s[i][j]==-1) s[i][j]=n+1;
+			if(j>0){
+				merge(s[i][j-1],s[i][j]);
+			}
+		}
+	}
+	if(getfa(1)!=getfa(n+1)){
+		puts("0");
+		return 0;
+	}
+	int ll=1,rr=1000,mm;
+	while(ll<rr){
+		mm=(ll+rr)>>1;
+		if(chk(mm)) rr=mm;
+		else ll=mm+1;
+	}
+	printf("%d\n",ll);
+}
+```
+
+///
+
 ## 费用流
 
 ### P4249 [WC2007] 剪刀石头布
