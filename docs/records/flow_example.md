@@ -1606,6 +1606,121 @@ signed main(){
 
 ///
 
+### P3358 最长 k 可重区间集问题
+
+[传送门](https://www.luogu.com.cn/problem/P3358)
+
+建模最符合题意的一集。
+
+首先因为有一个**限制**和一个**收益**。并且收益之间是可以简单相加的。所以考虑费用流。
+
+那么核心思路就是用最大流来概括 $k$ 的限制，然后给对应的边赋收益相反数的费用。
+
+先考虑 $k=1$。即任意区间不互相重叠。那么限制就是按左端点排列后，对于相邻两个区间后一个区间的左端点大于等于前一个区间的右端点。容易想到对于每个实数上的开区间 $[l_i,r_i]$ 视为整数上的 $[l_i,r_i)$ 区间（就是把空格视为点），然后对这样离散的序列建从左往右的流（连容量为正无穷，费用为 $0$ 的边）。对于一个区间 $[l_i,r_i)$，连一条 $l_i\to r_i$ 的边即可。限制流量考虑从原点向 $1$ 的边。
+
+然后容易发现 $k>1$ 也能用这个方法。边数 $O(n)$（因为可以离散化）。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=505,inf=0x3f3f3f3f;
+int n,k,l[N],r[N],sz;
+vector<int> lsh;
+namespace flow{
+	struct edge{
+		int v,rst,w,nxt;
+	}e[N*10];
+	int head[N*2],incf[N*2],dis[N*2],vis[N*2],pre[N*2],s,t,cnte=1;
+	void adde(int u,int v,int rst,int w){
+		e[++cnte]=edge{v,rst,w,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,-w,head[v]};head[v]=cnte;
+	}
+	bool spfa(){
+		incf[s]=inf;incf[t]=-1;
+		queue<int> q;
+		q.push(s);vis[s]=1;
+		mem(dis,0x3f);
+		dis[s]=0;
+		while(q.size()){
+			int u=q.front();q.pop();
+			vis[u]=0;
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v,w=e[i].w,rst=e[i].rst;
+				if(!rst) continue;
+				if(dis[v]>dis[u]+w){
+					dis[v]=dis[u]+w;
+					incf[v]=min(incf[u],rst);
+					pre[v]=i;
+					if(!vis[v]){
+						vis[v]=1;
+						q.push(v);
+					}
+				}
+			}
+		}
+		return incf[t]!=-1;
+	}
+	pii calc(){
+		int mxf=0,mnc=0;
+		while(spfa()){
+			mxf+=incf[t];
+			for(int i=t;i!=s;i=e[pre[i]^1].v){
+				mnc+=e[pre[i]].w*incf[t];
+				e[pre[i]].rst-=incf[t];e[pre[i]^1].rst+=incf[t];
+			}
+		}
+		return mkp(mxf,mnc);
+	}
+}
+signed main(){
+	n=read();k=read();
+	forup(i,1,n){
+		l[i]=read();r[i]=read();
+		lsh.push_back(l[i]);lsh.push_back(r[i]);
+	}
+	sort(lsh.begin(),lsh.end());
+	lsh.erase(unique(lsh.begin(),lsh.end()),lsh.end());
+	sz=lsh.size();
+	flow::s=sz+1;flow::t=sz+2;
+	flow::adde(flow::s,1,k,0);
+	flow::adde(sz,flow::t,inf,0);
+	forup(i,1,sz-1) flow::adde(i,i+1,inf,0);
+	forup(i,1,n){
+		if(r[i]<=l[i]) continue;
+		int ll=lower_bound(lsh.begin(),lsh.end(),l[i])-lsh.begin()+1,rr=lower_bound(lsh.begin(),lsh.end(),r[i])-lsh.begin()+1;
+		flow::adde(ll,rr,1,-(r[i]-l[i]));
+	}
+	pii res=flow::calc();
+	printf("%d\n",-res.se);
+}
+```
+
+///
+
 ## 最小割
 
 ### P1791 [国家集训队] 人员雇佣
