@@ -139,7 +139,9 @@ nav:
       - 线段树分治: algo/ds/SegT_divide_and_conquer.md
       - 猫树: algo/ds/Cat_Tree.md
       - 李超线段树: algo/ds/LiChaoTree.md
-    # - 数学:
+    - 数学:
+      - 斯特林数: algo/math/stirling.md
+      - 反演入门: algo/math/inversion.md
     - 图论:
       - 网络流基础: algo/graph/flow.md
       - 最小生成树与 Kruskal 重构树: algo/graph/MST.md
