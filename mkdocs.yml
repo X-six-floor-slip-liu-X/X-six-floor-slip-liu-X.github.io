@@ -139,6 +139,7 @@ nav:
       - 线段树分治: algo/ds/SegT_divide_and_conquer.md
       - 猫树: algo/ds/Cat_Tree.md
       - 李超线段树: algo/ds/LiChaoTree.md
+      - LCT: slgo/ds/LCT.md
     - 数学:
       - 斯特林数: algo/math/stirling.md
       - 反演入门: algo/math/inversion.md
