@@ -141,8 +141,9 @@ nav:
       - 李超线段树: algo/ds/LiChaoTree.md
       - LCT: slgo/ds/LCT.md
     - 数学:
-      - 斯特林数: algo/math/stirling.md
-      - 反演入门: algo/math/inversion.md
+      - 斯特林数: algo/math/stirling.md #未完成
+      - 反演入门: algo/math/inversion.md #未完成
+      - 莫比乌斯反演: algo/math/Mobius_inversion.md
     - 图论:
       - 网络流基础: algo/graph/flow.md
       - 最小生成树与 Kruskal 重构树: algo/graph/MST.md
@@ -229,6 +230,7 @@ nav:
     - 关于: records/about.md
     - 按算法分类:
       - 网络流杂题: records/flow_example.md
+      - 反演筛法相关: records/inversion.md
     - 按时间分类:
       - 2023NOIP 集训杂题: records/2023NOIP.md
       - 2023 南京集训杂题: records/2023NanJing.md
