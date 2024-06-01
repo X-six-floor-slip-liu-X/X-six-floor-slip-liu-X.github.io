@@ -82,7 +82,6 @@ $$
 $$
 G(n)=\sum_{i=0}^n\binom{n}{i}H(i)
 $$
-
 $$
 H(n)=\sum_{i=0}^n(-1)^{n-i}\binom{n}{i}G(i)
 $$
@@ -90,6 +89,19 @@ $$
 这个更好看的形式。而且这个结论非常强力，只要式子 $1$ 成立，那么式子 $2$ 成立。
 
 容易发现，可以用 $G(n)$ 表示从 $n$ 个中选任意个组成某种特定结构的方案数，$F(n)$ 表示用恰好 $n$ 个组成特定结构的方案数。通常 $G$ 是比 $F$ 好算的，那么就能通过这个式子用 $G$ 求出 $F$ 了。通常来说，二项式反演是把**恰好**转化为**至多**来解题了。
+
+二项式反演还有一个形式：
+
+$$
+G(n)=\sum_{i\ge n}\binom{i}{n}H(i)
+$$
+$$
+H(n)=\sum_{i\ge n}(-1)^{i-n}\binom{i}{n}G(i)
+$$
+
+其实就是换成把杨辉三角填到下三角矩阵，证明还是类似。
+
+这个也非常有用，$H(i)$ 可以表示**恰好 $i$ 个满足特定结构**，$G(i)$ 可以表示**钦定 $i$ 个满足特定结构（其余的无要求）**，就能把“恰好”转化为“钦定”了（好像比前面的形式还好使一点）。
 
 ### 经典问题：错排问题
 
@@ -140,6 +152,8 @@ $$
 
 然后使用也和二项式反演类似，把**恰为集合** $S$ 转化为 **是集合 $S$ 的子集**来解决问题。
 
+并且也是类似的，子集反演还有超集版本（把所有 $\subseteq$ 符号倒过来即可），证明类似。
+
 ## 斯特林反演
 
 前置知识：[斯特林数](./stirling.md)。
@@ -165,7 +179,7 @@ $$
 \end{aligned}
 $$
 
-我们希望证明 $\sum_{k=j}^i(-1)^{k-j}(-1)^{k-j}\begin{Bmatrix}i\\\\k\end{Bmatrix}\begin{bmatrix}k\\\\j\end{bmatrix}=[i=j]$
+我们希望证明 $\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\\\k\end{Bmatrix}\begin{bmatrix}k\\\\j\end{bmatrix}=[i=j]$
 
 根据经典结论，有：
 
@@ -179,7 +193,18 @@ $$
 
 那么显然当 $i\ne n$ 时，$\sum_{j=i}^n(-1)^{n-j}\begin{bmatrix}n\\\\j\end{bmatrix}\begin{Bmatrix}j\\\\i\end{Bmatrix}=0$，否则等号无法成立。
 
-则 $\sum_{k=j}^i(-1)^{k-j}(-1)^{k-j}\begin{Bmatrix}i\\\\k\end{Bmatrix}\begin{bmatrix}k\\\\j\end{bmatrix}=[i=j]$，得证。
+则 $\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\\\k\end{Bmatrix}\begin{bmatrix}k\\\\j\end{bmatrix}=[i=j]$，得证。
+
+另外斯特林反演也有 $i\ge n$ 版本，长这样：
+
+$$
+G(n)=\sum_{i\ge n}\begin{Bmatrix}i\\\\n\end{Bmatrix}F(i)
+$$
+$$
+F(n)=\sum_{i\ge n}(-1)^{n-i}\begin{bmatrix}i\\\\n\end{bmatrix}G(i)
+$$
+
+证明和上面类似，但要证的是 $\sum_{k=j}^i(-1)^{k-j}\begin{bmatrix}i\\\\k\end{bmatrix}\begin{Bmatrix}k\\\\j\end{Bmatrix}=[i=j]$，先把普通幂换成第二类斯特林数和下降幂的积，再把下降幂换成第一类斯特林数即可。
 
 然后和二项式反演相同，我们可以移动 $(-1)^{n-i}$ 的位置（取 $F'(n)=(-1)^{-n}F(n)=(-1)^{n}F(n),G'(n)=(-1)^{-n}G(n)=(-1)^nG(n)$）。于是：
 
