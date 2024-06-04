@@ -224,7 +224,7 @@ $$
 
 $$
 \begin{aligned}
-&\sum_{i=1}^n\sum_{j=1}^m[\operatorname{lcm}(i,j)=ij]\\\\
+&\sum_{i=1}^n\sum_{j=1}^m[\mathrm{lcm}(i,j)=ij]\\\\
 =&\sum_{i=1}^n\sum_{j=1}^m[\gcd(i,j)=1]\\\\
 =&\sum_{i=1}^n\sum_{j=1}^m\sum_{d\mid gcd(i,j)}\mu(d)\\\\
 =&\sum_{d=1}^{\min(n,m)}\sum_{d\mid i}^{i\le n}\sum_{d\mid j}^{j\le m}\mu(d)\\\\

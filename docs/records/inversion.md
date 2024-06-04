@@ -195,8 +195,8 @@ $$
 \begin{aligned}
 \sum_{i=1}^{n}\tau(i^2)
 &=\sum_{i=1}^n\sum_{x\mid i}\sum_{y\mid i}[\gcd(x,y)=1]\\\\
-&=\sum_{x=1}^n\sum_{y=1}^n[\gcd(x,y)=1]\sum_{\operatorname{lcm}(x,y)\mid i}^{i\le n}1\\\\
-&=\sum_{x=1}^n\sum_{y=1}^n[\gcd(x,y)=1]\left\lfloor\frac{n}{\operatorname{lcm}(x,y)}\right\rfloor\\\\
+&=\sum_{x=1}^n\sum_{y=1}^n[\gcd(x,y)=1]\sum_{\mathrm{lcm}(x,y)\mid i}^{i\le n}1\\\\
+&=\sum_{x=1}^n\sum_{y=1}^n[\gcd(x,y)=1]\left\lfloor\frac{n}{\mathrm{lcm}(x,y)}\right\rfloor\\\\
 &=\sum_{x=1}^n\sum_{y=1}^n[\gcd(x,y)=1]\left\lfloor\frac{n}{xy}\right\rfloor\\\\
 &=\sum_{x=1}^n\sum_{y=1}^n\left\lfloor\frac{n}{xy}\right\rfloor\sum_{d\mid \gcd(x,y)}\mu(d)\\\\
 &=\sum_{d=1}^n\mu(d)\sum_{d\mid x}\sum_{d\mid y}\left\lfloor\frac{n}{xy}\right\rfloor\\\\
@@ -555,6 +555,304 @@ signed main(){
 		}
 		printf("%d\n",g[i]);
 	}
+}
+```
+
+///
+
+## P4859 已经没有什么好害怕的了
+
+> 题意
+
+- 有一个二分完全图，$u$ 的权值为 $w_u$，点权互不相同，称一个匹配的权值为 $\sum_{(u,v)}[w_u>w_v]-[w_v>w_u]$。
+- 求权值恰为 $k$ 的匹配数。
+- $1\le k\le n\le 2000$（两边的点数均为 $n$）
+
+> 题解
+
+版。
+
+首先若 $n-k$ 是奇数显然无解。
+
+若 $n-k$ 是偶数，容易发现把两边放到一起离散化后就变成了上一道题链的情况只算白点在上黑点在下的权值而且只有单组询问。
+
+复杂度 $O(n^2)$。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=2005,inf=0x3f3f3f3f,mod=1e9+9;
+int n,k,t;
+struct Node{
+	int v,co;
+}s[N<<1];
+int dp[N],cnt[2],fact[N];
+int binom[N][N];
+signed main(){
+	n=read();k=read();
+	if((n-k)&1){
+		puts("0");
+		return 0;
+	}
+	t=k+(n-k)/2;
+	fact[0]=1;
+	forup(i,0,n){
+		binom[i][0]=1;
+		if(i) fact[i]=1ll*fact[i-1]*i%mod;
+		forup(j,1,i){
+			binom[i][j]=(binom[i-1][j]+binom[i-1][j-1])%mod;
+		}
+	}
+	forup(i,1,n){
+		s[i].v=read();s[i].co=0;
+	}
+	forup(i,n+1,n*2){
+		s[i].v=read();s[i].co=1;
+	}
+	sort(s+1,s+n*2+1,[&](Node a,Node b){return a.v<b.v;});
+	dp[0]=1;
+	forup(i,1,n*2){
+		++cnt[s[i].co];
+		if(!s[i].co){
+			fordown(j,cnt[1],1){
+				(dp[j]+=1ll*dp[j-1]*(cnt[1]-j+1)%mod)%=mod;
+			}
+		}
+	}
+	int res=0;
+	forup(i,t,n){
+		(res+=1ll*((i-t)&1?mod-1:1)*dp[i]%mod*fact[n-i]%mod*binom[i][t]%mod)%=mod;
+	}
+	printf("%d\n",res);
+}
+```
+
+///
+
+## P3327 [SDOI2015] 约数个数和
+
+[传送门](https://www.luogu.com.cn/problem/P3327)
+
+> 题意
+
+- 求 $\sum_{i=1}^n\sum_{j=1}^m\tau(i\times j)$，其中 $\tau(i)$ 表示 $i$ 的约数个数。
+- $1\le n,m,T\le 50000$，$T$ 是测试数据组数。
+
+> 题解
+
+莫反套路题。
+
+考虑 $\tau(n\times m)=\sum_{i\mid n}\sum_{j\mid m}[\gcd(i,j)=1]$，一对 $(i,j)$ 代表 $\frac{n\times j}{i}$，如果不互质就会算重。
+
+于是（钦定 $n<m$）：
+
+$$
+\begin{aligned}
+&\sum_{i=1}^n\sum_{j=1}^m\tau(i\times j)\\\\
+=&\sum_{i=1}^n\sum_{j=1}^m\sum_{x\mid i}\sum_{y\mid j}[\gcd(x,y)=1]\\\\
+=&\sum_{i=1}^n\sum_{j=1}^m\sum_{x\mid i}\sum_{y\mid j}\sum_{d\mid \gcd(x,y)}\mu(d)\\\\
+=&\sum_{d=1}^n\mu(d)\sum_{d\mid x}^{x\le n}\sum_{d\mid y}^{y\le m}\sum_{x\mid i}^{i\le n}\sum_{y\mid j}^{j\le m}1\\\\
+=&\sum_{d=1}^n\mu(d)\sum_{x=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{y=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\sum_{i=1}^{\left\lfloor\frac{n}{x\times d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{y\times d}\right\rfloor}1\\\\
+=&\sum_{d=1}^n\mu(d)\sum_{x=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\left\lfloor\frac{n}{x\times d}\right\rfloor\sum_{y=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\left\lfloor\frac{m}{y\times d}\right\rfloor\\\\
+=&\sum_{d=1}^n\mu(d)\sum_{x=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\tau(x)\sum_{y=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\tau(y)\\\\
+\end{aligned}
+$$
+
+最后一步是因为每个数在 $\left\lfloor\frac{n}{d}\right\rfloor$ 以内的倍数个数和就是这个范围内每个数的因数个数和。
+
+然后就可以线性筛预处理 $\tau(n)$ 的前缀和然后数论分块做了。复杂度 $O(n+T\sqrt{n})$。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(i64 i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(i64 i=(s);i>=(e);i--)
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using i64=long long;
+#define gc getchar()
+inline i64 read(){
+    i64 x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const i64 N=50005,inf=0x3f3f3f3f;
+i64 mu[N],summu[N],tau[N],cntl[N],sumtau[N];
+vector<i64> pri;
+void init(i64 n){
+	tau[1]=1;mu[1]=1;
+	forup(i,2,n){
+		if(!tau[i]){
+			tau[i]=2;cntl[i]=1;
+			mu[i]=-1;
+			pri.push_back(i);
+		}
+		for(auto j:pri){
+			if(i*j>n) break;
+			if(i%j){
+				tau[i*j]=tau[i]*2;cntl[i*j]=1;
+				mu[i*j]=-mu[i];
+			}else{
+				tau[i*j]=tau[i]*(cntl[i]+2)/(cntl[i]+1);cntl[i*j]=cntl[i]+1;
+				mu[i*j]=0;
+				break;
+			}
+		}
+	}
+	forup(i,1,n){
+		sumtau[i]=sumtau[i-1]+tau[i];
+		summu[i]=summu[i-1]+mu[i];
+	}
+}
+void solve(){
+	i64 n=read(),m=read();
+	if(n>m) swap(n,m);
+	i64 res=0;
+	for(i64 l=1,r=0;l<=n;l=r+1){
+		r=min(n/(n/l),m/(m/l));
+		res+=(summu[r]-summu[l-1])*sumtau[n/l]*sumtau[m/l];
+	}
+	printf("%lld\n",res);
+}
+signed main(){
+	i64 t=read();
+	init(5e4);
+	while(t--){
+		solve();
+	}
+}
+```
+
+///
+
+## P1829 [国家集训队] Crash的数字表格 / JZPTAB
+
+[传送门](https://www.luogu.com.cn/problem/P1829)
+
+> 题意
+
+- 给定 $n,m$，求 $\sum_{i=1}^n\sum_{j=1}^m\mathrm{lcm}(i,j)$。
+- 单组询问，$1\le n,m\le 10^7$。
+
+> 题解
+
+怎么所有人都觉得这道题很简单，我觉得很复杂啊。
+
+考虑 $\mathrm{lcm}$ 不好做，但是有 $\mathrm{lcm}(i,j)=\frac{i\times j}{\gcd(i,j)}$，而 $\gcd$ 是好做一点的。
+
+但是 $\gcd$ 在分母仍然不好搞，考虑令 $i'=\frac{i}{\gcd(i,j)},j'=\frac{j}{\gcd(i,j)}$，显然 $\gcd(i',j')=1$，并且有 $\frac{i\times j}{\gcd(i,j)}=\gcd(i,j)i'j'$，于是就把 $\gcd$ 提到分子了。
+
+于是有（钦定 $n\le m$）：
+
+$$
+\begin{aligned}
+&\sum_{i=1}^n\sum_{j=1}^m\mathrm{lca}(i,j)\\\\
+=&\sum_{d=1}^n d\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}[\gcd(i,j)=1]ij\\\\
+=&\sum_{d=1}^n d\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}ij\sum_{t\mid \gcd(i,j)}\mu(t)\\\\
+=&\sum_{d=1}^n d\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)\sum_{i=1}^{\left\lfloor\frac{n}{d\times t}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d\times t}\right\rfloor}(i\cdot t)(j\cdot t)\\\\
+=&\sum_{d=1}^n d\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)t^2\left(\sum_{i=1}^{\left\lfloor\frac{n}{d\times t}\right\rfloor}i\right)\left(\sum_{j=1}^{\left\lfloor\frac{m}{d\times t}\right\rfloor}j\right)\\\\
+\end{aligned}
+$$
+
+然后容易发现 $\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)t^2\left(\sum_{i=1}^{\left\lfloor\frac{n}{d\times t}\right\rfloor}i\right)\left(\sum_{j=1}^{\left\lfloor\frac{m}{d\times t}\right\rfloor}j\right)$ 可以预处理 $\mu(t)t^2$ 的前缀和然后数论分块做，外层也能数论分块做。于是套两层数论分块，复杂度不会分析但是显然小于 $O(\sqrt{n}^2)=O(n)$。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=1e7+5,inf=0x3f3f3f3f,mod=20101009;
+int n,m,mu[N],vv[N],sum[N],summu[N];
+vector<int> pri;
+void init(int n){
+	vv[1]=mu[1]=1;
+	forup(i,2,n){
+		if(!vv[i]){
+			pri.push_back(i);
+			mu[i]=-1;
+		}
+		for(auto j:pri){
+			if(1ll*i*j>n) break;
+			vv[i*j]=1;
+			if(i%j){
+				mu[i*j]=-mu[i];
+			}else{
+				mu[i*j]=0;
+				break;
+			}
+		}
+	}
+	forup(i,1,n){
+		sum[i]=(sum[i-1]+i)%mod;
+		summu[i]=(summu[i-1]+1ll*mu[i]*i*i%mod)%mod;
+	}
+}
+int calcg(int d){
+	int res=0,nn=n/d,mm=m/d;
+	for(int l=1,r=0;l<=nn;l=r+1){
+		r=min(nn/(nn/l),mm/(mm/l));
+		(res+=1ll*(sum[r]-sum[l-1]+mod)*sum[nn/l]%mod*sum[mm/l]%mod)%=mod;
+	}
+	return res;
+}
+signed main(){
+	n=read();m=read();
+	if(n>m) swap(n,m);
+	init(m);
+	int ans=0;
+	for(int l=1,r=0;l<=n;l=r+1){
+		r=min(n/(n/l),m/(m/l));
+		(ans+=1ll*(summu[r]-summu[l-1]+mod)*calcg(l)%mod)%=mod;
+	}
+	printf("%d\n",ans);
 }
 ```
 

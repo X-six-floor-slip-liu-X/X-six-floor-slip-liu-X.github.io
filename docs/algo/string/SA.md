@@ -233,13 +233,13 @@ signed main(){
 
 两个字符串 $S$ 和 $T$ 的 LCP（longest common prefix，最长公共前缀）就是最大的 $x(x\le \min(|S|, |T|))$ 使得 $S_i=T_i\ (\forall\ 1\le i\le x)$。
 
-下文中以 $\operatorname{lcp}(i,j)$（Longest Common Prefix）表示后缀 $i$ 和后缀 $j$ 的最长公共前缀的长度。
+下文中以 $\mathrm{lcp}(i,j)$（Longest Common Prefix）表示后缀 $i$ 和后缀 $j$ 的最长公共前缀的长度。
 
 ///
 
 #### height 数组
 
-height 数组的定义为 $height_i=\operatorname{lcp}(sa_i,sa_{i-1})$（这里的 $sa$ 是那个后缀对应的字符串），特别地，令 $height_1=0$（其实就相当于和空字符串的 $\operatorname{lcp}$）。
+height 数组的定义为 $height_i=\mathrm{lcp}(sa_i,sa_{i-1})$（这里的 $sa$ 是那个后缀对应的字符串），特别地，令 $height_1=0$（其实就相当于和空字符串的 $\mathrm{lcp}$）。
 
 #### 求 height 数组
 
@@ -253,9 +253,9 @@ height 数组可以 $O(n)$ 求出，但需要一个引理：
 
 证明：
 
-其实很简单，考虑设 $suf(i-1)=cAB$，其中 $c$ 是一个字符，$AB$ 均是字符串，$cA$ 是 $height_{rk_{i-1}}$ 对应的那个 $\operatorname{lcp}$，这说明 $suf(sa_{rk_{i-1}-1})=cAD$，其中 $D$ 也是一个字符串。
+其实很简单，考虑设 $suf(i-1)=cAB$，其中 $c$ 是一个字符，$AB$ 均是字符串，$cA$ 是 $height_{rk_{i-1}}$ 对应的那个 $\mathrm{lcp}$，这说明 $suf(sa_{rk_{i-1}-1})=cAD$，其中 $D$ 也是一个字符串。
 
-容易发现 $suf(i)=AB$，并且由于存在 $suf(sa_{rk_{i-1}-1}+1)=AD$，所以 $height_{rk_i}$ 至少也是 $A$，并且由于去掉了一个 $c$，还可能存在一个 $\operatorname{lcp}$ 更长的后缀。
+容易发现 $suf(i)=AB$，并且由于存在 $suf(sa_{rk_{i-1}-1}+1)=AD$，所以 $height_{rk_i}$ 至少也是 $A$，并且由于去掉了一个 $c$，还可能存在一个 $\mathrm{lcp}$ 更长的后缀。
 
 ///
 
@@ -283,13 +283,13 @@ height 数组可以 $O(n)$ 求出，但需要一个引理：
 
 那么 height 数组有什么用呢？
 
-首先，可以求任意两后缀的 $\operatorname{lcp}$。
+首先，可以求任意两后缀的 $\mathrm{lcp}$。
 
-考虑把所有后缀压入一棵 Trie，那么两后缀的 $\operatorname{lcp}$ 就是对应结束状态在 Trie 上的 $\operatorname{lca}$。
+考虑把所有后缀压入一棵 Trie，那么两后缀的 $\mathrm{lcp}$ 就是对应结束状态在 Trie 上的 $\mathrm{lca}$。
 
-然后根据经典结论，序列上两点 $u,v$ 的 $\operatorname{lca}$ 就是按 dfn 排序后，区间 $[u,v]$ 中所有相邻两点的 $\operatorname{lca}$ 中深度最小的。
+然后根据经典结论，序列上两点 $u,v$ 的 $\mathrm{lca}$ 就是按 dfn 排序后，区间 $[u,v]$ 中所有相邻两点的 $\mathrm{lca}$ 中深度最小的。
 
-而容易发现，按字典序排序恰好就是 Trie 上的 dfn 序列，而 $height_i$ 就是 $\operatorname{lca}(sa_i,sa_{i-1})$，那么做个 RMQ 即可。
+而容易发现，按字典序排序恰好就是 Trie 上的 dfn 序列，而 $height_i$ 就是 $\mathrm{lca}(sa_i,sa_{i-1})$，那么做个 RMQ 即可。
 
 ### 本质不同子串个数
 

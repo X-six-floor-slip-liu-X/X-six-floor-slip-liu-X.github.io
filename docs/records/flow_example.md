@@ -12,7 +12,7 @@ comments: true
 
 模板题里比较不显然的。
 
-考虑路径数怎么概括，容易发现路径数等于路径起点数，那么考虑起点和其它点的本质区别是什么，即**入度为** $0$，换句话说，路径数 $= n-\sum d_i$ 其中 $d_i$ 是 $i$ 的入度（显然只能为 $0$ 或 $1$）。
+考虑路径数怎么概括，容易发现路径数等于路径起点数（因为是 DAG 没有环），那么考虑起点和其它点的本质区别是什么，即**入度为** $0$，换句话说，路径数 $= n-\sum d_i$ 其中 $d_i$ 是 $i$ 的入度（显然只能为 $0$ 或 $1$）。
 
 那么就要最大化入度总数了，容易发现每个入度必须要一个出度来匹配（一条有向边终点的入度与起点的出度匹配），就容易想到二分图最大匹配。左部点 $(i,0)$ 代表 $i$ 的出度，右部点 $(i,1)$ 代表 $i$ 的入度，然后左右点连边 $(i,0)\to (j,1)$ 当且仅当对应 $(i,j)$ 间有边。最小路径覆盖即最大匹配。
 
@@ -2575,6 +2575,159 @@ signed main(){
 	while(t--){
 		solve();
 	}
+}
+```
+
+///
+
+### [ARC142E] Pairing Wizards
+
+[传送门](https://www.luogu.com.cn/problem/AT_arc142_e)
+
+> 题意
+
+- 有一张 $n$ 个点 $m$ 条边的简单无向图，每个点有 $a_i,b_i$ 两个点权。
+- 你需要对每个点赋一个权值 $A_i$，必须满足对于任意一条边 $(u,v)$，满足 $A_u\ge b_u\land A_v\ge b_v$ 或 $A_u\ge b_v\land A_v\ge b_u$。
+- 一种赋值方案的代价是 $\sum_{i}|A_i-a_i|$，求最小代价。
+- $1\le n\le 100,1\le a_i,b_i\le 100,1\le m\le \binom{n}{2}$
+
+> 题解
+
+首先显然的，$A_i\ge a_i$ 必定不劣。对于一条边条件应是 $\max(A_u,A_v)\ge \max(b_u,b_v)\land \min(A_u,A_v)\ge \min(b_u,b_v)$，，其中取 $\min$ 的条件可以转化为 $A_u\ge b_v\land A_v\ge b_v$，于是可以先把每个 $A_i$ 加上某个数使得满足所有较小值的条件。然后题目就转化为了每条边有一个权值，要求它至少一个端点的 $A_i$ 大于等于它（下文 $a_i$ 均是这一步处理后的）。
+
+但是这个转化显然太蠢了，我们可以考虑把这个权值挂到点上（假如 $b_u>b_v$ 就把 $b_u$ 挂到 $u$ 上），然后容易发现，如果 $A_u<b_u$，那么它所有邻居的 $A_v$ 必须 $\ge b_u$，否则对邻居没有要求。
+
+这种“没选 $A$ 就必须选 $B$”的条件容易想到类似于 2-SAT 的东西，那么可以考虑建出 2-SAT 的图后给点赋权跑最大闭合子图。这道题求最小值那等会建模的时候点权全部取相反数即可。
+
+那么建一个点表示“不满足 $A_u\ge b_u$”，那么不考虑其它点，此时取 $A_u=a_u$ 必定不劣。于是可以考虑假设本来有 $A_u=b_u$，给答案中加上 $b_u-a_u$，然后给这个点赋值 $-(b_u-a_u)$，就能概括这个点对答案的影响了。
+
+然后考虑另一个条件形如“要求 $A_u\ge t$”，套路地，对 $A_u$ 的每个取值建一个点 $p_{u,j}$ 表示 $A_u\ge j$，显然每个点要向小于它的点连边。然后对大于 $a_u$ 的 $p_{u,j}$ 赋值 $1$ 即可。然后每一个“不满足 $A_u\ge b_u$”的点连向“$A_v\ge b_u$”即可（其中 $v$ 是 $u$ 的邻居）。
+
+对上述的所有东西取反，注意到最大权闭合子图中“先加上所有正点权”的操作和“先给答案中加上 $b_u-a_u$”抵消了，然后剩下的东西形如 $-(0-\mathrm{mincut})=\mathrm{mincut}$，直接加上那张图的最小割即可。
+
+注意加上最初 $a_u$ 调整到 $\min(b_u,b_v)$ 的代价。
+
+点数 $O(nV)$，边数 $O(m+nV)$（其中 $V$ 是值域），跑的飞快。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+#define forup(i,s,e) for(int i=(s);i<=(e);i++)
+#define fordown(i,s,e) for(int i=(s);i>=(e);i--)
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+inline int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<3)+(x<<1)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=105,inf=0x3f3f3f3f;
+int n,m,a[N],b[N],res;
+int cntn;
+namespace flow{
+	struct edge{
+		int v,rst,nxt;
+	}e[N*N*8];
+	int head[N*N*2],cur[N*N*2],dpt[N*N*2],cnte=1,s,t;
+	void adde(int u,int v,int w){
+		e[++cnte]=edge{v,w,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,head[v]};head[v]=cnte;
+	}
+	bool bfs(){
+		forup(i,1,cntn){
+			dpt[i]=-1;cur[i]=head[i];
+		}
+		queue<int> q;
+		q.push(s);dpt[s]=0;
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v;
+				if(!e[i].rst||(~dpt[v])) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return ~dpt[t];
+	}
+	int dfs(int x,int flow){
+		if(!flow||x==t) return flow;
+		int res=0;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;
+			int rst=e[i].rst,v=e[i].v;
+			if(!rst||dpt[v]!=dpt[x]+1) continue;
+			int gt=dfs(v,min(flow-res,rst));
+			if(gt){
+				e[i].rst-=gt;
+				e[i^1].rst+=gt;
+				res+=gt;
+				if(res==flow) break;
+			}
+		}
+		return res;
+	}
+	int dinic(){
+		int ans=0;
+		while(bfs()){
+			ans+=dfs(s,inf);
+		}
+		return ans;
+	}
+}
+int node[N][N];
+vector<int> e[N];
+signed main(){
+	n=read();
+	forup(i,1,n){
+		a[i]=read();b[i]=read();
+	}
+	m=read();
+	forup(i,1,m){
+		int x=read(),y=read();
+		int p=min(b[x],b[y]);
+		if(a[x]<p){res+=p-a[x];a[x]=p;}
+		if(a[y]<p){res+=p-a[y];a[y]=p;}
+		if(b[x]>b[y]){
+			e[x].push_back(y);
+		}else{
+			e[y].push_back(x);
+		}
+	}
+	flow::s=1;flow::t=2;
+	cntn=2;
+	forup(i,1,n){
+		forup(j,1,100){
+			node[i][j]=++cntn;
+			if(j>1) flow::adde(node[i][j],node[i][j-1],inf);
+			if(j>a[i]) flow::adde(node[i][j],flow::t,1);
+		}
+	}
+	forup(i,1,n){
+		if(b[i]<=a[i]) continue;
+		int nd=++cntn;
+		flow::adde(flow::s,nd,b[i]-a[i]);
+		for(auto j:e[i]){
+			if(node[j][b[i]]) flow::adde(nd,node[j][b[i]],inf);
+		}
+	}
+	res+=flow::dinic();
+	printf("%d\n",res);
 }
 ```
 
