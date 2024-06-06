@@ -2732,3 +2732,204 @@ signed main(){
 ```
 
 ///
+
+### [ABC347G] Grid Coloring 2
+
+[传送门](https://www.luogu.com.cn/problem/AT_abc347_g)
+
+> 题意
+
+- 有一个 $n\times n$ 的矩阵 $A$，每个数都是 $[0,5]$ 之内的整数。
+- 现在你可以把一部分 $0$ 改为 $[1,5]$ 内的整数，最小化 $\left(\sum_{i=1}^{n-1}\sum_{j=1}^n(A_{i,j}-A_{i+1,j})^2\right)\left(\sum_{i=1}^n\sum_{j=1}^{n-1}(A_{i,j}-A_{i,j+1})^2\right)$。
+- $1\le n\le 20$。
+
+> 题解
+
+这种值域很小，并且多个元素会相互影响的容易想到值域相关的网络流建模。
+
+首先显然地，把所有 $0$ 都变成非 $0$ 必然是不劣的。
+
+考虑如何刻画 $(A_{i,j}-A_{i+1,j})^2$（横着的同理），容易想到 $(A_{i,j}-A_{i+1,j})^2=A_{i,j}^2+A_{i+1,j}^2+2A_{i,j}A_{i+1,j}$，那么把 $A_{i,j}^2$ 和 $-2A_{i,j}A_{i+1,j}$ 分开维护。
+
+这种多个东西有关联，几个必须一起选的容易想到最小权闭合子图建模（即最大权闭合子图取反）。那么考虑寻找“选了 $a$ 就必须选 $b$ 的关系”。
+
+先不考虑有些 $A_{i,j}$ 已经确定了，这道题应该怎么做。
+
+首先套路地，对于值域相关的网络流建模，对于每个 $A_{i,j}$ 维护 $P_{i,j,k}$ 表示 $A_{i,j}\ge k$ 的贡献，那么寻找将 $A_{i,j}$ 加一后 $A_{i,j}^2$ 的变化。容易发现 $k^2-(k-1)^2=2k-1$，所以给 $P_{i,j,k}$ 赋值 $(2k-1)\times 4$ （因为要算四次，边界记得特判）即可。
+
+然后考虑 $-2A_{i,j}A_{i+1,j}$，这里就能找到“选了 $a$ 就必须选 $b$”的关系了。因为求最小权值，所以显然尽量选负数，那么就是选了 $-2A_{i,j}A_{i+1,j}$ 必须选对应的 $A_{i,j}^2$ 和 $A_{i+1,j}^2$。于是考虑对每一对 $A_{i,j}=m,A_{i+1,j}=n$ 新建一个点 $p$，给这个点赋一个权值表示 $-2mn$ 相比更小的 $n',m'$ 权值增加了多少。容易发现这会个二维差分，算出来这个权值应该是 $-2$。
+
+容易发现这玩意取反后的最大闭合子图为空，怎么办呢？根据经典技巧，考虑有哪些点是必选的。容易发现 $P_{i,j,1}$ 是必选的，用一个新点 $\inf$ 连向它们即可。
+
+然后考虑加上确定的 $A_{i,j}$，容易发现只需要钦定 $P_{i,j,A_{i,j}}$ 必选，$P_{i,j,A_{i,j}+1}$ 不选即可。钦定不选的技巧也是类似的。
+
+点数边数均为 $O(n^2v^2)$，跑的飞快。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(int i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(int i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+#define gc getchar()
+int read(){
+	int x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const int N=25,inf=0x3f3f3f3f;
+int n,a[N][N],cntn,res,vis[N*N*60];
+namespace flow{
+	struct edge{
+		int v,rst,nxt;
+	}e[N*N*300];
+	int head[N*N*60],cur[N*N*60],dpt[N*N*60],cnte=1,s,t;
+	void adde(int u,int v,int w){
+		e[++cnte]=edge{v,w,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,head[v]};head[v]=cnte;
+	}
+	bool bfs(){
+		forup(i,1,cntn){
+			cur[i]=head[i];
+			dpt[i]=-1;
+		}
+		queue<int> q;
+		q.push(s);dpt[s]=0;
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v;
+				if(!e[i].rst||(~dpt[v])) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return ~dpt[t];
+	}
+	int dfs(int x,int flow){
+		if(x==t||!flow) return flow;
+		int res=0;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;
+			int v=e[i].v,rst=e[i].rst;
+			if(!rst||dpt[v]!=dpt[x]+1) continue;
+			int gt=dfs(v,min(rst,flow-res));
+			if(gt){
+				e[i].rst-=gt;
+				e[i^1].rst+=gt;
+				res+=gt;
+				if(res==flow) break;
+			}
+		}
+		return res;
+	}
+	int dinic(){
+		int ans=0;
+		while(bfs()){
+			ans+=dfs(s,inf);
+		}
+		return ans;
+	}
+	void gcut(){
+		queue<int> q;
+		q.push(s);vis[s]=1;
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v;
+				if(!e[i].rst||vis[v]) continue;
+				vis[v]=1;
+				q.push(v);
+			}
+		}
+	}
+}
+int nnode[N][N][10],tr,fa;
+signed main(){
+	n=read();
+	forup(i,1,n){
+		forup(j,1,n){
+			a[i][j]=read();
+		}
+	}
+	flow::s=1;flow::t=2;
+	tr=3;fa=4;
+	cntn=4;
+	flow::adde(flow::s,tr,inf);
+	flow::adde(fa,flow::t,inf);
+	forup(i,1,n){
+		forup(j,1,n){
+			forup(v,1,5){
+				nnode[i][j][v]=++cntn;
+				flow::adde(nnode[i][j][v],flow::t,(2*v-1)*(4-(i==1)-(j==1)-(i==n)-(j==n)));
+				if(v>1) flow::adde(nnode[i][j][v],nnode[i][j][v-1],inf);
+			}
+			if(a[i][j]){
+				flow::adde(tr,nnode[i][j][a[i][j]],inf);
+				if(a[i][j]<5){
+					flow::adde(nnode[i][j][a[i][j]+1],fa,inf);
+				}
+			}else{
+				flow::adde(tr,nnode[i][j][1],inf);
+			}
+		}
+	}
+	forup(i,1,n){
+		forup(j,1,n){
+			if(i<n){
+				forup(vi,1,5){
+					forup(vj,1,5){
+						int nn=++cntn;
+						flow::adde(flow::s,nn,2);
+						res+=2;
+						flow::adde(nn,nnode[i][j][vi],inf);
+						flow::adde(nn,nnode[i+1][j][vj],inf);
+					}
+				}
+			}
+			if(j<n){
+				forup(vi,1,5){
+					forup(vj,1,5){
+						int nn=++cntn;
+						flow::adde(flow::s,nn,2);
+						res+=2;
+						flow::adde(nn,nnode[i][j][vi],inf);
+						flow::adde(nn,nnode[i][j+1][vj],inf);
+					}
+				}
+			}
+		}
+	}
+	res-=flow::dinic();
+	flow::gcut();
+	forup(i,1,n){
+		forup(j,1,n){
+			if(a[i][j]){
+				printf("%d ",a[i][j]);
+			}else{
+				fordown(k,5,1){
+					if(vis[nnode[i][j][k]]){
+						printf("%d ",k);
+						break;
+					}
+				}
+			}
+		}
+		puts("");
+	}
+}
+```
+
+///

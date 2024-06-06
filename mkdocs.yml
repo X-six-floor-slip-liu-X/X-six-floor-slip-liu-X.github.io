@@ -229,8 +229,8 @@ nav:
   - 记录:
     - 关于: records/about.md
     - 按算法分类:
-      - 网络流杂题: records/flow_example.md
-      - 反演筛法相关: records/inversion.md
+      - 网络流杂题: records/flow.md
+      - 反演筛法相关杂题: records/inversion.md
     - 按时间分类:
       - 2023NOIP 集训杂题: records/2023NOIP.md
       - 2023 南京集训杂题: records/2023NanJing.md
