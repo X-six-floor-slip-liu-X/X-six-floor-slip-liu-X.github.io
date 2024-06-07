@@ -1721,6 +1721,198 @@ signed main(){
 
 ///
 
+### Stock Exchange
+
+[传送门](https://www.luogu.com.cn/problem/CF1178H)
+
+> 题意
+
+- 现在有 $2n$ 支股票，第 $i$ 支在 $t$ 时刻的价格是 $ta_i+b_i$。
+- 你手上有 $1\sim n$ 的 $n$ 张股票各一张，每个时刻你可以进行任意次“把某支股票换成价格小于等于它的另一支股票”操作。
+- 问最早能在那个时刻把 $1\sim n$ 的股票全部换成 $n+1\sim 2n$ 的股票。若有解，再求出所需的最小交换次数。否则输出 $-1$。
+- $1\le n\le 2200,0\le a_i,b_i\le 10^9$。
+
+> 题解
+
+对于第一问，首先容易发现答案具有单调性，因为你在 $1\sim t$ 时间内能换完肯定也能在 $1\sim t+t'$ 时间内换完，所以考虑二分，容易发现答案上界是 $b_i$ 的最大值减最小值（即两不平行一次函数在斜率差为 $1$ 时最远的交点），那么思考如何判断一个 $t$ 是否合法。
+
+一个显然的结论是你只会在 $0$ 时刻或 $t$ 时刻换股票，因为每支股票的价格是一次函数，如果中间某个时刻能换的话那么必定 $0$ 时刻或 $t$ 时刻能换。
+
+容易想到一个贪心，先在 $0$ 时刻把所有股票换成价格小于等于它，且在 $t$ 时刻价格最大的股票，再在 $t$ 时刻换到其它 $n+1\sim 2n$ 的。正确性比较显然，换成 $t$ 时刻更大的肯定有更多机会换到目标点。如果 $u$ 能在 $0$ 时刻换到一个 $n+1\sim 2n$ 的 $v$，那么小于它且在 $t$ 时最大的那个必定在 $t$ 时大于等于 $v$，要么 $u$ 在 $0$ 时刻换不了那肯定要选更大的。
+
+然后考虑如何做第二问。这种匹配问题容易想到网络流相关建模，考虑费用流建模。
+
+首先根据我们的贪心，一支股票只会换 $1$ 次或 $2$ 次，那么考虑最小化换两次的。
+
+容易发现换两次的必定是在 $0$ 时刻换了一次又在 $t$ 时刻换了一次。也就是说所有**在 $0$ 时刻有超过一个的**都必定会换两次。那么考虑源点向 $0$ 时刻 $1\sim n$ 连容量为 $1$ 费用为 $0$ 的边。然后按大小从大往小连容量充分大费用为 $0$ 的边。每种股票只有一个是不需要代价的，那么每个点向 $t$ 时刻相应的点连一条容量为 $1$ 费用为 $0$ 的边和一条容量充分大，费用为 $1$ 的边。右侧同样从大到小连边。然后每个 $n+1\sim 2n$ 的点向汇点连容量为 $1$ 费用为 $1$ 的边表示每支股票至少有 $1$ 的代价。求出来的最小费用即答案。
+
+点数边数均为 $O(n)$，前面二分复杂度 $O(n\log V)$，其中 $V$ 是值域。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(i64 i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(i64 i=(s),E123123123=(e);i.=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<i64,i64>;
+#define fi first
+#define se second
+#define mkp make_pair
+using i64=long long;
+#define gc getchar()
+i64 read(){
+	i64 x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const i64 N=4405,inf=2e18;
+i64 n,m,a[N],b[N];
+namespace flow{
+	const i64 N=8810,M=40005;
+	struct edge{
+		i64 v,rst,w,nxt;
+	}e[M<<1];
+	i64 head[N],incf[N],dis[N],pre[N],vis[N],cnte=1,s,t;
+	void adde(i64 u,i64 v,i64 rst,i64 c){
+		e[++cnte]=edge{v,rst,c,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,-c,head[v]};head[v]=cnte;
+	}
+	bool spfa(){
+		queue<i64> q;
+		forup(i,1,t){
+			dis[i]=inf;
+		}
+		incf[t]=-1;incf[s]=inf;
+		q.push(s);dis[s]=0;vis[s]=1;
+		while(q.size()){
+			i64 u=q.front();q.pop();
+			vis[u]=0;
+			for(i64 i=head[u];i;i=e[i].nxt){
+				i64 v=e[i].v,rst=e[i].rst,w=e[i].w;
+				if(!rst||dis[v]<=dis[u]+w) continue;
+				dis[v]=dis[u]+w;
+				incf[v]=min(incf[u],rst);
+				pre[v]=i;
+				if(!vis[v]){
+					q.push(v);
+					vis[v]=1;
+				}
+			}
+		}
+		return ~incf[t];
+	}
+	pii SSP(){
+		i64 mnc=0,mxf=0;
+		while(spfa()){
+			mxf+=incf[t];
+			for(i64 i=t;i!=s;i=e[pre[i]^1].v){
+				mnc+=incf[t]*e[pre[i]].w;
+				e[pre[i]].rst-=incf[t];
+				e[pre[i]^1].rst+=incf[t];
+			}
+		}
+		return mkp(mxf,mnc);
+	}
+}
+pii c[N],d[N];
+i64 cnt[N];
+bool chk(i64 t){
+	forup(i,1,n*2){
+		d[i].fi=t*a[i]+b[i];
+		d[i].se=i;
+		cnt[i]=0;
+	}
+	i64 mx=0;
+	for(i64 i=1;i<=n*2;){
+		i64 j=i;
+		while(j<=n*2&&c[j].fi==c[i].fi){
+			if(!mx||d[c[j].se].fi>d[mx].fi) mx=c[j].se;
+			++j;
+		}
+		while(i<j){
+			if(c[i].se<=n){
+				++cnt[mx];
+			}
+			++i;
+		}
+	}
+	sort(d+1,d+n*2+1);
+	i64 cc=0;
+	for(i64 i=1;i<=n*2;){
+		i64 j=i;
+		while(j<=n*2&&d[j].fi==d[i].fi){
+			if(d[j].se>n&&!cnt[d[j].se]) ++cc;
+			++j;
+		}
+		while(i<j){
+			if(cnt[d[i].se]){
+				cc-=(cnt[d[i].se]-(d[i].se>n));
+				if(cc<0) return false;
+			}
+			++i;
+		}
+	}
+	return true;
+}
+i64 lp[N],rp[N];
+signed main(){
+	n=read();
+	forup(i,1,n*2){
+		a[i]=read();c[i].fi=b[i]=read();
+		c[i].se=i;
+	}
+	sort(c+1,c+n*2+1);
+	i64 ll=0,rr=1e9,mm;
+	while(ll<rr){
+		mm=(ll+rr)>>1;
+		if(chk(mm)) rr=mm;
+		else ll=mm+1;
+	}
+	if(!chk(ll)){
+		puts("-1");
+		return 0;
+	}
+	flow::s=n*4+1;flow::t=n*4+2;
+	printf("%lld ",ll);
+	forup(i,1,n*2){
+		lp[c[i].se]=i;rp[d[i].se]=i;
+		if(c[i].se<=n) flow::adde(flow::s,i,1,0);
+		if(d[i].se>n) flow::adde(i+n*2,flow::t,1,1);
+		if(i>1){
+			flow::adde(i,i-1,inf,0);
+			if(c[i].fi==c[i-1].fi){
+				flow::adde(i-1,i,inf,0);
+			}
+			flow::adde(i+n*2,i+n*2-1,inf,0);
+			if(d[i].fi==d[i-1].fi){
+				flow::adde(i+n*2-1,i+n*2,inf,0);
+			}
+		}
+	}
+	forup(i,1,n*2){
+		flow::adde(lp[i],rp[i]+n*2,1,0);
+		flow::adde(lp[i],rp[i]+n*2,inf,1);
+	}
+	printf("%lld\n",flow::SSP().se);
+}
+```
+
+///
+
+/// details
+
 ## 最小割
 
 ### P1791 [国家集训队] 人员雇佣
@@ -2928,6 +3120,265 @@ signed main(){
 			}
 		}
 		puts("");
+	}
+}
+```
+
+///
+
+## 上下界网络流
+
+### CF1416F Showing Off
+
+[传送门](https://www.luogu.com.cn/problem/CF1416F)
+
+> 题意
+
+- 定义“方向矩阵 $A$”为元素全是字符 `L/R/U/D` 的矩阵，其中 $A_{i,j}$ 为 `L` 表示你在这个点可以向左走，依此类推。并且不能有指向矩阵外的方向。
+- 现在给定矩阵 $S$，你需要构造一个方向矩阵 $A$ 与一个数字矩阵 $B$，使得从 $(i,j)$ 开始能走到的所有 $B_{i',j'}$ 之和恰好等于 $S_{i,j}$，或报告无解。
+- $\sum n\times m\le 2\times 10^5,2\le S_{i,j}\le 10^9$，有多测。
+
+> 题解
+
+容易发现这玩意相当于是一个内向基环森林。
+
+考虑对网格图黑白染色（染成国际象棋的样子），那么中间的环长度必然是偶数（不然就会出现相邻的两黑点/白点）。显然把它拆成一对一对是不劣的。所以其实就是对中间的环进行二分图匹配（白点在左黑点在右）。
+
+考虑什么样的点才能加入环。容易发现一个环内所有点的 $S$ 必然是相同的，并且又容易发现不在环上的点必定指向一个严格小于它的点，那么分类讨论：
+
+- $(i,j)$ 周围的所有数都大于 $S_{i,j}$：显然无解。
+- $(i,j)$ 周围有至少一个数小于 $S_{i,j}$：那么 $(i,j)$ 可以不在环上（但显然也可以在环上）。
+- $(i,j)$ 周围没有小于 $S_{i,j}$ 的数，但是有等于 $S_{i,j}$ 的数：此时 $(i,j)$ 必须在环上，不然不合法。
+
+那么这是一个二分图匹配中，形如“其中有些点必须匹配，有些点则不需要匹配”的问题。于是转化为有源汇上下界可行流问题。
+
+对于方案的构造，首先按二分图匹配连出二元环，其余的点随意连向一个小于自己的点即可。因为总容量是 $O(nm)$ 的（除去上下界网络流那条“充分大”的边，但它的容量取 $nm$ 就足够大了），复杂度 $O(nm\sqrt{nm})$。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(int i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(int i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+int read(){
+	int x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const int N=2e5+5,inf=0x3f3f3f3f;
+int n,m;
+vector<vector<int> > q,a,b;
+int nxt[4][2]={
+	{0,1},{-1,0},{0,-1},{1,0}
+};
+namespace flow{
+	struct edge{
+		int v,rst,nxt;
+	}e[N*8];
+	int head[N+5],cur[N+5],dpt[N+5],sub[N+5],cnte=1,s,t,S,T,cntn;
+	void adde(int u,int v,int l,int r){
+//		msg("%d %d %d %d|\n",u/m,u%m,v/m,v%m);
+		e[++cnte]=edge{v,r-l,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,head[v]};head[v]=cnte;
+		sub[u]-=l;sub[v]+=l;
+	}
+	void clear(){
+		s=n*m;t=n*m+1;
+		S=n*m+2;T=n*m+3;
+		cntn=n*m+3;
+		forup(i,0,cntn) head[i]=sub[i]=0;
+		cnte=1;
+		adde(t,s,0,inf);
+	}
+	bool bfs(){
+		queue<int> q;
+		forup(i,0,cntn){
+			dpt[i]=-1;
+			cur[i]=head[i];
+		}
+		q.push(S);
+		dpt[S]=0;
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v;
+				if(!e[i].rst||(~dpt[v])) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return ~dpt[T];
+	}
+	int dfs(int x,int flow){
+		if(x==T||!flow) return flow;
+		int res=0;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;
+			int v=e[i].v,rst=e[i].rst;
+			if(dpt[v]!=dpt[x]+1||!rst) continue;
+			int gt=dfs(v,min(rst,flow-res));
+			if(gt){
+				e[i].rst-=gt;
+				e[i^1].rst+=gt;
+				res+=gt;
+				if(res==flow) break;
+			}
+		}
+		return res;
+	}
+	int dinic(){
+		int ans=0;
+		while(bfs()){
+			ans+=dfs(S,inf);
+		}
+		return ans;
+	}
+	bool solve(){
+		int pp=0;
+		forup(i,0,n*m+1){
+			msg("%d ",sub[i]);
+			if(i%m==m-1) msg("|\n");
+			if(sub[i]<0){
+				flow::adde(i,T,0,-sub[i]);
+			}else if(sub[i]>0){
+				flow::adde(S,i,0,sub[i]);
+				pp+=sub[i];
+			}
+		}
+		int res=dinic();
+		msg("%d %d|\n",res,pp);
+		if(res!=pp) return 0;
+		return 1;
+	}
+	void gans(){
+		for(int i=head[s];i;i=e[i].nxt){
+			int u=e[i].v;
+			if(e[i].rst||u==t) continue;
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v;
+				if(e[i].rst||v==s) continue;
+				int x=u,y=v;
+				if(x>y) swap(x,y);
+				if(y==x+m){
+					a[x/m][x%m]=4;
+					a[y/m][y%m]=2;
+				}else{
+					a[x/m][x%m]=1;
+					a[y/m][y%m]=3;
+				}
+				b[x/m][x%m]=1;
+				b[y/m][y%m]=q[x/m][x%m]-1;
+			}
+		}
+		forup(i,0,n-1){
+			forup(j,0,m-1){
+				if(a[i][j]) continue;
+				forup(k,0,3){
+					int nx=i+nxt[k][0],ny=j+nxt[k][1];
+					if(nx<0||ny<0||nx>=n||ny>=m) continue;
+					if(q[nx][ny]<q[i][j]){
+						a[i][j]=k+1;
+						b[i][j]=q[i][j]-q[nx][ny];
+						break;
+					}
+				}
+			}
+		}
+		puts("YES");
+		forup(i,0,n-1){
+			forup(j,0,m-1){
+				printf("%d ",b[i][j]);
+			}
+			puts("");
+		}
+		forup(i,0,n-1){
+			forup(j,0,m-1){
+//				printf("%d ",b[i][j]);
+				printf(a[i][j]<=2?(a[i][j]==1?"R ":"U "):(a[i][j]==3?"L ":"D "));
+			}
+			puts("");
+		}
+	}
+}
+void solve(){
+	n=read();m=read();
+	if(n==1&&m==1){
+		puts("NO");
+		return;
+	}
+	flow::clear();
+	q.clear();a.clear();b.clear();
+	q.resize(n,vector<int>(m));
+	a.resize(n,vector<int>(m));
+	b.resize(n,vector<int>(m));
+	forup(i,0,n-1){
+		forup(j,0,m-1){
+			q[i][j]=read();
+			if((i+j)&1){
+				if(i>0&&q[i][j]==q[i-1][j]){
+					flow::adde(i*m+j,(i-1)*m+j,0,1);
+				}
+				if(j>0&&q[i][j]==q[i][j-1]){
+					flow::adde(i*m+j,i*m+j-1,0,1);
+				}
+			}else{
+				if(i>0&&q[i][j]==q[i-1][j]){
+					flow::adde((i-1)*m+j,i*m+j,0,1);
+				}
+				if(j>0&&q[i][j]==q[i][j-1]){
+					flow::adde(i*m+j-1,i*m+j,0,1);
+				}
+			}
+		}
+	}
+	forup(i,0,n-1){
+		forup(j,0,m-1){
+			int f1=1,f2=1;
+			forup(k,0,3){
+				int nx=i+nxt[k][0],ny=j+nxt[k][1];
+				if(nx<0||ny<0||nx>=n||ny>=m) continue;
+				if(q[nx][ny]<q[i][j]) f1=0;
+				if(q[nx][ny]<=q[i][j]) f2=0;
+			}
+			if(f2){
+				msg("1");puts("NO");
+				return;
+			}
+			if((i+j)&1){
+				flow::adde(flow::s,i*m+j,f1,1);
+			}else{
+				flow::adde(i*m+j,flow::t,f1,1);
+			}
+		}
+	}
+	int res=flow::solve();
+	if(!res){
+		msg("2");puts("NO");
+	}else{
+		flow::gans();
+	}
+}
+signed main(){
+	int t=read();
+	while(t--){
+		solve();
 	}
 }
 ```
