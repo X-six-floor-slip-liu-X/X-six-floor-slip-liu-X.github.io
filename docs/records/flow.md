@@ -1911,7 +1911,128 @@ signed main(){
 
 ///
 
-/// details
+
+### P3980 [NOI2008] 志愿者招募
+
+[传送门](https://www.luogu.com.cn/problem/P3980)
+
+> 题意
+
+- 有一件事情要办 $n$ 天，第 $i$ 天需要雇佣至少 $a_i$ 人。
+- 有 $m$ 种不同的雇佣方法，形如 $(l_i,r_i,c_i)$，表示将一个人从第 $l_i$ 天雇佣到第 $r_i$ 天花费 $c_i$ 元。
+- 求最小代价。
+- $1\le n\le 1000,1\le m\le 10000$，其余数据在 $32$ 位整数范围内。
+
+> 题解
+
+第一眼：这不是我们网络流 $24$ 题里面的 $k$ 可重区间集问题吗。
+
+发现不对，因为是“至少”要雇佣 $a_i$ 人而非至多。
+
+考虑之前 $k$ 可重区间集的建模。容易发现每有一个流量流过那个表示区间的边，中轴上对应区间的流量都会减一。
+
+用 $i-1\to i$ 的边表示第 $i$ 天，那么这条边的流量与最大流的差就是这天雇佣的人数。
+
+于是源点向 $0$ 号点连容量为 $C$ 的边（$C$ 是充分大的数），然后对于每个 $i$，$i-1\to i$ 边的容量设为 $C-a_i$。每种雇佣方法连边 $(l_i-1,r_i,\inf,c)$，然后 $n$ 向汇点连容量为 $C$ 的边。由于题目保证有解，故最大流必定为 $C$，建模显然正确。
+
+点数 $O(n)$，边数 $O(n+m)$，因为建模比较特殊跑的还挺快的。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(i64 i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(i64 i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<i64,i64>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+i64 read(){
+	i64 x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const i64 N=2e5+5,inf=1e18;
+i64 n,m;
+namespace flow{
+	const i64 N=1005,M=20000;
+	struct edge{
+		i64 v,rst,w,nxt;
+	}e[M<<1];
+	i64 head[N],incf[N],dis[N],pre[N],vis[N],cnte=1,s,t;
+	void adde(i64 u,i64 v,i64 rst,i64 c){
+		e[++cnte]=edge{v,rst,c,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,-c,head[v]};head[v]=cnte;
+	}
+	bool spfa(){
+		queue<i64> q;
+		forup(i,0,t){
+			dis[i]=inf;
+		}
+		incf[t]=-1;incf[s]=inf;
+		q.push(s);dis[s]=0;vis[s]=1;
+		while(q.size()){
+			i64 u=q.front();q.pop();
+			vis[u]=0;
+			for(i64 i=head[u];i;i=e[i].nxt){
+				i64 v=e[i].v,rst=e[i].rst,w=e[i].w;
+				if(!rst||dis[v]<=dis[u]+w) continue;
+				dis[v]=dis[u]+w;
+				incf[v]=min(incf[u],rst);
+				pre[v]=i;
+				if(!vis[v]){
+					q.push(v);
+					vis[v]=1;
+				}
+			}
+		}
+		return ~incf[t];
+	}
+	pii SSP(){
+		i64 mnc=0,mxf=0;
+		while(spfa()){
+			mxf+=incf[t];
+			for(i64 i=t;i!=s;i=e[pre[i]^1].v){
+				mnc+=incf[t]*e[pre[i]].w;
+				e[pre[i]].rst-=incf[t];
+				e[pre[i]^1].rst+=incf[t];
+			}
+		}
+		return mkp(mxf,mnc);
+	}
+}
+signed main(){
+	n=read();m=read();
+	flow::s=n+1;flow::t=n+2;
+	forup(i,1,n){
+		i64 a=read();
+		flow::adde(i-1,i,inf-a,0);
+	}
+	flow::adde(flow::s,0,inf,0);
+	flow::adde(n,flow::t,inf,0);
+	forup(i,1,m){
+		i64 l=read(),r=read(),c=read();
+		flow::adde(l-1,r,inf,c);
+	}
+	pii res=flow::SSP();
+	printf("%lld\n",res.se);
+}
+```
+
+///
 
 ## 最小割
 
@@ -1923,7 +2044,7 @@ signed main(){
 
 具体来说，核心思路为用收益综合减去最小代价。我们对每个人开一个点，然后直接从源点连向他们，从他们连向汇点。我们希望若他处于 $S$ 集合，则表示雇佣他，若处于 $T$ 集合则表示不雇佣他。
 
-如果不雇佣他，那么就会损失他的贡献，此时会割掉远点到他的边，这条边容量就应该是他的贡献。而如果雇佣他，就会损失他的工资，此时会割掉他到汇点的边，所以这条边的容量就应该是他的工资。
+如果不雇佣他，那么就会损失他的贡献，此时会割掉源点到他的边，这条边容量就应该是他的贡献。而如果雇佣他，就会损失他的工资，此时会割掉他到汇点的边，所以这条边的容量就应该是他的工资。
 
 形式化的，对于所有点 $u$ 连边 $(s,u,\sum E_{u,i}),(u,t,A_u)$。
 
@@ -3379,6 +3500,129 @@ signed main(){
 	int t=read();
 	while(t--){
 		solve();
+	}
+}
+```
+
+///
+
+### P6967 [NEERC2016] Delight for a Cat
+
+> 题意
+
+- 有一个长度为 $n$ 的序列，你可以把每个点涂成黑色或白色，涂成黑色能获得 $s_i$ 的收益，涂成白色能获得 $e_i$ 的收益。
+- 要求连续 $k$ 个点内至少有 $m_e$ 个白点，$m_s$ 个黑点。问能获得的最大收益。
+- $1\le n\le 1000$，其余数据在合理范围内，所有数都不爆 $32$ 位整数。
+
+> 题解
+
+神秘网络流模型，算是套路题吧。
+
+另外这道题虽然是上下界网络流建模，但令人惊讶的是可以不用上下界网络流。
+
+考虑假设最开始全黑，把某些涂白。这个限制相当于从第 $k$ 个开始每个往前 $k$ 个内至少有 $m_e$ 个白点，至多有 $k-m_s$ 个白点。这个“从 $i$ 往前选”是不好搞的。一个想法是换成“把 $i$ 涂白能影响 $[i,i+k)$” 的区间。这样就转化成类似 [P3980 [NOI2008] 志愿者招募](https://www.luogu.com.cn/problem/P3980) 的问题了。
+
+但那个题只有上界，这道题上下界都有。那么考虑上下界网络流，于是做完了。
+
+但是并不需要。考虑建模时，中轴上每条边的容量都是 $[m_s,k-m_e]$，因为所有下界相等，那么不妨设为 $[0,k-m_e-m_s]$，然后把 $s\to 1,n+1\to t$ 的边容量都设为 $k-m_s$，就去掉下界了。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(i64 i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(i64 i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<i64,i64>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+i64 read(){
+	i64 x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const i64 N=1005,inf=1e18;
+i64 n,k,blim,wlim,b[N],w[N];
+namespace flow{
+	struct edge{
+		i64 v,rst,w,nxt;
+	}e[N*8];
+	i64 head[N+5],incf[N+5],pre[N+5],dis[N+5],vis[N+5],s,t,cnte=1;
+	void adde(i64 u,i64 v,i64 rst,i64 w){
+		e[++cnte]=edge{v,rst,w,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,-w,head[v]};head[v]=cnte;
+	}
+	bool spfa(){
+		forup(i,1,t){
+			dis[i]=inf;
+		}
+		queue<i64> q;
+		dis[s]=0;q.push(s);vis[s]=1;
+		incf[s]=inf;incf[t]=0;
+		while(q.size()){
+			i64 u=q.front();q.pop();
+			vis[u]=0;
+			for(i64 i=head[u];i;i=e[i].nxt){
+				i64 v=e[i].v,w=e[i].w,rst=e[i].rst;
+				if(dis[v]<=dis[u]+w||!rst) continue;
+				dis[v]=dis[u]+w;
+				pre[v]=i;incf[v]=min(incf[u],rst);
+				if(!vis[v]){
+					q.push(v);vis[v]=1;
+				}
+			}
+		}
+		return incf[t];
+	}
+	pii SSP(){
+		i64 mnc=0,mxf=0;
+		while(spfa()){
+			mxf+=incf[t];
+			for(i64 p=t;p!=s;p=e[pre[p]^1].v){
+				mnc+=e[pre[p]].w*incf[t];
+				e[pre[p]].rst-=incf[t];
+				e[pre[p]^1].rst+=incf[t];
+			}
+		}
+		return mkp(mxf,mnc);
+	}
+}
+i64 ed[N];
+signed main(){
+	n=read();k=read();blim=read();wlim=read();
+	forup(i,1,n) b[i]=read();
+	forup(i,1,n) w[i]=read();
+	flow::s=n+2;flow::t=flow::s+1;
+	i64 sum=0;
+	forup(i,1,n){
+		flow::adde(i,i+1,k-blim-(i<k?0:wlim),0);
+		flow::adde(i,min(n+1,i+k),1,b[i]-w[i]);
+		ed[i]=flow::cnte;
+		sum+=b[i];
+	}
+	flow::adde(flow::s,1,k-blim,0);flow::adde(n+1,flow::t,k-blim,0);
+	pii res=flow::SSP();
+	sum-=res.se;
+	printf("%lld\n",sum);
+	forup(i,1,n){
+		if(flow::e[ed[i]].rst){
+			putchar('E');
+		}else{
+			putchar('S');
+		}
 	}
 }
 ```

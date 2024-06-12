@@ -143,6 +143,7 @@ nav:
     - 数学:
       - 斯特林数: algo/math/stirling.md #未完成
       - 反演入门: algo/math/inversion.md #未完成
+      # - 筛法入门: algo/math/sieve.md #未完成
       - 莫比乌斯反演: algo/math/Mobius_inversion.md
     - 图论:
       - 网络流基础: algo/graph/flow.md
