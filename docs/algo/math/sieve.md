@@ -10,7 +10,9 @@ comments: true
 
 约定 $p$ 表示素数，$\prod_i p_i^{c_i}$ 表示某个数的质因数分解。
 
-$f\ast g$ 表示 $f$ 与 $g$ 的狄利克雷卷积。大写字母 $F(i)$ 表示对应小写字母 $f(i)$ 的前缀和，即 $F(n)=\sum_{i=1}^nf(i)$（同理，$G(i),g(i)$ 等也有类似关系）
+$f\ast g$ 表示 $f$ 与 $g$ 的狄利克雷卷积。大写字母 $F(i)$ 表示对应小写字母 $f(i)$ 的前缀和，即 $F(n)=\sum_{i=1}^nf(i)$（同理，$G(i),g(i)$ 等也有类似关系）。
+
+$[]$ 为艾佛森括号，表示若内部表达式为真，则值为 $1$，否则为 $0$。
 
 ## 线性筛
 
@@ -42,7 +44,7 @@ $f\ast g$ 表示 $f$ 与 $g$ 的狄利克雷卷积。大写字母 $F(i)$ 表示�
 
 难度陡然上升。
 
-为什么杜教筛叫筛呢？（我个人理解）注意到线性筛是通过更小的多个 $f(n)$ 用较小的复杂度计算出更大的单个 $f(n)$，虽然真正计算过的函数值变多了，但是你真正算出 $f(n)$ 所用的时间变少了。
+为什么杜教筛叫筛呢？（我个人理解）注意到线性筛是通过更小的多个 $f(n)$ 用较小的复杂度计算出更大的单个 $f(n)$，虽然真正计算过的函数值变多了，但是你真正算出 $f(n)$ 所用的时间变少了。杜教筛也是如此，通过多计算几个值的方式降低整体复杂度。
 
 ### 主要思路
 
@@ -90,9 +92,116 @@ $$
 
 很随缘啊，取决于能不能构造出 $g$。
 
-但是不要局限于筛。若 $f=g\ast h$，而 $g,h$ 都好求前缀和，其实可以直接用 $\sum_{i=1}^n(f\ast g)(i)=\sum_{i=1}^ng(i)F(\left\lfloor\frac{n}{i}\right\rfloor)$ 直接数论分块算，复杂度还是 $O(n^{\frac{1}{2}})$ 的。
+但是不要局限于筛。假如你能构造出 $g,h$ 满足 $f=g\ast h$，而 $g,h$ 都好求前缀和，其实可以直接用 $\sum_{i=1}^n(f\ast g)(i)=\sum_{i=1}^ng(i)F(\left\lfloor\frac{n}{i}\right\rfloor)$ 直接数论分块算，复杂度还是 $O(n^{\frac{1}{2}})$ 的。
+
+/// details | [模板题](https://www.luogu.com.cn/problem/P4213)参考代码
+    open: False
+    type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(i64 i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(i64 i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<i64,i64>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+i64 read(){
+	i64 x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const i64 N=1e7+5,inf=0x3f3f3f3f;
+i64 n,mu[N],summu[N],phi[N],sumphi[N];
+vector<i64> pri;
+void init(i64 n){
+	mu[1]=1;phi[1]=1;
+	forup(i,2,n){
+		if(!phi[i]){
+			phi[i]=i-1;mu[i]=-1;
+			pri.push_back(i);
+		}
+		for(auto j:pri){
+			if(1ll*i*j>n) break;
+			if(i%j){
+				phi[i*j]=phi[i]*(j-1);
+				mu[i*j]=-mu[i];
+			}else{
+				phi[i*j]=phi[i]*j;
+				mu[i*j]=0;
+				break;
+			}
+		}
+	}
+	forup(i,1,n){
+		summu[i]=summu[i-1]+mu[i];
+		sumphi[i]=sumphi[i-1]+phi[i];
+	}
+}
+map<i64,pii> sum;
+pii calc(i64 n){
+	if(n<=1e7){
+		return mkp(summu[n],sumphi[n]);
+	}
+	if(sum.count(n)) return sum[n];
+	i64 smu=1,sphi=1ll*(1+n)*n/2;
+	for(i64 l=2,r=0;l<=n;l=r+1){
+		r=n/(n/l);
+		pii res=calc(n/l);
+		smu-=(r-l+1)*res.fi;
+		sphi-=(r-l+1)*res.se;
+	}
+	smu/=1;sphi/=1;//象征性除以 1，防止复制板子的时候忘了。
+	sum[n]=mkp(smu,sphi);
+	return mkp(smu,sphi);
+}
+void solve(){
+	n=read();
+	pii res=calc(n);
+	printf("%lld %lld\n",res.se,res.fi);
+}
+signed main(){
+	init(1e7);
+	i64 t=read();
+	while(t--){
+		solve();
+	}
+}
+```
+
+///
 
 ## Powerful Number 筛（PN 筛）
 
 PN 筛用于亚线性地求解一些积性函数的前缀和。
 
+### Powerful Number
+
+~~Poweful Number，Number 中的 Number，数字中的数字，数字中的征服者，数字的王~~
+
+若一个正整数 $n=\prod p_i^{c_i}$，$\forall i$ 均有 $c_i>1$，则称 $n$ 为一个 Powerful Number（注意 $1$ 也满足这个条件）。
+
+显然所有 PowerFul Number 都能写成 $a^2b^3$，考虑偶数就全放 $a$ 里，奇数就拆三个放 $b$ 里。
+
+那么 $n$ 以内的 Powerful Number1 个数就是 $\sum_{a=1}^{\sqrt{n}}\sqrt[3]{\frac{n}{a^2}}$。根据一些我不会的证明这玩意是 $O(\sqrt{n})$ 级别的。
+
+### PN 筛
+
+首先我们需要构造一个积性函数 $g$，满足对于所有质数 $p\le n$ 均有 $g(p)=f(p)$（非质数点位不作要求，比如若 $f$ 在质数位置都取 $1$ 时，$g$ 可以取 $I$）。
+
+考虑构造一个 $h\ast g=f$。根据狄利克雷卷积的性质，有 $h(1)=1$ 且 $h$ 也是积性函数。下面探讨一些 $h$ 的性质。
+
+对于任意质数 $p$，显然有 $f(p)=h(p)g(1)+h(1)g(p)$。由于 $g(1)=h(1)=1$（非 $0$ 积性函数的性质），则 $f(p)=h(p)+g(p)$。又由于 $g(p)=f(p)$，所以 $h(p)=0$。而注意到 $h$ 为积性函数，容易发现在非 Powerful Number 的位置均有 $h(i)=0$（否则就会带一个一次质因子，根据积性 $h(i)=0$）。
+
+又由于 $F(n)=\sum_{i=1}^n(h\ast g)(i)=\sum_{i=1}^nh(i)G(\left\lfloor\frac{n}{i}\right\rfloor)$，而 $h$ 只在 PN 处有值。则大力搜索 $i$（用 $a^2b^3$ 的性质）然后乘上 $g$ 的前缀和即可。复杂度 $O((p+q)\sqrt{n})$，其中 $p,q$ 分别是求 $g$ 前缀和的复杂度和求 $h$ 单点值的复杂度。
