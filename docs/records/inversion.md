@@ -857,3 +857,303 @@ signed main(){
 ```
 
 ///
+
+## P3768 简单的数学题
+
+[传送门](https://www.luogu.com.cn/problem/P3768)
+
+> 题意
+
+- 给定 $n$,求 $\sum_{i=1}^n\sum_{j=1}^nij\gcd(i,j)$。
+- 防止答案过大，答案模 $p$ 输出（其实对做法没有影响），$p$ 是质数。
+- $1\le n\le 10^{10},5\times 10^8\le p\le1.1\times 10^9$
+
+> 题解
+
+还是比较套路的。
+
+看到 $\gcd$ 想到往反演方向推：
+
+$$
+\begin{aligned}
+&\sum_{i=1}^n\sum_{j=1}^nij\gcd(i,j)\\\\
+=&\sum_{p=1}^np\sum_{p\mid i}\sum_{p\mid j}ij[\gcd(i/p,j/p)=1]\\\\
+=&\sum_{p=1}^np\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{p}\right\rfloor}ip\times jp\times [\gcd(i,j)=1]\\\\
+=&\sum_{p=1}^np^3\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{p}\right\rfloor}ij\times [\gcd(i,j)=1]\\\\
+=&\sum_{p=1}^np^3\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{p}\right\rfloor}ij\sum_{d\mid \gcd(i,j)}\mu(d)\\\\
+=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}id\times jd\\\\
+=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}d^2\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i\sum_{j=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}j\\\\
+=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}d^2\mu(d)\left(\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i\right)^2\\\\
+=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}d^2\mu(d)\left(\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i^3\right)\\\\
+=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)\sum_{p\mid T}p^3\left(\frac{T}{p}\right)^2\mu(\frac{T}{p})\\\\
+=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)T^2\sum_{p\mid T}p\mu(\frac{T}{p})\\\\
+=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)T^2(id\ast\mu)(T)\\\\
+=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)T^2\varphi(T)\\\\
+\end{aligned}
+$$
+
+其中 $\left(\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i\right)^2=\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i^3$ 是经典小学奥数，我证不来。然后 $id\ast \mu=\varphi$ 是经典结论。
+
+那么前面 $\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3$ 的部分可以数论分块解决，问题在于我们需要求 $T^2\varphi(T)$ 的前缀和。因为 $n=10^{10}$ 肯定考虑筛法了。考虑杜教筛。
+
+那么我们需要构造 $h=g\ast f$，其中 $f(i)=i^2\varphi(i)$，有经典结论 $id=\varphi\ast I$，即 $\sum_{d\mid n}\varphi(d)=n$，容易想到 $\sum_{d\mid n}d^2\varphi(d)(\frac{n}{d})^2=n^3$，即 $id^3=(id^2\times\varphi)\ast id^2$。而 $id^3$ 和 $id^2$ 的前缀和都能经典小学奥数求出，于是套个板子就做完了。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(i64 i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(i64 i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+#define gc getchar()
+i64 read(){
+	i64 x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const i64 N=1e7,inf=0x3f3f3f3f;
+#define ull unsigned long long
+#define ui128 __uint128_t
+struct Barrett{
+	ull d;ui128 m;
+	void init(ull _d){
+		d=_d;m=((ui128)(1)<<64)/d;
+	}
+};
+Barrett mod;
+ull operator %(const ull a,const Barrett mod){
+	ull w=(mod.m*a)>>64;w=a-w*mod.d;
+	if(w>=mod.d)w-=mod.d;return w;
+}
+i64 ksm(i64 a,i64 b){
+	i64 c=1;
+	while(b){
+		if(b&1) c=1ll*a*c%mod;
+		a=1ll*a*a%mod;
+		b>>=1;
+	}
+	return c;
+}
+i64 n,p,phi[N+5],sumphi[N+5],inv6,inv4;
+vector<i64> pri;
+void init(i64 n){
+	phi[1]=1;
+	forup(i,2,n){
+		if(!phi[i]){
+			phi[i]=i-1;
+			pri.push_back(i);
+		}
+		for(auto j:pri){
+			if(1ll*i*j>n) break;
+			if(i%j){
+				phi[i*j]=phi[i]*(j-1)%mod;
+			}else{
+				phi[i*j]=phi[i]*j%mod;
+				break;
+			}
+		}
+	}
+	forup(i,1,n){
+		sumphi[i]=(sumphi[i-1]+phi[i]*i%mod*i%mod)%mod;
+	}
+}
+i64 sump2(i64 n){
+	n=n%mod;
+	return 1ll*n*(n+1)%mod*(2*n+1)%mod*inv6%mod;
+}
+i64 sump3(i64 n){
+	n=n%mod;
+	return n*n%mod*(n+1)%mod*(n+1)%mod*inv4%mod;
+}
+map<i64,i64> val;
+i64 calc(i64 n){
+	if(n<=N) return sumphi[n];
+	if(val.count(n)) return val[n];
+	i64 va=sump3(n);
+	for(i64 l=2,r=0;l<=n;l=r+1){
+		r=n/(n/l);
+		va=(va+p-(sump2(r)-sump2(l-1)+p)%mod*calc(n/l)%mod)%mod;
+	}
+	val[n]=va;
+	return va;
+}
+signed main(){
+	p=read();n=read();
+	mod.init(p);
+	inv6=ksm(6,p-2);
+	inv4=ksm(4,p-2);
+	init(min(n,N));
+	i64 res=0;
+	for(i64 l=1,r=0;l<=n;l=r+1){
+		r=n/(n/l);
+		res=(res+p+(calc(r)+p-calc(l-1))%mod*sump3(n/l)%mod)%mod;
+	}
+	printf("%lld\n",res);
+}
+```
+
+///
+
+## P5325 【模板】Min_25 筛
+
+> 题意
+
+- 求 $\sum_{i=1}^nf(i)$，其中 $f(i)$ 是积性函数，满足 $f(p^k)=p^k(p^k-1)$。
+- $1\le n\le 10^{10}$
+
+> 题解
+
+积性函数前缀和考虑 PN 筛（主要是我不会 Min_25 筛）。
+
+那么先考虑构造积性函数 $g$ 满足 $g(p)=f(p)$。看到“积性”和“$p-1$”容易想到 $\varphi$。容易发现构造 $g(i)=i\varphi(i)$ 是符合条件的。然后考虑寻找 $h\ast g=f$。
+
+容易发现 $g(p^k)=p^k\left(p^{k-1}(p-1)\right)=p^{2k-1}(p-1)$（根据欧拉函数通项公式。另外 $k=0$ 不满足这个，$k=0$ 时 $g(1)=1$）那么有 $f(p^k)=p^k(p^k-1)=h(p^k)+\sum_{i=1}^kp^{2i-1}(p-1)h(p^{k-i})$，则 $h(p^k)=p^k(p^k-1)-\sum_{i=1}^kp^{2i-1}(p-1)h(p^{k-i})$，手模一下，容易得到：
+
+$$
+\begin{aligned}
+h(1)&=1\\\\
+h(p)&=0\\\\
+h(p^2)&=p^2(p^2-1)-p^{2\times 2-1}(p-1)h(1)\\\\
+	  &=p^3-p^2\\\\
+h(p^3)&=p^3(p^3-1)-p^{1\times 2-1}(p-1)h(p^2)-p^{3\times 2-1}(p-1)h(1)\\\\
+	  &=p^3(p^3-1)-p(p-1)(p^3-p^2)-p^{5}(p-1)\\\\
+	  &=2(p^4-p^3)\\\\
+h(p^4)&=p^4(p^4-1)-p^{1\times 2-1}(p-1)h(p^3)-p^{2\times 2-1}(p-1)h(p^2)-p^{4\times 2-1}(p-1)h(1)\\\\
+	  &=p^4(p^4-1)-p(p-1)2(p^4-p^3)-p^{3}(p-1)(p^3-p^2)-p^{7}(p-1)\\\\
+	  &=3(p^5-p^4)\\\\
+\end{aligned}
+$$
+
+大胆猜测 $h(p^i)=(i-1)(p^{i+1}-p^{i})$（除去 $i=0$ 时，$h(1)=1$），考虑证明：
+
+考虑数学归纳法。
+
+首先对于 $k=1$，$p^k$ 不是 Powerful Number，则 $h(p^k)=0$，符合条件。
+
+考虑假设对于所有 $1\le i\le k-1$ 上述结论均成立，证明 $h(p^k)=(k-1)(p^{k+1}-p^k)$。对于 $k>1$，注意到（具体注意方法是发现后面每个 $\sum_{i=1}^kg(p^i)h(p^{k-i})$ 中，对于指数相同的 $h$，$g$ 的指数都变大 $2$，那么把第一项 $f(p^k)$ 去掉乘以 $p^2$ 后再加上新增的项）：
+
+$$
+\begin{aligned}
+h(p^k)&=p^2(h(p^{k-1})-p^{k-1}(p^{k-1}-1))+p^k(p^k-1)-p(p-1)h(p^{k-1})\\\\
+&=(p^2-p^2+p)h(k-1)-p^{k+1}(p^{k-1}-1)+p^k(p^k-1)\\\\
+&=p\cdot h(k-1)-p^{2k}+p^{k+1}+p^{2k}-p^k\\\\
+&=p(k-2)(p^k-p^{k-1})+p^{k+1}-p^{k}\\\\
+&=(k-2)(p^{k+1}-p^k)+(p^{k+1}-p^k)\\\\
+&=(k-1)(p^{k+1}-p^k)
+\end{aligned}
+$$
+
+得证。
+
+然后 $h$ 可以在找 Powerful Number 的时候顺便求出，瓶颈在于求 $g$ 的前缀和，考虑杜教筛（$g\ast id=id^2$）。找到所有 $\left\lfloor\frac{n}{i}\right\rfloor$ 处前缀和值的复杂度为 $O(n^{\frac{2}{3}})$。于是总复杂度 $O(n^{\frac{2}{3}})$。
+
+注意 $n=1$ 的时候如果写得不好访问第一个质数会 RE，考虑特判或者多预处理几个质数。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(i64 i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(i64 i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+#define gc getchar()
+i64 read(){
+	i64 x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const i64 N=1e7,mod=1e9+7;
+i64 n,sphi[N+5],phi[N+5],inv6,inv2;
+i64 ksm(i64 a,i64 b){
+	i64 c=1;
+	while(b){
+		if(b&1) c=a*c%mod;
+		a=a*a%mod;
+		b>>=1;
+	}
+	return c;
+}
+vector<i64> pri;
+void init(i64 n){
+	phi[1]=1;
+	forup(i,2,n){
+		if(!phi[i]){
+			pri.push_back(i);
+			phi[i]=i-1;
+		}
+		for(auto j:pri){
+			if(i*j>n) break;
+			if(i%j){
+				phi[i*j]=phi[i]*(j-1)%mod;
+			}else{
+				phi[i*j]=phi[i]*j%mod;
+				break;
+			}
+		}
+	}
+	forup(i,1,n){
+		sphi[i]=(sphi[i-1]+i*phi[i]%mod)%mod;
+	}
+}
+map<i64,i64> val;
+i64 sump2(i64 n){
+	n%=mod;
+	return n*(n+1)%mod*((2*n+1)%mod)%mod*inv6%mod;
+}
+i64 calcsg(i64 n){
+	if(n<=N) return sphi[n];
+	if(val.count(n)) return val[n];
+	i64 res=sump2(n);
+	for(i64 l=2,r=0;l<=n;l=r+1){
+		r=n/(n/l);
+		res-=((r+l)%mod)*((r-l+1)%mod)%mod*inv2%mod*calcsg(n/l)%mod;
+		if(res<0) res+=mod;
+	}
+	val[n]=res;
+	return res;
+}
+i64 ans;
+i64 calch(i64 pk,i64 p,i64 k){
+	pk%=mod;p=(p-1)%mod;k=(k-1)%mod;
+	return k*p%mod*pk%mod;
+}
+void dfs(i64 v,i64 h,i64 p){
+	(ans+=h*calcsg(n/v)%mod)%=mod;
+	for(i64 rr=n/v;pri[p]*pri[p]<=rr;++p){
+		for(i64 c=2,nv=pri[p]*pri[p];nv<=rr;nv*=pri[p],++c){
+			dfs(v*nv,h*calch(nv,pri[p],c)%mod,p+1);
+		}
+	}
+}
+signed main(){
+	n=read();
+	init(min(n+5,N));
+	inv6=ksm(6,mod-2);inv2=ksm(2,mod-2);
+	dfs(1,1,0);
+	printf("%lld\n",ans);
+}
+```
+
+///
