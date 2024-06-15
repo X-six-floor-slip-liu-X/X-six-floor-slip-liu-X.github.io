@@ -4,6 +4,8 @@ comments: true
 
 # 反演与筛法相关题目
 
+把这俩放一起的原因是很多筛题都需要先反演。而且两类算法本质上都是求某个函数的值。
+
 ## P2257 YY 的 GCD
 
 [传送门](https://www.luogu.com.cn/problem/P2257)
@@ -1157,3 +1159,32 @@ signed main(){
 ```
 
 ///
+
+## Loj#6053. 简单的函数
+
+[传送门](https://loj.ac/p/6053)
+
+> 题意
+
+- 给定 $n$，求积性函数 $f$ 的前缀和 $\sum_{i=1}^nf(i)$。
+- 其中 $f(1)=1,f(p^c)=p\oplus c$，$\oplus$ 表示按位异或。
+-  $1\le n\le 10^{10}$
+
+> 题解
+
+因为我不会 Min_25 筛所以考虑 Powerful Number 筛。先来构造 $g\ast h=f$。
+
+因为需要积性函数，又发现在奇质数的位置 $f(p)=p-1$，而偶数的位置有 $f(2)=3$，容易想到构造：
+
+$$
+g(n)=\begin{cases}
+\varphi(n)&,n\bmod 2=1\\\\
+3\varphi(n)&,n\bmod 2=0
+\end{cases}
+$$
+
+容易发现这个也是积性函数。设 $a,b$ 互质，显然里面最多有一个是偶数。若两个都是奇数则显然正确。否则不妨设 $a$ 是偶数，那么 $g(ab)=3\varphi(ab)=3\varphi(a)\varphi(b)=g(a)g(b)$。于是积性。
+
+这个怎么求前缀和呢？容易发现等于 $\varphi$ 的前缀和加上偶数位置的总和（乘一个系数）。不妨把偶数 $i$ 全部除以二。若 $\frac{i}{2}$ 不是偶数那么 $\varphi(i)=\varphi(\frac{i}{2})$，否则 $\varphi(i)=2\varphi(\frac{i}{2})$（考虑带 $\varphi$ 的通项公式）。而这就变成了一个子问题，可以递归求解。而容易发现这样需要求的前缀和的下标均是 $\left\lfloor\frac{n}{2^k}\right\rfloor$ 的形式。于是考虑杜教筛，这部分复杂度是 $O(n^{\frac{2}{3}}+\sqrt{n}\log^2 n)$，其中这个 $\sqrt{n}$ 是枚举 Powerful Number 的复杂度，$\log^2$ 是因为如果用 map 记忆化每次访问会带个 $\log$。
+
+然后考虑 $h$。手模几组容易发现没有显著规律，那么只能暴力求 $h$ 了，复杂度是 $O(\sqrt{n}\log n)$。
