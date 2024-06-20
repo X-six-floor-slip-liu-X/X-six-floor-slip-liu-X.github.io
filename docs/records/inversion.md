@@ -1183,8 +1183,115 @@ g(n)=\begin{cases}
 \end{cases}
 $$
 
-容易发现这个也是积性函数。设 $a,b$ 互质，显然里面最多有一个是偶数。若两个都是奇数则显然正确。否则不妨设 $a$ 是偶数，那么 $g(ab)=3\varphi(ab)=3\varphi(a)\varphi(b)=g(a)g(b)$。于是积性。
+容易发现这个也是积性函数。设 $a,b$ 互质，显然里面最多有一个是偶数。若两个都是奇数则显然正确。否则不妨钦定 $a$ 是偶数，那么 $g(ab)=3\varphi(ab)=3\varphi(a)\varphi(b)=g(a)g(b)$。于是积性。
 
-这个怎么求前缀和呢？容易发现等于 $\varphi$ 的前缀和加上偶数位置的总和（乘一个系数）。不妨把偶数 $i$ 全部除以二。若 $\frac{i}{2}$ 不是偶数那么 $\varphi(i)=\varphi(\frac{i}{2})$，否则 $\varphi(i)=2\varphi(\frac{i}{2})$（考虑带 $\varphi$ 的通项公式）。而这就变成了一个子问题，可以递归求解。而容易发现这样需要求的前缀和的下标均是 $\left\lfloor\frac{n}{2^k}\right\rfloor$ 的形式。于是考虑杜教筛，这部分复杂度是 $O(n^{\frac{2}{3}}+\sqrt{n}\log^2 n)$，其中这个 $\sqrt{n}$ 是枚举 Powerful Number 的复杂度，$\log^2$ 是因为如果用 map 记忆化每次访问会带个 $\log$。
+这个怎么求前缀和呢？容易发现等于 $\varphi$ 的前缀和加上偶数位置的总和乘 $2$。不妨把偶数 $i$ 全部除以二。若 $\frac{i}{2}$ 不是偶数那么 $\varphi(i)=\varphi(\frac{i}{2})$，否则 $\varphi(i)=2\varphi(\frac{i}{2})$（考虑带 $\varphi$ 的通项公式）。而这就变成了一个子问题（只不过变成偶数位置不用乘二），可以递归求解。而容易发现这样需要求的前缀和的下标均是 $\left\lfloor\frac{n}{2^k}\right\rfloor$ 的形式。于是考虑杜教筛，这部分复杂度是 $O(n^{\frac{2}{3}}+\sqrt{n}\log^2 n)$，其中这个 $\sqrt{n}$ 是枚举 Powerful Number 的复杂度，$\log^2$ 是因为如果用 map 记忆化每次访问会带个 $\log$。
 
 然后考虑 $h$。手模几组容易发现没有显著规律，那么只能暴力求 $h$ 了，复杂度是 $O(\sqrt{n}\log n)$。
+
+综上，复杂度 $O(n^{\frac{2}{3}}+\sqrt{n}\log^2 n)$。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(i64 i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(i64 i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+#define gc getchar()
+i64 read(){
+	i64 x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const i64 N=1e7,inf=0x3f3f3f3f,mod=1e9+7,inv2=5e8+4;
+i64 ksm(i64 a,i64 b){
+	i64 c=1;
+	while(b){
+		if(b&1) c=1ll*a*c%mod;
+		a=1ll*a*a%mod;
+		b>>=1;
+	}
+	return c;
+}
+i64 n,phi[N+5],sphi[N+5];
+vector<i64> pri;
+void init(i64 n){
+	phi[1]=1;
+	forup(i,2,n){
+		if(!phi[i]){
+			pri.push_back(i);
+			phi[i]=i-1;
+		}
+		for(auto j:pri){
+			if(i*j>n) break;
+			if(i%j){
+				phi[i*j]=phi[i]*(j-1)%mod;
+			}else{
+				phi[i*j]=phi[i]*j%mod;
+				break;
+			}
+		}
+	}
+	forup(i,1,n){
+		sphi[i]=(sphi[i-1]+phi[i])%mod;
+	}
+}
+map<i64,i64> val;
+i64 calcsphi(i64 n){
+	if(n<=N) return sphi[n];
+	if(val.count(n)) return val[n];
+	i64 res=(n%mod)*((n+1)%mod)%mod*inv2%mod;
+	for(i64 l=2,r=0;l<=n;l=r+1){
+		r=n/(n/l);
+		res=(res+mod-(r-l+1)%mod*calcsphi(n/l)%mod)%mod;
+	}
+	val[n]=res;
+	return res;
+}
+i64 calcG(i64 n){
+	if(n==0) return 0;
+	return (calcsphi(n)+calcG(n/2))%mod;
+}
+vector<i64> hp[10000];
+i64 ans;
+void dfs(i64 p,i64 h,i64 v){
+	(ans+=h*(calcsphi(n/v)+2*calcG((n/v)/2)%mod))%=mod;
+	for(i64 rr=n/v;pri[p]*pri[p]<=rr;++p){
+		for(i64 e=2,vv=pri[p]*pri[p];vv<=rr;++e,vv*=pri[p]){
+			dfs(p+1,h*hp[p][e]%mod,v*vv);
+		}
+	}
+}
+signed main(){
+	n=read();
+	init(min(n+5,N));
+	for(i64 i=0;;++i){
+		if(pri[i]>n/pri[i]) break;
+		hp[i].push_back(1);hp[i].push_back(0);
+		for(i64 j=pri[i]*pri[i],k=2;j<=n;j=j*pri[i],++k){
+			i64 nh=pri[i]^k,nv=pri[i]-1;
+			fordown(l,k-1,0){
+				nh=(nh+mod-hp[i][l]*nv%mod*(1+2*(pri[i]==2))%mod)%mod;
+				nv=nv*pri[i]%mod;
+			}
+			hp[i].push_back(nh);
+		}
+	}
+	dfs(0,1,1);
+	printf("%lld\n",ans);
+}
+```
+
+///
