@@ -206,14 +206,14 @@ $$
 
 证明和上面类似，但要证的是 $\sum_{k=j}^i(-1)^{k-j}\begin{bmatrix}i\\\\k\end{bmatrix}\begin{Bmatrix}k\\\\j\end{Bmatrix}=[i=j]$，先把普通幂换成第二类斯特林数和下降幂的积，再把下降幂换成第一类斯特林数即可。
 
-然后和二项式反演相同，我们可以移动 $(-1)^{n-i}$ 的位置（取 $F'(n)=(-1)^{-n}F(n)=(-1)^{n}F(n),G'(n)=(-1)^{-n}G(n)=(-1)^nG(n)$）。于是：
+然后和二项式反演相同，我们可以移动 $(-1)^{n-i}$ 的位置（取 $F_{\ast}(n)=(-1)^{-n}F(n)=(-1)^{n}F(n),G_{\ast}(n)=(-1)^{-n}G(n)=(-1)^nG(n)$）。于是：
 
 
 $$
-G'(n)=\sum_{i=0}^n(-1)^{n-i}\begin{Bmatrix}n\\\\i\end{Bmatrix}F'(i)
+G_{\ast}(n)=\sum_{i=0}^n(-1)^{n-i}\begin{Bmatrix}n\\\\i\end{Bmatrix}F_{\ast}(i)
 $$
 $$
-F'(n)=\sum_{i=0}^n\begin{bmatrix}n\\\\i\end{bmatrix}G'(i)
+F_{\ast}(n)=\sum_{i=0}^n\begin{bmatrix}n\\\\i\end{bmatrix}G_{\ast}(i)
 $$
 
 常用做法还是用来做计数题。

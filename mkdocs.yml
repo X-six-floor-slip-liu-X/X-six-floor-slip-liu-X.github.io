@@ -145,8 +145,9 @@ nav:
       - 反演入门: algo/math/inversion.md #未完成
       - 莫比乌斯反演: algo/math/Mobius_inversion.md
       - 筛法入门: algo/math/sieve.md
-      # - 生成函数入门: algo/math/generating_function.md
-      # - FFT 与 NTT: algo/math/FFT_NTT.md
+      - 生成函数入门: algo/math/generating_function.md
+      - FFT 与 NTT: algo/math/FFT_NTT.md #未完成
+      - 多项式基础: algo/math/polynomial.md
     - 图论:
       - 网络流基础: algo/graph/flow.md
       - 最小生成树与 Kruskal 重构树: algo/graph/MST.md

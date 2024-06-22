@@ -77,7 +77,7 @@ $a\mid b$ 表示存在整数 $k$ 使得 $ak=b$。
 $$
 \begin{aligned}
 F(\omega_n^k)&=F_0\left(\left(\omega_n^k\right)^2\right)+\omega_n^kF_1\left(\left(\omega_n^k\right)^2\right)&=F_0\left(\omega_{\frac{n}{2}}^k\right)+\omega_n^kF_1\left(\omega_{\frac{n}{2}}^k\right)\\\\
-F(\omega_n^{k'})&=F_0\left(\left(\omega_n^{k'}\right)^2\right)+\omega_n^kF_1\left(\left(\omega_n^{k'}\right)^2\right)&=F_0\left(\omega_{\frac{n}{2}}^k\right)-\omega_n^kF_1\left(\omega_{\frac{n}{2}}^k\right)
+F(\omega_n^{k'})&=F_0\left(\left(\omega_n^{k'}\right)^2\right)+\omega_n^{k'}F_1\left(\left(\omega_n^{k'}\right)^2\right)&=F_0\left(\omega_{\frac{n}{2}}^k\right)-\omega_n^kF_1\left(\omega_{\frac{n}{2}}^k\right)
 \end{aligned}
 $$
 
@@ -239,3 +239,48 @@ $998244353$ 有非常好的性质：
 注意到一个问题，刚刚钦定了 $n\mid p-1$。
 
 哎，您猜怎么着☝️🤓，$998244352$ 有 $2^{23}$ 的因子（$\approx 8.3\times 10^6$），可以把 $n$ 调整为 $2$ 的幂次就能做了。
+
+注意到一点区别，从 $F_0,F_1$ 推到 $F$ 的式子（$k\in[0,\frac{n}{2}),k'=k+\frac{n}{2}$）：
+
+$$
+\begin{aligned}
+F(g_n^k)&=F_0\left(\left(g_n^k\right)^2\right)+g_n^kF_1\left(\left(g_n^k\right)^2\right)&=F_0\left(g_{\frac{n}{2}}^k\right)+g_n^kF_1\left(g_{\frac{n}{2}}^k\right)\\\\
+F(g_n^{k'})&=F_0\left(\left(g_n^{k'}\right)^2\right)+g_n^{k'}F_1\left(\left(g_n^{k'}\right)^2\right)&=F_0\left(g_{\frac{n}{2}}^k\right)+g^{\frac{p-1}{2}}g_n^kF_1\left(g_{\frac{n}{2}}^k\right)
+\end{aligned}
+$$
+
+注意到 $g^{\frac{p-1}{2}}=\sqrt{g^{p-1}}=\sqrt{1}$，根据二次探测引理，$g^{\frac{p-1}{2}}=\pm 1$。但是若这玩意等于 $1$ 那么 $g$ 就不是原根了（和定义不符），所以这东西必定等于 $-1$（即 $p-1$）。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+其它地方差不多，`inv3` 是 $3$ 的逆元。
+
+```cpp
+void trans(int *f,int type){
+	forup(i,0,p-1) if(i<rev[i]) swap(f[i],f[rev[i]]);
+	for(int len=1;len<p;len<<=1){
+		int wn=ksm(type==1?3:inv3,(mod-1)/(len<<1));
+		for(int i=0;i<p;i+=(len<<1)){
+			int nw=1;
+			forup(j,0,len-1){
+				int x=f[i+j],y=1ll*nw*f[i+len+j]%mod;
+				f[i+j]=(x+y)%mod;
+				f[i+len+j]=(x-y+mod)%mod;
+				nw=1ll*nw*wn%mod;
+			}
+		}
+	}
+	if(type==-1){
+		int inv=ksm(p,mod-2);
+		forup(i,0,p-1) f[i]=1ll*f[i]*inv%mod;
+	}
+}
+```
+
+///
+
+## 任意模数 NTT
+
+感觉没什么用就先不写了，留坑待补。
