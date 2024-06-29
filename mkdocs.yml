@@ -155,6 +155,7 @@ nav:
       - 最短路: algo/graph/shortest_path.md
       - 2-SAT 问题: algo/graph/2_SAT.md
       - Dilworth 定理: algo/graph/Dilworth.md
+      # - 平面图的性质: algo/graph/planar_graph.md #未完成
     - 字符串:
       - 字符串基础: algo/string/string_base.md
       - KMP 算法与 AC 自动机: algo/string/kmp_and_ac_automaton.md

@@ -2034,6 +2034,168 @@ signed main(){
 
 ///
 
+
+## P5470 [NOI2019] 序列
+
+[传送门](https://www.luogu.com.cn/problem/P5470)
+
+感觉很适合入门模拟费用流啊。
+
+> 题意
+
+- 给定两长度为 $n$ 的序列 $a_i,b_i$。
+- 你需要从 $a_i,b_i$ 中各选 $K$ 个数，要求其中至少有 $L$ 对相同下标。
+- 最大化你选出来的数的总和。
+- $1\le L\le K\le n\le 2\times 10^5$，带多测，$1\le \sum n\le 10^6$，所有数据在 $10^9$ 以内。
+
+> 题解
+
+首先容易想到一个费用流建模。源点向左部点连容量为 $1$，费用为 $a_i$ 的边，每个左部点向对应右部点连容量为 $1$，费用为 $0$ 的边。右部点向汇点连容量为 $1$，费用为 $b_i$ 的边。这样就能求出只考虑相同下标的最大贡献了。
+
+对于不同下标，考虑建一个中转站，左部点全连向它，它再连向右部点。但是有 $K-L$ 的流量限制，那么将其拆点即可。
+
+用超级源汇点限制流量为 $K$，再这张图上跑最大费用最大流，就能得到答案了。但是复杂度显然爆炸。于是考虑模拟费用流。
+
+首先在初始网络上就有两种流，流过中转站的和流过横叉边的。第二种维护每一对点总和的最大值。第一种对两边分别维护最大值即可，注意第二种每次流过时应额外维护中转站上的流量。
+
+然后当网络有了一定流量后，残量网络上还会出现新的种类的流：
+
+> 下文 $s$ 代表源点，$t$ 代表汇点，$a_i$ 代表某个左部点，$b_i$ 代表某个右部点，中转站用 $u\to v$ 表示
+
+- $s\to a_i\to b_i\to v\to b_j\to t$：$b_i$ 已经被经过中转站的流流过了，此时可以经过反向边前往 $v$ 将流量导向**没被流过的最大的 $b_j$ 点**。
+- $s\to a_i\to u \to a_j\to b_j\to t$：与第一个同理。
+- $s\to a_j\to u\to a_i\to b_i\to v \to b_k\to t$：$a_i$，$b_i$ 均被从中转站流过，这样其间的横叉边是没有流量的，那么可以找到一个 $a_i\to b_i\to v\to u\to a_i$ 的环，将其流量整体 $+1$，这样 $u\to v$ 就获得了一个新的容量，可以匹配一组 $a_j,b_k$。
+
+于是维护这几种，每次找其中的最大值即可。复杂度 $O(K\log n)$。
+
+我代码中的 $m$ 就是 $K$。另外容易发现在两边各找一个没用过的最大值显然无论何时都大于等于剩下四种，这个可以无脑选。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(int i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(int i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<i64,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+int read(){
+	int x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const int N=2e5+5,inf=0x3f3f3f3f;
+int n,m,L,a[N],b[N],visl[N],visr[N];
+i64 ans;
+priority_queue<pii> q1,ql,qr,qpl,qpr;
+//一对的最大值，左部点的最大值，右部点的最大值，
+//所对应右部点已经流过的左部点的最大值，所对应左部点已经流过的右部点的最大值
+void solve(){
+	n=read();m=read();L=read();
+	L=m-L;
+	while(ql.size()) ql.pop();
+	while(qr.size()) qr.pop();
+	while(q1.size()) q1.pop();
+	while(qpl.size()) qpl.pop();
+	while(qpr.size()) qpr.pop();
+	ans=0;
+	forup(i,1,n) a[i]=read(),ql.push(mkp(a[i],i));
+	forup(i,1,n) b[i]=read(),qr.push(mkp(b[i],i));
+	forup(i,1,n){
+		visl[i]=visr[i]=0;
+		q1.push(mkp(a[i]+b[i],i));
+	}
+	forup(i,1,m){
+		while(q1.size()&&(visl[q1.top().se]||visr[q1.top().se])) q1.pop();
+		while(visl[ql.top().se]) ql.pop();
+		while(visr[qr.top().se]) qr.pop();
+		while(qpl.size()&&visl[qpl.top().se]) qpl.pop();
+		while(qpr.size()&&visr[qpr.top().se]) qpr.pop();
+		if(L>0){
+			int l=ql.top().se,r=qr.top().se;
+			ql.pop();qr.pop();
+			ans+=a[l]+b[r];
+			visl[l]=visr[r]=1;
+			--L;
+			if(visl[r]){
+				++L;
+			}else{
+				qpl.push(mkp(a[r],r));
+			}
+			if(l!=r){
+				if(visr[l]){
+					++L;
+				}else{
+					qpr.push(mkp(b[l],l));
+				}
+			}
+			continue;
+		}
+		int sl=-1,sr=-1,flag=0;
+		if(q1.size()){
+			int u=q1.top().se;
+			if(!flag||a[u]+b[u]>a[sl]+b[sr]){
+				sl=sr=u;flag=1;
+			}
+		}
+		if(qpl.size()){
+			int l=qpl.top().se,r=qr.top().se;
+			if(!flag||a[l]+b[r]>a[sl]+b[sr]){
+				sl=l;sr=r;flag=2;
+			}
+		}
+		if(qpr.size()){
+			int l=ql.top().se,r=qpr.top().se;
+			if(!flag||a[l]+b[r]>a[sl]+b[sr]){
+				sl=l;sr=r;flag=3;
+			}
+		}
+		ans+=a[sl]+b[sr];
+		visl[sl]=visr[sr]=1;
+		if(flag==1){
+			q1.pop();
+		}else if(flag==2){
+			qpl.pop(),qr.pop();
+			if(visl[sr]){
+				++L;
+			}else{
+				qpl.push(mkp(a[sr],sr));
+			}
+		}else{
+			ql.pop(),qpr.pop();
+			if(visr[sl]){
+				++L;
+			}else{
+				qpr.push(mkp(b[sl],sl));
+			}
+		}
+	}
+	printf("%lld\n",ans);
+}
+signed main(){
+	int t=read();
+	while(t--){
+		solve();
+	}
+}
+```
+
+///
+
 ## 最小割
 
 ### P1791 [国家集训队] 人员雇佣
