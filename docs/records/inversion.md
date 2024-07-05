@@ -1295,3 +1295,145 @@ signed main(){
 ```
 
 ///
+
+## P3704 [SDOI2017] 数字表格
+
+[传送门](https://www.luogu.com.cn/problem/P3704)
+
+> 题意
+
+- 给定 $n,m$，求 $\prod_{i=1}^n\prod_{j=1}^mf(\gcd(i,j))$。
+- 其中 $f_n$ 表示斐波那契数列的第 $n$ 项。此处定义 $f(0)=0,f(1)=1$，后面每个数等于它前面两个数相加。
+- $1\le n,m\le 10^6$，多组询问，询问数量 $1\le T\le 1000$
+
+> 题解
+
+想了一下午带通项公式乘起来无果瞄了一眼题解发现可以直接莫反，破防了。
+
+考虑化式子（钦定 $n\le m$）：
+
+$$
+\begin{aligned}
+&\prod_{i=1}^n\prod_{j=1}^mf(\gcd(i,j))\\\\
+=&\prod_{d=1}^nf(d)^{\sum_{i=1}^n\sum_{j=1}^m[\gcd(i,j)=d]}\\\\
+=&\prod_{d=1}^nf(d)^{\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}[\gcd(i,j)=1]}\\\\
+=&\prod_{d=1}^nf(d)^{\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)\left\lfloor\frac{n}{d\cdot t}\right\rfloor\left\lfloor\frac{m}{d\cdot t}\right\rfloor}
+\end{aligned}
+$$
+
+看起来化不了了。根据套路，把 $d\cdot t$ 乘在一起枚举：
+
+$$
+\begin{aligned}
+=&\sum_{p=1}^n\sum_{d\mid p}f(d)^{\mu(\frac{p}{d})\left\lfloor\frac{n}{p}\right\rfloor\left\lfloor\frac{m}{p}\right\rfloor}\\\\
+=&\sum_{p=1}^n\left(\sum_{d\mid p}f(d)^{\mu(\frac{p}{d})}\right)^{\left\lfloor\frac{n}{p}\right\rfloor\left\lfloor\frac{m}{p}\right\rfloor}\\\\
+\end{aligned}
+$$
+
+容易发现中间这坨可以暴力预处理，枚举每个数和它的倍数即可，预处理复杂度 $O(n\log n)$。
+
+然后单次询问可以数论分块 $+$ 快速幂，复杂度 $O(n\log n+T\sqrt{n}\log n)$。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(int i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(int i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+int read(){
+	int x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const int N=1e6+5,inf=0x3f3f3f3f,mod=1e9+7;
+int ksm(int a,int b){
+	int c=1;
+	while(b){
+		if(b&1) c=1ll*a*c%mod;
+		a=1ll*a*a%mod;
+		b>>=1;
+	}
+	return c;
+}
+int n,m;
+int mu[N],f[N],vv[N],val[N],sum[N],sinv[N];
+vector<int> pri;
+void init(int n){
+	mu[1]=vv[1]=f[1]=1;
+	forup(i,2,n){
+		f[i]=(f[i-1]+f[i-2])%mod;
+		if(!vv[i]){
+			pri.push_back(i);
+			mu[i]=-1;
+		}
+		for(auto j:pri){
+			if(1ll*i*j>n) break;
+			vv[i*j]=1;
+			if(i%j){
+				mu[i*j]=-mu[i];
+				vv[i*j]=1;
+			}else{
+				mu[i*j]=0;
+				vv[i*j]=1;
+				break;
+			}
+		}
+	}
+	forup(i,1,n) val[i]=1;
+	forup(i,1,n){
+		int inv=ksm(f[i],mod-2);
+		forup(j,1,n/i){
+			if(mu[j]==1){
+				val[i*j]=1ll*val[i*j]*f[i]%mod;
+			}else if(mu[j]==-1){
+				val[i*j]=1ll*val[i*j]*inv%mod;
+			}
+		}
+	}
+	sum[0]=1;
+	forup(i,1,n){
+		sum[i]=1ll*val[i]*sum[i-1]%mod;
+	}
+	sinv[n]=ksm(sum[n],mod-2);
+	fordown(i,n-1,1){
+		sinv[i]=1ll*sinv[i+1]*val[i+1]%mod;
+	}
+	sinv[0]=1;
+}
+void solve(){
+	n=read();m=read();
+	if(n>m) swap(n,m);
+	int ans=1;
+	for(int l=1,r=0;l<=n;l=r+1){
+		r=min(n/(n/l),m/(m/l));
+		ans=1ll*ans*ksm(1ll*sum[r]*sinv[l-1]%mod,1ll*(n/l)*(m/l)%(mod-1))%mod;
+	}
+	printf("%d\n",ans);
+}
+signed main(){
+	init(1e6);
+	int t=read();
+	while(t--){
+		solve();
+	}
+}
+```
+
+///
