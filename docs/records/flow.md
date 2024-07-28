@@ -1215,6 +1215,169 @@ signed main(){
 
 ///
 
+### CF884F Anti-Palindromize
+
+[传送门](https://www.luogu.com.cn/problem/CF884F)
+
+> 题意
+
+- 给定一长度为 $n$（$n$ 为偶数）的字符串 $s$ 和长度为 $n$ 的序列 $b$。你需要将 $s$ 重排得到 $t$，要求 $t_i\ne t_{n+1-i}$。
+- 令一个重排方案的权值为 $\sum_{i}^{n}b_i[s_i=t_i]$，输出最大权值，保证有解。
+- $2\le n\le 100,1\le b_i\le 100$。
+
+> 题解
+
+很需要灵光一现的建模，但是做过一次后应该比较容易做出类似题。
+
+首先 $s$ 就相当于限制了每种字符的使用次数最大化某权值，容易想到费用流建模。
+
+那么对每个下标建点，每个字符建点。一个流过字符 $c$ 和下标 $i$ 的流的意义是 $t_i=c$，具体容量及费用是容易想到的。
+
+但是怎么概括 $t_i\ne t_{n+1-i}$ 的限制呢？一个想法是对每个点对建个中间点，每个字符只向中间点连 $1$ 的容量，每个中间点再向两个点连边。
+
+一个更聪明的想法是直接把这两个点建成一个点。具体容量及费用还是简单的。
+
+点数为 $O(n)$，边数为 $O(n|\Sigma|)$，随便过的。
+
+/// details | 参考代码
+	open: False
+	type: success
+	
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(int i=(s),E123=(e);i<=E123;++i)
+#define fordown(i,s,e) for(int i=(s),E123=(e);i>=E123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+int read(){
+	int x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const int N=105,inf=0x3f3f3f3f;
+int n;
+namespace flow{
+	struct edge{
+		int v,w,rst,nxt;
+	}e[N*60];
+	int head[N+30],incf[N+30],pre[N+30],vis[N+30],dis[N+30],s,t,cnte=1;
+	void adde(int u,int v,int w,int rst){
+		e[++cnte]=edge{v,w,rst,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,-w,0,head[v]};head[v]=cnte;
+	}
+	bool spfa(){
+		forup(i,1,t){
+			dis[i]=-inf;
+		}
+		incf[s]=inf;incf[t]=0;
+		queue<int> q;
+		dis[s]=0;q.push(s);vis[s]=1;
+		while(q.size()){
+			int u=q.front();q.pop();
+			vis[u]=0;
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v,w=e[i].w,rst=e[i].rst;
+				if(dis[v]>=dis[u]+w||!rst) continue;
+				dis[v]=dis[u]+w;
+				incf[v]=min(incf[u],rst);
+				pre[v]=i;
+				if(!vis[v]){
+					vis[v]=1;
+					q.push(v);
+				}
+			}
+		}
+		return incf[t]!=0;
+	}
+	pii SSP(){
+		int mxf=0,mxc=0;
+		while(spfa()){
+			mxf+=incf[t];
+			for(int i=t;i!=s;i=e[pre[i]^1].v){
+				mxc+=e[pre[i]].w*incf[t];
+				e[pre[i]].rst-=incf[t];
+				e[pre[i]^1].rst+=incf[t];
+			}
+		}
+		return mkp(mxf,mxc);
+	}
+}
+char str[N];
+int cnt[26],b[N];
+signed main(){
+	n=read();
+	scanf(" %s",str+1);
+	forup(i,1,n){
+		++cnt[str[i]-'a'];
+		b[i]=read();
+	}
+	flow::s=n/2+27;flow::t=flow::s+1;
+	forup(i,0,25){
+		flow::adde(flow::s,n/2+i+1,0,cnt[i]);
+	}
+	forup(i,1,n/2){
+		forup(j,0,25){
+			if(str[i]==j+'a'&&str[n+1-i]==j+'a'){
+				flow::adde(n/2+1+j,i,max(b[i],b[n+1-i]),1);
+			}else if(str[i]==j+'a'){
+				flow::adde(n/2+1+j,i,b[i],1);
+			}else if(str[n+1-i]==j+'a'){
+				flow::adde(n/2+1+j,i,b[n+1-i],1);
+			}else{
+				flow::adde(n/2+1+j,i,0,1);
+			}
+		}
+		flow::adde(i,flow::t,0,2);
+	}
+	pii res=flow::SSP();
+	printf("%d\n",res.se);
+}
+```
+
+///
+
+
+### CF1250K Projectors
+
+[传送门](https://www.luogu.com.cn/problem/CF1250K)
+
+> 题意
+
+- 有 $n$ 堂讲课和 $m$ 次研讨会。有 $x$ 个高清投影仪和 $y$ 个普通投影仪。
+- 每堂讲课要用一个高清投影仪，每堂研讨会可以使用普通或高清投影仪。
+- 第 $i$ 堂讲课时间为 $[a_i,b_i)$，第 $i$ 次研讨会时间为 $[p_i,q_i)$。每个时刻每个投影仪只能用在一个地方。
+- 构造投影仪分配方案或判断无解。
+- $1\le n,m,x,y\le 300,1\le a_i,b_i,p_i,q_i\le 10^6$，带多测，$1\le t\le 300$。
+
+> 题解
+
+从简单考虑，假如只有讲课会发生什么事。容易发现有解当且仅当高清投影仪数量大于等于每个时刻的讲课数量。
+
+那么加在一起呢？容易发现我们是能求出每个时刻至少需要多少普通投影仪的，即 $\max(c_i-x,0)$，其中 $c_i$ 是 $i$ 时刻讲课和研讨会堂数的总和。
+
+然后容易发现这个就是 [P3980 志愿者招募](https://www.luogu.com.cn/problem/P3980) 的一个削弱版，于是跑网络流即可。
+
+对于方案的构造，首先普通投影仪可以每次退 $1$ 流量看经过了哪些研讨会边。
+
+然后剩下的高清投影仪用一个栈之类的东西随便搞一搞即可。 
+
+关于时间复杂度，显然时间轴可以离散化，因为最大流流量不超过 $y$ 所以单次复杂度应为 $O((n+m)y)$，那么总复杂度 $O(t(n+m)y)$。
+
+代码待补。
+
 ## 费用流
 
 ### P4249 [WC2007] 剪刀石头布
@@ -2035,7 +2198,7 @@ signed main(){
 ///
 
 
-## P5470 [NOI2019] 序列
+### P5470 [NOI2019] 序列
 
 [传送门](https://www.luogu.com.cn/problem/P5470)
 
@@ -2190,6 +2353,392 @@ signed main(){
 	int t=read();
 	while(t--){
 		solve();
+	}
+}
+```
+
+///
+
+### P2050 [NOI2012] 美食节
+
+[传送门](https://www.luogu.com.cn/problem/P2050)
+
+> 题意
+
+- 有 $m$ 个厨师，$n$ 种菜，第 $i$ 种菜需要 $p_i$ 份。
+- 第 $i$ 个厨师做一份第 $j$ 种菜所需时间为 $t_{i,j}$。
+- 定义某份菜的“等待时间”为从开始时刻到这道菜做完的时间（即做这道菜的厨师做这道菜及其之前的时间和），求出等待时间之和最小是多少。
+- $1\le n\le 40,1\le m\le 100,1\le \sum p_i\le 800,1\le t_{i,j}\le 1000$
+
+> 题解
+
+其实是挺一眼的费用流，容易发现若某道菜 $j$ 是厨师 $i$ 做的，并且该厨师在做了它后还做了 $w$ 道菜。那么它对时间总和的贡献为 $t_{i,j}\times(w+1)$。
+
+那么按 $w$ 将每个厨师拆点即可。但是点数是 $n+m\sum p$，边数更是炸裂，显然过不了。
+
+观察性质，容易发现每个厨师只有 $w$ 的一段前缀会被流过，即每个厨师都有大量拆出来的点是没用的。那么每次只对每个厨师建一个点，然后流一次。若某个厨师的点被用过了再建新点。这样点数就大约是 $n+m+\sum p$，边数变成 $n(m+\sum p)$ 的，就能过了。
+
+/// details | 参考代码
+	open: False
+	type: success
+	
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(int i=(s),E123=(e);i<=E123;++i)
+#define fordown(i,s,e) for(int i=(s),E123=(e);i>=E123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+int read(){
+	int x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const int N=800,inf=0x3f3f3f3f;
+int n,m,Tm[105][45],p[45],nd[45],nwd[105],ct[105],cntn,sum,vv[N*2];
+namespace flow{
+	struct edge{
+		int v,w,rst,nxt;
+	}e[N*100];
+	int head[N*2],pre[N*2],dis[N*2],incf[N*2],vis[N*2],cnte=1,s,t;
+	void adde(int u,int v,int rst,int w){
+		e[++cnte]=edge{v,w,rst,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,-w,0,head[v]};head[v]=cnte;
+	}
+	bool spfa(){
+		forup(i,0,cntn){
+			dis[i]=inf;
+		}
+		incf[s]=inf;incf[t]=0;
+		queue<int> q;
+		q.push(s);dis[s]=0;
+		vis[s]=1;
+		while(q.size()){
+			int u=q.front();q.pop();
+			vis[u]=0;
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v,w=e[i].w,rst=e[i].rst;
+				if(dis[v]<=dis[u]+w||!rst) continue;
+				dis[v]=dis[u]+w;
+				pre[v]=i;
+				incf[v]=min(incf[u],rst);
+				if(!vis[v]){
+					vis[v]=1;
+					q.push(v);
+				}
+			}
+		}
+		return incf[t]!=0;
+	}
+	int solve(){
+		int mxf=0,mnc=0;
+		while(mxf<sum&&spfa()){
+			mxf+=incf[t];mnc+=dis[t]*incf[t];
+			for(int i=t;i!=s;i=e[pre[i]^1].v){
+				e[pre[i]].rst-=incf[t];
+				e[pre[i]^1].rst+=incf[t];
+				vv[i]=1;
+			}
+			forup(j,1,m){
+				if(vv[nwd[j]]){
+					nwd[j]=++cntn;++ct[j];
+					adde(s,nwd[j],1,0);
+					forup(i,1,n){
+						adde(nwd[j],nd[i],1,Tm[j][i]*ct[j]);
+					}
+				}
+			}
+		}
+		return mnc;
+	}
+}
+signed main(){
+	n=read();m=read();
+	flow::s=0;flow::t=1;
+	cntn=1;
+	forup(i,1,n){
+		p[i]=read();
+		sum+=p[i];
+		nd[i]=++cntn;
+		flow::adde(nd[i],flow::t,p[i],0);
+	}
+	forup(i,1,n){
+		forup(j,1,m){
+			Tm[j][i]=read();
+		}
+	}
+	forup(j,1,m){
+		nwd[j]=++cntn;ct[j]=1;
+		flow::adde(flow::s,nwd[j],1,0);
+		forup(i,1,n){
+			flow::adde(nwd[j],nd[i],1,Tm[j][i]*ct[j]);
+		}
+	}
+	printf("%d\n",flow::solve());
+}
+```
+
+///
+
+### [ABC363G] Dynamic Scheduling
+
+[传送门](https://www.luogu.com.cn/problem/AT_abc363_g)
+
+[洛谷专栏链接](https://www.luogu.com.cn/article/o1mle23w)
+
+> 题意
+
+- 有两个长度为 $n$ 的数组 $d_n,p_n$，表示有一个若在 $d_i$ 时刻前做完会获得 $p_i$ 收益的任务（若在 $d_i$ 时刻前没有做完则任务作废），每个时刻可以做一个任务。
+- $q$ 次修改，每次在数据范围内修改某一个任务的参数。每次修改后输出最大收益
+- $1\le n,q\le 10^5,1\le d_i\le n,1\le p_i\le 10^9$。
+
+> 题解
+
+jiangly 讲课时讲了这道题，受益良多，遂以题解记之。
+
+首先对于静态问题有一个经典贪心，把每个人物挂在时间 $p_i$ 处，每个时刻都做时间后缀中剩下的收益最大的任务。
+
+但是贪心显然不好改成在线。jiangly 的解法是考虑改成费用流，然后离线下来线段树分治去掉删除操作，用模拟费用流解决。
+
+首先费用流是好改的，每个时刻开一个点向前连容量无限费用为 $0$ 的边，每个点向汇点连容量为 $1$ 费用为 $0$ 的边，根据每个任务的参数从源点向 $d_i$ 连容量为 $1$ 费用为 $p_i$ 的边，求最大费用最大流。这种费用流改成模拟费用流是比较经典的。
+
+用线段树分治去掉删除操作后，考虑如何在网络流图上加边，加边后有三种可能：产生新的流，产生新的正环（显然求最大费用流时也有消圈定理），不对结果产生影响。
+
+容易发现，任意时刻残量网络都形如时间轴上每个点向源汇点连若干条边（向汇点连的就是原先的边，向源点连的是流过后的反向边）。考虑如何新增一个流量（或者去掉一个正环），那么要么在时间轴上往前流找到一个费用最大的出边（可能是指向汇点的边或指向源点的反向边，前者流量 $+1$，后者解决正环），或者向后流若干条反向边找到费用最大的出边（同理）。
+
+不妨设从某个点指向源汇的出边费用最大值为 $x$，那么第一种是简单的，就是从前缀 $x$ 的最大值处流出（因为时间轴上容量无限可以随便流），但是第二种还要考虑反向边是否存在，这怎么办呢？
+
+考虑设某一条边的反向边容量为 $c$，那么就是往后走若干条 $c\ge 1$ 的边找到 $x$，即**第一个 $c=0$ 之前的 $x$ 最大值**。
+
+容易发现这些都可以线段树维护，如果费用 $p+x >0$ 就流一下，那么考虑一个流量会对网络流图产生什么影响。
+
+首先向左流会使区间的 $c$ 增加 $1$，向右流会使得区间的 $c$ 减少 $1$。然后会用掉原有的一条出边并新增一条反向边。
+
+乂？我们发现了一个问题：$c$ 有区间加的操作，可能让区间内的 $0$ 突然出现或消失，怎么维护**第一个 $0$ 之前 $x$ 的最小值**呢？
+
+这是经典的，先在序列末尾新增一条 $c$ 恒定为 $0$ 的边，然后改为维护 $c$ 的**区间最小值**之前 $x$ 的最大值，这样 $c$ 的区间加就不会对它产生影响，并且在后缀查询时和原问题是完全相同的。
+
+注意一个点可能连多条反向边，需要用 `std::multiset` 在叶子处维护。
+
+最后考虑线段树分治如何回退操作。每一层干的事情大致是若干个 $c$ 的区间修改和 $x$ 的单点修改，那么用一个栈把每一层的修改存下来，退出结点时反向做一遍就行了，因为每次操作只会对应 $O(1)$ 的修改所以不会使复杂度变劣。
+
+线段树分治中，每条流会被考虑 $O(\log q)$ 次，每次复杂度 $O(\log n)$。于是复杂度 $O(q\log q\log n)$。
+
+/// details | 参考代码
+	open: False
+	type: success
+	
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(i64 i=(s),E123=(e);i<=E123;++i)
+#define fordown(i,s,e) for(i64 i=(s),E123=(e);i>=E123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<i64,i64>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+i64 read(){
+	i64 x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const i64 N=1e5+5,inf=0x3f3f3f3f;
+i64 n,q,d[N],p[N],pre[N],ans[N];
+#define mid ((l+r)>>1)
+#define lson l,mid,id<<1
+#define rson mid+1,r,id<<1|1
+struct Node{
+	pii maxv,lmax;
+	i64 minc;
+	Node operator +(const Node &r){
+		Node res;
+		res.maxv=max(maxv,r.maxv);
+		res.minc=min(minc,r.minc);
+		if(res.minc==minc){
+			res.lmax=lmax;
+		}else{
+			res.lmax=max(maxv,r.lmax);
+		}
+		return res;
+	}
+};
+multiset<i64> ed[N];
+struct SegTree{
+	Node info[N<<2];
+	i64 mark[N<<2];
+	void PushDown(i64 id){
+		info[id<<1].minc+=mark[id];
+		info[id<<1|1].minc+=mark[id];
+		mark[id<<1]+=mark[id];
+		mark[id<<1|1]+=mark[id];
+		mark[id]=0;
+	}
+	void Build(i64 l=1,i64 r=n,i64 id=1){
+		mark[id]=0;
+		if(l==r){
+			ed[l].insert(0);
+			info[id].maxv=info[id].lmax=mkp(0,l);
+			return;
+		}
+		Build(lson);Build(rson);
+		info[id]=info[id<<1]+info[id<<1|1];
+	}
+	void UpdateV(i64 P,i64 X,i64 l=1,i64 r=n,i64 id=1){
+		if(l==r){
+			ed[l].insert(X);
+			info[id].maxv=info[id].lmax=mkp(*prev(ed[l].end()),l);
+			return;
+		}
+		if(mark[id]) PushDown(id);
+		if(P<=mid) UpdateV(P,X,lson);
+		else       UpdateV(P,X,rson);
+		info[id]=info[id<<1]+info[id<<1|1];
+	}
+	void EraseV(i64 P,i64 X,i64 l=1,i64 r=n,i64 id=1){
+		if(l==r){
+			ed[l].erase(ed[l].find(X));
+			info[id].maxv=info[id].lmax=mkp(-inf,l);
+			if(ed[l].size()) info[id].maxv=info[id].lmax=mkp(*prev(ed[l].end()),l);
+			return;
+		}
+		if(mark[id]) PushDown(id);
+		if(P<=mid) EraseV(P,X,lson);
+		else       EraseV(P,X,rson);
+		info[id]=info[id<<1]+info[id<<1|1];
+	}
+	void Modify(i64 L,i64 R,i64 X,i64 l=1,i64 r=n,i64 id=1){
+		if(L>R) return;
+		if(L<=l&&r<=R){
+			info[id].minc+=X;
+			mark[id]+=X;
+			return;
+		}
+		if(mark[id]) PushDown(id);
+		if(L<=mid) Modify(L,R,X,lson);
+		if(mid< R) Modify(L,R,X,rson);
+		info[id]=info[id<<1]+info[id<<1|1];
+	}
+	Node Query(i64 L,i64 R,i64 l=1,i64 r=n,i64 id=1){
+		if(L>R){
+			return Node{mkp(-inf,-1),mkp(-inf,-1),0};
+		}
+		if(L<=l&&r<=R){
+			return info[id];
+		}
+		if(mark[id]) PushDown(id);
+		if(R<=mid){
+			return Query(L,R,lson);
+		}else if(mid<L){
+			return Query(L,R,rson);
+		}else{
+			return Query(L,R,lson)+Query(L,R,rson);
+		}
+	}
+}mt;
+vector<pii> node[N<<2];
+void Update(i64 L,i64 R,i64 D,i64 P,i64 l=0,i64 r=q,i64 id=1){
+	if(L<=l&&r<=R){
+		node[id].push_back(mkp(D,P));
+		return;
+	}
+	if(L<=mid) Update(L,R,D,P,lson);
+	if(mid< R) Update(L,R,D,P,rson);
+}
+i64 ncost;
+struct oper{
+	i64 l,r,v;
+};
+void solve(i64 l=0,i64 r=q,i64 id=1){
+	stack<oper> sv;
+	i64 add=0;
+	for(auto op:node[id]){
+		i64 d=op.fi,p=op.se;
+		pii lmx=mt.Query(1,d).maxv,rmx=mt.Query(d,n).lmax;
+		if(lmx>=rmx){
+			if(p+lmx.fi>0){
+//				msg("A|%d %d|%d %d|\n",l,r,d,p);
+				ncost+=p+lmx.fi;
+				add+=p+lmx.fi;
+				mt.EraseV(lmx.se,lmx.fi);
+				sv.push(oper{-2,lmx.se,lmx.fi});
+				mt.UpdateV(d,-p);
+				sv.push(oper{-1,d,-p});
+				mt.Modify(lmx.se,d-1,1);
+				sv.push(oper{lmx.se,d-1,1});
+			}
+		}else{
+			if(p+rmx.fi>0){
+//				msg("B|%d %d|%d %d|\n",l,r,d,p);
+				ncost+=p+rmx.fi;
+				add+=p+rmx.fi;
+				mt.EraseV(rmx.se,rmx.fi);
+				sv.push(oper{-2,rmx.se,rmx.fi});
+				mt.UpdateV(d,-p);
+				sv.push(oper{-1,d,-p});
+				mt.Modify(d,rmx.se-1,-1);
+				sv.push(oper{d,rmx.se-1,-1});
+			}
+		}
+	}
+	if(l==r){
+		ans[l]=ncost;
+	}else{
+		solve(lson);solve(rson);
+	}
+	while(sv.size()){
+		oper i=sv.top();sv.pop();
+		if(i.l==-1){
+			mt.EraseV(i.r,i.v);
+		}else if(i.l==-2){
+			mt.UpdateV(i.r,i.v);
+		}else{
+			mt.Modify(i.l,i.r,-i.v);
+		}
+	}
+	ncost-=add;
+}
+#undef mid
+#undef lson
+#undef rson
+signed main(){
+	n=read();q=read();
+	forup(i,1,n) d[i]=read();
+	forup(i,1,n) p[i]=read();
+	forup(i,1,q){
+		i64 c=read(),x=read(),y=read();
+		Update(pre[c],i-1,d[c],p[c]);
+		pre[c]=i;d[c]=x;p[c]=y;
+	}
+	forup(i,1,n){
+		Update(pre[i],q,d[i],p[i]);
+	}
+	mt.Build();
+	solve();
+	forup(i,1,q){
+		printf("%lld\n",ans[i]);
 	}
 }
 ```
@@ -3408,6 +3957,530 @@ signed main(){
 ```
 
 ///
+
+### [ARC107F] Sum of Abs
+
+[传送门](https://www.luogu.com.cn/problem/AT_arc107_f)
+
+> 题意
+
+- 给定一张 $n$ 个点 $m$ 条边的无向图，每个点有两个权值 $A_i,B_i$，可以用 $A_i$ 的代价删掉点 $i$ 及其项链的边。一个连通块的权值为其 $B_i$ 和的绝对值。
+- 删除一些结点后（可以不删），收益定义为所有极大连通块的权值之和减去删除所用的带价和。求最大收益。
+- $1\le N,M\le 300,1\le A_i\le 10^6,|B_i|\le 10^6$
+
+> 题解
+
+一步步分析即可很通顺地得到建模。
+
+首先看到绝对值拆绝对值，容易发现每个没被删的 $B_i$ 要么给总和正的贡献，要么给总和负的贡献。
+
+进一步的，容易发现一个连通块内要么全为正贡献，要么全为负贡献。
+
+那么思路就明了了，将每个点 $u$ 拆为两点 $u,u'$​，表示这个点产生正贡献还是负贡献。
+
+然后要选一些点，代价与限制如下：
+
+- 若 $u,u'$ 均不选则产生 $-A_u$ 的收益。
+
+- 选择 $u$ 产生 $B_u$ 的收益，选择 $u'$ 产生 $-B_u$ 的收益。
+
+- $u,u'$ 不能同时选。
+
+- 对于 $(u,v)\in E$​，$(u,v'),(u',v)$​ 均不能同时选。
+
+因为要求最大值，所以转化为选一些点去掉贡献，那么初始贡献就是 $\sum |B_i|$，然后 $B_i\ge 0$ 的点选负以及 $B_i<0$ 的点选正会损失 $2|B_i|$ 的收益。
+
+容易发现两种限制和代价 $1$ 都形如“一个正点和一个负点在同一边”，那么将正点在 $S$ 方设为选，负点在 $T$ 方设为选即可。具体连边是经典的。
+
+/// details | 参考代码
+	open: False
+	type: success
+	
+```cpp
+#include<bits/stdc++.h> 
+#define forup(i,s,e) for(int i=(s),E123=(e);i<=E123;++i)
+#define fordown(i,s,e) for(int i=(s),E123=(e);i>=E123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+int read(){
+	int x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const int N=305,inf=0x3f3f3f3f;
+int n,m,a[N],b[N];
+int ans=0;
+namespace flow{
+	struct edge{
+		int v,rst,nxt;
+	}e[N*16];
+	int head[N*2],cur[N*2],dpt[N*2],cnte=1,s,t;
+	void adde(int u,int v,int w,int rw=0){
+		e[++cnte]=edge{v,w,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,rw,head[v]};head[v]=cnte;
+	}
+	bool bfs(){
+		forup(i,1,t){
+			dpt[i]=-1;
+			cur[i]=head[i];
+		}
+		dpt[s]=0;
+		queue<int> q;
+		q.push(s);
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v,rst=e[i].rst;
+				if(dpt[v]!=-1||!rst) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return dpt[t]!=-1;
+	}
+	int dfs(int x,int flow){
+		if(x==t||!flow) return flow;
+		int res=0;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;
+			int rst=e[i].rst,v=e[i].v;
+			if(dpt[v]!=dpt[x]+1||!rst) continue;
+			int gt=dfs(v,min(rst,flow-res));
+			if(gt){
+				e[i].rst-=gt;
+				e[i^1].rst+=gt;
+				res+=gt;
+				if(res==flow) break;
+			}
+		}
+		return res;
+	}
+	int dinic(){
+		int mxf=0;
+		while(bfs()){
+			mxf+=dfs(s,inf);
+		}
+		return mxf;
+	}
+}
+signed main(){
+	n=read();m=read();
+	flow::s=n*2+1;flow::t=flow::s+1;
+	forup(i,1,n) a[i]=read();
+	forup(i,1,n) b[i]=read(),ans+=abs(b[i]);
+	forup(i,1,n){
+		flow::adde(i,i+n,inf,a[i]+abs(b[i]));
+		if(b[i]>=0){
+			flow::adde(i,flow::t,2*b[i]);
+		}else{
+			flow::adde(flow::s,i+n,-2*b[i]);
+		}
+	}
+	forup(i,1,m){
+		int u=read(),v=read();
+		flow::adde(u,v+n,inf);
+		flow::adde(v,u+n,inf);
+	}
+	printf("%d\n",ans-flow::dinic());
+}
+```
+
+///
+
+### P3749 [六省联考 2017] 寿司餐厅
+
+[传送门](https://www.luogu.com.cn/problem/P3749)
+
+> 题意
+
+- 有 $n$ 种寿司各有无限份排成序列，每种寿司有个代号 $a_i$。
+- 你每次可以吃一个区间的寿司，如果**存在某一次**你同时吃了 $i$ 寿司和 $j$ 寿司，就会获得 $d_{i,j}$ 的收益（重复吃不会重复获得收益）。
+- 若你吃了 $c$ 种（$c>0$）代号为 $x$ 的寿司，就会消耗 $mx^2+cx$ 的代价（$m$ 为常数）。
+- 求收益减去代价的最大值。
+- $1\le n\le100,0\le m\le 1,1\le a_i\le 1000,|d_{i,j}|\le 500$
+
+> 题解
+
+容易想到最大权闭合子图建模（对每个点对 $(i,j)$ 建点），那么难点在于如何概括 $mx^2$ 的代价。
+
+这种时候可以再对每个代号开一个点，如果选了 $d_{i,i}$ 就必须选 $a_i$。
+
+点数边数均为 $O(n^2)$，应该还是比较好过的。
+
+/// details | 参考代码
+	open: False
+	type: success
+	
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(int i=(s),E123=(e);i<=E123;++i)
+#define fordown(i,s,e) for(int i=(s),E123=(e);i>=E123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+int read(){
+	int x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const int N=105,inf=0x3f3f3f3f;
+namespace flow{
+	struct edge{
+		int v,rst,nxt;
+	}e[N*N*20];
+	int head[N*N+1000],cur[N*N+1000],dpt[N*N+1000],cnte=1,s,t;
+	void adde(int u,int v,int w,int rw=0){
+		e[++cnte]=edge{v,w,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,rw,head[v]};head[v]=cnte;
+	}
+	bool bfs(){
+		forup(i,1,t){
+			dpt[i]=-1;
+			cur[i]=head[i];
+		}
+		dpt[s]=0;
+		queue<int> q;
+		q.push(s);
+		while(q.size()){
+			int u=q.front();q.pop();
+			for(int i=head[u];i;i=e[i].nxt){
+				int v=e[i].v,rst=e[i].rst;
+				if(dpt[v]!=-1||!rst) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return dpt[t]!=-1;
+	}
+	int dfs(int x,int flow){
+		if(x==t||!flow) return flow;
+		int res=0;
+		for(int i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;
+			int rst=e[i].rst,v=e[i].v;
+			if(dpt[v]!=dpt[x]+1||!rst) continue;
+			int gt=dfs(v,min(rst,flow-res));
+			if(gt){
+				e[i].rst-=gt;
+				e[i^1].rst+=gt;
+				res+=gt;
+				if(res==flow) break;
+			}
+		}
+		return res;
+	}
+	int dinic(){
+		int mxf=0;
+		while(bfs()){
+			mxf+=dfs(s,inf);
+		}
+		return mxf;
+	}
+}
+int n,m,a[N],d[N][N],ans;
+signed main(){
+	n=read();m=read();
+	int mxa=0;
+	forup(i,1,n){
+		a[i]=read();
+		mxa=max(mxa,a[i]);
+	}
+	flow::s=n*n+mxa+1;flow::t=flow::s+1;
+	forup(i,1,mxa){
+		flow::adde(n*n+i,flow::t,i*i*m);
+	}
+	forup(i,1,n){
+		forup(j,i,n){
+			d[i][j]=read();
+			if(i==j){
+				d[i][j]-=a[i];
+				flow::adde((i-1)*n+j,n*n+a[i],inf);
+			}
+			if(d[i][j]>=0){
+				flow::adde(flow::s,(i-1)*n+j,d[i][j]);
+				ans+=d[i][j];
+			}else{
+				flow::adde((i-1)*n+j,flow::t,-d[i][j]);
+			}
+			if(j>i){
+				flow::adde((i-1)*n+j,(i-1)*n+j-1,inf);
+				flow::adde((i-1)*n+j,i*n+j,inf);
+			}
+		}
+	}
+	printf("%d\n",ans-flow::dinic());
+}
+```
+
+///
+
+### CF1517G Starry Night Camping
+
+[传送门](https://www.luogu.com.cn/problem/CF1517G)
+
+> 题意
+
+- 一张图上有 $n$ 个点 $(x_i,y_i)$。
+- 你需要删除若干个点，使得对于任意横纵坐标均为偶数的点，不存在与其八连通的三个点和它构成矩形或平行四边形。下图示不合法形状，图源原题。
+
+![图示 1](../img/record_flow_1.png)
+
+- 删除一个点有代价 $w_i$，最小化代价。
+- $1\le n\le 1000,|x_i|,|y_i|\le 10^9,1\le w_i\le 10^9$
+
+> 题解
+
+属于做一次永远也忘不了程度的题。
+
+发现**横纵坐标均为偶数的点**的限制很神奇。考虑将横纵坐标奇偶分类，涂成四种颜色。
+
+![图示 2](../img/record_flow_2.png)
+
+容易发现每一种不合法形状都能被概括为一条 红 $\to$ 橙 $\to$ 绿 $\to$ 蓝 的链。
+
+于是建分层图拆点跑最小割即可，点数边数均为 $O(n^2)$。
+
+/// details | 参考代码
+	open: False
+	type: success
+	
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(i64 i=(s),E123=(e);i<=E123;++i)
+#define fordown(i,s,e) for(i64 i=(s),E123=(e);i>=E123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<i64,i64>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+i64 read(){
+	i64 x=0,f=1;char c;
+	while(!isdigit(c=gc)) if(c=='-') f=-1;
+	while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+	return x*f;
+}
+#undef gc
+const i64 N=1005,inf=0x3f3f3f3f;
+namespace flow{
+	struct edge{
+		i64 v,rst,nxt;
+	}e[N*40];
+	i64 head[N*2],cur[N*2],dpt[N*2],cnte=1,s,t;
+	void adde(i64 u,i64 v,i64 w){
+		e[++cnte]=edge{v,w,head[u]};head[u]=cnte;
+		e[++cnte]=edge{u,0,head[v]};head[v]=cnte;
+	}
+	bool bfs(){
+		forup(i,1,t){
+			dpt[i]=-1;
+			cur[i]=head[i];
+		}
+		dpt[s]=0;
+		queue<i64> q;
+		q.push(s);
+		while(q.size()){
+			i64 u=q.front();q.pop();
+			for(i64 i=head[u];i;i=e[i].nxt){
+				i64 v=e[i].v,rst=e[i].rst;
+				if(dpt[v]!=-1||!rst) continue;
+				dpt[v]=dpt[u]+1;
+				q.push(v);
+			}
+		}
+		return dpt[t]!=-1;
+	}
+	i64 dfs(i64 x,i64 flow){
+		if(x==t||!flow) return flow;
+		i64 res=0;
+		for(i64 i=cur[x];i;i=e[i].nxt){
+			cur[x]=i;
+			i64 rst=e[i].rst,v=e[i].v;
+			if(dpt[v]!=dpt[x]+1||!rst) continue;
+			i64 gt=dfs(v,min(rst,flow-res));
+			if(gt){
+				e[i].rst-=gt;
+				e[i^1].rst+=gt;
+				res+=gt;
+				if(res==flow) break;
+			}
+		}
+		return res;
+	}
+	i64 dinic(){
+		i64 mxf=0;
+		while(bfs()){
+			mxf+=dfs(s,inf);
+		}
+		return mxf;
+	}
+}
+i64 n,sum;
+map<pii,i64> po;
+signed main(){
+	n=read();
+	flow::s=n*2+1;flow::t=flow::s+1;
+	forup(i,1,n){
+		i64 x=read(),y=read(),w=read();
+		sum+=w;
+		po[mkp(x,y)]=i;
+		flow::adde(i,i+n,w);
+		if(x&1){
+			if(y&1){
+				flow::adde(flow::s,i,inf);
+				if(po.count(mkp(x-1,y))) flow::adde(i+n,po[mkp(x-1,y)],inf);
+				if(po.count(mkp(x+1,y))) flow::adde(i+n,po[mkp(x+1,y)],inf);
+			}else{
+				flow::adde(i+n,flow::t,inf);
+				if(po.count(mkp(x-1,y))) flow::adde(po[mkp(x-1,y)]+n,i,inf);
+				if(po.count(mkp(x+1,y))) flow::adde(po[mkp(x+1,y)]+n,i,inf);
+			}
+		}else{
+			if(y&1){
+				if(po.count(mkp(x-1,y))) flow::adde(po[mkp(x-1,y)]+n,i,inf);
+				if(po.count(mkp(x+1,y))) flow::adde(po[mkp(x+1,y)]+n,i,inf);
+				if(po.count(mkp(x,y-1))) flow::adde(i+n,po[mkp(x,y-1)],inf);
+				if(po.count(mkp(x,y+1))) flow::adde(i+n,po[mkp(x,y+1)],inf);
+			}else{
+				if(po.count(mkp(x,y-1))) flow::adde(po[mkp(x,y-1)]+n,i,inf);
+				if(po.count(mkp(x,y+1))) flow::adde(po[mkp(x,y+1)]+n,i,inf);
+				if(po.count(mkp(x-1,y))) flow::adde(i+n,po[mkp(x-1,y)],inf);
+				if(po.count(mkp(x+1,y))) flow::adde(i+n,po[mkp(x+1,y)],inf);
+			}
+		} 
+	}
+	printf("%lld\n",sum-flow::dinic());
+}
+```
+
+///
+
+### QOJ#1359 Setting Maps
+
+[传送门](https://vjudge.net.cn/problem/QOJ-1359)
+
+> 题意
+
+- 给定 $n$ 个点 $m$ 条边的简单有向图，你可以将一些点涂黑，把某个点 $u$ 涂黑需要 $C_u$ 的代价，对于起点 $s$ 和终点 $e$，求使得 $S$ 到 $E$ 的所有路径上都至少有 $k$ 个黑点的最小代价并构造方案。
+- $2\le n\le 200,1\le m\le 500,1\le k\le 5,1\le C_i\le 10^7$
+
+> 题解
+
+因为要统计的东西和点有关所以考虑拆点 $u,u'$，那么将某个点涂黑就是将对应的边 $u\to u'$ 权值变为 $1$，限制条件就是 $s\rightsquigarrow e$ 的最短路大于等于 $k$。
+
+注意到最优情况最短路应恰好等于 $k$，那么到任意点的最短路都小于等于 $k$，于是考虑和值域有关的网络流建模。
+
+那么限制和代价如下：
+
+- $\forall (u,v)\in E,d_v\le d_{u'}$：最短路的性质。
+- $\forall u\in V,d_{u'}\le d_{u}+1$：边权不是 $0$ 就是 $1$。
+- 若 $d_{u'}=d_{u}+1$，则产生 $C_u$ 的代价。
+- $d_s=0,d_e=k$。
+
+这个是经典模型。对每个点 $u$ 开 $k+1$ 个点 $(u,1)\sim (u,k+1)$，然后建边 $(v,t)\xrightarrow{+\inf} (u,t)$，$(u',t)\xrightarrow{+\inf} (u,t-1)$，$(u',t)\xrightarrow{C_u} (u,t)$，$(u,t)\xrightarrow{+\inf} (u,t-1)$，$(u',t)\xrightarrow{+\inf} (u',t-1)$，对于 $t\ge 1$ 建边 $(s,t)\xrightarrow{+\inf} (s,t+1)$，对于 $t<k$ 建边 $(e',t)\xrightarrow{+\inf} (e',t+1)$。
+
+点数为 $O(nk)$，边数为 $O(nk+mk)$，应该是比较好过的。
+
+代码待补。
+
+### CF843E Maximum Flow
+
+[传送门](https://www.luogu.com.cn/problem/CF843E)
+
+> 题意
+
+- 给定一 $n$ 个点 $m$ 条边的简单有向图和一源点汇点，每条边有颜色。你需要给每条边定一个小于等于 $10^9$ 的正整数容量且求出一个最大流，使得黑色边流量不为 $0$，白色边流量为 $0$。最小化满流边数量。
+- $2\le n\le 100,1\le m\le 1000,1\le s,t\le n,s\ne t$，多解输出任意一个。
+
+> 题解
+
+神秘思路，感觉只有天天刷网络流的人能想出来。
+
+最大流最小割定理指出割边必定满流，所以若没有颜色的限制那么答案就是对每条边赋 $1$ 容量跑最小割。那么考虑这个颜色的限制是在干嘛。
+
+其实就相当于对于黑边 $u\to v$，残量网络上 $v\to u$ 必定有剩余流量。对于白边 $u\to v$，残量网络上 $v\to u$ 必定有剩余流量，也就是说这些边不能割。那么事情就好办了，将这些边容量设为 $+\inf$，再加上所有黑边的正向赋容量为 $1$ 跑最小割，求出来的割边即为满流边。
+
+对于构造方案，容易发现其实跑一个上下界最小流（白边不管，黑边下界 $1$ 上界 $+\inf$）就能搞定。然后满流边容量就设为流量，不满流的随便搞即可。点数为 $O(n)$，边数为 $O(m)$，复杂度算成 $O(n^2m)$ 也能随便过。
+
+代码待补。
+
+### QOJ#1197 Draw in Straight Lines
+
+[传送门](https://vjudge.net.cn/problem/QOJ-1197)
+
+> 题意
+
+- 有一张 $n\times m$ 的网格图，初始全白，每次可以进行以下操作之一：
+  - 将某个格子涂黑或涂白，代价为 $c$。
+  - 将同一行或同一列若干连续的各自涂黑或涂白，设操作的格子数量为 $l$，则代价为 $al+b$。
+- 有如下限制：
+  - 每个格子至多被涂两次。
+  - 不能将被涂白过的格子涂黑。
+- 给出目标状态，求将网格图变成目标状态的花费。
+- $1\le n,m\le 40,0\le a,b,c\le 40,c\le a+b$。
+
+> 题解
+
+感觉不可做，考虑先观察性质：
+
+首先显然操作顺序应为：先进行若干次线段涂黑，再进行若干次线段涂白，最后进行若干次单点涂色。
+
+另外又容易发现（真的容易发现吗？）同一个点不会被横涂两次或竖涂两次，证明简单分讨即可。
+
+发现代价可以用最小割模型刻画，具体来说：
+
+用 $Hb_{i,j},Vb_{i,j},Hw_{i,j},Vw_{i,j}$ 表示格子 $(i,j)$ 有没有被竖着/横着涂黑/涂白。
+
+- 若 $Hb_{i,j}=1$，则产生代价 $a$.
+- 若 $Hb_{i,j}=1,Hb_{i-1,j}=0$，则产生代价 $b$。
+
+其它三种同理。
+
+然后考虑何时需要单点涂：
+
+- 对于要涂黑的格子，若没被涂黑过（即 $Hb_{i,j}=Vb_{i,j}=0$）则产生代价 $c$。
+- 对于要涂白的格子，若被涂黑且没涂白过（即 $Hb_{i,j}=1,Vw_{i,j}=0$，或者行列相反）则产生代价 $c$。
+
+最后考虑不合法情况：
+
+- 要涂黑的格子被涂白过（$Vw_{i,j}=1$ 或 $Hw_{i,j}=1$）。
+- 要涂白的格子被两个方向涂黑过（$Hb_{i,j}=Vb_{i,j}=1$）。
+
+发现除了 $Hb_{i,j}=Vb_{i,j}=0$ 以及 $Hb_{i,j}=Vb_{i,j}=1$ 其余限制/贡献都是标准模型。对于这个，将 $Vb_{i,j}$ 的定义反转即可。
+
+代码待补。
 
 ## 上下界网络流
 

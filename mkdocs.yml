@@ -139,7 +139,7 @@ nav:
       - 线段树分治: algo/ds/SegT_divide_and_conquer.md
       - 猫树: algo/ds/Cat_Tree.md
       - 李超线段树: algo/ds/LiChaoTree.md
-      - LCT: slgo/ds/LCT.md
+      - LCT: algo/ds/LCT.md
     - 数学:
       - 斯特林数: algo/math/stirling.md #未完成
       - 反演入门: algo/math/inversion.md #未完成
@@ -245,5 +245,8 @@ nav:
       - 2024 1 月杂题: records/2024Jan.md
       - 2024 4 月杂题: records/2024Apr.md
       - 2024 5 月杂题: records/2024May.md
+      - 2024 6 月杂题: records/2024Jun.md
+      - 2024 7 月杂题 上: records/2024Jul_1.md
+      - 2024 7 月杂题 下: records/2024Jul_2.md
   - 关于: about.md
   - 友链: friendslinks.md
