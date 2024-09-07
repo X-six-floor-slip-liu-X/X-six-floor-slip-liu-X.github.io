@@ -151,7 +151,7 @@ nav:
     - 图论:
       - 网络流基础: algo/graph/flow.md
       - 最小生成树与 Kruskal 重构树: algo/graph/MST.md
-      - 双连通分量: algo/graph/BCC.md
+      - 双连通分量: algo/graph/bcc.md
       - 最短路: algo/graph/shortest_path.md
       - 2-SAT 问题: algo/graph/2_SAT.md
       - Dilworth 定理: algo/graph/Dilworth.md
@@ -249,5 +249,6 @@ nav:
       - 2024 7 月杂题 上: records/2024Jul_1.md
       - 2024 7 月杂题 下: records/2024Jul_2.md
       - 2024 8 月杂题: records/2024Aug.md
+      - 2024 9 月杂题: records/2024Sep.md
   - 关于: about.md
   - 友链: friendslinks.md
