@@ -1437,3 +1437,159 @@ signed main(){
 ```
 
 ///
+
+
+## P6271 [湖北省队互测2014] 一个人的数论
+
+[传送门](https://www.luogu.com.cn/problem/P6271)
+
+这道题让我重新认识莫反。
+
+> 题意
+
+- 给定 $n,d$，求小于 $n$ 且与 $n$ 互质的数的 $d$ 次方之和。
+- 形式化地，求 $G(n)=\sum_{i=1}^ni^d[\gcd(n,i)=1]$
+- 本题中 $n$ 以质因数分解 $\prod_{i=1}^w p_i^{a_i}$ 给出
+- $1\le p_i,a_i\le 10^9,1\le w\le 1000,1\le d\le 100$，保证 $p$ 是质数。
+
+> 题解
+
+之前 zmy 看到这道题的时候跟 XD 说，XD 没看数据范围说他会多项式做法，然后看了一眼数据范围说不会了。
+
+然后 lh 看到了直接秒了，这就是银牌爷的实力吗。
+
+看到 $[\gcd=1]$ 考虑直接套路化式子：
+
+$$
+\begin{aligned}
+G(n)&=\sum_{i=1}^ni^d[\gcd(n,i)=1]\\\\
+	&=\sum_{i=1}^ni^d\sum_{k\mid \gcd(n,i)}\mu(k)\\\\
+	&=\sum_{k\mid n}\mu(k)\sum_{k\mid i}^{i\le n}i^d\\\\
+	&=\sum_{k\mid n}\mu(k)k^d\sum_{i=1}^{\frac{n}{d}}i^d
+\end{aligned}
+$$
+
+根据经典结论，自然数幂的前缀和（即形如 $\sum_{i=1}^ni^k$ 的东西）是一个 $k+1$ 次多项式，于是我们可以把 $\sum_{i=1}^{\frac{n}{d}}i^d$ 写成 $\sum_{i=0}^{d+1}f_i(\frac{n}{d})^i$，其中 $f$ 待定，为多项式系数。
+
+$$
+\begin{aligned}
+&=\sum_{k\mid n}\mu(k)k^d\sum_{i=0}^{d+1}f_i(\frac{n}{d})^i\\\\
+&=\sum_{i=0}^{d+1}f_in^i\sum_{k\mid n}\mu(k)k^{d-i}
+\end{aligned}
+$$
+
+显然 $\mu(k)k^{d-i}$ 是一个积性函数，那么考虑把 $k$ 质因数分解为 $\prod_{j=1}^w p_j^{e_j}$，$p,w$ 即题目输入。
+
+$$
+\begin{aligned}
+&=\sum_{i=0}^{d+1}f_in^i\sum_{k\mid n}\prod_{j=1}^w\mu(p_j^{e_j})p_j^{e_j(d-i)}\\\\
+&=\sum_{i=0}^{d+1}f_in^i\prod_{j=1}^w\sum_{e=0}^{a_j}\mu(p_j^e)p_j^{e(d-i)}
+\end{aligned}
+$$
+
+这里的 $a_j$ 还是题上给的。这一步转化考虑乘法分配律即可。注意到 $\mu(p^e)$ 有非常好的性质，具体来说，它在 $e=0$ 时取 $1$，$e=1$ 时取 $-1$，$e>1$ 时取 $0$，那么其实 $e$ 只需要枚举到 $1$ 即可，而显然 $a_j$ 全都大于等于 $1$，则：
+
+$$
+\begin{aligned}
+&=\sum_{i=0}^{d+1}f_in^i\prod_{j=1}^w(1-p_j^{d-i})
+\end{aligned}
+$$
+
+那么我们只要求出 $f_i$ 就能暴力 $O(wd)$ 得到答案了。
+
+求 $f_i$ 考虑插值即可。具体来说，我们随便选 $d+2$（注意本题是 $d+1$ 次多项式）个点求出点值 $(x_i,y_i)$，则多项式 $F(x)=\sum_{i=1}^{d+2}y_i\prod_{j\ne i}\frac{x-x_j}{x_i-x_j}$，即 $d+2$ 个只有对应点值处取 $y$，其余地方取 $0$（相当于方程的根）的多项式相加，直接暴力是 $O(d^3)$ 的，随便过的，也可以预处理多项式 $\prod x-x_i$，每次除一个多项式乘一个常数即可做到 $O(d^2)$。
+
+复杂度 $O(d^3+wd)$。
+
+/// details | 参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(int i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(int i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int mod=1e9+7;
+int ksm(int a,int b){
+    int c=1;
+    while(b){
+        if(b&1) c=1ll*a*c%mod;
+        a=1ll*a*a%mod;
+        b>>=1;
+    }
+    return c;
+}
+int w,d,n,pw[1005][105],inv[1005],ans;
+int f[105],nw[105],nxt[105];
+void getf(int x,int y){
+    mem(nw,0);mem(nxt,0);
+    nw[0]=1;
+    int p=y;
+    forup(i,0,d+1){
+        if(i==x) continue;
+        p=1ll*p*ksm((x-i+mod)%mod,mod-2)%mod;
+        forup(j,0,d+1){
+            nxt[j]=1ll*(mod-i)*nw[j]%mod;
+            if(j) (nxt[j]+=nw[j-1])%=mod;
+        }
+        forup(j,0,d+1){
+            nw[j]=nxt[j];
+            nxt[j]=0;
+        }
+    }
+    forup(i,0,d+1){
+        (f[i]+=1ll*nw[i]*p%mod)%=mod;
+    }
+}
+signed main(){
+    d=read();w=read();
+    int y=0;
+    forup(i,0,d+1){
+        (y+=ksm(i,d))%=mod;
+        getf(i,y);
+    }
+    int n=1;
+    forup(i,1,w){
+        int p=read(),a=read();
+        n=1ll*n*ksm(p,a)%mod;
+        inv[i]=ksm(p,mod-2);
+        pw[i][0]=1;
+        forup(j,1,d+1){
+            pw[i][j]=1ll*pw[i][j-1]*p%mod;
+        }
+    }
+    int pn=1;
+    forup(i,0,d+1){
+        int val=1ll*f[i]*pn%mod;
+        pn=1ll*pn*n%mod;
+        forup(j,1,w){
+            if(i<=d) val=1ll*val*(mod+1-pw[j][d-i])%mod;
+            else val=1ll*val*(mod+1-inv[j])%mod;
+        }
+        (ans+=val)%=mod;
+    }
+    printf("%d\n",ans);
+}
+```
+
+///
