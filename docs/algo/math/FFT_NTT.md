@@ -117,15 +117,15 @@ a[0] | a[4] | a[2] | a[6] | a[1] | a[5] | a[3] | a[7]
 
 根据 $F(\omega_{n}^i)=\sum_{j=0}^{n-1}a_j\omega_n^{ij}$，容易发现这玩意是个线性变换。
 
-那么就能写成矩阵 $\mathbf{y}=\mathbf{a}\times \mathbf{V{\mathit{n}}}$，其中 $(\mathbf{V{\mathit{n}}})_{i,j}=\omega_{n}^{ij}$。
+那么就能写成矩阵 $\mathbf{y}=\mathbf{a}\times \mathbf{V{\mathit{n}}}$，其中 $(\mathbf{V{\mathit{n}}})\_{i,j}=\omega_{n}^{ij}$。
 
 然后用神秘方法就能得到 $\mathbf{V_{\mathit{n}}}^{-1}$，使得 $\mathbf{a}=\mathbf{y}\times\mathbf{V_{\mathit{n}}}^{-1}$。
 
-直接说结论 $(\mathbf{V_{\mathit{n}}}^{-1})_{i,j}=\frac{\omega_{n}^{-ij}}{n}$。 ~~因为我不会证~~
+直接说结论 $(\mathbf{V_{\mathit{n}}}^{-1})\_{i,j}=\frac{\omega_{n}^{-ij}}{n}$。 ~~因为我不会证~~
 
 以及容易发现，$\omega_{n}^{-1}=\cos(\frac{2\pi}{n})+\sin(-\frac{2\pi}{n})i$（考虑 $\omega_{n}^{-1}\times \omega_{n}=1$，模长相乘辐角相加）。然后其余部分和 FFT 完全相同，最后除以 $n$（注意这个 “$n$” 是前文所说 $2^k$）即可。
 
-/// [模板题](https://www.luogu.com.cn/problem/P3803)参考代码
+/// details | [模板题](https://www.luogu.com.cn/problem/P3803)参考代码
     open: False
     type: success
 
