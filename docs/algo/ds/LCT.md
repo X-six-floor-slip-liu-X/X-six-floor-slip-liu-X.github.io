@@ -46,47 +46,47 @@ splay 的实现基于 rotate 操作。rotate 操作类似于有旋 Treap 的 Zig
 
 1. $y$ 就是根：
 
-此时一次 rotate 就能旋到根：
+	此时一次 rotate 就能旋到根：
 
-图就是上面那张，就不再放一遍了。
+	图就是上面那张，就不再放一遍了。
 
-这种操作叫 Zig/Zag。
+	这种操作叫 Zig/Zag。
 
 2. $y$ 和 $x$ 是父亲的同一个儿子
 
-就是这种情况：
+	就是这种情况：
 
-![图示 2](../../img/LCT_2.png)
+	![图示 2](../../img/LCT_2.png)
 
-这种情况先 `rotate(y)` 再 `rotate(x)`，据说在势能分析下很平衡。
+	这种情况先 `rotate(y)` 再 `rotate(x)`，据说在势能分析下很平衡。
 
-这种操作叫 Zig-Zig/Zag-Zag。
+	这种操作叫 Zig-Zig/Zag-Zag。
 
 3. $y$ 和 $x$ 是父亲的不同儿子
 
-这种情况：
+	这种情况：
 
-![图示 3](../../img/LCT_3.png)
+	![图示 3](../../img/LCT_3.png)
 
-这种情况 `rotate(x)` 两次即可，看起来就很平衡。
+	这种情况 `rotate(x)` 两次即可，看起来就很平衡。
 
-这种操作叫 Zig-Zag/Zag-Zig。
+	这种操作叫 Zig-Zag/Zag-Zig。
 
-代码实现很简单：
+	代码实现很简单：
 
-/// details | 参考代码
-    open: False
-    type: success
+	/// details | 参考代码
+		open: False
+		type: success
 
-```cpp
-	void Splay(int x){
-		for(int f=fa[x];f=fa[x],f;Rotate(x)){
-			if(fa[f]) Rotate(get(x)==get(f)?f:x);
+	```cpp
+		void Splay(int x){
+			for(int f=fa[x];f=fa[x],f;Rotate(x)){
+				if(fa[f]) Rotate(get(x)==get(f)?f:x);
+			}
 		}
-	}
-```
+	```
 
-///
+	///
 
 ### 其余操作
 
