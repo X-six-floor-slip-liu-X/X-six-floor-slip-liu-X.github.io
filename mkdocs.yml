@@ -150,7 +150,7 @@ nav:
       - 生成函数入门: algo/math/generating_function.md
       - FFT 与 NTT: algo/math/FFT_NTT.md #未完成
       - 多项式基础: algo/math/polynomial.md
-      - 初探线性代数: algo/math/linear_algebra.md
+      - 初探线性代数: algo/math/linear_algebra.md #未完成
     - 图论:
       - 网络流基础: algo/graph/flow.md
       - 最小生成树与 Kruskal 重构树: algo/graph/MST.md
@@ -253,5 +253,6 @@ nav:
       - 2024 7 月杂题 下: records/2024Jul_2.md
       - 2024 8 月杂题: records/2024Aug.md
       - 2024 9 月杂题: records/2024Sep.md
+      - 2024 10 月杂题: records/2024Oct.md
   - 关于: about.md
   - 友链: friendslinks.md
