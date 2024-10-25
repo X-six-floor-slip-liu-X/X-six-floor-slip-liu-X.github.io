@@ -151,6 +151,7 @@ nav:
       - FFT 与 NTT: algo/math/FFT_NTT.md #未完成
       - 多项式基础: algo/math/polynomial.md
       - 初探线性代数: algo/math/linear_algebra.md #未完成
+      - 快速莫比乌斯变换和快速沃尔什变换: algo/math/FMT_FWT.md
     - 图论:
       - 网络流基础: algo/graph/flow.md
       - 最小生成树与 Kruskal 重构树: algo/graph/MST.md
