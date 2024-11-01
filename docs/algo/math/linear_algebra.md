@@ -868,6 +868,8 @@ $$
 
 注意到对于一个线性空间 $(V,+,\cdot,\mathbb{P})$ 中的一个向量组 $a_n$，$\begin{Bmatrix}x|x=\sum_{i=1}^nk_ia_i\end{Bmatrix}$（其中 $k_i$ 取遍 $\mathbb{P}$）也构成一个线性空间，称为由向量组 $a_n$ **张成**的线性空间（或**线性包**），记作 $\mathrm{span}\begin{Bmatrix}a_n\end{Bmatrix}$。
 
+这 $n$ 个向量 $a$ 不一定线性无关。
+
 #### 线性无关组，秩
 
 容易想到，线性相关可以理解为“多余”，意思是说去掉某个向量这个向量组仍能表出原先能表出的所有向量（等价于这个向量能被其他向量表出），那么我们去掉这些向量剩下的就是这个向量组的极大线性无关组。
@@ -889,7 +891,7 @@ $$
 
     类似地，我们定义了**矩阵的秩**，即将矩阵看作若干行向量（容易发现其实看作列向量得到的值是一样的），得到的向量组的秩。
 
-2. 若向量组 $a_n$ 能被向量组 $b_m$ 线性表出，且 $b_m$ 也能被 $a_n$ 表出，则称两向量组**等价**，记作 $a_n\cong b_m$（`\cong`）。容易发现两向量组等价当且仅当两向量组能表出的向量全集（即张成空间）相同。
+2. 若向量组 $a_n$ 能被向量组 $b_m$ 线性表出，且 $b_m$ 也能被 $a_n$ 表出，则称两向量组**等价**，记作 $a_n\cong b_m$（`\cong`）。容易发现两向量组等价当且仅当两向量组能表出的向量全集相同（即张成空间 $\mathrm{span}\begin{Bmatrix}a_n\end{Bmatrix}=\mathrm{span}\begin{Bmatrix}b_m\end{Bmatrix}$）。
 
     显然向量组的等价比矩阵的等价更强，不仅要求秩相同，还要求张成空间完全一样。因此两等价的向量组并在一起秩不能发生改变
 
@@ -897,7 +899,7 @@ $$
 
 - 若向量组 $a_n$ 能被向量组 $b_m$ 表出，则 $\mathrm{rank}\begin{Bmatrix}a_n\end{Bmatrix}\le \mathrm{rank}\begin{Bmatrix}b_m\end{Bmatrix}$
 
-    设 $c_p$ 为 $b_m$ 的极大线性无关组，考虑把 $a_n$ 中的向量全部写成 $\sum_{i=1}^pk_ic_i$ 的形式（因为 $a_n$ 能被 $b_m$ 表出，所以这是必定可行的），那么选出 $a_n$ 中 $p$ 个向量使其能表出其它向量是简单的，高斯消元即可构造。
+    设 $c_p$ 为 $b_m$ 的极大线性无关组，考虑把 $a_n$ 中的向量全部写成 $\sum_{i=1}^pk_ic_i$ 的形式（因为 $a_n$ 能被 $b_m$ 表出，所以这是必定可行的），那么选出 $a_n$ 中 $p$ 个向量使其能表出其它向量是简单的，高斯消元即可构造。所以向量组 $a_n$ 的秩只能更小。
 
 - 向量组线性无关当且仅当其秩等于其大小。
 
@@ -919,4 +921,274 @@ $$
 
     因为极大无关组相等。
 
-#### 留坑待补 线性基
+#### 线性子空间
+
+对于线性空间 $(V,+,\cdot,\mathbb{P})$，若代数系统 $(V_1,+,\cdot,\mathbb{P})$ 满足：
+
+- $V_1\ne \varnothing$
+- $V_1\subseteq V$
+- $V_1$ 关于 $+,\cdot$ 构成 $\mathbb{P}$ 上的线性空间。
+
+则称 $V_1$ 是 $V$ 的线性子空间，记作 $V_1\le V$。
+
+任何线性空间都含有两个平凡子空间：它自己 $V$ 和零子空间（只含 $\mathbf{0}$ 向量）。
+
+若 $V_1$ 是 $V$ 的真子集，则称 $V_1$ 是 $V$ 的真子空间，记作 $V_1 < V$。
+
+容易发现线性空间 $V$ 的非空子集 $V_1$ 是线性子空间当且仅当线性运算在 $V_1$ 上封闭。
+
+### 线性基
+
+线性基是线性空间的一组基，是研究线性空间的重要工具。
+
+线性基的和立体几何中基向量类似，更具体地说，因为三维欧氏空间是特殊的线性空间，三维欧氏空间的基向量在线性空间中就被推广为了线性基。
+
+OI 中有关线性基的应用一般只涉及两类线性空间：$n$ 维实线性空间 $\mathbf{R}^n$ 和 $n$ 维布尔域线性空间 $\mathbf{Z_{\mathrm{2}}}^n$，后者的线性基就是我们熟悉的异或线性基了。
+
+#### 定义
+
+称线性空间 $V$ 的一个极大线性无关组为 $V$ 的一组 Hamel 基或线性基，简称**基**。
+
+规定线性空间 $\begin{Bmatrix}\mathbf{0}\end{Bmatrix}$ 的基为空集。
+
+显然任意线性空间均存在线性基，根据前文可知任意线性基（极大线性无关组）大小相等，我们定义线性空间 $V$ 的**维数**为线性基的元素个数，记作 $\dim V$。
+
+在 OI 中，我们一般将 $n$ 维实线性空间 $\mathbf{R}^n$ 下的线性基称为**实数线性基**（并不常用），$n$ 维布尔域线性空间 $\mathbf{Z_{\mathrm{2}}}^n$ 下的线性基称为**异或线性基**（这个比较常用，用于处理各种异或信息）。
+
+/// details | 关于 $n$ 维布尔域线性空间。
+    open: False
+    type: note
+
+对于集合 $\mathbf{Z_{\mathrm{2}}}$（即值域为 $[0,1]$ 的整数集合），我们定义加减法为异或，乘法为与，显然这构成一个域。
+
+可以证明代数系统 $(\mathbf{Z}_2^n,+,\cdot,\mathbf{Z_{\mathrm{2}}})$ 是线性空间，其中：
+
+$$
+\begin{aligned}
+(a_1,\dots,a_n)+(b_1,\dots,b_n)&:=(a_1\oplus b_1,\dots,a_n\oplus b_n)\\\\
+k\cdot(a_1,\dots,a_n)&:=(k\And a_1,\dots,k\And a_n)
+\end{aligned}
+$$
+
+其中 $\oplus$ 是异或，$\And$ 是与。即向量加是逐个异或，数乘是逐个与。
+
+///
+
+#### 性质
+
+对于有限维线性空间 $V$，设其维数为 $n$，则有：
+
+- $V$ 中任意 $n+1$ 个向量线性相关。
+- $V$ 中任意 $n$ 个线性无关的向量均为 $V$ 的线性基。
+- 若 $V$ 中任意向量均能被线性组 $a_n$ 线性表出，则 $a_n$ 是 $V$ 的一组线性基。
+
+    证明：考虑任取一组线性基 $b_n$，根据条件，$b_n$ 中的所有元素都能被 $a_n$ 线性表出，则 $\mathrm{rank}(b_n)=n\le \mathrm{rank}(a_n)$，又因为 $a_n$ 是 $V$ 的子集，所以 $\mathrm{rank}(a_n)\le \mathrm{rank}(V)=n$，则 $\mathrm{rank}(a_n)=n$，故 $a_n$ 也是 $V$ 的一组极大线性无关组，即线性基。
+
+- $V$ 中的任意线性无关组都能通过插入若干向量变成 $V$ 的一组线性基。
+
+#### 构造方法
+
+我们的问题是对于给定的向量组 $X=\begin{Bmatrix}x_1,x_2,\dots x_n\end{Bmatrix}$，求出其张成空间的一组线性基。其它问题可以在这个问题的代码上适当修改解决。
+
+以异或线性基为例（实数线性基其实差不多，注意一下哪里加哪里减即可，与异或区分开）。常用方法是增量法和高斯消元法。
+
+高斯消元法比较显然，将其看作一个方程组即可，下面着重介绍增量法。
+
+增量法核心思想是每次将向量 $x_i$ 插入 $\mathrm{span}\begin{Bmatrix}x_1,x_2,\dots x_{i-1}\end{Bmatrix}$ 的线性基内。
+
+类似于高斯消元，我们对向量组的每一位维护一个代表元 $b_j$，每次尝试将 $x_i$ 插入。
+
+具体来说，设我们插入的向量是 $p$，从高到低枚举 $p$ 的每一位 $j$，若 $p$ 的这一位为 $1$，并且这一位没有代表元，那么直接 $b_j\gets p$，否则我们通过一些 $p$ 和 $b_j$ 的线性变换使得 $p$ 的这一位变为 $0$（注意到 $b_j$ 的更高位均为 $0$，这就相当于高斯消元把矩阵消成上三角的过程），然后继续往低枚举，若 $p$ 变为 $\mathbf{0}$ 了仍未成功插入，说明 $p$ 与线性基线性相关。显然单次插入的复杂度是 $\dim \mathrm{span}(X)$。
+
+#### 常见问题
+
+以下是 OI 中用线性基解决的常见问题：
+
+- 求给定向量组的秩。
+
+    显然把线性基求出来就搞定了。
+
+- 对给定的向量组，找到一组极大线性无关组。
+
+    记录一下有哪些向量成功插入线性基即可。
+
+- 判断某向量能否被某向量组线性表出。
+
+    求出该向量组的线性基即可。
+
+- 求某集合异或可得的最大值。
+
+    求出该集合的异或线性基，然后从高到低位确定这一位能否为 $1$ 即可。
+
+    [P3812 【模板】线性基](https://www.luogu.com.cn/problem/P3812)
+
+- 求某集合异或可得的最小值。
+
+    就是最小的代表元。
+
+- 求某集合异或可得的第 $k$ 小/大值。
+
+    注意到某异或线性基张成空间的元素个数是有限的，即 $2^{|B|}$（或者 $2^{|B|}-1$，原集合线性无关且题目要求不计空集时无法得到 $\mathbf{0}$ 向量），所以这其实是同一个问题。
+
+    将线性基消成行最简形矩阵（在增量法可以考虑插入某代表元时将对应位上的 $1$ 都去掉），容易发现第 $k$ 小就是将 $k$ 化为二进制后，$1$ 的位对应的代表元异或和，证明考虑从高到低按位贪心。
+
+- 线性基合并
+
+    注意到线性基中只有 $O(k)$ 个元素（其中 $k$ 是维数，在常见的异或问题中是 $\log V$），暴力将一个线性基插入另一个是 $O(k^2)$ 的。
+
+- 最大权线性基
+
+    即每个向量还带一个权值，求出权值和最大的线性无关组。
+
+    我们对每一位记录代表元的权值 $h$，考虑在增量法的过程中贪心，当出现“$p$ 的这一位已经有代表元”的情况时，考虑 $p$ 和原先这一位的代表元 $a$，若 $h_p\le h_a$ 就直接拿 $p \oplus a$ 往下消，否则 $a\gets p$，然后拿 $a \oplus p$ 往下消。
+
+    考虑这为什么对，注意到 $p$ 无法插入线性基当且仅当它和线性基线性相关，即存在集合 $S$ 满足 $\bigoplus_{i\in S} b_i=p$，那么我们将 $S$ 中的任意 $b_i$ 替换为 $p$ 后得到的新向量组和原来的向量组是等价的，因为张成空间不变。显然若 $p$ 能直接插入上述算法显然正确，否则上述算法则会将 $S\cup\begin{Bmatrix}p\end{Bmatrix}$ 中的最小值删掉。显然正确。
+
+- 带删除线性基。
+
+    有简单单次修改 $O(k^2\log n)$ 线性做法，线段树加线性基合并即可。
+
+    还有 $O(k)-O(k^2)$ 离线做法。我们将线性基的删除时间视为权值，维护最大权线性基。查询时把线性基内没被删掉的重新拿出来 $O(k^2)$ 求线性基。（感觉这个在合适的题目能做到更优的复杂度吧）
+    
+    还可以 $O(k\log n)$ 线段树分治。
+
+#### 例题
+
+
+//// details | CF1100F Ivan and Burgers
+    open: False
+    type: success
+
+[传送门](https://www.luogu.com.cn/problem/CF1100F)
+
+> 题意
+
+- 给定长度为 $n$ 的序列 $a_i$，$q$ 次询问，每次询问从一个区间 $a_i$ 选一个子集异或起来能得到的最大值。
+- $1\le n\le 5\times 10^5,0\le a_i\le 10^6$
+
+> 题解
+
+异或最大值，容易想到线性基。
+
+一个想法是离线下来，对每个右端点暴力扫左端点，复杂度 $O(n^2\log a_i)$。
+
+考虑线性基只需要加入每一位最右侧的可行代表元，后面的必定无法加入，即维护下标的最大权线性基，于是就能优化到 $O(n\log^2 a_i)$。
+
+/// details | 参考代码
+    open: False
+    type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(int i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(int i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void();
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=5e5+5,inf=0x3f3f3f3f;
+int n,m,c[N],ans[N];
+vector<pii> q[N];
+vector<int> vec;
+struct linear_basis{
+    int b[20],h[20];
+    void insert(int p,int v){
+        fordown(i,19,0){
+            if((p>>i)&1){
+                if(!b[i]){
+                    b[i]=p;
+                    h[i]=v;
+                    break;
+                }else{
+                    if(v>h[i]){
+                        swap(p,b[i]);
+                        swap(v,h[i]);
+                    }
+                    p^=b[i];
+                    if(!p) break;                    
+                }
+            }
+        }
+    }
+    void work(){
+        vec.clear();
+        forup(i,0,19){
+            if(b[i]) vec.push_back(h[i]);
+        }
+        sort(vec.begin(),vec.end(),greater<int>());
+    }
+}t1;
+struct linear_basis_2{
+    int b[20];
+    void insert(int p){
+        fordown(i,19,0){
+            if((p>>i)&1){
+                if(!b[i]){
+                    b[i]=p;
+                    break;
+                }else{
+                    p^=b[i];
+                    if(!p) break;
+                }
+            }
+        }
+    }
+    int Ask(){
+        int res=0;
+        fordown(i,19,0){
+            res=max(res,res^b[i]);
+        }
+        return res;
+    }
+}t2;
+signed main(){
+    n=read();
+    forup(i,1,n){
+        c[i]=read();
+    }
+    m=read();
+    forup(i,1,m){
+        int l=read(),r=read();
+        q[r].push_back(mkp(l,i));
+    }
+    forup(i,1,n){
+        t1.insert(c[i],i);
+        t1.work();
+        mem(t2.b,0);
+        sort(q[i].begin(),q[i].end(),greater<pii>());
+        int pl=0;
+        for(auto j:q[i]){
+            while(pl<vec.size()&&vec[pl]>=j.fi){
+                t2.insert(c[vec[pl]]);
+                ++pl;
+            }
+            ans[j.se]=t2.Ask();
+        }
+    }
+    forup(i,1,m){
+        printf("%d\n",ans[i]);
+    }
+}
+```
+
+///
+
+////
+
+## 矩阵树定理 留坑待补
