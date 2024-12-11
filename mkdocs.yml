@@ -143,6 +143,7 @@ nav:
       - 猫树: algo/ds/Cat_Tree.md
       - 李超线段树: algo/ds/LiChaoTree.md
       - LCT: algo/ds/LCT.md
+      - d-D Tree: algo/ds/kD_tree.md
     - 数学:
       - 斯特林数: algo/math/stirling.md #未完成
       - 反演入门: algo/math/inversion.md #未完成
@@ -257,5 +258,6 @@ nav:
       - 2024 9 月杂题: records/2024Sep.md
       - 2024 10 月杂题: records/2024Oct.md
       - 2024 11 月杂题: records/2024Nov.md
+      - 2024 12 月杂题: records/2024Dec.md
   - 关于: about.md
   - 友链: friendslinks.md

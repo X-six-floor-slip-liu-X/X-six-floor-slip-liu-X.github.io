@@ -26,13 +26,13 @@ $a\mid b$ 表示存在整数 $k$ 使得 $ak=b$。
 
 众所周知，任意一元 $n$ 次方程必有 $n$ 个根。只是初中范围（以及高中“复数”这一章以外）内只研究实根，而在遇到 $\sqrt{-a}$ 之类的东西都会直接省去。实际上这是能产生复数根的。
 
-考虑 $x^n=1$ 这个方程。由于复数的运算法则（模长相乘，辐角相加），显然这 $n$ 个解恰好把复平面单位圆均分成 $n$ 份（即辐角分别为 $\frac{2k\pi}{n},k\in[0,n-1]$）。我们称 $x^n=1$ 的根为 $n$ 次单位根，记除去 $1$ 之外辐角最小的 $n$ 次单位根为 $\omega_n$（`\omega_n`），显然其它单位根就是 $\omega_n^i$
+考虑 $x^n=1$ 这个方程。由于复数的运算法则（模长相乘，辐角相加），显然这 $n$ 个解恰好把复平面单位圆均分成 $n$ 份（即辐角分别为 $\frac{2k\pi}{n},k\in[0,n-1]$）。我们称 $x^n=1$ 的根为 $n$ 次单位根，记除去 $1$ 之外辐角最小的 $n$ 次单位根为 $\omega_n$（`\omega_n`），显然其它单位根就是 $\omega_n^i$。
 
 单位根有三个比较显然的引理：
 
 1. 消去引理：$\omega_{kn}^{km}=\omega_n^m$，根据单位根几何意义显然。
 2. 折半引理：$\left(\omega_{n}^{k+\frac{n}{2}}\right)^2=\left(\omega_{n}^k\right)^2=\omega_{n}^{2k}=\omega_{\frac{n}{2}}^k$，这个只在 $n$ 为偶数时成立，带消去引理即可。
-3. 求和引理：$\sum_{i=0}^{n-1} \left(\omega_n^k\right)^i = 0$，这玩意显然就等于 $\sum_{i=0}^{n-1} \omega_n^i$，是一个等比数列求和，答案即为 $\frac{\omega_n^n-1}{\omega_n^1-1}=\frac{1-1}{\omega_n^1-1}==0$。
+3. 求和引理：$\sum_{i=0}^{n-1} \left(\omega_n^k\right)^i = 0$，这玩意显然就等于 $\sum_{i=0}^{n-1} \omega_n^i$，是一个等比数列求和，答案即为 $\frac{\omega_n^n-1}{\omega_n^1-1}=\frac{1-1}{\omega_n^1-1}=0$。
 
 另外根据三角函数基础，显然 $\omega_n=\cos(\frac{2\pi}{n})+\sin(\frac{2\pi}{n})i$。
 
@@ -117,7 +117,7 @@ a[0] | a[4] | a[2] | a[6] | a[1] | a[5] | a[3] | a[7]
 
 根据 $F(\omega_{n}^i)=\sum_{j=0}^{n-1}a_j\omega_n^{ij}$，容易发现这玩意是个线性变换。
 
-那么就能写成矩阵 $\mathbf{y}=\mathbf{a}\times \mathbf{V{\mathit{n}}}$，其中 $(\mathbf{V{\mathit{n}}})\_{i,j}=\omega_{n}^{ij}$。
+那么就能写成矩阵 $\mathbf{y}=\mathbf{a}\times \mathbf{V_{\mathit{n}}}$，其中 $(\mathbf{V_{\mathit{n}}})\_{i,j}=\omega_{n}^{ij}$。
 
 然后用神秘方法就能得到 $\mathbf{V_{\mathit{n}}}^{-1}$，使得 $\mathbf{a}=\mathbf{y}\times\mathbf{V_{\mathit{n}}}^{-1}$。
 
@@ -284,3 +284,128 @@ void trans(int *f,int type){
 ## 任意模数 NTT
 
 感觉没什么用就先不写了，留坑待补。
+
+## 分治 FFT/NTT（半在线卷积）
+
+还有另一种算法也叫分治 NTT，把若干个多项式乘在一起时每次把最短的两个拉出来 NTT，那个很简单就不说了。
+
+有些时候我们需要计算形如下式的函数：
+
+$$
+f(n)=\begin{cases}
+c&,n=0\\\\
+\sum_{j=1}^if(i-j)g(j)&,n\ge 1
+\end{cases}
+$$
+
+其中 $c$ 是常数。
+
+这时候就不能直接将 $f,g$ 进行卷积了，因为 $f$ 还没有求出来。
+
+这时候可以类似 cdq 分治优化 DP，对序列进行分治。按分治树的中序遍历，每次统计左边对右边的贡献。
+
+具体可以看代码。
+
+/// details | [模板题](https://www.luogu.com.cn/problem/P4721)参考代码
+	open: False
+	type: success
+
+```cpp
+#include<bits/stdc++.h>
+#define forup(i,s,e) for(int i=(s),E123123123=(e);i<=E123123123;++i)
+#define fordown(i,s,e) for(int i=(s),E123123123=(e);i>=E123123123;--i)
+#define mem(a,b) memset(a,b,sizeof(a))
+#ifdef DEBUG
+#define msg(args...) fprintf(stderr,args)
+#else
+#define msg(...) void()
+#endif
+using namespace std;
+using i64=long long;
+using pii=pair<int,int>;
+#define fi first
+#define se second
+#define mkp make_pair
+#define gc getchar()
+int read(){
+    int x=0,f=1;char c;
+    while(!isdigit(c=gc)) if(c=='-') f=-1;
+    while(isdigit(c)){x=(x<<1)+(x<<3)+(c^48);c=gc;}
+    return x*f;
+}
+#undef gc
+const int N=1<<18|10,mod=998244353,inv3=332748118;
+int ksm(int a,int b){
+    int c=1;
+    while(b){
+        if(b&1) c=1ll*a*c%mod;
+        a=1ll*a*a%mod;
+        b>>=1;
+    }
+    return c;
+}
+int n,m,g[N],f[N],h[N];
+int rev[N];
+void NTT(int *f,int n,int type){
+    int w=31^__builtin_clz(n);
+    forup(i,0,n-1){
+        rev[i]=(rev[i>>1]>>1)|((i&1)<<(w-1));
+        if(i<rev[i]) swap(f[i],f[rev[i]]);
+    }
+    for(int len=1;len<n;len<<=1){
+        int wn=ksm(type==1?3:inv3,(mod-1)/(len<<1));
+        for(int i=0;i<n;i+=(len<<1)){
+            int nw=1;
+            forup(j,0,len-1){
+                int x=f[i+j],y=1ll*nw*f[i+len+j]%mod;
+                f[i+j]=(x+y)%mod;
+                f[i+len+j]=(x+mod-y)%mod;
+                nw=1ll*nw*wn%mod;
+            }
+        }
+    }
+    if(type==-1){
+        int inv=ksm(n,mod-2);
+        forup(i,0,n-1) f[i]=1ll*f[i]*inv%mod;
+    }
+}
+int a[N],b[N],c[N];
+void solve(int l,int r){
+    if(l==r) return;
+    int mid=(l+r)>>1;
+    solve(l,mid);
+    int len=(r-l+1)<<1;
+    forup(i,0,len){
+        a[i]=b[i]=c[i]=0;
+    }
+    forup(i,l,r){
+        if(i<=mid) a[i-l]=f[i];
+        b[i-l]=g[i-l];
+    }
+    NTT(a,len,1);NTT(b,len,1);
+    forup(i,0,len-1){
+        c[i]=1ll*a[i]*b[i]%mod;
+    }
+    NTT(c,len,-1);
+    forup(i,mid+1,r){
+        (f[i]+=c[i-l])%=mod;
+    }
+    solve(mid+1,r);
+}
+signed main(){
+    n=read();
+    forup(i,1,n-1){
+        g[i]=read();
+    }
+    m=n;
+    n=1;
+    while(n<m){n<<=1;}
+    f[0]=1;
+    solve(0,n-1);
+    forup(i,0,m-1){
+        printf("%d ",f[i]);
+    }puts("");
+}
+```
+
+///
