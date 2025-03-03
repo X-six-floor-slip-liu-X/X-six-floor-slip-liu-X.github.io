@@ -1,0 +1,5153 @@
+<!-- Fix MathJax rendering on iOS Safari due to rendering long numbers as phone numbers. -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+	
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="这是一个中学 OIer 的博客，他会在这里分享一些算法和题解，喜欢可以进来贴贴。">
+      
+      
+        <meta name="author" content="六楼溜刘 aka six-floor-slip-liu">
+      
+      
+        <link rel="canonical" href="https://x-six-floor-slip-liu-x.github.io/algo/math/generating_function/">
+      
+      
+        <link rel="prev" href="../sieve/">
+      
+      
+        <link rel="next" href="../FFT_NTT/">
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+	<meta name="format-detection" content="telephone=no">
+	<script>
+		MathJax = {
+		  tex: {
+			inlineMath: [['$', '$'], ['\\(', '\\)']]
+		  },
+		  svg: {
+			fontCache: 'global'
+		  }
+		};
+	</script>
+
+    
+      
+        <title>生成函数入门 - 六楼溜刘的小窝</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.75 1.75 0 0 1 1 7.775m1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25m13.274 9.537zl-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074M4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5M4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13M6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75M8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.5 4.5 0 0 1-.563-1.191 3.84 3.84 0 0 1-.05-2.063 4.65 4.65 0 0 1-2.025-.293.75.75 0 0 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.747.747 0 0 1 1.06 0 .75.75 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4 2.4 0 0 1-.507-.441 3.1 3.1 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19.01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7 5.527c-.814-.68-1.75-1.462-2.692-2.619a3.7 3.7 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 .018-1.042.75.75 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13M6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.76 2.76 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6 6 0 0 0-.26.16 1 1 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1 1 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.61.61 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1 1 0 0 0-.34.398M9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0M9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343za8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746m1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275M6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.75.75 0 0 1 .215-.734L6.94 8 4.97 6.03a.75.75 0 0 1 .018-1.042.75.75 0 0 1 1.042-.018"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.25 1.25 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005 0-.009.004"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.5 3.5 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327q0 .15-.025.292c.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5q-.002.615-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A5 5 0 0 1 8 16a5 5 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5 5 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.7 1.7 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06m.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.17.17 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5m4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5m0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5M2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0"/></svg>');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="六楼溜刘的小窝" class="md-header__button md-logo" aria-label="六楼溜刘的小窝" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="m57.7 193 9.4 16.4c8.3 14.5 21.9 25.2 38 29.8l57.9 16.5c17.2 4.9 29 20.6 29 38.5v39.9c0 11 6.2 21 16 25.9s16 14.9 16 25.9v39c0 15.6 14.9 26.9 29.9 22.6 16.1-4.6 28.6-17.5 32.7-33.8l2.8-11.2c4.2-16.9 15.2-31.4 30.3-40l8.1-4.6c15-8.5 24.2-24.5 24.2-41.7v-8.3c0-12.7-5.1-24.9-14.1-33.9l-3.9-3.9c-9-9-21.2-14.1-33.9-14.1H257c-11.1 0-22.1-2.9-31.8-8.4l-34.5-19.7c-4.3-2.5-7.6-6.5-9.2-11.2-3.2-9.6 1.1-20 10.2-24.5l5.9-3c6.6-3.3 14.3-3.9 21.3-1.5l23.2 7.7c8.2 2.7 17.2-.4 21.9-7.5 4.7-7 4.2-16.3-1.2-22.8l-13.6-16.3c-10-12-9.9-29.5.3-41.3l15.7-18.3c8.8-10.3 10.2-25 3.5-36.7l-2.4-4.2c-3.5-.2-6.9-.3-10.4-.3-92.8 0-171.5 60.9-198.2 145M464 256c0-36.8-9.6-71.4-26.4-101.5L412 164.8c-15.7 6.3-23.8 23.8-18.5 39.8l16.9 50.7c3.5 10.4 12 18.3 22.6 20.9l29.1 7.3c1.2-9 1.8-18.2 1.8-27.5zM0 256a256 256 0 1 1 512 0 256 256 0 1 1-512 0"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            六楼溜刘的小窝
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              生成函数入门
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="cyan" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/X-six-floor-slip-liu-X/X-six-floor-slip-liu-X.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    X-six-floor-slip-liu-X/六楼溜刘的小窝
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../misc/about/" class="md-tabs__link">
+          
+  
+  杂项
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../about/" class="md-tabs__link">
+          
+  
+  算法笔记
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../solution/about/" class="md-tabs__link">
+          
+  
+  题解
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../records/about/" class="md-tabs__link">
+          
+  
+  记录
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+    
+  
+  关于
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../friendslinks/" class="md-tabs__link">
+        
+  
+    
+  
+  友链
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="六楼溜刘的小窝" class="md-nav__button md-logo" aria-label="六楼溜刘的小窝" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="m57.7 193 9.4 16.4c8.3 14.5 21.9 25.2 38 29.8l57.9 16.5c17.2 4.9 29 20.6 29 38.5v39.9c0 11 6.2 21 16 25.9s16 14.9 16 25.9v39c0 15.6 14.9 26.9 29.9 22.6 16.1-4.6 28.6-17.5 32.7-33.8l2.8-11.2c4.2-16.9 15.2-31.4 30.3-40l8.1-4.6c15-8.5 24.2-24.5 24.2-41.7v-8.3c0-12.7-5.1-24.9-14.1-33.9l-3.9-3.9c-9-9-21.2-14.1-33.9-14.1H257c-11.1 0-22.1-2.9-31.8-8.4l-34.5-19.7c-4.3-2.5-7.6-6.5-9.2-11.2-3.2-9.6 1.1-20 10.2-24.5l5.9-3c6.6-3.3 14.3-3.9 21.3-1.5l23.2 7.7c8.2 2.7 17.2-.4 21.9-7.5 4.7-7 4.2-16.3-1.2-22.8l-13.6-16.3c-10-12-9.9-29.5.3-41.3l15.7-18.3c8.8-10.3 10.2-25 3.5-36.7l-2.4-4.2c-3.5-.2-6.9-.3-10.4-.3-92.8 0-171.5 60.9-198.2 145M464 256c0-36.8-9.6-71.4-26.4-101.5L412 164.8c-15.7 6.3-23.8 23.8-18.5 39.8l16.9 50.7c3.5 10.4 12 18.3 22.6 20.9l29.1 7.3c1.2-9 1.8-18.2 1.8-27.5zM0 256a256 256 0 1 1 512 0 256 256 0 1 1-512 0"/></svg>
+
+    </a>
+    六楼溜刘的小窝
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/X-six-floor-slip-liu-X/X-six-floor-slip-liu-X.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    X-six-floor-slip-liu-X/六楼溜刘的小窝
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    杂项
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            杂项
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    关于
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/new/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    新博客建立啦
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/try_md/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MarkDown 常用语法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/how_to_get_0pts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    挂分秘籍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    游记
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            游记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2023NOIP_taining/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023CW NOIP 集训
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2023NanJing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023 南京集训
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/CSPS2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CSPS2023
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2024XDFZ/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 重庆集训
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/CSPS2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CSPS2024
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/NOIP2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NOIP2024
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/WC2025/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WC2024
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2025CQBZ/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2025 CQBZ 集训
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/SCOI2025/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SCOI2025
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    P
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            P
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/2024P/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 批话合集
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    算法笔记
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            算法笔记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    关于
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    动态规划
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            动态规划
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dp/SOSDP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    高维前缀和/SOSDP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数据结构
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            数据结构
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds/SegT_BIT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线段树、BIT 与 ST 表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds/Treap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    平衡树入门与 Treap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds/wenyi_FHQ_Treap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FHQ 文艺平衡树
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds/SegT_divide_and_conquer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线段树分治
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds/Cat_Tree/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    猫树
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds/LiChaoTree/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    李超线段树
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds/LCT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LCT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds/kD_tree/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    k-D Tree
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数学
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            数学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stirling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    斯特林数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inversion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    反演入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mobius_inversion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    莫比乌斯反演
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sieve/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    筛法入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    生成函数入门
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    生成函数入门
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      符号与约定
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ogf" class="md-nav__link">
+    <span class="md-ellipsis">
+      普通生成函数（OGF）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="普通生成函数（OGF）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      封闭形式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      运算规律
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      例题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#egf" class="md-nav__link">
+    <span class="md-ellipsis">
+      指数生成函数（EGF）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指数生成函数（EGF）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      运算规律
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      麦克劳林级数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#egf_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      常用 EGF
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      组合意义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      例题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FFT_NTT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FFT 与 NTT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../polynomial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    多项式基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linear_algebra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    初探线性代数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FMT_FWT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    快速莫比乌斯变换和快速沃尔什变换
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    图论
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            图论
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph/flow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    网络流基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph/MST/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    最小生成树与 Kruskal 重构树
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph/bcc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    双连通分量
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph/shortest_path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    最短路
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph/2_SAT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2-SAT 问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph/Dilworth/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dilworth 定理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    字符串
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            字符串
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../string/string_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    字符串基础
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../string/kmp_and_ac_automaton/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    KMP 算法与 AC 自动机
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../string/exKMP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    扩展 KMP 算法 (Z 函数)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../string/SA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    后缀数组
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../string/SAM/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    后缀自动机
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../string/Manacher/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manacher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    杂项
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            杂项
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/Barrett/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Barrett 取模优化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/wqs_binary_search/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    wqs 二分
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    题解
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            题解
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    关于
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    2023 年
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            2023 年
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_1" id="__nav_4_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    一月
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            一月
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230113D_D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230113D 染色
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_2" id="__nav_4_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    四月
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            四月
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230407C_C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230407C 进化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230411C_C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230411C 逆序对
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230418C_C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230418C 金条争夺
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230420C_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230420C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230426C_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230426C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230428C_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230428C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230430C_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230430C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3" id="__nav_4_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    五月
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            五月
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230524C_D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230524C 数数题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_4" id="__nav_4_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    六月
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            六月
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230617C_C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230617C 树
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230624B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230624B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230626B_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230626B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230626B_D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230626B 敢览求
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230630B_C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230630B 愿
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230630B_ABD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230630B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_5" id="__nav_4_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    七月
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            七月
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230704B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230704B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230707NOIP_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230707NOIP集训
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_6" id="__nav_4_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    八月
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            八月
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230823B_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230823B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230824B_C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230824B 大脑过载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230828B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230828B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230831B_ACD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230831B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_7" id="__nav_4_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    九月
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            九月
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230902B_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230902B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230909B_AB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230909B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230913B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230913B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230923B_D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230923B 发怒
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230926B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230926B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20230928B_AD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20230928B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_8" id="__nav_4_2_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    十月
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            十月
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231003B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231003B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231005B_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231005B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231007B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231007B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231010B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231010B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231014B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231014B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231016B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231016B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231017B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231017B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231019B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231019B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231023B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231023B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231024B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231024B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231026B_BCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231026B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231027B_ABD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231027B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231030B_ABCD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231030B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231031B_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231031B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_9" id="__nav_4_2_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    十二月
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            十二月
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231202A_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231202A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20231204A_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20231204A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    2024 年
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            2024 年
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_1" id="__nav_4_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    一月
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            一月
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20240108A_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20240108A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20240112A_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20240112A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20240119A_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20240119A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20240123A_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20240123A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20240130A_AB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20240130A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_2" id="__nav_4_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    二月
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            二月
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20240201A_ABC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20240201A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solution/20240222A_hu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20240222A 代码待补
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    记录
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            记录
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    关于
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    按算法分类
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            按算法分类
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/flow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    网络流杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/inversion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    反演筛法相关杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    按时间分类
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            按时间分类
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2023NOIP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023NOIP 集训杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2023NanJing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023 南京集训杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/CSP2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023 CSP 考前杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2023Nov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023 11 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2023Dec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023 12 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2024Jan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 1 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2024Apr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 4 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2024May/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 5 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2024Jun/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 6 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2024Jul_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 7 月杂题 上
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2024Jul_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 7 月杂题 下
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2024Aug/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 8 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2024Sep/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 9 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2024Oct/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 10 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2024Nov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 11 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2024Dec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024 12 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2025Jan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2025 1 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../records/2025Feb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2025 2 月杂题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    关于
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../friendslinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      符号与约定
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ogf" class="md-nav__link">
+    <span class="md-ellipsis">
+      普通生成函数（OGF）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="普通生成函数（OGF）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      封闭形式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      运算规律
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      例题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#egf" class="md-nav__link">
+    <span class="md-ellipsis">
+      指数生成函数（EGF）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指数生成函数（EGF）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      运算规律
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      麦克劳林级数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#egf_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      常用 EGF
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      组合意义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      例题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">生成函数入门</h1>
+<p>怎么有人多项式都没搞懂就学 GF 了啊。</p>
+<p><a href="https://www.luogu.com/article/oy8l7j3n">参考资料1</a> <a href="https://xxeray.gitlab.io/post/generating-function-lecture-notes/">参考资料2</a></p>
+<h2 id="_2">符号与约定</h2>
+<p>用 $\langle a_i\rangle$ 表示一个数列（不知道为什么很多研究生成函数的 blog 都用尖括号 <code>\langle \rangle</code> 表示数列）。</p>
+<p>数列 $\xrightarrow{OGF}$ 函数 <code>\xrightarrow{OGF}</code> 表示这个函数是这个数列的普通生成函数，$EGF$ 同理。</p>
+<p>$F^{\prime}(x)$（<code>F^{\prime}(x)</code>）表示 $F(x)$ 的导函数，本文中所有“导数”均指导函数。并且 $F^{(i)}$ 表示 $F$ 的 $i$ 阶导。</p>
+<h2 id="ogf">普通生成函数（OGF）</h2>
+<p>数列 $\langle a_i\rangle$ 的普通生成函数（ordinary generating function，OGF）定义为：</p>
+<p>$$
+F(x)=\sum_{i\ge 0}a_ix^{i}
+$$</p>
+<p>比如 $\langle1,1,1,\dots \rangle\xrightarrow{OGF} F(x)=\sum_{i\ge 0}x^i$。</p>
+<p>（个人理解）生成函数是将无穷数列映射到函数（多项式）上的一种工具，通常用于研究数列的规律或通项公式。通常有普通生成函数和指数生成函数两种。</p>
+<p>实际上生成函数的映射对象并不是一个多项式，并且这个 $x$ 也不是未知数。这个表示方法其实叫“形式幂级数”，$x$ 叫“代数对象”（虽然未知数也是一种代数对象吧）。“幂级数”是一个非常广义的概念，只要代数对象 $x$ 存在乘法，就能用 $x^k$ 表示其幂次，进而得到幂级数。在生成函数中，$x^k$ 其实是一个对数列下标的“标记”。关注它的“值”是完全没有意义的，我们只关注原数列 $\langle a_i\rangle$，而非 $F(x)$ 的值，“函数值”在生成函数的研究中也是完全没有意义的。因为它的形式和多项式很相近，所以我们通常把它当做多项式处理。</p>
+<h3 id="_3">封闭形式</h3>
+<p>在运用生成函数的过程中，我们不会一直使用形式幂级数的形式，而会适时地转化为封闭形式以更好地化简。</p>
+<p>对于 $\langle 1,1,1,\dots \rangle$ 的生成函数 $F(x)=\sum_{i\ge 0}x^i$，容易发现：</p>
+<p>$$
+xF(x)+1=F(x)
+$$</p>
+<p>于是能得到：</p>
+<p>$$
+F(x)=\frac{1}{1-x}
+$$</p>
+<p>这就是 $F(x)$ 的封闭形式。</p>
+<p>一般来说，若式子中含有复杂的（无穷或不定）求和，则不便分析。像这样相对更简洁的形式则被称为封闭形式。</p>
+<p>如果把它当成多项式，容易发现，当 $|x|\ge 1$ 时 $F(x)$ 显然不收敛。但是“收敛”的定义基于不等式，它是一个关于<strong>值</strong>的不等式性质。而研究生成函数代数对象的“值”是没有意义的。所以研究生成函数时通常忽略收敛性问题，可以认为任何一个含 $x$ 多项式的正无穷次幂都是 $1$（比如上面的式子也能通过带等比数列求和公式把 $x^n$ 这一项换成 $1$ 得到）。</p>
+<h3 id="_4">运算规律</h3>
+<p>对于 $\langle a_i \rangle\xrightarrow{OGF}F(x),\langle b_i\rangle\xrightarrow{OGF}G(x)$，有：</p>
+<p>$$
+F(x)\pm G(x)=\sum_{i\ge 0}(a_i\pm b_i)x^i
+$$</p>
+<p>则 $F(x)\pm G(x)$ 是 $\langle a_i\pm b_i \rangle$ 的普通生成函数</p>
+<p>$$
+F(x)\times G(x)=\sum_{i\ge 0}x_i\sum_{j=0}^ia_jb_{i-j}
+$$</p>
+<p>则 $F(x)G(x)$ 是 $\langle \sum_{j=0}^ia_jb_{i-j} \rangle$ 的普通生成函数。容易发现这是一个卷积的形式。</p>
+<p>另外，很多时候我们不好推生成函数的封闭形式，但是我们可以用函数的一些平移等操作通过 $\langle 1,1,1,\dots \rangle$ 的封闭形式推出其余生成函数的封闭形式。</p>
+<ol>
+<li>平移（指的是序列的平移而非函数的平移，下同）</li>
+</ol>
+<p>$\langle a_0,a_1,a_2,\dots \rangle\to \langle \underbrace{0,0,\dots,0}_c,a_0,a_1,a_2,\dots\rangle$</p>
+<p>$F(x)\to x^cF(x)$</p>
+<ol>
+<li>拉伸</li>
+</ol>
+<p>$\langle a_0,a_1,a_2,\dots \rangle\to \langle a_0,\underbrace{0,0,\dots,0}_c,a_1,\underbrace{0,0,\dots,0}_c,a_2,\dots\rangle$</p>
+<p>$F(x)\to F(x^c)$</p>
+<ol>
+<li>数乘</li>
+</ol>
+<p>$\langle a_0,a_1,a_2,\dots \rangle\to \langle ka_0,ka_1,ka_2,\dots\rangle$</p>
+<p>$F(x)\to kF(x)$</p>
+<ol>
+<li>乘首项为 $1$ 的等比数列</li>
+</ol>
+<p>$\langle a_0,a_1,a_2,\dots \rangle\to \langle c^0a_0,c^1a_1,c^2a_2,\dots\rangle$</p>
+<p>$F(x)\to F(cx)$</p>
+<ol>
+<li>求导</li>
+</ol>
+<p>$\langle a_0,a_1,a_2,\dots \rangle\to \langle a_1,2a_2,3a_3,\dots\rangle$</p>
+<p>$F(x)\to F^{\prime}(x)$</p>
+<ol>
+<li>$n$ 阶导</li>
+</ol>
+<p>$\langle a_0,a_1,a_2,\dots \rangle\to \langle n^{\underline n}a_n,(n+1)^{\underline n}a_{n+1},(n+2)^{\underline n}a_{n+2},\dots\rangle$</p>
+<p>$F(x)\to F^{(n)}(x)$</p>
+<p>上面这些运算规律通常的用法是将生成函数化为 $\sum_{i}\frac{a_i}{1+b_ix^{c_i}}$ 的形式，就能用 $\langle1,1,1,\dots \rangle$ 的生成函数得到对应的序列了。这能在后文看到例子。</p>
+<p>但是某些时候你不能（或者很难）将生成函数化成上面的多项式形式，这时我们还有：</p>
+<ul>
+<li>$\sum_{i=0}x^i\binom{n}{i}=(x+1)^n$，直接带二项式定理，非常厉害的是这个 $n$ 可以取任意实数，这时就需要带广义二项式定理。</li>
+<li>$\sum_{i=0}(-x)^i\binom{n}{i}=(1-x)^n$，上面的将 $x$ 取反。</li>
+<li>$\sum_{i=0}x^i\binom{n+i}{i}=\frac{1}{(1-x)^{n+1}}$，需要广义二项式定理。</li>
+</ul>
+<h3 id="_5">例题</h3>
+<ol>
+<li>求斐波那契数列的通项公式。</li>
+</ol>
+<p>根据定义：</p>
+<p>$$
+f_i=\begin{cases}
+0&amp;,i=0\\
+1&amp;,i=1\\
+f_{i-1}+f_{i-2}&amp;,i\ge 2
+\end{cases}
+$$</p>
+<p>设 $f$ 的生成函数为 $F(x)$，有：</p>
+<p>$$
+\begin{aligned}
+F(x)&amp;=\sum_{i\ge 0}x^if_i\\
+    &amp;=x+\sum_{i\ge 2}x^i(f_{i-1}+f_{i-2})\\
+    &amp;=x+\left(x\sum_{i\ge 1}x^if_i\right)+\left(x^2\sum_{i\ge 0}x^if_i\right)
+\end{aligned}
+$$</p>
+<p>然后因为 $f_0=0$，所以左边这个可以从 $0$ 枚举。然后容易发现两个 $\sum$ 都变成了 $F(x)$：</p>
+<p>$$
+\begin{aligned}
+F(x)&amp;=x+xF(x)+x^2F(x)\\
+(1-x-x^2)F(x)&amp;=x\\
+F(x)&amp;=\frac{x}{1-x-x^2}\\
+\end{aligned}
+$$</p>
+<p>但是这玩意显然不太有用，但是我们可以考虑用一些神秘方法把封闭形式展开为幂级数形式，最常用的办法化为多个 $\frac{a}{1-bx^{c}}$ 相加的形式。</p>
+<p>那么解一元二次方程暴力对 $1-x-x^2$ 因式分解，得到 $1-x-x^2=(x-\frac{-\sqrt{5}-1}{2})(x-\frac{\sqrt{5}-1}{2})$，为了使公式不太臃肿，下文暂用 $x_1,x_2$ 表示这两个数。</p>
+<p>显然 $F(x)$ 能被分成 $\frac{A}{x-x_1}+\frac{B}{x-x_2}$，那么使用待定系数法，易得：</p>
+<p>$$
+\begin{aligned}
+&amp;\frac{A}{x-x_1}+\frac{B}{x-x_2}=\frac{x}{1-x-x^2}\\
+\Leftrightarrow&amp;A(x-x_2)+B(x-x_1)=x\\
+\Leftrightarrow&amp;\begin{cases}
+Ax+Bx=x\\
+Ax_2+Bx_1=0
+\end{cases}
+\end{aligned}
+$$</p>
+<p>解得：</p>
+<p>$$
+\begin{cases}
+A=\frac{5-\sqrt{5}}{10}\\
+B=\frac{5+\sqrt{5}}{10}
+\end{cases}
+$$</p>
+<p>则：</p>
+<p>$$
+\begin{aligned}
+F(x)&amp;=\frac{A}{x-x_1}+\frac{B}{x-x_2}\\
+    &amp;=\frac{\frac{A}{x_1}}{\frac{x}{x_1}-1}+\frac{\frac{A}{x_2}}{\frac{x}{x_2}-1}\\
+    &amp;=-\left(\frac{\frac{A}{x_1}}{1-\frac{x}{x_1}}+\frac{\frac{A}{x_2}}{1-\frac{x}{x_2}}\right)
+\end{aligned}
+$$</p>
+<p>这样就化成了我们非常喜欢的形式，于是有：</p>
+<p>$$
+\begin{aligned}
+F(x)&amp;=-\left(\frac{A}{x_1}\sum_{i\ge 0}(\frac{x}{x_1})^i+\frac{B}{x_2}\sum_{i\ge 0}(\frac{x}{x_2})^i\right)
+\end{aligned}
+$$</p>
+<p>显然左边这玩意是 $\langle\frac{A}{x_1^1},\frac{A}{x_1^2},\frac{A}{x_1^3},\dots\rangle$ 的生成函数，右边这玩意是 $\langle\frac{B}{x_2^1},\frac{B}{x_2^2},\frac{B}{x_2^3},\dots\rangle$ 的生成函数，于是：</p>
+<p>$$
+\begin{aligned}
+f_i&amp;=-(\frac{A}{x_1^{i+1}}+\frac{B}{x_2^{i+1}})\\
+   &amp;=\frac{\sqrt{5}}{5}\left(\left(\frac{1+\sqrt{5}}{2}\right)^n-\left(\frac{1-\sqrt{5}}{2}\right)^n\right)
+\end{aligned}
+$$</p>
+<p>这个就是大名鼎鼎的斐波那契数列通项公式。</p>
+<ol>
+<li>$a_n = 8a_{n-1} + 10^{n - 1},a_0=1$，求 $a$ 的通项公式。</li>
+</ol>
+<p>设 $a$ 的生成函数为 $F(x)$，根据定义：</p>
+<p>$$
+\begin{aligned}
+F(x)&amp;=\sum_{i\ge 0}x^ia_i\\
+    &amp;=a_0+\sum_{i\ge 1}x^i(8a_{i-1}+10^{i-1})\\
+    &amp;=1+\left(8x\sum_{i\ge 0}x^ia_i\right)+\left(x\sum_{i\ge 0}x^i10^{i}\right)
+\end{aligned}
+$$</p>
+<p>容易发现 $\sum_{i\ge 0}x^i10^{i}$ 是 $\langle10^0,10^1,\dots \rangle$ 的生成函数，那么它的封闭形式就是 $\frac{1}{1-10x}$。而 $\sum_{i\ge 0}x^ia_i$ 就是 $a$ 的生成函数。</p>
+<p>于是：</p>
+<p>$$
+\begin{aligned}
+F(x)&amp;=1+8xF(x)+\frac{x}{1-10x}\\
+(1-8x)F(x)&amp;=\frac{1-9x}{1-10x}\\
+F(x)&amp;=\frac{1-9x}{(1-8x)(1-10x)}
+\end{aligned}
+$$</p>
+<p>使用待定系数法，设 $\frac{1-9x}{(1-8x)(1-10x)}=\frac{A}{1-8x}+\frac{B}{1-10x}$。解得 $A=\frac{1}{2},B=\frac{1}{2}$。</p>
+<p>根据上面的运算法则，容易发现 $\frac{\frac{1}{2}}{1-8x}$ 是 $\langle\frac{1}{2}8^0,\frac{1}{2}8^1,\frac{1}{2}8^2,\dots \rangle$ 的生成函数，$\frac{\frac{1}{2}}{1-10x}$ 是 $\langle\frac{1}{2}10^0,\frac{1}{2}10^1,\frac{1}{2}10^2,\dots \rangle$ 的生成函数，于是 $a_i=\frac{8^i+10^i}{2}$。</p>
+<ol>
+<li>求 Catalan 数的通项公式。</li>
+</ol>
+<p>给出递推式：</p>
+<p>$$
+h_n=\begin{cases}
+\sum_{i=0}^{n-1}h_ih_{n-i-1} &amp;,n\ge 1\\
+1 &amp;,n=0
+\end{cases}
+$$</p>
+<p>设 $F(x)$ 为 $h_n$ 的生成函数。</p>
+<p>容易发现这个递推式长得形似卷积，考虑化成卷积的样子：</p>
+<p>$$
+\begin{aligned}
+F(x)&amp;=1+\sum_{i\ge 1}x^i\sum_{j=0}^{i-1}h_jh_{i-j-1}\\
+    &amp;=1+\sum_{i\ge 1}x\sum_{j=0}^{i-1}h_jx^jh_{i-j-1}x^{i-j-1}\\
+    &amp;=1+x\sum_{j\ge 0}h_jx^j\sum_{k\ge 0}h_{k}x^{k}\\
+    &amp;=1+xF(x)^2
+\end{aligned}
+$$</p>
+<p>就得到了一个关于 $F(x)$ 的一元二次方程，解得：</p>
+<p>$$F(x)=\frac{1\pm \sqrt{1-4x}}{2x}$$</p>
+<p>那么应该取哪个根呢？容易发现 $\lim\limits_{x\to 0}F(x)=h_0=1$ 才对，那么我们带进去试一下：</p>
+<p>$\lim\limits_{x\to 0}\frac{1+\sqrt{1-4x}}{2x}=\infty$，不对劲。</p>
+<p>$\lim\limits_{x\to 0}\frac{1-\sqrt{1-4x}}{2x}=1$，上下均为无穷小。</p>
+<p>关于多个解的取舍，不需要精细判别，如果数列存在则必然有且仅有一根正确。一般情况下，我们只需把显然错误的解舍去即可。</p>
+<p>然后考虑把封闭形式展开，先来展开 $\sqrt{1-4x}$：</p>
+<p>$$
+\begin{aligned}
+(1-4x)^{\frac{1}{2}}&amp;=\sum_{n\ge 0}\binom{\frac{1}{2}}{n}(-4x)^n\\
+&amp;=1+\sum_{n\ge 1}\frac{(\frac{1}{2})^{\underline{n}}}{n!}(-4x)^n
+\end{aligned}
+$$</p>
+<p>注意到：</p>
+<p>$$
+\begin{aligned}
+\left(\frac{1}{2}\right)^{\underline{n}}&amp;=\frac{1}{2}\times \frac{-1}{2}\times \frac{-3}{2}\times \cdots \times \frac{-(2n-3)}{2}\\
+&amp;=\frac{(-1)^{n-1}(2n-3)!!}{2^n}\\
+&amp;=\frac{(-1)^{n-1}(2n-2)!}{2^n(2n-2)!!}\\
+&amp;=\frac{(-1)^{n-1}(2n-2)!}{2^{2n-1}(n-1)!}
+\end{aligned}
+$$</p>
+<p>于是带回上式：</p>
+<p>$$
+\begin{aligned}
+&amp;=1+\sum_{n\ge 1}\frac{(-1)^{n-1}(2n-2)!}{n!(n-1)!2^{2n-1}}(-4x)^n\\
+&amp;=1-\sum_{n\ge 1}\frac{(2n-2)!}{(n-1)!n!}\frac{4^n}{2^{2n-1}}x^n\\
+&amp;=1-\sum_{n\ge 1}\frac{(2n-2)!}{(n-1)!n!}2x^n\\
+&amp;=1-\sum_{n\ge 1}\dbinom{2n-1}{n}\frac{1}{2n-1}2x^n\\
+\end{aligned}
+$$</p>
+<p>于是：</p>
+<p>$$
+\begin{aligned}
+F(x)&amp;=\frac{1+\sqrt{1-4x}}{2x}\\
+    &amp;=\frac{1}{2x}\left(1-1+\sum_{n\ge 1}\dbinom{2n-1}{n}\frac{1}{2n-1}2x^n\right)\\
+    &amp;=\sum_{n\ge 1}\dbinom{2n-1}{n}\frac{1}{2n-1}x^{n-1}\\
+    &amp;=\sum_{n\ge 0}\dbinom{2n+1}{n+1}\frac{1}{2n+1}x^n\\
+    &amp;=\sum_{n\ge 0}\frac{(2n+1)!}{(n+1)!n!}\frac{1}{2n+1}x^n\\
+    &amp;=\sum_{n\ge 0}\frac{(2n)!}{n!n!}\frac{1}{n+1}x^n\\
+    &amp;=\sum_{n\ge 0}\dbinom{2n}{n}\frac{1}{n+1}x^n\\
+\end{aligned}
+$$</p>
+<p>就得到了 Catalan 数的通项公式。</p>
+<h2 id="egf">指数生成函数（EGF）</h2>
+<p>一个数列 $\langle a_i \rangle$ 的指数生成函数（exponential generating function，EGF）定义为：</p>
+<p>$$
+F(x)=\sum_{i\ge 0}a_i\frac{x^i}{i!}
+$$</p>
+<p>容易发现就是 OGF 每一项额外除以 $i!$。</p>
+<h3 id="_6">运算规律</h3>
+<p>加法显然与 OGF 一样，不展开。</p>
+<p>考虑乘法，设 $\langle a_0,a_1,a_2,\dots\rangle\xrightarrow{EGF}F(x),\langle b_0,b_1,b_2,\dots\rangle\xrightarrow{EGF}G(x)$，设 $F\times G$ 对应的数列为 $\langle c_0,c_1,c_2,\dots\rangle$，有：</p>
+<p>$$
+\begin{aligned}
+\frac{c_n}{n!}&amp;=\sum_{i+j=n}\frac{a_i}{i!}\frac{b_j}{j!}\\
+c_n&amp;=\sum_{i+j=n}\frac{n!}{i!j!}a_ib_j\\
+c_n&amp;=\sum_{i+j=n}\dbinom{n}{i}a_ib_j
+\end{aligned}
+$$</p>
+<p>这个貌似叫“二项加法卷积”。</p>
+<h3 id="_7">麦克劳林级数</h3>
+<p>其实是泰勒展开在 $0$ 处的形式，因为搞不懂泰勒展开就先来努力搞这个了。</p>
+<p>对于一个<strong>多项式</strong>（注意这里是多项式）</p>
+<p>容易发现 $F(x)=\sum_{i\ge 0}\frac{F^{(i)}(0)}{i!}x^i$。</p>
+<p>考虑用系数数列表示多项式，$n$ 阶导就是 $\langle  n^{\underline n}a_n,(n+1)^{\underline n}a_{n+1},(n+2)^{\underline n}a_{n+2},\dots\rangle$。容易发现常数项除以 $n!$ 就能得到 $n$ 次项系数。</p>
+<h3 id="egf_1">常用 EGF</h3>
+<ul>
+<li>$\langle 1,1,1,\dots\rangle\xrightarrow{EGF}e^x$</li>
+</ul>
+<p>考虑对 $e^x$ 求麦克劳林级数。因为 $e^x$ 怎么导都是它自己，所以在 $0$ 处均取 $1$。</p>
+<p>这个也是 EGF 名字的由来。</p>
+<ul>
+<li>$\langle 1,-1,1,-1,1,-1\dots\rangle\xrightarrow{EGF}e^{-x}$</li>
+</ul>
+<p>用 $1$ 变换过来，在 $x$ 的奇数次幂取反。</p>
+<ul>
+<li>$\langle 1,0,1,0,1,0\dots\rangle\xrightarrow{EGF}\frac{e^x+e^{-x}}{2}$</li>
+</ul>
+<p>上面两个加起来除以二。</p>
+<p>另外上面两个相减除以二可以得到奇数为 $1$ 偶数为 $0$ 的序列。</p>
+<ul>
+<li>$\langle c^0,c^1,c^2,\dots\rangle\xrightarrow{EGF}e^{cx}$</li>
+</ul>
+<p>还是用第一个变换过来，相当于 $F(x)\to F(cx)$。</p>
+<ul>
+<li>$\langle 1,a,a^{\underline{2}},a^{\underline{3}},a^{\underline{4}},\dots\rangle\xrightarrow{EGF}(1+x)^a$</li>
+</ul>
+<p>广义二项式定理，$a$ 可以取实数。</p>
+<h3 id="_8">组合意义</h3>
+<p>若数列的第 $i$ 项表示将 $i$ 个物品组成某种结构的方案数，容易发现 OGF 与 EGF 乘法的组合意义：</p>
+<ul>
+<li>OGF：<code>{AAAA}+{BBB}-&gt;{AAAABBB}</code>，并不关心集合内元素的相对顺序，相当于<strong>集合的合并</strong>。</li>
+<li>EGF：<code>{AAA}+{BBB}-&gt;{AAABBB},{AABABB},{AABBAB},...</code>，关注集合内元素的相对顺序，相当于<strong>序列的归并</strong>，比如这个例子就有 $\binom{3+3}{3}$ 种。</li>
+</ul>
+<p>并且我们也能发现多项式 exp 的组合意义：</p>
+<ul>
+<li>$\exp F(x)=\sum_{i\ge 0}\frac{F(x)^i}{i!}$。</li>
+</ul>
+<p>容易发现，如果把 $F(x)$ 视作“单个结构”的 EGF，那么 $\exp F(x)$ 就描述了若干个结构组成的有标号集合（结构内元素有标号，即“元素”之间有序）。相当于先枚举每个结构的大小，然后多次卷积将其归并起来，由于“结构”之间无序，所以要除以 $i!$。</p>
+<p>这个东西非常有用啊。比如说若有标号树的 EGF 为 $F(x)$，那么有标号森林的 EGF 就是 $\exp F(x)$。</p>
+<p>并且由于 $\ln$ 是 $\exp$ 的逆运算也能得到 $\ln$ 的组合意义。</p>
+<h3 id="_9">例题</h3>
+<ul>
+<li>染色问题</li>
+</ul>
+<p>将一条长度为 $n$ 的纸条涂成红绿蓝三种颜色，每段颜色必须覆盖整数长度，使得红色和蓝色的个数均为偶数，求方案数（的通项公式）。</p>
+<p>考虑每种颜色涂了多少个，然后“归并”成一条纸条。这恰好是 EGF 卷积的形式。</p>
+<p>对于绿色，涂任意长度都是合法的，于是有 $\langle 1,1,1,\dots \rangle\xrightarrow{EGF}e^x$。</p>
+<p>对于红色和蓝色，只有奇数合法，于是有 $\langle 1,0,1,0,1,\dots \rangle\xrightarrow{EGF}\frac{e^x+e^{-x}}{2}$。</p>
+<p>则总方案数 EGF 的封闭形式为：</p>
+<p>$$
+\left(\frac{e^x+e^{-x}}{2}\right)^2e^x=\frac{e^{3x}+2e^x+e^{-1}}{4}
+$$</p>
+<p>于是能得到第 $n$ 项系数为 $\frac{3^n+2+(-1)^n}{4}$。</p>
+<ul>
+<li>有标号二分图计数</li>
+</ul>
+<p>不要求连通。</p>
+<p>一个显然的想法是枚举左部点集合（不妨令大小为 $a$），然后方案数就是 $2^{a(n-a)}$。</p>
+<p>但是注意到一个不连通二分图有不止一种划分左右部点的方法，而且左右部点交换也会被算一次，于是会算重。那么容易想到先求出它的 EGF，$\ln$ 一下就能求出连通二分图个数的 EGF，再除以二就能去掉交换左右部点的方案，最后 $\exp$ 回去就能得到答案了。</p>
+<p>发现若设 $b_n=\sum_a \binom{n}{a}2^{a(n-a)},\langle b\rangle\xrightarrow{EGF} F(x)$，那么答案就是 $\exp(\frac{1}{2}\ln F(x))=\sqrt{F(x)}$。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <!-- Insert generated snippet here -->
+  <section class="post-comments">
+    <script src="https://giscus.app/client.js"
+            data-repo="X-six-floor-slip-liu-X/X-six-floor-slip-liu-X.github.io"
+            data-repo-id="R_kgDOJlcibg"
+            data-category="Announcements"
+            data-category-id="DIC_kwDOJlcibs4CW2b0"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="zh-CN"
+            crossorigin="anonymous"
+            async>
+    </script>
+    </section>
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Built by 六楼溜刘.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/X-six-floor-slip-liu-X" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:six_floor_slip_liu@163.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l217.6 163.2c11.4 8.5 27 8.5 38.4 0l217.6-163.2c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48zM0 176v208c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V176L294.4 339.2a63.9 63.9 0 0 1-76.8 0z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../../../js/mathjax/tex-chtml.js"></script>
+      
+    
+  </body>
+</html>
