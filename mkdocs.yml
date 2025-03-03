@@ -128,6 +128,9 @@ nav:
       - 2024 重庆集训: misc/travels/2024XDFZ.md
       - CSPS2024: misc/travels/CSPS2024.md
       - NOIP2024: misc/travels/NOIP2024.md
+      - WC2024: misc/travels/WC2025.md
+      - 2025 CQBZ 集训: misc/travels/2025CQBZ.md
+      - SCOI2025: misc/travels/SCOI2025.md
     - P:
       - 2024 批话合集: misc/2024P.md
   - 算法笔记:
@@ -143,7 +146,8 @@ nav:
       - 猫树: algo/ds/Cat_Tree.md
       - 李超线段树: algo/ds/LiChaoTree.md
       - LCT: algo/ds/LCT.md
-      - d-D Tree: algo/ds/kD_tree.md
+      - k-D Tree: algo/ds/kD_tree.md
+      # - 全局平衡二叉树: algo/ds/gbst.md #未完成
     - 数学:
       - 斯特林数: algo/math/stirling.md #未完成
       - 反演入门: algo/math/inversion.md #未完成
@@ -260,5 +264,6 @@ nav:
       - 2024 11 月杂题: records/2024Nov.md
       - 2024 12 月杂题: records/2024Dec.md
       - 2025 1 月杂题: records/2025Jan.md
+      - 2025 2 月杂题: records/2025Feb.md
   - 关于: about.md
   - 友链: friendslinks.md
