@@ -75,8 +75,35 @@ int main(){
 1. 第一个问题
 1. 第二个问题
 1. 第三个问题
+
+// 似乎只与第一个数字有关
 ```
 
+Mkdocs 默认配置下无序列表只能从 $1$ 开始。
+
+比如：
+
+```
+4. item 4
+5. item 5
+6. item 6
+```
+
+会被渲染成：
+
+1. item 4
+2. item 5
+3. item 6
+
+```
+//这里为了效果实际上是这样写的
+
+1. item 4
+2. item 5
+3. item 6
+```
+
+但是可以通过加 hook 的方式解决这种问题，见[这篇 issue](https://github.com/radude/mdx_truly_sane_lists/issues/21)。
 ### 无序列表
 
 - 问题 A
