@@ -114,8 +114,8 @@ markdown_extensions:
   - pymdownx.blocks.definition:
   - pymdownx.blocks.tab:
       alternate_style: True
-  # - mdx-better-lists:
-      # always_start_at_one: false
+  - mdx_better_lists:
+      always_start_at_one: false
 
 # 目录（导航）
 # 格式： - 名称: 路径（通常是相对路径）

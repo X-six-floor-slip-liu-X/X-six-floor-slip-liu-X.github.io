@@ -22,6 +22,6 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run:
-          # pip install mdx-better-lists
+          pip install mdx_better_lists
           pip install mkdocs-material 
       - run: mkdocs gh-deploy --force

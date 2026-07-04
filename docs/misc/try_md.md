@@ -103,7 +103,7 @@ Mkdocs 默认配置下无序列表只能从 $1$ 开始。
 3. item 6
 ```
 
-但是可以通过加 hook 的方式解决这种问题，见[这篇 issue](https://github.com/radude/mdx_truly_sane_lists/issues/21)。
+但是可以通过加 extension 的方式解决这种问题，见[这篇文档](https://pypi.org/project/mdx-better-lists/)。
 
 
 4. item 4
