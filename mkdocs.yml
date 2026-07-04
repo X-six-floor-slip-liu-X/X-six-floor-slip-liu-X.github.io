@@ -63,8 +63,8 @@ theme:
     - content.code.annotate # 代码块注释
 
 # Hook
-hooks:
-  - hooks/patch_mdx_truly_sane_lists.py
+
+#Plugins
 
 # Customization
 extra:
@@ -114,6 +114,8 @@ markdown_extensions:
   - pymdownx.blocks.definition:
   - pymdownx.blocks.tab:
       alternate_style: True
+  # - mdx-better-lists:
+      # always_start_at_one: false
 
 # 目录（导航）
 # 格式： - 名称: 路径（通常是相对路径）
