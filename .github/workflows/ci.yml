@@ -21,7 +21,7 @@ jobs:
           path: .cache
           restore-keys: |
             mkdocs-material-
-      - run:
+      - run: |
           pip install mdx_better_lists
           pip install mkdocs-material 
       - run: mkdocs gh-deploy --force
