@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # 最短路
 

@@ -4,7 +4,7 @@ site_description: 这是一个前中学 OIer 的博客，他会在这里分享�
 site_author: 六楼溜刘 aka six-floor-slip-liu
 site_url: https://x-six-floor-slip-liu-x.github.io/
 
-# Repository 
+# Repository  
 repo_name: X-six-floor-slip-liu-X/六楼溜刘的小窝
 repo_url: https://github.com/X-six-floor-slip-liu-X/X-six-floor-slip-liu-X.github.io
 
@@ -15,7 +15,7 @@ copyright: Built by 六楼溜刘.
 theme:
   name: material # 不能改
   language: zh # 中文   
-  language: en # English 
+  # language: en # English 
   custom_dir: overrides # 不能改
   favicon: assets/favicon.png   
   palette:
@@ -159,7 +159,7 @@ nav:
       - SCOI2025: misc/travels/SCOI2025.md
       - HUST 报到: misc/travels/2026HUST_registration.md
     - 日记:
-      - 2026 年 10 月： misc/diaries/2026Oct.md
+      - 2026 年 10 月: misc/diaries/2026Oct.md
     - P:
       - 2024 批话合集: misc/2024P.md
   - 算法笔记:

@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # 2023 CW NOIP 集训游记
 

@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # 常用 MarkDown 语法
 

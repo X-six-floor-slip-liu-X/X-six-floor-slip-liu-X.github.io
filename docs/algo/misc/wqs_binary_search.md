@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # wqs 二分
 

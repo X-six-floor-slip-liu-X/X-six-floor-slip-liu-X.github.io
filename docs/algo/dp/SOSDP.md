@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # 高维前缀和与 SOSDP
 

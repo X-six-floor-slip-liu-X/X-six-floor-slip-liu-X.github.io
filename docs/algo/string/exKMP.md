@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # 扩展 KMP 算法（Z 函数）
 

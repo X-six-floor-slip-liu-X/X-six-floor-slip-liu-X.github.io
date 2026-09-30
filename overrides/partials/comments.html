@@ -1,4 +1,8 @@
-{% if page.meta.comments %}
+{#-
+  评论区：默认所有页面都开启。
+  想关掉某一页的评论区，在它的 front matter 里写 comments: false 即可。
+-#}
+{% if page.meta.get("comments", true) %}
   <h2 id="__comments">{{ lang.t("meta.comments") }}</h2>
   <!-- Insert generated snippet here -->
   <section class="post-comments">

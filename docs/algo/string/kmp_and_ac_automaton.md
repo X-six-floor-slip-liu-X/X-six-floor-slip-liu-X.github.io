@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # KMP 与 AC 自动机
 

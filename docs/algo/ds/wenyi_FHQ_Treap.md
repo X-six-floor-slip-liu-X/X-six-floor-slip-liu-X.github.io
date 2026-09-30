@@ -1,6 +1,3 @@
----
-comments: true
----
  
 # FHQTreap 实现的文艺平衡树
 

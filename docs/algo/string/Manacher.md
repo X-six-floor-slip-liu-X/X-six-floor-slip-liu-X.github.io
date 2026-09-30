@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # Manacher 算法
 

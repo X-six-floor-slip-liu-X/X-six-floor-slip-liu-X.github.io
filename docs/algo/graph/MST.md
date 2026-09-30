@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # 最小生成树与 Kruskal 重构树
 

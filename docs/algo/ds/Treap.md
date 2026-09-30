@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # 平衡树入门及 Treap
 

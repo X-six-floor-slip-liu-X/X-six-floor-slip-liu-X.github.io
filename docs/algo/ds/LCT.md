@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # LCT 学习笔记
 

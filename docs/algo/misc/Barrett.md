@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # Barrett 取模优化
 

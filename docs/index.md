@@ -1,3 +1,6 @@
+---
+comments: false
+---
 
 ![我爱庄方宜](./assets/cover.png)
 

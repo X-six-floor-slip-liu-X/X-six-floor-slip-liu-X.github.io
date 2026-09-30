@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # Dilworth 定理
 

@@ -1,6 +1,3 @@
----
-comments: true
----
 
 # 2-SAT 问题学习笔记
 
