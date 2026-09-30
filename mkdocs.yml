@@ -65,6 +65,21 @@ theme:
 # Hook
 
 #Plugins
+# 注意：一旦声明了 plugins，MkDocs 默认的 search 插件就不会自动加载，必须显式写出来
+plugins:
+  - search # 站内搜索
+  - rss: # RSS / JSON Feed 订阅源
+      enabled: true
+      rss_feed_enabled: true # 生成 feed_rss_created.xml、feed_rss_updated.xml
+      json_feed_enabled: true # 生成 feed_json_created.json、feed_json_updated.json
+      use_git: true # 用 git 提交时间作为文章的创建 / 更新时间
+      use_material_blog: false # 本站未使用 Material 的 blog 插件
+      use_material_social_cards: false # 本站未使用 social cards 插件
+      match_path: ".*" # 所有页面都进订阅源
+      length: 20 # 订阅源最多包含 20 篇文章
+      abstract_chars_count: 200 # 每篇文章摘要的字数
+      feed_ttl: 1440 # 建议订阅端缓存 1 天（单位：分钟）
+      image: https://x-six-floor-slip-liu-x.github.io/assets/favicon.png # 订阅源图标
 
 # Customization
 extra:
@@ -73,6 +88,9 @@ extra:
       link: https://github.com/X-six-floor-slip-liu-X
     - icon: fontawesome/solid/envelope
       link: mailto:six_floor_slip_liu@163.com
+    - icon: fontawesome/solid/rss # RSS 订阅
+      link: https://x-six-floor-slip-liu-x.github.io/feed_rss_created.xml
+      name: RSS 订阅
 
 extra_javascript:
   - js/mathjax/tex-chtml.js # 不能改
@@ -140,6 +158,8 @@ nav:
       - 2025 CQBZ 集训: misc/travels/2025CQBZ.md
       - SCOI2025: misc/travels/SCOI2025.md
       - HUST 报到: misc/travels/2026HUST_registration.md
+    - 日记:
+      - 2026 年 10 月： misc/diaries/2026Oct.md
     - P:
       - 2024 批话合集: misc/2024P.md
   - 算法笔记:

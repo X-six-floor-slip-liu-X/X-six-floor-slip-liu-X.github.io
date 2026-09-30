@@ -15,3 +15,10 @@
 		};
 	</script>
 {% endblock %}
+
+<!-- JSON Feed 的自动发现链接。RSS 的两条链接 Material 主题会自己加，不要重复写 -->
+{% block extrahead %}
+	{{ super() }}
+	<link rel="alternate" type="application/feed+json" title="{{ config.site_name }} - 最新文章" href="{{ 'feed_json_created.json' | url }}">
+	<link rel="alternate" type="application/feed+json" title="{{ config.site_name }} - 最近更新" href="{{ 'feed_json_updated.json' | url }}">
+{% endblock %}
