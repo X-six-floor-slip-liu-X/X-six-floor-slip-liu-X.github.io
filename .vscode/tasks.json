@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "MkDocs: 启动预览 (dirty)",
+      "detail": "mkdocs serve --dirty --watch overrides —— 只重建改动过的文件，改一篇正文约 0.4 秒刷新",
+      "type": "shell",
+      "command": "mkdocs serve --dirty --watch overrides",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "showReuseMessage": false
+      },
+      "problemMatcher": [
+        {
+          "owner": "mkdocs",
+          "source": "mkdocs",
+          "fileLocation": ["relative", "${workspaceFolder}/docs"],
+          "pattern": {
+            "regexp": "^\\s*(?:DEBUG|INFO|WARNING|ERROR|CRITICAL)\\s+-\\s+(?:\\[\\d{2}:\\d{2}:\\d{2}\\]\\s+)?Doc file '([^']+)'\\s+(.*)$",
+            "file": 1,
+            "message": 2,
+            "severity": 1
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "Building documentation",
+            "endsPattern": "Documentation built in"
+          }
+        }
+      ]
+    }
+  ]
+}
