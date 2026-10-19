@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5829,39 +5857,39 @@
 <h3 id="part-0">Part 0 题意理解</h3>
 <p>首先容易发现最多只会发生一次抢夺，因为假如 A 抢了之后又会被 B 抢回去，那么 A 肯定不会去抢，因为所有人都希望不要遗憾离场，而所有人又足够聪明。所以我们先解决会不会发生抢夺的问题。</p>
 <p>什么时候会发生抢夺呢？显然，是抢了之后不会被抢回去时。假如我们把所有能发生抢夺（即没有私交，又不在同一组）的人之间连一条边，容易发现这其实是个二分图博弈模型（其实因为我没学过所以并不容易 awa），金条仅能按边移动。</p>
-<p>假如最后金条不能移动时不在 $P$ 组（即模型中“先手胜”的情况，为方便叙述设这组为 $Q$），那么可以发生抢夺，因为假如 $Q$ 组的 $A$ 抢了后被 $P$ 组的 $B$ 抢回去，那 $Q$ 组就必定有一个 $C$ 能抢回去，$B$ 就不会去抢。同理，假如最后金条留在 $P$ 组（即“后手胜”），那么就不会发生抢夺。</p>
+<p>假如最后金条不能移动时不在 <span class="arithmatex">\(P\)</span> 组（即模型中“先手胜”的情况，为方便叙述设这组为 <span class="arithmatex">\(Q\)</span>），那么可以发生抢夺，因为假如 <span class="arithmatex">\(Q\)</span> 组的 <span class="arithmatex">\(A\)</span> 抢了后被 <span class="arithmatex">\(P\)</span> 组的 <span class="arithmatex">\(B\)</span> 抢回去，那 <span class="arithmatex">\(Q\)</span> 组就必定有一个 <span class="arithmatex">\(C\)</span> 能抢回去，<span class="arithmatex">\(B\)</span> 就不会去抢。同理，假如最后金条留在 <span class="arithmatex">\(P\)</span> 组（即“后手胜”），那么就不会发生抢夺。</p>
 <h3 id="part-1">Part 1 二分图博弈</h3>
 <p>由于我之前没学过二分图博弈模型所以我这里要讲一讲（方便理解）。</p>
-<p>首先，这个模型是有一个二分图，其中起点 $H$ 上有一个棋子，先手后手分别沿边移动棋子，不能重复经过某个点，最后无路可走的就输了。</p>
+<p>首先，这个模型是有一个二分图，其中起点 <span class="arithmatex">\(H\)</span> 上有一个棋子，先手后手分别沿边移动棋子，不能重复经过某个点，最后无路可走的就输了。</p>
 <p>这个模型的结论如下：</p>
 <blockquote>
-<p>假如二分图最大匹配一定包含起点 $H$，先手必胜；反之，先手必败。</p>
+<p>假如二分图最大匹配一定包含起点 <span class="arithmatex">\(H\)</span>，先手必胜；反之，先手必败。</p>
 </blockquote>
-<p>假如二分图最大匹配一定包含 $H$，那么先手只需要按某条匹配边移动棋子，后手无论如何必定会沿一条非匹配边移到另一个匹配点上（或者无路可走），所以先手只需要每次沿匹配边走即可。证明的话，设路径为 $H \to P_1 \to P_2\to P_3\dots$，当前在 $P_i$，下一步后手会沿边 $P_i-P_{i+1}$ 移动。由于 $P_{i-1}-P_i$ 是一条匹配边，所以 $P_i-P_{i+1}$ 必定是一条非匹配边。假如 $P_{i+1}$ 不是匹配点，那么存在一个大小和原匹配 ${H-P_1,P_2-P_3\dots P_{i-1}-P_i}$ 相等的匹配 ${P_1-P_2,P_3-P_4\dots P_i-P_{i+1}}$，与最大匹配一定包含 $H$ 矛盾。</p>
-<p>假如二分图最大匹配不一定包含 $H$，那么必定存在一个最大匹配 $M$ 不包含 $H$，先手第一步必定会走到 $M$ 的匹配点上。假如第一步不移动到匹配点上，那么 $H-P_1$ 就可以和 $M$ 匹配，与 $M$ 是最大匹配矛盾。往后每一步先手都必定走到另一个匹配点上，后手只要沿 $M$ 的匹配边走即可，同样设路径为 $H \to P_1 \to P_2\to P_3\dots$，那么 $M$ 即为 ${P_1-P_2,P_3-P_4\dots,P_{i-1}-P_i}$，假如 $P_{i+1}$ 不是匹配点，那么存在另一个更大的匹配 ${H-P_1,P_2-P_3\dots P_i-P_{i+1}}$，同样与 $M$ 为最大匹配矛盾。</p>
-<p>回到这道题，假如 $P=2$，我们就可以把两组的信息交换一下（用数学语言就是“不妨设 $P=1$”，最后输出时注意一下即可），将第一组人设为 $1\sim n$，第二组为 $n+1\sim n+m$，将所有不在同一组也没有私交的人两两连边组成二分图，先去掉点 $X$ 跑一遍最大匹配，再加上它跑一遍最大匹配，假如加上后最大匹配变大了那么说明所有最大匹配都包含点 $X$，即先手胜，反之后手胜（可以直接输出初始情况）。这一步的复杂度为 $O((n+m)\sqrt{nm-k})$（好怪的复杂度）。</p>
+<p>假如二分图最大匹配一定包含 <span class="arithmatex">\(H\)</span>，那么先手只需要按某条匹配边移动棋子，后手无论如何必定会沿一条非匹配边移到另一个匹配点上（或者无路可走），所以先手只需要每次沿匹配边走即可。证明的话，设路径为 <span class="arithmatex">\(H \to P_1 \to P_2\to P_3\dots\)</span>，当前在 <span class="arithmatex">\(P_i\)</span>，下一步后手会沿边 <span class="arithmatex">\(P_i-P_{i+1}\)</span> 移动。由于 <span class="arithmatex">\(P_{i-1}-P_i\)</span> 是一条匹配边，所以 <span class="arithmatex">\(P_i-P_{i+1}\)</span> 必定是一条非匹配边。假如 <span class="arithmatex">\(P_{i+1}\)</span> 不是匹配点，那么存在一个大小和原匹配 <span class="arithmatex">\(\{H-P_1,P_2-P_3\dots P_{i-1}-P_i\}\)</span> 相等的匹配 <span class="arithmatex">\(\{P_1-P_2,P_3-P_4\dots P_i-P_{i+1}\}\)</span>，与最大匹配一定包含 <span class="arithmatex">\(H\)</span> 矛盾。</p>
+<p>假如二分图最大匹配不一定包含 <span class="arithmatex">\(H\)</span>，那么必定存在一个最大匹配 <span class="arithmatex">\(M\)</span> 不包含 <span class="arithmatex">\(H\)</span>，先手第一步必定会走到 <span class="arithmatex">\(M\)</span> 的匹配点上。假如第一步不移动到匹配点上，那么 <span class="arithmatex">\(H-P_1\)</span> 就可以和 <span class="arithmatex">\(M\)</span> 匹配，与 <span class="arithmatex">\(M\)</span> 是最大匹配矛盾。往后每一步先手都必定走到另一个匹配点上，后手只要沿 <span class="arithmatex">\(M\)</span> 的匹配边走即可，同样设路径为 <span class="arithmatex">\(H \to P_1 \to P_2\to P_3\dots\)</span>，那么 <span class="arithmatex">\(M\)</span> 即为 <span class="arithmatex">\(\{P_1-P_2,P_3-P_4\dots,P_{i-1}-P_i\}\)</span>，假如 <span class="arithmatex">\(P_{i+1}\)</span> 不是匹配点，那么存在另一个更大的匹配 <span class="arithmatex">\(\{H-P_1,P_2-P_3\dots P_i-P_{i+1}\}\)</span>，同样与 <span class="arithmatex">\(M\)</span> 为最大匹配矛盾。</p>
+<p>回到这道题，假如 <span class="arithmatex">\(P=2\)</span>，我们就可以把两组的信息交换一下（用数学语言就是“不妨设 <span class="arithmatex">\(P=1\)</span>”，最后输出时注意一下即可），将第一组人设为 <span class="arithmatex">\(1\sim n\)</span>，第二组为 <span class="arithmatex">\(n+1\sim n+m\)</span>，将所有不在同一组也没有私交的人两两连边组成二分图，先去掉点 <span class="arithmatex">\(X\)</span> 跑一遍最大匹配，再加上它跑一遍最大匹配，假如加上后最大匹配变大了那么说明所有最大匹配都包含点 <span class="arithmatex">\(X\)</span>，即先手胜，反之后手胜（可以直接输出初始情况）。这一步的复杂度为 <span class="arithmatex">\(O((n+m)\sqrt{nm-k})\)</span>（好怪的复杂度）。</p>
 <h3 id="part-2">Part 2 判断可行边</h3>
 <p>假如先手胜，那么我们还要解决另一个问题：谁会抢金条。</p>
-<p>容易发现，会抢金条的其实就是所有从 $X$ 出发的可行边中，连向的编号最小的人，我们只要能判断某条边是否为可行边，就能找到抢夺者。</p>
-<p>在完备匹配中，假如边 $U-V$ 为可行边，只需要满足以下两个条件之一：</p>
+<p>容易发现，会抢金条的其实就是所有从 <span class="arithmatex">\(X\)</span> 出发的可行边中，连向的编号最小的人，我们只要能判断某条边是否为可行边，就能找到抢夺者。</p>
+<p>在完备匹配中，假如边 <span class="arithmatex">\(U-V\)</span> 为可行边，只需要满足以下两个条件之一：</p>
 <ul>
-<li>$U-V$ 当前是匹配边（如果你是用 Dinic 求的最大匹配那么等价于 $U \to V$ 的残量为 $0$）。</li>
-<li>$U-V$ 是非匹配边，设当前 $U$ 与 $I$ 匹配，$V$ 与 $J$ 匹配，连接 $U-V$ 后，$I$ 和 $J$ 失去匹配，那么必须能找到一条从 $J$ 到 $I$ 的增广路才能保证最大匹配。</li>
+<li><span class="arithmatex">\(U-V\)</span> 当前是匹配边（如果你是用 Dinic 求的最大匹配那么等价于 <span class="arithmatex">\(U \to V\)</span> 的残量为 <span class="arithmatex">\(0\)</span>）。</li>
+<li><span class="arithmatex">\(U-V\)</span> 是非匹配边，设当前 <span class="arithmatex">\(U\)</span> 与 <span class="arithmatex">\(I\)</span> 匹配，<span class="arithmatex">\(V\)</span> 与 <span class="arithmatex">\(J\)</span> 匹配，连接 <span class="arithmatex">\(U-V\)</span> 后，<span class="arithmatex">\(I\)</span> 和 <span class="arithmatex">\(J\)</span> 失去匹配，那么必须能找到一条从 <span class="arithmatex">\(J\)</span> 到 <span class="arithmatex">\(I\)</span> 的增广路才能保证最大匹配。</li>
 </ul>
-<p>容易发现，假如我们把匹配边视为从右至左的有向边，非匹配边视为从左至右的（即跑完 Dinic 后的残量网络中残量为 $1$ 的单向边）。那么显然，从 $U$ 到 $V$ 有一条单向边，从 $I$ 到 $U$，从 $V$ 到 $J$ 也各有一条单向边，假如我们能再找到一条从 $V$ 到 $U$ 的路径，那么它满足如下性质：</p>
+<p>容易发现，假如我们把匹配边视为从右至左的有向边，非匹配边视为从左至右的（即跑完 Dinic 后的残量网络中残量为 <span class="arithmatex">\(1\)</span> 的单向边）。那么显然，从 <span class="arithmatex">\(U\)</span> 到 <span class="arithmatex">\(V\)</span> 有一条单向边，从 <span class="arithmatex">\(I\)</span> 到 <span class="arithmatex">\(U\)</span>，从 <span class="arithmatex">\(V\)</span> 到 <span class="arithmatex">\(J\)</span> 也各有一条单向边，假如我们能再找到一条从 <span class="arithmatex">\(V\)</span> 到 <span class="arithmatex">\(U\)</span> 的路径，那么它满足如下性质：</p>
 <ul>
-<li>这条路径长度肯定为奇数，因为二分图中没有奇环，而这条路径加上边 $U-V$ 就是一个环。</li>
-<li>这条路径是从 $V$ 到 $U$ 的增广路，所以去除两端的两条边后它就是从 $J$ 到 $I$ 的增广路。</li>
+<li>这条路径长度肯定为奇数，因为二分图中没有奇环，而这条路径加上边 <span class="arithmatex">\(U-V\)</span> 就是一个环。</li>
+<li>这条路径是从 <span class="arithmatex">\(V\)</span> 到 <span class="arithmatex">\(U\)</span> 的增广路，所以去除两端的两条边后它就是从 <span class="arithmatex">\(J\)</span> 到 <span class="arithmatex">\(I\)</span> 的增广路。</li>
 </ul>
-<p>假如原先从 $V$ 到 $U$ 的增广路中匹配了 $e$ 条边，那么从 $J$ 到 $I$ 的增广路中就匹配了 $e-1$ 条边，加上新增的 $U-V$ 这条边，显然匹配数不变。</p>
-<p>容易发现 $U$ 能到达 $V$，$V$ 又能到达 $U$，其实就是在说 $U,V$ 在同一个强连通分量里，我们对残量网络（如果你用的不是 Dinic 就自己手动给边定向）跑一遍强连通即可求解。</p>
+<p>假如原先从 <span class="arithmatex">\(V\)</span> 到 <span class="arithmatex">\(U\)</span> 的增广路中匹配了 <span class="arithmatex">\(e\)</span> 条边，那么从 <span class="arithmatex">\(J\)</span> 到 <span class="arithmatex">\(I\)</span> 的增广路中就匹配了 <span class="arithmatex">\(e-1\)</span> 条边，加上新增的 <span class="arithmatex">\(U-V\)</span> 这条边，显然匹配数不变。</p>
+<p>容易发现 <span class="arithmatex">\(U\)</span> 能到达 <span class="arithmatex">\(V\)</span>，<span class="arithmatex">\(V\)</span> 又能到达 <span class="arithmatex">\(U\)</span>，其实就是在说 <span class="arithmatex">\(U,V\)</span> 在同一个强连通分量里，我们对残量网络（如果你用的不是 Dinic 就自己手动给边定向）跑一遍强连通即可求解。</p>
 <p>但是这道题不一定是完备匹配，上面的结论会出现一些问题。</p>
 <ul>
-<li>$U,V$ 二者之一可能本来就是非匹配点，不妨设 $V$ 是非匹配点，此时直接断开 $U$ 原来的匹配边，连接 $U-V$ 仍然是最大匹配。</li>
-<li>即使当前 $U$ 与 $I$ 匹配，$V$ 与 $J$ 匹配，连接 $U-V$ 后，$I,J$ 失去匹配，我们也不一定非要找到从 $J$ 到 $I$ 的增广路，因为从 $I$ 到另一非匹配点的增广路同样可以得到一组包含 $U,V$ 的最大匹配。</li>
+<li><span class="arithmatex">\(U,V\)</span> 二者之一可能本来就是非匹配点，不妨设 <span class="arithmatex">\(V\)</span> 是非匹配点，此时直接断开 <span class="arithmatex">\(U\)</span> 原来的匹配边，连接 <span class="arithmatex">\(U-V\)</span> 仍然是最大匹配。</li>
+<li>即使当前 <span class="arithmatex">\(U\)</span> 与 <span class="arithmatex">\(I\)</span> 匹配，<span class="arithmatex">\(V\)</span> 与 <span class="arithmatex">\(J\)</span> 匹配，连接 <span class="arithmatex">\(U-V\)</span> 后，<span class="arithmatex">\(I,J\)</span> 失去匹配，我们也不一定非要找到从 <span class="arithmatex">\(J\)</span> 到 <span class="arithmatex">\(I\)</span> 的增广路，因为从 <span class="arithmatex">\(I\)</span> 到另一非匹配点的增广路同样可以得到一组包含 <span class="arithmatex">\(U,V\)</span> 的最大匹配。</li>
 </ul>
-<p>所以我们不能直接当成完备匹配来做，但我们设右部某点为 $W$，汇点为 $T$，假如 $W$ 为非匹配点，$W \to T$ 的残量必定为 $1$，反之，假如 $W'$ 为匹配点，$W \to T$ 的残量必定为 $0$，即 $T \to W'$ 的残量为 $1$，换言之，存在一条路径 $W \to T \to W'$。假如二分图中有一条 $V$ 到 $U$ 的增广路，那么必定能从 $U$ 经过残量网络到达 $W$，进而到达 $V$，$U,V$ 仍在同一个强连通分量中。</p>
-<p>在这一步中，跑一遍强连通的复杂度为 $O((n+m)+(nm-k))$，最终枚举求解的复杂度为 $O(m)$，故整个算法的复杂度是 $O((n+m)\sqrt{nm-k}+(n+m)+(nm-k)+m)$，差不多是 $O(n^2)$ 级别的，可以通过此题。</p>
+<p>所以我们不能直接当成完备匹配来做，但我们设右部某点为 <span class="arithmatex">\(W\)</span>，汇点为 <span class="arithmatex">\(T\)</span>，假如 <span class="arithmatex">\(W\)</span> 为非匹配点，<span class="arithmatex">\(W \to T\)</span> 的残量必定为 <span class="arithmatex">\(1\)</span>，反之，假如 <span class="arithmatex">\(W'\)</span> 为匹配点，<span class="arithmatex">\(W \to T\)</span> 的残量必定为 <span class="arithmatex">\(0\)</span>，即 <span class="arithmatex">\(T \to W'\)</span> 的残量为 <span class="arithmatex">\(1\)</span>，换言之，存在一条路径 <span class="arithmatex">\(W \to T \to W'\)</span>。假如二分图中有一条 <span class="arithmatex">\(V\)</span> 到 <span class="arithmatex">\(U\)</span> 的增广路，那么必定能从 <span class="arithmatex">\(U\)</span> 经过残量网络到达 <span class="arithmatex">\(W\)</span>，进而到达 <span class="arithmatex">\(V\)</span>，<span class="arithmatex">\(U,V\)</span> 仍在同一个强连通分量中。</p>
+<p>在这一步中，跑一遍强连通的复杂度为 <span class="arithmatex">\(O((n+m)+(nm-k))\)</span>，最终枚举求解的复杂度为 <span class="arithmatex">\(O(m)\)</span>，故整个算法的复杂度是 <span class="arithmatex">\(O((n+m)\sqrt{nm-k}+(n+m)+(nm-k)+m)\)</span>，差不多是 <span class="arithmatex">\(O(n^2)\)</span> 级别的，可以通过此题。</p>
 <h3 id="code">code</h3>
 <details class="success">
 <summary>code</summary>

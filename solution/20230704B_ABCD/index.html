@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5851,7 +5879,7 @@
 <h2 id="_1">前言</h2>
 <p>这次前两道题很简单但是赛时卡了，记录一下思维过程以后不要再卡。第三道是思维题，第四道套路题，都有记一下的价值。</p>
 <h2 id="t1">T1</h2>
-<p>其实很简单，发现假如知道了第 $k$ 根棍子的长度可以很容易地判断能否取到，那么直接二分答案搞定。但赛时有个砂玻卡了 1.5h 才想出来。</p>
+<p>其实很简单，发现假如知道了第 <span class="arithmatex">\(k\)</span> 根棍子的长度可以很容易地判断能否取到，那么直接二分答案搞定。但赛时有个砂玻卡了 1.5h 才想出来。</p>
 <p>做这种题假如正向思维卡住不妨反向来考虑，或者说这种简单的求最大/最小值的题应该优先考虑二分答案。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -5888,9 +5916,9 @@
 </details>
 <h2 id="t2">T2</h2>
 <p>这种跟整除有关的题应该优先考虑数论分块。</p>
-<p>对于一个固定的 $a$，容易发现 $b$ 的值域为 $[\left\lceil\frac{min_c}{a}\right\rceil,\left\lfloor\frac{max_c}{a}\right\rfloor]$。</p>
-<p>而众所周知 $\left\lfloor\frac{n}{m}\right\rfloor$ 的取值只有 $2\sqrt{n}$ 种，因为当 $m \le \sqrt{n}$，显然只有 $\sqrt{n}$ 种，当 $m \ge \sqrt{n}$，那么 $\frac{n}{m}$ 就只有 $\sqrt{n}$ 种取值。所以共有大约 $2 \sqrt{n}$ 种。</p>
-<p>所以 $b$ 的值域至多会变化 $4\sqrt{max_c}$ 次，我们在 $a$ 的取值中二分下一次变化 $a$ 的值即可，复杂度 $O(\sqrt{max_c}\log{max_a})$。</p>
+<p>对于一个固定的 <span class="arithmatex">\(a\)</span>，容易发现 <span class="arithmatex">\(b\)</span> 的值域为 <span class="arithmatex">\([\left\lceil\frac{min_c}{a}\right\rceil,\left\lfloor\frac{max_c}{a}\right\rfloor]\)</span>。</p>
+<p>而众所周知 <span class="arithmatex">\(\left\lfloor\frac{n}{m}\right\rfloor\)</span> 的取值只有 <span class="arithmatex">\(2\sqrt{n}\)</span> 种，因为当 <span class="arithmatex">\(m \le \sqrt{n}\)</span>，显然只有 <span class="arithmatex">\(\sqrt{n}\)</span> 种，当 <span class="arithmatex">\(m \ge \sqrt{n}\)</span>，那么 <span class="arithmatex">\(\frac{n}{m}\)</span> 就只有 <span class="arithmatex">\(\sqrt{n}\)</span> 种取值。所以共有大约 <span class="arithmatex">\(2 \sqrt{n}\)</span> 种。</p>
+<p>所以 <span class="arithmatex">\(b\)</span> 的值域至多会变化 <span class="arithmatex">\(4\sqrt{max_c}\)</span> 次，我们在 <span class="arithmatex">\(a\)</span> 的取值中二分下一次变化 <span class="arithmatex">\(a\)</span> 的值即可，复杂度 <span class="arithmatex">\(O(\sqrt{max_c}\log{max_a})\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">i64</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="n">a2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">,</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">ans</span><span class="p">,</span><span class="n">l</span><span class="p">;</span>
@@ -5914,30 +5942,30 @@
 <h2 id="t3">T3</h2>
 <p>据说以前考过，但当时我还在 D 组不知道在搞什么。</p>
 <p>首先容易发现一个性质：</p>
-<p>$$
+<div class="arithmatex">\[
 10^k\bmod11=\begin{cases}
 1 &amp; k\equiv 0\pmod 2\\
 -1 &amp; k\equiv 1\pmod 2
 \end{cases}
-$$</p>
+\]</div>
 <p>然后我们就可以用这个性质做题了。</p>
-<p>首先读入的时候不用高精度，由于我们最后算的是模以 $11$ 为 $0$ 的情况，不妨每读一位就模以 $11$，把每个数看做一个 $0 \sim 10$ 的数加一堆前导零，另外存储一下这个数的位数是奇数还是偶数。</p>
-<p>然后假如我们得到的每个数为 $a_1,a_2\dots a_n$，位数为 $l_1,l_2\dots l_n$，那么按顺序拼出来的大概长这样：</p>
-<p>$$a_1 \times 10^{l_2+l_3+\dots l_n}+a_2 \times 10^{l_3+l_4\dots l_n}+\dots a_n$$</p>
-<p>还记得我们刚才的结论吗？这东西模 $11$ 和下面这东西模 $11$ 是等价的。</p>
-<p>$$a_1 \times -1^{l_2+l_3+\dots l_n}+a_2 \times -1^{l_3+l_4\dots l_n}+\dots a_n$$</p>
-<p>也就是说我们会把一些数的 $a$ 取相反数，一些不取反然后加起来。另外取反的 $a_i$ 必定满足 $l_{i+1}+l_{l+2}+\dots l_n \equiv 1 \pmod 2$。</p>
-<p>假如我们现在已经拼出了后 $k$ 位，现在把某个数 $a_i$ 接在上面，那么假如 $k$ 为奇数，$a_i$ 就要取反，反之不取反，另外容易发现假如 $l_i$ 是一个奇数那么对于下一个 $a$ 它的 $k'$ 和 $k$ 奇偶性不同，假如 $l_i$ 是偶数那么 $k'$ 和 $k$ 奇偶性相同。这就有个很好的性质，我们发现可以先把所有奇数全部拼好再插入偶数，这对于奇数的答案是不会有影响的。</p>
-<p>假如只考虑奇数，设奇数有 $odd$ 个，容易发现无论怎么构造都必定有 $\left\lfloor\frac{odd}{2}\right\rfloor$ 个 $a$ 取反，其余的不取反，那么我们可以不考虑具体放哪个位置，只关心它取不取反。考虑 DP，设 $dp_{i,j,k}$ 表示考虑前 $i$ 个奇数（随意排序），其中 $j$ 个取反，和（在模 $11$ 意义下）为 $k$ 的方案数，易得转移方程：</p>
-<p>$$dp_{i,j,k}=dp_{i-1,j,k-a_i}\times (\left\lceil\frac{odd}{2}\right\rceil-(i-j-1))+dp_{i-1,j-1,k+a_i}\times (\left\lfloor\frac{odd}{2}\right\rfloor-(j-1))$$</p>
-<p>这个式子前半部分是考虑 $a_i$ 不取反转移，其中 $\left\lceil\frac{odd}{2}\right\rceil-(i-j-1)$ 表示这个数具体塞在哪里的方案数，后半部分是考虑 $a_i$ 取反转移，具体实现时要注意取模和 $j$ 的边界。</p>
-<p>然后考虑偶数如何放，仍然考虑 DP，设 $f_{i,j,k}$，定义与 $dp_{i,j,k}$ 类似，易得转移方程：</p>
-<p>$$f_{i,j,k}=f_{i-1,j,k-a_i}\times (\left\lceil\frac{odd+1}{2}\right\rceil+(i-j-1))+f_{i-1,j-1,k+a_i}\times (\left\lfloor\frac{odd+1}{2}\right\rfloor+(j-1))$$</p>
-<p>式子前后半部分的意义和 $dp_{i,j,k}$ 是类似的。</p>
-<p><del>这时候聪明的小朋友就要问了，为什么一个是减去 $(i-j-1)$，另一个是加上呢？</del></p>
+<p>首先读入的时候不用高精度，由于我们最后算的是模以 <span class="arithmatex">\(11\)</span> 为 <span class="arithmatex">\(0\)</span> 的情况，不妨每读一位就模以 <span class="arithmatex">\(11\)</span>，把每个数看做一个 <span class="arithmatex">\(0 \sim 10\)</span> 的数加一堆前导零，另外存储一下这个数的位数是奇数还是偶数。</p>
+<p>然后假如我们得到的每个数为 <span class="arithmatex">\(a_1,a_2\dots a_n\)</span>，位数为 <span class="arithmatex">\(l_1,l_2\dots l_n\)</span>，那么按顺序拼出来的大概长这样：</p>
+<div class="arithmatex">\[a_1 \times 10^{l_2+l_3+\dots l_n}+a_2 \times 10^{l_3+l_4\dots l_n}+\dots a_n\]</div>
+<p>还记得我们刚才的结论吗？这东西模 <span class="arithmatex">\(11\)</span> 和下面这东西模 <span class="arithmatex">\(11\)</span> 是等价的。</p>
+<div class="arithmatex">\[a_1 \times -1^{l_2+l_3+\dots l_n}+a_2 \times -1^{l_3+l_4\dots l_n}+\dots a_n\]</div>
+<p>也就是说我们会把一些数的 <span class="arithmatex">\(a\)</span> 取相反数，一些不取反然后加起来。另外取反的 <span class="arithmatex">\(a_i\)</span> 必定满足 <span class="arithmatex">\(l_{i+1}+l_{l+2}+\dots l_n \equiv 1 \pmod 2\)</span>。</p>
+<p>假如我们现在已经拼出了后 <span class="arithmatex">\(k\)</span> 位，现在把某个数 <span class="arithmatex">\(a_i\)</span> 接在上面，那么假如 <span class="arithmatex">\(k\)</span> 为奇数，<span class="arithmatex">\(a_i\)</span> 就要取反，反之不取反，另外容易发现假如 <span class="arithmatex">\(l_i\)</span> 是一个奇数那么对于下一个 <span class="arithmatex">\(a\)</span> 它的 <span class="arithmatex">\(k'\)</span> 和 <span class="arithmatex">\(k\)</span> 奇偶性不同，假如 <span class="arithmatex">\(l_i\)</span> 是偶数那么 <span class="arithmatex">\(k'\)</span> 和 <span class="arithmatex">\(k\)</span> 奇偶性相同。这就有个很好的性质，我们发现可以先把所有奇数全部拼好再插入偶数，这对于奇数的答案是不会有影响的。</p>
+<p>假如只考虑奇数，设奇数有 <span class="arithmatex">\(odd\)</span> 个，容易发现无论怎么构造都必定有 <span class="arithmatex">\(\left\lfloor\frac{odd}{2}\right\rfloor\)</span> 个 <span class="arithmatex">\(a\)</span> 取反，其余的不取反，那么我们可以不考虑具体放哪个位置，只关心它取不取反。考虑 DP，设 <span class="arithmatex">\(dp_{i,j,k}\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 个奇数（随意排序），其中 <span class="arithmatex">\(j\)</span> 个取反，和（在模 <span class="arithmatex">\(11\)</span> 意义下）为 <span class="arithmatex">\(k\)</span> 的方案数，易得转移方程：</p>
+<div class="arithmatex">\[dp_{i,j,k}=dp_{i-1,j,k-a_i}\times (\left\lceil\frac{odd}{2}\right\rceil-(i-j-1))+dp_{i-1,j-1,k+a_i}\times (\left\lfloor\frac{odd}{2}\right\rfloor-(j-1))\]</div>
+<p>这个式子前半部分是考虑 <span class="arithmatex">\(a_i\)</span> 不取反转移，其中 <span class="arithmatex">\(\left\lceil\frac{odd}{2}\right\rceil-(i-j-1)\)</span> 表示这个数具体塞在哪里的方案数，后半部分是考虑 <span class="arithmatex">\(a_i\)</span> 取反转移，具体实现时要注意取模和 <span class="arithmatex">\(j\)</span> 的边界。</p>
+<p>然后考虑偶数如何放，仍然考虑 DP，设 <span class="arithmatex">\(f_{i,j,k}\)</span>，定义与 <span class="arithmatex">\(dp_{i,j,k}\)</span> 类似，易得转移方程：</p>
+<div class="arithmatex">\[f_{i,j,k}=f_{i-1,j,k-a_i}\times (\left\lceil\frac{odd+1}{2}\right\rceil+(i-j-1))+f_{i-1,j-1,k+a_i}\times (\left\lfloor\frac{odd+1}{2}\right\rfloor+(j-1))\]</div>
+<p>式子前后半部分的意义和 <span class="arithmatex">\(dp_{i,j,k}\)</span> 是类似的。</p>
+<p><del>这时候聪明的小朋友就要问了，为什么一个是减去 <span class="arithmatex">\((i-j-1)\)</span>，另一个是加上呢？</del></p>
 <p>感性理解一下，放奇数是一个萝卜一个坑地放，某个数占了一个位置那其它数就不能放这个位置了。但放偶数是插空放，放了一个数就会新增一个空。</p>
-<p>然后最后统计答案时，首先奇数取反的必定有 $\left\lfloor\frac{odd}{2}\right\rfloor$ 个，直接枚举偶数有多少个取反，然后枚举 $k$ 相乘即可，具体见代码。</p>
-<p>复杂度 $O(n^2)$。</p>
+<p>然后最后统计答案时，首先奇数取反的必定有 <span class="arithmatex">\(\left\lfloor\frac{odd}{2}\right\rfloor\)</span> 个，直接枚举偶数有多少个取反，然后枚举 <span class="arithmatex">\(k\)</span> 相乘即可，具体见代码。</p>
+<p>复杂度 <span class="arithmatex">\(O(n^2)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">const</span><span class="w"> </span><span class="n">i64</span><span class="w"> </span><span class="n">N</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span><span class="n">inf</span><span class="o">=</span><span class="mh">0x3f3f3f3f</span><span class="p">,</span><span class="n">mod</span><span class="o">=</span><span class="mf">1e9</span><span class="o">+</span><span class="mi">7</span><span class="p">;</span>
@@ -6006,41 +6034,41 @@ $$</p>
 <details class="question">
 <summary>什么是切比雪夫距离</summary>
 <p>切比雪夫距离（Chebyshev distance）是向量空间中的一种度量，二个点之间的距离定义为其各坐标数值差的最大值。</p>
-<p>在二维空间内，两个点之间的切比雪夫距离为它们横坐标之差的绝对值与纵坐标之差的绝对值的最大值。设点 $A(x_1,y_1),B(x_2,y_2)$，则 A,B 之间的切比雪夫距离用公式可以表示为：</p>
-<p>$$d(A,B) = \max(|x_1 - x_2|, |y_1 - y_2|)$$</p>
-<p>$n$ 维空间中切比雪夫距离的距离公式可以表示为：</p>
-<p>$$
+<p>在二维空间内，两个点之间的切比雪夫距离为它们横坐标之差的绝对值与纵坐标之差的绝对值的最大值。设点 <span class="arithmatex">\(A(x_1,y_1),B(x_2,y_2)\)</span>，则 A,B 之间的切比雪夫距离用公式可以表示为：</p>
+<div class="arithmatex">\[d(A,B) = \max(|x_1 - x_2|, |y_1 - y_2|)\]</div>
+<p><span class="arithmatex">\(n\)</span> 维空间中切比雪夫距离的距离公式可以表示为：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 d(x,y) &amp;= \max\begin{Bmatrix} |x_1 - y_1|,|x_2 - y_2|,\cdot \cdot \cdot,|x_n - y_n|\end{Bmatrix} \\
 &amp;= \max\begin{Bmatrix} |x_i - y_i|\end{Bmatrix}(i \in [1, n])\end{aligned}
-$$</p>
+\]</div>
 <p>摘自 <a href="https://oi-wiki.org/geometry/distance/#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E8%B7%9D%E7%A6%BB">OI Wiki</a></p>
 </details>
 <p>并且切比雪夫距离和曼哈顿距离可以互相转化。</p>
-<p>假如我现在有两个点 $A(x_1,y_1),B(x_2,y_2)$，它们的曼哈顿距离应该是 $|x_1-x_2|+|y_1-y_2|$，显然等于这个东西：</p>
-<p>$$\max\begin{Bmatrix}(x_1-x_2)+(y_1-y_2),(-x_1+x_2)+(y_1-y_2),(x_1-x_2)+(-y_1+y_2),(-x_1+x_2)+(-y_1+y_2)\end{Bmatrix}$$</p>
-<p>因为 $(x_1-x_2),(y_1-y_2)$ 都是取正数的时候更大。然后再考虑转化一下，就可以得到这个式子：</p>
-<p>$$\max\begin{Bmatrix}(x_1+y_1)-(x_2+y_2),(y_1-x_1)-(y_2-x_2),(x_1-y_1)-(x_2-y_2),(x_2+y_2)-(x_1+y_1)\end{Bmatrix}$$</p>
+<p>假如我现在有两个点 <span class="arithmatex">\(A(x_1,y_1),B(x_2,y_2)\)</span>，它们的曼哈顿距离应该是 <span class="arithmatex">\(|x_1-x_2|+|y_1-y_2|\)</span>，显然等于这个东西：</p>
+<div class="arithmatex">\[\max\begin{Bmatrix}(x_1-x_2)+(y_1-y_2),(-x_1+x_2)+(y_1-y_2),(x_1-x_2)+(-y_1+y_2),(-x_1+x_2)+(-y_1+y_2)\end{Bmatrix}\]</div>
+<p>因为 <span class="arithmatex">\((x_1-x_2),(y_1-y_2)\)</span> 都是取正数的时候更大。然后再考虑转化一下，就可以得到这个式子：</p>
+<div class="arithmatex">\[\max\begin{Bmatrix}(x_1+y_1)-(x_2+y_2),(y_1-x_1)-(y_2-x_2),(x_1-y_1)-(x_2-y_2),(x_2+y_2)-(x_1+y_1)\end{Bmatrix}\]</div>
 <p>然后发现可以套一层绝对值：</p>
-<p>$$\max\begin{Bmatrix}|(x_1+y_1)-(x_2+y_2)|,|(x_1-y_1)-(x_2-y_2)|\end{Bmatrix}$$</p>
+<div class="arithmatex">\[\max\begin{Bmatrix}|(x_1+y_1)-(x_2+y_2)|,|(x_1-y_1)-(x_2-y_2)|\end{Bmatrix}\]</div>
 <p>发现没有，这就是切比雪夫距离的形式。</p>
-<p>故 $A(x_1,y_1),B(x_2,y_2)$ 的曼哈顿距离等于 $A'(x_1+y_1,x_1-y_1),B'(x_2+y_2,x_2-y_2)$ 的切比雪夫距离。</p>
+<p>故 <span class="arithmatex">\(A(x_1,y_1),B(x_2,y_2)\)</span> 的曼哈顿距离等于 <span class="arithmatex">\(A'(x_1+y_1,x_1-y_1),B'(x_2+y_2,x_2-y_2)\)</span> 的切比雪夫距离。</p>
 <p>反过来也差不多，但不是这道题的重点就不讲了。</p>
-<p>那么现在我们把所有黑点 $(x_i,y_i)$ 转化为 $(x_i+y_i,x_i-y_i)$，这样删点的代价就变成了它和切比雪夫距离最远的黑点的切比雪夫距离。为方便叙述，以下所有“距离”均为切比雪夫距离。</p>
+<p>那么现在我们把所有黑点 <span class="arithmatex">\((x_i,y_i)\)</span> 转化为 <span class="arithmatex">\((x_i+y_i,x_i-y_i)\)</span>，这样删点的代价就变成了它和切比雪夫距离最远的黑点的切比雪夫距离。为方便叙述，以下所有“距离”均为切比雪夫距离。</p>
 <p>考虑转化后平面上的点集长这样：</p>
 <p><img alt="图示 1" src="../../img/20230704B_ABCD_1.png" /></p>
-<p>容易发现每个点纵坐标值域为 $[-7,7]$，横坐标为 $[2,16]$。现在我们标注出最边缘的点。</p>
+<p>容易发现每个点纵坐标值域为 <span class="arithmatex">\([-7,7]\)</span>，横坐标为 <span class="arithmatex">\([2,16]\)</span>。现在我们标注出最边缘的点。</p>
 <p><img alt="图示 2" src="../../img/20230704B_ABCD_2.png" /></p>
 <p>容易发现每次删距离更远的两对边上的点一定是不劣的。</p>
 <p>假如我们有这个一个点，它和四条边缘的距离分别是这样的：</p>
 <p><img alt="图示 3" src="../../img/20230704B_ABCD_3.png" /></p>
-<p>假设 $A&gt;B$，首先蓝边 $A$ 肯定会被算至少一次，因为你无论删边上的哪个点与它距离最远的都是对面的那个点。</p>
+<p>假设 <span class="arithmatex">\(A&gt;B\)</span>，首先蓝边 <span class="arithmatex">\(A\)</span> 肯定会被算至少一次，因为你无论删边上的哪个点与它距离最远的都是对面的那个点。</p>
 <p>然后对于那个红色点，假如删去它原本的代价是与蓝色边界的距离，那么删绿边上的点不会影响它。假如原本的代价是和绿边的距离，那么删绿边的点还可能让代价变小。容易发现对于每个点都是这样的。</p>
 <p>那么考虑记忆化搜索，每次扫一遍当前点集找到更远的两边缘上的点，然后随便删一个。</p>
 <p>这样的复杂度为什么是对的？考虑围成的矩形有多少种取法。</p>
-<p>不妨考虑两对角顶点的位置有多少种取法，首先转化后点集横纵坐标取值都有 $14$ 种，那么两对角顶点的位置都有 $14^2$ 种选法，去掉重复的就是 $\frac{14^2 \times 14^2}{2}=19268$ 种，这本来就是个非常小的数了，还根本不可能卡满。</p>
+<p>不妨考虑两对角顶点的位置有多少种取法，首先转化后点集横纵坐标取值都有 <span class="arithmatex">\(14\)</span> 种，那么两对角顶点的位置都有 <span class="arithmatex">\(14^2\)</span> 种选法，去掉重复的就是 <span class="arithmatex">\(\frac{14^2 \times 14^2}{2}=19268\)</span> 种，这本来就是个非常小的数了，还根本不可能卡满。</p>
 <p>另外发现在一个矩形变形之前只可能取它边缘上的点，基本上可以认为复杂度只和矩形的数量有关，而且还要加记忆化使每个状态只会被访问一次，跑得就更快了。</p>
-<p>注意对于状态我们可以用一个 <code>vector</code> 存点集，然后用 <code>map</code> 写记忆化。注意要给 <code>map</code> 的 $key$ 定义一个小于符号才不会 CE，但众所周知 <code>vector</code> 默认按字典序比较，我们只要给存的点定义小于符号即可。</p>
+<p>注意对于状态我们可以用一个 <code>vector</code> 存点集，然后用 <code>map</code> 写记忆化。注意要给 <code>map</code> 的 <span class="arithmatex">\(key\)</span> 定义一个小于符号才不会 CE，但众所周知 <code>vector</code> 默认按字典序比较，我们只要给存的点定义小于符号即可。</p>
 <details class="example">
 <summary>具体实现参考</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">point</span><span class="p">{</span>

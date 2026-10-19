@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5829,9 +5857,9 @@
 <p>爆零，然后被 OPJ 骂破防。</p>
 <h2 id="t1">T1</h2>
 <p>算是简单题吧。但是赛时以为复杂度假了于是就没写。</p>
-<p>首先容易发现数位积的质因数必定只含有 $2,3,5,7$，那么可以数位 DP 求出每个数位积的出现次数。</p>
-<p>然后考虑枚举 $\gcd$，容易发现 $a$ 是 $\gcd$ 的倍数当且仅当 $a$ 的四个质因子指数都不大于 $\gcd$ 的对应指数。这个可以四维后缀和求，接着平方后做简单容斥即可求出 $\gcd$ 恰好等于你选的数的数对 $(i,j)$。</p>
-<p>然后就过了，因为可以发现可能出现的数位积是不多的。往多了说最多也就 $(18\times 3)\times(18\times 2)\times 18\times 18$ 个数，实际请款肯定远小于它。</p>
+<p>首先容易发现数位积的质因数必定只含有 <span class="arithmatex">\(2,3,5,7\)</span>，那么可以数位 DP 求出每个数位积的出现次数。</p>
+<p>然后考虑枚举 <span class="arithmatex">\(\gcd\)</span>，容易发现 <span class="arithmatex">\(a\)</span> 是 <span class="arithmatex">\(\gcd\)</span> 的倍数当且仅当 <span class="arithmatex">\(a\)</span> 的四个质因子指数都不大于 <span class="arithmatex">\(\gcd\)</span> 的对应指数。这个可以四维后缀和求，接着平方后做简单容斥即可求出 <span class="arithmatex">\(\gcd\)</span> 恰好等于你选的数的数对 <span class="arithmatex">\((i,j)\)</span>。</p>
+<p>然后就过了，因为可以发现可能出现的数位积是不多的。往多了说最多也就 <span class="arithmatex">\((18\times 3)\times(18\times 2)\times 18\times 18\)</span> 个数，实际请款肯定远小于它。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5959,11 +5987,11 @@
 </details>
 <h2 id="t2">T2</h2>
 <p>套路题，会套路就简单，不会就难。</p>
-<p>这种元素数量很多，并且有大小关系，让你求第 $k$ 大的题可以考虑随机二分。</p>
-<p>考虑二分是每次选中间元素 $a$，然后将所有元素划为<strong>严格小于 $a$ 与大于等于 $a$ 两类</strong>。判断 $a$ 的排名，然后在答案存在的那一边做子问题。</p>
-<p>但是这道题不好找“中间”的一个元素。那么就可以随机一个 $a$，在期望情况下也是 $O(\log n^2)=O(\log n)$ 的。</p>
-<p>那么怎么求有多少个区间小于 $a$ 呢？这个可以在值域上开一个线段树维护每个数的出现次数，然后用双指针维护，每次找到第一个出现次数不同的数判断谁更大然后挪动双指针即可。这部分复杂度 $O(n\log n)$。</p>
-<p>然后对每个右端点存没被删掉的左端点区间即可。总复杂度 $O(n\log^2 n)$。</p>
+<p>这种元素数量很多，并且有大小关系，让你求第 <span class="arithmatex">\(k\)</span> 大的题可以考虑随机二分。</p>
+<p>考虑二分是每次选中间元素 <span class="arithmatex">\(a\)</span>，然后将所有元素划为<strong>严格小于 <span class="arithmatex">\(a\)</span> 与大于等于 <span class="arithmatex">\(a\)</span> 两类</strong>。判断 <span class="arithmatex">\(a\)</span> 的排名，然后在答案存在的那一边做子问题。</p>
+<p>但是这道题不好找“中间”的一个元素。那么就可以随机一个 <span class="arithmatex">\(a\)</span>，在期望情况下也是 <span class="arithmatex">\(O(\log n^2)=O(\log n)\)</span> 的。</p>
+<p>那么怎么求有多少个区间小于 <span class="arithmatex">\(a\)</span> 呢？这个可以在值域上开一个线段树维护每个数的出现次数，然后用双指针维护，每次找到第一个出现次数不同的数判断谁更大然后挪动双指针即可。这部分复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
+<p>然后对每个右端点存没被删掉的左端点区间即可。总复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6063,8 +6091,8 @@
 <p>考虑有两种情况，一种是占用某一个空行的正中间，另一种是紧靠在某一个用过的点的左边或右边。</p>
 <p>第一种容易发现只有两行（上下各一行）是不劣的，这个可以直接维护。</p>
 <p>考虑第二种，容易想到在<strong>空格长度</strong>上开线段树，然后再用线段树维护剩下三个条件最优的情况。</p>
-<p>那么如何维护曼哈顿距离和呢？考虑一个完全在中线左侧的区间 $(x,[l,r])$。此时曼哈顿距离和就是 $(x,r)$ 与中点的距离 $dis$ 乘以 $r-l+1$ 再加上一个等差数列。而这个等差数列在固定长度的情况下显然是个定值。那么维护那个距离即可。</p>
-<p>然后具体实现可以在线段树叶子上开 <code>set</code> 即可。我代码的实现比较劣，复杂度 $O(n\log n)$。</p>
+<p>那么如何维护曼哈顿距离和呢？考虑一个完全在中线左侧的区间 <span class="arithmatex">\((x,[l,r])\)</span>。此时曼哈顿距离和就是 <span class="arithmatex">\((x,r)\)</span> 与中点的距离 <span class="arithmatex">\(dis\)</span> 乘以 <span class="arithmatex">\(r-l+1\)</span> 再加上一个等差数列。而这个等差数列在固定长度的情况下显然是个定值。那么维护那个距离即可。</p>
+<p>然后具体实现可以在线段树叶子上开 <code>set</code> 即可。我代码的实现比较劣，复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

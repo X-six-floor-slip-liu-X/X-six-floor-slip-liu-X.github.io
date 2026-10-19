@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6491,44 +6519,44 @@
 <p><del>虽然但是这道题还是图论题。</del></p>
 <p><a href="https://www.luogu.com.cn/problem/P7295">传送门</a></p>
 <p>貌似是我第一次完全独立做出黑题。</p>
-<p>约定 $a_{i,j}$ 表示给定矩阵的第 $i$ 行第 $j$ 列。</p>
+<p>约定 <span class="arithmatex">\(a_{i,j}\)</span> 表示给定矩阵的第 <span class="arithmatex">\(i\)</span> 行第 <span class="arithmatex">\(j\)</span> 列。</p>
 <p>容易发现假如我们给四连通的同色块连边，那么容易发现每一笔可以涂完一整个连通块。而方格图建边后必然是平面图。故我们要求的其实就是<strong>矩阵内平面图连通块的数量</strong>。</p>
-<p>根据平面图欧拉公式，我们有 $V+F-E-1=A$，其中 $A$ 为平面图连通块数量，$V$ 为点的数量，$F$ 为面的数量（包含外面无限大的平面），$E$ 为边的数量。其实你如果不算外面的平面那么有 $V+F-E=A$。</p>
+<p>根据平面图欧拉公式，我们有 <span class="arithmatex">\(V+F-E-1=A\)</span>，其中 <span class="arithmatex">\(A\)</span> 为平面图连通块数量，<span class="arithmatex">\(V\)</span> 为点的数量，<span class="arithmatex">\(F\)</span> 为面的数量（包含外面无限大的平面），<span class="arithmatex">\(E\)</span> 为边的数量。其实你如果不算外面的平面那么有 <span class="arithmatex">\(V+F-E=A\)</span>。</p>
 <hr />
 <p>此处简要证明一下平面图欧拉公式。</p>
-<p>考虑数学归纳法，容易发现，当 $V=1,E=0$，显然成立。</p>
-<p>然后对于任意情况，假设所有 $V'\le V,E'&lt;E$ 的情况都成立。</p>
+<p>考虑数学归纳法，容易发现，当 <span class="arithmatex">\(V=1,E=0\)</span>，显然成立。</p>
+<p>然后对于任意情况，假设所有 <span class="arithmatex">\(V'\le V,E'&lt;E\)</span> 的情况都成立。</p>
 <p>考虑删掉一条边，那么就有两种情况：</p>
 <ol>
 <li>删掉的这条边是桥边（即删掉后变成两个连通块）</li>
 </ol>
-<p>那么容易发现它变成了两个更小的情况，面数不变（桥边两侧都是外围无限大的平面），点数不变，边数减一。$V+F-E$ 的值 $+1$，而连通块数量 $+1$，符合条件。</p>
+<p>那么容易发现它变成了两个更小的情况，面数不变（桥边两侧都是外围无限大的平面），点数不变，边数减一。<span class="arithmatex">\(V+F-E\)</span> 的值 <span class="arithmatex">\(+1\)</span>，而连通块数量 <span class="arithmatex">\(+1\)</span>，符合条件。</p>
 <ol start="2">
 <li>删掉的这条边不是桥边</li>
 </ol>
-<p>那么连通块数量不改变。但是由于它不是桥边，那么它两侧的两个面原先必定不连通（因为有至少一边是封闭的）。删掉这条边后变为连通，且变成了一个规模更小的情况。相比新情况，$V+F-E$ 的值不变（$E'=E-1,F'=F-1$），连通块数量不改变，符合条件。</p>
+<p>那么连通块数量不改变。但是由于它不是桥边，那么它两侧的两个面原先必定不连通（因为有至少一边是封闭的）。删掉这条边后变为连通，且变成了一个规模更小的情况。相比新情况，<span class="arithmatex">\(V+F-E\)</span> 的值不变（<span class="arithmatex">\(E'=E-1,F'=F-1\)</span>），连通块数量不改变，符合条件。</p>
 <p>另外容易发现某个连通块内部的“面”里面有另一个连通块其实和两个连通块相互独立是等价的。</p>
 <hr />
-<p>那么考虑如何维护 $V+F-E$ 的值。</p>
-<p>首先 $V$ 最简单，就是矩形大小。</p>
-<p>然后是 $E$，容易想到分成纵向边和横向边两种情况求二维前缀和。</p>
-<p>具体来说，令 $s_{x,y}=\sum_{i=1}^x\sum_{j=1}^y[a_{i,j}=a_{i-1,j}],s_{x,y}'=\sum_{i=1}^x\sum_{j=1}^y[a_{i,j}=a_{i,j-1}]$。那么容易发现矩形 $(x_1,y_1,x_2,y_2)$ 中的横向边数就是：</p>
-<p>$$s_{x_2,y_2}-s_{x_1,y_2}-s_{x_2,y_1-1}+s_{x_1,y_1-1}$$</p>
-<p>注意一边是 $x_1$，另一边是 $y_1-1$，因为在 $s$ 的定义中一条横向边是挂在右边的点上的。</p>
+<p>那么考虑如何维护 <span class="arithmatex">\(V+F-E\)</span> 的值。</p>
+<p>首先 <span class="arithmatex">\(V\)</span> 最简单，就是矩形大小。</p>
+<p>然后是 <span class="arithmatex">\(E\)</span>，容易想到分成纵向边和横向边两种情况求二维前缀和。</p>
+<p>具体来说，令 <span class="arithmatex">\(s_{x,y}=\sum_{i=1}^x\sum_{j=1}^y[a_{i,j}=a_{i-1,j}],s_{x,y}'=\sum_{i=1}^x\sum_{j=1}^y[a_{i,j}=a_{i,j-1}]\)</span>。那么容易发现矩形 <span class="arithmatex">\((x_1,y_1,x_2,y_2)\)</span> 中的横向边数就是：</p>
+<div class="arithmatex">\[s_{x_2,y_2}-s_{x_1,y_2}-s_{x_2,y_1-1}+s_{x_1,y_1-1}\]</div>
+<p>注意一边是 <span class="arithmatex">\(x_1\)</span>，另一边是 <span class="arithmatex">\(y_1-1\)</span>，因为在 <span class="arithmatex">\(s\)</span> 的定义中一条横向边是挂在右边的点上的。</p>
 <p>同理，纵向边数就是：</p>
-<p>$$s_{x_2,y_2}'-s_{x_1-1,y_2}'-s_{x_2,y_1}'+s_{x_1-1,y_1}'$$</p>
+<div class="arithmatex">\[s_{x_2,y_2}'-s_{x_1-1,y_2}'-s_{x_2,y_1}'+s_{x_1-1,y_1}'\]</div>
 <p>加起来即可。</p>
 <hr />
-<p>接下来是最难搞的 $F$。</p>
-<p>$F$ 能分两种情况，一种是 $2\times 2$ 的小方格。</p>
+<p>接下来是最难搞的 <span class="arithmatex">\(F\)</span>。</p>
+<p><span class="arithmatex">\(F\)</span> 能分两种情况，一种是 <span class="arithmatex">\(2\times 2\)</span> 的小方格。</p>
 <p><img alt="图示 1" src="../../img/2023Dec_1.png" /></p>
 <p>比如上图中间蓝色的那一坨。这种中间<strong>不包含其它点</strong>的面可以直接前缀和维护，挂在右下角上即可。</p>
 <p>然后是另一种中间围了其它点的空腔。</p>
 <p><img alt="图示 2" src="../../img/2023Dec_2.png" /></p>
 <p>（其实这就是样例）比如右边红色围着蓝色的就是一个例子。</p>
-<p>这个怎么办呢？容易发现对于这样的一个连通块，显然存在一个矩形 $(x_1',y_1',x_2',y_2')$ 恰好包含它。而这个面产生贡献当且仅当询问的矩形恰好完全包含这个矩形，即若有一个询问 $(x_1,y_1,x_2,y_2)$ 满足：$x_1&lt;x_1',y_1<y_1',x_2>x_2',y_2&gt;y_2'$，那么这个面会对对应询问产生贡献。</p>
+<p>这个怎么办呢？容易发现对于这样的一个连通块，显然存在一个矩形 <span class="arithmatex">\((x_1',y_1',x_2',y_2')\)</span> 恰好包含它。而这个面产生贡献当且仅当询问的矩形恰好完全包含这个矩形，即若有一个询问 <span class="arithmatex">\((x_1,y_1,x_2,y_2)\)</span> 满足：<span class="arithmatex">\(x_1&lt;x_1',y_1&lt;y_1',x_2&gt;x_2',y_2&gt;y_2'\)</span>，那么这个面会对对应询问产生贡献。</p>
 <p>那么容易发现这是一个四维偏序，考虑 cdq 套 cdq，内层排序后用树状数组解决。</p>
-<p>另外，我们还要考虑一下如何找到空腔。这个其实很简单，先枚举是这个空腔是哪个颜色的空腔，比如是 $c$ 颜色。那么就可以把所有 $c$ 颜色视作障碍物，其余视作平地跑 dfs 染色，途中维护四个方向的最值即可。</p>
+<p>另外，我们还要考虑一下如何找到空腔。这个其实很简单，先枚举是这个空腔是哪个颜色的空腔，比如是 <span class="arithmatex">\(c\)</span> 颜色。那么就可以把所有 <span class="arithmatex">\(c\)</span> 颜色视作障碍物，其余视作平地跑 dfs 染色，途中维护四个方向的最值即可。</p>
 <p>注意这一种情况：</p>
 <p><img alt="图示 3" src="../../img/2023Dec_3.png" /></p>
 <p>容易发现，中间的蓝色块虽然不是四连通的，但是也是同一个空穴。所以跑 dfs 染色的时候应该将八连通视作相邻，就不会出问题了。</p>
@@ -6537,9 +6565,9 @@
 <p>此处简要阐述 cdq 套 cdq 怎么实现。</p>
 <p>容易发现 cdq 的每一层是把所有点简化成了一个“左边的修改”对“右边的询问”产生贡献的形式。</p>
 <p>那么对于第一层分治的每个区间，把左边的所有修改和右边的所有询问取出来，排序后放到新的序列上，然后对新的序列做第二层 cdq 即可。</p>
-<p>注意这里有个问题，就是对于第一层（假设第一层是 $x_1$），若存在一修改和一询问的 $x_1$ 相等，那么应该将询问排到前面。因为若连续的 $x_1$ 横跨了第一层分治的某个区间，那么它们都会被取出来。就可能会有 $x_1=x_1'$ 的一对修改和查询产生贡献，而这是我们需要避免的。但只要把询问排到前面就能避免这种情况了，因为若询问被取出了那么对应修改必定不被取出，反之亦然。</p>
+<p>注意这里有个问题，就是对于第一层（假设第一层是 <span class="arithmatex">\(x_1\)</span>），若存在一修改和一询问的 <span class="arithmatex">\(x_1\)</span> 相等，那么应该将询问排到前面。因为若连续的 <span class="arithmatex">\(x_1\)</span> 横跨了第一层分治的某个区间，那么它们都会被取出来。就可能会有 <span class="arithmatex">\(x_1=x_1'\)</span> 的一对修改和查询产生贡献，而这是我们需要避免的。但只要把询问排到前面就能避免这种情况了，因为若询问被取出了那么对应修改必定不被取出，反之亦然。</p>
 <hr />
-<p>然后我们就优雅地解决了这个问题，复杂度贼神奇，是 $O(q+nm|\Sigma|+(nm+q)\log^3(nm+q))$，其中第一个 $q$ 是前缀和维护可维护的信息，第二个 $nm|\Sigma|$ 中 $\Sigma$ 表示字符集，这个是寻找空腔的复杂度，第三个是求偏序的复杂度，看起来过不了，但是这个上界取的太松了，空腔数量是卡不到它的。</p>
+<p>然后我们就优雅地解决了这个问题，复杂度贼神奇，是 <span class="arithmatex">\(O(q+nm|\Sigma|+(nm+q)\log^3(nm+q))\)</span>，其中第一个 <span class="arithmatex">\(q\)</span> 是前缀和维护可维护的信息，第二个 <span class="arithmatex">\(nm|\Sigma|\)</span> 中 <span class="arithmatex">\(\Sigma\)</span> 表示字符集，这个是寻找空腔的复杂度，第三个是求偏序的复杂度，看起来过不了，但是这个上界取的太松了，空腔数量是卡不到它的。</p>
 <p><del>虽然但是，我目前暂居洛谷倒数第二劣解，因为这个解法确实做复杂了。</del></p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6686,7 +6714,7 @@
 </span><span id="__span-0-141"><a id="__codelineno-0-141" name="__codelineno-0-141" href="#__codelineno-0-141"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>存储询问矩阵与空腔矩阵，<code>pos</code> 为 $0$ 表示是空腔</li>
+<li>存储询问矩阵与空腔矩阵，<code>pos</code> 为 <span class="arithmatex">\(0\)</span> 表示是空腔</li>
 <li>计算能前缀和维护的部分</li>
 <li>dfs 涂色，维护四个方向的最值</li>
 <li>把左侧的修改和右侧的询问取出来</li>
@@ -6697,10 +6725,10 @@
 <h2 id="cf1207g-indie-album">CF1207G Indie Album</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1207G">传送门</a></p>
 <p>很复杂但是很典的一道题。</p>
-<p>为方便叙述，称前面某一次操作得到的字符串是 $s$，后面的仍然叫 $t$。</p>
-<p>先不考虑如何得到 $s$，容易发现这个就是个在线询问版的<a href="https://www.luogu.com.cn/problem/P5357">【模板】AC 自动机（二次加强版）</a>，这个可以在 $fail$ 树上做单点加子树求和来算。</p>
-<p>然后考虑如何得到 $s$，这个其实也很简单，先按它给的条件建出树形结构，如果是操作 $1$ 就接向结点 $0$，否则接向对应结点。然后 dfs 维护一条垂直的链上的字符串在 AC 自动机上的状态即可。</p>
-<p>复杂度 $O(\sum|t||V| + n\log \sum|t|)$，其中 $V$ 是字符集（不用 $\Sigma$ 是因为有歧义）。</p>
+<p>为方便叙述，称前面某一次操作得到的字符串是 <span class="arithmatex">\(s\)</span>，后面的仍然叫 <span class="arithmatex">\(t\)</span>。</p>
+<p>先不考虑如何得到 <span class="arithmatex">\(s\)</span>，容易发现这个就是个在线询问版的<a href="https://www.luogu.com.cn/problem/P5357">【模板】AC 自动机（二次加强版）</a>，这个可以在 <span class="arithmatex">\(fail\)</span> 树上做单点加子树求和来算。</p>
+<p>然后考虑如何得到 <span class="arithmatex">\(s\)</span>，这个其实也很简单，先按它给的条件建出树形结构，如果是操作 <span class="arithmatex">\(1\)</span> 就接向结点 <span class="arithmatex">\(0\)</span>，否则接向对应结点。然后 dfs 维护一条垂直的链上的字符串在 AC 自动机上的状态即可。</p>
+<p>复杂度 <span class="arithmatex">\(O(\sum|t||V| + n\log \sum|t|)\)</span>，其中 <span class="arithmatex">\(V\)</span> 是字符集（不用 <span class="arithmatex">\(\Sigma\)</span> 是因为有歧义）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6810,7 +6838,7 @@
 <p>好题，但是挺坏的。</p>
 <p>首先一个简单贪心想法是按 <code>*</code> 分成若干段，然后（除去最后一段，因为它需要匹配字符串末尾）从第一段开始每一段都尽量往前匹配，因为无论两段相隔多远 <code>*</code> 都能把中间填好，那么前一段匹配的更靠前显然不劣。</p>
 <p>然后考虑 <code>?</code> 怎么处理。现在的问题转化成了没有 <code>*</code> 的情况，那么每一个字符下标的相对位置显然是固定的。容易想到按 <code>?</code> 分段（每个 <code>?</code> 单独分一段，因为可能会有一些极端数据），然后匹配后对下标做差消除相对位置的差距即可。</p>
-<p>复杂度 $O(|S||\Sigma|+\sum|t|)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(|S||\Sigma|+\sum|t|)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6990,7 +7018,7 @@
 </details>
 <h2 id="cf1437g-death-dbms">CF1437G Death DBMS</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1437G">传送门</a></p>
-<p>$fail$ 树上单点修改树链查最大值，树剖解决，复杂度 $O(n\log^2 n)$。</p>
+<p><span class="arithmatex">\(fail\)</span> 树上单点修改树链查最大值，树剖解决，复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7137,7 +7165,7 @@
 <h2 id="p4287-shoi2011">P4287 [SHOI2011] 双倍回文</h2>
 <p><a href="https://www.luogu.com.cn/problem/P4287">传送门</a></p>
 <p>考虑一个本质不同的新回文子串只会在 Manacher 暴力拓展时产生。</p>
-<p>那么每次暴力拓展时判断新回文子串前半部分是不是回文子串即可，复杂度 $O(n)$。</p>
+<p>那么每次暴力拓展时判断新回文子串前半部分是不是回文子串即可，复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <p>代码是偶数 Manacher，如果你不想写偶数版本或许能插 <code>#</code> 后判断中心点是不是 <code>#</code>。</p>
@@ -7193,12 +7221,12 @@
 </details>
 <h2 id="p2336-scoi2012">P2336 [SCOI2012] 喵星球上的点名</h2>
 <p><a href="https://www.luogu.com.cn/problem/P2336">传送门</a></p>
-<p>首先容易想到这道题能用 AC 自动机做，现在最高赞题解就是用的 AC 自动机。建出 $\mathrm{fail}$ 树后的操作可以参考已有题解，我就不多赘述了。但是现在的所有 AC 自动机题解构建 $\mathrm{fail}$ 指针都是暴力跳的，虽然很难卡，但是复杂度是假的。</p>
-<p>这里提供一种 $O(N\log |\Sigma|)$ 的 AC 自动机建法，其中 $N$ 是字符串总长度，$\Sigma$ 是字符集。</p>
-<p>众所周知，无论你是用通常写法每次把不存在的 $son_{u,c}$ 指向 $son_{fail_u,c}$，还是暴力跳 $\mathrm{fail}$ 并且记忆化，构建 AC 自动机 $\mathrm{fail}$ 指针的复杂度都是 $N|\Sigma|$。</p>
-<p>怎么办呢，考虑通常写法中，对于一个 $u$，它的 $son_{u,c}$ 由两部分构成，一部分是 Trie 树上的儿子，另一部分是从 $fail_u$ 继承过来的儿子。</p>
+<p>首先容易想到这道题能用 AC 自动机做，现在最高赞题解就是用的 AC 自动机。建出 <span class="arithmatex">\(\mathrm{fail}\)</span> 树后的操作可以参考已有题解，我就不多赘述了。但是现在的所有 AC 自动机题解构建 <span class="arithmatex">\(\mathrm{fail}\)</span> 指针都是暴力跳的，虽然很难卡，但是复杂度是假的。</p>
+<p>这里提供一种 <span class="arithmatex">\(O(N\log |\Sigma|)\)</span> 的 AC 自动机建法，其中 <span class="arithmatex">\(N\)</span> 是字符串总长度，<span class="arithmatex">\(\Sigma\)</span> 是字符集。</p>
+<p>众所周知，无论你是用通常写法每次把不存在的 <span class="arithmatex">\(son_{u,c}\)</span> 指向 <span class="arithmatex">\(son_{fail_u,c}\)</span>，还是暴力跳 <span class="arithmatex">\(\mathrm{fail}\)</span> 并且记忆化，构建 AC 自动机 <span class="arithmatex">\(\mathrm{fail}\)</span> 指针的复杂度都是 <span class="arithmatex">\(N|\Sigma|\)</span>。</p>
+<p>怎么办呢，考虑通常写法中，对于一个 <span class="arithmatex">\(u\)</span>，它的 <span class="arithmatex">\(son_{u,c}\)</span> 由两部分构成，一部分是 Trie 树上的儿子，另一部分是从 <span class="arithmatex">\(fail_u\)</span> 继承过来的儿子。</p>
 <p>容易想到这个可以用一个类似于<strong>可持久化线段树</strong>和<strong>线段树合并</strong>生的孩子的东西来维护。</p>
-<p>具体来说，最初在 Trie 中插入字符串的时候，用一棵动态开点线段树代替数组来维护每个结点的儿子。然后在初始化 AC 自动机的时候，将 $u$ 对应的线段树和 $fail_u$ 进行一个类似于线段树合并的操作。</p>
+<p>具体来说，最初在 Trie 中插入字符串的时候，用一棵动态开点线段树代替数组来维护每个结点的儿子。然后在初始化 AC 自动机的时候，将 <span class="arithmatex">\(u\)</span> 对应的线段树和 <span class="arithmatex">\(fail_u\)</span> 进行一个类似于线段树合并的操作。</p>
 <p>具体来说，从初始化 AC 自动机的通常写法开始考虑。</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">//这是我平时用的板子</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Build</span><span class="p">(){</span>
@@ -7219,13 +7247,13 @@
 </span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>递归时，若线段树上 $u$ 的一个结点没有左儿子，那么这整个儿子都要进行上面代码中的操作 $2$，可以直接继承 $fail_u$ 对应结点的左儿子。</p>
+<p>递归时，若线段树上 <span class="arithmatex">\(u\)</span> 的一个结点没有左儿子，那么这整个儿子都要进行上面代码中的操作 <span class="arithmatex">\(2\)</span>，可以直接继承 <span class="arithmatex">\(fail_u\)</span> 对应结点的左儿子。</p>
 <p><img alt="图示 4" src="../../img/2023Dec_4.png" /></p>
-<p>比如像这样，假如 Trie 上 $u$ 只有这三个儿子，那么剩余儿子都能直接连向 $fail_u$ 的对应子树。</p>
-<p>对于 $u$ 上已有的叶子结点，要进行上面代码中的操作 $1$，这个在叶子结点操作即可。</p>
+<p>比如像这样，假如 Trie 上 <span class="arithmatex">\(u\)</span> 只有这三个儿子，那么剩余儿子都能直接连向 <span class="arithmatex">\(fail_u\)</span> 的对应子树。</p>
+<p>对于 <span class="arithmatex">\(u\)</span> 上已有的叶子结点，要进行上面代码中的操作 <span class="arithmatex">\(1\)</span>，这个在叶子结点操作即可。</p>
 <p>然后剩余操作都和 AC 自动机一样了，那么分析一下上面操作的复杂度。</p>
-<p>容易发现，每插入一个字符串 $t$，会新建 $O(|t|\log |\Sigma|)$ 个结点，那么结点总数就是 $O(N\log |\Sigma|)$ 的。而线段树合并时，每个结点只会访问一次，故时间空间复杂度均是 $O(N\log|\Sigma|)$。</p>
-<p>然后建出 $\mathrm{fail}$ 树后，每次插入一个文本串的复杂度是 $O(n\log |\Sigma|)$，其中 $n$ 是文本串的长度。带 $\log$ 是因为每次找下一个状态需要在线段树上查询叶子。显然这个 $\log$ 和每个结点维护单点加/单点求值是加算关系，所以数据结构维护树上信息的时间复杂度仍然是 $O(N\log N)$，不会变成双 $\log$，实测总共只跑了 350ms 左右（但是跑不过 $O(N\sqrt{N})$ 小常数做法 o(╥﹏╥)o）。</p>
+<p>容易发现，每插入一个字符串 <span class="arithmatex">\(t\)</span>，会新建 <span class="arithmatex">\(O(|t|\log |\Sigma|)\)</span> 个结点，那么结点总数就是 <span class="arithmatex">\(O(N\log |\Sigma|)\)</span> 的。而线段树合并时，每个结点只会访问一次，故时间空间复杂度均是 <span class="arithmatex">\(O(N\log|\Sigma|)\)</span>。</p>
+<p>然后建出 <span class="arithmatex">\(\mathrm{fail}\)</span> 树后，每次插入一个文本串的复杂度是 <span class="arithmatex">\(O(n\log |\Sigma|)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是文本串的长度。带 <span class="arithmatex">\(\log\)</span> 是因为每次找下一个状态需要在线段树上查询叶子。显然这个 <span class="arithmatex">\(\log\)</span> 和每个结点维护单点加/单点求值是加算关系，所以数据结构维护树上信息的时间复杂度仍然是 <span class="arithmatex">\(O(N\log N)\)</span>，不会变成双 <span class="arithmatex">\(\log\)</span>，实测总共只跑了 350ms 左右（但是跑不过 <span class="arithmatex">\(O(N\sqrt{N})\)</span> 小常数做法 o(╥﹏╥)o）。</p>
 <details class="success">
 <summary>完整代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7411,9 +7439,9 @@
 <h2 id="p4094-heoi2016tjoi2016">P4094 [HEOI2016/TJOI2016] 字符串</h2>
 <p><a href="https://www.luogu.com.cn/problem/P4094">传送门</a></p>
 <p>首先，这道题的第一个瓶颈是<strong>认真读题</strong>。</p>
-<p>题意是求 $s[a:b]$ 的<strong>后缀</strong>和<strong>整个</strong> $s[c:d]$ 的 $\mathrm{lcp}$ 的最大值。</p>
-<p>由于要求 $\mathrm{lcp}$，可以从 $sa$ 方面考虑，但是 $s[a:b]$ 的后缀在 $sa$ 上不一定是连续的，不太好直接维护。但是由于 $\mathrm{lcp}$ 在 $sa$ 意义下是一个<strong>区间最小值</strong>，那么这个问题其实是“最大化最小值”的问题，考虑二分答案。</p>
-<p>容易发现，在 $sa$ 上，对于一个固定的 $u$，$\mathrm{lcp}(u,v)$ 是关于 $v$ 单峰的，其中在 $v=u$ 时取到唯一一个最大值（显然吧？区间最小值在固定某端点时肯定关于另一端点显然单调不增）。也就是说，能取到 $\mathrm{lcp}(u,v)\ge x$ 的 $v$ 是一个连续的区间。在确定答案为 $mid$ 后，只要查询区间 $[a,b-mid+1]$ 中有没有 $rk_i$ 在能取到 $\mathrm{lcp}(a,v)\ge mid$ 的 $v$ 的区间里即可。这个区间可以 RMQ+二分得到，然后可以用主席树维护，就做完了，复杂度 $O(n\log n+m\log^2n)$。</p>
+<p>题意是求 <span class="arithmatex">\(s[a:b]\)</span> 的<strong>后缀</strong>和<strong>整个</strong> <span class="arithmatex">\(s[c:d]\)</span> 的 <span class="arithmatex">\(\mathrm{lcp}\)</span> 的最大值。</p>
+<p>由于要求 <span class="arithmatex">\(\mathrm{lcp}\)</span>，可以从 <span class="arithmatex">\(sa\)</span> 方面考虑，但是 <span class="arithmatex">\(s[a:b]\)</span> 的后缀在 <span class="arithmatex">\(sa\)</span> 上不一定是连续的，不太好直接维护。但是由于 <span class="arithmatex">\(\mathrm{lcp}\)</span> 在 <span class="arithmatex">\(sa\)</span> 意义下是一个<strong>区间最小值</strong>，那么这个问题其实是“最大化最小值”的问题，考虑二分答案。</p>
+<p>容易发现，在 <span class="arithmatex">\(sa\)</span> 上，对于一个固定的 <span class="arithmatex">\(u\)</span>，<span class="arithmatex">\(\mathrm{lcp}(u,v)\)</span> 是关于 <span class="arithmatex">\(v\)</span> 单峰的，其中在 <span class="arithmatex">\(v=u\)</span> 时取到唯一一个最大值（显然吧？区间最小值在固定某端点时肯定关于另一端点显然单调不增）。也就是说，能取到 <span class="arithmatex">\(\mathrm{lcp}(u,v)\ge x\)</span> 的 <span class="arithmatex">\(v\)</span> 是一个连续的区间。在确定答案为 <span class="arithmatex">\(mid\)</span> 后，只要查询区间 <span class="arithmatex">\([a,b-mid+1]\)</span> 中有没有 <span class="arithmatex">\(rk_i\)</span> 在能取到 <span class="arithmatex">\(\mathrm{lcp}(a,v)\ge mid\)</span> 的 <span class="arithmatex">\(v\)</span> 的区间里即可。这个区间可以 RMQ+二分得到，然后可以用主席树维护，就做完了，复杂度 <span class="arithmatex">\(O(n\log n+m\log^2n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7569,14 +7597,14 @@
 <h2 id="p1117-noi2016">P1117 [NOI2016] 优秀的拆分</h2>
 <p><a href="https://www.luogu.com.cn/problem/P1117">传送门</a></p>
 <p>人类智慧科技题。</p>
-<p>首先，如果你能找到以所有 $i$ 开头的 $AA$ 数量 $g(i)$，以 $i$ 结尾的 $AA$ 数量 $f(i)$，那么答案就是：</p>
-<p>$$\sum_{i=1}^{n-1}f(i)g(i+1)$$</p>
+<p>首先，如果你能找到以所有 <span class="arithmatex">\(i\)</span> 开头的 <span class="arithmatex">\(AA\)</span> 数量 <span class="arithmatex">\(g(i)\)</span>，以 <span class="arithmatex">\(i\)</span> 结尾的 <span class="arithmatex">\(AA\)</span> 数量 <span class="arithmatex">\(f(i)\)</span>，那么答案就是：</p>
+<div class="arithmatex">\[\sum_{i=1}^{n-1}f(i)g(i+1)\]</div>
 <p>那么考虑怎么求着两个东西。</p>
-<p>考虑枚举块长 $len$，如果有一个 $AA$ 长度大于等于 $2len$，那么它显然会跨越恰好两个分界点。设这两个分界点分别是 $i,j$，如果你找到 $\mathrm{lcs}(suf(i),suf(j))$ 和 $\mathrm{lcp}(pre(i-1),pre(j-1))$（$\mathrm{lcs}$ 是最长公共后缀，其余应该都能看懂吧？），那么它们必然长这样：</p>
+<p>考虑枚举块长 <span class="arithmatex">\(len\)</span>，如果有一个 <span class="arithmatex">\(AA\)</span> 长度大于等于 <span class="arithmatex">\(2len\)</span>，那么它显然会跨越恰好两个分界点。设这两个分界点分别是 <span class="arithmatex">\(i,j\)</span>，如果你找到 <span class="arithmatex">\(\mathrm{lcs}(suf(i),suf(j))\)</span> 和 <span class="arithmatex">\(\mathrm{lcp}(pre(i-1),pre(j-1))\)</span>（<span class="arithmatex">\(\mathrm{lcs}\)</span> 是最长公共后缀，其余应该都能看懂吧？），那么它们必然长这样：</p>
 <p><img alt="图示 5" src="../../img/2023Dec_5.png" /></p>
-<p>其中两条绿色线段长度为 $2len$。</p>
-<p>也就是说，只要上面的 $\mathrm{lcs}+\mathrm{lcp}\ge len$，在两条绿色线段之间的所有长度为 $2len$ 的线段都是 $AA$，那么左边的 $g$ 增加，右边的 $f$ 增加即可。这个可以差分维护。</p>
-<p>复杂度是调和级数 $O(n\log n)$，因为其它操作都是 $O(1)$ 的。</p>
+<p>其中两条绿色线段长度为 <span class="arithmatex">\(2len\)</span>。</p>
+<p>也就是说，只要上面的 <span class="arithmatex">\(\mathrm{lcs}+\mathrm{lcp}\ge len\)</span>，在两条绿色线段之间的所有长度为 <span class="arithmatex">\(2len\)</span> 的线段都是 <span class="arithmatex">\(AA\)</span>，那么左边的 <span class="arithmatex">\(g\)</span> 增加，右边的 <span class="arithmatex">\(f\)</span> 增加即可。这个可以差分维护。</p>
+<p>复杂度是调和级数 <span class="arithmatex">\(O(n\log n)\)</span>，因为其它操作都是 <span class="arithmatex">\(O(1)\)</span> 的。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7703,10 +7731,10 @@
 <h2 id="loj-6041-2017-day7">Loj #6041. 「雅礼集训 2017 Day7」事情的相似度</h2>
 <p><a href="https://loj.ac/p/6041">传送门</a></p>
 <p>很好的题啊。</p>
-<p>容易想到区间内按 $rk_i$ 排序后，答案肯定在相邻的两数之间产生。</p>
+<p>容易想到区间内按 <span class="arithmatex">\(rk_i\)</span> 排序后，答案肯定在相邻的两数之间产生。</p>
 <p>那么容易想到用只删的回滚莫队维护一个链表。</p>
-<p>但是最大值不好维护，用 <code>set</code> 会带 $\log$，怎么办呢？有一个人类智慧的分块，因为这个会插入 $O(n\sqrt{n})$ 次，只查询 $O(m)$ 次，那么考虑用什么可以 $O(1)$ 插入 $O(\sqrt{n})$ 查询的东西维护就能保证复杂度了。这个可以分块啊，就是开一个桶，维护每一块里有没有东西，如果有就进去找，这样复杂度就对了。</p>
-<p>复杂度 $O(n\sqrt{n})$。</p>
+<p>但是最大值不好维护，用 <code>set</code> 会带 <span class="arithmatex">\(\log\)</span>，怎么办呢？有一个人类智慧的分块，因为这个会插入 <span class="arithmatex">\(O(n\sqrt{n})\)</span> 次，只查询 <span class="arithmatex">\(O(m)\)</span> 次，那么考虑用什么可以 <span class="arithmatex">\(O(1)\)</span> 插入 <span class="arithmatex">\(O(\sqrt{n})\)</span> 查询的东西维护就能保证复杂度了。这个可以分块啊，就是开一个桶，维护每一块里有没有东西，如果有就进去找，这样复杂度就对了。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\sqrt{n})\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7911,13 +7939,13 @@
 <h2 id="p9482-noi2023">P9482 [NOI2023] 字符串</h2>
 <p><a href="https://www.luogu.com.cn/problem/P9482">传送门</a></p>
 <p>这种不好直接维护的有两种思路，一种是把限制放宽再减去不合法的，另一种是把限制收紧再加上少算的。</p>
-<p>考虑“子串”是我们不喜欢的，而我们更喜欢“前缀”或者“后缀”，因为前者是 $O(n^2)$ 的而后者是 $O(n)$ 的。</p>
-<p>那么把限制放宽到<strong>后缀 $s[i:n]$ 小于前缀 $s[1:i+2l-1]$ 的倒置</strong>。显然，这是一个必要不充分条件。</p>
-<p>这个很好维护，把字符串复制一份倒置放到后面，中间放个分隔符（形如 $s+c+R(s)+c'$，此处为方便边界情况的实现，把 $c$ 赋为极大值，$c'$ 赋为极小值即可），然后用 SA 即可。</p>
-<p>考虑什么时候不充分，注意到若 $s[i:i+l-1]&lt;R(s[i+l:i+2l-1])$，他是充分的，只有当 $s[i:i+l-1]=R(s[i+l:i+2l-1])$，的时候可能会算多。注意到这是一个回文串的形式，考虑一个回文串何时会产生对于贡献。</p>
-<p>显然，是这个回文串往前拓展的字典序比往后拓展大的情况，那么王两侧拓展到第一个不同位置然后判断即可。容易发现第一个不同位置就是 Manacher 求出的 $i+d_i$ 和 $i-d_i-1$（我的 Manacher 写法是把偶数回文串挂在分界点右边）。容易发现就是一条斜率为 $-1$ 的线段加，可以坐标变换一下（具体就是将所有 $y$ 加上 $x$）然后扫描线。</p>
+<p>考虑“子串”是我们不喜欢的，而我们更喜欢“前缀”或者“后缀”，因为前者是 <span class="arithmatex">\(O(n^2)\)</span> 的而后者是 <span class="arithmatex">\(O(n)\)</span> 的。</p>
+<p>那么把限制放宽到<strong>后缀 <span class="arithmatex">\(s[i:n]\)</span> 小于前缀 <span class="arithmatex">\(s[1:i+2l-1]\)</span> 的倒置</strong>。显然，这是一个必要不充分条件。</p>
+<p>这个很好维护，把字符串复制一份倒置放到后面，中间放个分隔符（形如 <span class="arithmatex">\(s+c+R(s)+c'\)</span>，此处为方便边界情况的实现，把 <span class="arithmatex">\(c\)</span> 赋为极大值，<span class="arithmatex">\(c'\)</span> 赋为极小值即可），然后用 SA 即可。</p>
+<p>考虑什么时候不充分，注意到若 <span class="arithmatex">\(s[i:i+l-1]&lt;R(s[i+l:i+2l-1])\)</span>，他是充分的，只有当 <span class="arithmatex">\(s[i:i+l-1]=R(s[i+l:i+2l-1])\)</span>，的时候可能会算多。注意到这是一个回文串的形式，考虑一个回文串何时会产生对于贡献。</p>
+<p>显然，是这个回文串往前拓展的字典序比往后拓展大的情况，那么王两侧拓展到第一个不同位置然后判断即可。容易发现第一个不同位置就是 Manacher 求出的 <span class="arithmatex">\(i+d_i\)</span> 和 <span class="arithmatex">\(i-d_i-1\)</span>（我的 Manacher 写法是把偶数回文串挂在分界点右边）。容易发现就是一条斜率为 <span class="arithmatex">\(-1\)</span> 的线段加，可以坐标变换一下（具体就是将所有 <span class="arithmatex">\(y\)</span> 加上 <span class="arithmatex">\(x\)</span>）然后扫描线。</p>
 <p>注意对奇偶分别维护。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -8071,22 +8099,22 @@
 </details>
 <h2 id="bzoj3413">BZOJ3413 匹配</h2>
 <p><a href="https://vjudge.csgrandeur.cn/problem/%E9%BB%91%E6%9A%97%E7%88%86%E7%82%B8-3413">实在找不到既有题面又能提交的地址了，挂个 vjudge 链接</a></p>
-<p>考虑问的问题就是找到 $t$ 第一次在 $s$ 中出现的位置的<strong>开头</strong> $l$（若未出现取 $n$），求出 $\sum_{i=1}^l\mathrm{lcp}(s[i:n],t)$（再加上失败的匹配次数，但这个很好求，就是第一次出现位置 $-1$，因为前面必定没有匹配成功）。</p>
-<p>先不考虑位置要求，假设要求 $\sum_{i=1}^n\mathrm{lcp}(s[i:n],t)$。</p>
-<p>那么容易发现这个等价于求 $t$ 的所有前缀在 $s$ 中的出现次数之和。考虑一个 $\mathrm{lcp}$ 显然是 $t$ 的前缀，而一个前缀能对上式产生的贡献恰好是它的前缀数量。</p>
+<p>考虑问的问题就是找到 <span class="arithmatex">\(t\)</span> 第一次在 <span class="arithmatex">\(s\)</span> 中出现的位置的<strong>开头</strong> <span class="arithmatex">\(l\)</span>（若未出现取 <span class="arithmatex">\(n\)</span>），求出 <span class="arithmatex">\(\sum_{i=1}^l\mathrm{lcp}(s[i:n],t)\)</span>（再加上失败的匹配次数，但这个很好求，就是第一次出现位置 <span class="arithmatex">\(-1\)</span>，因为前面必定没有匹配成功）。</p>
+<p>先不考虑位置要求，假设要求 <span class="arithmatex">\(\sum_{i=1}^n\mathrm{lcp}(s[i:n],t)\)</span>。</p>
+<p>那么容易发现这个等价于求 <span class="arithmatex">\(t\)</span> 的所有前缀在 <span class="arithmatex">\(s\)</span> 中的出现次数之和。考虑一个 <span class="arithmatex">\(\mathrm{lcp}\)</span> 显然是 <span class="arithmatex">\(t\)</span> 的前缀，而一个前缀能对上式产生的贡献恰好是它的前缀数量。</p>
 <p>感觉太抽象了，考虑用数学语言解释：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
  &amp;\sum_{i=1}^n\mathrm{lcp}(s[i:n],t)\\
 =&amp;\sum_{i=1}^n\sum_{j=1}^{n-i+1}[\mathrm{lcp}(s[i:n],t)\ge j]\\
 =&amp;\sum_{j=1}^n\sum_{i=1}^{n-j+1}[\mathrm{lcp}(s[i:n],t)\ge j]\\
 =&amp;\sum_{j=1}^n\sum_{i=1}^{n-j+1}[s[i:i+j-1]=t[1:j]]
 \end{aligned}
-$$</p>
-<p>其中单独的中括号是艾佛森括号（$[P]$ 表示若 $P$ 为真，值为 $1$，否则为 $0$）。</p>
-<p>那么对于没有位置要求的子问题，我们只需要建 SAM，将 $t$ 输入 SAM 后把路径上所有 $\mathrm{endpos}$ 大小加起来即可（或者也可以 KMP 找到对应位置后用 SA 加二分吧）。</p>
-<p>然后考虑有位置限制的，这个也很简单，用线段树的可持久化合并（这个定语顺序是 wqs 说的）维护 $\mathrm{endpos}$ 内的具体元素即可（这个好像也可以 SA，二分后用主席树维护）。</p>
-<p>复杂度是 $O(|s|+|s|\log |s|+|t|\log |s|)$。</p>
+\]</div>
+<p>其中单独的中括号是艾佛森括号（<span class="arithmatex">\([P]\)</span> 表示若 <span class="arithmatex">\(P\)</span> 为真，值为 <span class="arithmatex">\(1\)</span>，否则为 <span class="arithmatex">\(0\)</span>）。</p>
+<p>那么对于没有位置要求的子问题，我们只需要建 SAM，将 <span class="arithmatex">\(t\)</span> 输入 SAM 后把路径上所有 <span class="arithmatex">\(\mathrm{endpos}\)</span> 大小加起来即可（或者也可以 KMP 找到对应位置后用 SA 加二分吧）。</p>
+<p>然后考虑有位置限制的，这个也很简单，用线段树的可持久化合并（这个定语顺序是 wqs 说的）维护 <span class="arithmatex">\(\mathrm{endpos}\)</span> 内的具体元素即可（这个好像也可以 SA，二分后用主席树维护）。</p>
+<p>复杂度是 <span class="arithmatex">\(O(|s|+|s|\log |s|+|t|\log |s|)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -8245,11 +8273,11 @@ $$</p>
 <h2 id="cf700e-cool-slogans">CF700E Cool Slogans</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF700E">传送门</a></p>
 <p>子串问题可以考虑 SAM。</p>
-<p>考虑同一个等价类内，不可能存在两子串 $s,t$ 使得 $s$ 能在 $t$ 中匹配多次。因为假如在非 $t$ 结尾的位置匹配了，说明这里也有一个 $t$，然后就无限递归了。</p>
-<p>所以可以将一个等价类视为一个状态然后做 DP。容易想到设 $dp_x$（其中 $x$ 是一个状态）表示若 $s_1\in x$，$k$ 的最大值是多少。</p>
-<p>由于 $s_{i+1}$ 必须是 $s_i$ 的子串，所以必定是 $s_i$ 某个前缀的后缀，即读入 $s_i$ 过程中经过的某个状态的祖先，那么就可以在 parent tree 上从上到下转移。这个可能会想到树上倍增转移，但是一个聪明的方法是除去 $dp_x$ 外再记一个 $g_x$ 表示 $x$ 的祖先中，$dp$ 值与 $x$ 相同的最高点。容易发现 $dp_v$ 要么等于 $dp_x$，要么等于 $dp_x+1$，即从某个等于 $dp_x$ 的位置转移过来。而如果 $x$ 到 $g_x$ 的链上有某个状态在 $v$ 中匹配了至少两次，那么 $g_x$ 必定也在 $v$ 中出现了至少两次。所以直接从 $dp_x$ 转移时找 $\mathrm{endpos}<em>{\mathit{g_x}}$ 在 $[pos_v-\mathrm{len</em>{\mathit{v}}}+\mathrm{len_{\mathit{g_x}}},pos_v]$ 中有没有出现至少两次即可（其中 $pos_v$ 是在 $v$ 的 $\mathrm{endpos}$ 中随便找的一个位置），这个可以用线段树的可持久化合并维护。</p>
-<p>然后转移边的转移就直接取 $\max$ 即可。注意更新 $g$。</p>
-<p>然后考虑转移顺序。其实很简单，容易发现把 parent tree 和转移边放一起仍然是个 DAG，因为每条边都是从更短的 $\mathrm{len_{\mathit{p}}}$ 指向更长的 $\mathrm{len_{\mathit{q}}}$ 的。那么按拓扑序即可。</p>
+<p>考虑同一个等价类内，不可能存在两子串 <span class="arithmatex">\(s,t\)</span> 使得 <span class="arithmatex">\(s\)</span> 能在 <span class="arithmatex">\(t\)</span> 中匹配多次。因为假如在非 <span class="arithmatex">\(t\)</span> 结尾的位置匹配了，说明这里也有一个 <span class="arithmatex">\(t\)</span>，然后就无限递归了。</p>
+<p>所以可以将一个等价类视为一个状态然后做 DP。容易想到设 <span class="arithmatex">\(dp_x\)</span>（其中 <span class="arithmatex">\(x\)</span> 是一个状态）表示若 <span class="arithmatex">\(s_1\in x\)</span>，<span class="arithmatex">\(k\)</span> 的最大值是多少。</p>
+<p>由于 <span class="arithmatex">\(s_{i+1}\)</span> 必须是 <span class="arithmatex">\(s_i\)</span> 的子串，所以必定是 <span class="arithmatex">\(s_i\)</span> 某个前缀的后缀，即读入 <span class="arithmatex">\(s_i\)</span> 过程中经过的某个状态的祖先，那么就可以在 parent tree 上从上到下转移。这个可能会想到树上倍增转移，但是一个聪明的方法是除去 <span class="arithmatex">\(dp_x\)</span> 外再记一个 <span class="arithmatex">\(g_x\)</span> 表示 <span class="arithmatex">\(x\)</span> 的祖先中，<span class="arithmatex">\(dp\)</span> 值与 <span class="arithmatex">\(x\)</span> 相同的最高点。容易发现 <span class="arithmatex">\(dp_v\)</span> 要么等于 <span class="arithmatex">\(dp_x\)</span>，要么等于 <span class="arithmatex">\(dp_x+1\)</span>，即从某个等于 <span class="arithmatex">\(dp_x\)</span> 的位置转移过来。而如果 <span class="arithmatex">\(x\)</span> 到 <span class="arithmatex">\(g_x\)</span> 的链上有某个状态在 <span class="arithmatex">\(v\)</span> 中匹配了至少两次，那么 <span class="arithmatex">\(g_x\)</span> 必定也在 <span class="arithmatex">\(v\)</span> 中出现了至少两次。所以直接从 <span class="arithmatex">\(dp_x\)</span> 转移时找 <span class="arithmatex">\(\mathrm{endpos}_{\mathit{g_x}}\)</span> 在 <span class="arithmatex">\([pos_v-\mathrm{len_{\mathit{v}}}+\mathrm{len_{\mathit{g_x}}},pos_v]\)</span> 中有没有出现至少两次即可（其中 <span class="arithmatex">\(pos_v\)</span> 是在 <span class="arithmatex">\(v\)</span> 的 <span class="arithmatex">\(\mathrm{endpos}\)</span> 中随便找的一个位置），这个可以用线段树的可持久化合并维护。</p>
+<p>然后转移边的转移就直接取 <span class="arithmatex">\(\max\)</span> 即可。注意更新 <span class="arithmatex">\(g\)</span>。</p>
+<p>然后考虑转移顺序。其实很简单，容易发现把 parent tree 和转移边放一起仍然是个 DAG，因为每条边都是从更短的 <span class="arithmatex">\(\mathrm{len_{\mathit{p}}}\)</span> 指向更长的 <span class="arithmatex">\(\mathrm{len_{\mathit{q}}}\)</span> 的。那么按拓扑序即可。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -8425,12 +8453,12 @@ $$</p>
 <h2 id="p4770-noi2018">P4770 [NOI2018] 你的名字</h2>
 <p><a href="https://www.luogu.com.cn/problem/P4770">传送门</a></p>
 <p><del>我在题单里看到这道题的时候还以为是那道同名毒瘤分块卡常题</del></p>
-<p>题意是求是 $t$ 的子串，但不是 $s[l:r]$ 的子串的字符串数量。</p>
-<p>考虑“是 $t$ 的子串，不是 $s$ 的子串”不太经典，但是“$t$ 的本质不同子串数量”和“$t$ 和 $s$ 的公共子串数量”这两个问题都挺经典的。站在巨人的肩膀上肯定看得更远，所以考虑把原问题转化为前者的答案减去后者的答案。</p>
+<p>题意是求是 <span class="arithmatex">\(t\)</span> 的子串，但不是 <span class="arithmatex">\(s[l:r]\)</span> 的子串的字符串数量。</p>
+<p>考虑“是 <span class="arithmatex">\(t\)</span> 的子串，不是 <span class="arithmatex">\(s\)</span> 的子串”不太经典，但是“<span class="arithmatex">\(t\)</span> 的本质不同子串数量”和“<span class="arithmatex">\(t\)</span> 和 <span class="arithmatex">\(s\)</span> 的公共子串数量”这两个问题都挺经典的。站在巨人的肩膀上肯定看得更远，所以考虑把原问题转化为前者的答案减去后者的答案。</p>
 <p>前者就是板子，考虑后者怎么做。</p>
-<p>先考虑两个完整字符串匹配的情况，由于一个子串必定是另一个子串的后缀，所以考虑对 $t$ 的每个 $i$ 求一个 $L_i$，表示 $t[L_i:i]$ 是 $t$ 中以 $i$ 结尾的与 $s$ 的最长公共子串。这个 $L_i$ 可以考虑建 $s$ 的自动机然后读入 $t$，若某个地方没有转移边就跳 $\mathrm{link}$ 直到有对应的转移为止，同时双指针维护 $L_i$。然后答案就是 parent tree 上，经过的这些所有点到根的路径并，这个可以按 $dfn$ 排序后 $O(|t|)$ 求。暴力跳 $\mathrm{link}$ 的复杂度显然是对的，因为每次跳 $\mathrm{link}$ 都会使 $L_i$ 增加，而 $L_i$ 不会超过 $i$，所以是线性的。注意这个可能会把某个等价类分成两半，实现时注意细节。</p>
-<p>接下来考虑区间问题怎么做。容易想到用线段树维护 $\mathrm{endpos}$ 的位置，然后转移时额外查一下有没有对应区间内的转移。但是注意这里就不能直接跳 $\mathrm{link}$ 了，因为整个 $s$ 中的等价类在区间内不一定是一个等价类。这里只能用双指针维护，若 $[L_i,i]$ 长度短于 $\mathrm{minlen}$ 的时候再跳 $\mathrm{link}$。这样复杂度也是对的，还是因为 $L$ 无法超过 $i$。</p>
-<p>复杂度 $O(|s|+|t|\log |t|)$（因为你要排一遍序，并且每次判对应区间内有没有转移也是 $\log$ 的），不知道为什么跑的贼慢，暂居最劣解。</p>
+<p>先考虑两个完整字符串匹配的情况，由于一个子串必定是另一个子串的后缀，所以考虑对 <span class="arithmatex">\(t\)</span> 的每个 <span class="arithmatex">\(i\)</span> 求一个 <span class="arithmatex">\(L_i\)</span>，表示 <span class="arithmatex">\(t[L_i:i]\)</span> 是 <span class="arithmatex">\(t\)</span> 中以 <span class="arithmatex">\(i\)</span> 结尾的与 <span class="arithmatex">\(s\)</span> 的最长公共子串。这个 <span class="arithmatex">\(L_i\)</span> 可以考虑建 <span class="arithmatex">\(s\)</span> 的自动机然后读入 <span class="arithmatex">\(t\)</span>，若某个地方没有转移边就跳 <span class="arithmatex">\(\mathrm{link}\)</span> 直到有对应的转移为止，同时双指针维护 <span class="arithmatex">\(L_i\)</span>。然后答案就是 parent tree 上，经过的这些所有点到根的路径并，这个可以按 <span class="arithmatex">\(dfn\)</span> 排序后 <span class="arithmatex">\(O(|t|)\)</span> 求。暴力跳 <span class="arithmatex">\(\mathrm{link}\)</span> 的复杂度显然是对的，因为每次跳 <span class="arithmatex">\(\mathrm{link}\)</span> 都会使 <span class="arithmatex">\(L_i\)</span> 增加，而 <span class="arithmatex">\(L_i\)</span> 不会超过 <span class="arithmatex">\(i\)</span>，所以是线性的。注意这个可能会把某个等价类分成两半，实现时注意细节。</p>
+<p>接下来考虑区间问题怎么做。容易想到用线段树维护 <span class="arithmatex">\(\mathrm{endpos}\)</span> 的位置，然后转移时额外查一下有没有对应区间内的转移。但是注意这里就不能直接跳 <span class="arithmatex">\(\mathrm{link}\)</span> 了，因为整个 <span class="arithmatex">\(s\)</span> 中的等价类在区间内不一定是一个等价类。这里只能用双指针维护，若 <span class="arithmatex">\([L_i,i]\)</span> 长度短于 <span class="arithmatex">\(\mathrm{minlen}\)</span> 的时候再跳 <span class="arithmatex">\(\mathrm{link}\)</span>。这样复杂度也是对的，还是因为 <span class="arithmatex">\(L\)</span> 无法超过 <span class="arithmatex">\(i\)</span>。</p>
+<p>复杂度 <span class="arithmatex">\(O(|s|+|t|\log |t|)\)</span>（因为你要排一遍序，并且每次判对应区间内有没有转移也是 <span class="arithmatex">\(\log\)</span> 的），不知道为什么跑的贼慢，暂居最劣解。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -8678,12 +8706,12 @@ $$</p>
 </details>
 <h2 id="hdu4426-palindromic-substring">HDU4426 Palindromic Substring</h2>
 <p><a href="https://acm.hdu.edu.cn/showproblem.php?pid=4426">传送门</a></p>
-<p>考虑一个字符串中本质不同回文串数量是 $O(n)$ 的（具体来说，上界是 $n$，全是相同字符的字符串可以卡到这个上界）。</p>
-<p>对于如何找到本质不同子串，容易发现一个新的本质不同子串只会在 Manacher 暴力拓展时产生，故可以 $O(n)$ 求，可能需要哈希去重。</p>
+<p>考虑一个字符串中本质不同回文串数量是 <span class="arithmatex">\(O(n)\)</span> 的（具体来说，上界是 <span class="arithmatex">\(n\)</span>，全是相同字符的字符串可以卡到这个上界）。</p>
+<p>对于如何找到本质不同子串，容易发现一个新的本质不同子串只会在 Manacher 暴力拓展时产生，故可以 <span class="arithmatex">\(O(n)\)</span> 求，可能需要哈希去重。</p>
 <p>但是原问题本质不同子串算多个，但其实求出每个回文串数量即可，这个可以 SA + 二分。</p>
 <p>然后为了保证复杂度，可以用字符串哈希的思想，用前缀和维护区间权值（容易发现权值和字符串哈希的定义是差不多的）。</p>
-<p>复杂度 $O(n\log n)$（去重，二分还有排序啥的要带个 $\log$）。</p>
-<p><strong>注意 $k$ 会爆 <code>int</code> ！！！</strong></p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>（去重，二分还有排序啥的要带个 <span class="arithmatex">\(\log\)</span>）。</p>
+<p><strong>注意 <span class="arithmatex">\(k\)</span> 会爆 <code>int</code> ！！！</strong></p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -8883,16 +8911,16 @@ $$</p>
 <p>论文题，但是挺有意思的，很考验对 Manacher 算法的理解。</p>
 <p>容易发现，若两字符串在回文子串意义下是等价的（即所有回文子串位置相同），那么它们跑 Manacher 的过程是完全相同的。同样的，如果两字符串跑 Manacher 的过程是完全相同的，那么它们在回文子串意义下是等价的（因为跑出来的东西是一样的）。</p>
 <p>所以我们可以认为<strong>Manacher 的过程和回文子串意义下的等价类一一对应</strong>。</p>
-<p>又考虑是什么决定了 Manacher 的过程。容易发现 Manacher 中每个 $d$ 的值只和每次暴力拓展的距离有关。而每次暴力拓展的距离又只和形如 $s_{i-k}=s_{i+k}$ 的相等关系以及边界处的不相等关系有关。所以我们只用维护这些相等关系和不相等关系即可。</p>
+<p>又考虑是什么决定了 Manacher 的过程。容易发现 Manacher 中每个 <span class="arithmatex">\(d\)</span> 的值只和每次暴力拓展的距离有关。而每次暴力拓展的距离又只和形如 <span class="arithmatex">\(s_{i-k}=s_{i+k}\)</span> 的相等关系以及边界处的不相等关系有关。所以我们只用维护这些相等关系和不相等关系即可。</p>
 <p>相等关系很好维护，开个并查集即可，问题在于不相等关系。现在已经把每个相等的连通块缩成了一个点（下文称“等价类”），然后将不相等关系连成边（即每条边的意义是两端点颜色不同）。容易发现这是一个 26-SAT 问题，是 NPC 的。考虑寻找性质。</p>
-<p>论文中给出了性质，对于每个等价类取其中最小的作为其下标（其实貌似任意取一个作为下标也行），对于三等价类 $a_i,a_j,a_k$，若 $i&lt;j&lt;k$，且 $a_i\ne a_k,a_j\ne a_k$，那么必然连过 $a_i\ne a_j$ 的边（但是如果 $a_i\ne a_j,a_j\ne a_k$ 无法推出 $a_i\ne a_k$）。</p>
+<p>论文中给出了性质，对于每个等价类取其中最小的作为其下标（其实貌似任意取一个作为下标也行），对于三等价类 <span class="arithmatex">\(a_i,a_j,a_k\)</span>，若 <span class="arithmatex">\(i&lt;j&lt;k\)</span>，且 <span class="arithmatex">\(a_i\ne a_k,a_j\ne a_k\)</span>，那么必然连过 <span class="arithmatex">\(a_i\ne a_j\)</span> 的边（但是如果 <span class="arithmatex">\(a_i\ne a_j,a_j\ne a_k\)</span> 无法推出 <span class="arithmatex">\(a_i\ne a_k\)</span>）。</p>
 <p>考虑证明。</p>
-<p>观察 Manacher 的过程，容易发现每个 $a_x\ne a_y$ 的关系必定在某回文串 $[l,r]$ 的边缘 $l-1,r+1$ 产生。</p>
-<p>容易发现满足 $i&lt;j&lt;k$ 且 $a_i\ne a_k,a_j\ne a_k$ 的关系必定长这样：
+<p>观察 Manacher 的过程，容易发现每个 <span class="arithmatex">\(a_x\ne a_y\)</span> 的关系必定在某回文串 <span class="arithmatex">\([l,r]\)</span> 的边缘 <span class="arithmatex">\(l-1,r+1\)</span> 产生。</p>
+<p>容易发现满足 <span class="arithmatex">\(i&lt;j&lt;k\)</span> 且 <span class="arithmatex">\(a_i\ne a_k,a_j\ne a_k\)</span> 的关系必定长这样：
 2
 <img alt="图示 6" src="../../img/2023Dec_6.png" /></p>
-<p>其中所有带颜色的线段均表示回文串，其中 $j'$ 是 $j$ 沿 $i,k$ 的中心翻折得到的点，显然 $j',j$ 在同一个等价类中。由于 $[i+1,k-1]$ 是回文串，$[j+1,k-1]$ 是回文串，所以 $[i+1,j'-1]$ 必定是回文串。故 $a_i,a_{j'}$ 间必定有连边，又由于 $j$ 和 $j'$ 在同一等价类中，故必定有一条 $a_i \ne a_j$ 的边。</p>
-<p>这个性质其实是一个很强的性质，对于任意一个点 $u$，所有 $v&lt;u,(u,v)\in E$ 的 $v$ 组成的点集 $V'$ 的导出子图必定是一个完全图，那么每个等价类的方案数就是 $26-|V'|$，乘起来显然是不会算多，也不重不漏的。</p>
+<p>其中所有带颜色的线段均表示回文串，其中 <span class="arithmatex">\(j'\)</span> 是 <span class="arithmatex">\(j\)</span> 沿 <span class="arithmatex">\(i,k\)</span> 的中心翻折得到的点，显然 <span class="arithmatex">\(j',j\)</span> 在同一个等价类中。由于 <span class="arithmatex">\([i+1,k-1]\)</span> 是回文串，<span class="arithmatex">\([j+1,k-1]\)</span> 是回文串，所以 <span class="arithmatex">\([i+1,j'-1]\)</span> 必定是回文串。故 <span class="arithmatex">\(a_i,a_{j'}\)</span> 间必定有连边，又由于 <span class="arithmatex">\(j\)</span> 和 <span class="arithmatex">\(j'\)</span> 在同一等价类中，故必定有一条 <span class="arithmatex">\(a_i \ne a_j\)</span> 的边。</p>
+<p>这个性质其实是一个很强的性质，对于任意一个点 <span class="arithmatex">\(u\)</span>，所有 <span class="arithmatex">\(v&lt;u,(u,v)\in E\)</span> 的 <span class="arithmatex">\(v\)</span> 组成的点集 <span class="arithmatex">\(V'\)</span> 的导出子图必定是一个完全图，那么每个等价类的方案数就是 <span class="arithmatex">\(26-|V'|\)</span>，乘起来显然是不会算多，也不重不漏的。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -8970,7 +8998,7 @@ $$</p>
 <p><a href="https://www.luogu.com.cn/problem/P4070">传送门</a></p>
 <p>求每个前缀的本质不同子串个数。</p>
 <p>不容易想到比较显然的 SA 做法，考虑 SAM。</p>
-<p>容易发现本质不同子串个数就是每个等价类的 $\mathrm{len}-\mathrm{minlen}+1=\mathrm{len}-\mathrm{len_{link}}$。</p>
+<p>容易发现本质不同子串个数就是每个等价类的 <span class="arithmatex">\(\mathrm{len}-\mathrm{minlen}+1=\mathrm{len}-\mathrm{len_{link}}\)</span>。</p>
 <p>然后就做完了，而且 SAM 还刚好是在线的。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -9042,9 +9070,9 @@ $$</p>
 <h2 id="usaco-2023-december-contest-silver-problem-1-bovine-acrobatics">USACO 2023 December Contest, Silver Problem 1. Bovine Acrobatics</h2>
 <p><a href="https://www.luogu.com.cn/problem/P9977">传送门</a></p>
 <p>考虑一个贪心，从大到小每次能放就放，不能放就跳过。</p>
-<p>思考为什么是对的，注意到若 $a$ 能放在 $b$ 上面，那 $a$ 也必然能放在任意大于 $b$ 的 $c$ 上面。所以假如有一对奶牛存在“放了 $x$ 就不能放 $y$” 的关系时，显然放更大的是不劣的。</p>
+<p>思考为什么是对的，注意到若 <span class="arithmatex">\(a\)</span> 能放在 <span class="arithmatex">\(b\)</span> 上面，那 <span class="arithmatex">\(a\)</span> 也必然能放在任意大于 <span class="arithmatex">\(b\)</span> 的 <span class="arithmatex">\(c\)</span> 上面。所以假如有一对奶牛存在“放了 <span class="arithmatex">\(x\)</span> 就不能放 <span class="arithmatex">\(y\)</span>” 的关系时，显然放更大的是不劣的。</p>
 <p>具体怎么实现，可以考虑双指针维护现在塔顶的区间，然后对其中每头奶牛存它占了多少个塔顶即可。</p>
-<p>复杂度 $O(n\log n)$（需要排序）。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>（需要排序）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <p>我写代码的时候题读错了，读成从小到大放了（虽然这也是对的），懒得改了。</p>
@@ -9100,11 +9128,11 @@ $$</p>
 <h2 id="usaco-2023-december-contest-silver-problem-2-cycle-correspondence">USACO 2023 December Contest, Silver Problem 2. Cycle Correspondence</h2>
 <p><a href="https://www.luogu.com.cn/problem/P9978">传送门</a></p>
 <p>题意在说什么啊，读了 20min 才看懂。</p>
-<p>题意就是有一张 $N$ 个点的图（点互不相同），其中包含且仅包含一个长为 $K$ 的无向环，其余点均未连边。</p>
+<p>题意就是有一张 <span class="arithmatex">\(N\)</span> 个点的图（点互不相同），其中包含且仅包含一个长为 <span class="arithmatex">\(K\)</span> 的无向环，其余点均未连边。</p>
 <p>然后有两种标号方式，现在给你两种标号方式中环上顺次的标号，但是你不知道哪个标号对应哪个点，而且两个环上标号的方向可能不同，所以你需要计算最多可能有多少个点在两种方式中的标号相同。</p>
 <p>考虑如果某标号在两个环上都未出现，说明它是一个散点，那显然它可以在两种方案中涂色相同，故只需要考虑环上的即可。</p>
-<p>一个简单的想法是考虑顺着 <code>rotate</code> 出来的 $N$ 中情况和 <code>reverse</code> 后 <code>rotate</code> 出来的 $N$ 中情况。那么容易想到计算每个点要恰好 <code>rotate</code> 多少才会产生贡献。那么就很简单了。</p>
-<p>复杂度 $O(n)$。</p>
+<p>一个简单的想法是考虑顺着 <code>rotate</code> 出来的 <span class="arithmatex">\(N\)</span> 中情况和 <code>reverse</code> 后 <code>rotate</code> 出来的 <span class="arithmatex">\(N\)</span> 中情况。那么容易想到计算每个点要恰好 <code>rotate</code> 多少才会产生贡献。那么就很简单了。</p>
+<p>复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -9156,17 +9184,17 @@ $$</p>
 </details>
 <h2 id="usaco-2023-december-contest-silver-problem-3-target-practice">USACO 2023 December Contest, Silver Problem 3. Target Practice</h2>
 <p><a href="https://www.luogu.com.cn/problem/P9979">传送门</a></p>
-<p>考虑每次修改一个指令就是把整个后缀的所有开枪位置平移 $1\sim 2$ 位。</p>
-<p>具体来说有 $6$ 中情况：</p>
+<p>考虑每次修改一个指令就是把整个后缀的所有开枪位置平移 <span class="arithmatex">\(1\sim 2\)</span> 位。</p>
+<p>具体来说有 <span class="arithmatex">\(6\)</span> 中情况：</p>
 <ol>
-<li><code>L-&gt;F</code>：右移 $1$ 位，且多开一枪。</li>
-<li><code>F-&gt;L</code>：左移 $1$ 位，且少开一枪。</li>
-<li><code>R-&gt;F</code>：左移 $1$ 位，且多开一枪。</li>
-<li><code>F-&gt;R</code>：右移 $1$ 位，且少开一枪。</li>
-<li><code>L-&gt;R</code>：右移 $2$ 位。</li>
-<li><code>R-&gt;L</code>：左移 $2$ 位。</li>
+<li><code>L-&gt;F</code>：右移 <span class="arithmatex">\(1\)</span> 位，且多开一枪。</li>
+<li><code>F-&gt;L</code>：左移 <span class="arithmatex">\(1\)</span> 位，且少开一枪。</li>
+<li><code>R-&gt;F</code>：左移 <span class="arithmatex">\(1\)</span> 位，且多开一枪。</li>
+<li><code>F-&gt;R</code>：右移 <span class="arithmatex">\(1\)</span> 位，且少开一枪。</li>
+<li><code>L-&gt;R</code>：右移 <span class="arithmatex">\(2\)</span> 位。</li>
+<li><code>R-&gt;L</code>：左移 <span class="arithmatex">\(2\)</span> 位。</li>
 </ol>
-<p>那么从后往前扫，存当前后缀四种平移方法分别的答案即可，复杂度 $O(n)$。</p>
+<p>那么从后往前扫，存当前后缀四种平移方法分别的答案即可，复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -9254,8 +9282,8 @@ $$</p>
 <h2 id="usaco-2023-december-contest-gold-problem-1-flight-routes">USACO 2023 December Contest, Gold Problem 1. Flight Routes</h2>
 <p><a href="https://www.luogu.com.cn/problem/P9980">传送门</a></p>
 <p>简单题。</p>
-<p>考虑如果 $u\to v$ 的道路有奇数条，当 $v$ 连向 $x$ 时，$u\to x$ 的路径也会增加奇数条。</p>
-<p>故从小到大考虑以每个点为终点的边即可，然后每连一条边暴力更新前驱。$O(n^3)$ 是可以过 $n\le 750$ 的。</p>
+<p>考虑如果 <span class="arithmatex">\(u\to v\)</span> 的道路有奇数条，当 <span class="arithmatex">\(v\)</span> 连向 <span class="arithmatex">\(x\)</span> 时，<span class="arithmatex">\(u\to x\)</span> 的路径也会增加奇数条。</p>
+<p>故从小到大考虑以每个点为终点的边即可，然后每连一条边暴力更新前驱。<span class="arithmatex">\(O(n^3)\)</span> 是可以过 <span class="arithmatex">\(n\le 750\)</span> 的。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -9306,8 +9334,8 @@ $$</p>
 <p><a href="https://www.luogu.com.cn/problem/P9981">传送门</a></p>
 <p>考虑在反图上 DP。</p>
 <p>长度很简单，略过。只考虑在长度相同的情况下最小化字典序。</p>
-<p>容易发现要最小化某个序列的字典序，那么它的某个后缀肯定也是字典序最小的。所以可以直接从另一个字典序最小的序列转移过来。所以在（反图上）一条 $u\to v$ 边只需要考虑从 $u$ 的答案转移到 $v$ 的答案。</p>
-<p>考虑具体转移方法，由于字典序比较就是找到极长的相同前缀，然后比较下一位。极长的相同前缀可以哈希加倍增维护。然后就做完了，复杂度 $O(n\log n)$。</p>
+<p>容易发现要最小化某个序列的字典序，那么它的某个后缀肯定也是字典序最小的。所以可以直接从另一个字典序最小的序列转移过来。所以在（反图上）一条 <span class="arithmatex">\(u\to v\)</span> 边只需要考虑从 <span class="arithmatex">\(u\)</span> 的答案转移到 <span class="arithmatex">\(v\)</span> 的答案。</p>
+<p>考虑具体转移方法，由于字典序比较就是找到极长的相同前缀，然后比较下一位。极长的相同前缀可以哈希加倍增维护。然后就做完了，复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -9399,16 +9427,16 @@ $$</p>
 </details>
 <h2 id="usaco-2023-december-contest-gold-problem-3-haybale-distribution">USACO 2023 December Contest, Gold Problem 3. Haybale Distribution</h2>
 <p><a href="https://www.luogu.com.cn/problem/P9982">传送门</a></p>
-<p>考虑化式子，设 $cnt_u=\sum_{i=1}^n[x_i\le u],sum_i=\sum_{i=1}^n[x_i\le u]x_i$，容易发现答案如下。</p>
-<p>$$
+<p>考虑化式子，设 <span class="arithmatex">\(cnt_u=\sum_{i=1}^n[x_i\le u],sum_i=\sum_{i=1}^n[x_i\le u]x_i\)</span>，容易发现答案如下。</p>
+<div class="arithmatex">\[
 \begin{aligned}
  &amp;a(u\cdot cnt_u-sum_u)+b(sum_{x_n}-sum_u-u(n-cnt_u))\\
 =&amp;a\cdot u\cdot cnt_u-a\cdot sum_u+b\cdot sum_{x_n}-b\cdot sum_u-b\cdot u\cdot n+b\cdot u\cdot cnt_u\\
 =&amp;(a+b)(u\cdot cnt_u-sum_u)-u\cdot r\cdot n+r\cdot sum_{x_n}
 \end{aligned}
-$$</p>
-<p>容易发现 $(a+b)(u\cdot cnt_u-sum_u)$ 是一个随 $u$ 增大而增大，且斜率单调不降的函数（就是下凸壳），因为后面那坨就是 $u$ 和之前所有 $x_i$ 的距离和，$u\cdot r\cdot n$ 是个一次函数，$r\cdot sum_{x_n}$ 是个常数。加起来也是个下凸壳。所以考虑在凸壳上二分即可。复杂度 $O(n\log V)$，其中 $V$ 是值域。</p>
-<p>注意 $x_i$ 相同的情况。</p>
+\]</div>
+<p>容易发现 <span class="arithmatex">\((a+b)(u\cdot cnt_u-sum_u)\)</span> 是一个随 <span class="arithmatex">\(u\)</span> 增大而增大，且斜率单调不降的函数（就是下凸壳），因为后面那坨就是 <span class="arithmatex">\(u\)</span> 和之前所有 <span class="arithmatex">\(x_i\)</span> 的距离和，<span class="arithmatex">\(u\cdot r\cdot n\)</span> 是个一次函数，<span class="arithmatex">\(r\cdot sum_{x_n}\)</span> 是个常数。加起来也是个下凸壳。所以考虑在凸壳上二分即可。复杂度 <span class="arithmatex">\(O(n\log V)\)</span>，其中 <span class="arithmatex">\(V\)</span> 是值域。</p>
+<p>注意 <span class="arithmatex">\(x_i\)</span> 相同的情况。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -9482,23 +9510,23 @@ $$</p>
 <h2 id="51nod1600-simple-kmp">51Nod1600 Simple KMP</h2>
 <p><a href="https://vjudge.csgrandeur.cn/problem/51Nod-1600">因为一些不可抗力（指那个 OJ 没登录看不到题），挂的是 vjudge 链接</a></p>
 <p>感谢蜘蛛蚝借账号给我交题。</p>
-<p>题意是令 $g(T)$ 为 $T$ 的 $\mathrm{fail}$ 树（KMP 的 $\mathrm{fail}$ 树）上所有结点深度之和，其中空结点深度是 $-1$。又令 $f(S)$ 为 $S$ 的所有子串的 $g(T)$ 之和，对 $S$ 的每个前缀求出 $f(S[1:i])$。</p>
-<p>这种看着就不好维护的可以考虑拆贡献，先拆 $g$ 的贡献，容易想到先刻画出一个字符串使其 $\mathrm{fail}$ 树上有深度超过 $2$ 的点。</p>
+<p>题意是令 <span class="arithmatex">\(g(T)\)</span> 为 <span class="arithmatex">\(T\)</span> 的 <span class="arithmatex">\(\mathrm{fail}\)</span> 树（KMP 的 <span class="arithmatex">\(\mathrm{fail}\)</span> 树）上所有结点深度之和，其中空结点深度是 <span class="arithmatex">\(-1\)</span>。又令 <span class="arithmatex">\(f(S)\)</span> 为 <span class="arithmatex">\(S\)</span> 的所有子串的 <span class="arithmatex">\(g(T)\)</span> 之和，对 <span class="arithmatex">\(S\)</span> 的每个前缀求出 <span class="arithmatex">\(f(S[1:i])\)</span>。</p>
+<p>这种看着就不好维护的可以考虑拆贡献，先拆 <span class="arithmatex">\(g\)</span> 的贡献，容易想到先刻画出一个字符串使其 <span class="arithmatex">\(\mathrm{fail}\)</span> 树上有深度超过 <span class="arithmatex">\(2\)</span> 的点。</p>
 <p><img alt="图示 7" src="../../img/2023Dec_7.png" /></p>
 <p>容易发现，一个点的深度就等于<strong>此处的 Border 数量</strong>，在上图中表示为两对黑线描边的绿色和橙色矩形。</p>
-<p>于是我们就能把 $G$ 转化成求每个前缀的 Border 数，考虑用数学语言解释：</p>
-<p>$$g(T)=\sum_{i=1}^{|T|}\sum_{x=1}^{i-1}[T[1:x]=T[|T|-x+1:|T|]]$$</p>
-<p>那么 $f(S)$ 就能写成：</p>
-<p>$$
+<p>于是我们就能把 <span class="arithmatex">\(G\)</span> 转化成求每个前缀的 Border 数，考虑用数学语言解释：</p>
+<div class="arithmatex">\[g(T)=\sum_{i=1}^{|T|}\sum_{x=1}^{i-1}[T[1:x]=T[|T|-x+1:|T|]]\]</div>
+<p>那么 <span class="arithmatex">\(f(S)\)</span> 就能写成：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 f(S)&amp;=\sum_{l=1}^n\sum_{r=l}^ng(S[l:r])\\
 &amp;=\sum_{l=1}^n\sum_{r=l}^n\sum_{i=l}^r\sum_{x=1}^{i-l}[S[l:l+x-1]=S[i-x+1:i]]
 \end{aligned}
-$$</p>
-<p>根据经验，把枚举用于比较的那个字符串的 $\sum$ 放到外面是更容易用 SAM 维护的，并且从终点（字符串右边缘）枚举也是更容易维护的，考虑把 $i$ 和 $x$ 拎出来。</p>
-<p>$$\sum_{r=i}^n\sum_{i=1}^r\sum_{x=1}^{i-1}\sum_{l=1}^{i-x}[S[l:l+x-1]=S[i-x+1:i]]$$</p>
-<p>容易发现，在固定 $i$ 之后，满足 $S[l:l+x-1]=S[i-x+1:i]$ 的 $(l,x)$ 二元组是可以直接维护的。</p>
-<p>具体来说，$l$ 的数量其实就是 parent tree 上 $S[1:i]$ 的祖先中，在 $x$ 之前出现过的次数总和，这个可以树剖动态维护。   </p>
+\]</div>
+<p>根据经验，把枚举用于比较的那个字符串的 <span class="arithmatex">\(\sum\)</span> 放到外面是更容易用 SAM 维护的，并且从终点（字符串右边缘）枚举也是更容易维护的，考虑把 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(x\)</span> 拎出来。</p>
+<div class="arithmatex">\[\sum_{r=i}^n\sum_{i=1}^r\sum_{x=1}^{i-1}\sum_{l=1}^{i-x}[S[l:l+x-1]=S[i-x+1:i]]\]</div>
+<p>容易发现，在固定 <span class="arithmatex">\(i\)</span> 之后，满足 <span class="arithmatex">\(S[l:l+x-1]=S[i-x+1:i]\)</span> 的 <span class="arithmatex">\((l,x)\)</span> 二元组是可以直接维护的。</p>
+<p>具体来说，<span class="arithmatex">\(l\)</span> 的数量其实就是 parent tree 上 <span class="arithmatex">\(S[1:i]\)</span> 的祖先中，在 <span class="arithmatex">\(x\)</span> 之前出现过的次数总和，这个可以树剖动态维护。   </p>
 <p>然后求出这个值后，容易发现外层的就是一个二次前缀和，做两遍前缀和即可。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -9656,14 +9684,14 @@ $$</p>
 <h2 id="p9051-pa2021-wystawa">P9051 [PA2021] Wystawa</h2>
 <p><a href="https://www.luogu.com.cn/problem/P9051">传送门</a></p>
 <p>妙题。</p>
-<p>考虑这玩意关于 $k$ 大致是下凸的（其实是平着一行一行的），这个显然不能用 wqs 二分，尝试把它转化成单调的。</p>
-<p>容易想到对于 $a_i\le b_i$ 的 $i$ 选 $a$ 必然是不劣的，故我们把这些全部选上，然后剩下的每选一个 $a$，$c$ 的最大子段和显然是单调不减的，故把 $k$ 补齐即可（若已经大于 $k$ 考虑 $a,b$ 反转）。</p>
-<p>那么如何 check 呢？二分 $mid$ 后，容易想到一个暴力 $dp$，设 $dp_{i,j}$ 表示考虑前 $i$ 位，（在整个前缀最大子段和不超过 $mid$ 的情况下）选了 $j$ 个 $a$ 时以 $i$ 结尾的最大子段和最小是多少，若这个值超过 $mid$ 就赋值为空，转移分选 $a$ 和选 $b$ 两种：</p>
-<p>$$dp_{i,j}\gets dp_{i-1,j}+b_i$$
-$$dp_{i,j}\gets dp_{i-1,j-1}+a_i$$</p>
-<p>然后还要对 $0$ 取 $\max$。</p>
-<p>首先根据之前的转化，$dp_{i,j}$ 关于 $j$ 是单调不减的，画出图像后考虑手模一下。容易发现它相当于把原图像复制一份，一半向上平移 $b_i$，另一半右移 $1$ 后向上平移 $a_i$。故在第一个 $dp_{i,j}+a_i&lt;dp_{i,j+1}+b_i$ 的地方，会取到第二个转移，即 $dp_{i,j+1}-dp_{i,j}&lt;a_i-b_i$。对于 $i=1,2$ 时，这玩意必然是下凸的，考虑 $i=3$ 时，分两种情况讨论（$dp_{3,2}$ 的转移）容易发现它还是下凸的。那么后面每次就是找到第一个斜率小于 $a_i-b_i$ 的地方，插入一条线段，显然这个会保持下凸的性质。用 <code>set</code> 维护差分即可，然后每次删掉开头小于 $0$ 的部分和结尾大于 $mid$ 的部分，最后判断非空的 $dp_{n,j}$ 数量即可。为输出方案需要把每个 $j$ 对应的 $a_i$ 存下来（以及开头的 $0$）。</p>
-<p>复杂度 $O(n\log n\log V)$，具体细节见代码。</p>
+<p>考虑这玩意关于 <span class="arithmatex">\(k\)</span> 大致是下凸的（其实是平着一行一行的），这个显然不能用 wqs 二分，尝试把它转化成单调的。</p>
+<p>容易想到对于 <span class="arithmatex">\(a_i\le b_i\)</span> 的 <span class="arithmatex">\(i\)</span> 选 <span class="arithmatex">\(a\)</span> 必然是不劣的，故我们把这些全部选上，然后剩下的每选一个 <span class="arithmatex">\(a\)</span>，<span class="arithmatex">\(c\)</span> 的最大子段和显然是单调不减的，故把 <span class="arithmatex">\(k\)</span> 补齐即可（若已经大于 <span class="arithmatex">\(k\)</span> 考虑 <span class="arithmatex">\(a,b\)</span> 反转）。</p>
+<p>那么如何 check 呢？二分 <span class="arithmatex">\(mid\)</span> 后，容易想到一个暴力 <span class="arithmatex">\(dp\)</span>，设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 位，（在整个前缀最大子段和不超过 <span class="arithmatex">\(mid\)</span> 的情况下）选了 <span class="arithmatex">\(j\)</span> 个 <span class="arithmatex">\(a\)</span> 时以 <span class="arithmatex">\(i\)</span> 结尾的最大子段和最小是多少，若这个值超过 <span class="arithmatex">\(mid\)</span> 就赋值为空，转移分选 <span class="arithmatex">\(a\)</span> 和选 <span class="arithmatex">\(b\)</span> 两种：</p>
+<div class="arithmatex">\[dp_{i,j}\gets dp_{i-1,j}+b_i$$
+$$dp_{i,j}\gets dp_{i-1,j-1}+a_i\]</div>
+<p>然后还要对 <span class="arithmatex">\(0\)</span> 取 <span class="arithmatex">\(\max\)</span>。</p>
+<p>首先根据之前的转化，<span class="arithmatex">\(dp_{i,j}\)</span> 关于 <span class="arithmatex">\(j\)</span> 是单调不减的，画出图像后考虑手模一下。容易发现它相当于把原图像复制一份，一半向上平移 <span class="arithmatex">\(b_i\)</span>，另一半右移 <span class="arithmatex">\(1\)</span> 后向上平移 <span class="arithmatex">\(a_i\)</span>。故在第一个 <span class="arithmatex">\(dp_{i,j}+a_i&lt;dp_{i,j+1}+b_i\)</span> 的地方，会取到第二个转移，即 <span class="arithmatex">\(dp_{i,j+1}-dp_{i,j}&lt;a_i-b_i\)</span>。对于 <span class="arithmatex">\(i=1,2\)</span> 时，这玩意必然是下凸的，考虑 <span class="arithmatex">\(i=3\)</span> 时，分两种情况讨论（<span class="arithmatex">\(dp_{3,2}\)</span> 的转移）容易发现它还是下凸的。那么后面每次就是找到第一个斜率小于 <span class="arithmatex">\(a_i-b_i\)</span> 的地方，插入一条线段，显然这个会保持下凸的性质。用 <code>set</code> 维护差分即可，然后每次删掉开头小于 <span class="arithmatex">\(0\)</span> 的部分和结尾大于 <span class="arithmatex">\(mid\)</span> 的部分，最后判断非空的 <span class="arithmatex">\(dp_{n,j}\)</span> 数量即可。为输出方案需要把每个 <span class="arithmatex">\(j\)</span> 对应的 <span class="arithmatex">\(a_i\)</span> 存下来（以及开头的 <span class="arithmatex">\(0\)</span>）。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n\log V)\)</span>，具体细节见代码。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -9804,9 +9832,9 @@ $$dp_{i,j}\gets dp_{i-1,j-1}+a_i$$</p>
 <h2 id="p5311-ynoi2011">P5311 [Ynoi2011] 成都七中</h2>
 <p><a href="https://www.luogu.com.cn/problem/P5311">传送门</a></p>
 <p>简单题，不知道为什么评黑。</p>
-<p>首先容易想到点分治，那么假如某分支中心到 $x_i$ 路径上全都在区间 $[l_i,r_i]$ 内，$x_i$ 显然在该分治中心中求解，离线挂到 $x$ 上即可。</p>
-<p>具体如何求解，考虑简单扫描线（这个应该叫扫描线吧？），用类似于二维偏序的思路维护当前右端点时，每个左端点的答案，这里就是分治中心到对应点路径上编号极值被区间 $[l_i,r_i]$ 严格包含，BIT 维护。</p>
-<p>复杂度 $O(n\log^2 n)$，注意点分治不要写假了。</p>
+<p>首先容易想到点分治，那么假如某分支中心到 <span class="arithmatex">\(x_i\)</span> 路径上全都在区间 <span class="arithmatex">\([l_i,r_i]\)</span> 内，<span class="arithmatex">\(x_i\)</span> 显然在该分治中心中求解，离线挂到 <span class="arithmatex">\(x\)</span> 上即可。</p>
+<p>具体如何求解，考虑简单扫描线（这个应该叫扫描线吧？），用类似于二维偏序的思路维护当前右端点时，每个左端点的答案，这里就是分治中心到对应点路径上编号极值被区间 <span class="arithmatex">\([l_i,r_i]\)</span> 严格包含，BIT 维护。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>，注意点分治不要写假了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="w">    </span><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -9930,13 +9958,13 @@ $$dp_{i,j}\gets dp_{i-1,j-1}+a_i$$</p>
 <h2 id="p8253-noi-online-2022">P8253 [NOI Online 2022 提高组] 如何正确地排序</h2>
 <p><a href="https://www.luogu.com.cn/problem/P8253">传送门</a></p>
 <p>思路算是比较顺畅吧。</p>
-<p>考虑 $a_{i,j}$ 能作为最小值在与第 $j'$ 列加起来时产生一次贡献的条件（最大值同理）：</p>
-<p>$$\forall i'\ne i,a_{i',j}+a_{i',j'}&lt;a_{i,j}+a_{i,j'}$$</p>
-<p>那么化一下式子（把 $j$ 挪到同一边，$j'$ 挪到另一边）就能转化成 $m-1$ 维偏序。</p>
-<p>当 $m=4$ 时复杂度是 $O(n\log^2 n)$ 乘以四倍常数的，不太能过。</p>
-<p>因为总和显然是 $2\times sum\times n$，考虑反过来求不能产生贡献的，当存在一个小于它且存在一个大于它时它就必定既不是最小值也不是最大值，那么可以仿照上面的转化成二维偏序，差不多就做完了，被多算的恰好会被减两遍（$f(j,j'),f(j',j)$ 各一遍）。</p>
-<p>为方便代码实现，可以把 $m=3$ 的复制一行或乘以二，$m=2$ 的可以直接求。</p>
-<p>复杂度 $O(n\log n)$ 带 $24$ 倍常数。</p>
+<p>考虑 <span class="arithmatex">\(a_{i,j}\)</span> 能作为最小值在与第 <span class="arithmatex">\(j'\)</span> 列加起来时产生一次贡献的条件（最大值同理）：</p>
+<div class="arithmatex">\[\forall i'\ne i,a_{i',j}+a_{i',j'}&lt;a_{i,j}+a_{i,j'}\]</div>
+<p>那么化一下式子（把 <span class="arithmatex">\(j\)</span> 挪到同一边，<span class="arithmatex">\(j'\)</span> 挪到另一边）就能转化成 <span class="arithmatex">\(m-1\)</span> 维偏序。</p>
+<p>当 <span class="arithmatex">\(m=4\)</span> 时复杂度是 <span class="arithmatex">\(O(n\log^2 n)\)</span> 乘以四倍常数的，不太能过。</p>
+<p>因为总和显然是 <span class="arithmatex">\(2\times sum\times n\)</span>，考虑反过来求不能产生贡献的，当存在一个小于它且存在一个大于它时它就必定既不是最小值也不是最大值，那么可以仿照上面的转化成二维偏序，差不多就做完了，被多算的恰好会被减两遍（<span class="arithmatex">\(f(j,j'),f(j',j)\)</span> 各一遍）。</p>
+<p>为方便代码实现，可以把 <span class="arithmatex">\(m=3\)</span> 的复制一行或乘以二，<span class="arithmatex">\(m=2\)</span> 的可以直接求。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span> 带 <span class="arithmatex">\(24\)</span> 倍常数。</p>
 <p>注意两数相同的情况。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -10025,8 +10053,8 @@ $$dp_{i,j}\gets dp_{i-1,j-1}+a_i$$</p>
 <h2 id="cf1572f-stations">CF1572F Stations</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1572F">传送门</a></p>
 <p>简单题，不知道怎么评到 *3400 的。</p>
-<p>每次操作相当于一个前缀推平（取 $\min$）加一个单点赋值，然后推平过程中另一颗线段树维护每个点被覆盖的次数，只需要实现区间加区间求和。</p>
-<p>复杂度 $O(n\log^2 n)$（大概吧？不太懂这种情况 segbeats 要怎么均摊）。</p>
+<p>每次操作相当于一个前缀推平（取 <span class="arithmatex">\(\min\)</span>）加一个单点赋值，然后推平过程中另一颗线段树维护每个点被覆盖的次数，只需要实现区间加区间求和。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>（大概吧？不太懂这种情况 segbeats 要怎么均摊）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -10172,11 +10200,11 @@ $$dp_{i,j}\gets dp_{i-1,j-1}+a_i$$</p>
 <h2 id="cf1651f-tower-defense">CF1651F Tower Defense</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1651F">传送门</a></p>
 <p>首先显然可以视作每个怪移动都不需要时间，这样就不需要考虑时间差了。那么考虑每个怪必定是把一个前缀魔力全消耗完后，用掉某一座塔一部分的魔力。</p>
-<p>这种“一大段 $+$ 散点”的形式容易让人想到分块维护。</p>
-<p>具体来说，对塔分块，维护每块中所有塔<strong>从空开始过了 $k$ 天后回复的魔力总和</strong>。这个可以 $O(n)$ 实现，具体来说，对于一座塔，它的图像是一条一次函数接一条水平的射线。那么可以维护差分的差分，然后做二维前缀和。</p>
-<p>然后上次把整块全用完的就可以 $O(1)$ 维护了，假如停在了这一块内，就暴力 $O(\sqrt{n})$ 维护。由于每个怪只会停下一次，所以复杂度还是对的。</p>
-<p>但是这样空间就是 $O(n\sqrt{n})$ 了。考虑离线下来后，一块一块求解。</p>
-<p>时间复杂度 $O(n\sqrt{n})$，空间复杂度 $O(n)$。</p>
+<p>这种“一大段 <span class="arithmatex">\(+\)</span> 散点”的形式容易让人想到分块维护。</p>
+<p>具体来说，对塔分块，维护每块中所有塔<strong>从空开始过了 <span class="arithmatex">\(k\)</span> 天后回复的魔力总和</strong>。这个可以 <span class="arithmatex">\(O(n)\)</span> 实现，具体来说，对于一座塔，它的图像是一条一次函数接一条水平的射线。那么可以维护差分的差分，然后做二维前缀和。</p>
+<p>然后上次把整块全用完的就可以 <span class="arithmatex">\(O(1)\)</span> 维护了，假如停在了这一块内，就暴力 <span class="arithmatex">\(O(\sqrt{n})\)</span> 维护。由于每个怪只会停下一次，所以复杂度还是对的。</p>
+<p>但是这样空间就是 <span class="arithmatex">\(O(n\sqrt{n})\)</span> 了。考虑离线下来后，一块一块求解。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n\sqrt{n})\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -10307,8 +10335,8 @@ $$dp_{i,j}\gets dp_{i-1,j-1}+a_i$$</p>
 <p>垃圾 HDU 评测机，卡了一天才卡过去，官方 std（比赛方下发的示例代码，不知道为什么 xzq 手上有）都 T 了，侧你妈。</p>
 <p><img alt="图示 8" src="../../img/2023Dec_8.png" /></p>
 <p>考虑这种边权限制的就用 Kruskal 重构树维护，但是每种颜色只选一个不好维护。</p>
-<p>怎么办呢，考虑链加单点查，当两条同颜色链重合时就取较大值。容易发现每条重合位置只会是虚树上的边，建虚树暴力跳即可（反正只有 $10$ 个点）。</p>
-<p>复杂度 $O(n\log n)$（树上差分维护），带 $10$ 倍常数。</p>
+<p>怎么办呢，考虑链加单点查，当两条同颜色链重合时就取较大值。容易发现每条重合位置只会是虚树上的边，建虚树暴力跳即可（反正只有 <span class="arithmatex">\(10\)</span> 个点）。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>（树上差分维护），带 <span class="arithmatex">\(10\)</span> 倍常数。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="cp">#pragma GCC optimize(2)</span>
@@ -10559,10 +10587,10 @@ $$dp_{i,j}\gets dp_{i-1,j-1}+a_i$$</p>
 <h2 id="p5163-wd">P5163 WD与地图</h2>
 <p><a href="https://www.luogu.com.cn/problem/P5163">传送门</a></p>
 <p>首先删边肯定没有加边好做，故先把边删完之后逆向求解。</p>
-<p>考虑无向图版本，这个就太简单了，并查集 $+$ 线段树合并即可。</p>
+<p>考虑无向图版本，这个就太简单了，并查集 <span class="arithmatex">\(+\)</span> 线段树合并即可。</p>
 <p>我们只需要求出每条边两端点何时开始属于同一个强连通分量即可，这个对于每条边显然是可以二分做的（二分时间，然后跑 Tarjan），所以考虑整体二分。</p>
-<p>具体来说，二分时间，然后在二分的时候下传一个边集 $E$ 表示“合并时间在此区间内的边”，每次加入 $[l,mid]$ 内的边，然后把当前已经在强连通分量内的边传到左儿子，其余传到右儿子。然后强连通分量可以用可撤销并查集维护，具体见代码：</p>
-<p>复杂度 $O(n\log^2n)$。</p>
+<p>具体来说，二分时间，然后在二分的时候下传一个边集 <span class="arithmatex">\(E\)</span> 表示“合并时间在此区间内的边”，每次加入 <span class="arithmatex">\([l,mid]\)</span> 内的边，然后把当前已经在强连通分量内的边传到左儿子，其余传到右儿子。然后强连通分量可以用可撤销并查集维护，具体见代码：</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log^2n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -10809,11 +10837,11 @@ $$dp_{i,j}\gets dp_{i-1,j-1}+a_i$$</p>
 </details>
 <h2 id="cf765f-souvenirs">CF765F Souvenirs</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF765F">传送门</a></p>
-<p>考虑对于一个 $a_i$ 可能成为最小值的小于 $i$ 的所有 $j$。</p>
-<p>先考虑 $a_j&gt;a_i$ 的情况，小于同理。</p>
-<p>首先在 $i$ 前面找到最大的 $j$ 使得 $a_j&gt;a_i$，考虑更靠前的 $a_{j'}$ 什么时候才可能产生贡献，即 $a_{j'}-a_i&lt;a_{j'}-a_{j}$。</p>
-<p>画一下式子可以得到 $a_{j'}-a_i&lt;\frac{1}{2}(a_j-a_i)$，那么每次值域会小一半，只会有 $\log V$ 个可能的 $j$。权值线段树维护即可。</p>
-<p>复杂度 $O(n\log^2 V)$。</p>
+<p>考虑对于一个 <span class="arithmatex">\(a_i\)</span> 可能成为最小值的小于 <span class="arithmatex">\(i\)</span> 的所有 <span class="arithmatex">\(j\)</span>。</p>
+<p>先考虑 <span class="arithmatex">\(a_j&gt;a_i\)</span> 的情况，小于同理。</p>
+<p>首先在 <span class="arithmatex">\(i\)</span> 前面找到最大的 <span class="arithmatex">\(j\)</span> 使得 <span class="arithmatex">\(a_j&gt;a_i\)</span>，考虑更靠前的 <span class="arithmatex">\(a_{j'}\)</span> 什么时候才可能产生贡献，即 <span class="arithmatex">\(a_{j'}-a_i&lt;a_{j'}-a_{j}\)</span>。</p>
+<p>画一下式子可以得到 <span class="arithmatex">\(a_{j'}-a_i&lt;\frac{1}{2}(a_j-a_i)\)</span>，那么每次值域会小一半，只会有 <span class="arithmatex">\(\log V\)</span> 个可能的 <span class="arithmatex">\(j\)</span>。权值线段树维护即可。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log^2 V)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -10941,15 +10969,15 @@ $$dp_{i,j}\gets dp_{i-1,j-1}+a_i$$</p>
 <h2 id="cf1083d-the-fair-nuts-getting-crazy">CF1083D The Fair Nut's getting crazy</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1083D">传送门</a></p>
 <p>不知道怎么评到 *3500 的。</p>
-<p>考虑暴力，就是找到两区间的交 $[c,b]$，然后左区间的左边界能取到的区间就是 $(\min_{i\in [c,b]}\begin{Bmatrix}pre_i\end{Bmatrix},c)$，其中 $pre_i$ 表示 $i$ 之前最近的与 $a_i$ 相同的颜色，不存在就是 $0$。右区间差不多，令 $suf_i$ 表示 $i$ 之后最近的与 $a_i$ 相同的颜色，不存在就是 $n+1$。</p>
-<p>那么令 $f(i,j)=\min_{k\in [i,j]}\begin{Bmatrix}pre_k\end{Bmatrix}+1,g(i,j)=\min_{k\in [i,j]}\begin{Bmatrix}suf_k\end{Bmatrix}-1$，为方便列式子又令 $h(i,j)$ 表示 $[i,j]$ 内每个颜色是否只出现一次，若是则值为 $1$，否则为 $0$。答案就是：</p>
-<p>$$\sum_{i=1}^n\sum_{j=i}^nh(i,j)(i-f(i,j))(g(i,j)-j)$$</p>
-<p>而对于一个 $i$，显然合法的 $j$ 在一个区间内，且这个区间是可以双指针维护的，不妨设这个区间为 $[i,k]$，那么以 $i$ 为左端点的所有区间的答案就是：</p>
-<p>$$\sum_{j=i}^k(i-f(i,j))(g(i,j)-j)$$</p>
+<p>考虑暴力，就是找到两区间的交 <span class="arithmatex">\([c,b]\)</span>，然后左区间的左边界能取到的区间就是 <span class="arithmatex">\((\min_{i\in [c,b]}\begin{Bmatrix}pre_i\end{Bmatrix},c)\)</span>，其中 <span class="arithmatex">\(pre_i\)</span> 表示 <span class="arithmatex">\(i\)</span> 之前最近的与 <span class="arithmatex">\(a_i\)</span> 相同的颜色，不存在就是 <span class="arithmatex">\(0\)</span>。右区间差不多，令 <span class="arithmatex">\(suf_i\)</span> 表示 <span class="arithmatex">\(i\)</span> 之后最近的与 <span class="arithmatex">\(a_i\)</span> 相同的颜色，不存在就是 <span class="arithmatex">\(n+1\)</span>。</p>
+<p>那么令 <span class="arithmatex">\(f(i,j)=\min_{k\in [i,j]}\begin{Bmatrix}pre_k\end{Bmatrix}+1,g(i,j)=\min_{k\in [i,j]}\begin{Bmatrix}suf_k\end{Bmatrix}-1\)</span>，为方便列式子又令 <span class="arithmatex">\(h(i,j)\)</span> 表示 <span class="arithmatex">\([i,j]\)</span> 内每个颜色是否只出现一次，若是则值为 <span class="arithmatex">\(1\)</span>，否则为 <span class="arithmatex">\(0\)</span>。答案就是：</p>
+<div class="arithmatex">\[\sum_{i=1}^n\sum_{j=i}^nh(i,j)(i-f(i,j))(g(i,j)-j)\]</div>
+<p>而对于一个 <span class="arithmatex">\(i\)</span>，显然合法的 <span class="arithmatex">\(j\)</span> 在一个区间内，且这个区间是可以双指针维护的，不妨设这个区间为 <span class="arithmatex">\([i,k]\)</span>，那么以 <span class="arithmatex">\(i\)</span> 为左端点的所有区间的答案就是：</p>
+<div class="arithmatex">\[\sum_{j=i}^k(i-f(i,j))(g(i,j)-j)\]</div>
 <p>然后随便拆一下式子就能化为：</p>
-<p>$$i\cdot \sum_{j=i}^kg(i,j)-i\cdot \sum_{j=i}^kj-\sum_{j=i}^kf(i,j)\cdot g(i,j)+\sum_{j=i}^kf(i,j)\cdot j$$</p>
-<p>容易发现这几个都能维护，又因为容易发现从右到左扫 $i$ 时每次 $f,g$ 可能更新的区域都是以 $i$ 为左端点的一段区间，这个可以单调栈预处理，然后操作就是区间赋值。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<div class="arithmatex">\[i\cdot \sum_{j=i}^kg(i,j)-i\cdot \sum_{j=i}^kj-\sum_{j=i}^kf(i,j)\cdot g(i,j)+\sum_{j=i}^kf(i,j)\cdot j\]</div>
+<p>容易发现这几个都能维护，又因为容易发现从右到左扫 <span class="arithmatex">\(i\)</span> 时每次 <span class="arithmatex">\(f,g\)</span> 可能更新的区域都是以 <span class="arithmatex">\(i\)</span> 为左端点的一段区间，这个可以单调栈预处理，然后操作就是区间赋值。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -11111,11 +11139,11 @@ $$dp_{i,j}\gets dp_{i-1,j-1}+a_i$$</p>
 </details>
 <h2 id="p3960-noip2017">P3960 [NOIP2017 提高组] 列队</h2>
 <p><a href="https://www.luogu.com.cn/problem/P3960">传送门</a></p>
-<p>考虑用平衡树暴力维护，那么可以过 $O(n^2)$ 的点。</p>
-<p>具体来说，对于前 $m-1$ 列，每一行开一棵平衡树，最后一列单独开一棵平衡树，然后按题意删删插插即可。</p>
-<p>但是空间是 $O(n^2)$ 的。</p>
+<p>考虑用平衡树暴力维护，那么可以过 <span class="arithmatex">\(O(n^2)\)</span> 的点。</p>
+<p>具体来说，对于前 <span class="arithmatex">\(m-1\)</span> 列，每一行开一棵平衡树，最后一列单独开一棵平衡树，然后按题意删删插插即可。</p>
+<p>但是空间是 <span class="arithmatex">\(O(n^2)\)</span> 的。</p>
 <p>考虑平衡树内很多连续段从头到尾都不会变。那么可以考虑维护编号连续段，对每个连续段开一个结点。然后每次找到想要的那个坐标所在的结点，删掉它之后裂成三份重新插回去。</p>
-<p>复杂度差不多是 $O(n\log n)$ 级别的，反正 $n,m,q$ 同阶，具体长啥样就不管了。</p>
+<p>复杂度差不多是 <span class="arithmatex">\(O(n\log n)\)</span> 级别的，反正 <span class="arithmatex">\(n,m,q\)</span> 同阶，具体长啥样就不管了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

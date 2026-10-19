@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6058,40 +6086,40 @@
 
 <h1 id="_1">最短路</h1>
 <h2 id="_2">记号与约定</h2>
-<p>记一条边的边权为 $w(u,v)$ 或 $w_e$，记一条有边权的边为 $(u,v,w)$。</p>
-<p>记图 $G=(V,E)$ 点数为 $n$，边数为 $m$。</p>
+<p>记一条边的边权为 <span class="arithmatex">\(w(u,v)\)</span> 或 <span class="arithmatex">\(w_e\)</span>，记一条有边权的边为 <span class="arithmatex">\((u,v,w)\)</span>。</p>
+<p>记图 <span class="arithmatex">\(G=(V,E)\)</span> 点数为 <span class="arithmatex">\(n\)</span>，边数为 <span class="arithmatex">\(m\)</span>。</p>
 <h2 id="_3">单源最短路径问题</h2>
 <h3 id="_4">记号与约定</h3>
-<p>此处约定源点为 $s$，$dis_u$ 为源点到 $u$ 的“估计最短路”，$D_u$ 为“实际最短路”。最初除源点外，$dis_u$ 均为 $+\infty$，显然在任意时刻均有 $dis_u\ge D_u$，且算法执行完成时要求 $dis_u=D_u$。</p>
+<p>此处约定源点为 <span class="arithmatex">\(s\)</span>，<span class="arithmatex">\(dis_u\)</span> 为源点到 <span class="arithmatex">\(u\)</span> 的“估计最短路”，<span class="arithmatex">\(D_u\)</span> 为“实际最短路”。最初除源点外，<span class="arithmatex">\(dis_u\)</span> 均为 <span class="arithmatex">\(+\infty\)</span>，显然在任意时刻均有 <span class="arithmatex">\(dis_u\ge D_u\)</span>，且算法执行完成时要求 <span class="arithmatex">\(dis_u=D_u\)</span>。</p>
 <h3 id="_5">性质</h3>
-<p>对于没有负环（即环上边权和为负）的图，任意两点间的最短路不会重复经过边或点。由此可得最短路最多包含 $n$ 个点 $n-1$ 条边。</p>
+<p>对于没有负环（即环上边权和为负）的图，任意两点间的最短路不会重复经过边或点。由此可得最短路最多包含 <span class="arithmatex">\(n\)</span> 个点 <span class="arithmatex">\(n-1\)</span> 条边。</p>
 <h3 id="bellman-ford">Bellman-Ford</h3>
 <p>Bellman-Ford 是一种暴力求解无负环图上最短路的算法。</p>
-<p>此处定义“松弛”操作为遍历所有边，对于一条有向边（无向边视作两条有向边）$(u,v,w)$，执行 $dis_v=\min(dis_v,dis_u+w)$。执行 $n-1$ 次松弛即可求得最短路。</p>
+<p>此处定义“松弛”操作为遍历所有边，对于一条有向边（无向边视作两条有向边）<span class="arithmatex">\((u,v,w)\)</span>，执行 <span class="arithmatex">\(dis_v=\min(dis_v,dis_u+w)\)</span>。执行 <span class="arithmatex">\(n-1\)</span> 次松弛即可求得最短路。</p>
 <div class="admonition">
 <p class="admonition-title">证明</p>
-<p>证明很简单，考虑 $s\to u$ 的最短路 $s\to p_1\to p_2\dots \to p_k\to u$，容易发现 $s\to p_k$ 前缀部分的肯定是 $s\to p_k$ 的最短路（不然这条路径就不是 $s\to u$ 的最短路了），也就是说 $s\to u$ 的最短路 $dis_u$ 必定是从一条边数少 $1$ 的最短路更新的。由于最短路最多包含 $n-1$ 条边，而边数为 $0$ 的最短路从开头就是确定的，故松弛 $n-1$ 次可以得到所有最短路。</p>
+<p>证明很简单，考虑 <span class="arithmatex">\(s\to u\)</span> 的最短路 <span class="arithmatex">\(s\to p_1\to p_2\dots \to p_k\to u\)</span>，容易发现 <span class="arithmatex">\(s\to p_k\)</span> 前缀部分的肯定是 <span class="arithmatex">\(s\to p_k\)</span> 的最短路（不然这条路径就不是 <span class="arithmatex">\(s\to u\)</span> 的最短路了），也就是说 <span class="arithmatex">\(s\to u\)</span> 的最短路 <span class="arithmatex">\(dis_u\)</span> 必定是从一条边数少 <span class="arithmatex">\(1\)</span> 的最短路更新的。由于最短路最多包含 <span class="arithmatex">\(n-1\)</span> 条边，而边数为 <span class="arithmatex">\(0\)</span> 的最短路从开头就是确定的，故松弛 <span class="arithmatex">\(n-1\)</span> 次可以得到所有最短路。</p>
 </div>
-<p>但是有个问题，若图上有负环，那么最短路边数会大于 $n-1$。若第 $n$ 次松弛仍有 $dis$ 被更新，说明图上存在负环。</p>
-<p>复杂度 $O(nm)$。</p>
+<p>但是有个问题，若图上有负环，那么最短路边数会大于 <span class="arithmatex">\(n-1\)</span>。若第 <span class="arithmatex">\(n\)</span> 次松弛仍有 <span class="arithmatex">\(dis\)</span> 被更新，说明图上存在负环。</p>
+<p>复杂度 <span class="arithmatex">\(O(nm)\)</span>。</p>
 <h3 id="dijkstra">Dijkstra</h3>
 <p>Dijkstra 是基于<strong>贪心</strong>的最短路算法，适用于<strong>非负权图</strong>。</p>
-<p>我们维护两个集合 $S,T$，初始所有点均在 $T$ 中，初始化 $dis_s=0$，其余 $dis$ 赋为 $+\infty$。</p>
-<p>然后重复以下两个操作直到 $T=\varnothing$：</p>
+<p>我们维护两个集合 <span class="arithmatex">\(S,T\)</span>，初始所有点均在 <span class="arithmatex">\(T\)</span> 中，初始化 <span class="arithmatex">\(dis_s=0\)</span>，其余 <span class="arithmatex">\(dis\)</span> 赋为 <span class="arithmatex">\(+\infty\)</span>。</p>
+<p>然后重复以下两个操作直到 <span class="arithmatex">\(T=\varnothing\)</span>：</p>
 <ol>
-<li>从 $T$ 中取出 $dis$ 最小的点 $u$。</li>
-<li>松弛 $u$ 所有出边，将 $u$ 加入 $S$ 集合。</li>
+<li>从 <span class="arithmatex">\(T\)</span> 中取出 <span class="arithmatex">\(dis\)</span> 最小的点 <span class="arithmatex">\(u\)</span>。</li>
+<li>松弛 <span class="arithmatex">\(u\)</span> 所有出边，将 <span class="arithmatex">\(u\)</span> 加入 <span class="arithmatex">\(S\)</span> 集合。</li>
 </ol>
-<p>由于没有负权边，所以对于每次取出的 $u$，$dis_u$ 单调不降。而每次取出 $u$ 时必定满足 $dis_u=D_u$ 考虑证明。</p>
+<p>由于没有负权边，所以对于每次取出的 <span class="arithmatex">\(u\)</span>，<span class="arithmatex">\(dis_u\)</span> 单调不降。而每次取出 <span class="arithmatex">\(u\)</span> 时必定满足 <span class="arithmatex">\(dis_u=D_u\)</span> 考虑证明。</p>
 <div class="admonition">
 <p class="admonition-title">证明</p>
 <p>考虑利用归纳法和反证法证明。</p>
-<p>首先初始情况，$S=\varnothing$，$S$ 中的结点显然全部满足于 $D_u=dis_u$。</p>
-<p>接下来考虑 $p_0,p_1\dots p_{k-1}\in S$，此时取出的点为 $p_k$。</p>
-<p>若 $p_k$ 未被更新，说明 $\forall v\in T,dis_{v}=+\infty$，也就是说这些点无法从 $s$ 出发抵达。此时 $dis_{p_k}=D_{p_k}=+\infty$，符合条件。</p>
-<p>若 $p_k$ 被更新过，即 $\exists i&lt;k,dis_{p_k}=dis_{p_i}+w(p_i,p_k)$。假设此时 $dis_{p_k}\ne D_{p_k}$，说明 $D_{p_k}$ 无法从 $p_0,p_{1}\dots p_{k-1}$ 更新过来，那么必然存在 $v\in T,j<k$，使得 $D_{p_k}=dis_{p_j}+w(p_j,v)+w(v,p_k)$，由于 $p_k$ 的最短路前驱确定，而且 $dis_v$ 必定已经从 $p_j$ 更新过了，可以推出此时 $D_v=dis_v=dis_{p_j}+w(p_j,v)$，所以 $D_{p_k}=D_v+w(v,p_k)$，进而可得 $D_{p_k}\ge D_v$。由定义得 $dis_{p_k}\ge D_{p_k}$，但是由于 $dis_{p_k}\ne D_{p_k}$ 故 $dis_{p_k}>D_{p_k}$。即 $dis_v=D_v\le D_{p_k}&lt;dis_{p_k}$，可得 $dis_v&lt;dis_{p_k}$。但是由于 $v$ 还没被取出 $T$ 集合，故 $dis_{v}\ge dis_{p_k}$。推出矛盾。故此时必定有 $D_{p_k}=dis_{p_k}$。</p>
+<p>首先初始情况，<span class="arithmatex">\(S=\varnothing\)</span>，<span class="arithmatex">\(S\)</span> 中的结点显然全部满足于 <span class="arithmatex">\(D_u=dis_u\)</span>。</p>
+<p>接下来考虑 <span class="arithmatex">\(p_0,p_1\dots p_{k-1}\in S\)</span>，此时取出的点为 <span class="arithmatex">\(p_k\)</span>。</p>
+<p>若 <span class="arithmatex">\(p_k\)</span> 未被更新，说明 <span class="arithmatex">\(\forall v\in T,dis_{v}=+\infty\)</span>，也就是说这些点无法从 <span class="arithmatex">\(s\)</span> 出发抵达。此时 <span class="arithmatex">\(dis_{p_k}=D_{p_k}=+\infty\)</span>，符合条件。</p>
+<p>若 <span class="arithmatex">\(p_k\)</span> 被更新过，即 <span class="arithmatex">\(\exists i&lt;k,dis_{p_k}=dis_{p_i}+w(p_i,p_k)\)</span>。假设此时 <span class="arithmatex">\(dis_{p_k}\ne D_{p_k}\)</span>，说明 <span class="arithmatex">\(D_{p_k}\)</span> 无法从 <span class="arithmatex">\(p_0,p_{1}\dots p_{k-1}\)</span> 更新过来，那么必然存在 <span class="arithmatex">\(v\in T,j&lt;k\)</span>，使得 <span class="arithmatex">\(D_{p_k}=dis_{p_j}+w(p_j,v)+w(v,p_k)\)</span>，由于 <span class="arithmatex">\(p_k\)</span> 的最短路前驱确定，而且 <span class="arithmatex">\(dis_v\)</span> 必定已经从 <span class="arithmatex">\(p_j\)</span> 更新过了，可以推出此时 <span class="arithmatex">\(D_v=dis_v=dis_{p_j}+w(p_j,v)\)</span>，所以 <span class="arithmatex">\(D_{p_k}=D_v+w(v,p_k)\)</span>，进而可得 <span class="arithmatex">\(D_{p_k}\ge D_v\)</span>。由定义得 <span class="arithmatex">\(dis_{p_k}\ge D_{p_k}\)</span>，但是由于 <span class="arithmatex">\(dis_{p_k}\ne D_{p_k}\)</span> 故 <span class="arithmatex">\(dis_{p_k}&gt;D_{p_k}\)</span>。即 <span class="arithmatex">\(dis_v=D_v\le D_{p_k}&lt;dis_{p_k}\)</span>，可得 <span class="arithmatex">\(dis_v&lt;dis_{p_k}\)</span>。但是由于 <span class="arithmatex">\(v\)</span> 还没被取出 <span class="arithmatex">\(T\)</span> 集合，故 <span class="arithmatex">\(dis_{v}\ge dis_{p_k}\)</span>。推出矛盾。故此时必定有 <span class="arithmatex">\(D_{p_k}=dis_{p_k}\)</span>。</p>
 </div>
-<p>然后每次取出 $dis$ 最小的点这个过程，直接暴力是 $O(n^2)$ 的。对于稀疏图可以考虑用优先队列等数据结构维护二元组 $(u,dis_u)$，并以 $dis_u$ 为第一关键字升序排列。复杂度 $O(m\log m)$。</p>
+<p>然后每次取出 <span class="arithmatex">\(dis\)</span> 最小的点这个过程，直接暴力是 <span class="arithmatex">\(O(n^2)\)</span> 的。对于稀疏图可以考虑用优先队列等数据结构维护二元组 <span class="arithmatex">\((u,dis_u)\)</span>，并以 <span class="arithmatex">\(dis_u\)</span> 为第一关键字升序排列。复杂度 <span class="arithmatex">\(O(m\log m)\)</span>。</p>
 <details>
 <summary><a href="https://www.luogu.com.cn/problem/P4779">模板题</a>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="o">=</span><span class="mf">1e5</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">inf</span><span class="o">=</span><span class="mh">0x3f3f3f3f</span><span class="p">;</span>
@@ -6132,15 +6160,15 @@
 </span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p>在单源最短路径问题中，对于每条边 $(u,v)\in E$，有 $D_u+w(u,v)\ge D_v$。这样的形式称为三角形不等式。事实上，观察上面的证明，容易发现关键步骤就是这个三角形不等式中 $w(u,v)\ge 0$。也就是说只要图上信息满足三角形不等式，且 $w$ 均非负，就能用 dijkstra 算法求出最短路。</p>
-<p><strong>拓展</strong>：当边权只有 $0,1$ 两种，可以用双端队列代替优先队列，将以 $0$ 权边拓展的点压入队首，以 $1$ 权边拓展的点压入队尾即可。</p>
+<p>在单源最短路径问题中，对于每条边 <span class="arithmatex">\((u,v)\in E\)</span>，有 <span class="arithmatex">\(D_u+w(u,v)\ge D_v\)</span>。这样的形式称为三角形不等式。事实上，观察上面的证明，容易发现关键步骤就是这个三角形不等式中 <span class="arithmatex">\(w(u,v)\ge 0\)</span>。也就是说只要图上信息满足三角形不等式，且 <span class="arithmatex">\(w\)</span> 均非负，就能用 dijkstra 算法求出最短路。</p>
+<p><strong>拓展</strong>：当边权只有 <span class="arithmatex">\(0,1\)</span> 两种，可以用双端队列代替优先队列，将以 <span class="arithmatex">\(0\)</span> 权边拓展的点压入队首，以 <span class="arithmatex">\(1\)</span> 权边拓展的点压入队尾即可。</p>
 <h3 id="spfa">SPFA 与负环</h3>
 <p>SPFA（Shortest Path Faster Algorithm）是队列优化的 Bellman-Ford。</p>
 <p>OI 界流传着一句广为人知的话：关于 SPFA，他死了。</p>
-<p>原因是因为虽然在随机图上表现优秀，但在特殊构造的图（比如只有一个点度数为 $n-1$，其余点度数全为 $1$ 的菊花图）上，会被卡到和 Bellman-Ford 一样的复杂度。所以大部分情况还是推荐能用 dijkstra 就不要用 SPFA。</p>
+<p>原因是因为虽然在随机图上表现优秀，但在特殊构造的图（比如只有一个点度数为 <span class="arithmatex">\(n-1\)</span>，其余点度数全为 <span class="arithmatex">\(1\)</span> 的菊花图）上，会被卡到和 Bellman-Ford 一样的复杂度。所以大部分情况还是推荐能用 dijkstra 就不要用 SPFA。</p>
 <p>容易发现，对于 Bellman-Ford，每次只有上次被松弛过的结点连的边可能在下一次松弛中有效。那么我们用队列来维护<strong>哪些结点可能会引起松弛操作</strong>，就能只访问必要的边了。</p>
-<p>具体来说，松弛点 $x$ 时找到接下来可能松弛的点，即与 $x$ 相邻且<strong>最短路被更新的点</strong>并压入队列。此外，记录一个点是否在队列中，若是则不压入，可以显著减小常数。</p>
-<p>SPFA 也可以用于判断 $s$ 点是否能抵达一个负环，只需记录最短路经过了多少条边，当经过了至少 $n$ 条边时，说明 $s$ 点可以抵达一个负环。但是注意，从 $s$ 点出发没有找到负环不代表整张图上没有负环。如果想求出整张图上是否有负环可以考虑建一个超级源点向所有点连有向 $0$ 权边。</p>
+<p>具体来说，松弛点 <span class="arithmatex">\(x\)</span> 时找到接下来可能松弛的点，即与 <span class="arithmatex">\(x\)</span> 相邻且<strong>最短路被更新的点</strong>并压入队列。此外，记录一个点是否在队列中，若是则不压入，可以显著减小常数。</p>
+<p>SPFA 也可以用于判断 <span class="arithmatex">\(s\)</span> 点是否能抵达一个负环，只需记录最短路经过了多少条边，当经过了至少 <span class="arithmatex">\(n\)</span> 条边时，说明 <span class="arithmatex">\(s\)</span> 点可以抵达一个负环。但是注意，从 <span class="arithmatex">\(s\)</span> 点出发没有找到负环不代表整张图上没有负环。如果想求出整张图上是否有负环可以考虑建一个超级源点向所有点连有向 <span class="arithmatex">\(0\)</span> 权边。</p>
 <details>
 <summary><a href="https://www.luogu.com.cn/problem/P3371">P3371 【模板】单源最短路径（弱化版）</a></summary>
 <p>代码加了负环判断（虽然对这道题没用）。</p>
@@ -6199,7 +6227,7 @@
 </details>
 <h2 id="_6">三角形不等式与差分约束</h2>
 <p>之前 Dijkstra 位置提到过，一张没有负环的图必然满足三角形不等式，证明显然。</p>
-<p>那么考虑加入给你一些形如 $x_u-x_v\ge c$ 的限制，要你求出 $x$ 序列。这个相当于是给你所有边 $D_u-c\ge D_v$，让你求出到每个点的最短路。</p>
+<p>那么考虑加入给你一些形如 <span class="arithmatex">\(x_u-x_v\ge c\)</span> 的限制，要你求出 <span class="arithmatex">\(x\)</span> 序列。这个相当于是给你所有边 <span class="arithmatex">\(D_u-c\ge D_v\)</span>，让你求出到每个点的最短路。</p>
 <p>容易发现，若有负环则误无解，因为有负环相当于要求一个数加上一个负数后仍等于它自己。</p>
 <details>
 <summary><a href="https://www.luogu.com.cn/problem/P5960">模板题</a>参考代码</summary>
@@ -6249,16 +6277,16 @@
 </span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p>然后有些时候题目可能会要求你求字典序极值的解。由于最短路的性质，容易发现对于一个 $i$，从源点到 $i$ 的路径上每条边都满足 $x_u+w(u,v)=x_v$，如果将 $x_i$ 增大 $1$，那么路径上必然有某个点的限制无法被满足。即<strong>所有点都取到了理论最大值</strong>。对于最小的，考虑取相反数，限制就从 $x_u+w(u,v)\ge x_v$ 变成了 $-x_v+w(u,v)\ge -x_u$，然后算字典序最大值再取相反数即可。</p>
+<p>然后有些时候题目可能会要求你求字典序极值的解。由于最短路的性质，容易发现对于一个 <span class="arithmatex">\(i\)</span>，从源点到 <span class="arithmatex">\(i\)</span> 的路径上每条边都满足 <span class="arithmatex">\(x_u+w(u,v)=x_v\)</span>，如果将 <span class="arithmatex">\(x_i\)</span> 增大 <span class="arithmatex">\(1\)</span>，那么路径上必然有某个点的限制无法被满足。即<strong>所有点都取到了理论最大值</strong>。对于最小的，考虑取相反数，限制就从 <span class="arithmatex">\(x_u+w(u,v)\ge x_v\)</span> 变成了 <span class="arithmatex">\(-x_v+w(u,v)\ge -x_u\)</span>，然后算字典序最大值再取相反数即可。</p>
 <h2 id="_7">全源最短路径</h2>
-<p>全源最短路径问题是给定一张图 $G=(V,E)$，要你对每一个点对 $(u\in V,v\in V)$，求出 $D_{u,v}$。</p>
-<p>对于非负权图，全源最短路径复杂度最低的算法其实是对每个点跑 dijkstra，复杂度是 $O(nm\log m)$（稀疏图）或者 $O(n^3)$（稠密图），用更高级的堆可以获得更好的复杂度。所以只考虑负权图的全源最短路。</p>
+<p>全源最短路径问题是给定一张图 <span class="arithmatex">\(G=(V,E)\)</span>，要你对每一个点对 <span class="arithmatex">\((u\in V,v\in V)\)</span>，求出 <span class="arithmatex">\(D_{u,v}\)</span>。</p>
+<p>对于非负权图，全源最短路径复杂度最低的算法其实是对每个点跑 dijkstra，复杂度是 <span class="arithmatex">\(O(nm\log m)\)</span>（稀疏图）或者 <span class="arithmatex">\(O(n^3)\)</span>（稠密图），用更高级的堆可以获得更好的复杂度。所以只考虑负权图的全源最短路。</p>
 <h3 id="floyd">Floyd 与传递闭包</h3>
 <p>Floyd 是一种基于 DP 的全源最短路算法，可以解决负权图的全源最短路径问题。</p>
-<p>考虑一条 $s\to t$ 的最短路上除去 $s,t$ 以外的所有点 $k$，都有 $D_{s,k}+D_{k,t}=D_{s,t}$。</p>
-<p>那么容易想到 DP，设 $f_{k,s,t}$ 表示除去起点终点外，只经过编号小于等于 $k$ 的点时的 $dis_{s,t}$。</p>
-<p>那么初始状态就是将 $f_0$ 初始化为邻接矩阵。然后转移就是每次枚举 $i,j$，用 $f_{k-1,i,k}+f_{k-1,k,j}$ 更新 $f_{k,i,j}$。</p>
-<p>然后容易发现每次都是用第 $k$ 行，第 $k$ 列的点更新不在这两行列的点，那么是不用担心重复转移的，可以直接把第一维压掉。</p>
+<p>考虑一条 <span class="arithmatex">\(s\to t\)</span> 的最短路上除去 <span class="arithmatex">\(s,t\)</span> 以外的所有点 <span class="arithmatex">\(k\)</span>，都有 <span class="arithmatex">\(D_{s,k}+D_{k,t}=D_{s,t}\)</span>。</p>
+<p>那么容易想到 DP，设 <span class="arithmatex">\(f_{k,s,t}\)</span> 表示除去起点终点外，只经过编号小于等于 <span class="arithmatex">\(k\)</span> 的点时的 <span class="arithmatex">\(dis_{s,t}\)</span>。</p>
+<p>那么初始状态就是将 <span class="arithmatex">\(f_0\)</span> 初始化为邻接矩阵。然后转移就是每次枚举 <span class="arithmatex">\(i,j\)</span>，用 <span class="arithmatex">\(f_{k-1,i,k}+f_{k-1,k,j}\)</span> 更新 <span class="arithmatex">\(f_{k,i,j}\)</span>。</p>
+<p>然后容易发现每次都是用第 <span class="arithmatex">\(k\)</span> 行，第 <span class="arithmatex">\(k\)</span> 列的点更新不在这两行列的点，那么是不用担心重复转移的，可以直接把第一维压掉。</p>
 <details>
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">forup</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">){</span>
@@ -6272,21 +6300,21 @@
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p>此外，Floyd 可以求有向图 $G$ 的<strong>传递闭包</strong>（这是个名词），有向图 $G$ 的<strong>传递闭包</strong>定义为 $n$ 阶 $01$ 矩阵 $T$，并且对于所有点对 $i,j$，$T_{i,j}=1$ 当且仅当 $i$ 可达 $j$。做法和求最短路类似，只是内部的式子写成 $T_{i,j}=T_{i,j}\lor(T_{i,k}\land T_{k,j})$ 即可。</p>
+<p>此外，Floyd 可以求有向图 <span class="arithmatex">\(G\)</span> 的<strong>传递闭包</strong>（这是个名词），有向图 <span class="arithmatex">\(G\)</span> 的<strong>传递闭包</strong>定义为 <span class="arithmatex">\(n\)</span> 阶 <span class="arithmatex">\(01\)</span> 矩阵 <span class="arithmatex">\(T\)</span>，并且对于所有点对 <span class="arithmatex">\(i,j\)</span>，<span class="arithmatex">\(T_{i,j}=1\)</span> 当且仅当 <span class="arithmatex">\(i\)</span> 可达 <span class="arithmatex">\(j\)</span>。做法和求最短路类似，只是内部的式子写成 <span class="arithmatex">\(T_{i,j}=T_{i,j}\lor(T_{i,k}\land T_{k,j})\)</span> 即可。</p>
 <h3 id="johnson">Johnson</h3>
 <p>考虑既然负权图跑不了，就想办法把它变成非负权图。这里有一个非常巧妙地想法，结合物理中的<strong>势能</strong>知识，给每个点加一个势能，使得所有边权变正，且只要起点终点相同，势能总量固定。</p>
-<p>具体来说，先随便选一个源点（由于图不一定连通，最好新建一个超级源点）跑一遍 SPFA 或者 Bellman-Ford，然后把每个点的势能 $h_i$ 设为 $D_i$。在后面对每个点跑 dijkstra 时，将每条边 $(u,v,w)$ 的权值改为 $h_u+w-h_v$ 即可。</p>
-<p>首先证明 $h_u+w-h_v$ 非负。由三角形不等式可得 $h_u+w\ge h_v$，显然有 $h_u+w-h_v\ge 0$。</p>
-<p>然后考虑证明这样找出来的最短路就是原先的最短路，设这样得出的最短路长度为 $D_{s,t}'$。</p>
-<p>那么设这样找出来的最短路为 $P=p_0,p_1,p_2\dots p_{k-1},p_k$（$p_0=s,p_k=t$），可以得到：</p>
-<p>$$
+<p>具体来说，先随便选一个源点（由于图不一定连通，最好新建一个超级源点）跑一遍 SPFA 或者 Bellman-Ford，然后把每个点的势能 <span class="arithmatex">\(h_i\)</span> 设为 <span class="arithmatex">\(D_i\)</span>。在后面对每个点跑 dijkstra 时，将每条边 <span class="arithmatex">\((u,v,w)\)</span> 的权值改为 <span class="arithmatex">\(h_u+w-h_v\)</span> 即可。</p>
+<p>首先证明 <span class="arithmatex">\(h_u+w-h_v\)</span> 非负。由三角形不等式可得 <span class="arithmatex">\(h_u+w\ge h_v\)</span>，显然有 <span class="arithmatex">\(h_u+w-h_v\ge 0\)</span>。</p>
+<p>然后考虑证明这样找出来的最短路就是原先的最短路，设这样得出的最短路长度为 <span class="arithmatex">\(D_{s,t}'\)</span>。</p>
+<p>那么设这样找出来的最短路为 <span class="arithmatex">\(P=p_0,p_1,p_2\dots p_{k-1},p_k\)</span>（<span class="arithmatex">\(p_0=s,p_k=t\)</span>），可以得到：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 D_{s,t}'&amp;=\sum_{i=0}^{k-1}h_{p_i}+w(p_i,p_{i+1})-h_{p_{i+1}}\\
 &amp;=h_{p_0}+h_{p_k}+\sum_{i=0}^{k-1}w(p_i,p_{i+1})
 \end{aligned}
-$$</p>
+\]</div>
 <p>容易发现这个势能只和起点终点有关，而既然势能固定，那么后面这一堆显然取到最小值，即最短路径长度。</p>
-<p>复杂度 $O(nm+nm\log m)$，后面的 $m\log m$ 是 dijkstra 的复杂度。</p>
+<p>复杂度 <span class="arithmatex">\(O(nm+nm\log m)\)</span>，后面的 <span class="arithmatex">\(m\log m\)</span> 是 dijkstra 的复杂度。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="o">=</span><span class="mf">3e3</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">inf</span><span class="o">=</span><span class="mf">1e9</span><span class="p">;</span>
@@ -6367,23 +6395,23 @@ $$</p>
 </details>
 <h2 id="_8">最短路树</h2>
 <p>最短路树可以看做单源最短路的拓展。</p>
-<p>容易发现，除 $s$ 外每个 $dis_u$ 都是从某个 $dis_v$ 转移过来的。那么容易发现若只保留这样的边 $(v,u)$，所有点的最短路仍然不变。且容易发现若图连通，这样连边后所有点仍能从 $s$ 出发到达，且恰好连了 $n-1$ 条边。那么显然这样连出来是一棵外向树。我们称这样的树为<strong>从 $s$ 出发的最短路树</strong>。我们也可以类似地定义<strong>到达 $s$ 的最短路树</strong>，实现建反图即可。</p>
-<p>另外显然，一张图的最短路树不唯一，而若把所有 $dis_u+w(u,v)=dis_v$ 的边加入结构，就能得到一个 DAG，称为<strong>最短路 DAG</strong>，可以解决一部分题目，比如对最短路计数相当于对 DAG 路径计数。</p>
+<p>容易发现，除 <span class="arithmatex">\(s\)</span> 外每个 <span class="arithmatex">\(dis_u\)</span> 都是从某个 <span class="arithmatex">\(dis_v\)</span> 转移过来的。那么容易发现若只保留这样的边 <span class="arithmatex">\((v,u)\)</span>，所有点的最短路仍然不变。且容易发现若图连通，这样连边后所有点仍能从 <span class="arithmatex">\(s\)</span> 出发到达，且恰好连了 <span class="arithmatex">\(n-1\)</span> 条边。那么显然这样连出来是一棵外向树。我们称这样的树为<strong>从 <span class="arithmatex">\(s\)</span> 出发的最短路树</strong>。我们也可以类似地定义<strong>到达 <span class="arithmatex">\(s\)</span> 的最短路树</strong>，实现建反图即可。</p>
+<p>另外显然，一张图的最短路树不唯一，而若把所有 <span class="arithmatex">\(dis_u+w(u,v)=dis_v\)</span> 的边加入结构，就能得到一个 DAG，称为<strong>最短路 DAG</strong>，可以解决一部分题目，比如对最短路计数相当于对 DAG 路径计数。</p>
 <h3 id="_9">删边最短路</h3>
 <p>最短路树在求解单源最短路径问题的变形时发挥了很大的作用，如接下来介绍的删边最短路。</p>
-<p>问题描述：给定一张<strong>无向正权图</strong>，对图上的每条边，求出删掉它后 $1\to n$ 的最短路。</p>
-<p>那么记原图上 $1\to n$ 的最短路中边集为 $P$，用 $t$ 表示当前讨论要删的边 $(i,j)$，不妨设 $(i,j)$ 在最短路上取的方向是 $i\to j$，分两种情况讨论：</p>
+<p>问题描述：给定一张<strong>无向正权图</strong>，对图上的每条边，求出删掉它后 <span class="arithmatex">\(1\to n\)</span> 的最短路。</p>
+<p>那么记原图上 <span class="arithmatex">\(1\to n\)</span> 的最短路中边集为 <span class="arithmatex">\(P\)</span>，用 <span class="arithmatex">\(t\)</span> 表示当前讨论要删的边 <span class="arithmatex">\((i,j)\)</span>，不妨设 <span class="arithmatex">\((i,j)\)</span> 在最短路上取的方向是 <span class="arithmatex">\(i\to j\)</span>，分两种情况讨论：</p>
 <ol>
-<li>若 $t\notin P$，显然原先的最短路不可能变短，故最短路不变。</li>
-<li>若 $t\in P$，这里有个结论。先把<strong>从 $1$ 出发的最短路树</strong> $T_1$ 和<strong>到达 $n$ 的最短路树</strong> $T_n$ 建出来，在删掉 $t$ 的新图中<strong>存在最短路恰好经过一条原图上的非树边</strong>（即存在一条最短路 $P$ 使得一条边 $(u,v)$ 使得 $p_0\sim u$ 全在 $T_1$ 上，$v\sim p_k$ 全在 $T_n$ 上）。</li>
+<li>若 <span class="arithmatex">\(t\notin P\)</span>，显然原先的最短路不可能变短，故最短路不变。</li>
+<li>若 <span class="arithmatex">\(t\in P\)</span>，这里有个结论。先把<strong>从 <span class="arithmatex">\(1\)</span> 出发的最短路树</strong> <span class="arithmatex">\(T_1\)</span> 和<strong>到达 <span class="arithmatex">\(n\)</span> 的最短路树</strong> <span class="arithmatex">\(T_n\)</span> 建出来，在删掉 <span class="arithmatex">\(t\)</span> 的新图中<strong>存在最短路恰好经过一条原图上的非树边</strong>（即存在一条最短路 <span class="arithmatex">\(P\)</span> 使得一条边 <span class="arithmatex">\((u,v)\)</span> 使得 <span class="arithmatex">\(p_0\sim u\)</span> 全在 <span class="arithmatex">\(T_1\)</span> 上，<span class="arithmatex">\(v\sim p_k\)</span> 全在 <span class="arithmatex">\(T_n\)</span> 上）。</li>
 </ol>
-<p>首先证明 $T_1$ 上 $j$ 的子树与 $T_n$ 上 $i$ 的子树不向交。考虑假设有一个点 $u$ 同时在两子树中。那么 $1\to u$ 的最短路中必定包含 $i\to j$，$u\to n$ 的最短路中也必须包含 $i\to j$。即 $D_{1,i}+w(i,j)+D_{j,u}\le D_{1,i}+D_{i,u}$，且 $D_{u,i}+w(i,j)+D_{j,n}\le D_{u,j}+D_{j,n}$。由于是无向边，可得 $D_{i,u}=D_{u,i},D_{j,u}=D_{u,j}$，那么化一下式子就能得到 $D_{i,u}-D_{j,u}\ge w(i,j)$ 且 $D_{i,u}-D_{j,u}\le -w(i,j)$。由于边权为正数，可以得到 $-w(i,j)&lt;w(i,j)$，故 $D_{i,u}-D_{j,u}&lt;D_{i,u}-D_{j,u}$，显然矛盾。</p>
-<p>由于 $n$ 在 $T_1$ 上 $j$ 的子树中，$1$ 在 $T_n$ 上 $i$ 的子树中，又由于这两点集不交，故最短路上必然存在至少一条边 $(u,v)$ 跨越这两个点集，而跨越这两点集的唯一树边就是 $(i,j)$，这条边又被删了，说明<strong>至少有一条非树边</strong>（如果不存在这样的边说明删掉 $t$ 之后图不连通）。而钦定 $(u,v)$ 之后，$1\to u$ 的路径全选 $T_1$ 树边（即最短路）必定是不劣的，$v\to n$ 的路径全选 $T_n$ 的树边必定是不劣的，即<strong>可以构造出方案只选钦定的非树边</strong> $(u,v)$。命题得证。</p>
-<p>那么枚举不是 $T_n$ 树边的边，容易发现"半条无向边" $(u,v)$ 可能影响的部分在 $T_n$ 上长这样：</p>
+<p>首先证明 <span class="arithmatex">\(T_1\)</span> 上 <span class="arithmatex">\(j\)</span> 的子树与 <span class="arithmatex">\(T_n\)</span> 上 <span class="arithmatex">\(i\)</span> 的子树不向交。考虑假设有一个点 <span class="arithmatex">\(u\)</span> 同时在两子树中。那么 <span class="arithmatex">\(1\to u\)</span> 的最短路中必定包含 <span class="arithmatex">\(i\to j\)</span>，<span class="arithmatex">\(u\to n\)</span> 的最短路中也必须包含 <span class="arithmatex">\(i\to j\)</span>。即 <span class="arithmatex">\(D_{1,i}+w(i,j)+D_{j,u}\le D_{1,i}+D_{i,u}\)</span>，且 <span class="arithmatex">\(D_{u,i}+w(i,j)+D_{j,n}\le D_{u,j}+D_{j,n}\)</span>。由于是无向边，可得 <span class="arithmatex">\(D_{i,u}=D_{u,i},D_{j,u}=D_{u,j}\)</span>，那么化一下式子就能得到 <span class="arithmatex">\(D_{i,u}-D_{j,u}\ge w(i,j)\)</span> 且 <span class="arithmatex">\(D_{i,u}-D_{j,u}\le -w(i,j)\)</span>。由于边权为正数，可以得到 <span class="arithmatex">\(-w(i,j)&lt;w(i,j)\)</span>，故 <span class="arithmatex">\(D_{i,u}-D_{j,u}&lt;D_{i,u}-D_{j,u}\)</span>，显然矛盾。</p>
+<p>由于 <span class="arithmatex">\(n\)</span> 在 <span class="arithmatex">\(T_1\)</span> 上 <span class="arithmatex">\(j\)</span> 的子树中，<span class="arithmatex">\(1\)</span> 在 <span class="arithmatex">\(T_n\)</span> 上 <span class="arithmatex">\(i\)</span> 的子树中，又由于这两点集不交，故最短路上必然存在至少一条边 <span class="arithmatex">\((u,v)\)</span> 跨越这两个点集，而跨越这两点集的唯一树边就是 <span class="arithmatex">\((i,j)\)</span>，这条边又被删了，说明<strong>至少有一条非树边</strong>（如果不存在这样的边说明删掉 <span class="arithmatex">\(t\)</span> 之后图不连通）。而钦定 <span class="arithmatex">\((u,v)\)</span> 之后，<span class="arithmatex">\(1\to u\)</span> 的路径全选 <span class="arithmatex">\(T_1\)</span> 树边（即最短路）必定是不劣的，<span class="arithmatex">\(v\to n\)</span> 的路径全选 <span class="arithmatex">\(T_n\)</span> 的树边必定是不劣的，即<strong>可以构造出方案只选钦定的非树边</strong> <span class="arithmatex">\((u,v)\)</span>。命题得证。</p>
+<p>那么枚举不是 <span class="arithmatex">\(T_n\)</span> 树边的边，容易发现"半条无向边" <span class="arithmatex">\((u,v)\)</span> 可能影响的部分在 <span class="arithmatex">\(T_n\)</span> 上长这样：</p>
 <p><img alt="图示 1" src="../../../img/shortest_path_1.png" /></p>
-<p>注意枚举的这条边可能是 $T_1$ 的树边，但是这不影响，因为这样的边连出的路径显然会在后面有一条非树边。由于一条非树边会在 $T_1,T_n$ 两边形如上图的形状上都产生贡献，如果只向一边贡献，是必须算这样的边的。</p>
-<p>即删掉这些红色边后 $u\to v$ 才可能跨越两集合。</p>
-<p>那么这个可以树剖维护，或者用树上后缀维护 <code>multiset</code> 启发式合并来维护。复杂度 $O(m\log^2n)$。</p>
+<p>注意枚举的这条边可能是 <span class="arithmatex">\(T_1\)</span> 的树边，但是这不影响，因为这样的边连出的路径显然会在后面有一条非树边。由于一条非树边会在 <span class="arithmatex">\(T_1,T_n\)</span> 两边形如上图的形状上都产生贡献，如果只向一边贡献，是必须算这样的边的。</p>
+<p>即删掉这些红色边后 <span class="arithmatex">\(u\to v\)</span> 才可能跨越两集合。</p>
+<p>那么这个可以树剖维护，或者用树上后缀维护 <code>multiset</code> 启发式合并来维护。复杂度 <span class="arithmatex">\(O(m\log^2n)\)</span>。</p>
 
 
 

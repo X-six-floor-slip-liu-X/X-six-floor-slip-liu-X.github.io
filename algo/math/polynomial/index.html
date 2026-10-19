@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5926,29 +5954,29 @@
 <p><a href="https://www.luogu.com/article/qdzrwqrd">参考资料 1</a></p>
 <p><a href="https://xxeray.gitlab.io/post/generating-function-lecture-notes">参考资料 2</a></p>
 <h2 id="_2">符号与约定</h2>
-<p>所有操作均默认是在模意义 $\pmod{998244353}$ 下进行的，因为 NTT 需要模这个数。</p>
-<p>称多项式“项数”为其次数加一（因为还有 $x^0$ 这一项）。</p>
-<p>用 $F[i]$ 表示多项式 $F(x)$ 中 $x^i$ 这一项的系数。</p>
-<p>默认 $n$ 代表某多项式的项数。</p>
-<p>很多时候都用 $n'$ 表示一个和 $n$ 相关的代数对象，但是因为在函数中这个符号会和导数产生歧义，故用 $F_{\ast}(x)$ 表示一个和 $F(x)$ 相关的函数。</p>
+<p>所有操作均默认是在模意义 <span class="arithmatex">\(\pmod{998244353}\)</span> 下进行的，因为 NTT 需要模这个数。</p>
+<p>称多项式“项数”为其次数加一（因为还有 <span class="arithmatex">\(x^0\)</span> 这一项）。</p>
+<p>用 <span class="arithmatex">\(F[i]\)</span> 表示多项式 <span class="arithmatex">\(F(x)\)</span> 中 <span class="arithmatex">\(x^i\)</span> 这一项的系数。</p>
+<p>默认 <span class="arithmatex">\(n\)</span> 代表某多项式的项数。</p>
+<p>很多时候都用 <span class="arithmatex">\(n'\)</span> 表示一个和 <span class="arithmatex">\(n\)</span> 相关的代数对象，但是因为在函数中这个符号会和导数产生歧义，故用 <span class="arithmatex">\(F_{\ast}(x)\)</span> 表示一个和 <span class="arithmatex">\(F(x)\)</span> 相关的函数。</p>
 <h2 id="_3">多项式四则运算</h2>
 <ul>
 <li>加减法</li>
 </ul>
 <p>多项式的加减法定义为：</p>
-<p>$$
+<div class="arithmatex">\[
 F(x)\pm G(x)=\sum_{i\ge 0}(F[i]\pm G[i])x^i
-$$</p>
-<p>就是对应项系数相加减，可以直接 $O(n)$。</p>
+\]</div>
+<p>就是对应项系数相加减，可以直接 <span class="arithmatex">\(O(n)\)</span>。</p>
 <ul>
 <li>乘法</li>
 </ul>
 <p>多项式乘法的定义为：</p>
-<p>$$
+<div class="arithmatex">\[
 F(x)\times G(x)=\sum_{i\ge 0}\sum_{j\ge 0}F[i]G[j]x^{i+j}=\sum_{i\ge 0}x^i\sum_{j=0}^i F[j]G[i-j]
-$$</p>
-<p>其实就是<strong>加法卷积</strong>。直接暴力是 $O(n^2)$ 的。但是可以用 NTT 优化到 $O(n\log n)$，移步<a href="../FFT_NTT/">这里</a>阅读。你在这里看到乘法的时候应该反应过来需要用 NTT 实现。</p>
-<p>需要注意的是 $n$ 项多项式乘以 $m$ 项多项式会得到 $n+m$ 项多项式，这点在后面会再次说明。</p>
+\]</div>
+<p>其实就是<strong>加法卷积</strong>。直接暴力是 <span class="arithmatex">\(O(n^2)\)</span> 的。但是可以用 NTT 优化到 <span class="arithmatex">\(O(n\log n)\)</span>，移步<a href="../FFT_NTT/">这里</a>阅读。你在这里看到乘法的时候应该反应过来需要用 NTT 实现。</p>
+<p>需要注意的是 <span class="arithmatex">\(n\)</span> 项多项式乘以 <span class="arithmatex">\(m\)</span> 项多项式会得到 <span class="arithmatex">\(n+m\)</span> 项多项式，这点在后面会再次说明。</p>
 <ul>
 <li>除法</li>
 </ul>
@@ -5962,66 +5990,66 @@ $$</p>
 <ul>
 <li>界</li>
 </ul>
-<p>多数时候，我们只关注多项式的前若干项，所以我们通常给多项式设置了一个次数上界，称为<strong>界</strong>，相当于 $\bmod\; x^n$，表示我们只关注 $x^0$ 项到 $x^{n-1}$ 项。</p>
+<p>多数时候，我们只关注多项式的前若干项，所以我们通常给多项式设置了一个次数上界，称为<strong>界</strong>，相当于 <span class="arithmatex">\(\bmod\; x^n\)</span>，表示我们只关注 <span class="arithmatex">\(x^0\)</span> 项到 <span class="arithmatex">\(x^{n-1}\)</span> 项。</p>
 <p>由于多项式加法不会对代数对象的幂次产生影响，故显然有：</p>
-<p>$$
+<div class="arithmatex">\[
 (F(x)\bmod x^n+G(x)\bmod x^n)\bmod x^n=(F(x)+G(x))\bmod x^n
-$$</p>
+\]</div>
 <p>而由于乘法只会从低次项向高次项转移，故也有：</p>
-<p>$$
+<div class="arithmatex">\[
 ((F(x)\bmod x^n)\times (G(x)\bmod x^n))\bmod x^n=(F(x)\times G(x))\bmod x^n
-$$</p>
-<p>但是如刚才所说，注意 $(F(x)\bmod x^n)\times (G(x)\bmod x^n)$ 有 $2n-1$ 项，在 NTT 时应该把 $n'$ 设为 $2n-1$ 而非 $n$，不要产生像计数题里面对某个数取模就不用担心爆 <code>long long</code> 种惯性思维。</p>
+\]</div>
+<p>但是如刚才所说，注意 <span class="arithmatex">\((F(x)\bmod x^n)\times (G(x)\bmod x^n)\)</span> 有 <span class="arithmatex">\(2n-1\)</span> 项，在 NTT 时应该把 <span class="arithmatex">\(n'\)</span> 设为 <span class="arithmatex">\(2n-1\)</span> 而非 <span class="arithmatex">\(n\)</span>，不要产生像计数题里面对某个数取模就不用担心爆 <code>long long</code> 种惯性思维。</p>
 <ul>
 <li>多项式的复合</li>
 </ul>
-<p>$$
+<div class="arithmatex">\[
 F(G(x))=\sum_{i\ge 0}F[i]G(x)^{i}
-$$</p>
-<p>就是把 $F$ 中的所有 $x$ 换成 $G(x)$。</p>
+\]</div>
+<p>就是把 <span class="arithmatex">\(F\)</span> 中的所有 <span class="arithmatex">\(x\)</span> 换成 <span class="arithmatex">\(G(x)\)</span>。</p>
 <p>具体实现视情况而定。</p>
 <ul>
 <li>多项式的求导</li>
 </ul>
-<p>$$
+<div class="arithmatex">\[
 F'(x)=\sum_{i\ge 1}F[i]ix^{i-1}
-$$</p>
-<p>相当于把每个 $x^i$ 换成 $i\cdot x^{i-1}$，和函数的求导是一样的。</p>
+\]</div>
+<p>相当于把每个 <span class="arithmatex">\(x^i\)</span> 换成 <span class="arithmatex">\(i\cdot x^{i-1}\)</span>，和函数的求导是一样的。</p>
 <ul>
 <li>多项式的积分</li>
 </ul>
-<p>$$
+<div class="arithmatex">\[
 F(x)=C+\sum_{i\ge 1}\frac{F'[i]x^{i+1}}{i}
-$$</p>
-<p>其中 $C$ 是常数项。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(C\)</span> 是常数项。</p>
 <p>容易发现其实就是求导的逆运算。</p>
-<p>容易发现求导和求积都能 $O(n)$ 算。</p>
+<p>容易发现求导和求积都能 <span class="arithmatex">\(O(n)\)</span> 算。</p>
 <h2 id="_4">多项式进阶运算</h2>
 <h3 id="_5">泰勒展开</h3>
-<p>设 $F^{(i)}(x)$ 表示 $F(x)$ 的 $i$ 阶导，有：</p>
-<p>$$
+<p>设 <span class="arithmatex">\(F^{(i)}(x)\)</span> 表示 <span class="arithmatex">\(F(x)\)</span> 的 <span class="arithmatex">\(i\)</span> 阶导，有：</p>
+<div class="arithmatex">\[
 F(x)=\sum_{i\ge 0}\frac{F^{(i)}(x_0)}{i!}(x-x_0)^i
-$$</p>
-<p>其中 $x_0$ 是你任意取的一个数。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(x_0\)</span> 是你任意取的一个数。</p>
 <p>这个东西可以把一些神秘式子换成多项式，在一些证明中非常有用。</p>
 <p>具体推导十分复杂，此处略过。</p>
 <h3 id="_6">牛顿迭代法</h3>
 <p>一个研究多项式时非常好用的工具，若要阅读后文请确保你理解了这一段。</p>
-<p>对于一个已知函数 $F(x)$，若存在一个与它相关的函数 $H(x)$（此处“相关”指存在 $G(H)=0$，且 $G$ 的定义式中含有 $F$，具体例子见后文。其中 $G(H)$ 表示多项式的复合，严谨一点的写法应该是 $G(H(x))$，但是这样看起来太臃肿了），我们可以用牛顿迭代求出 $G(x)\pmod{x^n}$。</p>
+<p>对于一个已知函数 <span class="arithmatex">\(F(x)\)</span>，若存在一个与它相关的函数 <span class="arithmatex">\(H(x)\)</span>（此处“相关”指存在 <span class="arithmatex">\(G(H)=0\)</span>，且 <span class="arithmatex">\(G\)</span> 的定义式中含有 <span class="arithmatex">\(F\)</span>，具体例子见后文。其中 <span class="arithmatex">\(G(H)\)</span> 表示多项式的复合，严谨一点的写法应该是 <span class="arithmatex">\(G(H(x))\)</span>，但是这样看起来太臃肿了），我们可以用牛顿迭代求出 <span class="arithmatex">\(G(x)\pmod{x^n}\)</span>。</p>
 <p>有：</p>
-<p>$$
+<div class="arithmatex">\[
 H\equiv H_{\ast}-\frac{G(H_{\ast})}{G'(H_{\ast})}\pmod{x^n}
-$$</p>
-<p>其中 $H_{\ast}$ 满足 $G(H_{\ast})\equiv 0\pmod{x^{\frac{n}{2}}}$，需要钦定 $n$ 是偶数。</p>
-<p>注意这里的 $G'(H_{\ast})$ 是以 $H_{\ast}$ 为主元的，即 $\frac{\operatorname{d} G(H_<em>(x))}{\operatorname{d} H_</em>(x)}$。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(H_{\ast}\)</span> 满足 <span class="arithmatex">\(G(H_{\ast})\equiv 0\pmod{x^{\frac{n}{2}}}\)</span>，需要钦定 <span class="arithmatex">\(n\)</span> 是偶数。</p>
+<p>注意这里的 <span class="arithmatex">\(G'(H_{\ast})\)</span> 是以 <span class="arithmatex">\(H_{\ast}\)</span> 为主元的，即 <span class="arithmatex">\(\frac{\operatorname{d} G(H_*(x))}{\operatorname{d} H_*(x)}\)</span>。</p>
 <div class="admonition quote">
 <p class="admonition-title">证明</p>
-<p>根据定义，显然有 $H(x)\equiv H_{\ast}(x)\pmod{x^{\frac{n}{2}}}$。将 $G(H)$ 在 $H_{\ast}(x)$ 处泰勒展开：</p>
-<p>$$
+<p>根据定义，显然有 <span class="arithmatex">\(H(x)\equiv H_{\ast}(x)\pmod{x^{\frac{n}{2}}}\)</span>。将 <span class="arithmatex">\(G(H)\)</span> 在 <span class="arithmatex">\(H_{\ast}(x)\)</span> 处泰勒展开：</p>
+<div class="arithmatex">\[
 G(H)=\sum_{i\ge 0}\frac{G^{(i)}(H_{\ast})}{i!}(H-H_{\ast})^i
-$$</p>
-<p>注意到 $H$ 与 $H_{\ast}$ 的前 $\frac{n}{2}$ 项相同。于是 $H-H_{\ast}$ 就只有后 $\frac{n}{2}$ 项。那么容易发现当 $c\ge 2$ 时，有 $(H-H_{\ast})^c\equiv 0\pmod{x^n}$。于是上面这个式子就只有前两项有用了，于是有：</p>
-<p>$$
+\]</div>
+<p>注意到 <span class="arithmatex">\(H\)</span> 与 <span class="arithmatex">\(H_{\ast}\)</span> 的前 <span class="arithmatex">\(\frac{n}{2}\)</span> 项相同。于是 <span class="arithmatex">\(H-H_{\ast}\)</span> 就只有后 <span class="arithmatex">\(\frac{n}{2}\)</span> 项。那么容易发现当 <span class="arithmatex">\(c\ge 2\)</span> 时，有 <span class="arithmatex">\((H-H_{\ast})^c\equiv 0\pmod{x^n}\)</span>。于是上面这个式子就只有前两项有用了，于是有：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 G(H)&amp;\equiv G(H_{\ast})+G'(H_{\ast})(H-H_{\ast}) &amp;\pmod{x^n}\\
 G'(H_{\ast})H&amp;\equiv G(H)-G(H_{\ast})+G'(H_{\ast})H_{\ast} &amp;\pmod{x^n}\\
@@ -6029,41 +6057,41 @@ H&amp;\equiv \frac{G(H)-G(H_{\ast})+G'(H_{\ast})H_{\ast}}{G'(H_{\ast})} &amp;\pm
 H&amp;\equiv H_{\ast}+\frac{G(H)-G(H_{\ast})}{G'(H_{\ast})} &amp;\pmod{x^n}\\
 H&amp;\equiv H_{\ast}+\frac{G(H)-G(H_{\ast})}{G'(H_{\ast})} &amp;\pmod{x^n}\\
 \end{aligned}
-$$</p>
-<p>欸！我们注意到 $G(H)\equiv 0\pmod{x^n}$，于是：</p>
-<p>$$
+\]</div>
+<p>欸！我们注意到 <span class="arithmatex">\(G(H)\equiv 0\pmod{x^n}\)</span>，于是：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 H&amp;\equiv H_{\ast}-\frac{G(H_{\ast})}{G'(H_{\ast})} &amp;\pmod{x^n}\\
 \end{aligned}
-$$</p>
-<p>需要注意 $\frac{1}{G'(H_{\ast})}$ 只需要求出 $\bmod\; x^{\frac{n}{2}}$ 的答案就行了。因为 $G(H_{\ast})$ 的前 $\frac{n}{2}$ 项必为 $0$，那么 $\frac{1}{G'(H_{\ast})}$ 任何一个超出 $\frac{n}{2}$ 的项和 $G(H_{\ast})$ 乘起来都会超过 $x^n$ 的界。</p>
+\]</div>
+<p>需要注意 <span class="arithmatex">\(\frac{1}{G'(H_{\ast})}\)</span> 只需要求出 <span class="arithmatex">\(\bmod\; x^{\frac{n}{2}}\)</span> 的答案就行了。因为 <span class="arithmatex">\(G(H_{\ast})\)</span> 的前 <span class="arithmatex">\(\frac{n}{2}\)</span> 项必为 <span class="arithmatex">\(0\)</span>，那么 <span class="arithmatex">\(\frac{1}{G'(H_{\ast})}\)</span> 任何一个超出 <span class="arithmatex">\(\frac{n}{2}\)</span> 的项和 <span class="arithmatex">\(G(H_{\ast})\)</span> 乘起来都会超过 <span class="arithmatex">\(x^n\)</span> 的界。</p>
 </div>
 <h3 id="_7">多项式求逆</h3>
 <p>注意到我们没有为多项式定义“除法”，事实上，我们需要用乘法逆元来实现这个东西。</p>
-<p>具体来说，定义多项式的单位元为 $1$（即只有常数项系数为 $1$，其余系数均为 $0$ 的多项式），那么对于一个多项式 $F$，用 $F^{-1}$ 来表示它的逆元，代表 $F\times F^{-1}=1$。</p>
-<p>容易构造出 $G(H)=F\times H-1$，这样当 $H=F^{-1}$ 时 $G$ 的值就能取 $0$ 了。</p>
+<p>具体来说，定义多项式的单位元为 <span class="arithmatex">\(1\)</span>（即只有常数项系数为 <span class="arithmatex">\(1\)</span>，其余系数均为 <span class="arithmatex">\(0\)</span> 的多项式），那么对于一个多项式 <span class="arithmatex">\(F\)</span>，用 <span class="arithmatex">\(F^{-1}\)</span> 来表示它的逆元，代表 <span class="arithmatex">\(F\times F^{-1}=1\)</span>。</p>
+<p>容易构造出 <span class="arithmatex">\(G(H)=F\times H-1\)</span>，这样当 <span class="arithmatex">\(H=F^{-1}\)</span> 时 <span class="arithmatex">\(G\)</span> 的值就能取 <span class="arithmatex">\(0\)</span> 了。</p>
 <p>根据牛顿迭代的公式：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 F^{-1}&amp;\equiv F_{\ast}^{-1}-\frac{G(F_{\ast}^{-1})}{G'(F_{\ast}^{-1})} &amp;\pmod{x^n}\\
 F^{-1}&amp;\equiv F_{\ast}^{-1}-\frac{F\times F_{\ast}^{-1}-1}{G'(F_{\ast}^{-1})} &amp;\pmod{x^n}
 \end{aligned}
-$$</p>
-<p>注意这个 $G'(F_{\ast}^{-1})$ 是以 $F_{\ast}^{-1}$ 为主元的，所以可以把 $F_{\ast}^{-1}$ 看作代数对象，那么 $F$ 就是一次项系数，$-1$ 就是常数项。所以求导之后只剩下一次项系数，故 $G'(F_{\ast}^{-1})=F$，于是上式可以转化为：</p>
-<p>$$
+\]</div>
+<p>注意这个 <span class="arithmatex">\(G'(F_{\ast}^{-1})\)</span> 是以 <span class="arithmatex">\(F_{\ast}^{-1}\)</span> 为主元的，所以可以把 <span class="arithmatex">\(F_{\ast}^{-1}\)</span> 看作代数对象，那么 <span class="arithmatex">\(F\)</span> 就是一次项系数，<span class="arithmatex">\(-1\)</span> 就是常数项。所以求导之后只剩下一次项系数，故 <span class="arithmatex">\(G'(F_{\ast}^{-1})=F\)</span>，于是上式可以转化为：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 F^{-1}&amp;\equiv F_{\ast}^{-1}-\frac{F\times F_{\ast}^{-1}-1}{F} &amp;\pmod{x^n}\\
 F^{-1}&amp;\equiv F_{\ast}^{-1}-F^{-1}(F\times F_{\ast}^{-1}-1) &amp;\pmod{x^n}
 \end{aligned}
-$$</p>
-<p>刚才我们说过，这个 $F^{-1}$ 只需要取前 $\frac{n}{2}$ 位，那容易发现这就是 $F_{\ast}^{-1}$，于是就能把上面的东西化成非常优美的形式：</p>
-<p>$$
+\]</div>
+<p>刚才我们说过，这个 <span class="arithmatex">\(F^{-1}\)</span> 只需要取前 <span class="arithmatex">\(\frac{n}{2}\)</span> 位，那容易发现这就是 <span class="arithmatex">\(F_{\ast}^{-1}\)</span>，于是就能把上面的东西化成非常优美的形式：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 F^{-1}&amp;\equiv F_{\ast}^{-1}-F_{\ast}^{-1}(F\times F_{\ast}^{-1}-1) &amp;\pmod{x^n}\\
 F^{-1}&amp;\equiv F_{\ast}^{-1}(2-F\times F_{\ast}^{-1}) &amp;\pmod{x^n}\\
 \end{aligned}
-$$</p>
-<p>然后 NTT $+$ 倍增就可以做到 $T(n)=T(\frac{n}{2})+O(n\log n)=O(n\log n)$ 了。</p>
+\]</div>
+<p>然后 NTT <span class="arithmatex">\(+\)</span> 倍增就可以做到 <span class="arithmatex">\(T(n)=T(\frac{n}{2})+O(n\log n)=O(n\log n)\)</span> 了。</p>
 <p>/// details | 参考代码
     open: False
     type： success</p>
@@ -6141,29 +6169,29 @@ $$</p>
 </span></code></pre></div>
 <p>///</p>
 <h3 id="ln">多项式 ln</h3>
-<p>请原谅我为了子目录的显示效果没有在小标题上加 $\LaTeX$。</p>
-<p>多项式的 $\ln$ 和 $\exp$（以 $e$ 为底的指数）定义为：</p>
-<p>$$
+<p>请原谅我为了子目录的显示效果没有在小标题上加 <span class="arithmatex">\(\LaTeX\)</span>。</p>
+<p>多项式的 <span class="arithmatex">\(\ln\)</span> 和 <span class="arithmatex">\(\exp\)</span>（以 <span class="arithmatex">\(e\)</span> 为底的指数）定义为：</p>
+<div class="arithmatex">\[
 \ln F(x)=-\sum_{i\ge 0}\frac{(1-F(x))^i}{i}
 $$
 $$
 \exp F(x)=\sum_{i\ge 0}\frac{F(x)^i}{i!}
-$$</p>
+\]</div>
 <p>这个定义是用 求出来的，感兴趣的可以自己推一推。</p>
 <p>为什么要用麦克劳林级数的定义呢？因为这个只用了加法和乘法，可以方便取模。</p>
-<p>考虑 $(\ln F(x))'=\frac{F'(x)}{F(x)}$（以 $x$ 为主元）。于是求出 $\frac{F'(x)}{F(x)}$ 之后对它求积就行了。瓶颈在于求 $\frac{1}{F(x)}$。</p>
+<p>考虑 <span class="arithmatex">\((\ln F(x))'=\frac{F'(x)}{F(x)}\)</span>（以 <span class="arithmatex">\(x\)</span> 为主元）。于是求出 <span class="arithmatex">\(\frac{F'(x)}{F(x)}\)</span> 之后对它求积就行了。瓶颈在于求 <span class="arithmatex">\(\frac{1}{F(x)}\)</span>。</p>
 <h3 id="exp">多项式 exp</h3>
-<p>$\exp$ 是 $\ln$ 的逆运算，所以考虑牛顿迭代（下文 $A,B$ 均为 $A(x),B(x)$，为防止公式臃肿省去括号）。</p>
-<p>设 $B=\exp A$，容易构造 $G(B)=\ln B-A$。</p>
-<p>那么 $G'(B)=\frac{1}{B}=B^{-1}$，于是有：</p>
-<p>$$
+<p><span class="arithmatex">\(\exp\)</span> 是 <span class="arithmatex">\(\ln\)</span> 的逆运算，所以考虑牛顿迭代（下文 <span class="arithmatex">\(A,B\)</span> 均为 <span class="arithmatex">\(A(x),B(x)\)</span>，为防止公式臃肿省去括号）。</p>
+<p>设 <span class="arithmatex">\(B=\exp A\)</span>，容易构造 <span class="arithmatex">\(G(B)=\ln B-A\)</span>。</p>
+<p>那么 <span class="arithmatex">\(G'(B)=\frac{1}{B}=B^{-1}\)</span>，于是有：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 B &amp;\equiv B_{\ast}-\frac{G(B_{\ast})}{G'(B_{\ast})} &amp;\pmod{x^n}\\
 B &amp;\equiv B_{\ast}-(\ln B_{\ast}-A)B_{\ast} &amp;\pmod{x^n}\\
 B &amp;\equiv (1-\ln B_{\ast}+A)B_{\ast} &amp;\pmod{x^n}\\
 \end{aligned}
-$$</p>
-<p>然后就能 $O(n\log n)$ 倍增做了。</p>
+\]</div>
+<p>然后就能 <span class="arithmatex">\(O(n\log n)\)</span> 倍增做了。</p>
 
 
 

@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5854,19 +5882,19 @@
 <h2 id="t1">T1</h2>
 <details class="info">
 <summary>前置知识：Prüfer 序列</summary>
-<p>Prüfer 序列可以将一个带标号 $n$ 个结点的树用 $[1,n]$ 中的 $n-2$ 个整数表示。你也可以把它理解为完全图的生成树与数列之间的双射。Heinz Prüfer 于 1918 年发明这个序列来证明凯莱公式。</p>
+<p>Prüfer 序列可以将一个带标号 <span class="arithmatex">\(n\)</span> 个结点的树用 <span class="arithmatex">\([1,n]\)</span> 中的 <span class="arithmatex">\(n-2\)</span> 个整数表示。你也可以把它理解为完全图的生成树与数列之间的双射。Heinz Prüfer 于 1918 年发明这个序列来证明凯莱公式。</p>
 <p>显然你不会想不开拿这玩意儿去维护树结构。这玩意儿常用组合计数问题上。</p>
 <p>Prüfer 是这样建立的：每次选择一个编号最小的叶结点并删掉它，然后在序列中记录下它连接到的那个结点。重复 n-2 次后就只剩下两个结点，算法结束。</p>
 <p>摘自 <a href="https://oi-wiki.org/graph/prufer/">OI Wiki</a>，这道题基本知道这些就够用了。</p>
 </details>
-<p>考虑 Prüfer 序列的生成方式，不太准确的表述就是每次选定一个叶子结点然后删掉它。不妨设每次删掉一个结点时它唯一连了边的孔为特殊孔，容易发现除去删完剩下的两个结点之间的边以外，其它每条边都连接一个特殊点和一个非特殊点，而且假如确认了剩下 $n-2$ 条边那么这条边也是唯一确认的。考虑把所有点连起来的一个加边的过程，那么总方案数如下：</p>
-<p>$$\prod_{i=1}^{n-2}(S-n-i+1)\times(n-i+1)$$</p>
-<p>其中 $S=\sum d_i$。</p>
-<p>式子很好理解，连了 $i-1$ 条边后就还剩 $S-n-i+1$ 个非特殊点和 $n-i+1$ 个特殊点，直接随便选两个，相乘即可。</p>
-<p>这里有一个小 bug，因为我们没有考虑连边的具体顺序，容易发现这个式子把每种连边方案的所有连边顺序都算上了，直接除以 $(n-1)!$ 即可。</p>
-<p>此外，选取特殊点的方案数为 $\prod d_i$，故最终答案为:</p>
-<p>$$(\prod_{i=1}^{n} d_i)\times (\prod_{i=0}^{n-3}S-n-i)$$</p>
-<p>复杂度 $O(n)$。</p>
+<p>考虑 Prüfer 序列的生成方式，不太准确的表述就是每次选定一个叶子结点然后删掉它。不妨设每次删掉一个结点时它唯一连了边的孔为特殊孔，容易发现除去删完剩下的两个结点之间的边以外，其它每条边都连接一个特殊点和一个非特殊点，而且假如确认了剩下 <span class="arithmatex">\(n-2\)</span> 条边那么这条边也是唯一确认的。考虑把所有点连起来的一个加边的过程，那么总方案数如下：</p>
+<div class="arithmatex">\[\prod_{i=1}^{n-2}(S-n-i+1)\times(n-i+1)\]</div>
+<p>其中 <span class="arithmatex">\(S=\sum d_i\)</span>。</p>
+<p>式子很好理解，连了 <span class="arithmatex">\(i-1\)</span> 条边后就还剩 <span class="arithmatex">\(S-n-i+1\)</span> 个非特殊点和 <span class="arithmatex">\(n-i+1\)</span> 个特殊点，直接随便选两个，相乘即可。</p>
+<p>这里有一个小 bug，因为我们没有考虑连边的具体顺序，容易发现这个式子把每种连边方案的所有连边顺序都算上了，直接除以 <span class="arithmatex">\((n-1)!\)</span> 即可。</p>
+<p>此外，选取特殊点的方案数为 <span class="arithmatex">\(\prod d_i\)</span>，故最终答案为:</p>
+<div class="arithmatex">\[(\prod_{i=1}^{n} d_i)\times (\prod_{i=0}^{n-3}S-n-i)\]</div>
+<p>复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5901,19 +5929,19 @@
 </details>
 <h2 id="t2">T2</h2>
 <p>首先考虑什么情况无解。</p>
-<p>容易发现有解当且仅当 $\max\begin{Bmatrix}a_i\end{Bmatrix} \le k \le \sum a_i$。</p>
+<p>容易发现有解当且仅当 <span class="arithmatex">\(\max\begin{Bmatrix}a_i\end{Bmatrix} \le k \le \sum a_i\)</span>。</p>
 <p>最大值很好构造，直接不严格降序排列就完了。考虑如何构造最小值，其实也非常简单，从大到小考虑每个数，每次每个数尽可能插在每段的开头，这样就能最小化每次增加的段数。</p>
-<p>这个构造方法启示我们，假如原本有个由若干个 $(i,n]$ 之间的整数组成的序列段数为 $k$，对于任意这样的序列，我们可以构造若干种插入 $i$ 的方法使得新序列段数 $l=[k,k+a_i]$ 之间的任意整数。</p>
-<p>具体地，将 $a_i-(k-l)$ 个 $i$ 插在原先每段的前面，剩余的 $k-l$ 个 $i$ 插在任意不是段首的位置都会使段数加一。</p>
-<p>我觉得这个很好理解，首先在结尾它会另起一段。假如插在某一段中间就会断开某一段，会增加一段。假如放在之前放的 $i$ 后面那么就会使它不严格递增，也会变成新段。</p>
-<p>容易想到 DP，设 $dp_{i,j}$ 表示考虑 $[i,n]$ 之间的数，段数为 $j$ 的方案数，转移方程如下：</p>
-<p>$$dp_{i,j}=\sum_{l=j-a_i}^{j}dp_{i+1,l}\times \dbinom{l}{a_i-(k-l)}\times \dbinom{(k-l)+[a_i-(k-l)+1+(\sum_{j=i+1}^{n} a_j)-l]-1}{[a_i-(k-l)+1+(\sum_{j=i+1}^{n} a_j)-l]-1}$$</p>
-<p>首先中间的 $\dbinom{l}{a_i-(k-l)}$ 很好理解，表示不会增加段数的 $i$ 具体插在哪里，后面的这是个经典问题，我们先把它放在一个更笼统的情况：</p>
+<p>这个构造方法启示我们，假如原本有个由若干个 <span class="arithmatex">\((i,n]\)</span> 之间的整数组成的序列段数为 <span class="arithmatex">\(k\)</span>，对于任意这样的序列，我们可以构造若干种插入 <span class="arithmatex">\(i\)</span> 的方法使得新序列段数 <span class="arithmatex">\(l=[k,k+a_i]\)</span> 之间的任意整数。</p>
+<p>具体地，将 <span class="arithmatex">\(a_i-(k-l)\)</span> 个 <span class="arithmatex">\(i\)</span> 插在原先每段的前面，剩余的 <span class="arithmatex">\(k-l\)</span> 个 <span class="arithmatex">\(i\)</span> 插在任意不是段首的位置都会使段数加一。</p>
+<p>我觉得这个很好理解，首先在结尾它会另起一段。假如插在某一段中间就会断开某一段，会增加一段。假如放在之前放的 <span class="arithmatex">\(i\)</span> 后面那么就会使它不严格递增，也会变成新段。</p>
+<p>容易想到 DP，设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示考虑 <span class="arithmatex">\([i,n]\)</span> 之间的数，段数为 <span class="arithmatex">\(j\)</span> 的方案数，转移方程如下：</p>
+<div class="arithmatex">\[dp_{i,j}=\sum_{l=j-a_i}^{j}dp_{i+1,l}\times \dbinom{l}{a_i-(k-l)}\times \dbinom{(k-l)+[a_i-(k-l)+1+(\sum_{j=i+1}^{n} a_j)-l]-1}{[a_i-(k-l)+1+(\sum_{j=i+1}^{n} a_j)-l]-1}\]</div>
+<p>首先中间的 <span class="arithmatex">\(\dbinom{l}{a_i-(k-l)}\)</span> 很好理解，表示不会增加段数的 <span class="arithmatex">\(i\)</span> 具体插在哪里，后面的这是个经典问题，我们先把它放在一个更笼统的情况：</p>
 <blockquote>
-<p>把长度为 $n$ 的序列分成 $q$ 段，每一段可为空，求方案数。</p>
+<p>把长度为 <span class="arithmatex">\(n\)</span> 的序列分成 <span class="arithmatex">\(q\)</span> 段，每一段可为空，求方案数。</p>
 </blockquote>
-<p>可以等价为在 $n+q-1$ 个 $0$ 中选 $q-1$ 个变成 $1$，这样相当于用 $1$ 把 $0$ 分成了 $q$ 段，即 $\dbinom{n+q-1}{q-1}$。</p>
-<p>然后懂了这个上面式子的后半段就很好懂了，就是把 $k-l$ 个 $i$ 分成 $[a_i-(k-l)+1+(\sum_{j=i+1}^{n} a_j)-l]$ 段的方案数。而这个数就是不是段首的位置的数量。</p>
+<p>可以等价为在 <span class="arithmatex">\(n+q-1\)</span> 个 <span class="arithmatex">\(0\)</span> 中选 <span class="arithmatex">\(q-1\)</span> 个变成 <span class="arithmatex">\(1\)</span>，这样相当于用 <span class="arithmatex">\(1\)</span> 把 <span class="arithmatex">\(0\)</span> 分成了 <span class="arithmatex">\(q\)</span> 段，即 <span class="arithmatex">\(\dbinom{n+q-1}{q-1}\)</span>。</p>
+<p>然后懂了这个上面式子的后半段就很好懂了，就是把 <span class="arithmatex">\(k-l\)</span> 个 <span class="arithmatex">\(i\)</span> 分成 <span class="arithmatex">\([a_i-(k-l)+1+(\sum_{j=i+1}^{n} a_j)-l]\)</span> 段的方案数。而这个数就是不是段首的位置的数量。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5993,24 +6021,24 @@
 </details>
 <h2 id="t3">T3</h2>
 <p>首先这道题肯定不能把图画出来再遍历，这样时间空间双双爆炸。</p>
-<p>考虑寻找性质，假如按题上给的条件，即以左下角为原点，从下到上从左到右分别是 $0\sim 2^{k}-1$，容易发现以下性质：</p>
+<p>考虑寻找性质，假如按题上给的条件，即以左下角为原点，从下到上从左到右分别是 <span class="arithmatex">\(0\sim 2^{k}-1\)</span>，容易发现以下性质：</p>
 <blockquote>
-<p>格子 $(i,j)$ 是黑色的当且仅当 $\exists k\in[0,k-1]\;s.t.\;i \And 2^k \ne 0,j \And 2^k =0$。或者说在二进制下存在某一位，使得 $i$ 这一位为 $1$，$j$ 这一位为 $0$。</p>
+<p>格子 <span class="arithmatex">\((i,j)\)</span> 是黑色的当且仅当 <span class="arithmatex">\(\exists k\in[0,k-1]\;s.t.\;i \And 2^k \ne 0,j \And 2^k =0\)</span>。或者说在二进制下存在某一位，使得 <span class="arithmatex">\(i\)</span> 这一位为 <span class="arithmatex">\(1\)</span>，<span class="arithmatex">\(j\)</span> 这一位为 <span class="arithmatex">\(0\)</span>。</p>
 </blockquote>
 <div class="admonition info">
 <p class="admonition-title">证明</p>
 <p>考虑数学归纳法。</p>
-<p>首先对于 $0$ 阶画板，结论平凡。</p>
-<p>假设 $0 \sim k-1$ 阶画板满足以上性质，考虑 $k$ 阶画板。</p>
-<p>首先对于左上角的部分所有格子全为黑色的，$i \in [2^{k-1},2^{k}-1],j\in [0,2^{k-1}-1]$，容易发现 $i$ 的最高位（即 $2^{k-1}$ 这一位）必定为 $1$，$j$ 的最高位必定为 $0$。对于剩下的三块，最高位不满足条件（证明平凡），只考虑后面的位数，就是一个 $k-1$ 阶画板。</p>
+<p>首先对于 <span class="arithmatex">\(0\)</span> 阶画板，结论平凡。</p>
+<p>假设 <span class="arithmatex">\(0 \sim k-1\)</span> 阶画板满足以上性质，考虑 <span class="arithmatex">\(k\)</span> 阶画板。</p>
+<p>首先对于左上角的部分所有格子全为黑色的，<span class="arithmatex">\(i \in [2^{k-1},2^{k}-1],j\in [0,2^{k-1}-1]\)</span>，容易发现 <span class="arithmatex">\(i\)</span> 的最高位（即 <span class="arithmatex">\(2^{k-1}\)</span> 这一位）必定为 <span class="arithmatex">\(1\)</span>，<span class="arithmatex">\(j\)</span> 的最高位必定为 <span class="arithmatex">\(0\)</span>。对于剩下的三块，最高位不满足条件（证明平凡），只考虑后面的位数，就是一个 <span class="arithmatex">\(k-1\)</span> 阶画板。</p>
 <p>证毕。</p>
 </div>
 <p>故我们可以抛开原来的画板，转化成了这样一个问题：</p>
 <blockquote>
-<p>求有多少个 $a,b\in [0,2^{k-1}]$ 且 $a+X,b+Y \in [0,2^{k-1}]$，使得二进制下，$a$ 所有为 $1$ 的位数 $b$ 对应位均不为 $0$，且 $a+X$ 所有为 $1$ 的位数 $b+Y$ 对应位均不为 $0$。</p>
+<p>求有多少个 <span class="arithmatex">\(a,b\in [0,2^{k-1}]\)</span> 且 <span class="arithmatex">\(a+X,b+Y \in [0,2^{k-1}]\)</span>，使得二进制下，<span class="arithmatex">\(a\)</span> 所有为 <span class="arithmatex">\(1\)</span> 的位数 <span class="arithmatex">\(b\)</span> 对应位均不为 <span class="arithmatex">\(0\)</span>，且 <span class="arithmatex">\(a+X\)</span> 所有为 <span class="arithmatex">\(1\)</span> 的位数 <span class="arithmatex">\(b+Y\)</span> 对应位均不为 <span class="arithmatex">\(0\)</span>。</p>
 </blockquote>
-<p>考虑数位 DP，设 $dp_{i,1/0,1/0}$ 表示考虑后 $i$ 位，$a+X$ 有/无来自上一位的进位，$b+Y$ 有/无来自上一位的进位的合法的取 $(a,b)$ 的方案数。转移枚举这一位 $a,b$ 分别取 $0$ 还是 $1$ 即可。</p>
-<p>注意到要写高精度，其实非常简单，只需要时间高精加，高精除以二，高精模以二即可。复杂度 $O(k^2)$（因为高精也是 $O(k)$ 的）。</p>
+<p>考虑数位 DP，设 <span class="arithmatex">\(dp_{i,1/0,1/0}\)</span> 表示考虑后 <span class="arithmatex">\(i\)</span> 位，<span class="arithmatex">\(a+X\)</span> 有/无来自上一位的进位，<span class="arithmatex">\(b+Y\)</span> 有/无来自上一位的进位的合法的取 <span class="arithmatex">\((a,b)\)</span> 的方案数。转移枚举这一位 <span class="arithmatex">\(a,b\)</span> 分别取 <span class="arithmatex">\(0\)</span> 还是 <span class="arithmatex">\(1\)</span> 即可。</p>
+<p>注意到要写高精度，其实非常简单，只需要时间高精加，高精除以二，高精模以二即可。复杂度 <span class="arithmatex">\(O(k^2)\)</span>（因为高精也是 <span class="arithmatex">\(O(k)\)</span> 的）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6096,13 +6124,13 @@
 </details>
 <h2 id="t4">T4</h2>
 <p>考虑一种贪心。</p>
-<p>首先假设对于每个区间，往左边转发和往右边转发是两个独立的问题，我们设区间 $i$ 转发给左侧所有人的最小转发次数为 $fl_i$，显然可以找一个右端点在当前区间内，且 $fl_j$ 最小的区间 $j$，右侧同理，设这个数为 $fr_i$</p>
+<p>首先假设对于每个区间，往左边转发和往右边转发是两个独立的问题，我们设区间 <span class="arithmatex">\(i\)</span> 转发给左侧所有人的最小转发次数为 <span class="arithmatex">\(fl_i\)</span>，显然可以找一个右端点在当前区间内，且 <span class="arithmatex">\(fl_j\)</span> 最小的区间 <span class="arithmatex">\(j\)</span>，右侧同理，设这个数为 <span class="arithmatex">\(fr_i\)</span></p>
 <p>假如左右独立，这个显然是对的，因为每次找一个最小的肯定比找一个较大的优。</p>
 <p>但问题就在于左右不一定独立，比如这种情况：</p>
 <p><img alt="图示 1" src="../../img/20230707_ABCD_1.png" /></p>
-<p>假如黑色区间要传给两个粉色区间，按我们刚才的贪心策略就会走两个红色区间，答案为 $2$，但其实直接走那个橙色的显然更优，答案为 $1$。</p>
-<p>考虑如何解决这个问题，这其实也非常简单，因为会让我们答案不优的一定是个包含它的区间，那么我们最后再特判一下第一步走一个包含它的区间得到的答案即可，假设我们已经求出了 $fl,fr$，那么某个区间 $i$ 的答案即为：</p>
-<p>$$\min\begin{Bmatrix}fl_i+fr_i,\min\limits_{s_j \le s_i,t_i \le t_j}\begin{Bmatrix}fl_j+fr_j+1\end{Bmatrix}\end{Bmatrix}$$</p>
+<p>假如黑色区间要传给两个粉色区间，按我们刚才的贪心策略就会走两个红色区间，答案为 <span class="arithmatex">\(2\)</span>，但其实直接走那个橙色的显然更优，答案为 <span class="arithmatex">\(1\)</span>。</p>
+<p>考虑如何解决这个问题，这其实也非常简单，因为会让我们答案不优的一定是个包含它的区间，那么我们最后再特判一下第一步走一个包含它的区间得到的答案即可，假设我们已经求出了 <span class="arithmatex">\(fl,fr\)</span>，那么某个区间 <span class="arithmatex">\(i\)</span> 的答案即为：</p>
+<div class="arithmatex">\[\min\begin{Bmatrix}fl_i+fr_i,\min\limits_{s_j \le s_i,t_i \le t_j}\begin{Bmatrix}fl_j+fr_j+1\end{Bmatrix}\end{Bmatrix}\]</div>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

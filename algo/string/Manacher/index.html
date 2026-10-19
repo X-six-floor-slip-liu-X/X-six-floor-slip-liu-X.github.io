@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5788,18 +5816,18 @@
 <h2 id="_2">算法简述</h2>
 <p>Manacher 算法（国内俗称马拉车）由 Glenn K. Manacher 在 1975 年提出。是一种在能在<strong>线性时间</strong>内求出某字符串所有回文子串的算法，且相比其它复杂度相近算法<strong>压倒性地简单</strong>。</p>
 <p>首先，给出问题的严谨描述：</p>
-<p>给定一个长度为 $n$ 的字符串 $s$，请找到所有对 $(i, j)$ 使得子串 $s[i \dots j]$ 为一个回文串。当 $t = t_{\text{rev}}$ 时，字符串 $t$ 是一个回文串（$t_{\text{rev}}$ 是 $t$ 的反转字符串）。</p>
-<p>而回文串有一种更方便的表述方式，对于某个位置 $i$，我们令 $d_i$ 为以 $i$ 为对称轴的最长回文子串的长度。这样只能表示长度为奇数的回文子串，那么我们可以再令 $d_i'$ 为以 $i-1,i$ 间的间隔为对称轴的最长回文子串长度，这样就可以表示长度为偶数的回文子串了。</p>
-<p>考虑如何暴力求解 $d$ 与 $d'$，其实很简单，枚举中心点暴力往两侧拓展即可，代码就不贴了。</p>
-<p>然后考虑优化，这里只说如何求解 $d$，关于 $d'$ 的后面会详细说。</p>
-<p>首先与 KMP 等字符串算法的思路类似，都考虑从之前的答案推出现在的答案。假如我们已经求出 $1\sim i-1$ 的答案，那么我们可以维护两个数 $l,r$ 表示右端点最大的回文子串的左右端点（当然你也可以维护能使得 $x+d_x$ 最大的 $x$），若当前 $i&gt;r$，直接暴力拓展求出 $d_i$，否则考虑在其它情况下字符串长什么样：</p>
+<p>给定一个长度为 <span class="arithmatex">\(n\)</span> 的字符串 <span class="arithmatex">\(s\)</span>，请找到所有对 <span class="arithmatex">\((i, j)\)</span> 使得子串 <span class="arithmatex">\(s[i \dots j]\)</span> 为一个回文串。当 <span class="arithmatex">\(t = t_{\text{rev}}\)</span> 时，字符串 <span class="arithmatex">\(t\)</span> 是一个回文串（<span class="arithmatex">\(t_{\text{rev}}\)</span> 是 <span class="arithmatex">\(t\)</span> 的反转字符串）。</p>
+<p>而回文串有一种更方便的表述方式，对于某个位置 <span class="arithmatex">\(i\)</span>，我们令 <span class="arithmatex">\(d_i\)</span> 为以 <span class="arithmatex">\(i\)</span> 为对称轴的最长回文子串的长度。这样只能表示长度为奇数的回文子串，那么我们可以再令 <span class="arithmatex">\(d_i'\)</span> 为以 <span class="arithmatex">\(i-1,i\)</span> 间的间隔为对称轴的最长回文子串长度，这样就可以表示长度为偶数的回文子串了。</p>
+<p>考虑如何暴力求解 <span class="arithmatex">\(d\)</span> 与 <span class="arithmatex">\(d'\)</span>，其实很简单，枚举中心点暴力往两侧拓展即可，代码就不贴了。</p>
+<p>然后考虑优化，这里只说如何求解 <span class="arithmatex">\(d\)</span>，关于 <span class="arithmatex">\(d'\)</span> 的后面会详细说。</p>
+<p>首先与 KMP 等字符串算法的思路类似，都考虑从之前的答案推出现在的答案。假如我们已经求出 <span class="arithmatex">\(1\sim i-1\)</span> 的答案，那么我们可以维护两个数 <span class="arithmatex">\(l,r\)</span> 表示右端点最大的回文子串的左右端点（当然你也可以维护能使得 <span class="arithmatex">\(x+d_x\)</span> 最大的 <span class="arithmatex">\(x\)</span>），若当前 <span class="arithmatex">\(i&gt;r\)</span>，直接暴力拓展求出 <span class="arithmatex">\(d_i\)</span>，否则考虑在其它情况下字符串长什么样：</p>
 <p><img alt="图示 1" src="../../../img/Manacher_1.png" /></p>
-<p>那么我们可以在回文区间 $[l,r]$ 对称的位置找到一个 $j$，那么容易想到 $d_i$ <strong>很可能等于</strong> $d_j$！</p>
+<p>那么我们可以在回文区间 <span class="arithmatex">\([l,r]\)</span> 对称的位置找到一个 <span class="arithmatex">\(j\)</span>，那么容易想到 <span class="arithmatex">\(d_i\)</span> <strong>很可能等于</strong> <span class="arithmatex">\(d_j\)</span>！</p>
 <p><img alt="图示 2" src="../../../img/Manacher_2.png" /></p>
-<p>比如这种情况，假设 $d_j$ 对应的是左边蓝色区间，那么右边的蓝色区间显然与左边的完全相等（注意是回文的），且无法拓展（考虑定义中的<strong>最长</strong>）。</p>
+<p>比如这种情况，假设 <span class="arithmatex">\(d_j\)</span> 对应的是左边蓝色区间，那么右边的蓝色区间显然与左边的完全相等（注意是回文的），且无法拓展（考虑定义中的<strong>最长</strong>）。</p>
 <p><img alt="图示 3" src="../../../img/Manacher_3.png" /></p>
 <p>但是在这种情况，我们无法确定右边黑色区间外的绿色区间是否与左侧匹配。这种时候就要暴力拓展了。</p>
-<p>容易发现，每次暴力拓展都会更新 $r$，而 $r$ 至多被拓展 $n$ 次，若不拓展 $r$ 那么是 $O(1)$ 求出 $d_i$ 的。故复杂度是 $O(n)$。</p>
+<p>容易发现，每次暴力拓展都会更新 <span class="arithmatex">\(r\)</span>，而 <span class="arithmatex">\(r\)</span> 至多被拓展 <span class="arithmatex">\(n\)</span> 次，若不拓展 <span class="arithmatex">\(r\)</span> 那么是 <span class="arithmatex">\(O(1)\)</span> 求出 <span class="arithmatex">\(d_i\)</span> 的。故复杂度是 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary><a href="https://www.luogu.com.cn/problem/P3805">P3805 【模板】manacher</a> 参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="o">=</span><span class="mf">1.1e7</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">inf</span><span class="o">=</span><span class="mh">0x3f3f3f3f</span><span class="p">;</span>
@@ -5837,7 +5865,7 @@
 <p>比如原来字符串长这样：<code>abbaabba</code></p>
 <p>我们把间隔替换成字符：<code>#a#b#b#a#a#b#b#a#</code></p>
 <p>两侧的 <code>#</code> 是为了实现方便。</p>
-<p>这样就只需要跑 $d_1$ 即可，另外，容易发现这样得到的 $d_i$ 等于以 $i$ 为中心的极长回文子串长度 $+1$。</p>
+<p>这样就只需要跑 <span class="arithmatex">\(d_1\)</span> 即可，另外，容易发现这样得到的 <span class="arithmatex">\(d_i\)</span> 等于以 <span class="arithmatex">\(i\)</span> 为中心的极长回文子串长度 <span class="arithmatex">\(+1\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">    </span><span class="n">scanf</span><span class="p">(</span><span class="s">" %s"</span><span class="p">,</span><span class="n">str</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>

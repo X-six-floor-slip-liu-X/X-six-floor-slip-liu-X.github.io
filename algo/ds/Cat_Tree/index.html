@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5780,15 +5808,15 @@
 
 <h1 id="_1">猫树</h1>
 <h2 id="_2">引入</h2>
-<p>ST 表的复杂度非常优秀，$O(n\log n)$ 预处理，$O(1)$ 查询。但是只能维护<strong>可重复贡献</strong>的信息（如 $\min,\max$，按位与，按位或）。而很多时候我们维护的信息只满足结合律，只能用线段树维护。</p>
+<p>ST 表的复杂度非常优秀，<span class="arithmatex">\(O(n\log n)\)</span> 预处理，<span class="arithmatex">\(O(1)\)</span> 查询。但是只能维护<strong>可重复贡献</strong>的信息（如 <span class="arithmatex">\(\min,\max\)</span>，按位与，按位或）。而很多时候我们维护的信息只满足结合律，只能用线段树维护。</p>
 <p>而猫树以同样的复杂度，却可以维护仅满足结合律的信息。</p>
 <h2 id="_3">算法简介</h2>
-<p>猫树基于线段树的思想，能 $O(n\log n)$ 预处理，$O(1)$ 查询<strong>支持结合律和快速合并</strong>的信息。空间复杂度 $O(n\log n)$。</p>
-<p>具体来说，对于一个询问区间 $[L,R]$，若 $l=r$，可以直接得出答案。否则考虑在线段树上查询它的过程中，若它不是线段树上的某个完整区间，那么必然存在一个结点 $p$，在这个结点上<strong>同时访问左右两个儿子</strong>。若它恰好是线段树上的某个完整区间，那么视该节点为 $p$，且<strong>同时访问该结点的左右两儿子</strong>。</p>
-<p>这样就能把某区间的贡献拆成 $[L,mid],[mid+1,R]$ 两部分。且 $[L,mid]$ 恰好是上文中 $p$ 的<strong>左儿子的一段后缀</strong>，$[mid+1,R]$ 是<strong>右儿子的一段前缀</strong>。那么我们可以 $O(n\log n)$ 地预处理线段树每个结点前后缀的信息。容易发现每一层前后缀信息都恰好有 $n$ 个，在找到 $p$ 的层数后就能 $O(T)$ 求解，其中 $T$ 为合并信息的复杂度，通常为 $O(1)$。</p>
-<p>但是如何找到 $p$ 的层数呢？在一般的线段树上貌似只能 $O(\log n)$ 求解。这时候我们或许可以试着考虑一下 zkw 线段树，找到对应叶子结点后容易发现 $p$ 就是 $\mathrm{lca}$，那么树剖或倍增可以 $O(\log\log n)$ 找到 $p$ 后求解层数。用 RMQ+欧拉序可以 $O(1)$。</p>
+<p>猫树基于线段树的思想，能 <span class="arithmatex">\(O(n\log n)\)</span> 预处理，<span class="arithmatex">\(O(1)\)</span> 查询<strong>支持结合律和快速合并</strong>的信息。空间复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
+<p>具体来说，对于一个询问区间 <span class="arithmatex">\([L,R]\)</span>，若 <span class="arithmatex">\(l=r\)</span>，可以直接得出答案。否则考虑在线段树上查询它的过程中，若它不是线段树上的某个完整区间，那么必然存在一个结点 <span class="arithmatex">\(p\)</span>，在这个结点上<strong>同时访问左右两个儿子</strong>。若它恰好是线段树上的某个完整区间，那么视该节点为 <span class="arithmatex">\(p\)</span>，且<strong>同时访问该结点的左右两儿子</strong>。</p>
+<p>这样就能把某区间的贡献拆成 <span class="arithmatex">\([L,mid],[mid+1,R]\)</span> 两部分。且 <span class="arithmatex">\([L,mid]\)</span> 恰好是上文中 <span class="arithmatex">\(p\)</span> 的<strong>左儿子的一段后缀</strong>，<span class="arithmatex">\([mid+1,R]\)</span> 是<strong>右儿子的一段前缀</strong>。那么我们可以 <span class="arithmatex">\(O(n\log n)\)</span> 地预处理线段树每个结点前后缀的信息。容易发现每一层前后缀信息都恰好有 <span class="arithmatex">\(n\)</span> 个，在找到 <span class="arithmatex">\(p\)</span> 的层数后就能 <span class="arithmatex">\(O(T)\)</span> 求解，其中 <span class="arithmatex">\(T\)</span> 为合并信息的复杂度，通常为 <span class="arithmatex">\(O(1)\)</span>。</p>
+<p>但是如何找到 <span class="arithmatex">\(p\)</span> 的层数呢？在一般的线段树上貌似只能 <span class="arithmatex">\(O(\log n)\)</span> 求解。这时候我们或许可以试着考虑一下 zkw 线段树，找到对应叶子结点后容易发现 <span class="arithmatex">\(p\)</span> 就是 <span class="arithmatex">\(\mathrm{lca}\)</span>，那么树剖或倍增可以 <span class="arithmatex">\(O(\log\log n)\)</span> 找到 <span class="arithmatex">\(p\)</span> 后求解层数。用 RMQ+欧拉序可以 <span class="arithmatex">\(O(1)\)</span>。</p>
 <p>但这真的是我们想要的答案吗？</p>
-<p>如果你熟悉 zkw 线段树，容易发现结点 $u$ 的父亲是 $\left\lfloor\frac{u}{2}\right\rfloor$，即二进制下右移一位。那么在这种情况下 $\mathrm{lca}(l,r)$ 是多少呢？由于满二叉树下所有叶子结点深度相同，那么我们考虑同时右移。容易发现，$\mathrm{lca}(l,r)$ 恰好就是 $l,r$ 二进制下相同的一段前缀。那么其实 $\mathrm{lca}(l,r)$ 的层数就是 $\log_2((l+2^k)\oplus (r+2^k))$，其中 $\oplus$ 表示按位异或，$2^k$ 是大于 $n$ 的最小 $2$ 的次方数。那么其实它还可以再简化一下，因为 $2^k\oplus 2^k=0$，故 $p$ 的层数就是 $\log_2(l\oplus r)$。</p>
+<p>如果你熟悉 zkw 线段树，容易发现结点 <span class="arithmatex">\(u\)</span> 的父亲是 <span class="arithmatex">\(\left\lfloor\frac{u}{2}\right\rfloor\)</span>，即二进制下右移一位。那么在这种情况下 <span class="arithmatex">\(\mathrm{lca}(l,r)\)</span> 是多少呢？由于满二叉树下所有叶子结点深度相同，那么我们考虑同时右移。容易发现，<span class="arithmatex">\(\mathrm{lca}(l,r)\)</span> 恰好就是 <span class="arithmatex">\(l,r\)</span> 二进制下相同的一段前缀。那么其实 <span class="arithmatex">\(\mathrm{lca}(l,r)\)</span> 的层数就是 <span class="arithmatex">\(\log_2((l+2^k)\oplus (r+2^k))\)</span>，其中 <span class="arithmatex">\(\oplus\)</span> 表示按位异或，<span class="arithmatex">\(2^k\)</span> 是大于 <span class="arithmatex">\(n\)</span> 的最小 <span class="arithmatex">\(2\)</span> 的次方数。那么其实它还可以再简化一下，因为 <span class="arithmatex">\(2^k\oplus 2^k=0\)</span>，故 <span class="arithmatex">\(p\)</span> 的层数就是 <span class="arithmatex">\(\log_2(l\oplus r)\)</span>。</p>
 
 
 

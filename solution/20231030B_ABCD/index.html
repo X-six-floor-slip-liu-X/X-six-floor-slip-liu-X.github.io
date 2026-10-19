@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5851,9 +5879,9 @@
 <p>从这场开始模拟赛质量开始断崖式下跌，天天一堆锅。所以后面到 NOIP 前很多我都不打算改了。</p>
 <p><a href="../../files/20231030.rar">密码是通用密码</a></p>
 <h2 id="t1">T1</h2>
-<p>首先显而易见的是，对于任意一个 $k$，$[n+1,2n]$ 中在二进制下有 $k$ 个 $1$ 的数的数量是单调不减的。</p>
-<p>证明很简单，考虑 $n\to n+1$，会去掉 $n+1$，新增 $2n+2,2n+1$。容易发现 $2n+2$ 和 $n+1$ 中 $1$ 的个数是相等的，只会新增一个 $2n+1$。即不会减少，只会增加。</p>
-<p>那么可以二分答案。然后对于区间内“二进制下有 $k$ 个 $1$ 的数的数量”可以拆成两个前缀，还是比较好求的，大概思路类似于数位 DP，就不展开讲了。</p>
+<p>首先显而易见的是，对于任意一个 <span class="arithmatex">\(k\)</span>，<span class="arithmatex">\([n+1,2n]\)</span> 中在二进制下有 <span class="arithmatex">\(k\)</span> 个 <span class="arithmatex">\(1\)</span> 的数的数量是单调不减的。</p>
+<p>证明很简单，考虑 <span class="arithmatex">\(n\to n+1\)</span>，会去掉 <span class="arithmatex">\(n+1\)</span>，新增 <span class="arithmatex">\(2n+2,2n+1\)</span>。容易发现 <span class="arithmatex">\(2n+2\)</span> 和 <span class="arithmatex">\(n+1\)</span> 中 <span class="arithmatex">\(1\)</span> 的个数是相等的，只会新增一个 <span class="arithmatex">\(2n+1\)</span>。即不会减少，只会增加。</p>
+<p>那么可以二分答案。然后对于区间内“二进制下有 <span class="arithmatex">\(k\)</span> 个 <span class="arithmatex">\(1\)</span> 的数的数量”可以拆成两个前缀，还是比较好求的，大概思路类似于数位 DP，就不展开讲了。</p>
 <p>另外题目有锅，答案在 <code>long long</code> 范围内，不知道文件是改前还是改后的。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -5931,29 +5959,29 @@
 </span></code></pre></div>
 </details>
 <h2 id="t2">T2</h2>
-<p>首先容易发现我们可以对每个数找到“能删掉它的最小数”。具体而言，能删掉 $x$ 的最小数 $y=(\left\lfloor\sqrt{2x}\right\rfloor+1)^2-x$。容易发现它大概是分成一段一段递减的（就是对于前半段相等的，后半段显然是个一次函数）。观察小数据发现上段 $y$ 的最大值小于下一段的最小值，接下来考虑证明。</p>
-<p>首先分段的依据是 $(\left\lfloor\sqrt{2x}\right\rfloor+1)^2$ 不相等，即 $\left\lfloor\sqrt{2x}\right\rfloor$ 不相等。设 $k=\left\lfloor\sqrt{2x}\right\rfloor$。</p>
-<p>容易发现，对于一个 $k$，该段最大的 $x$ 为 $\left\lfloor\frac{(k+1)^2-1}{2}\right\rfloor$，最小的 $x$ 为上一段的最大值 $+1$，即 $\left\lfloor\frac{k^2-1}{2}\right\rfloor+1$。那么对应的 $y$ 就分别是 $(k+1)^2-\left\lfloor\frac{(k+1)^2-1}{2}\right\rfloor$ 和 $(k+1)^2-\left\lfloor\frac{k^2-1}{2}\right\rfloor-1$。故 $k+1$ 段 $y$ 的最小值就是 $(k+2)^2-\left\lfloor\frac{(k+2)^2-1}{2}\right\rfloor$。我们要证明的就是 $(k+1)^2-\left\lfloor\frac{k^2-1}{2}\right\rfloor-1&lt;(k+2)^2-\left\lfloor\frac{(k+2)^2-1}{2}\right\rfloor$。</p>
+<p>首先容易发现我们可以对每个数找到“能删掉它的最小数”。具体而言，能删掉 <span class="arithmatex">\(x\)</span> 的最小数 <span class="arithmatex">\(y=(\left\lfloor\sqrt{2x}\right\rfloor+1)^2-x\)</span>。容易发现它大概是分成一段一段递减的（就是对于前半段相等的，后半段显然是个一次函数）。观察小数据发现上段 <span class="arithmatex">\(y\)</span> 的最大值小于下一段的最小值，接下来考虑证明。</p>
+<p>首先分段的依据是 <span class="arithmatex">\((\left\lfloor\sqrt{2x}\right\rfloor+1)^2\)</span> 不相等，即 <span class="arithmatex">\(\left\lfloor\sqrt{2x}\right\rfloor\)</span> 不相等。设 <span class="arithmatex">\(k=\left\lfloor\sqrt{2x}\right\rfloor\)</span>。</p>
+<p>容易发现，对于一个 <span class="arithmatex">\(k\)</span>，该段最大的 <span class="arithmatex">\(x\)</span> 为 <span class="arithmatex">\(\left\lfloor\frac{(k+1)^2-1}{2}\right\rfloor\)</span>，最小的 <span class="arithmatex">\(x\)</span> 为上一段的最大值 <span class="arithmatex">\(+1\)</span>，即 <span class="arithmatex">\(\left\lfloor\frac{k^2-1}{2}\right\rfloor+1\)</span>。那么对应的 <span class="arithmatex">\(y\)</span> 就分别是 <span class="arithmatex">\((k+1)^2-\left\lfloor\frac{(k+1)^2-1}{2}\right\rfloor\)</span> 和 <span class="arithmatex">\((k+1)^2-\left\lfloor\frac{k^2-1}{2}\right\rfloor-1\)</span>。故 <span class="arithmatex">\(k+1\)</span> 段 <span class="arithmatex">\(y\)</span> 的最小值就是 <span class="arithmatex">\((k+2)^2-\left\lfloor\frac{(k+2)^2-1}{2}\right\rfloor\)</span>。我们要证明的就是 <span class="arithmatex">\((k+1)^2-\left\lfloor\frac{k^2-1}{2}\right\rfloor-1&lt;(k+2)^2-\left\lfloor\frac{(k+2)^2-1}{2}\right\rfloor\)</span>。</p>
 <p>右边减左边，得：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
  &amp;(k+2)^2-\left\lfloor\frac{(k+2)^2-1}{2}\right\rfloor-\left((k+1)^2-\left\lfloor\frac{k^2-1}{2}\right\rfloor-1\right)\\
 =&amp;k^2+4k+4-k^2-2k-1+1+\left\lfloor\frac{k^2-1}{2}\right\rfloor-\left\lfloor\frac{(k+2)^2-1}{2}\right\rfloor\\
 =&amp;2k+4+\left\lfloor\frac{k^2-1}{2}\right\rfloor-\left\lfloor\frac{k^2+4k+3}{2}\right\rfloor
 \end{aligned}
-$$</p>
-<p>然后分奇偶性讨论（因为下取整里面的分母是 $2$）。</p>
-<p>若 $k$ 是奇数，那么 $k^2-1,k^2+4k+3$ 均是偶数，则有：</p>
-<p>$$
+\]</div>
+<p>然后分奇偶性讨论（因为下取整里面的分母是 <span class="arithmatex">\(2\)</span>）。</p>
+<p>若 <span class="arithmatex">\(k\)</span> 是奇数，那么 <span class="arithmatex">\(k^2-1,k^2+4k+3\)</span> 均是偶数，则有：</p>
+<div class="arithmatex">\[
 \begin{aligned}
  &amp;2k+4+\left\lfloor\frac{k^2-1}{2}\right\rfloor-\left\lfloor\frac{k^2+4k+3}{2}\right\rfloor\\
 =&amp;2k+4+\frac{(k^2-1)-(k^2+4k+3)}{2}\\
 =&amp;2k+4+\frac{-4k-4}{2}\\
 =&amp;2&gt;0
 \end{aligned}
-$$</p>
-<p>若 $k$ 是偶数，那么那俩东西均是奇数，则有：</p>
-<p>$$
+\]</div>
+<p>若 <span class="arithmatex">\(k\)</span> 是偶数，那么那俩东西均是奇数，则有：</p>
+<div class="arithmatex">\[
 \begin{aligned}
  &amp;2k+4+\left\lfloor\frac{k^2-1}{2}\right\rfloor-\left\lfloor\frac{k^2+4k+3}{2}\right\rfloor\\
 =&amp;2k+4+\left\lfloor\frac{k^2-2}{2}\right\rfloor-\left\lfloor\frac{k^2+4k+2}{2}\right\rfloor\\
@@ -5961,9 +5989,9 @@ $$</p>
 =&amp;2k+4+\frac{-4k-4}{2}\\
 =&amp;2&gt;0
 \end{aligned}
-$$</p>
+\]</div>
 <p><del>其实几乎是一样的</del></p>
-<p>那么也就是说，我们找到 $n$ 对应的 $k$ 后，$1\sim k-1$ 段全部都能被删掉，第 $k$ 段有一个后缀可以被删掉。</p>
+<p>那么也就是说，我们找到 <span class="arithmatex">\(n\)</span> 对应的 <span class="arithmatex">\(k\)</span> 后，<span class="arithmatex">\(1\sim k-1\)</span> 段全部都能被删掉，第 <span class="arithmatex">\(k\)</span> 段有一个后缀可以被删掉。</p>
 <p>实现很简单，就不细说了。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6007,9 +6035,9 @@ $$</p>
 </span></code></pre></div>
 </details>
 <h2 id="t3">T3</h2>
-<p>首先容易发现，我们构造出的操作序列必然是先通过一系列操作得到一个 $a=b$ 的状态，然后执行多次 $a\gets a+b$，然后再进行若干次减一。容易发现对于一个固定的 $a=b$，后面两步要执行多少次是可以 $O(1)$ 计算的。也就是说，我们把问题转化成了“对于所有 $i=[1,n]$，求出到达 $a=b=i$ 的状态至少需要多少次操作”。</p>
-<p>首先一个比较简单的想法是，将一个数 $i$ 向它的所有倍数 $ki$ 和 $i-1$ 连边，边权是转化到对应状态需要的代价（分别是 $k$（因为还要执行一次 $b\gets a$）和 $1$）。然后跑一边迪杰求最短路。这样边数是 $O(n\log n)$（$\frac{n}{1}+\frac{n}{2}+\frac{n}{3}\dots$）的，$O(n\log^2n)$ 不太能过，考虑优化。</p>
-<p>那么很显然，一个点只需要向它的质数倍连边，复杂度就变成了 $O(n\log n\log\log n)$，就能过了。</p>
+<p>首先容易发现，我们构造出的操作序列必然是先通过一系列操作得到一个 <span class="arithmatex">\(a=b\)</span> 的状态，然后执行多次 <span class="arithmatex">\(a\gets a+b\)</span>，然后再进行若干次减一。容易发现对于一个固定的 <span class="arithmatex">\(a=b\)</span>，后面两步要执行多少次是可以 <span class="arithmatex">\(O(1)\)</span> 计算的。也就是说，我们把问题转化成了“对于所有 <span class="arithmatex">\(i=[1,n]\)</span>，求出到达 <span class="arithmatex">\(a=b=i\)</span> 的状态至少需要多少次操作”。</p>
+<p>首先一个比较简单的想法是，将一个数 <span class="arithmatex">\(i\)</span> 向它的所有倍数 <span class="arithmatex">\(ki\)</span> 和 <span class="arithmatex">\(i-1\)</span> 连边，边权是转化到对应状态需要的代价（分别是 <span class="arithmatex">\(k\)</span>（因为还要执行一次 <span class="arithmatex">\(b\gets a\)</span>）和 <span class="arithmatex">\(1\)</span>）。然后跑一边迪杰求最短路。这样边数是 <span class="arithmatex">\(O(n\log n)\)</span>（<span class="arithmatex">\(\frac{n}{1}+\frac{n}{2}+\frac{n}{3}\dots\)</span>）的，<span class="arithmatex">\(O(n\log^2n)\)</span> 不太能过，考虑优化。</p>
+<p>那么很显然，一个点只需要向它的质数倍连边，复杂度就变成了 <span class="arithmatex">\(O(n\log n\log\log n)\)</span>，就能过了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6079,9 +6107,9 @@ $$</p>
 <h2 id="t4">T4</h2>
 <p>很聪明的一道题，但是我很蠢。</p>
 <p>题目的意思就是让你复制一些边（复制两端点和边权），把原图变成欧拉回路，问加的这些边边权和最小是多少。</p>
-<p>首先考虑经典结论：欧拉回路存在的充要条件为每个点度数都为偶数，证明略。由于每条边会给整张图贡献 $2$ 的度数，那么总度数就是偶数。可以简单推出有偶数个点度数为奇数。我们的目标就是把它们的度数变为偶数。</p>
-<p>容易发现若复制了一条链，那么只有链两端的点度数奇偶性会改变。也就是说如果我们想同时改变 $A,B$ 度数的奇偶性，只需要复制他们俩之间的最短路即可，可以先跑一遍 floyd 预处理。</p>
-<p>那么相当于最初有一个大小为偶数的点集 $S$，表示 $S$ 内的点度数全为奇数。然后每次操作可以花费 $dis_{x,y}$ 的代价把 $x,y$ 两个点都删掉，问删掉整个点集需要的最小代价，容易想到 dp。设 $f_{msk}$ 为删成 $msk$ 需要的最小代价，转移就是枚举删那两个，记搜即可。</p>
+<p>首先考虑经典结论：欧拉回路存在的充要条件为每个点度数都为偶数，证明略。由于每条边会给整张图贡献 <span class="arithmatex">\(2\)</span> 的度数，那么总度数就是偶数。可以简单推出有偶数个点度数为奇数。我们的目标就是把它们的度数变为偶数。</p>
+<p>容易发现若复制了一条链，那么只有链两端的点度数奇偶性会改变。也就是说如果我们想同时改变 <span class="arithmatex">\(A,B\)</span> 度数的奇偶性，只需要复制他们俩之间的最短路即可，可以先跑一遍 floyd 预处理。</p>
+<p>那么相当于最初有一个大小为偶数的点集 <span class="arithmatex">\(S\)</span>，表示 <span class="arithmatex">\(S\)</span> 内的点度数全为奇数。然后每次操作可以花费 <span class="arithmatex">\(dis_{x,y}\)</span> 的代价把 <span class="arithmatex">\(x,y\)</span> 两个点都删掉，问删掉整个点集需要的最小代价，容易想到 dp。设 <span class="arithmatex">\(f_{msk}\)</span> 为删成 <span class="arithmatex">\(msk\)</span> 需要的最小代价，转移就是枚举删那两个，记搜即可。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

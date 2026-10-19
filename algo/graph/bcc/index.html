@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6037,40 +6065,40 @@
 <h1 id="_1">点双连通分量与边双连通分量</h1>
 <h2 id="_2">前言</h2>
 <p>佳老师说点双比边双要难一点，因为性质比较多，定义要更复杂一点，所以先写点双。</p>
-<p>约定图的点数是 $n$，边数是 $m$。</p>
+<p>约定图的点数是 <span class="arithmatex">\(n\)</span>，边数是 <span class="arithmatex">\(m\)</span>。</p>
 <p>另外本文中的图默认是无向图，因为点双的定义是基于无向图的。</p>
 <h2 id="_3">点双连通分量</h2>
 <h3 id="_4">定义</h3>
 <p>在网上搜<strong>点双连通图</strong>的定义通常只会搜到“没有割点”，这里给出佳老师讲的定义：</p>
 <ol>
-<li>定义 $1$（基础定义）：对于任意两条边，都能用两条不经过重复点的路径连成环。</li>
+<li>定义 <span class="arithmatex">\(1\)</span>（基础定义）：对于任意两条边，都能用两条不经过重复点的路径连成环。</li>
 </ol>
-<p>为什么要将这个定义作为基础定义呢？考虑三条边 $e_1,e_2,e_3$，若 $e_1,e_2$ 能连成环，$e_2,e_3$ 能连成环，那么 $e_1,e_3$ 也能连成环，即此定义具有<strong>传递性</strong>。</p>
+<p>为什么要将这个定义作为基础定义呢？考虑三条边 <span class="arithmatex">\(e_1,e_2,e_3\)</span>，若 <span class="arithmatex">\(e_1,e_2\)</span> 能连成环，<span class="arithmatex">\(e_2,e_3\)</span> 能连成环，那么 <span class="arithmatex">\(e_1,e_3\)</span> 也能连成环，即此定义具有<strong>传递性</strong>。</p>
 <p>关于具体如何构造。考虑两个环分别长什么样：</p>
 <p><img alt="图示 1" src="../../../img/BCC_1.png" /></p>
-<p>必定是长这样的（两橙色点可能是 $e_2$ 的端点，但这不影响），所以显然具有传递性。</p>
+<p>必定是长这样的（两橙色点可能是 <span class="arithmatex">\(e_2\)</span> 的端点，但这不影响），所以显然具有传递性。</p>
 <ol start="2">
-<li>定义 $2$：（前提：$n\ge 3$）对于任意两个点，都能用两条不经过重复点的路径连城环。</li>
+<li>定义 <span class="arithmatex">\(2\)</span>：（前提：<span class="arithmatex">\(n\ge 3\)</span>）对于任意两个点，都能用两条不经过重复点的路径连城环。</li>
 </ol>
-<p>定义 $2$ 是弱于定义 $1$ 的（考虑随便找个出边），所以定义 $1\Rightarrow$ 定义 $2$ 是简单的，考虑证回来。</p>
-<p>首先证明在定义 $2$ 下，一条边 $(u,v)$ 和一个点 $x$ 能连成简单环。考虑 $u\to x$ 的路径一条是 $u\to v \to x$，那么必然有至少一条和这一条点不重复，那么把这两条接起来即可。</p>
-<p>然后再证到定义 $1$，即两条边 $(u,v),(x,y)$ 能连成简单环，由于 $x,(u,v)$ 能连成简单环，即存在 $x\to u\to v$ 的路径，那么对于必然有一条和它点不向交的 $y\to v$ 的路径，同样的，把它们接起来即可。</p>
+<p>定义 <span class="arithmatex">\(2\)</span> 是弱于定义 <span class="arithmatex">\(1\)</span> 的（考虑随便找个出边），所以定义 <span class="arithmatex">\(1\Rightarrow\)</span> 定义 <span class="arithmatex">\(2\)</span> 是简单的，考虑证回来。</p>
+<p>首先证明在定义 <span class="arithmatex">\(2\)</span> 下，一条边 <span class="arithmatex">\((u,v)\)</span> 和一个点 <span class="arithmatex">\(x\)</span> 能连成简单环。考虑 <span class="arithmatex">\(u\to x\)</span> 的路径一条是 <span class="arithmatex">\(u\to v \to x\)</span>，那么必然有至少一条和这一条点不重复，那么把这两条接起来即可。</p>
+<p>然后再证到定义 <span class="arithmatex">\(1\)</span>，即两条边 <span class="arithmatex">\((u,v),(x,y)\)</span> 能连成简单环，由于 <span class="arithmatex">\(x,(u,v)\)</span> 能连成简单环，即存在 <span class="arithmatex">\(x\to u\to v\)</span> 的路径，那么对于必然有一条和它点不向交的 <span class="arithmatex">\(y\to v\)</span> 的路径，同样的，把它们接起来即可。</p>
 <ol start="3">
-<li>定义 $3$（最常用）：没有割点。</li>
+<li>定义 <span class="arithmatex">\(3\)</span>（最常用）：没有割点。</li>
 </ol>
 <p>割点的定义可以简要理解为“<strong>删掉该点后图不连通</strong>”，其实原本定义好像是基于一个叫点割集的东西的，但是因为貌似不怎么考（佳老师讲省选算法的时候压根没提），记住割点的定义即可。</p>
-<p>由定义 $2$ 证到定义 $3$ 是显然的（因为任意两点之间有至少两条点不重复的路径，删掉其中一边还有另一边），又考虑证回来。</p>
-<p>这个可以用网络流思想简单解决。怎么用网络流求两点之间不经过重复点的路径数至多有几条呢？容易发现这对点有限制，那么考虑拆点，把每个点拆成入点和出点，然后两点之间连一条容量为 $1$ 的边即可。如果要求 $u,v$ 之间不经过重复点的路径数只需要求 $u_{out}$ 和 $v_{in}$ 之间的最大流即可。</p>
-<p>根据最大流最小割定理，最大流等于最小割，而由于不存在割点，任意取 $(u,v)$ 的最小割都大于等于 $2$，故当图没有割点时，任意两点之间都有至少两条点不重复的路径。</p>
+<p>由定义 <span class="arithmatex">\(2\)</span> 证到定义 <span class="arithmatex">\(3\)</span> 是显然的（因为任意两点之间有至少两条点不重复的路径，删掉其中一边还有另一边），又考虑证回来。</p>
+<p>这个可以用网络流思想简单解决。怎么用网络流求两点之间不经过重复点的路径数至多有几条呢？容易发现这对点有限制，那么考虑拆点，把每个点拆成入点和出点，然后两点之间连一条容量为 <span class="arithmatex">\(1\)</span> 的边即可。如果要求 <span class="arithmatex">\(u,v\)</span> 之间不经过重复点的路径数只需要求 <span class="arithmatex">\(u_{out}\)</span> 和 <span class="arithmatex">\(v_{in}\)</span> 之间的最大流即可。</p>
+<p>根据最大流最小割定理，最大流等于最小割，而由于不存在割点，任意取 <span class="arithmatex">\((u,v)\)</span> 的最小割都大于等于 <span class="arithmatex">\(2\)</span>，故当图没有割点时，任意两点之间都有至少两条点不重复的路径。</p>
 <p>另外，特别地，我们认为仅有两点之间连一条边的图也是点双连通图。</p>
 <hr />
 <p>然后根据点双连通图的定义，我们能得到<strong>点双连通子图</strong>的定义，即一个是点双连通图的子图。</p>
 <p>进而可以得到<strong>点双连通分量</strong>的定义：<strong>极大的点双连通子图</strong>。</p>
 <h3 id="_5">点双连通图相关性质</h3>
 <p>众所周知，点双连通图具有非常好的性质。</p>
-<p>首先，任意指定 $(u,v,x)$，都存在一条简单路径从 $u$ 出发经过 $x$ 到达 $v$。证明的话考虑 $u,v$ 之间必定有一条路径不经过 $x$，然后把它当成一条边再进行一次定义 $1\Rightarrow$ 定义 $2$ 的证明即可。</p>
-<p>具体构造考虑源点连向 $x_{in}$，$u_{out},v_{out}$ 连向汇点跑最大流。</p>
-<p>然后任意指定 $(u,v,(x,y))$，都存在一条简单路径从 $u$ 出发经过<strong>无向边</strong> $(x,y)$（即不指定方向）到达 $v$，证明和构造同理。</p>
+<p>首先，任意指定 <span class="arithmatex">\((u,v,x)\)</span>，都存在一条简单路径从 <span class="arithmatex">\(u\)</span> 出发经过 <span class="arithmatex">\(x\)</span> 到达 <span class="arithmatex">\(v\)</span>。证明的话考虑 <span class="arithmatex">\(u,v\)</span> 之间必定有一条路径不经过 <span class="arithmatex">\(x\)</span>，然后把它当成一条边再进行一次定义 <span class="arithmatex">\(1\Rightarrow\)</span> 定义 <span class="arithmatex">\(2\)</span> 的证明即可。</p>
+<p>具体构造考虑源点连向 <span class="arithmatex">\(x_{in}\)</span>，<span class="arithmatex">\(u_{out},v_{out}\)</span> 连向汇点跑最大流。</p>
+<p>然后任意指定 <span class="arithmatex">\((u,v,(x,y))\)</span>，都存在一条简单路径从 <span class="arithmatex">\(u\)</span> 出发经过<strong>无向边</strong> <span class="arithmatex">\((x,y)\)</span>（即不指定方向）到达 <span class="arithmatex">\(v\)</span>，证明和构造同理。</p>
 <p>然后此处我们能发现两点之间连一条边的图满足以上性质，所以我们之前才特别定义这样的图也是点双连通图。</p>
 <h3 id="_6">圆方树</h3>
 <p>容易发现多个点双连通分量（以下简称<strong>点双</strong>）虽然不共用边（因为点双连通性对于边是有传递性的），但是可能共用点。所以我们不能用缩点的方法把点双缩起来。但是我们还有一个巧妙的办法，叫圆方树。</p>
@@ -6079,9 +6107,9 @@
 <h4 id="_7">求法</h4>
 <p>我们通常使用类似于 Tarjan 求割点的算法构建圆方树。</p>
 <p>具体来说，考虑 DFS 树，如果一个点子树内没有返祖边返到它的祖先（不含它自己），说明它就是一个割点。</p>
-<p>那么为了实现这个功能，我们定义 $dfn_i$ 表示 $i$ 被访问的时间戳，易证对于任意一条垂直的树链，$dfn$ 单调递增。然后定义 $low_i$ 为 $i$ 经过<strong>至多一条</strong>返祖边能到达的时间戳最小结点。</p>
-<p>那么上面的条件就是 $low_v\ge dfn_u$（$v$ 是 $u$ 的一个儿子），而如果我们规定 $low$ 数组可以通过父边向上（这样实现也会更方便），那么就有一个更强的性质：$low_v=dfn_u$。更准确的说，对于一条树边 $u\to v$，两点 $u,v$ 在同一个点双中，且 $u$ 是这个点双中最浅的结点当且仅当 $low_v=dfn_u$。</p>
-<p>那么我们可以在 DFS 的过程中确定哪些地方存在点双，但是还不能准确确定一个点双所包含的点集。其实这并不难处理，我们可以在 DFS 过程中维护一个栈，存储还未确定所属点双的节点（一个结点可能所属多个点双，只有在全部确定时才会弹出）。在找到点双时，点双中除了 $u$ 以外的其他的点都集中在栈顶端，并且由于是回溯时才处理的这些点，它们的出边必定都被考虑过了，那么它们的所属点双必定全都确定，所以只需要不断弹栈直到弹出 $v$ 为止即可。在弹出时可以直接向点双对应的方点连边，为方便实现，我们可以将方点的序号从 $n+1$ 开始计数，注意最后需要让 $u$ 和对应方点连边，但是不用弹出。</p>
+<p>那么为了实现这个功能，我们定义 <span class="arithmatex">\(dfn_i\)</span> 表示 <span class="arithmatex">\(i\)</span> 被访问的时间戳，易证对于任意一条垂直的树链，<span class="arithmatex">\(dfn\)</span> 单调递增。然后定义 <span class="arithmatex">\(low_i\)</span> 为 <span class="arithmatex">\(i\)</span> 经过<strong>至多一条</strong>返祖边能到达的时间戳最小结点。</p>
+<p>那么上面的条件就是 <span class="arithmatex">\(low_v\ge dfn_u\)</span>（<span class="arithmatex">\(v\)</span> 是 <span class="arithmatex">\(u\)</span> 的一个儿子），而如果我们规定 <span class="arithmatex">\(low\)</span> 数组可以通过父边向上（这样实现也会更方便），那么就有一个更强的性质：<span class="arithmatex">\(low_v=dfn_u\)</span>。更准确的说，对于一条树边 <span class="arithmatex">\(u\to v\)</span>，两点 <span class="arithmatex">\(u,v\)</span> 在同一个点双中，且 <span class="arithmatex">\(u\)</span> 是这个点双中最浅的结点当且仅当 <span class="arithmatex">\(low_v=dfn_u\)</span>。</p>
+<p>那么我们可以在 DFS 的过程中确定哪些地方存在点双，但是还不能准确确定一个点双所包含的点集。其实这并不难处理，我们可以在 DFS 过程中维护一个栈，存储还未确定所属点双的节点（一个结点可能所属多个点双，只有在全部确定时才会弹出）。在找到点双时，点双中除了 <span class="arithmatex">\(u\)</span> 以外的其他的点都集中在栈顶端，并且由于是回溯时才处理的这些点，它们的出边必定都被考虑过了，那么它们的所属点双必定全都确定，所以只需要不断弹栈直到弹出 <span class="arithmatex">\(v\)</span> 为止即可。在弹出时可以直接向点双对应的方点连边，为方便实现，我们可以将方点的序号从 <span class="arithmatex">\(n+1\)</span> 开始计数，注意最后需要让 <span class="arithmatex">\(u\)</span> 和对应方点连边，但是不用弹出。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">e</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">e2</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
@@ -6116,8 +6144,8 @@
 <h4 id="_8">例题</h4>
 <details>
 <summary><a href="https://www.luogu.com.cn/problem/P4630">P4630 [APIO2018] 铁人两项</a></summary>
-<p>题意就是统计所有点对 $(s,t)$，它们之间的所有简单路径点集并（不算端点）的大小之和。</p>
-<p>那么显然简单路径点集并的大小就是圆方树中路径上的所有点双大小之和。然后简单容斥可以得到方点点权取点双大小，圆点点权取 $-1$，然后统计树上路径点权和即可。对于统计所有点对，可以统一每个点产生了多少次贡献。这个比较简单。</p>
+<p>题意就是统计所有点对 <span class="arithmatex">\((s,t)\)</span>，它们之间的所有简单路径点集并（不算端点）的大小之和。</p>
+<p>那么显然简单路径点集并的大小就是圆方树中路径上的所有点双大小之和。然后简单容斥可以得到方点点权取点双大小，圆点点权取 <span class="arithmatex">\(-1\)</span>，然后统计树上路径点权和即可。对于统计所有点对，可以统一每个点产生了多少次贡献。这个比较简单。</p>
 <details class="success" open="open">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6203,8 +6231,8 @@
 </details>
 <details>
 <summary><a href="https://www.luogu.com.cn/problem/CF487E">CF487E Tourists</a></summary>
-<p>题意就是有两个操作，一个是修改点权，另一个是查询以 $s$ 开头 $t$ 结尾的所有简单路径上点权最小值。</p>
-<p>那么还是用圆方树，然后用 <code>multiset</code> 维护每个方点所有儿子的最小值，树剖维护路径上方点即可，注意特判 $\mathrm{lca}$ 的父亲。</p>
+<p>题意就是有两个操作，一个是修改点权，另一个是查询以 <span class="arithmatex">\(s\)</span> 开头 <span class="arithmatex">\(t\)</span> 结尾的所有简单路径上点权最小值。</p>
+<p>那么还是用圆方树，然后用 <code>multiset</code> 维护每个方点所有儿子的最小值，树剖维护路径上方点即可，注意特判 <span class="arithmatex">\(\mathrm{lca}\)</span> 的父亲。</p>
 <p>对于为什么只维护儿子的最小值，因为一个原点周围可能有很多个方点，如果维护整个点双的最小值复杂度会寄。</p>
 <details class="success" open="open">
 <summary>参考代码</summary>
@@ -6380,8 +6408,8 @@
 <p>和点双一样，把所有“点不重复”换成“边不重复”即可，这在一些“每条边只能用一次”的问题中可能会很有用。</p>
 <h3 id="_12">边双缩点及其求法</h3>
 <p>由于边双连通性对于点是有传递性的，所有任意两个边双不可能共用点。那么我们就可以把一个边双缩成一个点，这就是边双缩点。</p>
-<p>$dfn,low$ 两数组的定义和之前一样，但这里的 $low$ 不能通过父边向上，但是又由于有些时候存在重边，所以实现比较麻烦。</p>
-<p>然后容易发现，对于一个点 $u$，若 $low_u=dfn_u$，说明 $u$ 是某个边双中最浅的点，然后类似地可以用栈维护。</p>
+<p><span class="arithmatex">\(dfn,low\)</span> 两数组的定义和之前一样，但这里的 <span class="arithmatex">\(low\)</span> 不能通过父边向上，但是又由于有些时候存在重边，所以实现比较麻烦。</p>
+<p>然后容易发现，对于一个点 <span class="arithmatex">\(u\)</span>，若 <span class="arithmatex">\(low_u=dfn_u\)</span>，说明 <span class="arithmatex">\(u\)</span> 是某个边双中最浅的点，然后类似地可以用栈维护。</p>
 <details class="success">
 <summary>参考代码</summary>
 <p>其实这份代码貌似是直接抄了我自己的强连通分量板子，写的比较早，马蜂可能和现在略有差别。</p>

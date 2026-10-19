@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5849,10 +5877,10 @@
 <p><a href="https://acm.timus.ru/problem.aspx?space=1&amp;num=1128">原题链接</a></p>
 <p>考虑一个贪心，先把所有人放在一队，每次从两队中随便选一个不合法的放到另一队，直到选不出为止。</p>
 <p>这个贪心为什么是对的？</p>
-<p>首先边数是 $O(n)$ 级别的（大前提）。</p>
+<p>首先边数是 <span class="arithmatex">\(O(n)\)</span> 级别的（大前提）。</p>
 <p>然后假如一个点不合法说明它连了至少两条边，放到另一队里至多增加一条边，会使得总边数至少减一。</p>
-<p>最终一定会减到合法为止，且最多需要减 $O(n)$ 次。假如暴力找不合法的就是 $O(n^2)$，可以通过。</p>
-<p>据说还有神秘做法可以 $O(1)$ 查找不合法，复杂度就是线性的，但我不会，讲题的也没讲。</p>
+<p>最终一定会减到合法为止，且最多需要减 <span class="arithmatex">\(O(n)\)</span> 次。假如暴力找不合法的就是 <span class="arithmatex">\(O(n^2)\)</span>，可以通过。</p>
+<p>据说还有神秘做法可以 <span class="arithmatex">\(O(1)\)</span> 查找不合法，复杂度就是线性的，但我不会，讲题的也没讲。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5925,10 +5953,10 @@
 </details>
 <h2 id="day-3-t4">Day 3 模拟赛 T4</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF283E">原题传送门</a></p>
-<p>发现正着做不太好做，考虑反着求不满足 $a \to b \to c \to a$ 的三元组个数。</p>
-<p>由于是个比赛图，所以不满足的三元组必定是 $a \to b,a \to c,b\to c/c \to b$。</p>
+<p>发现正着做不太好做，考虑反着求不满足 <span class="arithmatex">\(a \to b \to c \to a\)</span> 的三元组个数。</p>
+<p>由于是个比赛图，所以不满足的三元组必定是 <span class="arithmatex">\(a \to b,a \to c,b\to c/c \to b\)</span>。</p>
 <p>换句话说，在一个点指向的点中随便选两个都不合法。</p>
-<p>然后就很简单了，线段树维护每个点在修改后的出边个数。具体来说，假如不修改，那么出边个数就是比它小的数的个数。然后开一棵线段树维护区间异或 $1$，区间求和即可。结合双指针复杂度 $O(n\log n+m)$。</p>
+<p>然后就很简单了，线段树维护每个点在修改后的出边个数。具体来说，假如不修改，那么出边个数就是比它小的数的个数。然后开一棵线段树维护区间异或 <span class="arithmatex">\(1\)</span>，区间求和即可。结合双指针复杂度 <span class="arithmatex">\(O(n\log n+m)\)</span>。</p>
 <p>然后组合数求解即可。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6034,8 +6062,8 @@
 <h2 id="agc030d-inversion-sum">[AGC030D] Inversion Sum</h2>
 <p><a href="https://www.luogu.com.cn/problem/AT_agc030_d">传送门</a></p>
 <p>直接做完全没思路。这种情况有个套路，就是转化成期望 DP 再最终乘以某个数，利用期望的线性性求解。</p>
-<p>设 $dp_{p,i,j}$ 表示考虑前 $p$ 个操作，假设每个操作有 $\frac{1}{2}$ 的概率不进行，$a_i&gt;a_j$ 的概率是多少。转移是简单的，先计算 $dp_{p,x_p,y_p}$ 和 $$dp_{p,y_p,x_p}，然后直接枚举除去这一步交换的两个位置以外的其它位置，由于这一步只有 $x_p,y_p$ 可能变化，所以只有 $O(n)$ 的状态会变化。最终统计 $i&gt;j,a_i&lt;a_j$ 的二元组 $(i,j)$ 个数，乘以 $2^Q$ 即可。</p>
-<p>然后可以把 $p$ 这一维压掉。</p>
+<p>设 <span class="arithmatex">\(dp_{p,i,j}\)</span> 表示考虑前 <span class="arithmatex">\(p\)</span> 个操作，假设每个操作有 <span class="arithmatex">\(\frac{1}{2}\)</span> 的概率不进行，<span class="arithmatex">\(a_i&gt;a_j\)</span> 的概率是多少。转移是简单的，先计算 <span class="arithmatex">\(dp_{p,x_p,y_p}\)</span> 和 $<span class="arithmatex">\(dp_{p,y_p,x_p}，然后直接枚举除去这一步交换的两个位置以外的其它位置，由于这一步只有 \)</span>x_p,y_p<span class="arithmatex">\( 可能变化，所以只有 \)</span>O(n)<span class="arithmatex">\( 的状态会变化。最终统计 \)</span>i&gt;j,a_i&lt;a_j<span class="arithmatex">\( 的二元组 \)</span>(i,j)<span class="arithmatex">\( 个数，乘以 \)</span>2^Q$ 即可。</p>
+<p>然后可以把 <span class="arithmatex">\(p\)</span> 这一维压掉。</p>
 <p>这道题主要难在不知道套路一点思路都想不出来。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6088,19 +6116,19 @@
 <h2 id="p9197-joi-open-2016">P9197 [JOI Open 2016] 摩天大楼</h2>
 <p><a href="https://www.luogu.com.cn/problem/P9197">传送门</a></p>
 <p>很有意思的一道题，第一步的转化很巧妙。</p>
-<p>首先从 $f$ 的顺序角度考虑显然是不可做的，考虑把所有数拍在一个二维平面上。</p>
+<p>首先从 <span class="arithmatex">\(f\)</span> 的顺序角度考虑显然是不可做的，考虑把所有数拍在一个二维平面上。</p>
 <p><img alt="图示 1" src="../../img/2023NanJIng_1.png" /></p>
 <p>那么其实就是要求折线总纵向长度。</p>
 <p>那么考虑从上到下用一个类似扫描线的东西。发现只要知道之前有几段连续的，下一层的贡献其实是唯一确定的。</p>
 <p><img alt="图示 2" src="../../img/2023NanJIng_2.png" /></p>
-<p>上图中这一层有 $5\times (f_4-f_3)$ 的贡献，因为右侧已经到头了。</p>
-<p>那么考虑排降序后 DP，设 $dp_{i,j,k,0/1,0/1}$ 表示放入（排序后）前 $i$ 个，分了 $j$ 个连续段，总和为 $k$，左/右有没有抵到边界的方案数。转移就分三种情况考虑：</p>
+<p>上图中这一层有 <span class="arithmatex">\(5\times (f_4-f_3)\)</span> 的贡献，因为右侧已经到头了。</p>
+<p>那么考虑排降序后 DP，设 <span class="arithmatex">\(dp_{i,j,k,0/1,0/1}\)</span> 表示放入（排序后）前 <span class="arithmatex">\(i\)</span> 个，分了 <span class="arithmatex">\(j\)</span> 个连续段，总和为 <span class="arithmatex">\(k\)</span>，左/右有没有抵到边界的方案数。转移就分三种情况考虑：</p>
 <ol>
 <li>新开一段。</li>
 <li>并入之前的某一段。</li>
 <li>合并原先的两段。</li>
 </ol>
-<p>具体方程略。最后答案就是 $\sum_{i=0}^kdp_{n,1,i,1,1}$。</p>
+<p>具体方程略。最后答案就是 <span class="arithmatex">\(\sum_{i=0}^kdp_{n,1,i,1,1}\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6168,17 +6196,17 @@
 <h2 id="agc033d-complexity">[AGC033D] Complexity</h2>
 <p><a href="https://www.luogu.com.cn/problem/AT_agc033_d">传送门</a></p>
 <p>貌似是很经典的一道套路题。</p>
-<p>首先 $O(n^5)$ 的记忆化搜索很简单，不多讲了。设状态 $f_{x_1,y_1,x_2,y_2}$ 表示左上角为 $(x_1,y_1)$，右下角为 $(x_2,y_2)$ 的矩形的复杂度。这种情况状态是 $O(n^4)$ 级别的，考虑先想办法压一维状态，然后把转移控制在大约 $\log$ 的复杂度内。</p>
-<p>首先考虑最坏情况，即要把整个矩阵剁成一格一格的臊子。发现此时答案为 $\left\lceil\log n\right\rceil+\left\lceil\log m\right\rceil\le 20$。</p>
+<p>首先 <span class="arithmatex">\(O(n^5)\)</span> 的记忆化搜索很简单，不多讲了。设状态 <span class="arithmatex">\(f_{x_1,y_1,x_2,y_2}\)</span> 表示左上角为 <span class="arithmatex">\((x_1,y_1)\)</span>，右下角为 <span class="arithmatex">\((x_2,y_2)\)</span> 的矩形的复杂度。这种情况状态是 <span class="arithmatex">\(O(n^4)\)</span> 级别的，考虑先想办法压一维状态，然后把转移控制在大约 <span class="arithmatex">\(\log\)</span> 的复杂度内。</p>
+<p>首先考虑最坏情况，即要把整个矩阵剁成一格一格的臊子。发现此时答案为 <span class="arithmatex">\(\left\lceil\log n\right\rceil+\left\lceil\log m\right\rceil\le 20\)</span>。</p>
 <p>那么发现答案的级别很小，考虑把答案和状态的某一维交换。</p>
-<p>具体来说，设 $f_{x_1,x_2,y,c}$ 表示矩阵左边为一条从 $(x_1,y)$ 到 $(x_2,y)$ 的线段，复杂度为 $c$ 的矩阵右边缘最多延伸到多远（我定义的是左闭右闭区间，貌似左闭右开会好写一点）。</p>
+<p>具体来说，设 <span class="arithmatex">\(f_{x_1,x_2,y,c}\)</span> 表示矩阵左边为一条从 <span class="arithmatex">\((x_1,y)\)</span> 到 <span class="arithmatex">\((x_2,y)\)</span> 的线段，复杂度为 <span class="arithmatex">\(c\)</span> 的矩阵右边缘最多延伸到多远（我定义的是左闭右闭区间，貌似左闭右开会好写一点）。</p>
 <p>那么转移分两种，横着切的转移和竖着切的转移。</p>
-<p>首先是竖着切的转移，由于切一刀只会增加 $1$ 复杂度，所以转移和倍增类似，即：</p>
-<p>$$dp_{x_1,x_2,y,c}=dp_{x_1,x_2,dp_{x_1,x_2,y,c-1}+1,c-1}$$</p>
+<p>首先是竖着切的转移，由于切一刀只会增加 <span class="arithmatex">\(1\)</span> 复杂度，所以转移和倍增类似，即：</p>
+<div class="arithmatex">\[dp_{x_1,x_2,y,c}=dp_{x_1,x_2,dp_{x_1,x_2,y,c-1}+1,c-1}\]</div>
 <p>然后考虑横着切的转移，发现其实就是要求这个式子（类似于区间 DP）：</p>
-<p>$$dp_{x_1,x_2,y,c}=\max_{mid=x_1}^{x_2}\begin{Bmatrix}\min(dp_{x_1,mid,y,c-1},dp_{mid+1,x_2,y,c-1})\end{Bmatrix}$$</p>
-<p>容易发现 $dp_{x_1,mid,y,c-1}$ 随着 $mid$ 的增加单调不增，$dp_{mid+1,x_2,y,c-1}$ 随着 $mid$ 增加单调不减，那么在它们取等的时候显然 $\min(dp_{x_1,mid,y,c-1},dp_{mid+1,x_2,y,c-1})$ 取到最大值，我们可以二分这个点。</p>
-<p>复杂度 $O(n^2m(\log n+\log m)\log n)$ 带小常数，随便过。</p>
+<div class="arithmatex">\[dp_{x_1,x_2,y,c}=\max_{mid=x_1}^{x_2}\begin{Bmatrix}\min(dp_{x_1,mid,y,c-1},dp_{mid+1,x_2,y,c-1})\end{Bmatrix}\]</div>
+<p>容易发现 <span class="arithmatex">\(dp_{x_1,mid,y,c-1}\)</span> 随着 <span class="arithmatex">\(mid\)</span> 的增加单调不增，<span class="arithmatex">\(dp_{mid+1,x_2,y,c-1}\)</span> 随着 <span class="arithmatex">\(mid\)</span> 增加单调不减，那么在它们取等的时候显然 <span class="arithmatex">\(\min(dp_{x_1,mid,y,c-1},dp_{mid+1,x_2,y,c-1})\)</span> 取到最大值，我们可以二分这个点。</p>
+<p>复杂度 <span class="arithmatex">\(O(n^2m(\log n+\log m)\log n)\)</span> 带小常数，随便过。</p>
 <p>/// details | 参考代码
     oprn: False
     type: success</p>

@@ -1058,6 +1058,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5738,56 +5766,56 @@
 <h1 id="_1">平面图性质</h1>
 <h2 id="_2">前言</h2>
 <p>平面图感觉用的很少啊。但是真考到了不会就是不会，怎么办嘛。</p>
-<p>如果图 $G$ 能画在平面 $S$ 上，即除顶点处外无边相交，则称 $G$ 可平面嵌入 $S$，$G$ 为可平面图或平面图。画出的没有边相交的图称为 $G$ 的平面表示或平面嵌入。</p>
+<p>如果图 <span class="arithmatex">\(G\)</span> 能画在平面 <span class="arithmatex">\(S\)</span> 上，即除顶点处外无边相交，则称 <span class="arithmatex">\(G\)</span> 可平面嵌入 <span class="arithmatex">\(S\)</span>，<span class="arithmatex">\(G\)</span> 为可平面图或平面图。画出的没有边相交的图称为 <span class="arithmatex">\(G\)</span> 的平面表示或平面嵌入。</p>
 <p>一般来说很少遇到题上直接说是“平面图”的情况。但是当题目给定一“网格图”时，你可能就需要考虑这些性质了。</p>
-<p>设 $G$ 是平面图，由 $G$ 的边将 $G$ 所在的平面划分成若干个区域，每个区域称为 $G$ 的一个面，其中面积无限的面称为无限面或外部面，面积有限的称为有限面或内部面。包围每个面的所有边组成的回路称为该面的边界，边界的长度称为该面的次数。</p>
-<p>平面图中所有面的次数之和等于边数 $E$ 的 $2$ 倍（这个显然吧，每条边会增加两个面的次数）。</p>
+<p>设 <span class="arithmatex">\(G\)</span> 是平面图，由 <span class="arithmatex">\(G\)</span> 的边将 <span class="arithmatex">\(G\)</span> 所在的平面划分成若干个区域，每个区域称为 <span class="arithmatex">\(G\)</span> 的一个面，其中面积无限的面称为无限面或外部面，面积有限的称为有限面或内部面。包围每个面的所有边组成的回路称为该面的边界，边界的长度称为该面的次数。</p>
+<p>平面图中所有面的次数之和等于边数 <span class="arithmatex">\(E\)</span> 的 <span class="arithmatex">\(2\)</span> 倍（这个显然吧，每条边会增加两个面的次数）。</p>
 <p>看了眼 OI wiki 感觉就下面这两个东西可能考到啊。</p>
 <h2 id="_3">平面图的欧拉公式</h2>
 <p>这个可以用于判断某些具有特殊性质的平面图连通块数量。</p>
-<p>公式内容很简单，对于一个连通的有至少一个点的平面图，$V+F-E=2$，其中 $V$ 是图中点的个数，$F$ 是面的个数，$E$ 是边的个数。</p>
+<p>公式内容很简单，对于一个连通的有至少一个点的平面图，<span class="arithmatex">\(V+F-E=2\)</span>，其中 <span class="arithmatex">\(V\)</span> 是图中点的个数，<span class="arithmatex">\(F\)</span> 是面的个数，<span class="arithmatex">\(E\)</span> 是边的个数。</p>
 <ul>
 <li>证明</li>
 </ul>
-<p>首先考虑单个点，显然 $V+F-E=2$(因为本来平面就是一个面)。</p>
-<p>而考虑加一条边，容易发现一条边必定使点数 $+1$（直接新建一个点连过去）或使面数 $+1$（将两个点连起来，不能与其它边相交），那么显然上式的值是不会变的。</p>
+<p>首先考虑单个点，显然 <span class="arithmatex">\(V+F-E=2\)</span>(因为本来平面就是一个面)。</p>
+<p>而考虑加一条边，容易发现一条边必定使点数 <span class="arithmatex">\(+1\)</span>（直接新建一个点连过去）或使面数 <span class="arithmatex">\(+1\)</span>（将两个点连起来，不能与其它边相交），那么显然上式的值是不会变的。</p>
 <ul>
 <li>推论：</li>
 </ul>
 <blockquote>
-<p>对于有 $p$ 个连通块的平面图，有 $V+F-E=p+1$。</p>
+<p>对于有 <span class="arithmatex">\(p\)</span> 个连通块的平面图，有 <span class="arithmatex">\(V+F-E=p+1\)</span>。</p>
 </blockquote>
 <p>这个根据刚才的证明过程显然。</p>
 <blockquote>
-<p>设 $G$ 是 $V \ge 3$ 阶 $E$ 条边的简单平面图，则 $E \le 3V-6$</p>
+<p>设 <span class="arithmatex">\(G\)</span> 是 <span class="arithmatex">\(V \ge 3\)</span> 阶 <span class="arithmatex">\(E\)</span> 条边的简单平面图，则 <span class="arithmatex">\(E \le 3V-6\)</span></p>
 </blockquote>
-<p>容易发现任意闭合的面次数都至少为 $3$，而次数之和为 $2E$。则有 $3F\le 2E$。带入平面图欧拉公式即可得到 $E\le 3V-6$。</p>
+<p>容易发现任意闭合的面次数都至少为 <span class="arithmatex">\(3\)</span>，而次数之和为 <span class="arithmatex">\(2E\)</span>。则有 <span class="arithmatex">\(3F\le 2E\)</span>。带入平面图欧拉公式即可得到 <span class="arithmatex">\(E\le 3V-6\)</span>。</p>
 <h2 id="_4">对偶图</h2>
-<p>设 $G$ 是平面图的某一个平面嵌入，构造图 $G'$：</p>
+<p>设 <span class="arithmatex">\(G\)</span> 是平面图的某一个平面嵌入，构造图 <span class="arithmatex">\(G'\)</span>：</p>
 <ul>
-<li>在 $G$ 的每个面 $R_i$ 中放置 $G'$ 的一个顶点 $v'$</li>
-<li>设 $e$ 为 $G$ 的一条边，若 $e$ 在 $G$ 的面 $f_i$ 和 $f_j$ 的公共边界上，做 $G'$ 的边 $e'$ 与 $e$ 相交，且 $e'$ 关联 $G'$ 的顶点 $v_i',v_j'$，即 $e'=(v_i', v_j')$，$e'$ 不与其他任何边相交。若 $e$ 为 $G$ 中桥且在 $f_i$ 的边界上，则 $e'$ 是以 $f_i$ 中顶点 $v_i'$ 为端点的环，即 $e'=(v_i',v_i')$。</li>
+<li>在 <span class="arithmatex">\(G\)</span> 的每个面 <span class="arithmatex">\(R_i\)</span> 中放置 <span class="arithmatex">\(G'\)</span> 的一个顶点 <span class="arithmatex">\(v'\)</span></li>
+<li>设 <span class="arithmatex">\(e\)</span> 为 <span class="arithmatex">\(G\)</span> 的一条边，若 <span class="arithmatex">\(e\)</span> 在 <span class="arithmatex">\(G\)</span> 的面 <span class="arithmatex">\(f_i\)</span> 和 <span class="arithmatex">\(f_j\)</span> 的公共边界上，做 <span class="arithmatex">\(G'\)</span> 的边 <span class="arithmatex">\(e'\)</span> 与 <span class="arithmatex">\(e\)</span> 相交，且 <span class="arithmatex">\(e'\)</span> 关联 <span class="arithmatex">\(G'\)</span> 的顶点 <span class="arithmatex">\(v_i',v_j'\)</span>，即 <span class="arithmatex">\(e'=(v_i', v_j')\)</span>，<span class="arithmatex">\(e'\)</span> 不与其他任何边相交。若 <span class="arithmatex">\(e\)</span> 为 <span class="arithmatex">\(G\)</span> 中桥且在 <span class="arithmatex">\(f_i\)</span> 的边界上，则 <span class="arithmatex">\(e'\)</span> 是以 <span class="arithmatex">\(f_i\)</span> 中顶点 <span class="arithmatex">\(v_i'\)</span> 为端点的环，即 <span class="arithmatex">\(e'=(v_i',v_i')\)</span>。</li>
 </ul>
-<p>称 $G'$ 为 $G$ 的对偶图。</p>
+<p>称 <span class="arithmatex">\(G'\)</span> 为 <span class="arithmatex">\(G\)</span> 的对偶图。</p>
 <p>举例（图源下文“参考资料”）：</p>
 <p><img alt="图示 1" src="../../../img/planar_graph_1.png" /></p>
 <h3 id="_5">性质</h3>
 <ol>
-<li>$G'$ 为平面图，且是平面嵌入。</li>
-<li>$G$ 中自环在 $G'$ 中对应桥，$G$ 中桥在 $G'$ 中对应自环。</li>
-<li>$G'$ 是连通的。</li>
-<li>若 $G$ 的面 $f_i,f_j$ 的边界上至少有两条公共边，则关联 $v_i',v_j'$ 的边有重边。</li>
+<li><span class="arithmatex">\(G'\)</span> 为平面图，且是平面嵌入。</li>
+<li><span class="arithmatex">\(G\)</span> 中自环在 <span class="arithmatex">\(G'\)</span> 中对应桥，<span class="arithmatex">\(G\)</span> 中桥在 <span class="arithmatex">\(G'\)</span> 中对应自环。</li>
+<li><span class="arithmatex">\(G'\)</span> 是连通的。</li>
+<li>若 <span class="arithmatex">\(G\)</span> 的面 <span class="arithmatex">\(f_i,f_j\)</span> 的边界上至少有两条公共边，则关联 <span class="arithmatex">\(v_i',v_j'\)</span> 的边有重边。</li>
 <li>同构的图的对偶图不一定是同构的。</li>
-<li>$G''$ 与 $G$ 同构当且仅当 $G$ 是连通图。</li>
-<li>$G,G'$ 边数相同，$G$ 的面数等于 $G'$ 的点数。$G$ 的点数等于 $G'$ 的面数。</li>
+<li><span class="arithmatex">\(G''\)</span> 与 <span class="arithmatex">\(G\)</span> 同构当且仅当 <span class="arithmatex">\(G\)</span> 是连通图。</li>
+<li><span class="arithmatex">\(G,G'\)</span> 边数相同，<span class="arithmatex">\(G\)</span> 的面数等于 <span class="arithmatex">\(G'\)</span> 的点数。<span class="arithmatex">\(G\)</span> 的点数等于 <span class="arithmatex">\(G'\)</span> 的面数。</li>
 </ol>
 <h3 id="_6">网络流</h3>
 <p><a href="https://www.doc88.com/p-3058242215674.html">参考资料</a></p>
 <p>那么平面图是怎么和网络流扯上关系的呢？</p>
-<p>容易发现 $G'$ 中任意一个环都能把 $G$ 的点集分成不交的两份。这和<strong>割</strong>的定义十分有关。</p>
-<p>假设我们有一个有源汇平面图网络 $G$，记源点为 $s$，汇点为 $t$。假如我们能找到一个平面嵌入，使得 $s,t$ 均暴露在外部平面中（其实只要与同一个面相邻就行了）。这时候我们连一条连接 $s,t$ 的虚边得到 $G_{\ast}$。这条边显然会把外部平面分成两块，容易发现 $G_{\ast}'$ 中包含这两个面（它们在 $G_{\ast}'$ 中是点）的环与 $s,t$ 的割一一对应！</p>
-<p>那么更进一步的，我们给 $G_{\ast}'$ 中的边赋权值等于与其相交的边容量（对于朝向问题，这个要根据具体题目来）。容易发现这样得出的那两个面之间的最短路就是原图的最小割。</p>
-<p>于是就能 $O(n\log n)$ 地求出最小割了。</p>
+<p>容易发现 <span class="arithmatex">\(G'\)</span> 中任意一个环都能把 <span class="arithmatex">\(G\)</span> 的点集分成不交的两份。这和<strong>割</strong>的定义十分有关。</p>
+<p>假设我们有一个有源汇平面图网络 <span class="arithmatex">\(G\)</span>，记源点为 <span class="arithmatex">\(s\)</span>，汇点为 <span class="arithmatex">\(t\)</span>。假如我们能找到一个平面嵌入，使得 <span class="arithmatex">\(s,t\)</span> 均暴露在外部平面中（其实只要与同一个面相邻就行了）。这时候我们连一条连接 <span class="arithmatex">\(s,t\)</span> 的虚边得到 <span class="arithmatex">\(G_{\ast}\)</span>。这条边显然会把外部平面分成两块，容易发现 <span class="arithmatex">\(G_{\ast}'\)</span> 中包含这两个面（它们在 <span class="arithmatex">\(G_{\ast}'\)</span> 中是点）的环与 <span class="arithmatex">\(s,t\)</span> 的割一一对应！</p>
+<p>那么更进一步的，我们给 <span class="arithmatex">\(G_{\ast}'\)</span> 中的边赋权值等于与其相交的边容量（对于朝向问题，这个要根据具体题目来）。容易发现这样得出的那两个面之间的最短路就是原图的最小割。</p>
+<p>于是就能 <span class="arithmatex">\(O(n\log n)\)</span> 地求出最小割了。</p>
 <p>例题：<a href="https://www.luogu.com.cn/problem/P2046">P2046 [NOI2010] 海拔</a></p>
 <details class="example">
 <summary>题解</summary>
@@ -5795,19 +5823,19 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一 $(n+1)\times (n+1)$ 的网格图，每条边有边权，且每条边与其反向边边权不一定相同。</li>
-<li>你需要给每个点实数赋点权 $h_i$，每条有向边 $(u\to v,w)$ 会产生 $\max(0,h_v-h_u)\times w$ 的贡献。初始最左上角点权为 $0$，最左下角为 $1$。</li>
+<li>给定一 <span class="arithmatex">\((n+1)\times (n+1)\)</span> 的网格图，每条边有边权，且每条边与其反向边边权不一定相同。</li>
+<li>你需要给每个点实数赋点权 <span class="arithmatex">\(h_i\)</span>，每条有向边 <span class="arithmatex">\((u\to v,w)\)</span> 会产生 <span class="arithmatex">\(\max(0,h_v-h_u)\times w\)</span> 的贡献。初始最左上角点权为 <span class="arithmatex">\(0\)</span>，最左下角为 <span class="arithmatex">\(1\)</span>。</li>
 <li>最小化贡献和，输出答案四舍五入到整数。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>容易发现 $h_i$ 取值只取 $0,1$ 是不劣的。证明考虑调整法，此处略。</p>
+<p>容易发现 <span class="arithmatex">\(h_i\)</span> 取值只取 <span class="arithmatex">\(0,1\)</span> 是不劣的。证明考虑调整法，此处略。</p>
 <p>那么这道题就是求平面图最小割，考虑转化对偶图最短路。那么思考如何给边赋权。</p>
 <p>考虑这么一个割：</p>
 <p><img alt="图示 2" src="../../../img/planar_graph_2.png" /></p>
-<p>注意到每条割边的贡献是它从 $S$ 到 $T$ 这个方向的边权。假如最短路按箭头方向走，容易发现原图上对应边顺时针转 $90^{\circ}$ 即得到对偶图对应边边权。</p>
-<p>于是做完了，复杂度 $O(n^2\log n)$。</p>
+<p>注意到每条割边的贡献是它从 <span class="arithmatex">\(S\)</span> 到 <span class="arithmatex">\(T\)</span> 这个方向的边权。假如最短路按箭头方向走，容易发现原图上对应边顺时针转 <span class="arithmatex">\(90^{\circ}\)</span> 即得到对偶图对应边边权。</p>
+<p>于是做完了，复杂度 <span class="arithmatex">\(O(n^2\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

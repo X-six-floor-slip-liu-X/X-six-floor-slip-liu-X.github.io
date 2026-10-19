@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6017,26 +6045,26 @@
 <p>复数（请移步高中必修二或 <a href="https://oi-wiki.org/math/complex/">OI wiki</a>）。</p>
 <p>初中范围的多项式。</p>
 <h2 id="_1">符号与约定</h2>
-<p>为了好看（以及好写），用 $\langle a_0,a_1,a_2,\dots a_n\rangle$ 表示一个有序 $n$ 元组，也用这个表示数列（某种意义上，数列也是有序 $n$ 元组吧）。</p>
-<p>$a\mid b$ 表示存在整数 $k$ 使得 $ak=b$。</p>
+<p>为了好看（以及好写），用 <span class="arithmatex">\(\langle a_0,a_1,a_2,\dots a_n\rangle\)</span> 表示一个有序 <span class="arithmatex">\(n\)</span> 元组，也用这个表示数列（某种意义上，数列也是有序 <span class="arithmatex">\(n\)</span> 元组吧）。</p>
+<p><span class="arithmatex">\(a\mid b\)</span> 表示存在整数 <span class="arithmatex">\(k\)</span> 使得 <span class="arithmatex">\(ak=b\)</span>。</p>
 <h2 id="_2">单位根</h2>
 <p>前置知识：复数。</p>
-<p>众所周知，任意一元 $n$ 次方程必有 $n$ 个根。只是初中范围（以及高中“复数”这一章以外）内只研究实根，而在遇到 $\sqrt{-a}$ 之类的东西都会直接省去。实际上这是能产生复数根的。</p>
-<p>考虑 $x^n=1$ 这个方程。由于复数的运算法则（模长相乘，辐角相加），显然这 $n$ 个解恰好把复平面单位圆均分成 $n$ 份（即辐角分别为 $\frac{2k\pi}{n},k\in[0,n-1]$）。我们称 $x^n=1$ 的根为 $n$ 次单位根，记除去 $1$ 之外辐角最小的 $n$ 次单位根为 $\omega_n$（<code>\omega_n</code>），显然其它单位根就是 $\omega_n^i$。</p>
+<p>众所周知，任意一元 <span class="arithmatex">\(n\)</span> 次方程必有 <span class="arithmatex">\(n\)</span> 个根。只是初中范围（以及高中“复数”这一章以外）内只研究实根，而在遇到 <span class="arithmatex">\(\sqrt{-a}\)</span> 之类的东西都会直接省去。实际上这是能产生复数根的。</p>
+<p>考虑 <span class="arithmatex">\(x^n=1\)</span> 这个方程。由于复数的运算法则（模长相乘，辐角相加），显然这 <span class="arithmatex">\(n\)</span> 个解恰好把复平面单位圆均分成 <span class="arithmatex">\(n\)</span> 份（即辐角分别为 <span class="arithmatex">\(\frac{2k\pi}{n},k\in[0,n-1]\)</span>）。我们称 <span class="arithmatex">\(x^n=1\)</span> 的根为 <span class="arithmatex">\(n\)</span> 次单位根，记除去 <span class="arithmatex">\(1\)</span> 之外辐角最小的 <span class="arithmatex">\(n\)</span> 次单位根为 <span class="arithmatex">\(\omega_n\)</span>（<code>\omega_n</code>），显然其它单位根就是 <span class="arithmatex">\(\omega_n^i\)</span>。</p>
 <p>单位根有三个比较显然的引理：</p>
 <ol>
-<li>消去引理：$\omega_{kn}^{km}=\omega_n^m$，根据单位根几何意义显然。</li>
-<li>折半引理：$\left(\omega_{n}^{k+\frac{n}{2}}\right)^2=\left(\omega_{n}^k\right)^2=\omega_{n}^{2k}=\omega_{\frac{n}{2}}^k$，这个只在 $n$ 为偶数时成立，带消去引理即可。</li>
-<li>求和引理：$\sum_{i=0}^{n-1} \left(\omega_n^k\right)^i = 0$，这玩意显然就等于 $\sum_{i=0}^{n-1} \omega_n^i$，是一个等比数列求和，答案即为 $\frac{\omega_n^n-1}{\omega_n^1-1}=\frac{1-1}{\omega_n^1-1}=0$。</li>
+<li>消去引理：<span class="arithmatex">\(\omega_{kn}^{km}=\omega_n^m\)</span>，根据单位根几何意义显然。</li>
+<li>折半引理：<span class="arithmatex">\(\left(\omega_{n}^{k+\frac{n}{2}}\right)^2=\left(\omega_{n}^k\right)^2=\omega_{n}^{2k}=\omega_{\frac{n}{2}}^k\)</span>，这个只在 <span class="arithmatex">\(n\)</span> 为偶数时成立，带消去引理即可。</li>
+<li>求和引理：<span class="arithmatex">\(\sum_{i=0}^{n-1} \left(\omega_n^k\right)^i = 0\)</span>，这玩意显然就等于 <span class="arithmatex">\(\sum_{i=0}^{n-1} \omega_n^i\)</span>，是一个等比数列求和，答案即为 <span class="arithmatex">\(\frac{\omega_n^n-1}{\omega_n^1-1}=\frac{1-1}{\omega_n^1-1}=0\)</span>。</li>
 </ol>
-<p>另外根据三角函数基础，显然 $\omega_n=\cos(\frac{2\pi}{n})+\sin(\frac{2\pi}{n})i$。</p>
+<p>另外根据三角函数基础，显然 <span class="arithmatex">\(\omega_n=\cos(\frac{2\pi}{n})+\sin(\frac{2\pi}{n})i\)</span>。</p>
 <h2 id="_3">多项式</h2>
 <p>前置知识：初中范围的多项式。</p>
-<p>此处只讨论一元 $n$ 次多项式。即 $F(x)=\sum_{i=0}^na_ix^i$。</p>
+<p>此处只讨论一元 <span class="arithmatex">\(n\)</span> 次多项式。即 <span class="arithmatex">\(F(x)=\sum_{i=0}^na_ix^i\)</span>。</p>
 <p>多项式有两种表示方法：</p>
 <ol>
-<li>系数表示：即列举出每一项的系数 $\langle a_0,a_1,\dots a_n\rangle$，其中 $a_i$ 为 $x^i$ 项的系数。</li>
-<li>点值表示：根据经典结论，$n+1$ 个互不相同的点就能确定一个一元 $n$ 次多项式，那么可以用 $\langle(x_0,F(x_0)),(x_1,F(x_1)),(x_2,F(x_2)),\dots (x_{n+1},F(x_{n+1}))\rangle$ 唯一确定一个多项式。并且这个神秘性质在定义域取到复数域，甚至是某个质数的剩余系时仍然成立，我证不来。</li>
+<li>系数表示：即列举出每一项的系数 <span class="arithmatex">\(\langle a_0,a_1,\dots a_n\rangle\)</span>，其中 <span class="arithmatex">\(a_i\)</span> 为 <span class="arithmatex">\(x^i\)</span> 项的系数。</li>
+<li>点值表示：根据经典结论，<span class="arithmatex">\(n+1\)</span> 个互不相同的点就能确定一个一元 <span class="arithmatex">\(n\)</span> 次多项式，那么可以用 <span class="arithmatex">\(\langle(x_0,F(x_0)),(x_1,F(x_1)),(x_2,F(x_2)),\dots (x_{n+1},F(x_{n+1}))\rangle\)</span> 唯一确定一个多项式。并且这个神秘性质在定义域取到复数域，甚至是某个质数的剩余系时仍然成立，我证不来。</li>
 </ol>
 <h2 id="fft">FFT</h2>
 <h3 id="_4">相关概念</h3>
@@ -6044,46 +6072,46 @@
 <li>离散傅里叶变换（Discrete Fourier Transform，DFT），将系数表示转化为某个点值表示的方法（实际定义比较复杂，涉及到一些信号学知识，此处可以这样理解）。</li>
 <li>快速傅里叶变换（即 快速（离散）傅里叶变换，Fast (Discrete) Fourier Transform，FFT），复杂度较低的 DFT。</li>
 </ul>
-<p>下文的 $n$ 均指多项式次数 $+1$（因为 $0$ 次项也要占一个位置，不这样搞会导致有一堆奇怪的 $+1$），称这个数为多项式“项数”。</p>
+<p>下文的 <span class="arithmatex">\(n\)</span> 均指多项式次数 <span class="arithmatex">\(+1\)</span>（因为 <span class="arithmatex">\(0\)</span> 次项也要占一个位置，不这样搞会导致有一堆奇怪的 <span class="arithmatex">\(+1\)</span>），称这个数为多项式“项数”。</p>
 <h3 id="_5">算法引入</h3>
-<p>假如我们要算多项式的积（$H(x)=G(x)\times F(x)$），直接用系数表示做需要 $O(n^2)$ 做。</p>
-<p>但是假如我们知道了 $G$ 和 $F$ 的点值表示，根据 $H(x)=G(x)\times F(x)$，就能 $O(n)$ 求出 $H$ 的点值表示（容易发现 $G,F,H$ 的项数不同，其中 $F$ 为 $n$ 项，$G$ 为 $m$ 项，$H$ 为 $n+m-1$ 项。一个办法是把三者都看成 $n+m$ 项式）。如果我们还有能从点值表示推出系数表示的方法，就能得到 $H(x)$ 的系数表示了。</p>
+<p>假如我们要算多项式的积（<span class="arithmatex">\(H(x)=G(x)\times F(x)\)</span>），直接用系数表示做需要 <span class="arithmatex">\(O(n^2)\)</span> 做。</p>
+<p>但是假如我们知道了 <span class="arithmatex">\(G\)</span> 和 <span class="arithmatex">\(F\)</span> 的点值表示，根据 <span class="arithmatex">\(H(x)=G(x)\times F(x)\)</span>，就能 <span class="arithmatex">\(O(n)\)</span> 求出 <span class="arithmatex">\(H\)</span> 的点值表示（容易发现 <span class="arithmatex">\(G,F,H\)</span> 的项数不同，其中 <span class="arithmatex">\(F\)</span> 为 <span class="arithmatex">\(n\)</span> 项，<span class="arithmatex">\(G\)</span> 为 <span class="arithmatex">\(m\)</span> 项，<span class="arithmatex">\(H\)</span> 为 <span class="arithmatex">\(n+m-1\)</span> 项。一个办法是把三者都看成 <span class="arithmatex">\(n+m\)</span> 项式）。如果我们还有能从点值表示推出系数表示的方法，就能得到 <span class="arithmatex">\(H(x)\)</span> 的系数表示了。</p>
 <p>并且容易发现多项式乘法就是对系数的卷积，那么这玩意还能用来快速求卷积。</p>
 <h3 id="_6">算法流程</h3>
-<p>首先我们肯定不能随便找一些 $x_i$，这样显然不好优化。FFT 干的事情是先找到最小的 $k$ 满足 $2^k\ge n$，把 $n$ 项多项式视为一个 $2^k$ 项多项式，然后用 $\omega_{2^k}^i$ 作为 $x_i$ 来表示点值。下文会叙述为什么要这样搞。</p>
-<p>首先 FFT 的核心思想是分治，对于一个多项式 $F$ 的系数表示 $A=\langle a_0,a_1,a_2,\dots a_{n-1}\rangle$（$n=2^k$），可以把它按奇偶性分成 $A_0=\langle a_0,a_2,a_4,\dots a_{n-2}\rangle$ 和 $A_1=\langle a_1,a_3,a_5,\dots a_{n-1}\rangle$，设这两个系数表示对应的多项式分别为 $F_0,F_1$，容易发现 $F(x)=F_0(x^2)+xF_1(x^2)$（显然）。于是就能想到用 $F_0,F_1$ 的点值表示来算出 $F$ 的点值表示。</p>
-<p>但这里有个问题，$F_0,F_1$ 的点值表示都只有 $\frac{n}{2}$ 个点，这样似乎无论怎么搞都只能得到 $F$ 的 $\frac{n}{2}$ 个点。这时候你就知道为什么要用单位根作为 $x_i$ 了。</p>
-<p>取 $k$ 为某个 $[0,\frac{n}{2})$ 之中的整数，记 $k'=k+\frac{n}{2}$，容易发现：</p>
-<p>$$
+<p>首先我们肯定不能随便找一些 <span class="arithmatex">\(x_i\)</span>，这样显然不好优化。FFT 干的事情是先找到最小的 <span class="arithmatex">\(k\)</span> 满足 <span class="arithmatex">\(2^k\ge n\)</span>，把 <span class="arithmatex">\(n\)</span> 项多项式视为一个 <span class="arithmatex">\(2^k\)</span> 项多项式，然后用 <span class="arithmatex">\(\omega_{2^k}^i\)</span> 作为 <span class="arithmatex">\(x_i\)</span> 来表示点值。下文会叙述为什么要这样搞。</p>
+<p>首先 FFT 的核心思想是分治，对于一个多项式 <span class="arithmatex">\(F\)</span> 的系数表示 <span class="arithmatex">\(A=\langle a_0,a_1,a_2,\dots a_{n-1}\rangle\)</span>（<span class="arithmatex">\(n=2^k\)</span>），可以把它按奇偶性分成 <span class="arithmatex">\(A_0=\langle a_0,a_2,a_4,\dots a_{n-2}\rangle\)</span> 和 <span class="arithmatex">\(A_1=\langle a_1,a_3,a_5,\dots a_{n-1}\rangle\)</span>，设这两个系数表示对应的多项式分别为 <span class="arithmatex">\(F_0,F_1\)</span>，容易发现 <span class="arithmatex">\(F(x)=F_0(x^2)+xF_1(x^2)\)</span>（显然）。于是就能想到用 <span class="arithmatex">\(F_0,F_1\)</span> 的点值表示来算出 <span class="arithmatex">\(F\)</span> 的点值表示。</p>
+<p>但这里有个问题，<span class="arithmatex">\(F_0,F_1\)</span> 的点值表示都只有 <span class="arithmatex">\(\frac{n}{2}\)</span> 个点，这样似乎无论怎么搞都只能得到 <span class="arithmatex">\(F\)</span> 的 <span class="arithmatex">\(\frac{n}{2}\)</span> 个点。这时候你就知道为什么要用单位根作为 <span class="arithmatex">\(x_i\)</span> 了。</p>
+<p>取 <span class="arithmatex">\(k\)</span> 为某个 <span class="arithmatex">\([0,\frac{n}{2})\)</span> 之中的整数，记 <span class="arithmatex">\(k'=k+\frac{n}{2}\)</span>，容易发现：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 F(\omega_n^k)&amp;=F_0\left(\left(\omega_n^k\right)^2\right)+\omega_n^kF_1\left(\left(\omega_n^k\right)^2\right)&amp;=F_0\left(\omega_{\frac{n}{2}}^k\right)+\omega_n^kF_1\left(\omega_{\frac{n}{2}}^k\right)\\
 F(\omega_n^{k'})&amp;=F_0\left(\left(\omega_n^{k'}\right)^2\right)+\omega_n^{k'}F_1\left(\left(\omega_n^{k'}\right)^2\right)&amp;=F_0\left(\omega_{\frac{n}{2}}^k\right)-\omega_n^kF_1\left(\omega_{\frac{n}{2}}^k\right)
 \end{aligned}
-$$</p>
-<p>其中第二行是因为 $\omega_n^{k+\frac{n}{2}}=-\omega_n^k$。</p>
-<p>然后就能用 $F_0,F_1$ 的点值表示推出 $F$ 的点值表示了。对于 $n=1$ 的边界条件，显然 $F(\omega_1^0)=F(1)=a_0x=a_0$，于是就有一个简单的递归写法了。需要封装复数的加减乘法。</p>
+\]</div>
+<p>其中第二行是因为 <span class="arithmatex">\(\omega_n^{k+\frac{n}{2}}=-\omega_n^k\)</span>。</p>
+<p>然后就能用 <span class="arithmatex">\(F_0,F_1\)</span> 的点值表示推出 <span class="arithmatex">\(F\)</span> 的点值表示了。对于 <span class="arithmatex">\(n=1\)</span> 的边界条件，显然 <span class="arithmatex">\(F(\omega_1^0)=F(1)=a_0x=a_0\)</span>，于是就有一个简单的递归写法了。需要封装复数的加减乘法。</p>
 <h3 id="_7">非递归写法</h3>
-<p>容易发现这玩意常数很大（因为每次需要把序列按奇偶性分开，可能需要开一些辅助数组，内存访问就不太连续），而这种 $2^k$ 每次都能恰好地把序列分成两半，这和 zkw 线段树十分类似，可以考虑是否存在非递归写法。</p>
-<p>容易发现，如果把它看做 zkw 的结构，我们只需要求出所有 $n=1$ 在递归树上对应的下标，其它就能直接倒序循环求出。</p>
-<p>以 $n=8$ 为例，考虑递归过程：</p>
+<p>容易发现这玩意常数很大（因为每次需要把序列按奇偶性分开，可能需要开一些辅助数组，内存访问就不太连续），而这种 <span class="arithmatex">\(2^k\)</span> 每次都能恰好地把序列分成两半，这和 zkw 线段树十分类似，可以考虑是否存在非递归写法。</p>
+<p>容易发现，如果把它看做 zkw 的结构，我们只需要求出所有 <span class="arithmatex">\(n=1\)</span> 在递归树上对应的下标，其它就能直接倒序循环求出。</p>
+<p>以 <span class="arithmatex">\(n=8\)</span> 为例，考虑递归过程：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>a[0]   a[1]   a[2]   a[3]   a[4]   a[5]   a[6]   a[7] 
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>a[0]   a[2]   a[4]   a[6] | a[1]   a[3]   a[5]   a[7] 
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>a[0]   a[4] | a[2]   a[6] | a[1]   a[5] | a[3]   a[7] 
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>a[0] | a[4] | a[2] | a[6] | a[1] | a[5] | a[3] | a[7] 
 </span></code></pre></div>
-<p>其实已经能发现一些端倪了，第 $i$ 层是按照二进制从下到上第 $i$ 为分开的，那么从二进制方向考虑每个点的下标：</p>
+<p>其实已经能发现一些端倪了，第 <span class="arithmatex">\(i\)</span> 层是按照二进制从下到上第 <span class="arithmatex">\(i\)</span> 为分开的，那么从二进制方向考虑每个点的下标：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>0   4   2   6   1   5   3   7
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>000 100 010 110 001 101 011 111
 </span></code></pre></div>
-<p>容易发现这些东西的二进制表示翻转后就恰好是 $0\sim 7$，从每次“以当前最低位为依据分开”也能推出来。于是直接以这样的“逆二进制序”处理即可。</p>
+<p>容易发现这些东西的二进制表示翻转后就恰好是 <span class="arithmatex">\(0\sim 7\)</span>，从每次“以当前最低位为依据分开”也能推出来。于是直接以这样的“逆二进制序”处理即可。</p>
 <p>于是就能得到非递归写法了。</p>
 <p>代码等会和后面的整合一下。</p>
 <h3 id="fftifft">逆 FFT（IFFT）</h3>
-<p>根据 $F(\omega_{n}^i)=\sum_{j=0}^{n-1}a_j\omega_n^{ij}$，容易发现这玩意是个线性变换。</p>
-<p>那么就能写成矩阵 $\mathbf{y}=\mathbf{a}\times \mathbf{V_{\mathit{n}}}$，其中 $(\mathbf{V_{\mathit{n}}})_{i,j}=\omega_{n}^{ij}$。</p>
-<p>然后用神秘方法就能得到 $\mathbf{V_{\mathit{n}}}^{-1}$，使得 $\mathbf{a}=\mathbf{y}\times\mathbf{V_{\mathit{n}}}^{-1}$。</p>
-<p>直接说结论 $(\mathbf{V_{\mathit{n}}}^{-1})_{i,j}=\frac{\omega_{n}^{-ij}}{n}$。 <del>因为我不会证</del></p>
-<p>以及容易发现，$\omega_{n}^{-1}=\cos(\frac{2\pi}{n})+\sin(-\frac{2\pi}{n})i$（考虑 $\omega_{n}^{-1}\times \omega_{n}=1$，模长相乘辐角相加）。然后其余部分和 FFT 完全相同，最后除以 $n$（注意这个 “$n$” 是前文所说 $2^k$）即可。</p>
+<p>根据 <span class="arithmatex">\(F(\omega_{n}^i)=\sum_{j=0}^{n-1}a_j\omega_n^{ij}\)</span>，容易发现这玩意是个线性变换。</p>
+<p>那么就能写成矩阵 <span class="arithmatex">\(\mathbf{y}=\mathbf{a}\times \mathbf{V_{\mathit{n}}}\)</span>，其中 <span class="arithmatex">\((\mathbf{V_{\mathit{n}}})_{i,j}=\omega_{n}^{ij}\)</span>。</p>
+<p>然后用神秘方法就能得到 <span class="arithmatex">\(\mathbf{V_{\mathit{n}}}^{-1}\)</span>，使得 <span class="arithmatex">\(\mathbf{a}=\mathbf{y}\times\mathbf{V_{\mathit{n}}}^{-1}\)</span>。</p>
+<p>直接说结论 <span class="arithmatex">\((\mathbf{V_{\mathit{n}}}^{-1})_{i,j}=\frac{\omega_{n}^{-ij}}{n}\)</span>。 <del>因为我不会证</del></p>
+<p>以及容易发现，<span class="arithmatex">\(\omega_{n}^{-1}=\cos(\frac{2\pi}{n})+\sin(-\frac{2\pi}{n})i\)</span>（考虑 <span class="arithmatex">\(\omega_{n}^{-1}\times \omega_{n}=1\)</span>，模长相乘辐角相加）。然后其余部分和 FFT 完全相同，最后除以 <span class="arithmatex">\(n\)</span>（注意这个 “<span class="arithmatex">\(n\)</span>” 是前文所说 <span class="arithmatex">\(2^k\)</span>）即可。</p>
 <details class="success">
 <summary><a href="https://www.luogu.com.cn/problem/P3803">模板题</a>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6164,35 +6192,35 @@ $$</p>
 <p>前置知识：数论基础。</p>
 <p>事实上如果你真的写了 FFT 模板题就会发现有一堆精度问题，而且假如用来卷积这玩意不能取模。</p>
 <p>于是就有人发明了没有精度问题（但是需要取模）的类似算法：快速数论变换（Number Theoretic Transform，NTT）。</p>
-<p>很多 OIer 在第一次做需要取模的计数题时都会疑惑“为什么模数是 $998244353$”，就是因为有这个算法的存在。</p>
-<p>$998244353$ 有非常好的性质：</p>
+<p>很多 OIer 在第一次做需要取模的计数题时都会疑惑“为什么模数是 <span class="arithmatex">\(998244353\)</span>”，就是因为有这个算法的存在。</p>
+<p><span class="arithmatex">\(998244353\)</span> 有非常好的性质：</p>
 <ul>
 <li>它是质数，剩余系对乘法是封闭的。</li>
-<li>$\varphi(998244353)=998244352=2^{23}\times 7\times 17$</li>
-<li>它有<a href="https://oi-wiki.org/math/number-theory/primitive-root/#_4">原根</a>，其中一个是 $3$。</li>
+<li><span class="arithmatex">\(\varphi(998244353)=998244352=2^{23}\times 7\times 17\)</span></li>
+<li>它有<a href="https://oi-wiki.org/math/number-theory/primitive-root/#_4">原根</a>，其中一个是 <span class="arithmatex">\(3\)</span>。</li>
 </ul>
-<p>下文默认在模 $998244353$ 意义下进行。</p>
-<p>原根（简要理解）就是说一个 $p$ 的简化剩余系内的数 $a$，若满足 $0\le n&lt; \varphi(p)$，所有 $a^n\bmod p$ 互不相同（或者 $\forall 0&lt;n&lt;\varphi(p),a^n\not\equiv 1\pmod p$，这两个定义显然等价），就称 $a$ 是 $p$ 的原根。</p>
-<p>考虑 FFT 中为什么要用 $\omega_n^i$ 作为点值表示的下标（下文记 $x_i$ 表示点值表示的第 $i$ 个下标）。就是因为它具有消去引理（$\omega_{kn}^{km}=\omega_n^m$）和折半引理（$\left(\omega_{n}^{k+\frac{n}{2}}\right)^2=\left(\omega_{n}^k\right)^2=\omega_{n}^{2k}=\omega_{\frac{n}{2}}^k$），那么原根有没有类似的性质呢？</p>
-<p>记原根为 $g$（当 $p=998244353$ 时，$g=3$），又记 $g_n=g^{\frac{p-1}{n}}$（钦定 $n\mid p-1$）。于是有：</p>
+<p>下文默认在模 <span class="arithmatex">\(998244353\)</span> 意义下进行。</p>
+<p>原根（简要理解）就是说一个 <span class="arithmatex">\(p\)</span> 的简化剩余系内的数 <span class="arithmatex">\(a\)</span>，若满足 <span class="arithmatex">\(0\le n&lt; \varphi(p)\)</span>，所有 <span class="arithmatex">\(a^n\bmod p\)</span> 互不相同（或者 <span class="arithmatex">\(\forall 0&lt;n&lt;\varphi(p),a^n\not\equiv 1\pmod p\)</span>，这两个定义显然等价），就称 <span class="arithmatex">\(a\)</span> 是 <span class="arithmatex">\(p\)</span> 的原根。</p>
+<p>考虑 FFT 中为什么要用 <span class="arithmatex">\(\omega_n^i\)</span> 作为点值表示的下标（下文记 <span class="arithmatex">\(x_i\)</span> 表示点值表示的第 <span class="arithmatex">\(i\)</span> 个下标）。就是因为它具有消去引理（<span class="arithmatex">\(\omega_{kn}^{km}=\omega_n^m\)</span>）和折半引理（<span class="arithmatex">\(\left(\omega_{n}^{k+\frac{n}{2}}\right)^2=\left(\omega_{n}^k\right)^2=\omega_{n}^{2k}=\omega_{\frac{n}{2}}^k\)</span>），那么原根有没有类似的性质呢？</p>
+<p>记原根为 <span class="arithmatex">\(g\)</span>（当 <span class="arithmatex">\(p=998244353\)</span> 时，<span class="arithmatex">\(g=3\)</span>），又记 <span class="arithmatex">\(g_n=g^{\frac{p-1}{n}}\)</span>（钦定 <span class="arithmatex">\(n\mid p-1\)</span>）。于是有：</p>
 <ul>
-<li>$g_{kn}^{km}=g^{\frac{km(p-1)}{kn}}=g^{\frac{m(p-1)}{n}}=g_n^m$</li>
-<li>$\left(g_{n}^{k+\frac{n}{2}}\right)^2=g_n^{2k+n}=g^{\frac{(2k+n)(p-1)}{n}}=g^{\frac{2k(p-1)}{n}}+g^{p-1}=g^{\frac{2k(p-1)}{n}}=g_n^{2k}=g_{\frac{n}{2}}^k$</li>
+<li><span class="arithmatex">\(g_{kn}^{km}=g^{\frac{km(p-1)}{kn}}=g^{\frac{m(p-1)}{n}}=g_n^m\)</span></li>
+<li><span class="arithmatex">\(\left(g_{n}^{k+\frac{n}{2}}\right)^2=g_n^{2k+n}=g^{\frac{(2k+n)(p-1)}{n}}=g^{\frac{2k(p-1)}{n}}+g^{p-1}=g^{\frac{2k(p-1)}{n}}=g_n^{2k}=g_{\frac{n}{2}}^k\)</span></li>
 </ul>
 <p>然后就能用这玩意做类似于 FFT 的操作了。</p>
-<p>注意到一个问题，刚刚钦定了 $n\mid p-1$。</p>
-<p>哎，您猜怎么着☝️🤓，$998244352$ 有 $2^{23}$ 的因子（$\approx 8.3\times 10^6$），可以把 $n$ 调整为 $2$ 的幂次就能做了。</p>
-<p>注意到一点区别，从 $F_0,F_1$ 推到 $F$ 的式子（$k\in[0,\frac{n}{2}),k'=k+\frac{n}{2}$）：</p>
-<p>$$
+<p>注意到一个问题，刚刚钦定了 <span class="arithmatex">\(n\mid p-1\)</span>。</p>
+<p>哎，您猜怎么着☝️🤓，<span class="arithmatex">\(998244352\)</span> 有 <span class="arithmatex">\(2^{23}\)</span> 的因子（<span class="arithmatex">\(\approx 8.3\times 10^6\)</span>），可以把 <span class="arithmatex">\(n\)</span> 调整为 <span class="arithmatex">\(2\)</span> 的幂次就能做了。</p>
+<p>注意到一点区别，从 <span class="arithmatex">\(F_0,F_1\)</span> 推到 <span class="arithmatex">\(F\)</span> 的式子（<span class="arithmatex">\(k\in[0,\frac{n}{2}),k'=k+\frac{n}{2}\)</span>）：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 F(g_n^k)&amp;=F_0\left(\left(g_n^k\right)^2\right)+g_n^kF_1\left(\left(g_n^k\right)^2\right)&amp;=F_0\left(g_{\frac{n}{2}}^k\right)+g_n^kF_1\left(g_{\frac{n}{2}}^k\right)\\
 F(g_n^{k'})&amp;=F_0\left(\left(g_n^{k'}\right)^2\right)+g_n^{k'}F_1\left(\left(g_n^{k'}\right)^2\right)&amp;=F_0\left(g_{\frac{n}{2}}^k\right)+g^{\frac{p-1}{2}}g_n^kF_1\left(g_{\frac{n}{2}}^k\right)
 \end{aligned}
-$$</p>
-<p>注意到 $g^{\frac{p-1}{2}}=\sqrt{g^{p-1}}=\sqrt{1}$，根据二次探测引理，$g^{\frac{p-1}{2}}=\pm 1$。但是若这玩意等于 $1$ 那么 $g$ 就不是原根了（和定义不符），所以这东西必定等于 $-1$（即 $p-1$）。</p>
+\]</div>
+<p>注意到 <span class="arithmatex">\(g^{\frac{p-1}{2}}=\sqrt{g^{p-1}}=\sqrt{1}\)</span>，根据二次探测引理，<span class="arithmatex">\(g^{\frac{p-1}{2}}=\pm 1\)</span>。但是若这玩意等于 <span class="arithmatex">\(1\)</span> 那么 <span class="arithmatex">\(g\)</span> 就不是原根了（和定义不符），所以这东西必定等于 <span class="arithmatex">\(-1\)</span>（即 <span class="arithmatex">\(p-1\)</span>）。</p>
 <details class="success">
 <summary>参考代码</summary>
-<p>其它地方差不多，<code>inv3</code> 是 $3$ 的逆元。</p>
+<p>其它地方差不多，<code>inv3</code> 是 <span class="arithmatex">\(3\)</span> 的逆元。</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">trans</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">f</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">){</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">forup</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">p</span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">rev</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="n">swap</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">rev</span><span class="p">[</span><span class="n">i</span><span class="p">]]);</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">len</span><span class="o">&lt;</span><span class="n">p</span><span class="p">;</span><span class="n">len</span><span class="o">&lt;&lt;=</span><span class="mi">1</span><span class="p">){</span>
@@ -6219,14 +6247,14 @@ $$</p>
 <h2 id="fftntt">分治 FFT/NTT（半在线卷积）</h2>
 <p>还有另一种算法也叫分治 NTT，把若干个多项式乘在一起时每次把最短的两个拉出来 NTT，那个很简单就不说了。</p>
 <p>有些时候我们需要计算形如下式的函数：</p>
-<p>$$
+<div class="arithmatex">\[
 f(n)=\begin{cases}
 c&amp;,n=0\\
 \sum_{j=1}^if(i-j)g(j)&amp;,n\ge 1
 \end{cases}
-$$</p>
-<p>其中 $c$ 是常数。</p>
-<p>这时候就不能直接将 $f,g$ 进行卷积了，因为 $f$ 还没有求出来。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(c\)</span> 是常数。</p>
+<p>这时候就不能直接将 <span class="arithmatex">\(f,g\)</span> 进行卷积了，因为 <span class="arithmatex">\(f\)</span> 还没有求出来。</p>
 <p>这时候可以类似 cdq 分治优化 DP，对序列进行分治。按分治树的中序遍历，每次统计左边对右边的贡献。</p>
 <p>具体可以看代码。</p>
 <details class="success">

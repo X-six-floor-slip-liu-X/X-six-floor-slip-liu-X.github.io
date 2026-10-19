@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5785,16 +5813,16 @@
 <p>感觉升到 A 组后模拟赛质量高了好多。</p>
 <h2 id="t3">T3</h2>
 <p>很智慧的一道题。</p>
-<p>考虑一个暴力 DP，设 $dp_{i,j}$ 表示第 $i$ 天，换乘 $j$ 次的最大贡献是多少。转移很简单，就是考虑现在的城市是 $j\bmod k$，然后下一步换不换乘。复杂度 $O(n^2)$，有 25pts。</p>
-<p>考虑如何优化。注意到这道题 $k$ 的范围很小，但是上面的方法复杂度和 $k$ 一点关系都没有。如何和 $k$ 扯上关系呢？考虑把 $j$ 写成 $pk+q$ 的形式，因为对于同一个 $q$，转移是相同的，所以考虑 $p$ 的取值。容易猜到 $dp_{i,pk+q}$ 在固定 $i,p$ 后，可能是关于 $p$ 上凸的（感性来说，最大值肯定在中间取到），考虑证明。</p>
-<p>首先一个和上凸（$y_{i+1}-y_{i}$ 关于 $i$ 单调不增，不用除以 $x$ 是因为相邻两个 $x$ 之差均为 $1$）等价的命题是 $\forall i\in(1,n),\frac{y_{i+1}+y_{i-1}}{2}\le y_i$，代数证明可以考虑两边乘以二然后移项，几何证明考虑取 $(x_{i-1},y_{i-1}),(x_{i+1},y_{i+1})$ 的中点。</p>
-<p>回到原问题，容易发现若令 $V_p=dp_{i,pk+q}$，那么假如我们能证明 $\frac{V_{i-1}+V_{i+1}}{2}\le V_i$，就能说明 $V$ 是上凸的。考虑把 $V_{i-1},V_{i+1}$ 的路径并排放在一起：</p>
+<p>考虑一个暴力 DP，设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示第 <span class="arithmatex">\(i\)</span> 天，换乘 <span class="arithmatex">\(j\)</span> 次的最大贡献是多少。转移很简单，就是考虑现在的城市是 <span class="arithmatex">\(j\bmod k\)</span>，然后下一步换不换乘。复杂度 <span class="arithmatex">\(O(n^2)\)</span>，有 25pts。</p>
+<p>考虑如何优化。注意到这道题 <span class="arithmatex">\(k\)</span> 的范围很小，但是上面的方法复杂度和 <span class="arithmatex">\(k\)</span> 一点关系都没有。如何和 <span class="arithmatex">\(k\)</span> 扯上关系呢？考虑把 <span class="arithmatex">\(j\)</span> 写成 <span class="arithmatex">\(pk+q\)</span> 的形式，因为对于同一个 <span class="arithmatex">\(q\)</span>，转移是相同的，所以考虑 <span class="arithmatex">\(p\)</span> 的取值。容易猜到 <span class="arithmatex">\(dp_{i,pk+q}\)</span> 在固定 <span class="arithmatex">\(i,p\)</span> 后，可能是关于 <span class="arithmatex">\(p\)</span> 上凸的（感性来说，最大值肯定在中间取到），考虑证明。</p>
+<p>首先一个和上凸（<span class="arithmatex">\(y_{i+1}-y_{i}\)</span> 关于 <span class="arithmatex">\(i\)</span> 单调不增，不用除以 <span class="arithmatex">\(x\)</span> 是因为相邻两个 <span class="arithmatex">\(x\)</span> 之差均为 <span class="arithmatex">\(1\)</span>）等价的命题是 <span class="arithmatex">\(\forall i\in(1,n),\frac{y_{i+1}+y_{i-1}}{2}\le y_i\)</span>，代数证明可以考虑两边乘以二然后移项，几何证明考虑取 <span class="arithmatex">\((x_{i-1},y_{i-1}),(x_{i+1},y_{i+1})\)</span> 的中点。</p>
+<p>回到原问题，容易发现若令 <span class="arithmatex">\(V_p=dp_{i,pk+q}\)</span>，那么假如我们能证明 <span class="arithmatex">\(\frac{V_{i-1}+V_{i+1}}{2}\le V_i\)</span>，就能说明 <span class="arithmatex">\(V\)</span> 是上凸的。考虑把 <span class="arithmatex">\(V_{i-1},V_{i+1}\)</span> 的路径并排放在一起：</p>
 <p><img alt="图示 1" src="../../img/20231204A_ABC_1.png" /></p>
-<p>那么必定能找到一个分界点，使得分界点左侧，$V_{i+1}$ 和 $V_{i-1}$ 的换乘次数之差是 $k$，那么右侧换乘次数之差同样也是 $k$。那么显然在分界点处的位置是相同的。此时把两段分开重新拼起来（就是两红色线段和两蓝色线段）换乘次数必定是 $ik+q$，即一个换乘次数正确的 $V_i$。显然两方案中必定有一个大于等于 $\frac{V_{i-1}+V_{i+1}}{2}$，得证。</p>
-<p>考虑上凸之后我们能干什么（这一步很不自然我也不知道题解怎么想到的，或许是因为上一步的证明让人想到把一个序列拆成两半？），可以想到，若把某个方案分成两半，合起来的时候就是一个 $(\max,+)$ 卷积。具体来说，设 $(l,r,x,y)$ 表示从 $l$ 到 $r$，换乘 $x$ 次，获利为 $y$ 的方案，那么 $(l,r,x,y)$ 必定能从 $(l,mid,x',y')+(mid+1,x-x',y-y')$（或者在中间换乘一次，$(l,mid,x',y')+(mid+1,r,x-x'+1,y-y')$）得到。而凸性和 $(\max,+)$ 卷积让人联想到闵可夫斯基和，考虑把刚刚很粗糙的猜想细化，并套入关于 $p$ 的凸性。</p>
-<p>由于区间的左右端点不固定，所以还要记录起点和终点的城镇 $S,E$（容易发现 $q$ 就是 $(E+m-S)\bmod m$），那么容易想到固定 $(l,r,S,E)$，这样 $V$ 关于 $p$ 就是上凸的。然后分治，合并时每局中间点 $M$，求闵可夫斯基和即可。</p>
-<p>这里有一个细节，合并是从 $(l,mid,S,M)+(mid+1,r,M,E)/(mid+1,r,(M+1)\bmod m,E)$ 转移，注意 $S\to M(\to (M+1)\bmod m)\to E$ 会不会额外绕一圈。</p>
-<p>时间复杂度 $O(k^3\sum\frac{len}{k})=O(k^2n\log n)$，4s 还是随便过的。然后空间每次可以复用之前的，貌似可以做到 $O(k^2\frac{n}{k})=O(nk)$，但是我空间貌似写挂了，但是无所谓能过就行。</p>
+<p>那么必定能找到一个分界点，使得分界点左侧，<span class="arithmatex">\(V_{i+1}\)</span> 和 <span class="arithmatex">\(V_{i-1}\)</span> 的换乘次数之差是 <span class="arithmatex">\(k\)</span>，那么右侧换乘次数之差同样也是 <span class="arithmatex">\(k\)</span>。那么显然在分界点处的位置是相同的。此时把两段分开重新拼起来（就是两红色线段和两蓝色线段）换乘次数必定是 <span class="arithmatex">\(ik+q\)</span>，即一个换乘次数正确的 <span class="arithmatex">\(V_i\)</span>。显然两方案中必定有一个大于等于 <span class="arithmatex">\(\frac{V_{i-1}+V_{i+1}}{2}\)</span>，得证。</p>
+<p>考虑上凸之后我们能干什么（这一步很不自然我也不知道题解怎么想到的，或许是因为上一步的证明让人想到把一个序列拆成两半？），可以想到，若把某个方案分成两半，合起来的时候就是一个 <span class="arithmatex">\((\max,+)\)</span> 卷积。具体来说，设 <span class="arithmatex">\((l,r,x,y)\)</span> 表示从 <span class="arithmatex">\(l\)</span> 到 <span class="arithmatex">\(r\)</span>，换乘 <span class="arithmatex">\(x\)</span> 次，获利为 <span class="arithmatex">\(y\)</span> 的方案，那么 <span class="arithmatex">\((l,r,x,y)\)</span> 必定能从 <span class="arithmatex">\((l,mid,x',y')+(mid+1,x-x',y-y')\)</span>（或者在中间换乘一次，<span class="arithmatex">\((l,mid,x',y')+(mid+1,r,x-x'+1,y-y')\)</span>）得到。而凸性和 <span class="arithmatex">\((\max,+)\)</span> 卷积让人联想到闵可夫斯基和，考虑把刚刚很粗糙的猜想细化，并套入关于 <span class="arithmatex">\(p\)</span> 的凸性。</p>
+<p>由于区间的左右端点不固定，所以还要记录起点和终点的城镇 <span class="arithmatex">\(S,E\)</span>（容易发现 <span class="arithmatex">\(q\)</span> 就是 <span class="arithmatex">\((E+m-S)\bmod m\)</span>），那么容易想到固定 <span class="arithmatex">\((l,r,S,E)\)</span>，这样 <span class="arithmatex">\(V\)</span> 关于 <span class="arithmatex">\(p\)</span> 就是上凸的。然后分治，合并时每局中间点 <span class="arithmatex">\(M\)</span>，求闵可夫斯基和即可。</p>
+<p>这里有一个细节，合并是从 <span class="arithmatex">\((l,mid,S,M)+(mid+1,r,M,E)/(mid+1,r,(M+1)\bmod m,E)\)</span> 转移，注意 <span class="arithmatex">\(S\to M(\to (M+1)\bmod m)\to E\)</span> 会不会额外绕一圈。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(k^3\sum\frac{len}{k})=O(k^2n\log n)\)</span>，4s 还是随便过的。然后空间每次可以复用之前的，貌似可以做到 <span class="arithmatex">\(O(k^2\frac{n}{k})=O(nk)\)</span>，但是我空间貌似写挂了，但是无所谓能过就行。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

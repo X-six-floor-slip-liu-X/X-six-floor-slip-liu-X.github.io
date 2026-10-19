@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5831,9 +5859,9 @@
 <p>唉，140-&gt;31。</p>
 <h2 id="t1">T1</h2>
 <p>简单树形 DP。</p>
-<p>设 $dp_i$ 表示从 $i$ 开始，涂完 $i$ 子树需要的最小时间。显然构造方案可以把所有儿子倒序排列后，每次涂前 $w_u$ 个，转移是简单的。</p>
+<p>设 <span class="arithmatex">\(dp_i\)</span> 表示从 <span class="arithmatex">\(i\)</span> 开始，涂完 <span class="arithmatex">\(i\)</span> 子树需要的最小时间。显然构造方案可以把所有儿子倒序排列后，每次涂前 <span class="arithmatex">\(w_u\)</span> 个，转移是简单的。</p>
 <p>考虑如何换根，难点在于删掉将要换到的那个位置。容易发现每次删一个数会使后面全部往前平移一个。那么排序后倒序考虑删每个点，如果这个点恰好是某一块的开头才有可能使贡献改变，这个可以 <code>multiset</code> 维护。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5918,15 +5946,15 @@
 </details>
 <h2 id="t2">T2</h2>
 <p>感觉很智慧啊。</p>
-<p>首先如果 $m=1$ 就是个裸的 Nim 游戏。但是 Nim 游戏是把每一堆分开的，而这个问题每一维都和其他维相关（因为有黑洞），考虑把四维放在一起的做法。</p>
+<p>首先如果 <span class="arithmatex">\(m=1\)</span> 就是个裸的 Nim 游戏。但是 Nim 游戏是把每一堆分开的，而这个问题每一维都和其他维相关（因为有黑洞），考虑把四维放在一起的做法。</p>
 <p>以下简称先手必胜为“必胜”，后手为“必败”。</p>
-<p>首先按有向图博弈的思路，容易得到一个 $O(n^5)$ DP，具体来说，如果一个点下一步能走到的所有点都是必胜那么这个点必败，否则（指有至少一个点必败）这个点必胜。</p>
-<p>注意到只需要考虑四个方向<strong>在下一个黑洞之前</strong>有没有必败点，又由于 DP 是从小到大枚举的，所以可以对每一维开一个三维的数组 $V_{a,b,c}$ 表示<strong>其余三维分别是 $a,b,c$，这一维到上一个黑洞前有没有必败点</strong>，每次遇到黑洞把对应四个点清零即可。</p>
+<p>首先按有向图博弈的思路，容易得到一个 <span class="arithmatex">\(O(n^5)\)</span> DP，具体来说，如果一个点下一步能走到的所有点都是必胜那么这个点必败，否则（指有至少一个点必败）这个点必胜。</p>
+<p>注意到只需要考虑四个方向<strong>在下一个黑洞之前</strong>有没有必败点，又由于 DP 是从小到大枚举的，所以可以对每一维开一个三维的数组 <span class="arithmatex">\(V_{a,b,c}\)</span> 表示<strong>其余三维分别是 <span class="arithmatex">\(a,b,c\)</span>，这一维到上一个黑洞前有没有必败点</strong>，每次遇到黑洞把对应四个点清零即可。</p>
 <p>但是这个很难再压了，考虑继续优化。</p>
-<p>注意到对最后一维记录的这个东西非常多余，因为你会连续地枚举这一维。容易发现，在每个黑洞之后找到第一个必败点，后面的都是必胜的（因为这一维对应的 $V$ 都是 $1$ 了）。而容易发现这个可以用 <code>bitset</code> 来维护。</p>
-<p>具体来说，$V$ 只维护前三维，然后每次把对应的三个 <code>bitset</code> 并起来取反。这样每次只需要一个 <code>_Find_next</code> 就能找到第一个必败点，然后一直到下一个黑洞都是必胜的。具体求答案可以用总的减去必败的和黑洞。</p>
-<p>注意每次更新三个 $V$，另外黑洞可以用指针维护。</p>
-<p>时间复杂度 $O(\frac{n^4}{w}+m\log m)$，空间复杂度 $O(n^3+m)$，前面这个 $n^3$ 是 <code>bitset</code> 类型的所以不会炸。</p>
+<p>注意到对最后一维记录的这个东西非常多余，因为你会连续地枚举这一维。容易发现，在每个黑洞之后找到第一个必败点，后面的都是必胜的（因为这一维对应的 <span class="arithmatex">\(V\)</span> 都是 <span class="arithmatex">\(1\)</span> 了）。而容易发现这个可以用 <code>bitset</code> 来维护。</p>
+<p>具体来说，<span class="arithmatex">\(V\)</span> 只维护前三维，然后每次把对应的三个 <code>bitset</code> 并起来取反。这样每次只需要一个 <code>_Find_next</code> 就能找到第一个必败点，然后一直到下一个黑洞都是必胜的。具体求答案可以用总的减去必败的和黑洞。</p>
+<p>注意每次更新三个 <span class="arithmatex">\(V\)</span>，另外黑洞可以用指针维护。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\frac{n^4}{w}+m\log m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^3+m)\)</span>，前面这个 <span class="arithmatex">\(n^3\)</span> 是 <code>bitset</code> 类型的所以不会炸。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6003,12 +6031,12 @@
 <h2 id="t3">T3</h2>
 <p>怪题。</p>
 <p>容易想到质因数完全相同的集合可以随意互换。</p>
-<p>感觉这句话有歧义啊，若一个数的质因数分解为 $x=\prod p_i^{k_i}$，设 $f(x)=\prod p_i$，那么对于任意一对 $i,j$ 使得 $f(i)=f(j)$，$i,j$ 显然可以互相交换（因为任意一个数若和 $i$ 互质当且仅当和 $j$ 互质），设这样的集合为 $S$。</p>
-<p>但是容易发现限制比这个更弱，比如在 $n=5$ 时 $1,3,5$ 是可以随意交换的，但显然这三者的 $f$ 不相同。</p>
-<p>注意到若两个质数 $p_1,p_2$，满足 $\left\lfloor\frac{n}{p_1}\right\rfloor=\left\lfloor\frac{n}{p_2}\right\rfloor$，那么将这两个数的倍数集合完全互换也是合法的（对于交，容易发现完全不管它是没关系的）。因为我们只关注互质关系，所以具体包含哪个质因子其实就不重要了。</p>
-<p>注意到若 $p_1\ne p_2$，又有 $\left\lfloor\frac{n}{p_1}\right\rfloor=\left\lfloor\frac{n}{p_2}\right\rfloor$，可以推出 $p_1,p_2&gt;\sqrt{n}$，那么每个数只有一个这样的质因子。</p>
-<p>这样就可以直接维护了。最终答案就是每个 $S$ 内没被用过的点数的阶乘之积乘上 $p_1\to p_2$ 的映射关系数量即可。</p>
-<p>用欧拉筛复杂度可以做到 $O(n)$，注意特判 $1$。</p>
+<p>感觉这句话有歧义啊，若一个数的质因数分解为 <span class="arithmatex">\(x=\prod p_i^{k_i}\)</span>，设 <span class="arithmatex">\(f(x)=\prod p_i\)</span>，那么对于任意一对 <span class="arithmatex">\(i,j\)</span> 使得 <span class="arithmatex">\(f(i)=f(j)\)</span>，<span class="arithmatex">\(i,j\)</span> 显然可以互相交换（因为任意一个数若和 <span class="arithmatex">\(i\)</span> 互质当且仅当和 <span class="arithmatex">\(j\)</span> 互质），设这样的集合为 <span class="arithmatex">\(S\)</span>。</p>
+<p>但是容易发现限制比这个更弱，比如在 <span class="arithmatex">\(n=5\)</span> 时 <span class="arithmatex">\(1,3,5\)</span> 是可以随意交换的，但显然这三者的 <span class="arithmatex">\(f\)</span> 不相同。</p>
+<p>注意到若两个质数 <span class="arithmatex">\(p_1,p_2\)</span>，满足 <span class="arithmatex">\(\left\lfloor\frac{n}{p_1}\right\rfloor=\left\lfloor\frac{n}{p_2}\right\rfloor\)</span>，那么将这两个数的倍数集合完全互换也是合法的（对于交，容易发现完全不管它是没关系的）。因为我们只关注互质关系，所以具体包含哪个质因子其实就不重要了。</p>
+<p>注意到若 <span class="arithmatex">\(p_1\ne p_2\)</span>，又有 <span class="arithmatex">\(\left\lfloor\frac{n}{p_1}\right\rfloor=\left\lfloor\frac{n}{p_2}\right\rfloor\)</span>，可以推出 <span class="arithmatex">\(p_1,p_2&gt;\sqrt{n}\)</span>，那么每个数只有一个这样的质因子。</p>
+<p>这样就可以直接维护了。最终答案就是每个 <span class="arithmatex">\(S\)</span> 内没被用过的点数的阶乘之积乘上 <span class="arithmatex">\(p_1\to p_2\)</span> 的映射关系数量即可。</p>
+<p>用欧拉筛复杂度可以做到 <span class="arithmatex">\(O(n)\)</span>，注意特判 <span class="arithmatex">\(1\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

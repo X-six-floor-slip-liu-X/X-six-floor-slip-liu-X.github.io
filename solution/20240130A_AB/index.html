@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5807,19 +5835,19 @@
 <p>T3 是模拟赛原，这里就不重复了。</p>
 <h2 id="t1">T1</h2>
 <p>瞪眼法做题。这里讲一下我赛时怎么猜出部分结论以及怎么<strong>合理地</strong>从这个结论猜到答案。</p>
-<p>首先从简单开始，考虑假如在前 $r$ 行 $c$ 列里放一个 $1$，整个矩阵会如何改变。</p>
+<p>首先从简单开始，考虑假如在前 <span class="arithmatex">\(r\)</span> 行 <span class="arithmatex">\(c\)</span> 列里放一个 <span class="arithmatex">\(1\)</span>，整个矩阵会如何改变。</p>
 <p><img alt="图示 1" src="../../img/20240130A_AB_1.png" /></p>
-<p>容易发现两绿色矩阵里面都必须放恰好一个，且不能存在某 $r\times c$ 的子矩阵同时包含两者。</p>
+<p>容易发现两绿色矩阵里面都必须放恰好一个，且不能存在某 <span class="arithmatex">\(r\times c\)</span> 的子矩阵同时包含两者。</p>
 <p><img alt="图示 2" src="../../img/20240130A_AB_2.png" /></p>
-<p>首先两边都对齐最开始放的那个显然符合要求，并且容易发现若一边不对齐则另一边必定对齐。更进一步的，若最开始是横向对齐，那么之后所有都会与前 $c$ 列横向对齐，纵向同理。</p>
+<p>首先两边都对齐最开始放的那个显然符合要求，并且容易发现若一边不对齐则另一边必定对齐。更进一步的，若最开始是横向对齐，那么之后所有都会与前 <span class="arithmatex">\(c\)</span> 列横向对齐，纵向同理。</p>
 <p>考虑推广到多个。但显然多个有横有纵会产生冲突（我赛时就卡这里了），怎么解决呢？</p>
-<p>注意到“$1$ 的个数相同”等价于“$0$ 的个数相同”，那么对于空格也必定会有类似的性质。考虑把刚刚影响了的空格找出来。</p>
+<p>注意到“<span class="arithmatex">\(1\)</span> 的个数相同”等价于“<span class="arithmatex">\(0\)</span> 的个数相同”，那么对于空格也必定会有类似的性质。考虑把刚刚影响了的空格找出来。</p>
 <p><img alt="图示 3" src="../../img/20240130A_AB_3.png" /></p>
-<p>显然这些空格是不能填横向对齐的 $1$ 的（不然就会出现“重复填在同一格”的情况）。</p>
-<p>这下事情就好办了，直接 $2^{rc}$ 枚举前 $r\times c$ 的矩阵中每一格是与其它格子纵向对齐还是横向对齐的，然后统计每一列纵向对齐的个数和每一行横向对齐的个数。下面暂时只考虑每一列的纵向对齐。</p>
-<p>设第 $i$ 列有 $col_{i}$ 个纵向对齐的格子，那么枚举其中有 $j$ 个 $1$，单独一组的填法就有 $\sum_{j=0}^{col_i}\binom{col_i}{j}$ 种，并且显然有 $\left\lceil\frac{m-i}{c}\right\rceil$ 组，设这个数是 $num$，纵向的纵方案数就是 $\prod_{i=1}^{r}\sum_{j=1}^{col_i}\binom{col_i}{j}^{num}$。</p>
-<p>而横向的类似，但有一点要注意，就是可能出现<strong>一整列都是 $1$</strong>的情况。这样的情况会在该格子归为纵向时仍被算一遍。这个可以容斥解决，就枚举有多少列不变即可。</p>
-<p>复杂度最优可以做到 $O(2^{rc}rc)$，但是需要一些预处理，我懒得写了，就带了一堆奇奇怪怪的 $\log$，照样能过。</p>
+<p>显然这些空格是不能填横向对齐的 <span class="arithmatex">\(1\)</span> 的（不然就会出现“重复填在同一格”的情况）。</p>
+<p>这下事情就好办了，直接 <span class="arithmatex">\(2^{rc}\)</span> 枚举前 <span class="arithmatex">\(r\times c\)</span> 的矩阵中每一格是与其它格子纵向对齐还是横向对齐的，然后统计每一列纵向对齐的个数和每一行横向对齐的个数。下面暂时只考虑每一列的纵向对齐。</p>
+<p>设第 <span class="arithmatex">\(i\)</span> 列有 <span class="arithmatex">\(col_{i}\)</span> 个纵向对齐的格子，那么枚举其中有 <span class="arithmatex">\(j\)</span> 个 <span class="arithmatex">\(1\)</span>，单独一组的填法就有 <span class="arithmatex">\(\sum_{j=0}^{col_i}\binom{col_i}{j}\)</span> 种，并且显然有 <span class="arithmatex">\(\left\lceil\frac{m-i}{c}\right\rceil\)</span> 组，设这个数是 <span class="arithmatex">\(num\)</span>，纵向的纵方案数就是 <span class="arithmatex">\(\prod_{i=1}^{r}\sum_{j=1}^{col_i}\binom{col_i}{j}^{num}\)</span>。</p>
+<p>而横向的类似，但有一点要注意，就是可能出现<strong>一整列都是 <span class="arithmatex">\(1\)</span></strong>的情况。这样的情况会在该格子归为纵向时仍被算一遍。这个可以容斥解决，就枚举有多少列不变即可。</p>
+<p>复杂度最优可以做到 <span class="arithmatex">\(O(2^{rc}rc)\)</span>，但是需要一些预处理，我懒得写了，就带了一堆奇奇怪怪的 <span class="arithmatex">\(\log\)</span>，照样能过。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5904,10 +5932,10 @@
 <h2 id="t2">T2</h2>
 <p>神秘题，感觉根本想不到啊。</p>
 <p>首先，每个询问都在树上跑是很困难的，考虑把询问离线下来放在一起考虑。观察部分分，发现有一个“链”的部分分，考虑这样的链具有什么样的性质。</p>
-<p>容易发现，这样的链相当于维护一个 $x$，每次从底到顶计算 $x\gets|x-b_i|+a_i$，可以想到用线段树维护询问的时间轴，然后做一个“整体减 $b_i$ 后取绝对值”的操作。</p>
-<p>这就是这道题最神秘的地方了。这可以 segbeats 维护，因为每次递归区间内的极差都会至少减少 $1$，然后和 segbeats 类似地进行势能分析即可（这就是为什么这道题 $a_i$ 比较小），由于极差之和是 $nv\log q$ 的，容易发现总复杂度是 $O((n+q)V\log q)$。</p>
+<p>容易发现，这样的链相当于维护一个 <span class="arithmatex">\(x\)</span>，每次从底到顶计算 <span class="arithmatex">\(x\gets|x-b_i|+a_i\)</span>，可以想到用线段树维护询问的时间轴，然后做一个“整体减 <span class="arithmatex">\(b_i\)</span> 后取绝对值”的操作。</p>
+<p>这就是这道题最神秘的地方了。这可以 segbeats 维护，因为每次递归区间内的极差都会至少减少 <span class="arithmatex">\(1\)</span>，然后和 segbeats 类似地进行势能分析即可（这就是为什么这道题 <span class="arithmatex">\(a_i\)</span> 比较小），由于极差之和是 <span class="arithmatex">\(nv\log q\)</span> 的，容易发现总复杂度是 <span class="arithmatex">\(O((n+q)V\log q)\)</span>。</p>
 <p>考虑树的情况怎么做，会了前面的之后用屁股都能想到线段树合并，具体合并方式是每次遇到某一边是完整的一个区间就开始进行 segbeats 的操作。</p>
-<p>考虑复杂度证明，若对两个结点进行 segbeats 的操作说明其中一边势能为 $0$，而另一边每进入一个区间势能就会减少至少 $1$。而每个询问操作至多增加 $\log q$ 的势能（考虑线段树上“未被完全覆盖”的结点数量），那么时间复杂度仍是 $O((n+q)v\log q)$。</p>
+<p>考虑复杂度证明，若对两个结点进行 segbeats 的操作说明其中一边势能为 <span class="arithmatex">\(0\)</span>，而另一边每进入一个区间势能就会减少至少 <span class="arithmatex">\(1\)</span>。而每个询问操作至多增加 <span class="arithmatex">\(\log q\)</span> 的势能（考虑线段树上“未被完全覆盖”的结点数量），那么时间复杂度仍是 <span class="arithmatex">\(O((n+q)v\log q)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

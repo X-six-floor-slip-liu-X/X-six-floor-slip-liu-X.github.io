@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6081,53 +6109,53 @@
 <h1 id="_1">筛法入门</h1>
 <p>神秘算法。</p>
 <h2 id="_2">符号与约定</h2>
-<p>约定 $p$ 表示素数，$\prod_i p_i^{c_i}$ 表示某个数的质因数分解。</p>
-<p>$f\ast g$ 表示 $f$ 与 $g$ 的狄利克雷卷积。大写字母 $F(i)$ 表示对应小写字母 $f(i)$ 的前缀和，即 $F(n)=\sum_{i=1}^nf(i)$（同理，$G(i),g(i)$ 等也有类似关系）。</p>
-<p>$[]$ 为艾佛森括号，表示若内部表达式为真，则值为 $1$，否则为 $0$。</p>
+<p>约定 <span class="arithmatex">\(p\)</span> 表示素数，<span class="arithmatex">\(\prod_i p_i^{c_i}\)</span> 表示某个数的质因数分解。</p>
+<p><span class="arithmatex">\(f\ast g\)</span> 表示 <span class="arithmatex">\(f\)</span> 与 <span class="arithmatex">\(g\)</span> 的狄利克雷卷积。大写字母 <span class="arithmatex">\(F(i)\)</span> 表示对应小写字母 <span class="arithmatex">\(f(i)\)</span> 的前缀和，即 <span class="arithmatex">\(F(n)=\sum_{i=1}^nf(i)\)</span>（同理，<span class="arithmatex">\(G(i),g(i)\)</span> 等也有类似关系）。</p>
+<p><span class="arithmatex">\([]\)</span> 为艾佛森括号，表示若内部表达式为真，则值为 <span class="arithmatex">\(1\)</span>，否则为 <span class="arithmatex">\(0\)</span>。</p>
 <h2 id="_3">线性筛</h2>
 <p>大部分人最早接触的筛法，最初级的用法是用来筛质数。</p>
 <p>事实上一般还是线性筛用的最多。</p>
 <h3 id="_4">质数</h3>
-<p>考虑一个合数含有至少两个质因子，那么从小到大枚举质数，枚举它的所有倍数打一个合数标记。后面每次遇到没标记的就是质数进行，否则就是合数。这个是埃式筛，根据神秘证明复杂度是 $O(n\log \log n)$。</p>
-<p>如果每个合数只被标记一次，复杂度就能缩到 $O(n)$ 了。一个想法是让每个合数只被它的最小质因子标记一次。那么先枚举 $i$，再枚举之前找到的质数 $p$，给 $ip$ 打标记。如果第一次遇到 $i\bmod p=0$ 说明现在 $p$ 就是 $i$ 的最小质因子，如果再往后枚举 $p$，那么 $ip$ 就不是被最小质因子（即 $i$ 的最小质因子）标记的。所以遇到 $i\bmod p=0$ 就退出循环即可。</p>
+<p>考虑一个合数含有至少两个质因子，那么从小到大枚举质数，枚举它的所有倍数打一个合数标记。后面每次遇到没标记的就是质数进行，否则就是合数。这个是埃式筛，根据神秘证明复杂度是 <span class="arithmatex">\(O(n\log \log n)\)</span>。</p>
+<p>如果每个合数只被标记一次，复杂度就能缩到 <span class="arithmatex">\(O(n)\)</span> 了。一个想法是让每个合数只被它的最小质因子标记一次。那么先枚举 <span class="arithmatex">\(i\)</span>，再枚举之前找到的质数 <span class="arithmatex">\(p\)</span>，给 <span class="arithmatex">\(ip\)</span> 打标记。如果第一次遇到 <span class="arithmatex">\(i\bmod p=0\)</span> 说明现在 <span class="arithmatex">\(p\)</span> 就是 <span class="arithmatex">\(i\)</span> 的最小质因子，如果再往后枚举 <span class="arithmatex">\(p\)</span>，那么 <span class="arithmatex">\(ip\)</span> 就不是被最小质因子（即 <span class="arithmatex">\(i\)</span> 的最小质因子）标记的。所以遇到 <span class="arithmatex">\(i\bmod p=0\)</span> 就退出循环即可。</p>
 <h3 id="_5">求积性函数的值</h3>
-<p>这玩意只用来筛素数也太浪费了。容易发现每次 $i,p$ 要么互质，要么 $p$ 是 $i$ 的最小质因子。那么对于一个积性函数 $f(i)$，前一种情况有 $f(ip)=f(i)f(p)$，后一种情况有 $f(ip)=f(\frac{i}{p^c})f(p^{c+1})$，其中 $c$ 是 $i$ 中 $p$ 的指数。</p>
-<p>多数情况下如果要计算积性函数一般 $f(p^c)$ 是好求的。于是可以记录每个数最小质因子的指数以及最小质因子以外部分的 $f$ 值，就能比较方便地求任意积性函数了。复杂度 $O(n)$，因为每次访问下一个数是 $O(1)$ 的，每个数至多访问一遍。</p>
+<p>这玩意只用来筛素数也太浪费了。容易发现每次 <span class="arithmatex">\(i,p\)</span> 要么互质，要么 <span class="arithmatex">\(p\)</span> 是 <span class="arithmatex">\(i\)</span> 的最小质因子。那么对于一个积性函数 <span class="arithmatex">\(f(i)\)</span>，前一种情况有 <span class="arithmatex">\(f(ip)=f(i)f(p)\)</span>，后一种情况有 <span class="arithmatex">\(f(ip)=f(\frac{i}{p^c})f(p^{c+1})\)</span>，其中 <span class="arithmatex">\(c\)</span> 是 <span class="arithmatex">\(i\)</span> 中 <span class="arithmatex">\(p\)</span> 的指数。</p>
+<p>多数情况下如果要计算积性函数一般 <span class="arithmatex">\(f(p^c)\)</span> 是好求的。于是可以记录每个数最小质因子的指数以及最小质因子以外部分的 <span class="arithmatex">\(f\)</span> 值，就能比较方便地求任意积性函数了。复杂度 <span class="arithmatex">\(O(n)\)</span>，因为每次访问下一个数是 <span class="arithmatex">\(O(1)\)</span> 的，每个数至多访问一遍。</p>
 <h3 id="_6">求欧拉函数/莫比乌斯函数的值</h3>
 <p>这两个也是积性函数，但是拎出来单独说一下。</p>
-<p>欧拉函数比较特殊，根据通项公式 $\varphi(n)=\prod_{i}p_i^{c_i-1}(p_i-1)$ 有 $\varphi(p^c)=p\cdot \varphi(p^{c-1})$，于是在 $i\bmod p=0$ 时可以直接计算。</p>
-<p>莫比乌斯函数就更特殊了，因为在某质因子质数大于 $1$ 时值取 $0$，所以遇到 $i\bmod p=0$ 时 $\mu(ip)=0$。</p>
+<p>欧拉函数比较特殊，根据通项公式 <span class="arithmatex">\(\varphi(n)=\prod_{i}p_i^{c_i-1}(p_i-1)\)</span> 有 <span class="arithmatex">\(\varphi(p^c)=p\cdot \varphi(p^{c-1})\)</span>，于是在 <span class="arithmatex">\(i\bmod p=0\)</span> 时可以直接计算。</p>
+<p>莫比乌斯函数就更特殊了，因为在某质因子质数大于 <span class="arithmatex">\(1\)</span> 时值取 <span class="arithmatex">\(0\)</span>，所以遇到 <span class="arithmatex">\(i\bmod p=0\)</span> 时 <span class="arithmatex">\(\mu(ip)=0\)</span>。</p>
 <h2 id="_7">杜教筛</h2>
 <p>难度陡然上升。</p>
-<p>为什么杜教筛叫筛呢？（我个人理解）注意到线性筛是通过更小的多个 $f(n)$ 用较小的复杂度计算出更大的单个 $f(n)$，虽然真正计算过的函数值变多了，但是你真正算出 $f(n)$ 所用的时间变少了。杜教筛也是如此，通过多计算几个值的方式降低整体复杂度。</p>
+<p>为什么杜教筛叫筛呢？（我个人理解）注意到线性筛是通过更小的多个 <span class="arithmatex">\(f(n)\)</span> 用较小的复杂度计算出更大的单个 <span class="arithmatex">\(f(n)\)</span>，虽然真正计算过的函数值变多了，但是你真正算出 <span class="arithmatex">\(f(n)\)</span> 所用的时间变少了。杜教筛也是如此，通过多计算几个值的方式降低整体复杂度。</p>
 <h3 id="_8">主要思路</h3>
-<p>考虑一对数论函数 $f,g$，有如下关系：</p>
-<p>$$
+<p>考虑一对数论函数 <span class="arithmatex">\(f,g\)</span>，有如下关系：</p>
+<div class="arithmatex">\[
 \sum_{i=1}^n(f\ast g)(i)=\sum_{i=1}^n\sum_{xy=i}g(x)f(y)=\sum_{i=1}^ng(i)F(\left\lfloor\frac{n}{i}\right\rfloor)
-$$</p>
-<p>因为每一对 $xy\le n$ 都会产生 $g(x)f(y)$ 的贡献，假如把前缀和拆开就会发现上述式子成立。</p>
+\]</div>
+<p>因为每一对 <span class="arithmatex">\(xy\le n\)</span> 都会产生 <span class="arithmatex">\(g(x)f(y)\)</span> 的贡献，假如把前缀和拆开就会发现上述式子成立。</p>
 <p>于是有：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 \sum_{i=1}^n(f\ast g)(i)&amp;=\sum_{i=1}^ng(i)F(\left\lfloor\frac{n}{i}\right\rfloor)\\
 \sum_{i=1}^n(f\ast g)(i)-\sum_{i=2}^{n}g(i)F(\left\lfloor\frac{n}{i}\right\rfloor)&amp;=g(1)F(n)\\
 \frac{\sum_{i=1}^n(f*g)(i)-\sum_{i=2}^{n}g(i)F(\left\lfloor\frac{n}{i}\right\rfloor)}{g(1)}&amp;=F(n)\\
 \end{aligned}
-$$</p>
-<p>假如 $f\ast g$ 和 $g$ 的前缀和都好算（可以 $O(1)$ 或者低复杂度算），那么对前面这一堆数论分块，就能转化成 $O(\sqrt{n})$ 个子问题。</p>
-<p>于是得到了杜教筛的基本思路。构造 $g$ 使得 $f\ast g$ 和 $g$ 的前缀和都好求。</p>
-<p>注意到 $\left\lfloor\frac{\left\lfloor\frac{a}{n}\right\rfloor}{m}\right\rfloor=\left\lfloor\frac{a}{nm}\right\rfloor$，所以需要计算的 $F(n')$ 都是 $\left\lfloor\frac{n}{i}\right\rfloor$ 中出现过的。那么全部取出来从小往大计算即可（或者记忆化）。</p>
-<p>复杂度证不来，就是 $\left\lfloor\frac{n}{i}\right\rfloor$ 的每个取值开根号加起来，可以证明是 $O(n^{\frac{3}{4}})$ 的。</p>
-<p>一种优化是（在能做的情况下）直接预处理 $F(i)$ 到 $n^{\frac{2}{3}}$（一般来说 $f$ 是积性函数，可以线性筛），然后对于小的直接引用，大的做上面的方法，可以证明复杂度是 $O(n^{\frac{2}{3}})$ 的。</p>
+\]</div>
+<p>假如 <span class="arithmatex">\(f\ast g\)</span> 和 <span class="arithmatex">\(g\)</span> 的前缀和都好算（可以 <span class="arithmatex">\(O(1)\)</span> 或者低复杂度算），那么对前面这一堆数论分块，就能转化成 <span class="arithmatex">\(O(\sqrt{n})\)</span> 个子问题。</p>
+<p>于是得到了杜教筛的基本思路。构造 <span class="arithmatex">\(g\)</span> 使得 <span class="arithmatex">\(f\ast g\)</span> 和 <span class="arithmatex">\(g\)</span> 的前缀和都好求。</p>
+<p>注意到 <span class="arithmatex">\(\left\lfloor\frac{\left\lfloor\frac{a}{n}\right\rfloor}{m}\right\rfloor=\left\lfloor\frac{a}{nm}\right\rfloor\)</span>，所以需要计算的 <span class="arithmatex">\(F(n')\)</span> 都是 <span class="arithmatex">\(\left\lfloor\frac{n}{i}\right\rfloor\)</span> 中出现过的。那么全部取出来从小往大计算即可（或者记忆化）。</p>
+<p>复杂度证不来，就是 <span class="arithmatex">\(\left\lfloor\frac{n}{i}\right\rfloor\)</span> 的每个取值开根号加起来，可以证明是 <span class="arithmatex">\(O(n^{\frac{3}{4}})\)</span> 的。</p>
+<p>一种优化是（在能做的情况下）直接预处理 <span class="arithmatex">\(F(i)\)</span> 到 <span class="arithmatex">\(n^{\frac{2}{3}}\)</span>（一般来说 <span class="arithmatex">\(f\)</span> 是积性函数，可以线性筛），然后对于小的直接引用，大的做上面的方法，可以证明复杂度是 <span class="arithmatex">\(O(n^{\frac{2}{3}})\)</span> 的。</p>
 <h3 id="_9">莫比乌斯函数</h3>
 <p>最常用的一集。</p>
-<p>有经典式子 $\varepsilon=\mu\ast I$。而 $\varepsilon$ 和 $I$ 的前缀和都巨好求无比（$\sum_{i=1}^n\varepsilon(i)=1,\sum_{i=1}^nI(i)=n$）。于是可以直接算。</p>
+<p>有经典式子 <span class="arithmatex">\(\varepsilon=\mu\ast I\)</span>。而 <span class="arithmatex">\(\varepsilon\)</span> 和 <span class="arithmatex">\(I\)</span> 的前缀和都巨好求无比（<span class="arithmatex">\(\sum_{i=1}^n\varepsilon(i)=1,\sum_{i=1}^nI(i)=n\)</span>）。于是可以直接算。</p>
 <h3 id="_10">欧拉函数</h3>
 <p>怎么哪都是你们两个。</p>
-<p>有经典式子 $\varphi=id\ast \mu$。故 $id=\varphi \ast I$，于是直接套板子。</p>
+<p>有经典式子 <span class="arithmatex">\(\varphi=id\ast \mu\)</span>。故 <span class="arithmatex">\(id=\varphi \ast I\)</span>，于是直接套板子。</p>
 <h3 id="_11">其他函数</h3>
-<p>很随缘啊，取决于能不能构造出 $g$。</p>
-<p>但是不要局限于筛。假如你能构造出 $g,h$ 满足 $f=g\ast h$，而 $g,h$ 都好求前缀和，其实可以直接用 $\sum_{i=1}^n(f\ast g)(i)=\sum_{i=1}^ng(i)F(\left\lfloor\frac{n}{i}\right\rfloor)$ 直接数论分块算，复杂度还是 $O(n^{\frac{1}{2}})$ 的。</p>
+<p>很随缘啊，取决于能不能构造出 <span class="arithmatex">\(g\)</span>。</p>
+<p>但是不要局限于筛。假如你能构造出 <span class="arithmatex">\(g,h\)</span> 满足 <span class="arithmatex">\(f=g\ast h\)</span>，而 <span class="arithmatex">\(g,h\)</span> 都好求前缀和，其实可以直接用 <span class="arithmatex">\(\sum_{i=1}^n(f\ast g)(i)=\sum_{i=1}^ng(i)F(\left\lfloor\frac{n}{i}\right\rfloor)\)</span> 直接数论分块算，复杂度还是 <span class="arithmatex">\(O(n^{\frac{1}{2}})\)</span> 的。</p>
 <details class="success">
 <summary><a href="https://www.luogu.com.cn/problem/P4213">模板题</a>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6215,18 +6243,18 @@ $$</p>
 <p>PN 筛用于亚线性地求解一些积性函数的前缀和。</p>
 <h3 id="powerful-number">Powerful Number</h3>
 <p><del>Poweful Number，Number 中的 Number，数字中的数字，数字中的征服者，数字的王</del></p>
-<p>若一个正整数 $n=\prod p_i^{c_i}$，$\forall i$ 均有 $c_i&gt;1$，则称 $n$ 为一个 Powerful Number（注意 $1$ 也满足这个条件）。</p>
-<p>显然所有 PowerFul Number 都能写成 $a^2b^3$，考虑偶数就全放 $a$ 里，奇数就拆三个放 $b$ 里。</p>
-<p>那么 $n$ 以内的 Powerful Number1 个数就是 $\sum_{a=1}^{\sqrt{n}}\sqrt[3]{\frac{n}{a^2}}$。根据一些我不会的证明这玩意是 $O(\sqrt{n})$ 级别的。</p>
+<p>若一个正整数 <span class="arithmatex">\(n=\prod p_i^{c_i}\)</span>，<span class="arithmatex">\(\forall i\)</span> 均有 <span class="arithmatex">\(c_i&gt;1\)</span>，则称 <span class="arithmatex">\(n\)</span> 为一个 Powerful Number（注意 <span class="arithmatex">\(1\)</span> 也满足这个条件）。</p>
+<p>显然所有 PowerFul Number 都能写成 <span class="arithmatex">\(a^2b^3\)</span>，考虑偶数就全放 <span class="arithmatex">\(a\)</span> 里，奇数就拆三个放 <span class="arithmatex">\(b\)</span> 里。</p>
+<p>那么 <span class="arithmatex">\(n\)</span> 以内的 Powerful Number1 个数就是 <span class="arithmatex">\(\sum_{a=1}^{\sqrt{n}}\sqrt[3]{\frac{n}{a^2}}\)</span>。根据一些我不会的证明这玩意是 <span class="arithmatex">\(O(\sqrt{n})\)</span> 级别的。</p>
 <h3 id="pn">PN 筛</h3>
-<p>首先我们需要构造一个好求前缀和的积性函数 $g$，满足对于所有质数 $p\le n$ 均有 $g(p)=f(p)$（非质数点位不作要求，比如若 $f$ 在质数位置都取 $1$ 时，$g$ 可能可以取 $I$）。</p>
-<p>考虑构造一个 $h\ast g=f$。根据狄利克雷卷积的性质，有 $h(1)=1$ 且 $h$ 也是积性函数。下面探讨一些 $h$ 的性质。</p>
-<p>对于任意质数 $p$，显然有 $f(p)=h(p)g(1)+h(1)g(p)$。由于 $g(1)=h(1)=1$（非 $0$ 积性函数的性质），则 $f(p)=h(p)+g(p)$。又由于 $g(p)=f(p)$，所以 $h(p)=0$。而注意到 $h$ 为积性函数，容易发现在非 Powerful Number 的位置均有 $h(i)=0$（否则就会带一个一次质因子，根据积性 $h(i)=0$）。</p>
-<p>关于 $h$ 的构造，因为它是积性函数，所以其实也只需要考虑 $p^k$ 就行了。能求出 $h$ 的通项公式当然好，但如果求不出来也有办法。考虑 $f(p^k)=\sum_{i=0}^kh(p^i)g(p^{k-i})$，所以 $h(p^k)=f(p^k)-\sum_{i=0}^{k-1}h(p^i)g(p^{k-i})$。又因为 $O(\sqrt{n})$ 内指数数量约为 $O(\frac{\sqrt{n}}{\log n})$ 级别的，素数的幂次上界是 $\log n$ 的。所以直接暴力复杂度是 $O(\frac{\sqrt{n}}{\log n}\log^2n)=O(\sqrt{n}\log n)$，还是非常小的，而且这个上界显然非常松吧。另外空间复杂度是 $O(\frac{\sqrt{n}}{\log n}\log n)=O(\sqrt{n})$ 的。当然如果能求出 $h$ 的通项公式那么复杂度会低一点。</p>
-<p>由于 $F(n)=\sum_{i=1}^n(h\ast g)(i)=\sum_{i=1}^nh(i)G(\left\lfloor\frac{n}{i}\right\rfloor)$，而 $h$ 只在 PN 处有值。则大力搜索 $i$（枚举 $\sqrt{n}$ 以内的质数再从 $2$ 开始枚举其幂次）然后乘上 $g$ 的前缀和即可。复杂度 $O((p+q)\sqrt{n})$，其中 $p,q$ 分别是求 $g$ 前缀和的复杂度和求 $h$ 单点值的复杂度。</p>
+<p>首先我们需要构造一个好求前缀和的积性函数 <span class="arithmatex">\(g\)</span>，满足对于所有质数 <span class="arithmatex">\(p\le n\)</span> 均有 <span class="arithmatex">\(g(p)=f(p)\)</span>（非质数点位不作要求，比如若 <span class="arithmatex">\(f\)</span> 在质数位置都取 <span class="arithmatex">\(1\)</span> 时，<span class="arithmatex">\(g\)</span> 可能可以取 <span class="arithmatex">\(I\)</span>）。</p>
+<p>考虑构造一个 <span class="arithmatex">\(h\ast g=f\)</span>。根据狄利克雷卷积的性质，有 <span class="arithmatex">\(h(1)=1\)</span> 且 <span class="arithmatex">\(h\)</span> 也是积性函数。下面探讨一些 <span class="arithmatex">\(h\)</span> 的性质。</p>
+<p>对于任意质数 <span class="arithmatex">\(p\)</span>，显然有 <span class="arithmatex">\(f(p)=h(p)g(1)+h(1)g(p)\)</span>。由于 <span class="arithmatex">\(g(1)=h(1)=1\)</span>（非 <span class="arithmatex">\(0\)</span> 积性函数的性质），则 <span class="arithmatex">\(f(p)=h(p)+g(p)\)</span>。又由于 <span class="arithmatex">\(g(p)=f(p)\)</span>，所以 <span class="arithmatex">\(h(p)=0\)</span>。而注意到 <span class="arithmatex">\(h\)</span> 为积性函数，容易发现在非 Powerful Number 的位置均有 <span class="arithmatex">\(h(i)=0\)</span>（否则就会带一个一次质因子，根据积性 <span class="arithmatex">\(h(i)=0\)</span>）。</p>
+<p>关于 <span class="arithmatex">\(h\)</span> 的构造，因为它是积性函数，所以其实也只需要考虑 <span class="arithmatex">\(p^k\)</span> 就行了。能求出 <span class="arithmatex">\(h\)</span> 的通项公式当然好，但如果求不出来也有办法。考虑 <span class="arithmatex">\(f(p^k)=\sum_{i=0}^kh(p^i)g(p^{k-i})\)</span>，所以 <span class="arithmatex">\(h(p^k)=f(p^k)-\sum_{i=0}^{k-1}h(p^i)g(p^{k-i})\)</span>。又因为 <span class="arithmatex">\(O(\sqrt{n})\)</span> 内指数数量约为 <span class="arithmatex">\(O(\frac{\sqrt{n}}{\log n})\)</span> 级别的，素数的幂次上界是 <span class="arithmatex">\(\log n\)</span> 的。所以直接暴力复杂度是 <span class="arithmatex">\(O(\frac{\sqrt{n}}{\log n}\log^2n)=O(\sqrt{n}\log n)\)</span>，还是非常小的，而且这个上界显然非常松吧。另外空间复杂度是 <span class="arithmatex">\(O(\frac{\sqrt{n}}{\log n}\log n)=O(\sqrt{n})\)</span> 的。当然如果能求出 <span class="arithmatex">\(h\)</span> 的通项公式那么复杂度会低一点。</p>
+<p>由于 <span class="arithmatex">\(F(n)=\sum_{i=1}^n(h\ast g)(i)=\sum_{i=1}^nh(i)G(\left\lfloor\frac{n}{i}\right\rfloor)\)</span>，而 <span class="arithmatex">\(h\)</span> 只在 PN 处有值。则大力搜索 <span class="arithmatex">\(i\)</span>（枚举 <span class="arithmatex">\(\sqrt{n}\)</span> 以内的质数再从 <span class="arithmatex">\(2\)</span> 开始枚举其幂次）然后乘上 <span class="arithmatex">\(g\)</span> 的前缀和即可。复杂度 <span class="arithmatex">\(O((p+q)\sqrt{n})\)</span>，其中 <span class="arithmatex">\(p,q\)</span> 分别是求 <span class="arithmatex">\(g\)</span> 前缀和的复杂度和求 <span class="arithmatex">\(h\)</span> 单点值的复杂度。</p>
 <h2 id="_12">结语</h2>
 <p>感觉学了杜教筛和 PN 筛就差不多了啊。</p>
-<p>这篇博客提到的筛法的核心是构造 $g,h$ 函数（除了线性筛），这个就和做几何题一样，想到了就简单，没想到就暴毙，感觉很考验经验啊。</p>
+<p>这篇博客提到的筛法的核心是构造 <span class="arithmatex">\(g,h\)</span> 函数（除了线性筛），这个就和做几何题一样，想到了就简单，没想到就暴毙，感觉很考验经验啊。</p>
 
 
 

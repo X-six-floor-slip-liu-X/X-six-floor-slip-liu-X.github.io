@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5831,8 +5859,8 @@
 <p>T4 要用 <strong>【10】最小树形图</strong>，准备学了最小树形图再写。</p>
 <p><a href="../../files/20231005.rar">密码是大小写敏感通用密码</a></p>
 <h2 id="t1">T1</h2>
-<p>首先容易发现，若 $a_1+b_1+c_1=a_2+b_2+c_2$，除非 $a_1=a_2,b_1=b_2,c_1=c_2$，否则 $(a_1,b_1,c_1),(a_2,b_2,c_2)$ 必然不互相偏序，且容易发现若把总和相同的所有三元组都取完了，那么再加任意一个三元组必定会被偏序。</p>
-<p>总和相同的三元组可以 $O(n^2)$ 枚举，这道题可以 $O(n^3)$ 过，$O(n)$ 枚举总和就可过了，但其实你打表可以发现在 $sum=\frac{3n}{2}$ 时个数取到最大值。</p>
+<p>首先容易发现，若 <span class="arithmatex">\(a_1+b_1+c_1=a_2+b_2+c_2\)</span>，除非 <span class="arithmatex">\(a_1=a_2,b_1=b_2,c_1=c_2\)</span>，否则 <span class="arithmatex">\((a_1,b_1,c_1),(a_2,b_2,c_2)\)</span> 必然不互相偏序，且容易发现若把总和相同的所有三元组都取完了，那么再加任意一个三元组必定会被偏序。</p>
+<p>总和相同的三元组可以 <span class="arithmatex">\(O(n^2)\)</span> 枚举，这道题可以 <span class="arithmatex">\(O(n^3)\)</span> 过，<span class="arithmatex">\(O(n)\)</span> 枚举总和就可过了，但其实你打表可以发现在 <span class="arithmatex">\(sum=\frac{3n}{2}\)</span> 时个数取到最大值。</p>
 <p>严谨证明可以参考附件里的官方题解。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -5873,11 +5901,11 @@
 </details>
 <h2 id="t2">T2</h2>
 <p>首先直接做是不好做的，长度为实数的区间个数是正无穷的，考虑寻找性质。</p>
-<p>首先容易发现若 $[l,r]$ 两端都不是某单一材质区间的（下文“区间”均指这个，询问区间用“$[l,r]$”指代）端点，那么可以考虑左右两边哪边密度大调整到对应的端点（如果密度一样那么调整之后不会变劣）。故我们可以得出结论，$[l,r]$ 中<strong>必定有至少一边是区间端点</strong>。</p>
-<p>但是现在区间个数显然还是正无穷的，考虑另一边。容易想到，若另一边不是区间端点，$[l,r]$ 的密度又不是上界 $R$ 或下界 $L$，那么这样必定是不优的，因为若最后一段密度较大，显然取到上界/下一个端点会比较优，若密度较小，显然取到下界/上一个端点会比较优。</p>
-<p>那么我们可以得出结论了：最终的 $[l,r]$ 要么两边都是区间端点，要么一边是区间端点，区间质量取到 $L$ 或 $R$。第二种情况区间个数是 $O(n)$ 的，可以直接暴力全求出来，我们考虑第一种情况怎么求。</p>
-<p>我们设质量的前缀和为 $summ_i$，长度的前缀和为 $suml_i$。如果答案取到的区间为 $(s,t]$，密度为 $P$，那么容易发现 $\frac{summ_t-summ_s}{suml_t-suml_s}=P$，这玩意长得就很 01 分数规划，稍微移一下项容易发现 $summ_r-Psuml_r=summ_l-Psuml_l$，然后就可以二分答案了。关于 checker，其实就是区间在线求最大值，可以单调队列维护。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>首先容易发现若 <span class="arithmatex">\([l,r]\)</span> 两端都不是某单一材质区间的（下文“区间”均指这个，询问区间用“<span class="arithmatex">\([l,r]\)</span>”指代）端点，那么可以考虑左右两边哪边密度大调整到对应的端点（如果密度一样那么调整之后不会变劣）。故我们可以得出结论，<span class="arithmatex">\([l,r]\)</span> 中<strong>必定有至少一边是区间端点</strong>。</p>
+<p>但是现在区间个数显然还是正无穷的，考虑另一边。容易想到，若另一边不是区间端点，<span class="arithmatex">\([l,r]\)</span> 的密度又不是上界 <span class="arithmatex">\(R\)</span> 或下界 <span class="arithmatex">\(L\)</span>，那么这样必定是不优的，因为若最后一段密度较大，显然取到上界/下一个端点会比较优，若密度较小，显然取到下界/上一个端点会比较优。</p>
+<p>那么我们可以得出结论了：最终的 <span class="arithmatex">\([l,r]\)</span> 要么两边都是区间端点，要么一边是区间端点，区间质量取到 <span class="arithmatex">\(L\)</span> 或 <span class="arithmatex">\(R\)</span>。第二种情况区间个数是 <span class="arithmatex">\(O(n)\)</span> 的，可以直接暴力全求出来，我们考虑第一种情况怎么求。</p>
+<p>我们设质量的前缀和为 <span class="arithmatex">\(summ_i\)</span>，长度的前缀和为 <span class="arithmatex">\(suml_i\)</span>。如果答案取到的区间为 <span class="arithmatex">\((s,t]\)</span>，密度为 <span class="arithmatex">\(P\)</span>，那么容易发现 <span class="arithmatex">\(\frac{summ_t-summ_s}{suml_t-suml_s}=P\)</span>，这玩意长得就很 01 分数规划，稍微移一下项容易发现 <span class="arithmatex">\(summ_r-Psuml_r=summ_l-Psuml_l\)</span>，然后就可以二分答案了。关于 checker，其实就是区间在线求最大值，可以单调队列维护。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5965,17 +5993,17 @@
 <h2 id="t3">T3</h2>
 <p>树上问题通常可以优先考虑树形 DP，但是这道题给的信息不太好直接维护，因为切下来的块可能是“除去某棵子树”的部分。考虑转化一下。</p>
 <p>其实也非常简单，我们看成两种操作，一种是<strong>保留当前子树</strong>，另一种是<strong>删除当前子树</strong>。而每个保留子树操作所删除的子树大小其实是很好求出的，这样所有信息都能在子树内维护了。</p>
-<p>然后考虑怎么设计状态，由于 $k$ 是很小的，考虑状态压缩。那么设 $dp_{i,msk,j}$ 表示在 $i$ 子树内，进行过的操作集合为 $msk$，第一次<strong>保留子树</strong>的操作是 $j$ 的方案数。为什么要记保留子树的操作呢？因为很多操作的可行性和这棵子树是否保留有关。若该子树内未进行保留子树操作 $j$ 取 $k+1$。</p>
-<p>然后考虑 DP 转移，假设现在要把 $u,v$ 两结点的状态 $dp_{u,s_1,j_1},dp_{v,s_2,j_2}$ 合并，那么两状态能合并，当且仅当：</p>
+<p>然后考虑怎么设计状态，由于 <span class="arithmatex">\(k\)</span> 是很小的，考虑状态压缩。那么设 <span class="arithmatex">\(dp_{i,msk,j}\)</span> 表示在 <span class="arithmatex">\(i\)</span> 子树内，进行过的操作集合为 <span class="arithmatex">\(msk\)</span>，第一次<strong>保留子树</strong>的操作是 <span class="arithmatex">\(j\)</span> 的方案数。为什么要记保留子树的操作呢？因为很多操作的可行性和这棵子树是否保留有关。若该子树内未进行保留子树操作 <span class="arithmatex">\(j\)</span> 取 <span class="arithmatex">\(k+1\)</span>。</p>
+<p>然后考虑 DP 转移，假设现在要把 <span class="arithmatex">\(u,v\)</span> 两结点的状态 <span class="arithmatex">\(dp_{u,s_1,j_1},dp_{v,s_2,j_2}\)</span> 合并，那么两状态能合并，当且仅当：</p>
 <ol>
-<li>$(u,v)\in E$：不解释。</li>
-<li>$j_1=k+1\vee j_2=k+1$：这个显然吧，不可能两棵子树同时都有保留子树操作，因为保留了一边的话另一边必然被删掉了。</li>
-<li>$s_1\cap s_2=\varnothing$：这个也显然吧，一个操作只会进行一次。</li>
+<li><span class="arithmatex">\((u,v)\in E\)</span>：不解释。</li>
+<li><span class="arithmatex">\(j_1=k+1\vee j_2=k+1\)</span>：这个显然吧，不可能两棵子树同时都有保留子树操作，因为保留了一边的话另一边必然被删掉了。</li>
+<li><span class="arithmatex">\(s_1\cap s_2=\varnothing\)</span>：这个也显然吧，一个操作只会进行一次。</li>
 </ol>
-<p>那么我们可以枚举子集维护条件 $3$，然后直接维护条件 $2$，这一部分复杂度是 $O(nk3^k)$ 的。</p>
-<p>然后考虑对于状态 $dp_{u,msk,j}$ 当前子树和父亲的边能不能断开作为一个全新的操作 $j'$。</p>
-<p>首先，无论如何，$j'$ 都不能在 $msk$ 中，因为你不能进行一个操作两次，若这是一个<strong>保留子树</strong>操作，那么显然有 $j'&lt;j$，因为你不可能先保留后面的再保留前面的吧。若这是一个<strong>删除子树</strong>操作，那么必然 $j'$ 比 $msk$ 中最大值还大，因为假如你把这条边断开了，那么下面的子树就不存在了，显然是不对的。然后对于子树大小问题，可以简单维护，这里不做赘述。</p>
-<p>复杂度 $O(nk3^k+nk2^k)$。</p>
+<p>那么我们可以枚举子集维护条件 <span class="arithmatex">\(3\)</span>，然后直接维护条件 <span class="arithmatex">\(2\)</span>，这一部分复杂度是 <span class="arithmatex">\(O(nk3^k)\)</span> 的。</p>
+<p>然后考虑对于状态 <span class="arithmatex">\(dp_{u,msk,j}\)</span> 当前子树和父亲的边能不能断开作为一个全新的操作 <span class="arithmatex">\(j'\)</span>。</p>
+<p>首先，无论如何，<span class="arithmatex">\(j'\)</span> 都不能在 <span class="arithmatex">\(msk\)</span> 中，因为你不能进行一个操作两次，若这是一个<strong>保留子树</strong>操作，那么显然有 <span class="arithmatex">\(j'&lt;j\)</span>，因为你不可能先保留后面的再保留前面的吧。若这是一个<strong>删除子树</strong>操作，那么必然 <span class="arithmatex">\(j'\)</span> 比 <span class="arithmatex">\(msk\)</span> 中最大值还大，因为假如你把这条边断开了，那么下面的子树就不存在了，显然是不对的。然后对于子树大小问题，可以简单维护，这里不做赘述。</p>
+<p>复杂度 <span class="arithmatex">\(O(nk3^k+nk2^k)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5854,9 +5882,9 @@
 <h2 id="t1">T1</h2>
 <p><del>最开始一眼以为这道题是偏序问题，后面发现不太对劲。</del></p>
 <p>容易发现这是一个类似拓扑排序的东西，那么我们可以考虑类似于拓扑排序的做法。</p>
-<p>首先对于每个主题 $j$，把 $r_{i,j}$ 升序排列，然后对于每个主题开一个指针，这样只要知道了每个主题的进度就能 $O(nk)$ 地维护有哪些主题的标准是达到了的。</p>
-<p>那么我们可以对每一个模块记有多少主题达标，如果有 $k$ 个主题达标说明这个模块已经可以学习了（类似于拓扑排序中的 $deg=0$）。</p>
-<p>啊啊啊题解写着感觉好抽象，总之就是像拓扑排序一样维护即可，复杂度 $O(nk\log n)$（因为要排序）。</p>
+<p>首先对于每个主题 <span class="arithmatex">\(j\)</span>，把 <span class="arithmatex">\(r_{i,j}\)</span> 升序排列，然后对于每个主题开一个指针，这样只要知道了每个主题的进度就能 <span class="arithmatex">\(O(nk)\)</span> 地维护有哪些主题的标准是达到了的。</p>
+<p>那么我们可以对每一个模块记有多少主题达标，如果有 <span class="arithmatex">\(k\)</span> 个主题达标说明这个模块已经可以学习了（类似于拓扑排序中的 <span class="arithmatex">\(deg=0\)</span>）。</p>
+<p>啊啊啊题解写着感觉好抽象，总之就是像拓扑排序一样维护即可，复杂度 <span class="arithmatex">\(O(nk\log n)\)</span>（因为要排序）。</p>
 <p>值得一提的是我赛时复杂度写假了，以为是排序常数大了，就打了基排。结果实际上由于大样例过水基排过了，但其实在大部分数据下基排比快排慢多了。</p>
 <details class="sucess">
 <summary>参考代码</summary>
@@ -5928,10 +5956,10 @@
 <h2 id="t2">T2</h2>
 <p>貌似是颜色段均摊套路题。</p>
 <p>首先每个任务相当于给区间染色，但是区间内每个点染的颜色不同，如何解决呢？</p>
-<p>容易发现，若把 $i$ 点的颜色 $c_i$ 改为 $c_i-i$，每个位置前后两个任务的时间差是不会变的，而每个任务染的颜色就相同了。</p>
+<p>容易发现，若把 <span class="arithmatex">\(i\)</span> 点的颜色 <span class="arithmatex">\(c_i\)</span> 改为 <span class="arithmatex">\(c_i-i\)</span>，每个位置前后两个任务的时间差是不会变的，而每个任务染的颜色就相同了。</p>
 <p>那么可以直接用珂朵莉树维护了。</p>
-<p>关于复杂度，珂朵莉树维护颜色段均摊的复杂度是 $O(n\log n)$ 的。</p>
-<p>考虑每次加区间时，区间数量至多加二（就是把原来的某个大区间分成两半，然后加一个进去）。而对于覆盖的区间，每个区间只会被删除一次，势能分析可得对区间的操作数是 $O(n)$ 级别的，而 <code>set</code> 是 $O(\log n)$ 的，故复杂度为 $O(n\log n)$。</p>
+<p>关于复杂度，珂朵莉树维护颜色段均摊的复杂度是 <span class="arithmatex">\(O(n\log n)\)</span> 的。</p>
+<p>考虑每次加区间时，区间数量至多加二（就是把原来的某个大区间分成两半，然后加一个进去）。而对于覆盖的区间，每个区间只会被删除一次，势能分析可得对区间的操作数是 <span class="arithmatex">\(O(n)\)</span> 级别的，而 <code>set</code> 是 <span class="arithmatex">\(O(\log n)\)</span> 的，故复杂度为 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6021,12 +6049,12 @@
 </details>
 <h2 id="t3">T3</h2>
 <p>容易发现，最优路径应该是前半部分单调向上，中间有一段平飞，然后后半部分单调向下，那么我们只考虑前半部分单调向上，后半部分是对称的。</p>
-<p>考虑假如已经知道了到 $u$ 的最短时间 $dis_u$，存在一条边 $(u,v)$，那么经过 $u$ 到达 $v$ 的最短时间 $dis_v$ 是多少。</p>
-<p>容易发现，是 $\max(dis_u+1,a_v)$，自己模拟一下即可。</p>
+<p>考虑假如已经知道了到 <span class="arithmatex">\(u\)</span> 的最短时间 <span class="arithmatex">\(dis_u\)</span>，存在一条边 <span class="arithmatex">\((u,v)\)</span>，那么经过 <span class="arithmatex">\(u\)</span> 到达 <span class="arithmatex">\(v\)</span> 的最短时间 <span class="arithmatex">\(dis_v\)</span> 是多少。</p>
+<p>容易发现，是 <span class="arithmatex">\(\max(dis_u+1,a_v)\)</span>，自己模拟一下即可。</p>
 <p>然后容易发现，这个式子是可以用 dijkstra 维护的。</p>
-<p>具体证明参考 <a href="https://oi-wiki.org/graph/shortest-path/#%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E">Oi Wiki</a>，总之容易发现这个式子也是满足 $D_y\le D_u$ 的，那么可以用 dijkstra 求出 $1$ 到每个点的时间和 $n$ 到每个点的距离（时间）。</p>
+<p>具体证明参考 <a href="https://oi-wiki.org/graph/shortest-path/#%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E">Oi Wiki</a>，总之容易发现这个式子也是满足 <span class="arithmatex">\(D_y\le D_u\)</span> 的，那么可以用 dijkstra 求出 <span class="arithmatex">\(1\)</span> 到每个点的时间和 <span class="arithmatex">\(n\)</span> 到每个点的距离（时间）。</p>
 <p>但是这样不能处理中间平飞的那段。</p>
-<p>考虑转化一下，容易发现假如中间平飞的距离大于等于 $2$，两端点相连的路径都从平飞变成上升/下降并不会改变总时间。</p>
+<p>考虑转化一下，容易发现假如中间平飞的距离大于等于 <span class="arithmatex">\(2\)</span>，两端点相连的路径都从平飞变成上升/下降并不会改变总时间。</p>
 <p>大概就是从这样：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>_____
 </span></code></pre></div>
@@ -6035,29 +6063,29 @@
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>/   \
 </span></code></pre></div>
 懒得画图了，将就一下。</p>
-<p>那么就可以把中间平飞的距离根据奇偶性变为 $0/1$。</p>
-<p>设从 $1$ 到 $i$ 的最短路为 $dis_{0,i}$，从 $n$ 到 $i$ 的为 $dis_{1,i}$ 现在分情况讨论：</p>
+<p>那么就可以把中间平飞的距离根据奇偶性变为 <span class="arithmatex">\(0/1\)</span>。</p>
+<p>设从 <span class="arithmatex">\(1\)</span> 到 <span class="arithmatex">\(i\)</span> 的最短路为 <span class="arithmatex">\(dis_{0,i}\)</span>，从 <span class="arithmatex">\(n\)</span> 到 <span class="arithmatex">\(i\)</span> 的为 <span class="arithmatex">\(dis_{1,i}\)</span> 现在分情况讨论：</p>
 <hr />
-<p>若平飞段长度为 $0$：</p>
-<p>那么平飞段就是一个转折点，设这个点为 $u$。</p>
+<p>若平飞段长度为 <span class="arithmatex">\(0\)</span>：</p>
+<p>那么平飞段就是一个转折点，设这个点为 <span class="arithmatex">\(u\)</span>。</p>
 <ul>
 <li>若前后最短路都取高度，即两边路径上均存在一个点使得高度大于路径长度：</li>
 </ul>
-<p>那么显然，时间为 $2a_u$，</p>
+<p>那么显然，时间为 <span class="arithmatex">\(2a_u\)</span>，</p>
 <ul>
 <li>若前后最短路都取路径长度，即路径上不存在一个点使得高度大于路径长度：</li>
 </ul>
-<p>容易发现，由于存在转折点，那么必定会一个中心点，使得前后距离相同，由于我们要枚举 $u$，那么必定能找到这个中心点，答案可取 $2\max(dis_{0,u},dis_{1,u})$。</p>
+<p>容易发现，由于存在转折点，那么必定会一个中心点，使得前后距离相同，由于我们要枚举 <span class="arithmatex">\(u\)</span>，那么必定能找到这个中心点，答案可取 <span class="arithmatex">\(2\max(dis_{0,u},dis_{1,u})\)</span>。</p>
 <ul>
 <li>若一边取路径长度一边取高度：</li>
 </ul>
 <p>类似于第二种，容易发现在取高度那边的最高点上能转化成第一种。</p>
-<p>综上，答案取 $2\max(dis_{0,u},dis_{1,u})$。</p>
-<p>若长度为 $1$：</p>
-<p>那么平飞段就是一条边，设为 $(u,v)$。</p>
-<p>证明类似，总之答案取 $2\max(dis_{0,u},dis_{1,v})+1$。</p>
+<p>综上，答案取 <span class="arithmatex">\(2\max(dis_{0,u},dis_{1,u})\)</span>。</p>
+<p>若长度为 <span class="arithmatex">\(1\)</span>：</p>
+<p>那么平飞段就是一条边，设为 <span class="arithmatex">\((u,v)\)</span>。</p>
+<p>证明类似，总之答案取 <span class="arithmatex">\(2\max(dis_{0,u},dis_{1,v})+1\)</span>。</p>
 <hr />
-<p>跑两遍 dijkstra 复杂度是 $O(m\log m)$，最终枚举中心点求答案复杂度是 $O(n+m)$ 的，总复杂度为 $O(m\log m)$。</p>
+<p>跑两遍 dijkstra 复杂度是 <span class="arithmatex">\(O(m\log m)\)</span>，最终枚举中心点求答案复杂度是 <span class="arithmatex">\(O(n+m)\)</span> 的，总复杂度为 <span class="arithmatex">\(O(m\log m)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6122,11 +6150,11 @@
 <h2 id="t4">T4</h2>
 <p>首先假如在线做要维护左右两个端点，非常麻烦。那么考虑离线解决。</p>
 <p>具体来说，把所有区间和询问挂在右端点上，这样只需要从左到右扫一遍维护左端点即可。</p>
-<p>那么考虑对每个点维护能覆盖它的区间中左端点最靠右是多少，若不存在能覆盖它的区间则为 $0$，容易发现只要询问区间 $[l,r]$ 中这个值的最小值大于等于 $l$ 就合法。</p>
-<p>证明很简单，首先满足这个条件那么选中的所有区间必定不超出询问区间，且询问区间内每个点都被覆盖（否则那个值就为 $0$ 了），那么必定恰好覆盖询问区间。</p>
-<p>考虑如何维护，加新区间是一个区间取 $\max$ 的过程，然后询问是区间求 $\min$。 <del>是一个很板的势能分析线段树</del></p>
-<p>其实仔细分析一下完全不需要写 Segbeats，区间取 $\max$ 后完全可以直接确定区间最小值，就像普通线段树一样写就行了。</p>
-<p>复杂度 $O((n+q)\log n)$。</p>
+<p>那么考虑对每个点维护能覆盖它的区间中左端点最靠右是多少，若不存在能覆盖它的区间则为 <span class="arithmatex">\(0\)</span>，容易发现只要询问区间 <span class="arithmatex">\([l,r]\)</span> 中这个值的最小值大于等于 <span class="arithmatex">\(l\)</span> 就合法。</p>
+<p>证明很简单，首先满足这个条件那么选中的所有区间必定不超出询问区间，且询问区间内每个点都被覆盖（否则那个值就为 <span class="arithmatex">\(0\)</span> 了），那么必定恰好覆盖询问区间。</p>
+<p>考虑如何维护，加新区间是一个区间取 <span class="arithmatex">\(\max\)</span> 的过程，然后询问是区间求 <span class="arithmatex">\(\min\)</span>。 <del>是一个很板的势能分析线段树</del></p>
+<p>其实仔细分析一下完全不需要写 Segbeats，区间取 <span class="arithmatex">\(\max\)</span> 后完全可以直接确定区间最小值，就像普通线段树一样写就行了。</p>
+<p>复杂度 <span class="arithmatex">\(O((n+q)\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

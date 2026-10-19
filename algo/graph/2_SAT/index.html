@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5802,20 +5830,20 @@
 
 <h1 id="2-sat">2-SAT 问题学习笔记</h1>
 <h2 id="_1">前言</h2>
-<p>有些时候我们会遇到一些由多个形如“$S$ 集合中至少有一个满足”限制的问题，我们按集合 $S$ 的大小称作“k-SAT（k-适定性问题，k-Satisfiability）”，而 $k&gt;2$ 的已经被证明是 NPC 问题，此处我们只考虑 $k=2$ 的情况。</p>
+<p>有些时候我们会遇到一些由多个形如“<span class="arithmatex">\(S\)</span> 集合中至少有一个满足”限制的问题，我们按集合 <span class="arithmatex">\(S\)</span> 的大小称作“k-SAT（k-适定性问题，k-Satisfiability）”，而 <span class="arithmatex">\(k&gt;2\)</span> 的已经被证明是 NPC 问题，此处我们只考虑 <span class="arithmatex">\(k=2\)</span> 的情况。</p>
 <h2 id="_2">算法简述</h2>
 <p>考虑图论建模。</p>
-<p>具体来说，我们能把这样的限制规约到位运算，然后再转化若干个为形如“若 $a$ 为真，必然有 $b$ 为真”的形式，此处简写为 $(a,b)$：</p>
+<p>具体来说，我们能把这样的限制规约到位运算，然后再转化若干个为形如“若 <span class="arithmatex">\(a\)</span> 为真，必然有 <span class="arithmatex">\(b\)</span> 为真”的形式，此处简写为 <span class="arithmatex">\((a,b)\)</span>：</p>
 <ul>
-<li>$a\lor b=1:(\lnot a,b),(\lnot b,a)$</li>
-<li>$a\lor b=0:(a,\lnot a),(b,\lnot b)$（其实这个限制等价于要求 $a,b$ 均为假，然后若要求某个数为假可以这样建边）</li>
-<li>$a\land b=1:(\lnot a,a),(\lnot b,b)$（同上）</li>
-<li>$a\land b=0:(a,\lnot b),(b,\lnot a)$</li>
-<li>$a\oplus b=1:(a,\lnot b),(b,\lnot a),(\lnot a,b),(\lnot b,a)$（$\oplus$ 表示异或）</li>
-<li>$a\oplus b=0:(a,b),(\lnot a,\lnot b)$</li>
+<li><span class="arithmatex">\(a\lor b=1:(\lnot a,b),(\lnot b,a)\)</span></li>
+<li><span class="arithmatex">\(a\lor b=0:(a,\lnot a),(b,\lnot b)\)</span>（其实这个限制等价于要求 <span class="arithmatex">\(a,b\)</span> 均为假，然后若要求某个数为假可以这样建边）</li>
+<li><span class="arithmatex">\(a\land b=1:(\lnot a,a),(\lnot b,b)\)</span>（同上）</li>
+<li><span class="arithmatex">\(a\land b=0:(a,\lnot b),(b,\lnot a)\)</span></li>
+<li><span class="arithmatex">\(a\oplus b=1:(a,\lnot b),(b,\lnot a),(\lnot a,b),(\lnot b,a)\)</span>（<span class="arithmatex">\(\oplus\)</span> 表示异或）</li>
+<li><span class="arithmatex">\(a\oplus b=0:(a,b),(\lnot a,\lnot b)\)</span></li>
 </ul>
-<p>我们可以给所有的 $(a,b)$ 连一条 $a\to b$ 的边，表示若 $a$ 在点集中，必须保证 $b$ 也在点集中。然后给所有的 $a,\lnot a$ 分别建一个点，然后 2-SAT 问题就转化成了选择一个点集，使得不存在 $a,\lnot a$ 均在该点集中。</p>
-<p>容易发现这是一个和连通性有关的问题，可以考虑求强连通分量，若 $a,\lnot a$ 在同一强连通分量中就无解，否则有解。</p>
+<p>我们可以给所有的 <span class="arithmatex">\((a,b)\)</span> 连一条 <span class="arithmatex">\(a\to b\)</span> 的边，表示若 <span class="arithmatex">\(a\)</span> 在点集中，必须保证 <span class="arithmatex">\(b\)</span> 也在点集中。然后给所有的 <span class="arithmatex">\(a,\lnot a\)</span> 分别建一个点，然后 2-SAT 问题就转化成了选择一个点集，使得不存在 <span class="arithmatex">\(a,\lnot a\)</span> 均在该点集中。</p>
+<p>容易发现这是一个和连通性有关的问题，可以考虑求强连通分量，若 <span class="arithmatex">\(a,\lnot a\)</span> 在同一强连通分量中就无解，否则有解。</p>
 <h2 id="_3">例题</h2>
 <div class="admonition">
 <p class="admonition-title"><a href="https://www.luogu.com.cn/problem/P4782">P4782 【模板】2-SAT</a></p>

@@ -1127,6 +1127,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5757,7 +5785,7 @@
 <h1 id="_1">挂分秘籍</h1>
 <p>你是否厌倦了天天 AK 被同学膜拜？你是否想获得毫不突出的大众分？你是否想得到遥不可及的爆零？请看此篇：挂分秘籍！！！</p>
 <h2 id="_2">常见错误</h2>
-<p>数列中有负数要算最大值，但 <code>mx</code> 初始化为 $0$。</p>
+<p>数列中有负数要算最大值，但 <code>mx</code> 初始化为 <span class="arithmatex">\(0\)</span>。</p>
 <p>忘开 <code>long long</code>。</p>
 <p>线段树/平衡树等数据结构修改时不 <code>PushUp</code>。</p>
 <div class="language-cpp highlight"><span class="filename">线段树上二分修改时先修改再引用</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">Erase</span><span class="p">(</span><span class="n">i64</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="n">i64</span><span class="w"> </span><span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i64</span><span class="w"> </span><span class="n">r</span><span class="o">=</span><span class="n">maxn</span><span class="p">,</span><span class="n">i64</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">){</span>
@@ -5797,9 +5825,9 @@
 </span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>$\leftarrow$ SB。</li>
+<li><span class="arithmatex">\(\leftarrow\)</span> SB。</li>
 </ol>
-<p>线段树单点修改 <code>querymin[id]=P</code>（其中 $P$ 是要改的位置，要改成的值是 $X$）。</p>
+<p>线段树单点修改 <code>querymin[id]=P</code>（其中 <span class="arithmatex">\(P\)</span> 是要改的位置，要改成的值是 <span class="arithmatex">\(X\)</span>）。</p>
 <p>高精度把高位和低位搞反。</p>
 <p>启发式合并写成 <code>if(sz[u]&gt;sz[u]) swap(u,v);</code></p>
 <div class="language-cpp highlight"><span class="filename">对不存在的迭代器自增</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
@@ -5837,7 +5865,7 @@
 <p>调试忘记删输出调试数据。<br />
 ...以及更弔的，删了输出调试数据忘记删对应的文件读写（有时候调试数据很大加了文件读写一定要记得删啊啊啊啊）。</p>
 <p>用 dfs 序时把时间戳当成点的编号用。</p>
-<p>斜率优化如果有多个点 $X$ 坐标相同保留全部。（应该只保留最优的一个，即下凸壳中 $Y$ 最小的和上凸壳中 $Y$ 最大的）。</p>
+<p>斜率优化如果有多个点 <span class="arithmatex">\(X\)</span> 坐标相同保留全部。（应该只保留最优的一个，即下凸壳中 <span class="arithmatex">\(Y\)</span> 最小的和上凸壳中 <span class="arithmatex">\(Y\)</span> 最大的）。</p>
 <p>不多说，上图：</p>
 <p><img alt="图示 1" src="../../img/how_to_get_0pts_1.png" /></p>
 <p>左边这种写法由于在栈空间内开了一个巨大的结构体，导致本机无法正常编译运行。</p>

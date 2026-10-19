@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5885,30 +5913,30 @@
 <p>开学第一考（乐）。</p>
 <p><a href="../../files/20230831.rar">题目，密码还是成外通用密码，大小写敏感</a></p>
 <h2 id="t1">T1</h2>
-<p>赛时打了个倍增双 $\log$ 60pts 部分分，倍增加了 Barrett 貌似能卡过去。但这道题有更好的做法。</p>
-<p>首先假如 $P$ 是个质数那这道题就是普及难度，二维前缀积就搞定了，可惜它不是，所以我们有两个思路。</p>
+<p>赛时打了个倍增双 <span class="arithmatex">\(\log\)</span> 60pts 部分分，倍增加了 Barrett 貌似能卡过去。但这道题有更好的做法。</p>
+<p>首先假如 <span class="arithmatex">\(P\)</span> 是个质数那这道题就是普及难度，二维前缀积就搞定了，可惜它不是，所以我们有两个思路。</p>
 <ol>
-<li>把 $P$ 分解成多个质数，用 CRT 求解</li>
+<li>把 <span class="arithmatex">\(P\)</span> 分解成多个质数，用 CRT 求解</li>
 </ol>
 <p>非常浅显，感觉这句话出来了就做完了。</p>
-<p>但是假如矩阵里面有 $P$ 某个质因数 $p$ 的倍数，那么做模 $p$ 前缀积的时候就会出现大问题，而且也没有逆元。针对这个，我们需要在给质因子 $p$ 做前缀积时把里面 $p$ 的倍数提出来做，在最后再乘进去。</p>
-<p>由于 $10^9$ 范围内一个数最多有 $9$ 个不同的质因子（考虑前十个质数 $2\times 3\times 5\times 7\times 11 \times 13 \times 17\times 19\times 23\times 29=6469693230&gt;10^9$），所以复杂度是对的，大概是 $O(q\omega(P)\log q)$，其中 $\omega(P)$ 表示 $P$ 中不同质因子的个数。</p>
-<p>但是我们有更简单的做法，这个做法就不提供代码了，注意求逆元不能用快速幂，因为每个质因子在 $P$ 中的次数不一定为 $1$，也就是说可能要求某个数对合数的逆元。</p>
+<p>但是假如矩阵里面有 <span class="arithmatex">\(P\)</span> 某个质因数 <span class="arithmatex">\(p\)</span> 的倍数，那么做模 <span class="arithmatex">\(p\)</span> 前缀积的时候就会出现大问题，而且也没有逆元。针对这个，我们需要在给质因子 <span class="arithmatex">\(p\)</span> 做前缀积时把里面 <span class="arithmatex">\(p\)</span> 的倍数提出来做，在最后再乘进去。</p>
+<p>由于 <span class="arithmatex">\(10^9\)</span> 范围内一个数最多有 <span class="arithmatex">\(9\)</span> 个不同的质因子（考虑前十个质数 <span class="arithmatex">\(2\times 3\times 5\times 7\times 11 \times 13 \times 17\times 19\times 23\times 29=6469693230&gt;10^9\)</span>），所以复杂度是对的，大概是 <span class="arithmatex">\(O(q\omega(P)\log q)\)</span>，其中 <span class="arithmatex">\(\omega(P)\)</span> 表示 <span class="arithmatex">\(P\)</span> 中不同质因子的个数。</p>
+<p>但是我们有更简单的做法，这个做法就不提供代码了，注意求逆元不能用快速幂，因为每个质因子在 <span class="arithmatex">\(P\)</span> 中的次数不一定为 <span class="arithmatex">\(1\)</span>，也就是说可能要求某个数对合数的逆元。</p>
 <ol start="2">
-<li>把整个矩阵变成与 $P$ 互质的数</li>
+<li>把整个矩阵变成与 <span class="arithmatex">\(P\)</span> 互质的数</li>
 </ol>
-<p>思考一下，为什么当 $P$ 为质数时这个问题是简单的呢？因为小于某质数的所有数都与它互质，都存在逆元。那么我们只需要与 $P$ 互质就行了。可以考虑像之前一样维护前缀和，对于 $P$ 的每个维护前缀因子个数和，然后剩下的必然全部与 $P$ 互质，可以直接维护前缀积。</p>
-<p>直接做复杂度是 $O(nm\log P+q\log P+q\omega(P))$ 的，但是我们有一些奇技淫巧可以优化它。</p>
+<p>思考一下，为什么当 <span class="arithmatex">\(P\)</span> 为质数时这个问题是简单的呢？因为小于某质数的所有数都与它互质，都存在逆元。那么我们只需要与 <span class="arithmatex">\(P\)</span> 互质就行了。可以考虑像之前一样维护前缀和，对于 <span class="arithmatex">\(P\)</span> 的每个维护前缀因子个数和，然后剩下的必然全部与 <span class="arithmatex">\(P\)</span> 互质，可以直接维护前缀积。</p>
+<p>直接做复杂度是 <span class="arithmatex">\(O(nm\log P+q\log P+q\omega(P))\)</span> 的，但是我们有一些奇技淫巧可以优化它。</p>
 <h3 id="_2">线性求整个序列的逆元</h3>
-<p>考虑逆元是完全积性函数（证明网上找，我以后可能会写，如果你看到了这片文章可以留意一下我博客的“数论”部分），那么前缀积的逆元等于逆元的前缀积。设 $pre_i$ 为 $\prod_{j=1}^i a_i$，那么显然有以下式子：</p>
-<p>$$
+<p>考虑逆元是完全积性函数（证明网上找，我以后可能会写，如果你看到了这片文章可以留意一下我博客的“数论”部分），那么前缀积的逆元等于逆元的前缀积。设 <span class="arithmatex">\(pre_i\)</span> 为 <span class="arithmatex">\(\prod_{j=1}^i a_i\)</span>，那么显然有以下式子：</p>
+<div class="arithmatex">\[
 pre_i^{-1}=pre_{i+1}^{-1}\times a_{i+1}\\
 a_i^{-1}=pre_i^{-1}\times pre_{i-1}
-$$</p>
-<p>那么很显然，在 $O(\log P)$ 求出 $pre_{n}^{-1}$ 的逆元后就可以 $O(n)$ 推出整个序列所有数的逆元了。</p>
-<p>那么我们可以把所有要求逆元的东西离线下来最后算，就优化了后面的那个 $\log$。</p>
-<p>然后注意这时候求前缀积就不要 $s_{i,j}=s_{i-1,j}\times s_{i,j-1}\times s_{i-1,j-1}^{-1}$ 了，因为这个必须一边算一边求逆元，不能离线下来，考虑设当前正在求的这行的前缀积为 $pre_j$，然后 $s_{i,j}=s_{i-1,j} \times pre_j$，就优化了前面那个 $\log$。</p>
-<p>这时候复杂度就优化成了 $O(nm+q+q\omega(P))$ 的近似线性复杂度了。</p>
+\]</div>
+<p>那么很显然，在 <span class="arithmatex">\(O(\log P)\)</span> 求出 <span class="arithmatex">\(pre_{n}^{-1}\)</span> 的逆元后就可以 <span class="arithmatex">\(O(n)\)</span> 推出整个序列所有数的逆元了。</p>
+<p>那么我们可以把所有要求逆元的东西离线下来最后算，就优化了后面的那个 <span class="arithmatex">\(\log\)</span>。</p>
+<p>然后注意这时候求前缀积就不要 <span class="arithmatex">\(s_{i,j}=s_{i-1,j}\times s_{i,j-1}\times s_{i-1,j-1}^{-1}\)</span> 了，因为这个必须一边算一边求逆元，不能离线下来，考虑设当前正在求的这行的前缀积为 <span class="arithmatex">\(pre_j\)</span>，然后 <span class="arithmatex">\(s_{i,j}=s_{i-1,j} \times pre_j\)</span>，就优化了前面那个 <span class="arithmatex">\(\log\)</span>。</p>
+<p>这时候复杂度就优化成了 <span class="arithmatex">\(O(nm+q+q\omega(P))\)</span> 的近似线性复杂度了。</p>
 <h3 id="barrett">Barrett 取模优化</h3>
 <p>优化幅度巨大的常数优化，尤其是在这种不停对同一个数取模的题，但这个优化不能加到 CRT 做法里（或者说加进去不太方便），因为模数很多。</p>
 <p><a href="../../algo/misc/Barrett/">传送门</a></p>
@@ -6077,21 +6105,21 @@ $$</p>
 </span></code></pre></div>
 </details>
 <h2 id="t3">T3</h2>
-<p>首先容易发现答案就是 $n-1+Ak$，其中 $A$ 是操作 $3$ 的次数。</p>
+<p>首先容易发现答案就是 <span class="arithmatex">\(n-1+Ak\)</span>，其中 <span class="arithmatex">\(A\)</span> 是操作 <span class="arithmatex">\(3\)</span> 的次数。</p>
 <p>那么假如没有修改操作，这个问题应该怎么做。</p>
-<p>假如现在的区间为区间 $[L,R]$，取到区间最大值的位置为 $i$，那么操作 $3$ 可以抽象为找到 $i$ 左侧第一个大于 $a_i$ 的 $a_l$，右侧第一个 $a_r$，然后把区间最大值变为 $\min(a_l,a_r)$，至于 $L,R$ 具体变成什么，我们并不关心。</p>
-<p>很显然，我们对于某个点 $i$，每次找到左边第一个大于 $a_i$ 的点 $a_l$,右边第一个 $a_r$，那么 $A_i$ 就是 $a_l,a_r$ 里较小的那一个的 $A$ 加一。可以用单调栈维护 $l,r$，然后记忆化搜索，输出时就是一个区间和。</p>
-<p>那么考虑怎么维护交换操作，不妨设 $a_{x+1}&gt;a_x$，然后考虑对于 $j&lt;x$  的 $j$ 的变化，其余情况可以用类似的方法。</p>
-<p>先假设 $a_i$ 互不相同，那么交换 $a_x,a_{x+1}$ 后，有这么一段的 $A$ 会 $-1$：</p>
+<p>假如现在的区间为区间 <span class="arithmatex">\([L,R]\)</span>，取到区间最大值的位置为 <span class="arithmatex">\(i\)</span>，那么操作 <span class="arithmatex">\(3\)</span> 可以抽象为找到 <span class="arithmatex">\(i\)</span> 左侧第一个大于 <span class="arithmatex">\(a_i\)</span> 的 <span class="arithmatex">\(a_l\)</span>，右侧第一个 <span class="arithmatex">\(a_r\)</span>，然后把区间最大值变为 <span class="arithmatex">\(\min(a_l,a_r)\)</span>，至于 <span class="arithmatex">\(L,R\)</span> 具体变成什么，我们并不关心。</p>
+<p>很显然，我们对于某个点 <span class="arithmatex">\(i\)</span>，每次找到左边第一个大于 <span class="arithmatex">\(a_i\)</span> 的点 <span class="arithmatex">\(a_l\)</span>,右边第一个 <span class="arithmatex">\(a_r\)</span>，那么 <span class="arithmatex">\(A_i\)</span> 就是 <span class="arithmatex">\(a_l,a_r\)</span> 里较小的那一个的 <span class="arithmatex">\(A\)</span> 加一。可以用单调栈维护 <span class="arithmatex">\(l,r\)</span>，然后记忆化搜索，输出时就是一个区间和。</p>
+<p>那么考虑怎么维护交换操作，不妨设 <span class="arithmatex">\(a_{x+1}&gt;a_x\)</span>，然后考虑对于 <span class="arithmatex">\(j&lt;x\)</span>  的 <span class="arithmatex">\(j\)</span> 的变化，其余情况可以用类似的方法。</p>
+<p>先假设 <span class="arithmatex">\(a_i\)</span> 互不相同，那么交换 <span class="arithmatex">\(a_x,a_{x+1}\)</span> 后，有这么一段的 <span class="arithmatex">\(A\)</span> 会 <span class="arithmatex">\(-1\)</span>：</p>
 <p><img alt="图示 1" src="../../img/20230831B_ACD_1.png" /></p>
-<p>设 $x$ 之前第一个大于 $a_x$ 的值为 $a_p$，那么 $(p,x)$ 中就会 $-1$，因为本来 $x,x+1$ 都会为这一段贡献，交换后 $x$ 就不会产生贡献了。</p>
-<p>但是 $a_i$ 可能相同，考虑相同会发生什么事：</p>
+<p>设 <span class="arithmatex">\(x\)</span> 之前第一个大于 <span class="arithmatex">\(a_x\)</span> 的值为 <span class="arithmatex">\(a_p\)</span>，那么 <span class="arithmatex">\((p,x)\)</span> 中就会 <span class="arithmatex">\(-1\)</span>，因为本来 <span class="arithmatex">\(x,x+1\)</span> 都会为这一段贡献，交换后 <span class="arithmatex">\(x\)</span> 就不会产生贡献了。</p>
+<p>但是 <span class="arithmatex">\(a_i\)</span> 可能相同，考虑相同会发生什么事：</p>
 <p><img alt="图示 2" src="../../img/20230831B_ACD_2.png" /></p>
-<p>在上图中，$A_6=4$ ，而假如我们交换 $9,10$，答案仍然是 $4$，并且容易发现中间这整个区间和左边的都不会变。</p>
+<p>在上图中，<span class="arithmatex">\(A_6=4\)</span> ，而假如我们交换 <span class="arithmatex">\(9,10\)</span>，答案仍然是 <span class="arithmatex">\(4\)</span>，并且容易发现中间这整个区间和左边的都不会变。</p>
 <p>特判一下就行了。</p>
-<p>关于如何找 $p$，这个可以线段树上二分解决。</p>
-<p>那么开两棵线段树，一颗维护 $A$，另一棵维护 $a$（用来找点 $p$）。</p>
-<p>第一棵支持 <strong>单点修改</strong>，<strong>区间加</strong>，<strong>区间求和</strong>。第二棵支持 <strong>单点修改</strong>，<strong>线段树上区间二分找到下标最小的大于等于某值的数</strong>，<strong>线段树上区间二分找到下标最大的大于等于某值的数</strong>。六个操作复杂度都是 $O(\log n)$ 的，复杂度 $O(n\log n+q\log n)$。</p>
+<p>关于如何找 <span class="arithmatex">\(p\)</span>，这个可以线段树上二分解决。</p>
+<p>那么开两棵线段树，一颗维护 <span class="arithmatex">\(A\)</span>，另一棵维护 <span class="arithmatex">\(a\)</span>（用来找点 <span class="arithmatex">\(p\)</span>）。</p>
+<p>第一棵支持 <strong>单点修改</strong>，<strong>区间加</strong>，<strong>区间求和</strong>。第二棵支持 <strong>单点修改</strong>，<strong>线段树上区间二分找到下标最小的大于等于某值的数</strong>，<strong>线段树上区间二分找到下标最大的大于等于某值的数</strong>。六个操作复杂度都是 <span class="arithmatex">\(O(\log n)\)</span> 的，复杂度 <span class="arithmatex">\(O(n\log n+q\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6309,22 +6337,22 @@ $$</p>
 <h2 id="t4">T4</h2>
 <p>首先，考虑选点的顺序通常是个不可做或者很难做的事，我们考虑原问题等价于给边定向。</p>
 <p>因为原图是个树所以无论怎么定向一定是个 DAG，那么我们按拓扑序来选点即可。发现这样每个点的贡献就是它能到达的点的数量乘以它的点权。</p>
-<p>然后就有 $O(2^n)$ 做法了，我赛时就写的这个，喜提 20pts。</p>
+<p>然后就有 <span class="arithmatex">\(O(2^n)\)</span> 做法了，我赛时就写的这个，喜提 20pts。</p>
 <p>这个问题显然不能贪心，又不怎么看得出性质，我们考虑 DP。但是一般的 DP 需要不同子树之间问题相对独立，但这道题显然会出现一条路径从这棵字数进入另一棵字树的情况，两边都要算贡献。考虑在 DP 状态上做文章让子树相对独立。</p>
-<p>设 $f_{i,j}$ 表示 $i$ 和父亲之间的边指向 $i$ ，且 $i$ 能到达子树内 $j$ 个点，$i$ 子树内所有点能获得的最大价值，$g_{i,j}$ 表示 $i$ 和父亲之间的边指向父亲，且钦定 $i$ 能到达子树外 $j$ 个点后，$i$ 子树内所有点能获得的最大价值（包含子树外面的 $j$ 倍点权）。这样不同子树的状态就相对独立了。</p>
-<p>考虑转移，由于要计算能到子树内多少点子树外多少点，不太好直接枚举，考虑利用 DP 转移 DP。设 $h_{i,j,k}$ 表示钦定 $i$ 能到达 $j$ 个点，其中有 $k$ 个在子树内，整棵子树的贡献最大是多少，转移枚举每个儿子提供多少个结点，或者假如儿子的边指向 $i$，那么就加上儿子能到达子树外 $j$ 个点的贡献。形式化一点就是这样：</p>
-<p>$$
+<p>设 <span class="arithmatex">\(f_{i,j}\)</span> 表示 <span class="arithmatex">\(i\)</span> 和父亲之间的边指向 <span class="arithmatex">\(i\)</span> ，且 <span class="arithmatex">\(i\)</span> 能到达子树内 <span class="arithmatex">\(j\)</span> 个点，<span class="arithmatex">\(i\)</span> 子树内所有点能获得的最大价值，<span class="arithmatex">\(g_{i,j}\)</span> 表示 <span class="arithmatex">\(i\)</span> 和父亲之间的边指向父亲，且钦定 <span class="arithmatex">\(i\)</span> 能到达子树外 <span class="arithmatex">\(j\)</span> 个点后，<span class="arithmatex">\(i\)</span> 子树内所有点能获得的最大价值（包含子树外面的 <span class="arithmatex">\(j\)</span> 倍点权）。这样不同子树的状态就相对独立了。</p>
+<p>考虑转移，由于要计算能到子树内多少点子树外多少点，不太好直接枚举，考虑利用 DP 转移 DP。设 <span class="arithmatex">\(h_{i,j,k}\)</span> 表示钦定 <span class="arithmatex">\(i\)</span> 能到达 <span class="arithmatex">\(j\)</span> 个点，其中有 <span class="arithmatex">\(k\)</span> 个在子树内，整棵子树的贡献最大是多少，转移枚举每个儿子提供多少个结点，或者假如儿子的边指向 <span class="arithmatex">\(i\)</span>，那么就加上儿子能到达子树外 <span class="arithmatex">\(j\)</span> 个点的贡献。形式化一点就是这样：</p>
+<div class="arithmatex">\[
 h_{i,j,k}=\max_{v\in son(i)}(h_{i,j,k}+g_{v,j},\max_{l=1}^{min(k-1,size_v)}\begin{Bmatrix}h_{i,j,k-l}+f_{v,l}\end{Bmatrix})
-$$</p>
-<p>然后 $f_{i,j}=h_{i,j,j},g_{i,j}=\max_{k=j+1}^{n}\begin{Bmatrix}h_{i,k,k-j}\end{Bmatrix}$。</p>
-<p>最后答案就是 $\max_{i=1}^n\begin{Bmatrix}f_{1,i}\end{Bmatrix}$。</p>
+\]</div>
+<p>然后 <span class="arithmatex">\(f_{i,j}=h_{i,j,j},g_{i,j}=\max_{k=j+1}^{n}\begin{Bmatrix}h_{i,k,k-j}\end{Bmatrix}\)</span>。</p>
+<p>最后答案就是 <span class="arithmatex">\(\max_{i=1}^n\begin{Bmatrix}f_{1,i}\end{Bmatrix}\)</span>。</p>
 <p>然后有一些小细节：</p>
 <ol>
-<li>所有 $h_{i,j,1}$ 初始化为 $a_i\times j$，其余为负无穷。</li>
-<li>$\max_{k=j+1}^{n}\begin{Bmatrix}h_{i,k,k-j}\end{Bmatrix}$ 的转移请使用刷表法，不然树上背包的复杂度是假的。</li>
-<li>$h_{i,j,k}$ 可以把前两维压掉，具体见代码</li>
+<li>所有 <span class="arithmatex">\(h_{i,j,1}\)</span> 初始化为 <span class="arithmatex">\(a_i\times j\)</span>，其余为负无穷。</li>
+<li><span class="arithmatex">\(\max_{k=j+1}^{n}\begin{Bmatrix}h_{i,k,k-j}\end{Bmatrix}\)</span> 的转移请使用刷表法，不然树上背包的复杂度是假的。</li>
+<li><span class="arithmatex">\(h_{i,j,k}\)</span> 可以把前两维压掉，具体见代码</li>
 </ol>
-<p>最后分析一下复杂度，首先 $h$ 最后一维的转移是个树上背包，容量结点数同阶，复杂度是 $O(n^2)$，然后再套一层枚举 $j$，是 $O(n^3)$ 的，其它地方都挺好分析的，总之复杂度是 $O(n^3)$。</p>
+<p>最后分析一下复杂度，首先 <span class="arithmatex">\(h\)</span> 最后一维的转移是个树上背包，容量结点数同阶，复杂度是 <span class="arithmatex">\(O(n^2)\)</span>，然后再套一层枚举 <span class="arithmatex">\(j\)</span>，是 <span class="arithmatex">\(O(n^3)\)</span> 的，其它地方都挺好分析的，总之复杂度是 <span class="arithmatex">\(O(n^3)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

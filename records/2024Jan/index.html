@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6093,15 +6121,15 @@
 <h2 id="cf896e-welcome-home-chtholly">CF896E Welcome home, Chtholly</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF896E">传送门</a></p>
 <p>这个信息看起来没有什么数据结构能维护，考虑暴力修改可不可行。</p>
-<p>考虑值域是 $[1,V]$，那么分情况讨论：</p>
+<p>考虑值域是 <span class="arithmatex">\([1,V]\)</span>，那么分情况讨论：</p>
 <ol>
-<li>若 $2x&lt;V$，那么把 $[1,x]$ 加到 $(x,V]$ 上，再做一个全局减，值域减小。</li>
-<li>若 $2x\ge V$，那么把 $(x,V]$ 加到 $[1,x]$ 上，值域减小。</li>
+<li>若 <span class="arithmatex">\(2x&lt;V\)</span>，那么把 <span class="arithmatex">\([1,x]\)</span> 加到 <span class="arithmatex">\((x,V]\)</span> 上，再做一个全局减，值域减小。</li>
+<li>若 <span class="arithmatex">\(2x\ge V\)</span>，那么把 <span class="arithmatex">\((x,V]\)</span> 加到 <span class="arithmatex">\([1,x]\)</span> 上，值域减小。</li>
 </ol>
 <p>容易发现每次修改值域都会减小，势能分析复杂度是值域大小的。</p>
 <p>那么考虑分块，散块暴力维护，考虑中间整块用什么数据结构刻画。</p>
 <p>容易发现可以 dsu，对每个连通块记一个颜色，再对每个颜色存对应连通块即可。</p>
-<p>复杂度 $O((n+m+V)\sqrt{n}\cdot\alpha(n))$。</p>
+<p>复杂度 <span class="arithmatex">\(O((n+m+V)\sqrt{n}\cdot\alpha(n))\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6250,8 +6278,8 @@
 <h2 id="p5501-lnoi2019">P5501 [LnOI2019] 来者不拒，去者不追</h2>
 <p><a href="https://www.luogu.com.cn/problem/P5501">传送门</a></p>
 <p>一眼莫队。</p>
-<p>具体来说，把贡献改为 $\sum_{x\in[l,r]}\left(a_x+a_x\times \sum_{y\in[l,r]}[y&lt;x]\right)$，然后 $a_x$ 就是区间和，后面那个东西可以莫队维护。具体就是对于每个数维护区间内严格小于它的数的个数和严格大于它的数的总和。</p>
-<p>莫队二次离线 $+$ 值域分块可以压到 $O(n\sqrt{V}+n\sqrt{n}+m\sqrt{n})$，注意值域分块要 $O(\sqrt{V})$ 修改 $O(1)$ 查询。</p>
+<p>具体来说，把贡献改为 <span class="arithmatex">\(\sum_{x\in[l,r]}\left(a_x+a_x\times \sum_{y\in[l,r]}[y&lt;x]\right)\)</span>，然后 <span class="arithmatex">\(a_x\)</span> 就是区间和，后面那个东西可以莫队维护。具体就是对于每个数维护区间内严格小于它的数的个数和严格大于它的数的总和。</p>
+<p>莫队二次离线 <span class="arithmatex">\(+\)</span> 值域分块可以压到 <span class="arithmatex">\(O(n\sqrt{V}+n\sqrt{n}+m\sqrt{n})\)</span>，注意值域分块要 <span class="arithmatex">\(O(\sqrt{V})\)</span> 修改 <span class="arithmatex">\(O(1)\)</span> 查询。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6430,14 +6458,14 @@
 <p>妙题。</p>
 <p>考虑最后肯定会从第二层的某个可操作区间向下走一步到第三层，那么考虑从哪个地方进入这个区间。</p>
 <p>容易发现进入有两种，一种是从左侧进入，另一种是从上方，第一层下来。</p>
-<p>那么设 $dp_{i}$ 表示进入（可能存在的）某个包含 $a_{2,i}$ 的区间前（或者说不得不对这个区间进行操作前），能得到的最大贡献，即到达 $a_{1,i}$ 和 $a_{2,i-1}$ 两点的<strong>最大贡献</strong>其中的较大值。</p>
-<p>首先到达 $a_{1,i}$ 的路线只有一种，故 $dp_i$ 初始等于 $a_1$ 的前缀和。</p>
-<p>然后考虑第二种。在不得不对某个区间操作时，上一步的位置必定是另一个区间的右端点，故可以枚举“上一步”所对应的区间。具体来说，对于一个区间 $(l,r,x)$，有转移 $dp_{r+1}\gets s_r-x+\max_{i=l}^r\begin{Bmatrix}dp_i-s_i-1\end{Bmatrix}$，其中 $s$ 是 $a_2$ 的前缀和。这一个按 $r$ 从小到大转移即可。</p>
-<p>现在考虑从前文的“最后一个区间”具体哪个位置进入第三行。即对于每个 $i$，求出：</p>
-<p>$$\max_{k}^{l_k\le i\le r_k}\begin{Bmatrix}(dp_i+t_n-s_{i-1})+\max_{j=i}^{r_k}\begin{Bmatrix}s_i-t_{i-1}-x_k\end{Bmatrix}\end{Bmatrix}$$</p>
-<p>其中 $k$ 是枚举一个包含 $i$ 的区间，$t$ 是 $a_3$ 的前缀和。这里跳步了，但我觉得这个式子很好理解。</p>
-<p>那么这个可以线段树维护，具体来说，每遇到一个 $l$ 就用 $x$ 更新 $[l,r]$，然后查询 $[i,n]$。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>那么设 <span class="arithmatex">\(dp_{i}\)</span> 表示进入（可能存在的）某个包含 <span class="arithmatex">\(a_{2,i}\)</span> 的区间前（或者说不得不对这个区间进行操作前），能得到的最大贡献，即到达 <span class="arithmatex">\(a_{1,i}\)</span> 和 <span class="arithmatex">\(a_{2,i-1}\)</span> 两点的<strong>最大贡献</strong>其中的较大值。</p>
+<p>首先到达 <span class="arithmatex">\(a_{1,i}\)</span> 的路线只有一种，故 <span class="arithmatex">\(dp_i\)</span> 初始等于 <span class="arithmatex">\(a_1\)</span> 的前缀和。</p>
+<p>然后考虑第二种。在不得不对某个区间操作时，上一步的位置必定是另一个区间的右端点，故可以枚举“上一步”所对应的区间。具体来说，对于一个区间 <span class="arithmatex">\((l,r,x)\)</span>，有转移 <span class="arithmatex">\(dp_{r+1}\gets s_r-x+\max_{i=l}^r\begin{Bmatrix}dp_i-s_i-1\end{Bmatrix}\)</span>，其中 <span class="arithmatex">\(s\)</span> 是 <span class="arithmatex">\(a_2\)</span> 的前缀和。这一个按 <span class="arithmatex">\(r\)</span> 从小到大转移即可。</p>
+<p>现在考虑从前文的“最后一个区间”具体哪个位置进入第三行。即对于每个 <span class="arithmatex">\(i\)</span>，求出：</p>
+<div class="arithmatex">\[\max_{k}^{l_k\le i\le r_k}\begin{Bmatrix}(dp_i+t_n-s_{i-1})+\max_{j=i}^{r_k}\begin{Bmatrix}s_i-t_{i-1}-x_k\end{Bmatrix}\end{Bmatrix}\]</div>
+<p>其中 <span class="arithmatex">\(k\)</span> 是枚举一个包含 <span class="arithmatex">\(i\)</span> 的区间，<span class="arithmatex">\(t\)</span> 是 <span class="arithmatex">\(a_3\)</span> 的前缀和。这里跳步了，但我觉得这个式子很好理解。</p>
+<p>那么这个可以线段树维护，具体来说，每遇到一个 <span class="arithmatex">\(l\)</span> 就用 <span class="arithmatex">\(x\)</span> 更新 <span class="arithmatex">\([l,r]\)</span>，然后查询 <span class="arithmatex">\([i,n]\)</span>。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6570,9 +6598,9 @@
 <h2 id="p5610-ynoi2013">P5610 [Ynoi2013] 大学</h2>
 <p><a href="https://www.luogu.com.cn/problem/P5610">传送门</a></p>
 <p>做法不难，但是要卡常。</p>
-<p>考虑一个数的因数个数上界大约是 $\sqrt[3]{n}$，那么把每个数在所有因数的位置存一下空间就是 $n\sqrt[3]{V}$ 的。那么就可以存下来然后暴力修改。由于每个数质因数最多不超过 $\log V$ 个，所以最多被除 $\log V$ 次，势能分析删除次数是 $O(n\log V)$ 的。然后每次可以 $O(\log n)$ 二分找到对应区间内第一个 $x$ 倍数的位置，然后每次暴力修改，复杂度是对的。</p>
-<p>那么现在只有删除无法处理，除去在序列上删数复杂度是 $O(m\log n+n\log V)$ 的。删数乍一看可以平衡树，但这是 ynoi，过不了。</p>
-<p>可以用动态数组 $+$ 并查集，每个并查集就是连续的被删的区间，这部分复杂度是 $O(n\alpha(n)d(n))$。</p>
+<p>考虑一个数的因数个数上界大约是 <span class="arithmatex">\(\sqrt[3]{n}\)</span>，那么把每个数在所有因数的位置存一下空间就是 <span class="arithmatex">\(n\sqrt[3]{V}\)</span> 的。那么就可以存下来然后暴力修改。由于每个数质因数最多不超过 <span class="arithmatex">\(\log V\)</span> 个，所以最多被除 <span class="arithmatex">\(\log V\)</span> 次，势能分析删除次数是 <span class="arithmatex">\(O(n\log V)\)</span> 的。然后每次可以 <span class="arithmatex">\(O(\log n)\)</span> 二分找到对应区间内第一个 <span class="arithmatex">\(x\)</span> 倍数的位置，然后每次暴力修改，复杂度是对的。</p>
+<p>那么现在只有删除无法处理，除去在序列上删数复杂度是 <span class="arithmatex">\(O(m\log n+n\log V)\)</span> 的。删数乍一看可以平衡树，但这是 ynoi，过不了。</p>
+<p>可以用动态数组 <span class="arithmatex">\(+\)</span> 并查集，每个并查集就是连续的被删的区间，这部分复杂度是 <span class="arithmatex">\(O(n\alpha(n)d(n))\)</span>。</p>
 <p>然后 <code>vector</code> 据说过不了。考虑开内存池/链式前向星。</p>
 <p>《稍微卡一卡》就能过了。</p>
 <details class="success">
@@ -6688,20 +6716,20 @@
 </span></code></pre></div>
 </details>
 <h2 id="p5609-ynoi2013-cf1172f-nauuo-and-bug">P5609 [Ynoi2013] 对数据结构的爱/CF1172F Nauuo and Bug</h2>
-<p>个更新 $c_{u,x+y}$。</p>
+<p>个更新 <span class="arithmatex">\(c_{u,x+y}\)</span>。</p>
 <p>那么稍微推一推式子，可以得到若 $c_{ls,x+1}-1+sum_{ls
 <a href="https://www.luogu.com.cn/problem/P5609">传送门</a> <a href="https://www.luogu.com.cn/problem/CF1172F">传送门2</a></p>
-<p>这玩意看起来不好刻画。这种可以考虑用线段树维护一个函数，表示“从该区间左侧读入一个值一直操作到该区间右侧”得到的贡献。然后查询就是把对应区间取出来顺次跑一遍。设线段树结点 $i$ 的函数为 $f(i,x)$</p>
-<p>容易发现，假如求出了<strong>区间 $i$ 减 $k$ 次 $p$ 所需要读入的最小值</strong> $c_{i,k}$，那么每次遇到一个 $x$，可以在 $c_i$ 上二分求出需要减多少次，然后就能求 $f(i,x)$ 了。求单个 $f$ 复杂度是 $O(\log V)$，合起来就是 $O(\log n\log V)$。并且由于结点内 $c_{i,k}$ 的第二维 $k$ 显然不超过区间长度（呃其实是区间长度 $+1$，因为还有个 $0$），所以空间复杂度也是对的。</p>
-<p>为方便叙述，假设现在把 $ls,rs$ 两结点合并到 $u$ 上。</p>
-<p>叶子结点的 $c$ 很显然，考虑怎么合并。一个简单的想法是若 $c_{ls,x+1}-1$（即能在左边减 $x$ 次的最大值）经过左儿子后得到的数大于等于 $c_{rs,y}$，那么就有可能用这两}-xp\ge c_{rs,y}$，则 $c_{u,x+y}\gets \max(c_{ls,x},c_{rs,y}-sum_{ls}+xp)$（这里的 $\gets$ 指与原有值取 $\min$）。</p>
-<p>那么直接做就是 $O(n^2)$ 的，但是这个又不是很好刻画。这种和两边下标都强相关的可以考虑寻找单调性。</p>
-<p>令 $g(x,y)=\max(c_{ls,x},c_{rs,y}-sum_{ls}+xp)$（若不合法则为空），猜测 $g(x,y)\le g(x+1,y-1)$。</p>
-<p>首先，对任意 $u,x$ 对，有 $c_{u,x+1}&gt;c_{u,x}$，或者更准确地，有 $c_{u,x+1}\ge c_{u,x}+p$。因为当读入值取到 $c_{u,x}$，那么在区间上从左到右暴力计算的时候，图像大致是一堆从 $0$ 到 $p$ 的分段曲线。那么必然有一个地方能<strong>恰好</strong>取到 $0$，并且后面都非正。而为了让这个地方超过 $p$ 显然初值要至少增加 $p$（考虑它前面的向上平移不会使 $-p$ 次数增加，后面的会比它晚增加）。</p>
-<p>考虑证明 $c_{rs,y}-sum_{ls}+xp\le c_{ls,x+1}$，这样就能推出 $g(x,y)\le c_{ls,x+1}\le g(x+1,y-1)$ 了。</p>
-<p>由于 $g(x,y)$ 在合法时才存在，故 $c_{ls,x+1}-1+sum_{ls}-xp\ge c_{rs,y}$，则直接有 $c_{rs,y}-sum_{ls}+(x+1)p\le c_{ls,x+1}$。</p>
-<p>那么具体实现时，用一个指针维护 $y$，注意每次 $x$ 增加时需要 $-1$。</p>
-<p>预处理复杂度 $O(n\log n)$，查询复杂度 $O(m\log n\log V)$。</p>
+<p>这玩意看起来不好刻画。这种可以考虑用线段树维护一个函数，表示“从该区间左侧读入一个值一直操作到该区间右侧”得到的贡献。然后查询就是把对应区间取出来顺次跑一遍。设线段树结点 <span class="arithmatex">\(i\)</span> 的函数为 <span class="arithmatex">\(f(i,x)\)</span></p>
+<p>容易发现，假如求出了<strong>区间 <span class="arithmatex">\(i\)</span> 减 <span class="arithmatex">\(k\)</span> 次 <span class="arithmatex">\(p\)</span> 所需要读入的最小值</strong> <span class="arithmatex">\(c_{i,k}\)</span>，那么每次遇到一个 <span class="arithmatex">\(x\)</span>，可以在 <span class="arithmatex">\(c_i\)</span> 上二分求出需要减多少次，然后就能求 <span class="arithmatex">\(f(i,x)\)</span> 了。求单个 <span class="arithmatex">\(f\)</span> 复杂度是 <span class="arithmatex">\(O(\log V)\)</span>，合起来就是 <span class="arithmatex">\(O(\log n\log V)\)</span>。并且由于结点内 <span class="arithmatex">\(c_{i,k}\)</span> 的第二维 <span class="arithmatex">\(k\)</span> 显然不超过区间长度（呃其实是区间长度 <span class="arithmatex">\(+1\)</span>，因为还有个 <span class="arithmatex">\(0\)</span>），所以空间复杂度也是对的。</p>
+<p>为方便叙述，假设现在把 <span class="arithmatex">\(ls,rs\)</span> 两结点合并到 <span class="arithmatex">\(u\)</span> 上。</p>
+<p>叶子结点的 <span class="arithmatex">\(c\)</span> 很显然，考虑怎么合并。一个简单的想法是若 <span class="arithmatex">\(c_{ls,x+1}-1\)</span>（即能在左边减 <span class="arithmatex">\(x\)</span> 次的最大值）经过左儿子后得到的数大于等于 <span class="arithmatex">\(c_{rs,y}\)</span>，那么就有可能用这两}-xp\ge c_{rs,y}<span class="arithmatex">\(，则 \)</span>c_{u,x+y}\gets \max(c_{ls,x},c_{rs,y}-sum_{ls}+xp)<span class="arithmatex">\(（这里的 \)</span>\gets<span class="arithmatex">\( 指与原有值取 \)</span>\min$）。</p>
+<p>那么直接做就是 <span class="arithmatex">\(O(n^2)\)</span> 的，但是这个又不是很好刻画。这种和两边下标都强相关的可以考虑寻找单调性。</p>
+<p>令 <span class="arithmatex">\(g(x,y)=\max(c_{ls,x},c_{rs,y}-sum_{ls}+xp)\)</span>（若不合法则为空），猜测 <span class="arithmatex">\(g(x,y)\le g(x+1,y-1)\)</span>。</p>
+<p>首先，对任意 <span class="arithmatex">\(u,x\)</span> 对，有 <span class="arithmatex">\(c_{u,x+1}&gt;c_{u,x}\)</span>，或者更准确地，有 <span class="arithmatex">\(c_{u,x+1}\ge c_{u,x}+p\)</span>。因为当读入值取到 <span class="arithmatex">\(c_{u,x}\)</span>，那么在区间上从左到右暴力计算的时候，图像大致是一堆从 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(p\)</span> 的分段曲线。那么必然有一个地方能<strong>恰好</strong>取到 <span class="arithmatex">\(0\)</span>，并且后面都非正。而为了让这个地方超过 <span class="arithmatex">\(p\)</span> 显然初值要至少增加 <span class="arithmatex">\(p\)</span>（考虑它前面的向上平移不会使 <span class="arithmatex">\(-p\)</span> 次数增加，后面的会比它晚增加）。</p>
+<p>考虑证明 <span class="arithmatex">\(c_{rs,y}-sum_{ls}+xp\le c_{ls,x+1}\)</span>，这样就能推出 <span class="arithmatex">\(g(x,y)\le c_{ls,x+1}\le g(x+1,y-1)\)</span> 了。</p>
+<p>由于 <span class="arithmatex">\(g(x,y)\)</span> 在合法时才存在，故 <span class="arithmatex">\(c_{ls,x+1}-1+sum_{ls}-xp\ge c_{rs,y}\)</span>，则直接有 <span class="arithmatex">\(c_{rs,y}-sum_{ls}+(x+1)p\le c_{ls,x+1}\)</span>。</p>
+<p>那么具体实现时，用一个指针维护 <span class="arithmatex">\(y\)</span>，注意每次 <span class="arithmatex">\(x\)</span> 增加时需要 <span class="arithmatex">\(-1\)</span>。</p>
+<p>预处理复杂度 <span class="arithmatex">\(O(n\log n)\)</span>，查询复杂度 <span class="arithmatex">\(O(m\log n\log V)\)</span>。</p>
 <p>代码最小清新的一集。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6799,48 +6827,48 @@
 <h2 id="p5280-zjoi2019">P5280 [ZJOI2019] 线段树</h2>
 <p><a href="https://www.luogu.com.cn/problem/P5280">传送门</a></p>
 <p>核心思路是在一棵线段树上维护所有线段树的答案。</p>
-<p>考虑设 $f_u$ 表示现在有多少棵线段树在结点 $u$ 处有 tag。</p>
+<p>考虑设 <span class="arithmatex">\(f_u\)</span> 表示现在有多少棵线段树在结点 <span class="arithmatex">\(u\)</span> 处有 tag。</p>
 <p>那么把一棵线段树上的结点分成五类：</p>
 <p><img alt="图示 1" src="../../img/2024Jan_1.png" /></p>
 <p>假设要修改红色区间内。</p>
-<p>首先是修改路径上经过的结点（就是上图中橙色点），这一部分会把原有的 tag 清空。然后是区间对应的最下面的结点，就是蓝色部分，这一部分会产生新的 tag。接下来是修改路径上的“另一个儿子”（黄色部分），但这一步的贡献和上面原本有没有 tag 有关，怎么办呢？考虑再记一个 $g_u$ 表示从 $u$ 到根的路径上有多少棵树上<strong>没有</strong> tag（为了方便转移记没有的个数）。那么转移就很简单了：</p>
-<p>为方便叙述，$f,g$ 为原有状态，$f',g'$ 为转移后的状态，$w$ 为这一次操作之前的线段树数量。</p>
+<p>首先是修改路径上经过的结点（就是上图中橙色点），这一部分会把原有的 tag 清空。然后是区间对应的最下面的结点，就是蓝色部分，这一部分会产生新的 tag。接下来是修改路径上的“另一个儿子”（黄色部分），但这一步的贡献和上面原本有没有 tag 有关，怎么办呢？考虑再记一个 <span class="arithmatex">\(g_u\)</span> 表示从 <span class="arithmatex">\(u\)</span> 到根的路径上有多少棵树上<strong>没有</strong> tag（为了方便转移记没有的个数）。那么转移就很简单了：</p>
+<p>为方便叙述，<span class="arithmatex">\(f,g\)</span> 为原有状态，<span class="arithmatex">\(f',g'\)</span> 为转移后的状态，<span class="arithmatex">\(w\)</span> 为这一次操作之前的线段树数量。</p>
 <p>对于橙色点：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{cases}
 f_u'=f_u+0\\
 g_u'=g_u+w
 \end{cases}
-$$</p>
+\]</div>
 <p>对于蓝色点：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{cases}
 f_u'=f_u+w\\
 g_u'=g_u+0
 \end{cases}
-$$</p>
+\]</div>
 <p>对于黄色点：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{cases}
 f_u'=f_u+(w-g_u)\\
 g_u'=g_u+0
 \end{cases}
-$$</p>
+\]</div>
 <p>对于白色点：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{cases}
 f_u'=f_u+f_u\\
 g_u'=g_u+0
 \end{cases}
-$$</p>
+\]</div>
 <p>对于灰色点：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{cases}
 f_u'=f_u+f_u\\
 g_u'=g_u+g_u
 \end{cases}
-$$</p>
-<p>然后就可以直接维护了，复杂度 $O(n\log n)$。</p>
+\]</div>
+<p>然后就可以直接维护了，复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6956,21 +6984,21 @@ $$</p>
 <h2 id="p6773-noi2020">P6773 [NOI2020] 命运</h2>
 <p><a href="https://www.luogu.com.cn/problem/P6773">传送门</a></p>
 <p>考虑树形 DP。</p>
-<p>容易想到若两条路径为 $(u_1,v)$ 和 $(u_2,v)$，其中 $u_1$ 是 $u_2$ 的祖先（等价于 $u_2$ 的深度大于等于 $u_1$）。那么满足了 $u_2$ 就必定满足 $u_1$。</p>
-<p>考虑一个更强的性质，假如对于点 $x$ ，有许多路径 $(u,v)$ 满足 $u$ 是 $x$ 的祖先，$v$ 在 $x$ 的子树内。那么如果只考虑在 $x$ 到根的路径上涂色的话，只要其中最深的 $u$ 满足了其余必定都满足了。</p>
-<p>容易想到设 $dp_{u,i}$ 表示只考虑下端点在 $u$ 子树内的路径，最深的没被满足的上端点是多少。特别的，令 $dp_{u,0}$ 表示下端点在 $u$ 子树内的所有路径全满足的情况。</p>
-<p>那么转移就枚举 $u$ 的儿子 $v$，然后考虑边 $(u,v)$ 要不要涂黑。分涂黑和不涂黑两种：</p>
+<p>容易想到若两条路径为 <span class="arithmatex">\((u_1,v)\)</span> 和 <span class="arithmatex">\((u_2,v)\)</span>，其中 <span class="arithmatex">\(u_1\)</span> 是 <span class="arithmatex">\(u_2\)</span> 的祖先（等价于 <span class="arithmatex">\(u_2\)</span> 的深度大于等于 <span class="arithmatex">\(u_1\)</span>）。那么满足了 <span class="arithmatex">\(u_2\)</span> 就必定满足 <span class="arithmatex">\(u_1\)</span>。</p>
+<p>考虑一个更强的性质，假如对于点 <span class="arithmatex">\(x\)</span> ，有许多路径 <span class="arithmatex">\((u,v)\)</span> 满足 <span class="arithmatex">\(u\)</span> 是 <span class="arithmatex">\(x\)</span> 的祖先，<span class="arithmatex">\(v\)</span> 在 <span class="arithmatex">\(x\)</span> 的子树内。那么如果只考虑在 <span class="arithmatex">\(x\)</span> 到根的路径上涂色的话，只要其中最深的 <span class="arithmatex">\(u\)</span> 满足了其余必定都满足了。</p>
+<p>容易想到设 <span class="arithmatex">\(dp_{u,i}\)</span> 表示只考虑下端点在 <span class="arithmatex">\(u\)</span> 子树内的路径，最深的没被满足的上端点是多少。特别的，令 <span class="arithmatex">\(dp_{u,0}\)</span> 表示下端点在 <span class="arithmatex">\(u\)</span> 子树内的所有路径全满足的情况。</p>
+<p>那么转移就枚举 <span class="arithmatex">\(u\)</span> 的儿子 <span class="arithmatex">\(v\)</span>，然后考虑边 <span class="arithmatex">\((u,v)\)</span> 要不要涂黑。分涂黑和不涂黑两种：</p>
 <p>涂黑：</p>
-<p>$$dp_{u,i}\gets \sum_{j=0}^{depth_u}dp_{u,i}\cdot dp_{v,j}$$</p>
-<p>因为此时不满足的路径必定从 $u$ 中贡献，$v$ 中所有小于等于 $depth_u$ 的 $i$ 都能被满足。</p>
+<div class="arithmatex">\[dp_{u,i}\gets \sum_{j=0}^{depth_u}dp_{u,i}\cdot dp_{v,j}\]</div>
+<p>因为此时不满足的路径必定从 <span class="arithmatex">\(u\)</span> 中贡献，<span class="arithmatex">\(v\)</span> 中所有小于等于 <span class="arithmatex">\(depth_u\)</span> 的 <span class="arithmatex">\(i\)</span> 都能被满足。</p>
 <p>不涂黑：</p>
-<p>$$dp_{u,i}\gets \sum_{j=0}^idp_{u,i}\cdot dp_{v,j}+\sum_{j=0}^{i-1}dp_{u,j}\cdot dp_{v,i}$$</p>
-<p>因为最深的可能从 $u$ 中产生，也可能从 $v$ 中产生。后一个 $j$  只枚举到 $i-1$ 是为了防止算重。</p>
-<p>容易发现有很多前缀和，设 $g_{u,i}=\sum_{j=0}^idp_{u,j}$，则有：</p>
-<p>$$dp_{u,i}\gets dp_{u,i}(g_{v,depth_u}+g_{v,i})+g_{u,i-1}\cdot dp_{v,i}$$</p>
-<p>然后就能 $O(n^2)$ 做了。</p>
-<p>考虑优化，容易发现这个可以线段树合并，其中 $g_{v,depth_u}$ 是常数，而 $g_{v,i}$ 和 $g_{u,i-1}$ 可以利用线段树中序遍历的性质维护。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<div class="arithmatex">\[dp_{u,i}\gets \sum_{j=0}^idp_{u,i}\cdot dp_{v,j}+\sum_{j=0}^{i-1}dp_{u,j}\cdot dp_{v,i}\]</div>
+<p>因为最深的可能从 <span class="arithmatex">\(u\)</span> 中产生，也可能从 <span class="arithmatex">\(v\)</span> 中产生。后一个 <span class="arithmatex">\(j\)</span>  只枚举到 <span class="arithmatex">\(i-1\)</span> 是为了防止算重。</p>
+<p>容易发现有很多前缀和，设 <span class="arithmatex">\(g_{u,i}=\sum_{j=0}^idp_{u,j}\)</span>，则有：</p>
+<div class="arithmatex">\[dp_{u,i}\gets dp_{u,i}(g_{v,depth_u}+g_{v,i})+g_{u,i-1}\cdot dp_{v,i}\]</div>
+<p>然后就能 <span class="arithmatex">\(O(n^2)\)</span> 做了。</p>
+<p>考虑优化，容易发现这个可以线段树合并，其中 <span class="arithmatex">\(g_{v,depth_u}\)</span> 是常数，而 <span class="arithmatex">\(g_{v,i}\)</span> 和 <span class="arithmatex">\(g_{u,i-1}\)</span> 可以利用线段树中序遍历的性质维护。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7109,9 +7137,9 @@ $$</p>
 <p>首先，最小化删掉的权值和等价于最大化剩下的权值和。故考虑留下尽可能多的星星，这道题应该怎么做。</p>
 <p>根据题意，两颗星星不能同时存在，当且仅当包含它们的最小矩形中没有任何白色部分。也就是说，考虑最高的白色部分，它的上方只能有一颗星星。而从它分开的两个区间，容易发现是类似的子问题。</p>
 <p>容易发现这是一个笛卡尔树的形式。那么就把“合法”转化成了对于任意一棵笛卡尔树的子树，保留至多一颗高于根节点的星星。</p>
-<p>容易想到 DP。设 $dp_{u,i}$ 表示考虑 $u$ 的子树，保留的星星最高为 $i$ 的最大贡献和。</p>
+<p>容易想到 DP。设 <span class="arithmatex">\(dp_{u,i}\)</span> 表示考虑 <span class="arithmatex">\(u\)</span> 的子树，保留的星星最高为 <span class="arithmatex">\(i\)</span> 的最大贡献和。</p>
 <p>转移大概是一个前缀最大值。然后就能用和上一道题类似的方法维护了，此处略过。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7260,9 +7288,9 @@ $$</p>
 </details>
 <h2 id="cf1137f-matches-are-not-a-childs-play">CF1137F Matches Are Not a Child's Play</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1137F">传送门</a></p>
-<p>考虑一个很显然的结论：若钦定编号最大的点为根（这个点显然最后删掉），$u$ 在 $v$ 之前删掉当且仅当 $v$ 是 $u$ 的祖先或 $u$ <strong>子树内编号最大值</strong>小于 $v$ <strong>子树内编号最大值</strong>。</p>
+<p>考虑一个很显然的结论：若钦定编号最大的点为根（这个点显然最后删掉），<span class="arithmatex">\(u\)</span> 在 <span class="arithmatex">\(v\)</span> 之前删掉当且仅当 <span class="arithmatex">\(v\)</span> 是 <span class="arithmatex">\(u\)</span> 的祖先或 <span class="arithmatex">\(u\)</span> <strong>子树内编号最大值</strong>小于 <span class="arithmatex">\(v\)</span> <strong>子树内编号最大值</strong>。</p>
 <p>那么容易想到维护子树内编号最大值（为方便叙述，称这个值为“颜色”），那么一个点的排名就是颜色严格小于它的点数加上和它颜色相同的点中深度大于它的（其实就是和对应的这个“最大点”的距离）。因为要换根所以容易想到用 LCT 维护。然后再用 BIT 之类的东西维护颜色的前缀和就做完了。</p>
-<p>复杂度 $O(n\log^2 n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7431,8 +7459,8 @@ $$</p>
 <h2 id="p6292">P6292 区间本质不同子串个数</h2>
 <p><a href="https://www.luogu.com.cn/problem/P6292">传送门</a></p>
 <p>考虑放到 SAM 上考虑。</p>
-<p>容易发现对于一个询问 $[l,r]$，要求的就是<strong>在 $r$ 之前最后一次出现的左端点大于等于 $l$ 的字符串数量</strong>。</p>
-<p>容易想到离线下来，用 LCT 维护最后一次出现（注意每次 $r$ 变大对应的一条 parent tree 上的链上最后一次出现的时间都会更新，那么就是一个链上染色），然后线段树维护左端点的区间加区间和即可。复杂度 $O(n\log^2 n)$。</p>
+<p>容易发现对于一个询问 <span class="arithmatex">\([l,r]\)</span>，要求的就是<strong>在 <span class="arithmatex">\(r\)</span> 之前最后一次出现的左端点大于等于 <span class="arithmatex">\(l\)</span> 的字符串数量</strong>。</p>
+<p>容易想到离线下来，用 LCT 维护最后一次出现（注意每次 <span class="arithmatex">\(r\)</span> 变大对应的一条 parent tree 上的链上最后一次出现的时间都会更新，那么就是一个链上染色），然后线段树维护左端点的区间加区间和即可。复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7604,10 +7632,10 @@ $$</p>
 <p><a href="https://codeforces.com/gym/100800">这一套的 H 题</a></p>
 <p>妈的垃圾号爸只晓得抓 Gym 题。</p>
 <p>简单题。</p>
-<p>考虑分别找到 $x'<x_i$ 与 $x'>x_i$ 的点 $(x',y')$ 中，向量 $(x'-x_i,y'-y_i)$ 与 $x$ 轴夹角最大的。那么这两个向量的夹角就是答案。</p>
+<p>考虑分别找到 <span class="arithmatex">\(x'&lt;x_i\)</span> 与 <span class="arithmatex">\(x'&gt;x_i\)</span> 的点 <span class="arithmatex">\((x',y')\)</span> 中，向量 <span class="arithmatex">\((x'-x_i,y'-y_i)\)</span> 与 <span class="arithmatex">\(x\)</span> 轴夹角最大的。那么这两个向量的夹角就是答案。</p>
 <p>那么这个怎么求呢？这个可以单调栈啊，用单调栈维护一个凸包即可。</p>
-<p>那么知道了 $x',y'$ 后应该怎么求答案呢？这个可以用 C++ 的 <code>atan2</code> 函数。<code>atan2</code> 函数引用时形如 <code>atan2(y,x)</code>，在 $x&gt;0$ 时返回 $\arctan(\frac{y}{x})$（弧度制），另外 $\pi$ 最好用 <code>acos(-1)</code> 计算。</p>
-<p>复杂度 $O(n)$，带浮点计算的常数。</p>
+<p>那么知道了 <span class="arithmatex">\(x',y'\)</span> 后应该怎么求答案呢？这个可以用 C++ 的 <code>atan2</code> 函数。<code>atan2</code> 函数引用时形如 <code>atan2(y,x)</code>，在 <span class="arithmatex">\(x&gt;0\)</span> 时返回 <span class="arithmatex">\(\arctan(\frac{y}{x})\)</span>（弧度制），另外 <span class="arithmatex">\(\pi\)</span> 最好用 <code>acos(-1)</code> 计算。</p>
+<p>复杂度 <span class="arithmatex">\(O(n)\)</span>，带浮点计算的常数。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7684,7 +7712,7 @@ $$</p>
 <p>简单题。</p>
 <p>题意是平面上有若干个点，保证没有三点共线。你需要规划一条路径经过每个点，但是规定每次拐弯是顺时针还是逆时针。</p>
 <p>思路是每一步都保证下一步能到达任意点。这个其实很简单啊，最开始找一个边凸包上的点，然后每次考虑<strong>下一次拐弯</strong>是左拐还是右拐，如果是左拐就走剩下点的凸包最右边（按角度来算）的点，否则走最左边即可。</p>
-<p>复杂度可以做到 $O(n^2)$。</p>
+<p>复杂度可以做到 <span class="arithmatex">\(O(n^2)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7776,9 +7804,9 @@ $$</p>
 <h2 id="gym-101806u-united-states-of-eurasia">Gym-101806U United States of Eurasia</h2>
 <p><a href="https://codeforces.com/gym/101806/problem/U">传送门</a></p>
 <p>最小化最大值，考虑二分。</p>
-<p>那么二分答案后考虑如何 check。容易想到一个贪心，每次在最远点距不超过 $mid$ 的情况下尽可能远地拓展。那么这个怎么做呢？容易想到二分 $+$ 旋转卡壳。</p>
-<p>但是这个 check 直接做复杂度不太对啊，大概是 $O(NK\log N)$ 的，考虑优化。这里有一个 trick，倍增优化二分。</p>
-<p>具体来说，先尝试区间长度为 $2^0,2^1,2^2\dots$，一直找到第一个最远点对超过 $mid$ 的区间长度为 $2^k$，那么答案必定在 $[2^{k-1},2^k)$ 中产生。这一部分复杂度是 $O(\text{答案区间长度})$ 的。然后在这一部分里面二分，复杂度是 $O(\text{答案区间长度}\times k)$ 的。这样总复杂度就是 $O(N\log N)$，然后就对了。</p>
+<p>那么二分答案后考虑如何 check。容易想到一个贪心，每次在最远点距不超过 <span class="arithmatex">\(mid\)</span> 的情况下尽可能远地拓展。那么这个怎么做呢？容易想到二分 <span class="arithmatex">\(+\)</span> 旋转卡壳。</p>
+<p>但是这个 check 直接做复杂度不太对啊，大概是 <span class="arithmatex">\(O(NK\log N)\)</span> 的，考虑优化。这里有一个 trick，倍增优化二分。</p>
+<p>具体来说，先尝试区间长度为 <span class="arithmatex">\(2^0,2^1,2^2\dots\)</span>，一直找到第一个最远点对超过 <span class="arithmatex">\(mid\)</span> 的区间长度为 <span class="arithmatex">\(2^k\)</span>，那么答案必定在 <span class="arithmatex">\([2^{k-1},2^k)\)</span> 中产生。这一部分复杂度是 <span class="arithmatex">\(O(\text{答案区间长度})\)</span> 的。然后在这一部分里面二分，复杂度是 <span class="arithmatex">\(O(\text{答案区间长度}\times k)\)</span> 的。这样总复杂度就是 <span class="arithmatex">\(O(N\log N)\)</span>，然后就对了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <p>代码很屎。</p>
@@ -7946,7 +7974,7 @@ $$</p>
 <p><a href="https://codeforces.com/gym/100960/problem/F">传送门</a></p>
 <p>最解析几何的一集。</p>
 <p>特判三点共线后，枚举哪两点共线，另一点用垂线去交。</p>
-<p>注意共线可能是 $L_g$ 的那条也可能是 $L_m$ 的那条。注意一次函数斜率可能不存在，这时候可以微小扰动或者像我一样特判。（但是用向量就没有问题了）</p>
+<p>注意共线可能是 <span class="arithmatex">\(L_g\)</span> 的那条也可能是 <span class="arithmatex">\(L_m\)</span> 的那条。注意一次函数斜率可能不存在，这时候可以微小扰动或者像我一样特判。（但是用向量就没有问题了）</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -8038,8 +8066,8 @@ $$</p>
 <h2 id="gym-101237j-dividing-area">Gym-101237J Dividing Area</h2>
 <p><a href="https://codeforces.com/gym/101237">传送门</a></p>
 <p>考虑加边相当于是分裂平面。而分裂是不好做的，所以考虑倒过来合并平面。</p>
-<p>另外观察求多边形面积的方法：每条边两个向量叉积算有向面积求和。容易发现每条边是独立的。那么可以把每条边视为正向和反向两条边，然后维护边的并查集，删边就相当于把一条边两个方向并起来。然后面积就是对应并查集每条边的贡献和。如果是负数或者 $0$ 说明不是封闭部分。</p>
-<p>那么剩下的难点在于如何初始化。考虑对每个点的出边极角排序，那么显然相邻的两条边会处于同一集合，且是较前者的正向边与较后者的反向边（因为要求按逆时针计算）。这里写的丑时会有精度问题，考虑当 <code>atan2</code> 的差小于 $eps$ 的时候用叉积求谁先谁后。</p>
+<p>另外观察求多边形面积的方法：每条边两个向量叉积算有向面积求和。容易发现每条边是独立的。那么可以把每条边视为正向和反向两条边，然后维护边的并查集，删边就相当于把一条边两个方向并起来。然后面积就是对应并查集每条边的贡献和。如果是负数或者 <span class="arithmatex">\(0\)</span> 说明不是封闭部分。</p>
+<p>那么剩下的难点在于如何初始化。考虑对每个点的出边极角排序，那么显然相邻的两条边会处于同一集合，且是较前者的正向边与较后者的反向边（因为要求按逆时针计算）。这里写的丑时会有精度问题，考虑当 <code>atan2</code> 的差小于 <span class="arithmatex">\(eps\)</span> 的时候用叉积求谁先谁后。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5809,28 +5837,28 @@
 <p><a href="https://local.cwoi.com.cn:8443/contest/C0253/problem/C">传送门</a></p>
 <h3 id="_3">题解</h3>
 <p>由于直径没有什么好的性质，我们考虑把直径拆成两段长度相等的半径处理。</p>
-<p>又由于直径的中点可能在某条边上，我们在每条边上加一个点，比如原先 $(u,v)$ 间有一条边，我们在其中加一个点 $e$ 变成 $(u,e),(e,v)$ 两条边。这样直径的中点就一定在一个点上了。</p>
-<p>但这样计算直径就要除以二（半径），为防止出错我们将每次边权 $+1$ 变成 $+2$，这样就不会有问题了。</p>
+<p>又由于直径的中点可能在某条边上，我们在每条边上加一个点，比如原先 <span class="arithmatex">\((u,v)\)</span> 间有一条边，我们在其中加一个点 <span class="arithmatex">\(e\)</span> 变成 <span class="arithmatex">\((u,e),(e,v)\)</span> 两条边。这样直径的中点就一定在一个点上了。</p>
+<p>但这样计算直径就要除以二（半径），为防止出错我们将每次边权 <span class="arithmatex">\(+1\)</span> 变成 <span class="arithmatex">\(+2\)</span>，这样就不会有问题了。</p>
 <p>考虑把所有边权都加在叶子结点到父亲的边上，容易发现这样肯定是不劣的。</p>
-<p>我们可以先做一遍树形 DP，求出<strong>每个非叶结点到叶子结点的最远距离 $r_i$</strong>，<strong>每个非叶节点到叶子结点的距离和 $s_i$</strong>，另外还要统计<strong>叶子结点的个数 $c$</strong>。需要注意，为方便 DP，这里<strong>默认根节点度数不为 $1$</strong>，如果是 $1$ 就换一个。</p>
+<p>我们可以先做一遍树形 DP，求出<strong>每个非叶结点到叶子结点的最远距离 <span class="arithmatex">\(r_i\)</span></strong>，<strong>每个非叶节点到叶子结点的距离和 <span class="arithmatex">\(s_i\)</span></strong>，另外还要统计<strong>叶子结点的个数 <span class="arithmatex">\(c\)</span></strong>。需要注意，为方便 DP，这里<strong>默认根节点度数不为 <span class="arithmatex">\(1\)</span></strong>，如果是 <span class="arithmatex">\(1\)</span> 就换一个。</p>
 <p>然后如何维护我们没看懂题解，@李至擎 给我们讲了他的做法。</p>
-<p>考虑假如确定中心点后，一个 $K$ 要加到树上有几种情况。</p>
+<p>考虑假如确定中心点后，一个 <span class="arithmatex">\(K\)</span> 要加到树上有几种情况。</p>
 <ol>
-<li>能把半径补齐，且能使得所有叶子结点到该结点的距离小于等于半径，此时 $K \le \frac{r_i \times c - s_i}{2}$，直径长度为 $r_i$（注意相对于原图是乘以二的）。</li>
-<li>根本不够把另外一条边补得和半径一样长，容易发现这种情况必然存在另一个中心点满足情况 $1$，直接不考虑。</li>
-<li>能补齐的情况下还多，此时最优策略显然是把多的平均分给叶子结点，假如这种情况下直径等于 $r_i+2x$，那么 $\frac{r_i \times c - s_i}{2} &lt; K \le\frac{r_i \times c - s_i}{2}+x\times c$</li>
+<li>能把半径补齐，且能使得所有叶子结点到该结点的距离小于等于半径，此时 <span class="arithmatex">\(K \le \frac{r_i \times c - s_i}{2}\)</span>，直径长度为 <span class="arithmatex">\(r_i\)</span>（注意相对于原图是乘以二的）。</li>
+<li>根本不够把另外一条边补得和半径一样长，容易发现这种情况必然存在另一个中心点满足情况 <span class="arithmatex">\(1\)</span>，直接不考虑。</li>
+<li>能补齐的情况下还多，此时最优策略显然是把多的平均分给叶子结点，假如这种情况下直径等于 <span class="arithmatex">\(r_i+2x\)</span>，那么 <span class="arithmatex">\(\frac{r_i \times c - s_i}{2} &lt; K \le\frac{r_i \times c - s_i}{2}+x\times c\)</span></li>
 </ol>
-<p>为方便叙述，我们设 $ O_i=\frac{r_i \times c - s_i}{2}$。</p>
-<p>容易发现情况 $1$ 的答案和 $K$ 无关，且按 $O_i$ 排序后恰好是一个后缀，直接维护一个后缀最小值即可。</p>
-<p>对于情况 $3$，我们化一下式子发现 $x=\left\lceil\frac{k-O_i}{c}\right\rceil$，则答案为 $2\left\lceil\frac{k-O_i}{c}\right\rceil+r_i$</p>
+<p>为方便叙述，我们设 <span class="arithmatex">\( O_i=\frac{r_i \times c - s_i}{2}\)</span>。</p>
+<p>容易发现情况 <span class="arithmatex">\(1\)</span> 的答案和 <span class="arithmatex">\(K\)</span> 无关，且按 <span class="arithmatex">\(O_i\)</span> 排序后恰好是一个后缀，直接维护一个后缀最小值即可。</p>
+<p>对于情况 <span class="arithmatex">\(3\)</span>，我们化一下式子发现 <span class="arithmatex">\(x=\left\lceil\frac{k-O_i}{c}\right\rceil\)</span>，则答案为 <span class="arithmatex">\(2\left\lceil\frac{k-O_i}{c}\right\rceil+r_i\)</span></p>
 <p>考虑进行一些化简降低耦合度，首先容易想到将上取整转化为分类讨论，即：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{cases}
 2\left\lfloor\frac{k}{c}\right\rfloor + 2 - 2\left\lfloor\frac{O_i}{c}\right\rfloor + r_i &amp; k\bmod c&gt;O_i \bmod c \\
 2\left\lfloor\frac{k}{c}\right\rfloor-2\left\lfloor\frac{O_i}{c}\right\rfloor+r_i &amp; k\bmod c\le O_i \bmod c
 \end{cases}
-$$</p>
-<p>容易想到先把 $K$ 和 $O_i$ 离线下来从小到大排序，每次碰到 $K$ 维护一个指针把小于等于它的 $O_i$ 对应的 $- 2\left\lfloor\frac{O_i}{c}\right\rfloor+r_i$ 的全部加进一棵 按 $O_i \bmod c$ 维护线段树里，然后查询前缀、后缀最小值还有情况一的后缀最小值分别代式子就完事了。</p>
+\]</div>
+<p>容易想到先把 <span class="arithmatex">\(K\)</span> 和 <span class="arithmatex">\(O_i\)</span> 离线下来从小到大排序，每次碰到 <span class="arithmatex">\(K\)</span> 维护一个指针把小于等于它的 <span class="arithmatex">\(O_i\)</span> 对应的 <span class="arithmatex">\(- 2\left\lfloor\frac{O_i}{c}\right\rfloor+r_i\)</span> 的全部加进一棵 按 <span class="arithmatex">\(O_i \bmod c\)</span> 维护线段树里，然后查询前缀、后缀最小值还有情况一的后缀最小值分别代式子就完事了。</p>
 <p>有一堆细节要处理，具体看代码。</p>
 <h3 id="code">code</h3>
 <details class="success">

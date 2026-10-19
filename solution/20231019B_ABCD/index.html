@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5851,16 +5879,16 @@
 <p>暂时先写 T4（因为是推式子题），其它的等有时间了再补。</p>
 <p><a href="../../files/20231019.rar">密码是成外通用密码，大小写敏感</a></p>
 <h2 id="t1">T1</h2>
-<p>这道题做法贼多，我这里说一下我的 $O(n\log n)$ exKMP 做法，应该是带 $\log$ 的做法中跑的最快的。</p>
+<p>这道题做法贼多，我这里说一下我的 <span class="arithmatex">\(O(n\log n)\)</span> exKMP 做法，应该是带 <span class="arithmatex">\(\log\)</span> 的做法中跑的最快的。</p>
 <blockquote>
-<p>约定：字符串下标从 $0$ 开始。</p>
+<p>约定：字符串下标从 <span class="arithmatex">\(0\)</span> 开始。</p>
 </blockquote>
-<p>先求出 exKMP 的 $nxt$ 数组，容易发现每个点的决策只有两种，分别是<strong>加上一个字符</strong>和<strong>复制一遍后删掉若干个字符</strong>，且在 $i$ 处至少要删掉 $i-nxt_i$ 个（不然就和 $S$ 不匹配了）。</p>
-<p>那么容易想到 DP，设 $dp_{i}$ 表示匹配完 $[0,i)$ 的最小代价，根据刚才的结论，转移有两种：</p>
-<p>$$
+<p>先求出 exKMP 的 <span class="arithmatex">\(nxt\)</span> 数组，容易发现每个点的决策只有两种，分别是<strong>加上一个字符</strong>和<strong>复制一遍后删掉若干个字符</strong>，且在 <span class="arithmatex">\(i\)</span> 处至少要删掉 <span class="arithmatex">\(i-nxt_i\)</span> 个（不然就和 <span class="arithmatex">\(S\)</span> 不匹配了）。</p>
+<p>那么容易想到 DP，设 <span class="arithmatex">\(dp_{i}\)</span> 表示匹配完 <span class="arithmatex">\([0,i)\)</span> 的最小代价，根据刚才的结论，转移有两种：</p>
+<div class="arithmatex">\[
 dp_i\gets dp_{i-1}+t_{s_{i-1}}\\
 dp_i\gets \min_{j&lt;i}^{j+nxt_j\ge i}\begin{Bmatrix}dp_j+t_1+t_2\times (2j-i)\end{Bmatrix}
-$$</p>
+\]</div>
 <p>然后第二个转移可以用优先队列维护，就做完了。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -5949,19 +5977,19 @@ $$</p>
 <h2 id="t2">T2</h2>
 <p>很奇妙的一道题，我赛时臆想了一个做法，就是离散化后跑 DDP，但是没想出怎么维护区间操作就跳过这道题了。希望有有缘人可以尝试一下。</p>
 <p>我赛后写的官方题解的做法。</p>
-<p>首先容易发现每个连通的整块只有两种涂色方法，且两种涂法黑白两色的差值是一样的。那么我们可以考虑只维护差值 $diff$，然后黑白的答案就分别是 $\frac{sum \pm diff}{2}$。</p>
+<p>首先容易发现每个连通的整块只有两种涂色方法，且两种涂法黑白两色的差值是一样的。那么我们可以考虑只维护差值 <span class="arithmatex">\(diff\)</span>，然后黑白的答案就分别是 <span class="arithmatex">\(\frac{sum \pm diff}{2}\)</span>。</p>
 <p>那么我们就要维护两个东西，分别是<strong>连通块</strong>和<strong>区间内黑白色差值</strong>，其中连通块可以用 ODT 维护，这个很简单就不具体讲了。我们现在重点讲第二个。</p>
-<p>首先，由于两种情况差值相同，我们不妨给每一个点钦定一个颜色（黑白交替），其中奇数列奇数行为白色，偶数行为黑色，偶数列反之，那么我们要维护区间深度加 $d$，考虑区间加 $d$ 会对差值 <strong>黑色 $-$ 白色</strong> 产生什么影响。</p>
-<p>首先，若 $d$ 是偶数，那么相当于在下面加偶数行块，容易发现这一块的差为 $0$，而上面原有的不会变。故若 $d$ 为偶数可以直接不操作。</p>
-<p>若 $d$ 为奇数，那么相当于区间内原有块黑白色交换，然后再加偶数行完整，再加一行。其中偶数行差为 $0$，不会产生影响，只考虑<strong>加的这一行</strong>和<strong>反转原来的颜色</strong>。</p>
-<p>对于反转颜色，如果某一列深度为偶数，那么这一列不会产生额外影响。反之，如果是第奇数列，那么黑色 $+1$，白色 $-1$，差值 $+2$，若为偶数列则白色 $+1$ 黑色 $-1$，差值 $-2$。</p>
-<p>然后考虑加的这一行，贡献显然是 偶数列数量 $-$ 奇数列数量。</p>
-<p>那么我们可以维护区间内 <strong>深度为奇数的偶数列 $o_0$</strong>，<strong>深度为奇数的奇数列 $o_1$</strong>，<strong>区间内奇数列的数量 $c$</strong> 来得出差值的变化。</p>
-<p>那么设区间长度为 $l$，差值就是：</p>
-<p>$$2o_1-2o_0+(l-2c)$$</p>
-<p>而容易发现 $o_1-c$ 就是深度为偶数的奇数列的数量，那么我们可以改为维护 <strong>深度与下标奇偶性不同的列数</strong> $o=(o_1-c)-o_0$，那么差值就是 $2o-l$，且修改后，$o$ 变为 $l-o$。</p>
+<p>首先，由于两种情况差值相同，我们不妨给每一个点钦定一个颜色（黑白交替），其中奇数列奇数行为白色，偶数行为黑色，偶数列反之，那么我们要维护区间深度加 <span class="arithmatex">\(d\)</span>，考虑区间加 <span class="arithmatex">\(d\)</span> 会对差值 <strong>黑色 <span class="arithmatex">\(-\)</span> 白色</strong> 产生什么影响。</p>
+<p>首先，若 <span class="arithmatex">\(d\)</span> 是偶数，那么相当于在下面加偶数行块，容易发现这一块的差为 <span class="arithmatex">\(0\)</span>，而上面原有的不会变。故若 <span class="arithmatex">\(d\)</span> 为偶数可以直接不操作。</p>
+<p>若 <span class="arithmatex">\(d\)</span> 为奇数，那么相当于区间内原有块黑白色交换，然后再加偶数行完整，再加一行。其中偶数行差为 <span class="arithmatex">\(0\)</span>，不会产生影响，只考虑<strong>加的这一行</strong>和<strong>反转原来的颜色</strong>。</p>
+<p>对于反转颜色，如果某一列深度为偶数，那么这一列不会产生额外影响。反之，如果是第奇数列，那么黑色 <span class="arithmatex">\(+1\)</span>，白色 <span class="arithmatex">\(-1\)</span>，差值 <span class="arithmatex">\(+2\)</span>，若为偶数列则白色 <span class="arithmatex">\(+1\)</span> 黑色 <span class="arithmatex">\(-1\)</span>，差值 <span class="arithmatex">\(-2\)</span>。</p>
+<p>然后考虑加的这一行，贡献显然是 偶数列数量 <span class="arithmatex">\(-\)</span> 奇数列数量。</p>
+<p>那么我们可以维护区间内 <strong>深度为奇数的偶数列 <span class="arithmatex">\(o_0\)</span></strong>，<strong>深度为奇数的奇数列 <span class="arithmatex">\(o_1\)</span></strong>，<strong>区间内奇数列的数量 <span class="arithmatex">\(c\)</span></strong> 来得出差值的变化。</p>
+<p>那么设区间长度为 <span class="arithmatex">\(l\)</span>，差值就是：</p>
+<div class="arithmatex">\[2o_1-2o_0+(l-2c)\]</div>
+<p>而容易发现 <span class="arithmatex">\(o_1-c\)</span> 就是深度为偶数的奇数列的数量，那么我们可以改为维护 <strong>深度与下标奇偶性不同的列数</strong> <span class="arithmatex">\(o=(o_1-c)-o_0\)</span>，那么差值就是 <span class="arithmatex">\(2o-l\)</span>，且修改后，<span class="arithmatex">\(o\)</span> 变为 <span class="arithmatex">\(l-o\)</span>。</p>
 <p>那么这个显然可以动态开点线段树维护，注意数组不要开小了，以及维护连通块的边界问题。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6198,43 +6226,43 @@ $$</p>
 </span></code></pre></div>
 </details>
 <h2 id="t4">T4</h2>
-<p>首先把排列拆成环（$i\to p_i$，比如排列 $3,5,4,1,2,6$ 就可以拆成三个环 $(3,4,1)(5,2)(6)$），为保证交换次数最小，只能再每个环内部交换，那么容易构造出每次用环上最小值当跳板和其他值交换，而这样显然是代价最小的，是最小值乘以其它值的和。那么整个排列的代价就是所有环的代价之和。</p>
-<p>那么考虑枚举 $i$ 在所有情况下能作为环内最小值产生贡献的代价之和，易得以下式子：</p>
-<p>$$\sum_{i=1}^{n-1}i\sum_{S\subseteq[i+1,n]}\left(\sum_{x\in S}x\right)|S|!(n-|S|-1)!$$</p>
-<p>式子很好理解，前半部分枚举内容很显然，其中 $S$ 是去掉 $i$ 后环上点的集合。最后的 $(n-|S|-1)!$ 是环外的排列。$|S|!$ 比较复杂，考虑 $i\to p_i$ 的环上的顺序，我们钦定一个点断开后其余点排列方案数就是 $|S|!$，然后每个环都能唯一对应 $i\to p_i$ 的映射集合（显然是双射吧），故环内的方案数为 $|S|!$。</p>
-<p>然后容易发现如果要枚举集合 $S$ 显然不可做，考虑枚举集合大小 $j=|S|$，然后每个 $x\in[i+1,n]$ 都能在 $\binom{n-i-1}{j-1}$ 个不同的 $S$ 中产生贡献，故上式可化为这样：</p>
-<p>$$\sum_{i-1}^{n-1}\sum_{j=1}^{n-i}i\dfrac{(n+i+1)(n-i)}{2}\dbinom{n-i-1}{j-1}j!(n-j-1)!$$</p>
+<p>首先把排列拆成环（<span class="arithmatex">\(i\to p_i\)</span>，比如排列 <span class="arithmatex">\(3,5,4,1,2,6\)</span> 就可以拆成三个环 <span class="arithmatex">\((3,4,1)(5,2)(6)\)</span>），为保证交换次数最小，只能再每个环内部交换，那么容易构造出每次用环上最小值当跳板和其他值交换，而这样显然是代价最小的，是最小值乘以其它值的和。那么整个排列的代价就是所有环的代价之和。</p>
+<p>那么考虑枚举 <span class="arithmatex">\(i\)</span> 在所有情况下能作为环内最小值产生贡献的代价之和，易得以下式子：</p>
+<div class="arithmatex">\[\sum_{i=1}^{n-1}i\sum_{S\subseteq[i+1,n]}\left(\sum_{x\in S}x\right)|S|!(n-|S|-1)!\]</div>
+<p>式子很好理解，前半部分枚举内容很显然，其中 <span class="arithmatex">\(S\)</span> 是去掉 <span class="arithmatex">\(i\)</span> 后环上点的集合。最后的 <span class="arithmatex">\((n-|S|-1)!\)</span> 是环外的排列。<span class="arithmatex">\(|S|!\)</span> 比较复杂，考虑 <span class="arithmatex">\(i\to p_i\)</span> 的环上的顺序，我们钦定一个点断开后其余点排列方案数就是 <span class="arithmatex">\(|S|!\)</span>，然后每个环都能唯一对应 <span class="arithmatex">\(i\to p_i\)</span> 的映射集合（显然是双射吧），故环内的方案数为 <span class="arithmatex">\(|S|!\)</span>。</p>
+<p>然后容易发现如果要枚举集合 <span class="arithmatex">\(S\)</span> 显然不可做，考虑枚举集合大小 <span class="arithmatex">\(j=|S|\)</span>，然后每个 <span class="arithmatex">\(x\in[i+1,n]\)</span> 都能在 <span class="arithmatex">\(\binom{n-i-1}{j-1}\)</span> 个不同的 <span class="arithmatex">\(S\)</span> 中产生贡献，故上式可化为这样：</p>
+<div class="arithmatex">\[\sum_{i-1}^{n-1}\sum_{j=1}^{n-i}i\dfrac{(n+i+1)(n-i)}{2}\dbinom{n-i-1}{j-1}j!(n-j-1)!\]</div>
 <p><del>不会连等差数列求和公式都看不懂吧？</del></p>
 <p>容易看到中间有个组合数，旁边还有一堆阶乘，考虑把组合数拆成阶乘再化简：</p>
-<p>$$\sum_{i-1}^{n-1}\sum_{j=1}^{n-i}i\dfrac{(n+i+1)(n-i)}{2}\times\dfrac{(n-i-1)!}{(j-1)!(n-i-j)!}j!(n-j-1)!$$</p>
+<div class="arithmatex">\[\sum_{i-1}^{n-1}\sum_{j=1}^{n-i}i\dfrac{(n+i+1)(n-i)}{2}\times\dfrac{(n-i-1)!}{(j-1)!(n-i-j)!}j!(n-j-1)!\]</div>
 <p>稍微约分一下：</p>
-<p>$$\frac{1}{2}\sum_{i-1}^{n-1}i(n+i+1)(n-i)!\sum_{j=1}^{n-i}\dfrac{j(n-j-1)!}{(n-j-i)!}$$</p>
-<p>这个式子虽然变好看了，但仍然需要 $O(n^2)$ 才能做，考虑拆掉后面的 $\sum$，但是为了消掉它，我们有一个套路，需要把它拆成难看的组合数。</p>
-<p>$$
+<div class="arithmatex">\[\frac{1}{2}\sum_{i-1}^{n-1}i(n+i+1)(n-i)!\sum_{j=1}^{n-i}\dfrac{j(n-j-1)!}{(n-j-i)!}\]</div>
+<p>这个式子虽然变好看了，但仍然需要 <span class="arithmatex">\(O(n^2)\)</span> 才能做，考虑拆掉后面的 <span class="arithmatex">\(\sum\)</span>，但是为了消掉它，我们有一个套路，需要把它拆成难看的组合数。</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\sum_{j=1}^{n-i}\dfrac{j(n-j-1)!}{(n-j-i)!}\\
 =&amp;(i-1)!\sum_{j=1}^{n-i}\dfrac{j(n-j-1)!}{(n-j-i)!(i-1)!}\\
 =&amp;(i-1)!\sum_{j=1}^{n-i}\dbinom{n-j-1}{i-1}\dbinom{j}{1}
 \end{aligned}
-$$</p>
+\]</div>
 <p>这里有一个套路，我们把它放到一个更一般的情况：</p>
 <hr />
-<p>$$\sum_{x=d-c}^{a-b}\dbinom{a-x}{b}\dbinom{c+x}{d}=\dbinom{a+c+1}{b+d+1}$$</p>
+<div class="arithmatex">\[\sum_{x=d-c}^{a-b}\dbinom{a-x}{b}\dbinom{c+x}{d}=\dbinom{a+c+1}{b+d+1}\]</div>
 <p>证明：</p>
-<p>考虑组合意义，即在两段长度分别为 $a-x,c+x$ 的序列上分别找 $b,d$ 个点的方案数。</p>
-<p>那么容易发现两段序列长度的和是固定的 $a+c$，我们再在中间塞一个分界点，且钦定它被选，左边恰好有 $b$ 个被选，右边有 $d$ 个（其实就是在选出来的所有 $b+d+1$ 个点中第 $b+1$ 个），那么一共就要选 $b+d+1$ 个，总方案数就是 $\binom{a+c+1}{b+d+1}$。</p>
-<p>为什么这样就是对的呢？考虑分界点的移动，容易发现它最左为 $b+1$，最右为 $a+b-d$，恰好分别是 $a-x,c+x$ 的下界。换句话说，这样选恰好在 $\sum$ 约束的范围内算到了所有 $x$ 取值的方案数总和。</p>
+<p>考虑组合意义，即在两段长度分别为 <span class="arithmatex">\(a-x,c+x\)</span> 的序列上分别找 <span class="arithmatex">\(b,d\)</span> 个点的方案数。</p>
+<p>那么容易发现两段序列长度的和是固定的 <span class="arithmatex">\(a+c\)</span>，我们再在中间塞一个分界点，且钦定它被选，左边恰好有 <span class="arithmatex">\(b\)</span> 个被选，右边有 <span class="arithmatex">\(d\)</span> 个（其实就是在选出来的所有 <span class="arithmatex">\(b+d+1\)</span> 个点中第 <span class="arithmatex">\(b+1\)</span> 个），那么一共就要选 <span class="arithmatex">\(b+d+1\)</span> 个，总方案数就是 <span class="arithmatex">\(\binom{a+c+1}{b+d+1}\)</span>。</p>
+<p>为什么这样就是对的呢？考虑分界点的移动，容易发现它最左为 <span class="arithmatex">\(b+1\)</span>，最右为 <span class="arithmatex">\(a+b-d\)</span>，恰好分别是 <span class="arithmatex">\(a-x,c+x\)</span> 的下界。换句话说，这样选恰好在 <span class="arithmatex">\(\sum\)</span> 约束的范围内算到了所有 <span class="arithmatex">\(x\)</span> 取值的方案数总和。</p>
 <hr />
-<p>那么把这个情况放回式子中，若 $a=n-1,b=i-1,c=0,d=1$，那么 $x$ 的范围为 $[1,n-i]$，这不巧了吗，恰好是 $j$ 的范围。那么我们刚刚的式子恰好完美满足优化条件，可以化成这样：</p>
-<p>$$(i-1)!\dbinom{n}{i+1}$$</p>
+<p>那么把这个情况放回式子中，若 <span class="arithmatex">\(a=n-1,b=i-1,c=0,d=1\)</span>，那么 <span class="arithmatex">\(x\)</span> 的范围为 <span class="arithmatex">\([1,n-i]\)</span>，这不巧了吗，恰好是 <span class="arithmatex">\(j\)</span> 的范围。那么我们刚刚的式子恰好完美满足优化条件，可以化成这样：</p>
+<div class="arithmatex">\[(i-1)!\dbinom{n}{i+1}\]</div>
 <p>再塞回原来的式子：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\frac{1}{2}\sum_{i-1}^{n-1}i(n+i+1)(n-i)!(i-1)!\dbinom{n}{i+1}\\
 =&amp;\frac{1}{2}\sum_{i-1}^{n-1}i!(n+i+1)(n-i)!\dfrac{n!}{(i+1)!(n-i-1)!}\\
 =&amp;\frac{1}{2}\sum_{i-1}^{n-1}\dfrac{(n+i+1)(n-i)n!}{i+1}
 \end{aligned}
-$$</p>
+\]</div>
 <p>那么我们就能得到一个又好算又好看的式子了。</p>
 <details class="success">
 <summary>参考代码</summary>

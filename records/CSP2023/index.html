@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5985,8 +6013,8 @@
 <p>科技题。</p>
 <p>首先看到异或就要想到 01Trie，那么考虑如何维护。</p>
 <p>假如给每个节点建一个 01Trie 存所有邻居显然是不行的，时间空间双双炸掉，考虑随便定个根，然后存每个结点所有儿子，修改和查询时额外把父亲加上就行了。</p>
-<p>然后 01Trie 需要支持插入删除求异或和和整体 $+1$，前三个是简单的。第四个就是这道题需要用科技的地方了。</p>
-<p>考虑在二进制上 $+1$ 相当于把最低位的 $0$ 变成 $1$，后面的 $1$ 全变成 $0$。那么假如我们的 01Trie 从低位往高位存储，这个操作就相当于交换结点左右儿子然后向 $0$ 递归。然后稍微注意一下另外三个操作的变化即可。</p>
+<p>然后 01Trie 需要支持插入删除求异或和和整体 <span class="arithmatex">\(+1\)</span>，前三个是简单的。第四个就是这道题需要用科技的地方了。</p>
+<p>考虑在二进制上 <span class="arithmatex">\(+1\)</span> 相当于把最低位的 <span class="arithmatex">\(0\)</span> 变成 <span class="arithmatex">\(1\)</span>，后面的 <span class="arithmatex">\(1\)</span> 全变成 <span class="arithmatex">\(0\)</span>。那么假如我们的 01Trie 从低位往高位存储，这个操作就相当于交换结点左右儿子然后向 <span class="arithmatex">\(0\)</span> 递归。然后稍微注意一下另外三个操作的变化即可。</p>
 <details class="success">
 <summary>代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6107,11 +6135,11 @@
 <p>那么题意就是单点修改，求前缀最大值数量。</p>
 <p>前缀最大值数量不具有结合律，乍一看不能用线段树维护，但是这道题就是要反其道而行。</p>
 <p>首先考虑合并时左儿子的前缀最大值必定是整个区间的前缀最大值，那么只用考虑右儿子大于左儿子最大值的部分。</p>
-<p>设右儿子为 $u$，左儿子为 $v$，$r_u$ 表示 $u$ 内的前缀最大值个数，$mx_u$ 表示 $u$ 内的最大值，$ls,rs$ 分别代表 $u$ 的左右儿子，那么分情况讨论：</p>
-<p>若 $mx_v&gt;mx_u$，右儿子对当前区间的贡献必为 $0$，直接等于左区间的 $r$。</p>
-<p>若 $mx_{ls}&lt;mx_v&lt;mx_u$，那么 $ls$ 就没有贡献，递归查找 $rs$。</p>
-<p>若 $mx_v&lt;mx_{ls}$，那么 $rs$ 的贡献必定为 $r_u-r_{ls}$，递归查找 $ls$。</p>
-<p>那么合并的复杂度就是 $O(\log n)$ 的，总复杂度 $O(n\log^2 n)$。</p>
+<p>设右儿子为 <span class="arithmatex">\(u\)</span>，左儿子为 <span class="arithmatex">\(v\)</span>，<span class="arithmatex">\(r_u\)</span> 表示 <span class="arithmatex">\(u\)</span> 内的前缀最大值个数，<span class="arithmatex">\(mx_u\)</span> 表示 <span class="arithmatex">\(u\)</span> 内的最大值，<span class="arithmatex">\(ls,rs\)</span> 分别代表 <span class="arithmatex">\(u\)</span> 的左右儿子，那么分情况讨论：</p>
+<p>若 <span class="arithmatex">\(mx_v&gt;mx_u\)</span>，右儿子对当前区间的贡献必为 <span class="arithmatex">\(0\)</span>，直接等于左区间的 <span class="arithmatex">\(r\)</span>。</p>
+<p>若 <span class="arithmatex">\(mx_{ls}&lt;mx_v&lt;mx_u\)</span>，那么 <span class="arithmatex">\(ls\)</span> 就没有贡献，递归查找 <span class="arithmatex">\(rs\)</span>。</p>
+<p>若 <span class="arithmatex">\(mx_v&lt;mx_{ls}\)</span>，那么 <span class="arithmatex">\(rs\)</span> 的贡献必定为 <span class="arithmatex">\(r_u-r_{ls}\)</span>，递归查找 <span class="arithmatex">\(ls\)</span>。</p>
+<p>那么合并的复杂度就是 <span class="arithmatex">\(O(\log n)\)</span> 的，总复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6191,22 +6219,22 @@
 </details>
 <h2 id="p7470-noi-online-2021">P7470 [NOI Online 2021 提高组] 岛屿探险</h2>
 <p><a href="https://www.luogu.com.cn/problem/P7470">传送门</a></p>
-<p>本文中 $\oplus$ 表示按位异或。</p>
+<p>本文中 <span class="arithmatex">\(\oplus\)</span> 表示按位异或。</p>
 <hr />
-<p>首先考虑把 $b_i&gt;d_j$ 和 $b_i \le d_j$ 的分开考虑：</p>
-<p>对于 $b_i&gt;d_j$ 的，即为求 $a_i\oplus c_j\le d_j$ 的 $i$ 的个数，由于 $c,d$ 是知道的，这个可以直接 01Trie 维护，具体维护方式略。</p>
-<p>对于 $b_i\le d_j$ 的，即为求 $c_j\oplus a_i\le b_i$ 的 $i$ 的个数，发现和上一种情况是对称的，那么考虑把询问塞到 01Trie 里面，然后统计改为给 Trie 的结点打标记，最后贡献即为根到叶子路径上标记的综合。</p>
+<p>首先考虑把 <span class="arithmatex">\(b_i&gt;d_j\)</span> 和 <span class="arithmatex">\(b_i \le d_j\)</span> 的分开考虑：</p>
+<p>对于 <span class="arithmatex">\(b_i&gt;d_j\)</span> 的，即为求 <span class="arithmatex">\(a_i\oplus c_j\le d_j\)</span> 的 <span class="arithmatex">\(i\)</span> 的个数，由于 <span class="arithmatex">\(c,d\)</span> 是知道的，这个可以直接 01Trie 维护，具体维护方式略。</p>
+<p>对于 <span class="arithmatex">\(b_i\le d_j\)</span> 的，即为求 <span class="arithmatex">\(c_j\oplus a_i\le b_i\)</span> 的 <span class="arithmatex">\(i\)</span> 的个数，发现和上一种情况是对称的，那么考虑把询问塞到 01Trie 里面，然后统计改为给 Trie 的结点打标记，最后贡献即为根到叶子路径上标记的综合。</p>
 <hr />
-<p>但是假如每次询问都这样做复杂度直接爆炸，大概是 $O(qn\log V)$ 的，那么考虑如何维护多次询问：</p>
-<p>首先考虑全都是 $b_i&gt;d_j$ 的（貌似有部分分），可以开一个可持久化 Trie，然后仿照可持久化权值线段树做前缀和即可。</p>
-<p>然后假如全是 $b_i\le d_j$，我们可以把询问拆成 $[1,r]-[1,l-1]$，直接离线下来排序做即可。</p>
-<p>这里离线下来指的是把所有 $c_j$ 插进 Trie 里，然后排序后遇到 $a_i$ 就打标记，遇到 $c_i$ 就查询路径上的标记和。</p>
+<p>但是假如每次询问都这样做复杂度直接爆炸，大概是 <span class="arithmatex">\(O(qn\log V)\)</span> 的，那么考虑如何维护多次询问：</p>
+<p>首先考虑全都是 <span class="arithmatex">\(b_i&gt;d_j\)</span> 的（貌似有部分分），可以开一个可持久化 Trie，然后仿照可持久化权值线段树做前缀和即可。</p>
+<p>然后假如全是 <span class="arithmatex">\(b_i\le d_j\)</span>，我们可以把询问拆成 <span class="arithmatex">\([1,r]-[1,l-1]\)</span>，直接离线下来排序做即可。</p>
+<p>这里离线下来指的是把所有 <span class="arithmatex">\(c_j\)</span> 插进 Trie 里，然后排序后遇到 <span class="arithmatex">\(a_i\)</span> 就打标记，遇到 <span class="arithmatex">\(c_i\)</span> 就查询路径上的标记和。</p>
 <p>然后就转化成了一个偏序问题，直接套一层 CDQ 分治即可。</p>
 <p>但是既然已经用了 CDQ 了，那可以把一维偏序当二维偏序做，就不需要可持久化 Trie 了。</p>
 <hr />
 <p>复杂度分析：</p>
-<p>$$T(n)=2T(\frac{n}{2})+O(n\log V)$$</p>
-<p>那么 $T(n)$ 的渐进复杂度即为 $O(n\log n\log V)$，然后这里的 $n$ 取题目中的 $n+q$，所以复杂度即为 $O((n+q)\log(n+q)\log V)$。</p>
+<div class="arithmatex">\[T(n)=2T(\frac{n}{2})+O(n\log V)\]</div>
+<p>那么 <span class="arithmatex">\(T(n)\)</span> 的渐进复杂度即为 <span class="arithmatex">\(O(n\log n\log V)\)</span>，然后这里的 <span class="arithmatex">\(n\)</span> 取题目中的 <span class="arithmatex">\(n+q\)</span>，所以复杂度即为 <span class="arithmatex">\(O((n+q)\log(n+q)\log V)\)</span>。</p>
 <details class="success">
 <summary>参考代码 updated on 22 Sept.</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6373,35 +6401,35 @@
 <p>根号分治题。</p>
 <p>题意就是说选一个区间内两种颜色数量相等，最大化权值和。</p>
 <hr />
-<p>首先考虑暴力，把两种颜色取出来，设 $x$ 的总数量为 $len_x$，然后从前往后扫一遍，设一个前缀的权值是 $c_x-c_y+len_y$（$c_x$ 表示前缀中 $x$ 的个数，加上 $len_y$ 是为了防止负数下标），那么容易发现两个全职相同的前缀的差就是一个合法的区间，后面的维护是简单的。</p>
-<p>复杂度为 $O(len_x+len_y)$。</p>
+<p>首先考虑暴力，把两种颜色取出来，设 <span class="arithmatex">\(x\)</span> 的总数量为 <span class="arithmatex">\(len_x\)</span>，然后从前往后扫一遍，设一个前缀的权值是 <span class="arithmatex">\(c_x-c_y+len_y\)</span>（<span class="arithmatex">\(c_x\)</span> 表示前缀中 <span class="arithmatex">\(x\)</span> 的个数，加上 <span class="arithmatex">\(len_y\)</span> 是为了防止负数下标），那么容易发现两个全职相同的前缀的差就是一个合法的区间，后面的维护是简单的。</p>
+<p>复杂度为 <span class="arithmatex">\(O(len_x+len_y)\)</span>。</p>
 <hr />
-<p>设一个阈值 $K$，然后把 $len_x&gt;K$ 的称为“大色”，$len_x\le K$ 的称为“小色”，那么可以把询问分为三种：</p>
+<p>设一个阈值 <span class="arithmatex">\(K\)</span>，然后把 <span class="arithmatex">\(len_x&gt;K\)</span> 的称为“大色”，<span class="arithmatex">\(len_x\le K\)</span> 的称为“小色”，那么可以把询问分为三种：</p>
 <ol>
 <li>小色对小色</li>
 </ol>
-<p>直接暴力复杂度是 $O(K)$ 的，复杂度最多是 $O(qK)$。</p>
+<p>直接暴力复杂度是 <span class="arithmatex">\(O(K)\)</span> 的，复杂度最多是 <span class="arithmatex">\(O(qK)\)</span>。</p>
 <ol start="2">
 <li>大色对大色</li>
 </ol>
-<p>这样的颜色最多有 $\frac{n}{K}$ 种，本质不同的对数只有 $\frac{n}{K}^2$ 对，可以用 <code>unordered_map</code> 存起来。设有 $k$ 个大色，极限情况下 $\sum_{i=1}^k {len_i}=n$，那么共有 $\frac{k(k-1)}{2}$ 种本质不同的询问，总计算次数为 $\sum_{i\le i&lt;j\le k}{len_i+len_j}=(k-1)\sum_{i=1}^k{len_i}=n(k-1)$。由于 $len_i\le K$，得到 $k\le \frac{n}{K}$，则极限复杂度为 $O(\frac{n^2}{K})$。</p>
+<p>这样的颜色最多有 <span class="arithmatex">\(\frac{n}{K}\)</span> 种，本质不同的对数只有 <span class="arithmatex">\(\frac{n}{K}^2\)</span> 对，可以用 <code>unordered_map</code> 存起来。设有 <span class="arithmatex">\(k\)</span> 个大色，极限情况下 <span class="arithmatex">\(\sum_{i=1}^k {len_i}=n\)</span>，那么共有 <span class="arithmatex">\(\frac{k(k-1)}{2}\)</span> 种本质不同的询问，总计算次数为 <span class="arithmatex">\(\sum_{i\le i&lt;j\le k}{len_i+len_j}=(k-1)\sum_{i=1}^k{len_i}=n(k-1)\)</span>。由于 <span class="arithmatex">\(len_i\le K\)</span>，得到 <span class="arithmatex">\(k\le \frac{n}{K}\)</span>，则极限复杂度为 <span class="arithmatex">\(O(\frac{n^2}{K})\)</span>。</p>
 <p>当然也可以感性理解，此处给了严谨证明就略过了。</p>
 <ol start="3">
 <li>大色对小色</li>
 </ol>
 <p>由于小色对应的点数和大色对应的点数差距悬殊，而题目要求选择的区间内两种颜色点数相同，大色里面有很多点都是不可能产生贡献的的。我们可以把两种颜色的点分成<strong>有效点</strong>与<strong>无效点</strong>两种。</p>
-<p>为方便叙述，假设 $len_x\le K &lt;len_y$</p>
-<p>首先 $x$ 内所有点都是有效点（显然吧）。</p>
-<p>然后考虑维护 $y$ 内有效点的集合，遍历 $x$，然后二分对应的下一个 $y$，这样也能找到一段极长的连续 $x$，设这一段的长度为 $l$，那么往前 $l$ 个 $y$，往后 $l$ 个 $y$ 都是有效点，然后注意跳过原本就是有效点的，这里可以用 <code>set</code> 维护，容易发现一个 $x$ 会对应至多 $2$ 个 $y$，故有效点的数量是 $O(K)$ 的，那么就可以直接暴力了。复杂度是 $O(len_x\log{len_y})$</p>
-<p>考虑极限情况，设有 $k_1$ 个大色，其中第 $i$ 个大小为 $L_i$，有 $k_2$ 个小色，其中第 $i$ 个大小为 $l_i$，考虑到复杂度与小色的大小关系更大，那么我们用最大的 $\frac{q}{k_1}$ 个小色对大色询问，这样对于记忆化是最劣的，计算次数为 $\sum_{i=1}^{k_2}\sum_{j=1}^{k_1}l_i\log L_j\le k_1\log n\sum l_i$。</p>
-<p>最强的情况，可以构造出约为 $\frac{n}{2K}$ 个长度略大于 $K$ 的大色，然后其余小色总长度约为 $\frac{n}{2}$，并且使每个大色对每个小色问一遍，此时 $k_1$ 约为 $O(\frac{n}{K})$，$\sum l_i$ 约为 $O(n)$，则总复杂度为 $\frac{n^2\log n}{B}$。</p>
+<p>为方便叙述，假设 <span class="arithmatex">\(len_x\le K &lt;len_y\)</span></p>
+<p>首先 <span class="arithmatex">\(x\)</span> 内所有点都是有效点（显然吧）。</p>
+<p>然后考虑维护 <span class="arithmatex">\(y\)</span> 内有效点的集合，遍历 <span class="arithmatex">\(x\)</span>，然后二分对应的下一个 <span class="arithmatex">\(y\)</span>，这样也能找到一段极长的连续 <span class="arithmatex">\(x\)</span>，设这一段的长度为 <span class="arithmatex">\(l\)</span>，那么往前 <span class="arithmatex">\(l\)</span> 个 <span class="arithmatex">\(y\)</span>，往后 <span class="arithmatex">\(l\)</span> 个 <span class="arithmatex">\(y\)</span> 都是有效点，然后注意跳过原本就是有效点的，这里可以用 <code>set</code> 维护，容易发现一个 <span class="arithmatex">\(x\)</span> 会对应至多 <span class="arithmatex">\(2\)</span> 个 <span class="arithmatex">\(y\)</span>，故有效点的数量是 <span class="arithmatex">\(O(K)\)</span> 的，那么就可以直接暴力了。复杂度是 <span class="arithmatex">\(O(len_x\log{len_y})\)</span></p>
+<p>考虑极限情况，设有 <span class="arithmatex">\(k_1\)</span> 个大色，其中第 <span class="arithmatex">\(i\)</span> 个大小为 <span class="arithmatex">\(L_i\)</span>，有 <span class="arithmatex">\(k_2\)</span> 个小色，其中第 <span class="arithmatex">\(i\)</span> 个大小为 <span class="arithmatex">\(l_i\)</span>，考虑到复杂度与小色的大小关系更大，那么我们用最大的 <span class="arithmatex">\(\frac{q}{k_1}\)</span> 个小色对大色询问，这样对于记忆化是最劣的，计算次数为 <span class="arithmatex">\(\sum_{i=1}^{k_2}\sum_{j=1}^{k_1}l_i\log L_j\le k_1\log n\sum l_i\)</span>。</p>
+<p>最强的情况，可以构造出约为 <span class="arithmatex">\(\frac{n}{2K}\)</span> 个长度略大于 <span class="arithmatex">\(K\)</span> 的大色，然后其余小色总长度约为 <span class="arithmatex">\(\frac{n}{2}\)</span>，并且使每个大色对每个小色问一遍，此时 <span class="arithmatex">\(k_1\)</span> 约为 <span class="arithmatex">\(O(\frac{n}{K})\)</span>，<span class="arithmatex">\(\sum l_i\)</span> 约为 <span class="arithmatex">\(O(n)\)</span>，则总复杂度为 <span class="arithmatex">\(\frac{n^2\log n}{B}\)</span>。</p>
 <hr />
-<p>总复杂度约为 $O(qK+\frac{n^2\log n}{K})$，大对大的因为严格小于大对小可以直接忽略，据说 $K$ 取 $\sqrt{\frac{n^2\log n}{q}}$ 时最优，但是我个人觉得取 $\sqrt{n}$ 差不多得了（ <del>主要是我不会证明</del> ）。</p>
+<p>总复杂度约为 <span class="arithmatex">\(O(qK+\frac{n^2\log n}{K})\)</span>，大对大的因为严格小于大对小可以直接忽略，据说 <span class="arithmatex">\(K\)</span> 取 <span class="arithmatex">\(\sqrt{\frac{n^2\log n}{q}}\)</span> 时最优，但是我个人觉得取 <span class="arithmatex">\(\sqrt{n}\)</span> 差不多得了（ <del>主要是我不会证明</del> ）。</p>
 <p>好了现在我会证了，感谢 xx019。</p>
-<p>根据均值不等式 $a+b\ge 2\sqrt{ab}$，$qK+\frac{n^2\log n}{K}\ge 2\sqrt{qn^2\log n}$，且在 $qK=\frac{n^2\log n}{K}$ 时取等，即 $K=\sqrt{\frac{n^2\log n}{q}}$，此时复杂度为 $O(n\sqrt{q\log n})$。</p>
+<p>根据均值不等式 <span class="arithmatex">\(a+b\ge 2\sqrt{ab}\)</span>，<span class="arithmatex">\(qK+\frac{n^2\log n}{K}\ge 2\sqrt{qn^2\log n}\)</span>，且在 <span class="arithmatex">\(qK=\frac{n^2\log n}{K}\)</span> 时取等，即 <span class="arithmatex">\(K=\sqrt{\frac{n^2\log n}{q}}\)</span>，此时复杂度为 <span class="arithmatex">\(O(n\sqrt{q\log n})\)</span>。</p>
 <hr />
-<p>好了写出来了，$O(n\sqrt{q\log n})$ 没卡过去，学了下 $O(n\sqrt{q})$ 的写法。</p>
-<p>具体来说，把大色对小色的离线到大色上，然后对于每个大色 $y$ 可以 $O(n)$ 预处理序列上每个数往前第一个 $y$ 和往后第一个 $y$。然后用栈维护连续段的个数，假如当前段的左端点比上一段右端点靠前就可以合并，再前缀和维护一下合并时没产生贡献的点数，把工薪额外加在当前区间的两端，最后和前面的做法一样，总的来说压掉了一个 $\sqrt{\log}$，就不用卡常了。</p>
+<p>好了写出来了，<span class="arithmatex">\(O(n\sqrt{q\log n})\)</span> 没卡过去，学了下 <span class="arithmatex">\(O(n\sqrt{q})\)</span> 的写法。</p>
+<p>具体来说，把大色对小色的离线到大色上，然后对于每个大色 <span class="arithmatex">\(y\)</span> 可以 <span class="arithmatex">\(O(n)\)</span> 预处理序列上每个数往前第一个 <span class="arithmatex">\(y\)</span> 和往后第一个 <span class="arithmatex">\(y\)</span>。然后用栈维护连续段的个数，假如当前段的左端点比上一段右端点靠前就可以合并，再前缀和维护一下合并时没产生贡献的点数，把工薪额外加在当前区间的两端，最后和前面的做法一样，总的来说压掉了一个 <span class="arithmatex">\(\sqrt{\log}\)</span>，就不用卡常了。</p>
 <details class="success">
 <summary>参考代码 updated on 22 Sept.</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6532,36 +6560,36 @@
 </details>
 <h2 id="p7739-noi2021">P7739 [NOI2021] 密码箱</h2>
 <p><a href="https://www.luogu.com.cn/problem/P7739">传送门</a></p>
-<p>首先 $f(a)$ 相当于重复 $n-1$ 次把末项取倒数然后加在倒数第二项里再删掉这一项，设现在的末项为 $\frac{x}{y}$，倒数第二项为 $a_{n-1}$，容易发现假如 $\gcd(x,y)=1$，那么 $\gcd(y+a_{n-1}x,x)=1$（即加入下一项后的分子分母），又由于最开始 $y=1$，所以其实并不需要约分，那么只用考虑取模即可。</p>
-<p>容易想到 $x,y$ 可以用矩阵乘法维护，先不考虑三种操作，假设序列 $a$ 固定，我们先把矩阵构造出来：</p>
-<p>具体的，我们希望构造的矩阵 $A_i$ 满足以下式子：</p>
-<p>$$A_i\times \begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}y+a_ix\\x\end{bmatrix}$$</p>
+<p>首先 <span class="arithmatex">\(f(a)\)</span> 相当于重复 <span class="arithmatex">\(n-1\)</span> 次把末项取倒数然后加在倒数第二项里再删掉这一项，设现在的末项为 <span class="arithmatex">\(\frac{x}{y}\)</span>，倒数第二项为 <span class="arithmatex">\(a_{n-1}\)</span>，容易发现假如 <span class="arithmatex">\(\gcd(x,y)=1\)</span>，那么 <span class="arithmatex">\(\gcd(y+a_{n-1}x,x)=1\)</span>（即加入下一项后的分子分母），又由于最开始 <span class="arithmatex">\(y=1\)</span>，所以其实并不需要约分，那么只用考虑取模即可。</p>
+<p>容易想到 <span class="arithmatex">\(x,y\)</span> 可以用矩阵乘法维护，先不考虑三种操作，假设序列 <span class="arithmatex">\(a\)</span> 固定，我们先把矩阵构造出来：</p>
+<p>具体的，我们希望构造的矩阵 <span class="arithmatex">\(A_i\)</span> 满足以下式子：</p>
+<div class="arithmatex">\[A_i\times \begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}y+a_ix\\x\end{bmatrix}\]</div>
 <p>由于每次是乘最后一个所以我设置为把一个列向量乘在右边，这样每次加入新的操作就是乘在右边的，比较符合直觉。</p>
-<p>那么解一解方程，容易发现矩阵 $A_i$ 应该长这样：</p>
-<p>$$\begin{bmatrix}a_i&amp;1\\1&amp;0\end{bmatrix}$$</p>
+<p>那么解一解方程，容易发现矩阵 <span class="arithmatex">\(A_i\)</span> 应该长这样：</p>
+<div class="arithmatex">\[\begin{bmatrix}a_i&amp;1\\1&amp;0\end{bmatrix}\]</div>
 <hr />
 <p>但是现在 <code>W</code>，<code>E</code> 两种操作还是不好维护，我们希望这两种操作也能用矩阵概括。</p>
-<p>首先是 <code>W</code>，我们设它对应的矩阵为 $W$，那么我们希望它满足以下式子：</p>
-<p>$$\begin{bmatrix}b&amp;1\\1&amp;0\end{bmatrix}\times W=\begin{bmatrix}b+1&amp;1\\1&amp;0\end{bmatrix}$$</p>
+<p>首先是 <code>W</code>，我们设它对应的矩阵为 <span class="arithmatex">\(W\)</span>，那么我们希望它满足以下式子：</p>
+<div class="arithmatex">\[\begin{bmatrix}b&amp;1\\1&amp;0\end{bmatrix}\times W=\begin{bmatrix}b+1&amp;1\\1&amp;0\end{bmatrix}\]</div>
 <p>然后解一解方程可以发现：</p>
-<p>$$W=\begin{bmatrix}1&amp;0\\1&amp;1\end{bmatrix}$$</p>
-<p>但是对于 <code>E</code> 操作仍然不好维护，但是假如我们发现对于 $a_n=1$，<code>E</code> 的两种操作类型对答案的影响相同的话，就能维护了，记住，转换题意后一定记得回到原题意解题。</p>
-<p>由于只要后面的一样就肯定肯定不影响前面的，我们不妨假设现在后面的算出来是 $\frac{x}{y}$，然后前面啥也没有，那么可以简单推一下：</p>
+<div class="arithmatex">\[W=\begin{bmatrix}1&amp;0\\1&amp;1\end{bmatrix}\]</div>
+<p>但是对于 <code>E</code> 操作仍然不好维护，但是假如我们发现对于 <span class="arithmatex">\(a_n=1\)</span>，<code>E</code> 的两种操作类型对答案的影响相同的话，就能维护了，记住，转换题意后一定记得回到原题意解题。</p>
+<p>由于只要后面的一样就肯定肯定不影响前面的，我们不妨假设现在后面的算出来是 <span class="arithmatex">\(\frac{x}{y}\)</span>，然后前面啥也没有，那么可以简单推一下：</p>
 <ol>
 <li>给倒数第二项加一。</li>
 </ol>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 f(a_1+1,1,\frac{x}{y})
 =&amp;f(a_1+1,\frac{x+y}{x})\\
 =&amp;f(\frac{(a_1+1)(x+y)+x}{x+y})\\
 =&amp;\frac{a_1(x+y)+2x+y}{x+y}
 \end{aligned}
-$$</p>
+\]</div>
 <ol start="2">
-<li>给最后一项减一，然后添两个 $1$</li>
+<li>给最后一项减一，然后添两个 <span class="arithmatex">\(1\)</span></li>
 </ol>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 f(a_1,0,1,1,\frac{x}{y})
 =&amp;f(a_1,0,1,\frac{x+y}{x})\\
@@ -6570,24 +6598,24 @@ f(a_1,0,1,1,\frac{x}{y})
 =&amp;f(\frac{a_1(x+y)+2x+y}{x+y})\\
 =&amp;\frac{a_1(x+y)+2x+y}{x+y}
 \end{aligned}
-$$</p>
-<p>显然这两个东西相等，那么 <code>E</code> 操作实际上就是：<strong>先给数列的最后一项减 $1$，接着在数列尾再加两项，两项的值都是 $1$。</strong></p>
-<p>那么仿照刚才算 $W$（真的仿了吗？如仿），$E$ 的矩阵如下：</p>
-<p>$$E=\begin{bmatrix}1&amp;0\\-1&amp;1\end{bmatrix}\times\begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}\times \begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}=\begin{bmatrix}2&amp;1\\-1&amp;0\end{bmatrix}$$</p>
+\]</div>
+<p>显然这两个东西相等，那么 <code>E</code> 操作实际上就是：<strong>先给数列的最后一项减 <span class="arithmatex">\(1\)</span>，接着在数列尾再加两项，两项的值都是 <span class="arithmatex">\(1\)</span>。</strong></p>
+<p>那么仿照刚才算 <span class="arithmatex">\(W\)</span>（真的仿了吗？如仿），<span class="arithmatex">\(E\)</span> 的矩阵如下：</p>
+<div class="arithmatex">\[E=\begin{bmatrix}1&amp;0\\-1&amp;1\end{bmatrix}\times\begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}\times \begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}=\begin{bmatrix}2&amp;1\\-1&amp;0\end{bmatrix}\]</div>
 <p>好了，现在我们已经会维护 <code>APPEND</code> 操作了，✿✿ヽ(°▽°)ノ✿。</p>
 <p>那么区间翻转和区间反转操作呢？首先翻转操作可以考虑文艺平衡树维护，但是反转操作呢？</p>
-<p>其实是一样的，我们对于每个子树预处理<strong>当前矩阵</strong>，<strong>操作反转的矩阵</strong>，<strong>操作翻转的矩阵</strong>，<strong>操作翻转后反转的矩阵</strong>。然后和文艺平衡树一样打标记维护，每次下传标记就 <code>swap</code> 一下即可。复杂度 $O((n+q)\log (n+q)2^3)$。</p>
-<p>最后考虑一下如何求答案，设最后整个操作序列乘出来的矩阵为 $B$，那么首先在前面乘上初始的两个数（这个很简单），考虑后面乘的一个初始向量是多少，设这个向量为 $V$，那么我们希望：</p>
-<p>$$\begin{bmatrix}a_i&amp;1\\1&amp;0\end{bmatrix}\times V=\begin{bmatrix}a_i\\1\end{bmatrix}$$</p>
+<p>其实是一样的，我们对于每个子树预处理<strong>当前矩阵</strong>，<strong>操作反转的矩阵</strong>，<strong>操作翻转的矩阵</strong>，<strong>操作翻转后反转的矩阵</strong>。然后和文艺平衡树一样打标记维护，每次下传标记就 <code>swap</code> 一下即可。复杂度 <span class="arithmatex">\(O((n+q)\log (n+q)2^3)\)</span>。</p>
+<p>最后考虑一下如何求答案，设最后整个操作序列乘出来的矩阵为 <span class="arithmatex">\(B\)</span>，那么首先在前面乘上初始的两个数（这个很简单），考虑后面乘的一个初始向量是多少，设这个向量为 <span class="arithmatex">\(V\)</span>，那么我们希望：</p>
+<div class="arithmatex">\[\begin{bmatrix}a_i&amp;1\\1&amp;0\end{bmatrix}\times V=\begin{bmatrix}a_i\\1\end{bmatrix}\]</div>
 <p>容易得到：</p>
-<p>$$V=\begin{bmatrix}1\\0\end{bmatrix}$$</p>
+<div class="arithmatex">\[V=\begin{bmatrix}1\\0\end{bmatrix}\]</div>
 <p>所以最终答案为：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;A_0\times A_1\times B\times V\\
 =&amp;\begin{bmatrix}1&amp;0\\1&amp;1\end{bmatrix}\times B\times \begin{bmatrix}1\\0\end{bmatrix}
 \end{aligned}
-$$</p>
+\]</div>
 <p>然后总结一下，以后看到很难维护的操作应该考虑一下能不能转化成矩阵乘法。</p>
 <details class="success">
 <summary>参考代码 updated on 22 Sept.</summary>
@@ -6761,16 +6789,16 @@ $$</p>
 </details>
 <h2 id="p7518-2021-ab">P7518 [省选联考 2021 A/B 卷] 宝石</h2>
 <p><a href="https://www.luogu.com.cn/problem/P7518">传送门</a></p>
-<p>设查询的路径为 $u,v$，且 $\mathrm{lca}(u,v)=t$，那么我们可以把每个询问分成 $u\to t,t\to v$ 三部分。</p>
-<p>首先 $u\to t$ 的，这是一段上升的路径，那么我们可以利用倍增跳，具体地，设 $f_{u,i}$ 表示从 $u$ 开始，从 $w_u$ 的后继开始只向上走收集 $2^i$ 个宝石后到达哪个结点，预处理一下 $f_{u,0}$，然后后面就是正常倍增了。</p>
-<p>然后考虑 $t\to v$，我们可以把所有询问以二元组 $(c_i,i)$ 离线到 $t$ 上，然后在 $v$ 处打一个结束标记，表示编号为 $i$ 的询问在 $t$ 之前拿到的最后一个宝石为 $c_i$，这里我们需要对每个宝石维护一个容器 $d_c$，表示该容器内所有询问的下一颗宝石为 $c$，这个容器需要以下功能：</p>
+<p>设查询的路径为 <span class="arithmatex">\(u,v\)</span>，且 <span class="arithmatex">\(\mathrm{lca}(u,v)=t\)</span>，那么我们可以把每个询问分成 <span class="arithmatex">\(u\to t,t\to v\)</span> 三部分。</p>
+<p>首先 <span class="arithmatex">\(u\to t\)</span> 的，这是一段上升的路径，那么我们可以利用倍增跳，具体地，设 <span class="arithmatex">\(f_{u,i}\)</span> 表示从 <span class="arithmatex">\(u\)</span> 开始，从 <span class="arithmatex">\(w_u\)</span> 的后继开始只向上走收集 <span class="arithmatex">\(2^i\)</span> 个宝石后到达哪个结点，预处理一下 <span class="arithmatex">\(f_{u,0}\)</span>，然后后面就是正常倍增了。</p>
+<p>然后考虑 <span class="arithmatex">\(t\to v\)</span>，我们可以把所有询问以二元组 <span class="arithmatex">\((c_i,i)\)</span> 离线到 <span class="arithmatex">\(t\)</span> 上，然后在 <span class="arithmatex">\(v\)</span> 处打一个结束标记，表示编号为 <span class="arithmatex">\(i\)</span> 的询问在 <span class="arithmatex">\(t\)</span> 之前拿到的最后一个宝石为 <span class="arithmatex">\(c_i\)</span>，这里我们需要对每个宝石维护一个容器 <span class="arithmatex">\(d_c\)</span>，表示该容器内所有询问的下一颗宝石为 <span class="arithmatex">\(c\)</span>，这个容器需要以下功能：</p>
 <ol>
-<li>在进入结点 $k$ 时，将所有 $i$ 插入 $d_{c_i}$ 中。</li>
-<li>将 $w_k$ 和 $w_k$ 的后继合并。</li>
+<li>在进入结点 <span class="arithmatex">\(k\)</span> 时，将所有 <span class="arithmatex">\(i\)</span> 插入 <span class="arithmatex">\(d_{c_i}\)</span> 中。</li>
+<li>将 <span class="arithmatex">\(w_k\)</span> 和 <span class="arithmatex">\(w_k\)</span> 的后继合并。</li>
 <li>对于所有结束标记，查询所在容器。</li>
-<li>在退出结点 $k$ 时，撤销所有操作。</li>
+<li>在退出结点 <span class="arithmatex">\(k\)</span> 时，撤销所有操作。</li>
 </ol>
-<p>显然，可以用可撤销并查集维护，复杂度 $O(q\log n+n\log q)$。</p>
+<p>显然，可以用可撤销并查集维护，复杂度 <span class="arithmatex">\(O(q\log n+n\log q)\)</span>。</p>
 <details class="success">
 <summary>参考代码 updated on 25 Sept.</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6929,13 +6957,13 @@ $$</p>
 </details>
 <h2 id="cf1017g-the-tree">CF1017G The Tree</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1017G">传送门</a></p>
-<p>首先，直接做要么修改是 $O(n)$ 的（暴力修改，单点查询），要么查询是 $O(n)$ 的（标记修改，往上跳查询），其中一个会被链卡另一个会被菊花图卡。</p>
-<p>那么我们可以考虑均衡一下，让修改和查询都变成 $O(\sqrt{n})$ 的，很自然地想到分块。</p>
-<p>思路是将询问分成 $\sqrt{q}$ 块，对于每一块建虚树，然后处理完一块后用虚树上的信息给原树染色。</p>
-<p>这样要求块内每个操作复杂度不多于 $O(\sqrt{n})$，对每一块预处理和处理完一块后染色的复杂度不多于 $O(n)$。</p>
-<p>首先是建虚树，但是为了维护操作 $1$ 需要处理虚树上每个关键点和它父亲中间有多少个白点，由于反正都要维护链的信息了，那直接可以 $O(n)$ 建虚树，符合条件。</p>
-<p>然后是三个操作，操作 $3$ 直接查即可，操作 $1$ 维护一下每条边上剩的白点数，假如全涂完了就往儿子递归，由于点数不超过 $\sqrt{q}$ 所以复杂度是对的，为了后面染回原树可能要维护一下每条边加了几个黑点，有没有被涂白过。操作 $2$ 就直接遍历，三个操作复杂度均不超过 $O(\sqrt{q})$。</p>
-<p>然后是染色，我现在臆想的实现是遍历虚树，然后每次定位到原树的这个结点，分有没有涂白过把距离最近的若干个白点涂黑，或者把黑点刷白，复杂度是 $O(\sqrt{q}+n)$ 的。</p>
+<p>首先，直接做要么修改是 <span class="arithmatex">\(O(n)\)</span> 的（暴力修改，单点查询），要么查询是 <span class="arithmatex">\(O(n)\)</span> 的（标记修改，往上跳查询），其中一个会被链卡另一个会被菊花图卡。</p>
+<p>那么我们可以考虑均衡一下，让修改和查询都变成 <span class="arithmatex">\(O(\sqrt{n})\)</span> 的，很自然地想到分块。</p>
+<p>思路是将询问分成 <span class="arithmatex">\(\sqrt{q}\)</span> 块，对于每一块建虚树，然后处理完一块后用虚树上的信息给原树染色。</p>
+<p>这样要求块内每个操作复杂度不多于 <span class="arithmatex">\(O(\sqrt{n})\)</span>，对每一块预处理和处理完一块后染色的复杂度不多于 <span class="arithmatex">\(O(n)\)</span>。</p>
+<p>首先是建虚树，但是为了维护操作 <span class="arithmatex">\(1\)</span> 需要处理虚树上每个关键点和它父亲中间有多少个白点，由于反正都要维护链的信息了，那直接可以 <span class="arithmatex">\(O(n)\)</span> 建虚树，符合条件。</p>
+<p>然后是三个操作，操作 <span class="arithmatex">\(3\)</span> 直接查即可，操作 <span class="arithmatex">\(1\)</span> 维护一下每条边上剩的白点数，假如全涂完了就往儿子递归，由于点数不超过 <span class="arithmatex">\(\sqrt{q}\)</span> 所以复杂度是对的，为了后面染回原树可能要维护一下每条边加了几个黑点，有没有被涂白过。操作 <span class="arithmatex">\(2\)</span> 就直接遍历，三个操作复杂度均不超过 <span class="arithmatex">\(O(\sqrt{q})\)</span>。</p>
+<p>然后是染色，我现在臆想的实现是遍历虚树，然后每次定位到原树的这个结点，分有没有涂白过把距离最近的若干个白点涂黑，或者把黑点刷白，复杂度是 <span class="arithmatex">\(O(\sqrt{q}+n)\)</span> 的。</p>
 <p>然后就做完了，估计代码不会太好写。</p>
 <details class="success">
 <summary>参考代码 updated on 27 Sept.</summary>
@@ -7108,65 +7136,65 @@ $$</p>
 </details>
 <h2 id="cf573e-bear-and-bowling">CF573E Bear and Bowling</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF573E">传送门</a></p>
-<p>首先有个 $O(n^2)$ DP。</p>
-<p>设 $dp_{i,j}$ 表示考虑前 $i$ 个，已经选了 $j$ 个能得到的最大值，转移是简单的：</p>
-<p>$$dp_{i,j}=\max(dp_{i-1,j},dp_{i-1,j-1}+a_i\times j)$$</p>
+<p>首先有个 <span class="arithmatex">\(O(n^2)\)</span> DP。</p>
+<p>设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 个，已经选了 <span class="arithmatex">\(j\)</span> 个能得到的最大值，转移是简单的：</p>
+<div class="arithmatex">\[dp_{i,j}=\max(dp_{i-1,j},dp_{i-1,j-1}+a_i\times j)\]</div>
 <p>然后这道题由于是 CF 的，考虑到 Java Python 等常数较大的语言，时限开的巨大无比，已经可以日过去了。</p>
 <p>但是我可不是那种不求甚解的人呐。</p>
-<p>但是这道题还有爆踩标算的 $O(n)$ 贪心做法。可惜这是数据结构专题……</p>
+<p>但是这道题还有爆踩标算的 <span class="arithmatex">\(O(n)\)</span> 贪心做法。可惜这是数据结构专题……</p>
 <hr />
 <p>这个方程看起来不太好优化，那么我们考虑猜结论：</p>
-<p>$\forall i,\exists k\in[1,i]$，满足：</p>
-<p>$$\forall j&lt;k,dp_{i,j}=dp_{i-1,j}$$</p>
-<p>$$\forall j\ge k,dp_{i,j}=dp_{i-1,j-1}+a_i\times j$$</p>
-<p>就是说前一半是第一种转移，后一半是第二种转移。具体猜法是考虑画图，从 $dp_i\to dp_{i+1}$ 来看，以 $j$ 为横坐标，DP 值为纵坐标，第一种转移就是原地不动，第二种转移相当于向右平移一位再把每个斜率加 $a_i$，然后每个横坐标取纵坐标较大值。从 $i=1$ 随便画一画容易发现很难搞出反例。</p>
+<p><span class="arithmatex">\(\forall i,\exists k\in[1,i]\)</span>，满足：</p>
+<div class="arithmatex">\[\forall j&lt;k,dp_{i,j}=dp_{i-1,j}\]</div>
+<div class="arithmatex">\[\forall j\ge k,dp_{i,j}=dp_{i-1,j-1}+a_i\times j\]</div>
+<p>就是说前一半是第一种转移，后一半是第二种转移。具体猜法是考虑画图，从 <span class="arithmatex">\(dp_i\to dp_{i+1}\)</span> 来看，以 <span class="arithmatex">\(j\)</span> 为横坐标，DP 值为纵坐标，第一种转移就是原地不动，第二种转移相当于向右平移一位再把每个斜率加 <span class="arithmatex">\(a_i\)</span>，然后每个横坐标取纵坐标较大值。从 <span class="arithmatex">\(i=1\)</span> 随便画一画容易发现很难搞出反例。</p>
 <p>证明：</p>
-<p>从刚刚猜想的过程容易发现和斜率相关，考虑对 $dp_i$ 构造一个差分序列 $f_i$，其中 $f_{i,j}=dp_{i,j}-dp_{i,j-1}$，设 $i-1\to i$ 转移时的分界点为 $k_i$。</p>
-<p>若猜想成立，则有 $dp_{i,k_i-1}\ge dp_{i-1,k_i-2}+a_i\times (k_i-1)$，且 $dp_{i-1,k_i}&lt;dp_{i-1,k_i-1}+a_i\times k_i$，于是 $\frac{f_{i-1,k_i-1}}{k_i-1}\ge a_i$，且 $\frac{f_{i-1,k_i}}{k_i}&lt;a_i$。</p>
-<p>容易发现前式对于所有 $j&lt; k_i$ 均成立，后式对于所有 $j\ge k_i$ 均成立，而 $a_i$ 是一个定值，那么若 $\frac{f_{i-1,j}}{j}$ 关于 $j$ 单调不增，则猜想必定成立（对于边界情况，考虑假如 $\frac{f_{i-1,j}}{j}$ 全都小于 $a_i$ 那么 $k_i$ 取 $1$，假如全都大于等于 $a_i$ 那么 $k_i$ 取 $i$）。</p>
-<p>若猜想成立，那么由 $dp_i$ 的值可知：</p>
-<p>$$\forall j&lt; k_i,f_{i,j}=f_{i-1,j}$$
+<p>从刚刚猜想的过程容易发现和斜率相关，考虑对 <span class="arithmatex">\(dp_i\)</span> 构造一个差分序列 <span class="arithmatex">\(f_i\)</span>，其中 <span class="arithmatex">\(f_{i,j}=dp_{i,j}-dp_{i,j-1}\)</span>，设 <span class="arithmatex">\(i-1\to i\)</span> 转移时的分界点为 <span class="arithmatex">\(k_i\)</span>。</p>
+<p>若猜想成立，则有 <span class="arithmatex">\(dp_{i,k_i-1}\ge dp_{i-1,k_i-2}+a_i\times (k_i-1)\)</span>，且 <span class="arithmatex">\(dp_{i-1,k_i}&lt;dp_{i-1,k_i-1}+a_i\times k_i\)</span>，于是 <span class="arithmatex">\(\frac{f_{i-1,k_i-1}}{k_i-1}\ge a_i\)</span>，且 <span class="arithmatex">\(\frac{f_{i-1,k_i}}{k_i}&lt;a_i\)</span>。</p>
+<p>容易发现前式对于所有 <span class="arithmatex">\(j&lt; k_i\)</span> 均成立，后式对于所有 <span class="arithmatex">\(j\ge k_i\)</span> 均成立，而 <span class="arithmatex">\(a_i\)</span> 是一个定值，那么若 <span class="arithmatex">\(\frac{f_{i-1,j}}{j}\)</span> 关于 <span class="arithmatex">\(j\)</span> 单调不增，则猜想必定成立（对于边界情况，考虑假如 <span class="arithmatex">\(\frac{f_{i-1,j}}{j}\)</span> 全都小于 <span class="arithmatex">\(a_i\)</span> 那么 <span class="arithmatex">\(k_i\)</span> 取 <span class="arithmatex">\(1\)</span>，假如全都大于等于 <span class="arithmatex">\(a_i\)</span> 那么 <span class="arithmatex">\(k_i\)</span> 取 <span class="arithmatex">\(i\)</span>）。</p>
+<p>若猜想成立，那么由 <span class="arithmatex">\(dp_i\)</span> 的值可知：</p>
+<div class="arithmatex">\[\forall j&lt; k_i,f_{i,j}=f_{i-1,j}$$
 $$\forall j&gt; k_i,f_{i,j}=f_{i-1,j-1}+a_i$$
-$$f_{i,k_i}=a_i\times k_i$$</p>
+$$f_{i,k_i}=a_i\times k_i\]</div>
 <p>证明考虑数学归纳法。</p>
-<p>首先对于 $i=1$， $\frac{f_{i,j}}{j}$ 显然单调不增（长度为 $1$ 的序列显然单调不增吧）。</p>
-<p>于是对于 $i=2$，有 $\frac{f_{i-1,j}}{j}$ 单调不增。</p>
-<p>对于更大的数，考虑若猜想成立，证明 $\frac{f_{i,j}}{j}$ 单调不增，即证对于 $i+1$ 猜想成立。</p>
-<p>首先对于 $j&lt;k_i$，$f_{i,j}=f_{i-1,j}$，显然单调不增。</p>
-<p>对于 $j=k_i$，由于 $\forall j&lt;k_i,\frac{f_{i,j}}{j}=\frac{f_{i-1,j}}{j}\ge a_i$，且 $\frac{f_{i,k_i}}{k_i}=\frac{a_i\times k_i}{k_i}=a_i$，单调性仍然存在。</p>
-<p>对于 $j&gt;k_i$：</p>
+<p>首先对于 <span class="arithmatex">\(i=1\)</span>， <span class="arithmatex">\(\frac{f_{i,j}}{j}\)</span> 显然单调不增（长度为 <span class="arithmatex">\(1\)</span> 的序列显然单调不增吧）。</p>
+<p>于是对于 <span class="arithmatex">\(i=2\)</span>，有 <span class="arithmatex">\(\frac{f_{i-1,j}}{j}\)</span> 单调不增。</p>
+<p>对于更大的数，考虑若猜想成立，证明 <span class="arithmatex">\(\frac{f_{i,j}}{j}\)</span> 单调不增，即证对于 <span class="arithmatex">\(i+1\)</span> 猜想成立。</p>
+<p>首先对于 <span class="arithmatex">\(j&lt;k_i\)</span>，<span class="arithmatex">\(f_{i,j}=f_{i-1,j}\)</span>，显然单调不增。</p>
+<p>对于 <span class="arithmatex">\(j=k_i\)</span>，由于 <span class="arithmatex">\(\forall j&lt;k_i,\frac{f_{i,j}}{j}=\frac{f_{i-1,j}}{j}\ge a_i\)</span>，且 <span class="arithmatex">\(\frac{f_{i,k_i}}{k_i}=\frac{a_i\times k_i}{k_i}=a_i\)</span>，单调性仍然存在。</p>
+<p>对于 <span class="arithmatex">\(j&gt;k_i\)</span>：</p>
 <p>首先结论长这样：</p>
-<p>$$\frac{f_{i,j-1}}{j-1}\ge\frac{f_{i,j}}{j}$$</p>
-<p>考虑 $f_{i,j-1}=f_{i-1,j-2}+a_i,f_{i,j}=f_{i-1,j-1}+a_i$。</p>
+<div class="arithmatex">\[\frac{f_{i,j-1}}{j-1}\ge\frac{f_{i,j}}{j}\]</div>
+<p>考虑 <span class="arithmatex">\(f_{i,j-1}=f_{i-1,j-2}+a_i,f_{i,j}=f_{i-1,j-1}+a_i\)</span>。</p>
 <p>那么上不等式等价于：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 \frac{f_{i-1,j-2}+a_i}{j-1}&amp;\ge\frac{f_{i-1,j-1}+a_i}{j}\\
 f_{i-1,j-2}+a_i&amp;\ge\frac{j-1}{j}(f_{i-1,j-1}+a_i)\\
 f_{i-1,j-2}+a_i&amp;\ge\frac{j-1}{j}f_{i-1,j-1}+\frac{j-1}{j}a_i\\
 f_{i-1,j-2}&amp;\ge\frac{j-1}{j}f_{i-1,j-1}-\frac{1}{j}a_i\\
 \end{aligned}
-$$</p>
-<p>由于 $\frac{f_{i-1,j}}{j}\ge\frac{f_{i-1,j+1}}{j+1}$，那么 $f_{i-1,j}\ge \frac{j}{j+1}f_{i-1,j+1}$，所以 $f_{i-1,j-2}\ge\frac{j-2}{j-1}f_{i-1,j-1}$，那么左式减右式，得：</p>
-<p>$$
+\]</div>
+<p>由于 <span class="arithmatex">\(\frac{f_{i-1,j}}{j}\ge\frac{f_{i-1,j+1}}{j+1}\)</span>，那么 <span class="arithmatex">\(f_{i-1,j}\ge \frac{j}{j+1}f_{i-1,j+1}\)</span>，所以 <span class="arithmatex">\(f_{i-1,j-2}\ge\frac{j-2}{j-1}f_{i-1,j-1}\)</span>，那么左式减右式，得：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;f_{i-1,j-2}-(\frac{j-1}{j}f_{i-1,j-1}-\frac{1}{j}a_i)\\
 \ge&amp;\frac{j-2}{j-1}f_{i-1,j-1}-(\frac{j-1}{j}f_{i-1,j-1}-\frac{1}{j}a_i)\\
 =&amp;\frac{\left[j(j-2)-(j-1)^2\right]f_{i-1,j-1}+(j-1)a_i}{j(j-1)}\\
 =&amp;\frac{(j-1)a_i-f_{i-1,j-1}}{j(j-1)}\\
 \end{aligned}
-$$</p>
-<p>由于 $j&gt;k_i$，则 $j-1\ge k_i$，那么 $\frac{f_{i-1,j-1}}{j-1}&lt; a_i$（见前文），故 $(j-1)a_i-f_{i-1,j-1}&gt;0$，则上式 $\ge0$。</p>
-<p>故 $\frac{f_{i,j-1}}{j-1}\ge\frac{f_{i,j}}{j}$。</p>
+\]</div>
+<p>由于 <span class="arithmatex">\(j&gt;k_i\)</span>，则 <span class="arithmatex">\(j-1\ge k_i\)</span>，那么 <span class="arithmatex">\(\frac{f_{i-1,j-1}}{j-1}&lt; a_i\)</span>（见前文），故 <span class="arithmatex">\((j-1)a_i-f_{i-1,j-1}&gt;0\)</span>，则上式 <span class="arithmatex">\(\ge0\)</span>。</p>
+<p>故 <span class="arithmatex">\(\frac{f_{i,j-1}}{j-1}\ge\frac{f_{i,j}}{j}\)</span>。</p>
 <hr />
 <p>那么我们已经证出这个性质了，这个性质有什么用呢？考虑我们之前的推论：</p>
-<p>$$\forall j&lt; k_i,f_{i,j}=f_{i-1,j}$$
+<div class="arithmatex">\[\forall j&lt; k_i,f_{i,j}=f_{i-1,j}$$
 $$\forall j&gt; k_i,f_{i,j}=f_{i-1,j-1}+a_i$$
-$$f_{i,k_i}=a_i\times k_i$$</p>
-<p>容易发现 $f_i$ 相当于前半部分继承 $f_{i-1}$，中间插入一个 $a_i\times k_i$，后半部分整体加上 $a_i$。</p>
-<p>容易发现这是文艺平衡树能维护的信息，而且 $k_i$ 可以二分找到，那么直接闭着眼睛拍一棵文艺平衡树不就完了吗。</p>
+$$f_{i,k_i}=a_i\times k_i\]</div>
+<p>容易发现 <span class="arithmatex">\(f_i\)</span> 相当于前半部分继承 <span class="arithmatex">\(f_{i-1}\)</span>，中间插入一个 <span class="arithmatex">\(a_i\times k_i\)</span>，后半部分整体加上 <span class="arithmatex">\(a_i\)</span>。</p>
+<p>容易发现这是文艺平衡树能维护的信息，而且 <span class="arithmatex">\(k_i\)</span> 可以二分找到，那么直接闭着眼睛拍一棵文艺平衡树不就完了吗。</p>
 <p>求出差分序列后，最后累加一下即可。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7283,31 +7311,31 @@ $$f_{i,k_i}=a_i\times k_i$$</p>
 <p>可以说是本套题里面最毒瘤的了。</p>
 <hr />
 <p>看到取模运算应该先想到根号分治（当然有些时候应该想到势能分析，取决于有没有区间修改之类的操作）。</p>
-<p>首先设一个阈值 $T$。</p>
+<p>首先设一个阈值 <span class="arithmatex">\(T\)</span>。</p>
 <hr />
-<p>对于 $k\le T$，这样的 $k$ 最多有 $T$ 个，那么我们可以把询问离线挂到 $k$ 上，对于每个 $k$ 预处理 $a_i\bmod k$ 的区间最大值，线段树建树是 $O(n)$ 的，然后查询复杂度和询问次数有关，我们暂且记单次查询是 $O(\log n)$ 的，等会跟后面的操作取 $\max$，这部分总复杂度 $O(Tn)$。</p>
+<p>对于 <span class="arithmatex">\(k\le T\)</span>，这样的 <span class="arithmatex">\(k\)</span> 最多有 <span class="arithmatex">\(T\)</span> 个，那么我们可以把询问离线挂到 <span class="arithmatex">\(k\)</span> 上，对于每个 <span class="arithmatex">\(k\)</span> 预处理 <span class="arithmatex">\(a_i\bmod k\)</span> 的区间最大值，线段树建树是 <span class="arithmatex">\(O(n)\)</span> 的，然后查询复杂度和询问次数有关，我们暂且记单次查询是 <span class="arithmatex">\(O(\log n)\)</span> 的，等会跟后面的操作取 <span class="arithmatex">\(\max\)</span>，这部分总复杂度 <span class="arithmatex">\(O(Tn)\)</span>。</p>
 <hr />
-<p>对于 $k&gt;T$，这部分就难搞了。</p>
-<p>首先这样的 $k$ 的倍数个数肯定 $\le \frac{n}{T}$ 吧。</p>
-<p>那么我们大体思路就是维护大于每个倍数 $p$ 的区间最小值。</p>
-<p>具体一点，给序列里的数 $a$ 和所有倍数 $p$ 放到一起排序，从大到小扫一遍，每次遇到 $a$ 就插入一个支持区间查最小值的数据结构里，遇到 $p$ 就查询。</p>
-<p>那么我们先考虑数据结构的选择，查询次数的上界是 $q\frac{V}{T}$，那我们查询只能是 $O(1)$ 的。考虑猫树或者 ST 表。但是我不会猫树，直接考虑 ST 表。</p>
-<p>但是这里又有个问题，ST 不能快速地插入新数据，复杂度最优是 $O(n)$ 的（$2^0+2^1+\dots +2^{\log n}=n$）。那么我们又考虑根号均摊，先分块，求出每一块的最小值，然后对块建立 ST 表，设块长为 $P$，这样复杂度就降到 $O(\frac{n}{P}+P)$ 的了，然后对于散块我们可以 $O(P)$ 预处理前后缀最小值，这样查询就是 $O(1)$ 的了，对于每个询问就是 $O(\frac{V}{T})$ 的。</p>
-<p>这又涉及到一个问题，假如某区间左右端点都在同一块里应该怎么做。这个操作需要我们跳出思维的陷阱，既然都在同一块里了那直接暴力复杂度就是 $O(L)$ 的，完全可以通过，我们把在同一块里的额外分开算即可。</p>
+<p>对于 <span class="arithmatex">\(k&gt;T\)</span>，这部分就难搞了。</p>
+<p>首先这样的 <span class="arithmatex">\(k\)</span> 的倍数个数肯定 <span class="arithmatex">\(\le \frac{n}{T}\)</span> 吧。</p>
+<p>那么我们大体思路就是维护大于每个倍数 <span class="arithmatex">\(p\)</span> 的区间最小值。</p>
+<p>具体一点，给序列里的数 <span class="arithmatex">\(a\)</span> 和所有倍数 <span class="arithmatex">\(p\)</span> 放到一起排序，从大到小扫一遍，每次遇到 <span class="arithmatex">\(a\)</span> 就插入一个支持区间查最小值的数据结构里，遇到 <span class="arithmatex">\(p\)</span> 就查询。</p>
+<p>那么我们先考虑数据结构的选择，查询次数的上界是 <span class="arithmatex">\(q\frac{V}{T}\)</span>，那我们查询只能是 <span class="arithmatex">\(O(1)\)</span> 的。考虑猫树或者 ST 表。但是我不会猫树，直接考虑 ST 表。</p>
+<p>但是这里又有个问题，ST 不能快速地插入新数据，复杂度最优是 <span class="arithmatex">\(O(n)\)</span> 的（<span class="arithmatex">\(2^0+2^1+\dots +2^{\log n}=n\)</span>）。那么我们又考虑根号均摊，先分块，求出每一块的最小值，然后对块建立 ST 表，设块长为 <span class="arithmatex">\(P\)</span>，这样复杂度就降到 <span class="arithmatex">\(O(\frac{n}{P}+P)\)</span> 的了，然后对于散块我们可以 <span class="arithmatex">\(O(P)\)</span> 预处理前后缀最小值，这样查询就是 <span class="arithmatex">\(O(1)\)</span> 的了，对于每个询问就是 <span class="arithmatex">\(O(\frac{V}{T})\)</span> 的。</p>
+<p>这又涉及到一个问题，假如某区间左右端点都在同一块里应该怎么做。这个操作需要我们跳出思维的陷阱，既然都在同一块里了那直接暴力复杂度就是 <span class="arithmatex">\(O(L)\)</span> 的，完全可以通过，我们把在同一块里的额外分开算即可。</p>
 <p>OK 刨开这个问题，我们又有另一个问题，这道题卡空间。</p>
-<p>刚刚我们构想的算法空间复杂度是 $O(q\frac{V}{T})$ 的，这道题空间限制是 128MB，进行一些简单的计算容易发现最多开 $128\times 1024\times 1024\times \frac{1}{4}=33554432$ 个 <code>int</code> 型变量。如果要保证空间 $T$ 至少要开到 $\frac{q\times V}{33554432}\approx 900$，而且再算上栈空间之类的 $T$ 至少要开到 $2000$，那么前面 $O(Tn)$ 的时间复杂度就超了。</p>
+<p>刚刚我们构想的算法空间复杂度是 <span class="arithmatex">\(O(q\frac{V}{T})\)</span> 的，这道题空间限制是 128MB，进行一些简单的计算容易发现最多开 <span class="arithmatex">\(128\times 1024\times 1024\times \frac{1}{4}=33554432\)</span> 个 <code>int</code> 型变量。如果要保证空间 <span class="arithmatex">\(T\)</span> 至少要开到 <span class="arithmatex">\(\frac{q\times V}{33554432}\approx 900\)</span>，而且再算上栈空间之类的 <span class="arithmatex">\(T\)</span> 至少要开到 <span class="arithmatex">\(2000\)</span>，那么前面 <span class="arithmatex">\(O(Tn)\)</span> 的时间复杂度就超了。</p>
 <p>所以我们不能试图通过调整块长的方法解决空间问题。</p>
-<p>那么考虑换一种思路。我们一眼就看到这道题值域比较小，那么我们把 $a$ 挂在值域上然后从大到小枚举每个数，对于每个数可以 $O(\sqrt{V})$ 地枚举因子判断有没有询问挂在这个数上，这样时间复杂度就在外部加上了一个 $O(V\sqrt{V})$，但是空间复杂度变成 $O(n+q)$ 的了，可以接受。</p>
-<p>然后注意一下，$0$ 是任何数的倍数，要特别处理一下。</p>
+<p>那么考虑换一种思路。我们一眼就看到这道题值域比较小，那么我们把 <span class="arithmatex">\(a\)</span> 挂在值域上然后从大到小枚举每个数，对于每个数可以 <span class="arithmatex">\(O(\sqrt{V})\)</span> 地枚举因子判断有没有询问挂在这个数上，这样时间复杂度就在外部加上了一个 <span class="arithmatex">\(O(V\sqrt{V})\)</span>，但是空间复杂度变成 <span class="arithmatex">\(O(n+q)\)</span> 的了，可以接受。</p>
+<p>然后注意一下，<span class="arithmatex">\(0\)</span> 是任何数的倍数，要特别处理一下。</p>
 <hr />
 <p>综合来说，我们分成三部分考虑：</p>
 <ol>
-<li>$r-l+1\le L$，直接暴力。</li>
-<li>$k\le T$，见上文第一类</li>
-<li>$k&gt; T$ 见上文第二类。</li>
+<li><span class="arithmatex">\(r-l+1\le L\)</span>，直接暴力。</li>
+<li><span class="arithmatex">\(k\le T\)</span>，见上文第一类</li>
+<li><span class="arithmatex">\(k&gt; T\)</span> 见上文第二类。</li>
 </ol>
-<p>然后分析一下块长，这样做下来复杂度是 $O(V\sqrt{V}+q\max(\frac{V}{T},P)+\frac{n^2}{P}+nP+Tn)$ 的。</p>
-<p>由于不带 $\log$，我们考虑 $P$ 取 $\sqrt{n}$，$T$ 取 $\sqrt{V}$，那么复杂度就是 $O((n+V)\sqrt{V}+(n+q)\sqrt{n})$ 的了，差不多是 $O(n\sqrt{n})$ 级别的（大道至简了属于是）。</p>
+<p>然后分析一下块长，这样做下来复杂度是 <span class="arithmatex">\(O(V\sqrt{V}+q\max(\frac{V}{T},P)+\frac{n^2}{P}+nP+Tn)\)</span> 的。</p>
+<p>由于不带 <span class="arithmatex">\(\log\)</span>，我们考虑 <span class="arithmatex">\(P\)</span> 取 <span class="arithmatex">\(\sqrt{n}\)</span>，<span class="arithmatex">\(T\)</span> 取 <span class="arithmatex">\(\sqrt{V}\)</span>，那么复杂度就是 <span class="arithmatex">\(O((n+V)\sqrt{V}+(n+q)\sqrt{n})\)</span> 的了，差不多是 <span class="arithmatex">\(O(n\sqrt{n})\)</span> 级别的（大道至简了属于是）。</p>
 <p>思维难度不算太高，但代码难度比较高。</p>
 <hr />
 <details class="success">
@@ -7315,12 +7343,12 @@ $$f_{i,k_i}=a_i\times k_i$$</p>
 <p><del>其实写起来也没想象的那么难，就是卡常有点折磨。</del></p>
 <p>附带卡常的技巧：</p>
 <ol>
-<li>假如同时满足第一个和第二个条件，可以判断一下用哪个方法更快（$r-l$ 较小就用第一个）。</li>
-<li>第二种可以用 Barrett 取模优化，因为同一个模数会用 $n$ 次，确实会快一点。</li>
+<li>假如同时满足第一个和第二个条件，可以判断一下用哪个方法更快（<span class="arithmatex">\(r-l\)</span> 较小就用第一个）。</li>
+<li>第二种可以用 Barrett 取模优化，因为同一个模数会用 <span class="arithmatex">\(n\)</span> 次，确实会快一点。</li>
 <li>ST 表把指数那一维放到第一维，这样内存更连续一些。</li>
 <li>C++20 好像对函数和结构体有优化，建议使用 C++20</li>
 <li>有些只用一次的数据结构可以不用结构体封装，封装会变慢的（虽然我代码里只有 ST 表没封装）。</li>
-<li>根据不同操作的常数微调块长（说是微调，但是我最终过的那个代码已经把应该等于 $\sqrt{V}$ 的 $T$ 调的比应该等于 $\sqrt{n}$ 的 $P$ 还大了）。</li>
+<li>根据不同操作的常数微调块长（说是微调，但是我最终过的那个代码已经把应该等于 <span class="arithmatex">\(\sqrt{V}\)</span> 的 <span class="arithmatex">\(T\)</span> 调的比应该等于 <span class="arithmatex">\(\sqrt{n}\)</span> 的 <span class="arithmatex">\(P\)</span> 还大了）。</li>
 <li>剪枝（已经是老生常谈了吧）</li>
 </ol>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7488,39 +7516,39 @@ $$f_{i,k_i}=a_i\times k_i$$</p>
 <p><a href="https://www.luogu.com.cn/problem/CF1368H2">传送门</a></p>
 <p>看到这道题很像网络流中的最大流模型，但是数据范围很大，网络流会 T，那么考虑模拟网络流。</p>
 <p>我们先把模建出来。</p>
-<p>首先把每个端口视为一个点，红点连源点，蓝点连汇点。然后矩阵内每个点和四连通的四个点连边，所有边容量均为 $1$。这个比较显然，一个流就是一根导线。</p>
+<p>首先把每个端口视为一个点，红点连源点，蓝点连汇点。然后矩阵内每个点和四连通的四个点连边，所有边容量均为 <span class="arithmatex">\(1\)</span>。这个比较显然，一个流就是一根导线。</p>
 <p>然后根据最大流最小割定理，考虑求最小割。</p>
 <p>最小割是把图上的点分为两个集合，那么考虑把矩阵内的点涂成红色和蓝色，表示处于源点/汇点所在的集合（和端口一致），那么若一条边两端颜色不同，它就会给割产生一个贡献（如果是最小割那么必然每条割边都是满流的，不然它就不是一个最小割）。</p>
 <p>但是这样仍然不好维护，如果考虑轮廓线 DP 复杂度会飙到指数级别，而且也没什么很好的其它方法。考虑寻找性质。</p>
 <p>容易发现，假如有一个这样的图形：</p>
 <p><img alt="图示 1" src="../../img/CSP2023_1.png" /></p>
 <p><del>画的不太好，将就一下。</del></p>
-<p>由于那么把第二行第三列的红点旁边有两个蓝点，那么把它涂成蓝色是必定不劣的（贡献 $-2+2$）。也就是说，必定能构造出最优情况，使得<strong>每个点附近至多有一个点与它颜色不同</strong>。</p>
+<p>由于那么把第二行第三列的红点旁边有两个蓝点，那么把它涂成蓝色是必定不劣的（贡献 <span class="arithmatex">\(-2+2\)</span>）。也就是说，必定能构造出最优情况，使得<strong>每个点附近至多有一个点与它颜色不同</strong>。</p>
 <p>这意味着什么？意味着（不看边缘的端口）必定是一整行一整行全是同一种颜色（或者一整列一整列）！</p>
 <p>由于行和列是对称的，我们单独考虑列。</p>
-<p>那么可以设 $dp_{i,0/1}$ 表示考虑前 $i$ 列，第 $i$ 列是红色/蓝色的最小割，转移是简单的，枚举上一个颜色即可（我觉得都不太能算枚举了，就两种情况，可以算分讨了）。</p>
-<p>$$
+<p>那么可以设 <span class="arithmatex">\(dp_{i,0/1}\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 列，第 <span class="arithmatex">\(i\)</span> 列是红色/蓝色的最小割，转移是简单的，枚举上一个颜色即可（我觉得都不太能算枚举了，就两种情况，可以算分讨了）。</p>
+<div class="arithmatex">\[
 dp_{i,0}=\min(dp_{i-1,0},dp_{i-1,1}+n)+c_{i,1}\\
 dp_{i,1}=\min(dp_{i-1,1},dp_{i-1,0}+n)+c_{i,0}
-$$</p>
-<p>其中 $c_{i,0/1}$ 表示第 $i$ 列上下两端口中红色/蓝色端口的个数，$n$ 为行数。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(c_{i,0/1}\)</span> 表示第 <span class="arithmatex">\(i\)</span> 列上下两端口中红色/蓝色端口的个数，<span class="arithmatex">\(n\)</span> 为行数。</p>
 <p>然后注意初值考虑左边缘，答案考虑右边缘。</p>
 <p>显然，第一维可以滚动掉，对横竖各求一遍 DP 就可以过 easy version 啦 ✿✿ヽ(°▽°)ノ✿。</p>
 <p>hard version 变成动态的了，那么考虑动态 DP，此处仍只考虑列，行是对称的。</p>
-<p>此处定义 $2\times 2$ 矩阵的广义矩阵乘法 $A\otimes B=C$：</p>
-<p>$$C_{i,j}=\min_{k=0}^{1}\begin{Bmatrix}A_{i,k}+B_{k,j}\end{Bmatrix}$$</p>
+<p>此处定义 <span class="arithmatex">\(2\times 2\)</span> 矩阵的广义矩阵乘法 <span class="arithmatex">\(A\otimes B=C\)</span>：</p>
+<div class="arithmatex">\[C_{i,j}=\min_{k=0}^{1}\begin{Bmatrix}A_{i,k}+B_{k,j}\end{Bmatrix}\]</div>
 <p>不看第一维，我们的状态就是：</p>
-<p>$$\begin{bmatrix}dp_0&amp;dp_1\end{bmatrix}$$</p>
-<p>首先考虑转移中的矩阵，设转移的矩阵为 $A_i$，那么我们希望它满足如下式子：</p>
-<p>$$\begin{bmatrix}dp_0&amp;dp_1\end{bmatrix}\otimes A_i=\begin{bmatrix}\min(dp_{i-1,0},dp_{i-1,1}+n)+c_{i,1}&amp;min(dp_{i-1,1},dp_{i-1,0}+n)+c_{i,0}\end{bmatrix}$$</p>
-<p>由于后面的那个加数不太好维护，我们把它塞到 $\min$ 里面：</p>
-<p>$$\begin{bmatrix}dp_0&amp;dp_1\end{bmatrix}\otimes A_i=\begin{bmatrix}\min(dp_{i-1,0}+c_{i,1},dp_{i-1,1}+n+c_{i,1})&amp;\min(dp_{i-1,1}+c_{i,0},dp_{i-1,0}+n+c_{i,0})\end{bmatrix}$$</p>
-<p>自己手玩一下，可以得到 $A_i$：</p>
-<p>$$A_i=\begin{bmatrix}c_{i,1} &amp;c_{i,0}+n\\ c_{i,1}+n &amp;c_{i,0}\end{bmatrix}$$</p>
+<div class="arithmatex">\[\begin{bmatrix}dp_0&amp;dp_1\end{bmatrix}\]</div>
+<p>首先考虑转移中的矩阵，设转移的矩阵为 <span class="arithmatex">\(A_i\)</span>，那么我们希望它满足如下式子：</p>
+<div class="arithmatex">\[\begin{bmatrix}dp_0&amp;dp_1\end{bmatrix}\otimes A_i=\begin{bmatrix}\min(dp_{i-1,0},dp_{i-1,1}+n)+c_{i,1}&amp;min(dp_{i-1,1},dp_{i-1,0}+n)+c_{i,0}\end{bmatrix}\]</div>
+<p>由于后面的那个加数不太好维护，我们把它塞到 <span class="arithmatex">\(\min\)</span> 里面：</p>
+<div class="arithmatex">\[\begin{bmatrix}dp_0&amp;dp_1\end{bmatrix}\otimes A_i=\begin{bmatrix}\min(dp_{i-1,0}+c_{i,1},dp_{i-1,1}+n+c_{i,1})&amp;\min(dp_{i-1,1}+c_{i,0},dp_{i-1,0}+n+c_{i,0})\end{bmatrix}\]</div>
+<p>自己手玩一下，可以得到 <span class="arithmatex">\(A_i\)</span>：</p>
+<div class="arithmatex">\[A_i=\begin{bmatrix}c_{i,1} &amp;c_{i,0}+n\\ c_{i,1}+n &amp;c_{i,0}\end{bmatrix}\]</div>
 <p>然后初末状态就是左/右边缘的红蓝点数，具体怎么样塞到矩阵（向量？）里就略过了。</p>
 <p>然后考虑如何维护反转操作，其实也很简单，对每一列维护四个矩阵，分别代表<strong>上下均不反转</strong>，<strong>上边缘反转</strong>，<strong>下边缘反转</strong>，<strong>上下均反转</strong>，在线段树维护的时候同时合并这四个信息即可。初末状态可以单独取出来放在线段树外面用另一棵线段树维护。</p>
 <p>然后和 easy version 一样，对横竖各维护一边就可以啦 ✿✿ヽ(°▽°)ノ✿。</p>
-<p>复杂度 $O(q\log n)$，带 $2^3$ 倍常数。</p>
+<p>复杂度 <span class="arithmatex">\(O(q\log n)\)</span>，带 <span class="arithmatex">\(2^3\)</span> 倍常数。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

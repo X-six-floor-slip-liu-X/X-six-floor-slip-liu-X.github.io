@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6112,7 +6140,7 @@
 
 <h1 id="treap">平衡树入门及 Treap</h1>
 <h2 id="_1">前言</h2>
-<p>平衡树是一种非常棒的数据结构，线段树能做的它能做不少，还能查前驱后继，还没有值域限制，空间复杂度还是 $O(n)$ 的，缺点是常数略大，码量也略大，事实上很多时候我都直接把 <code>set</code> 当成平衡树用。另外，其实线段树也可以看做一种只有叶子结点维护信息的特殊的平衡树。</p>
+<p>平衡树是一种非常棒的数据结构，线段树能做的它能做不少，还能查前驱后继，还没有值域限制，空间复杂度还是 <span class="arithmatex">\(O(n)\)</span> 的，缺点是常数略大，码量也略大，事实上很多时候我都直接把 <code>set</code> 当成平衡树用。另外，其实线段树也可以看做一种只有叶子结点维护信息的特殊的平衡树。</p>
 <h2 id="bst">BST</h2>
 <p>在平衡树之前，我们先看看远处的 BST（Binary Search Tree）吧！</p>
 <div class="admonition quote">
@@ -6140,15 +6168,15 @@
 <li><strong>插入元素</strong>：直接搜到叶子接在叶子上。</li>
 <li><strong>删除元素</strong>：和自己左子树最大的叶子或右子树最小的叶子交换，然后删除它。</li>
 <li><strong>查询元素排名</strong>：从根节点跳到这个值，每次如果向右跳就加上左子树的大小。</li>
-<li><strong>查询第 $k$ 大</strong>： 分左子树，自己，右子树三段考虑。（这个后面会详细说）</li>
+<li><strong>查询第 <span class="arithmatex">\(k\)</span> 大</strong>： 分左子树，自己，右子树三段考虑。（这个后面会详细说）</li>
 <li>等等</li>
 </ul>
-<p>容易发现 BST 上操作的复杂度和树高正相关，虽然 BST 最好情况下高度是 $O(\log n)$ 的，但我们可以精心构造数据使得 BST 的形态变成这样：</p>
+<p>容易发现 BST 上操作的复杂度和树高正相关，虽然 BST 最好情况下高度是 <span class="arithmatex">\(O(\log n)\)</span> 的，但我们可以精心构造数据使得 BST 的形态变成这样：</p>
 <p><img alt="图示 1" src="../../../img/Treap_1.png" /></p>
-<p>这样各种操作的复杂度就退化成 $O(n)$ 的了。所以我们肯定希望 BST 稍微平衡一点，平衡树就诞生了。</p>
+<p>这样各种操作的复杂度就退化成 <span class="arithmatex">\(O(n)\)</span> 的了。所以我们肯定希望 BST 稍微平衡一点，平衡树就诞生了。</p>
 <h2 id="treap_1">Treap</h2>
 <p>Treap 是一种比较基础的平衡树，它的名字是树（Tree）和堆（Heap）的合成词，就是说它既满足 BST 的性质也满足二叉堆的性质。</p>
-<p>具体来说，我们在每插入一个结点时，除了它作为 BST 的权值，再给它随机一个作为二叉堆的权值，因为在随机数据下堆的期望深度是 $O(\log n)$ 的。然后我们考虑通过某种方法使它第一个权值满足 BST 的性质的同时第二个权值满足二叉堆的性质。</p>
+<p>具体来说，我们在每插入一个结点时，除了它作为 BST 的权值，再给它随机一个作为二叉堆的权值，因为在随机数据下堆的期望深度是 <span class="arithmatex">\(O(\log n)\)</span> 的。然后我们考虑通过某种方法使它第一个权值满足 BST 的性质的同时第二个权值满足二叉堆的性质。</p>
 <h2 id="treap_2">旋转 Treap</h2>
 <p>顾名思义，旋转 Treap 就是通过旋转操作维护的 Treap。</p>
 <p>什么是旋转操作呢？假如我们有这样一棵 BST：</p>
@@ -6220,17 +6248,17 @@
 <p>分裂操作有两种，按值分裂和按大小分裂，这里因为我的 Treap 不需要按大小分裂就不提了，只说按值分裂。</p>
 <p>以这样一棵树为例：</p>
 <p><img alt="图示 4" src="../../../img/Treap_4.png" /></p>
-<p>假如我们要按 $5$ 分裂，即分裂成两棵树，其中一棵 $T_1$ 所有权值均小于等于 $5$，另一棵 $T_2$ 均大于 $5$。</p>
+<p>假如我们要按 <span class="arithmatex">\(5\)</span> 分裂，即分裂成两棵树，其中一棵 <span class="arithmatex">\(T_1\)</span> 所有权值均小于等于 <span class="arithmatex">\(5\)</span>，另一棵 <span class="arithmatex">\(T_2\)</span> 均大于 <span class="arithmatex">\(5\)</span>。</p>
 <p>分出来就是这样：</p>
 <p><img alt="图示 5" src="../../../img/Treap_5.png" /></p>
 <p>考虑分裂的过程是什么样的。</p>
-<p>首先从根节点进入，发现根节点 $8&gt;5$，说明根节点及其整个右子树都属于 $T_2$，而左子树里较大的可能也属于 $T_2$，继续往左子树分离。</p>
+<p>首先从根节点进入，发现根节点 <span class="arithmatex">\(8&gt;5\)</span>，说明根节点及其整个右子树都属于 <span class="arithmatex">\(T_2\)</span>，而左子树里较大的可能也属于 <span class="arithmatex">\(T_2\)</span>，继续往左子树分离。</p>
 <p><img alt="图示 6" src="../../../img/Treap_6.png" /></p>
-<p>然后进入左子树，发现根节点 $4 \le 5$，说明根节点及其整个左子树都属于 $T_1$，继续往右子树分离。</p>
+<p>然后进入左子树，发现根节点 <span class="arithmatex">\(4 \le 5\)</span>，说明根节点及其整个左子树都属于 <span class="arithmatex">\(T_1\)</span>，继续往右子树分离。</p>
 <p><img alt="图示 7" src="../../../img/Treap_7.png" /></p>
-<p>发现 $6&gt;5$，连进 $T_2$，往左子树分离。</p>
+<p>发现 <span class="arithmatex">\(6&gt;5\)</span>，连进 <span class="arithmatex">\(T_2\)</span>，往左子树分离。</p>
 <p><img alt="图示 8" src="../../../img/Treap_8.png" /></p>
-<p>发现 $5 \le 5$，连进 $T_1$，往右子树分离。</p>
+<p>发现 <span class="arithmatex">\(5 \le 5\)</span>，连进 <span class="arithmatex">\(T_1\)</span>，往右子树分离。</p>
 <p><img alt="图示 9" src="../../../img/Treap_5.png" /></p>
 <p>发现不存在右子树，操作结束。</p>
 <p>利用 C++ 的引用特性，我们可以非常优雅地实现这个过程：</p>
@@ -6256,19 +6284,19 @@
 </details>
 <h3 id="merge">合并（merge）操作</h3>
 <p>由于我们维护的是<strong>一棵</strong>平衡树，分裂之后肯定要合并回去，我们就是要在合并的时候维护二叉堆的性质。</p>
-<p>我们合并的时候假定 $T_1$ 中所有数都小于 $T_2$，注意到分裂的过程完全可以保证这个性质。所以我们合并的时候只用额外考虑二叉堆的性质即可。由于 $T_1$ 中所有数都小于 $T_2$，每次要么把 $T_1$ 中的结点 $x$ 放在 $T_2$ 中的结点 $y$ 的左子树，要么把 $y$ 放在 $x$ 的右子树。</p>
+<p>我们合并的时候假定 <span class="arithmatex">\(T_1\)</span> 中所有数都小于 <span class="arithmatex">\(T_2\)</span>，注意到分裂的过程完全可以保证这个性质。所以我们合并的时候只用额外考虑二叉堆的性质即可。由于 <span class="arithmatex">\(T_1\)</span> 中所有数都小于 <span class="arithmatex">\(T_2\)</span>，每次要么把 <span class="arithmatex">\(T_1\)</span> 中的结点 <span class="arithmatex">\(x\)</span> 放在 <span class="arithmatex">\(T_2\)</span> 中的结点 <span class="arithmatex">\(y\)</span> 的左子树，要么把 <span class="arithmatex">\(y\)</span> 放在 <span class="arithmatex">\(x\)</span> 的右子树。</p>
 <p>假如我们分裂后有两棵这样的树，结点旁的红字为堆权。</p>
 <p><img alt="图示 9" src="../../../img/Treap_9.png" /></p>
-<p>最开始考虑两根结点 $4,8$，发现 $14&lt;15$，左边的当儿子，考虑以 $4,6$（$6$ 即 $8$ 的左儿子）为根结点的两子树合并。</p>
+<p>最开始考虑两根结点 <span class="arithmatex">\(4,8\)</span>，发现 <span class="arithmatex">\(14&lt;15\)</span>，左边的当儿子，考虑以 <span class="arithmatex">\(4,6\)</span>（<span class="arithmatex">\(6\)</span> 即 <span class="arithmatex">\(8\)</span> 的左儿子）为根结点的两子树合并。</p>
 <p><img alt="图示 10" src="../../../img/Treap_10.png" /></p>
-<p>发现 $14&gt;13$，右边的当儿子，考虑 $5,6$（$5$ 即 $4$ 的右儿子）为根结点的两子树合并。</p>
+<p>发现 <span class="arithmatex">\(14&gt;13\)</span>，右边的当儿子，考虑 <span class="arithmatex">\(5,6\)</span>（<span class="arithmatex">\(5\)</span> 即 <span class="arithmatex">\(4\)</span> 的右儿子）为根结点的两子树合并。</p>
 <p><img alt="图示 11" src="../../../img/Treap_11.png" /></p>
-<p>发现 $4&lt;13$，左边的当儿子，考虑 $5,7$ 为根的两子树合并。</p>
+<p>发现 <span class="arithmatex">\(4&lt;13\)</span>，左边的当儿子，考虑 <span class="arithmatex">\(5,7\)</span> 为根的两子树合并。</p>
 <p><img alt="图示 12" src="../../../img/Treap_12.png" /></p>
-<p>发现 $4&lt;6$，左边的当儿子，考虑 $5$ 和 $7$ 的左儿子为根的两子树合并。</p>
-<p>发现 $7$ 没有左儿子，结束查询，回溯时连边。</p>
+<p>发现 <span class="arithmatex">\(4&lt;6\)</span>，左边的当儿子，考虑 <span class="arithmatex">\(5\)</span> 和 <span class="arithmatex">\(7\)</span> 的左儿子为根的两子树合并。</p>
+<p>发现 <span class="arithmatex">\(7\)</span> 没有左儿子，结束查询，回溯时连边。</p>
 <p><img alt="图示 13" src="../../../img/Treap_13.png" /></p>
-<p>其中 $5$ 是 $7$ 的左儿子。</p>
+<p>其中 <span class="arithmatex">\(5\)</span> 是 <span class="arithmatex">\(7\)</span> 的左儿子。</p>
 <p>容易发现这样在保持 BST 性质的同时维护了二叉堆的性质。</p>
 <p>写成代码就是这样：</p>
 <details class="success">
@@ -6288,13 +6316,13 @@
 </span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>返回值是以 $x,y$ 为根的两树合并后的根结点。</li>
+<li>返回值是以 <span class="arithmatex">\(x,y\)</span> 为根的两树合并后的根结点。</li>
 </ol>
 </details>
 <p>基于这两个操作，我们可以优雅地完成其它操作。</p>
 <h3 id="_3">其它操作</h3>
 <h4 id="_4">插入</h4>
-<p>要插入一个值 $key$，只需要把原树按 $key-1$ 分裂成两棵树，再为 $key$ 新建一个结点，把这三棵树合并起来。</p>
+<p>要插入一个值 <span class="arithmatex">\(key\)</span>，只需要把原树按 <span class="arithmatex">\(key-1\)</span> 分裂成两棵树，再为 <span class="arithmatex">\(key\)</span> 新建一个结点，把这三棵树合并起来。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">Insert</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">key</span><span class="p">){</span>
@@ -6305,7 +6333,7 @@
 </span></code></pre></div>
 </details>
 <h4 id="_5">删除</h4>
-<p>删除类似，把原数先按 $key$ 分裂成 $T_1,T_2$，再把 $T_1$ 按 $key-1$ 分裂成 $T_3,T_4$。需要注意此时 $T_4$ 中可能有多个值为 $key$ 的结点。我们可以把 $T_4$ 的根结点的儿子的子树合并起来，这样就能实现只删一个，然后把 $T_3,T_4,T_2$ 按顺序合并。如果要删除所有值为 $key$ 的结点的话直接把 $T_3,T_2$ 合并起来即可。</p>
+<p>删除类似，把原数先按 <span class="arithmatex">\(key\)</span> 分裂成 <span class="arithmatex">\(T_1,T_2\)</span>，再把 <span class="arithmatex">\(T_1\)</span> 按 <span class="arithmatex">\(key-1\)</span> 分裂成 <span class="arithmatex">\(T_3,T_4\)</span>。需要注意此时 <span class="arithmatex">\(T_4\)</span> 中可能有多个值为 <span class="arithmatex">\(key\)</span> 的结点。我们可以把 <span class="arithmatex">\(T_4\)</span> 的根结点的儿子的子树合并起来，这样就能实现只删一个，然后把 <span class="arithmatex">\(T_3,T_4,T_2\)</span> 按顺序合并。如果要删除所有值为 <span class="arithmatex">\(key\)</span> 的结点的话直接把 <span class="arithmatex">\(T_3,T_2\)</span> 合并起来即可。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">Erase</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">key</span><span class="p">){</span>
@@ -6321,7 +6349,7 @@
 </ol>
 </details>
 <h4 id="_6">查询排名</h4>
-<p><strong>普通平衡树</strong>题面中告诉我们排名就是比它小的数的数量加一。我们可以把原树按 $key-1$ 分裂后查询左树的大小再加一即可。</p>
+<p><strong>普通平衡树</strong>题面中告诉我们排名就是比它小的数的数量加一。我们可以把原树按 <span class="arithmatex">\(key-1\)</span> 分裂后查询左树的大小再加一即可。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">Rank</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">key</span><span class="p">){</span>
@@ -6355,7 +6383,7 @@
 </ol>
 </details>
 <h4 id="_7">求前驱，后继</h4>
-<p>前驱可以直接按 $key-1$ 分裂后找到左树最大值，后继可以按 $key$ 分裂后找右树最小值。</p>
+<p>前驱可以直接按 <span class="arithmatex">\(key-1\)</span> 分裂后找到左树最大值，后继可以按 <span class="arithmatex">\(key\)</span> 分裂后找右树最小值。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">Pre</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">key</span><span class="p">){</span>

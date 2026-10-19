@@ -1058,6 +1058,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5710,12 +5738,12 @@
 <h1 id="_1">可并堆学习笔记</h1>
 <h2 id="_2">前言</h2>
 <p>没啥说的，很简单的一类数据结构，就是可以合并的堆。</p>
-<p>一般来说合并两个堆需要一边慢慢弹另一边慢慢压，复杂度 $O(n\log n)$，但是可并堆可以做到单 $\log$（貌似还有更好的复杂度，但是我不会）。</p>
+<p>一般来说合并两个堆需要一边慢慢弹另一边慢慢压，复杂度 <span class="arithmatex">\(O(n\log n)\)</span>，但是可并堆可以做到单 <span class="arithmatex">\(\log\)</span>（貌似还有更好的复杂度，但是我不会）。</p>
 <p>本文中均以大根堆为例。</p>
 <h2 id="_3">斜堆</h2>
 <p>最好理解的可并堆。</p>
 <p>考虑暴力合并，类似于 FHQ 的合并操作。具体来说，将两个堆的根相比较，选较大的那个作为新的根，然后将它的某个儿子与另一个堆递归求解。</p>
-<p>但是假如你一直选右儿子（或者一直选左儿子），树高就会被卡到 $O(n)$，怎么办呢？一个简单的想法是随机选左右儿子（其实也可以每次有一半概率交换左右儿子），然后就不容易被卡了。</p>
+<p>但是假如你一直选右儿子（或者一直选左儿子），树高就会被卡到 <span class="arithmatex">\(O(n)\)</span>，怎么办呢？一个简单的想法是随机选左右儿子（其实也可以每次有一半概率交换左右儿子），然后就不容易被卡了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="o">=</span><span class="mf">1e5</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">inf</span><span class="o">=</span><span class="mh">0x3f3f3f3f</span><span class="p">;</span>
@@ -5789,9 +5817,9 @@
 <h2 id="_4">左偏树</h2>
 <p>如果你不喜欢随机化算法，还有复杂度严格的左偏树。</p>
 <p>首先考虑堆的左右儿子是等价的（显然吧，因为堆只有儿子和父亲之间有关系）。那么我们可以在任何时候交换左右儿子。</p>
-<p>观察到合并的复杂度只和我们走的那一条链的长度有关，容易想到只要让某一条链小于等于其它任意链，这条链的长度显然就是严格 $O(\log n)$ 的。</p>
+<p>观察到合并的复杂度只和我们走的那一条链的长度有关，容易想到只要让某一条链小于等于其它任意链，这条链的长度显然就是严格 <span class="arithmatex">\(O(\log n)\)</span> 的。</p>
 <p>所以我们在合并的时候再额外记一个<strong>和最近的叶子结点的距离</strong>，然后每次回溯的时候保证右边的距离小于等于左边的（大了就交换一下），合并的时候一直走右儿子即可。</p>
-<p>但是左偏树有个弊端，就是左边的路径可能被卡到 $O(n)$，在某些题可能会有形如“从 $x$ 暴力往上跳”的操作，复杂度就假了。斜堆就没有这个问题。</p>
+<p>但是左偏树有个弊端，就是左边的路径可能被卡到 <span class="arithmatex">\(O(n)\)</span>，在某些题可能会有形如“从 <span class="arithmatex">\(x\)</span> 暴力往上跳”的操作，复杂度就假了。斜堆就没有这个问题。</p>
 <p>/// detials | 参考代码
     open: False
     type: success</p>

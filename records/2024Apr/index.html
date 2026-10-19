@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6364,20 +6392,20 @@
 <p><a href="https://qoj.ac/problem/6842">传送门</a></p>
 <h3 id="_1">题意：</h3>
 <ul>
-<li>定义 $s_i = \mathrm{popcount}(i) \bmod 2, w(l, r) = s_ls_{l+1}\dots s_r$（此处表示字符串连接）。</li>
-<li>给出若干区间 $[l_i,r_i]$，令 $S = w(l_1, r_1) + w(l_2, r_2) + \dots + w(l_n, r_n)$（此处加号表示字符串连接）。</li>
-<li>$q$ 次询问一个串 $T$ 在 $S$ 中的出现次数。</li>
-<li>$n,q \le 10^5, 1 \le l_i \le r_i \le 10^9,\sum|T| ≤ 5 × 10^5$</li>
+<li>定义 <span class="arithmatex">\(s_i = \mathrm{popcount}(i) \bmod 2, w(l, r) = s_ls_{l+1}\dots s_r\)</span>（此处表示字符串连接）。</li>
+<li>给出若干区间 <span class="arithmatex">\([l_i,r_i]\)</span>，令 <span class="arithmatex">\(S = w(l_1, r_1) + w(l_2, r_2) + \dots + w(l_n, r_n)\)</span>（此处加号表示字符串连接）。</li>
+<li><span class="arithmatex">\(q\)</span> 次询问一个串 <span class="arithmatex">\(T\)</span> 在 <span class="arithmatex">\(S\)</span> 中的出现次数。</li>
+<li><span class="arithmatex">\(n,q \le 10^5, 1 \le l_i \le r_i \le 10^9,\sum|T| ≤ 5 × 10^5\)</span></li>
 </ul>
 <h3 id="_2">题解</h3>
-<p>首先不看数据范围，容易想到把 $T$ 塞到 AC 自动机里面然后直接跑 $S$。</p>
-<p>再看一眼数据范围，哇塞 $|S|\le 10^5\times 10^9$，显然是不行的。</p>
-<p>难道就没办法了吗？容易看到有一个 $\mathrm{popcount}$，这个容易让人往二进制方面想。那么考虑 $2^k$ 在题目条件下有无特殊性质。</p>
-<p>容易想到 $2^k\sim 2^{k+1}-1$ 恰好是 $0\sim 2^k-1$ 每个数再在最高位加一个 $1$，也就是说 $w(0,2^k-1)$ 与 $w(2^k,2^{k+1}-1)$ 每个数 $\mathrm{popcount}$ 的奇偶性恰好是完全相反的关系！这就说明对应字符串也是相反关系。</p>
-<p>这启发我们使用倍增求解。具体来说，对 AC 自动机上每个点 $i$ 求出 $f_{i,j,0/1}$ 表示“从 $i$ 开始，经过 $w(0,2^j-1)$（$0/1$ 表示反转的版本）后将到达哪个点”。这个预处理是简单的，不做赘述。并且注意到可以将任何一对 $[l_i,r_i]$ 分成若干段 $2$ 的整数次幂后转化为 $w(0,2^k)$ 或其反转（类似于线段树把任何一个区间划分成 $\log n$ 段）。对于统计答案，可以先存每个 $f_{i,j,0/1}$ 被用过几次（注意端点问题），然后从大到小倍增将答案统计到点上。</p>
-<p>但是这个倍增没有 $\mathrm{lca}$ 那么好做，因为必须找到某个区间 $[l_i,r_i]$ 中 $2$ 的整数次幂才能做，怎么办呢？仍然用线段树的思路，注意到 zkw 线段树的某个结点恰好是一个 $w(p,p+2^k-1)$，其中 $p$ 是一个“必定存在非负整数 $\lambda$，使得 $p=\lambda2^k$” 的数。也就是说直接算出 $p$ 的 $\mathrm{popcount}(p)$ 就能知道将 $w(p,p+2^k-1)$ 转化为 $w(0,2^k-1)$ 是否需要反转。而知道左右端点后是很好求出对应区间在 zkw 线段树上所有结点编号的。现在的问题就是如何从 zkw 的结点编号推出区间左右端点。</p>
-<p>设 zkw 线段树对应序列长度为 $2^k$（即下标区间为 $[0,2^k)$），容易发现结点 $t$ 的长度为 $2^{k-\mathrm{highbit}(t)}$，并且 $t-2^{\mathrm{highbit}(t)}$ 恰好是 $t$ 是它在对应层数的第多少块，即它的左右端点分别是 $2^{k-\mathrm{highbit}(t)}\times (t-2^{\mathrm{highbit}(t)})$ 和 $2^{k-\mathrm{highbit}(t)}\times (t-2^{\mathrm{highbit}(t)}+1)-1$，然后就做完了。</p>
-<p>复杂度 $O(\sum T+n\log V)$。</p>
+<p>首先不看数据范围，容易想到把 <span class="arithmatex">\(T\)</span> 塞到 AC 自动机里面然后直接跑 <span class="arithmatex">\(S\)</span>。</p>
+<p>再看一眼数据范围，哇塞 <span class="arithmatex">\(|S|\le 10^5\times 10^9\)</span>，显然是不行的。</p>
+<p>难道就没办法了吗？容易看到有一个 <span class="arithmatex">\(\mathrm{popcount}\)</span>，这个容易让人往二进制方面想。那么考虑 <span class="arithmatex">\(2^k\)</span> 在题目条件下有无特殊性质。</p>
+<p>容易想到 <span class="arithmatex">\(2^k\sim 2^{k+1}-1\)</span> 恰好是 <span class="arithmatex">\(0\sim 2^k-1\)</span> 每个数再在最高位加一个 <span class="arithmatex">\(1\)</span>，也就是说 <span class="arithmatex">\(w(0,2^k-1)\)</span> 与 <span class="arithmatex">\(w(2^k,2^{k+1}-1)\)</span> 每个数 <span class="arithmatex">\(\mathrm{popcount}\)</span> 的奇偶性恰好是完全相反的关系！这就说明对应字符串也是相反关系。</p>
+<p>这启发我们使用倍增求解。具体来说，对 AC 自动机上每个点 <span class="arithmatex">\(i\)</span> 求出 <span class="arithmatex">\(f_{i,j,0/1}\)</span> 表示“从 <span class="arithmatex">\(i\)</span> 开始，经过 <span class="arithmatex">\(w(0,2^j-1)\)</span>（<span class="arithmatex">\(0/1\)</span> 表示反转的版本）后将到达哪个点”。这个预处理是简单的，不做赘述。并且注意到可以将任何一对 <span class="arithmatex">\([l_i,r_i]\)</span> 分成若干段 <span class="arithmatex">\(2\)</span> 的整数次幂后转化为 <span class="arithmatex">\(w(0,2^k)\)</span> 或其反转（类似于线段树把任何一个区间划分成 <span class="arithmatex">\(\log n\)</span> 段）。对于统计答案，可以先存每个 <span class="arithmatex">\(f_{i,j,0/1}\)</span> 被用过几次（注意端点问题），然后从大到小倍增将答案统计到点上。</p>
+<p>但是这个倍增没有 <span class="arithmatex">\(\mathrm{lca}\)</span> 那么好做，因为必须找到某个区间 <span class="arithmatex">\([l_i,r_i]\)</span> 中 <span class="arithmatex">\(2\)</span> 的整数次幂才能做，怎么办呢？仍然用线段树的思路，注意到 zkw 线段树的某个结点恰好是一个 <span class="arithmatex">\(w(p,p+2^k-1)\)</span>，其中 <span class="arithmatex">\(p\)</span> 是一个“必定存在非负整数 <span class="arithmatex">\(\lambda\)</span>，使得 <span class="arithmatex">\(p=\lambda2^k\)</span>” 的数。也就是说直接算出 <span class="arithmatex">\(p\)</span> 的 <span class="arithmatex">\(\mathrm{popcount}(p)\)</span> 就能知道将 <span class="arithmatex">\(w(p,p+2^k-1)\)</span> 转化为 <span class="arithmatex">\(w(0,2^k-1)\)</span> 是否需要反转。而知道左右端点后是很好求出对应区间在 zkw 线段树上所有结点编号的。现在的问题就是如何从 zkw 的结点编号推出区间左右端点。</p>
+<p>设 zkw 线段树对应序列长度为 <span class="arithmatex">\(2^k\)</span>（即下标区间为 <span class="arithmatex">\([0,2^k)\)</span>），容易发现结点 <span class="arithmatex">\(t\)</span> 的长度为 <span class="arithmatex">\(2^{k-\mathrm{highbit}(t)}\)</span>，并且 <span class="arithmatex">\(t-2^{\mathrm{highbit}(t)}\)</span> 恰好是 <span class="arithmatex">\(t\)</span> 是它在对应层数的第多少块，即它的左右端点分别是 <span class="arithmatex">\(2^{k-\mathrm{highbit}(t)}\times (t-2^{\mathrm{highbit}(t)})\)</span> 和 <span class="arithmatex">\(2^{k-\mathrm{highbit}(t)}\times (t-2^{\mathrm{highbit}(t)}+1)-1\)</span>，然后就做完了。</p>
+<p>复杂度 <span class="arithmatex">\(O(\sum T+n\log V)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6539,29 +6567,29 @@
 <h2 id="p5397-ynoi2018">P5397 [Ynoi2018] 天降之物</h2>
 <p><a href="https://www.luogu.com.cn/problem/P5397">传送门</a></p>
 <h3 id="_3">题意</h3>
-<p>有一个长为 $n$ 的序列，维护两个操作（总共进行 $m$ 次，但 lxl 保证 $m=n$）。</p>
+<p>有一个长为 <span class="arithmatex">\(n\)</span> 的序列，维护两个操作（总共进行 <span class="arithmatex">\(m\)</span> 次，但 lxl 保证 <span class="arithmatex">\(m=n\)</span>）。</p>
 <ul>
-<li><code>1 x y</code>，将序列中所有 $x$ 修改为 $y$</li>
-<li><code>2 x y</code>，找出一个位置 $i$ 满足 $a_i=x$，找出一个位置 $j$ 满足 $a_j=y$，使得 $|i-j|$ 最小，并输出 $|i-j|$（下文称这样“最小的 $|i-j|$”为“距离”），如果找不出这样的位置，输出 <code>Ikaros</code>。</li>
-<li>强制在线，输入的所有数据在异或上一次答案后在 $[1,10^5]$ 内，所有数不大于 $n$，时限 500ms。</li>
+<li><code>1 x y</code>，将序列中所有 <span class="arithmatex">\(x\)</span> 修改为 <span class="arithmatex">\(y\)</span></li>
+<li><code>2 x y</code>，找出一个位置 <span class="arithmatex">\(i\)</span> 满足 <span class="arithmatex">\(a_i=x\)</span>，找出一个位置 <span class="arithmatex">\(j\)</span> 满足 <span class="arithmatex">\(a_j=y\)</span>，使得 <span class="arithmatex">\(|i-j|\)</span> 最小，并输出 <span class="arithmatex">\(|i-j|\)</span>（下文称这样“最小的 <span class="arithmatex">\(|i-j|\)</span>”为“距离”），如果找不出这样的位置，输出 <code>Ikaros</code>。</li>
+<li>强制在线，输入的所有数据在异或上一次答案后在 <span class="arithmatex">\([1,10^5]\)</span> 内，所有数不大于 <span class="arithmatex">\(n\)</span>，时限 500ms。</li>
 </ul>
 <h3 id="_4">题解</h3>
 <p>有一个很简单的根号分治做法。</p>
 <p>只考虑询问操作，容易想到两种不同的算法：</p>
 <ul>
-<li>算法一：对于所有 $x$，预处理所有 $y$ 到它的距离 $dis_{x,y}$。对于一个 $x$ 可以 $O(n)$ 扫一遍。时空复杂度均为 $O(Xn)$，其中 $X$ 是不同的 $x$ 个数，查询可以 $O(1)$。</li>
-<li>算法二：对于所有 $x$，存储它的<strong>出现位置集合</strong> $S$，预处理总时空复杂度 $O(n)$。由于具有单调性，查询可以在 $S_x,S_y$ 集合上跑双指针，复杂度 $O(|S_x|+|S_y|)$。</li>
+<li>算法一：对于所有 <span class="arithmatex">\(x\)</span>，预处理所有 <span class="arithmatex">\(y\)</span> 到它的距离 <span class="arithmatex">\(dis_{x,y}\)</span>。对于一个 <span class="arithmatex">\(x\)</span> 可以 <span class="arithmatex">\(O(n)\)</span> 扫一遍。时空复杂度均为 <span class="arithmatex">\(O(Xn)\)</span>，其中 <span class="arithmatex">\(X\)</span> 是不同的 <span class="arithmatex">\(x\)</span> 个数，查询可以 <span class="arithmatex">\(O(1)\)</span>。</li>
+<li>算法二：对于所有 <span class="arithmatex">\(x\)</span>，存储它的<strong>出现位置集合</strong> <span class="arithmatex">\(S\)</span>，预处理总时空复杂度 <span class="arithmatex">\(O(n)\)</span>。由于具有单调性，查询可以在 <span class="arithmatex">\(S_x,S_y\)</span> 集合上跑双指针，复杂度 <span class="arithmatex">\(O(|S_x|+|S_y|)\)</span>。</li>
 </ul>
-<p>这个看起来就非常根号分治啊。设定一个阈值 $B$，令 $x$ 的出现次数为 $sz_x$，若 $sz_x\ge B \lor sz_y \ge B$ 则使用算法一，此时时空复杂度为 $O(\frac{n^2}{B})$（因为只需要存 $sz_x\ge B$ 的所有 $x$ 与其余数的距离，这样的数最多有 $\frac{n}{B}$ 个），若 $sz_x&lt;B\land sz_y&lt;B$ 则使用算法二，此时单次查询时间复杂度为 $O(B)$，总复杂度 $O(nB)$。当 $B=\sqrt{n}$ 时复杂度即为 $O(n\sqrt{n})$。</p>
+<p>这个看起来就非常根号分治啊。设定一个阈值 <span class="arithmatex">\(B\)</span>，令 <span class="arithmatex">\(x\)</span> 的出现次数为 <span class="arithmatex">\(sz_x\)</span>，若 <span class="arithmatex">\(sz_x\ge B \lor sz_y \ge B\)</span> 则使用算法一，此时时空复杂度为 <span class="arithmatex">\(O(\frac{n^2}{B})\)</span>（因为只需要存 <span class="arithmatex">\(sz_x\ge B\)</span> 的所有 <span class="arithmatex">\(x\)</span> 与其余数的距离，这样的数最多有 <span class="arithmatex">\(\frac{n}{B}\)</span> 个），若 <span class="arithmatex">\(sz_x&lt;B\land sz_y&lt;B\)</span> 则使用算法二，此时单次查询时间复杂度为 <span class="arithmatex">\(O(B)\)</span>，总复杂度 <span class="arithmatex">\(O(nB)\)</span>。当 <span class="arithmatex">\(B=\sqrt{n}\)</span> 时复杂度即为 <span class="arithmatex">\(O(n\sqrt{n})\)</span>。</p>
 <p>考虑如何修改。</p>
-<p>首先如果 $sz_x=0$ 或者 $x=y$ 可以直接摆烂，如果 $y=0$ 考虑用打标记的方法修改（比如用 $mp_x$ 存储 $x$ 在序列上实际对应哪个数，这就可以直接 $mp_y\gets mp_x,mp_x\gets 0$）。剩下的就是需要动脑子的了。</p>
-<p>由于我们已经用 $mp_x$ 了，所以不妨设 $sz_y&gt;sz_x$（如果不满足直接 <code>swap(mp[x],mp[y])</code> 即可）。那么只剩下三种情况:</p>
+<p>首先如果 <span class="arithmatex">\(sz_x=0\)</span> 或者 <span class="arithmatex">\(x=y\)</span> 可以直接摆烂，如果 <span class="arithmatex">\(y=0\)</span> 考虑用打标记的方法修改（比如用 <span class="arithmatex">\(mp_x\)</span> 存储 <span class="arithmatex">\(x\)</span> 在序列上实际对应哪个数，这就可以直接 <span class="arithmatex">\(mp_y\gets mp_x,mp_x\gets 0\)</span>）。剩下的就是需要动脑子的了。</p>
+<p>由于我们已经用 <span class="arithmatex">\(mp_x\)</span> 了，所以不妨设 <span class="arithmatex">\(sz_y&gt;sz_x\)</span>（如果不满足直接 <code>swap(mp[x],mp[y])</code> 即可）。那么只剩下三种情况:</p>
 <ul>
-<li>$sz_x&lt;B,sz_y &lt;B$：这个可以直接遍历 $S_x$ 在序列上改了之后直接把 $S_x,S_y$ 归并到一起。单次操作复杂度显然是根号的。</li>
-<li>$sz_x\ge B,sz_y \ge B$：这个可以考虑 $O(n)$ 遍历整个序列把所有 $x$ 改成 $y$ 然后再计算一遍 $dis_y,z$，由于这样的 $x,y$ 不超过 $\sqrt{n}$ 个（算上初始小于 $B$，后面合成出来的大于等于 $B$ 的显然也不会超过 $\sqrt{n}$）所以这样的合并最多会发生根号次，总复杂度为 $O(n\sqrt{n})$。</li>
-<li>$sz_x&lt;B,sz_y\ge B$：这个不太好直接处理，怎么办呢？一个简单的做法是设置一个<strong>缓存区</strong>，将 $S_x$ 与 $S_y$ 的缓存区归并。然后查询时将大块与缓存区分开计算。每当缓存区 $\ge B$ 时就合并入 $S_y$。“归并入缓存区”的操作复杂度为根号，“合并入 $S_y$”的操作复杂度为 $O(n)$ 但最多进行 $\sqrt{n}$ 次。总复杂度还是 $O(n\sqrt{n})$。然后你会发现第一种情况可以直接用这种情况来做。</li>
+<li><span class="arithmatex">\(sz_x&lt;B,sz_y &lt;B\)</span>：这个可以直接遍历 <span class="arithmatex">\(S_x\)</span> 在序列上改了之后直接把 <span class="arithmatex">\(S_x,S_y\)</span> 归并到一起。单次操作复杂度显然是根号的。</li>
+<li><span class="arithmatex">\(sz_x\ge B,sz_y \ge B\)</span>：这个可以考虑 <span class="arithmatex">\(O(n)\)</span> 遍历整个序列把所有 <span class="arithmatex">\(x\)</span> 改成 <span class="arithmatex">\(y\)</span> 然后再计算一遍 <span class="arithmatex">\(dis_y,z\)</span>，由于这样的 <span class="arithmatex">\(x,y\)</span> 不超过 <span class="arithmatex">\(\sqrt{n}\)</span> 个（算上初始小于 <span class="arithmatex">\(B\)</span>，后面合成出来的大于等于 <span class="arithmatex">\(B\)</span> 的显然也不会超过 <span class="arithmatex">\(\sqrt{n}\)</span>）所以这样的合并最多会发生根号次，总复杂度为 <span class="arithmatex">\(O(n\sqrt{n})\)</span>。</li>
+<li><span class="arithmatex">\(sz_x&lt;B,sz_y\ge B\)</span>：这个不太好直接处理，怎么办呢？一个简单的做法是设置一个<strong>缓存区</strong>，将 <span class="arithmatex">\(S_x\)</span> 与 <span class="arithmatex">\(S_y\)</span> 的缓存区归并。然后查询时将大块与缓存区分开计算。每当缓存区 <span class="arithmatex">\(\ge B\)</span> 时就合并入 <span class="arithmatex">\(S_y\)</span>。“归并入缓存区”的操作复杂度为根号，“合并入 <span class="arithmatex">\(S_y\)</span>”的操作复杂度为 <span class="arithmatex">\(O(n)\)</span> 但最多进行 <span class="arithmatex">\(\sqrt{n}\)</span> 次。总复杂度还是 <span class="arithmatex">\(O(n\sqrt{n})\)</span>。然后你会发现第一种情况可以直接用这种情况来做。</li>
 </ul>
-<p>综上，总时空复杂度均为 $O(n\sqrt{n})$。</p>
+<p>综上，总时空复杂度均为 <span class="arithmatex">\(O(n\sqrt{n})\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6706,36 +6734,36 @@
 <p><a href="https://www.luogu.com.cn/problem/AT_abc221_g">传送门</a></p>
 <h3 id="_5">题意</h3>
 <ul>
-<li>在平面直角坐标系上，有一点 $(A,B)$。给你一个长为 $n$ 的序列 $\begin{Bmatrix}d_n\end{Bmatrix}$，表示你每一步的长度。</li>
-<li>你要决定每一步的方向（上下左右分别为 <code>UDLR</code>），使得最终到达 $(A,B)$，并构造方案。或报告无解。</li>
-<li>$1\le n \le 2000,1\le d_i\le 1800,|A|,|B|\le 3.6\times 10^6$</li>
+<li>在平面直角坐标系上，有一点 <span class="arithmatex">\((A,B)\)</span>。给你一个长为 <span class="arithmatex">\(n\)</span> 的序列 <span class="arithmatex">\(\begin{Bmatrix}d_n\end{Bmatrix}\)</span>，表示你每一步的长度。</li>
+<li>你要决定每一步的方向（上下左右分别为 <code>UDLR</code>），使得最终到达 <span class="arithmatex">\((A,B)\)</span>，并构造方案。或报告无解。</li>
+<li><span class="arithmatex">\(1\le n \le 2000,1\le d_i\le 1800,|A|,|B|\le 3.6\times 10^6\)</span></li>
 </ul>
 <h3 id="_6">题解</h3>
-<p>乍一看显然答案与 $d$ 的顺序是无关的，长得就很像背包。但要把 $d$ 分成四个集合，看起来非常不好做啊。这时候就有一个超级无敌牛逼，让所有人直呼“啊？”的方法：将坐标系顺时针旋转 $45^{\circ}$ 即可。</p>
-<p>容易发现这样每个 $d_i$ 都会给 $x,y$ 轴分别贡献 $\pm \frac{d_i}{\sqrt{2}}$，并且两轴是互相独立的。就变成了两个独立的“分成两个集合”的问题。</p>
-<p>此时 $(A,B)$ 的横纵坐标分别为 $(\frac{A-B}{\sqrt{2}},\frac{A+B}{\sqrt{2}})$，那么容易发现我们可以把新坐标系的所有信息乘以 $\sqrt{2}$，就是整数了。</p>
-<p>为了避免正负号的影响可以假设最初全取负（相当于容量 $+\sum d_i$），然后每把一个改成正的就加 $2d_i$（相当于再将总容量除以 $2$）。这样就变成了一个经典的 $01$ 背包问题。设背包容量为 $C,\max\begin{Bmatrix}d_i\end{Bmatrix}=D$。</p>
-<p>一般的 01 背包复杂度是 $O(n\sum d_i)$ 的，考虑如何优化（这道题其实可以直接 <code>bitset</code>，但是有一个更强力的做法）。</p>
-<p>这里介绍一个非常强力的算法：$O(nD)$ 判断 01 背包是否能恰好装满。</p>
-<p>首先从前往后遍历，直到找到一个 $pos$ 使得 $\sum_{i=1}^{pos-1}d_i\le C,sum_{i=1}^{pos}d_i&gt; C$。接下来就是要在左边扔掉一部分的同时在右边加入一部分。</p>
-<p>那么可以想到一个很简单的 DP：设 $f_{l,r,w}$ 表示左端点考虑到 $l$，右端点考虑到 $r$，总体积能否恰好为 $C+w$（$w$ 可能为负数，这个后面解决）。</p>
-<p>由于我们想凑出 $C$（即 $w=0$），所以对于 $w&gt;0$ 的状态只考虑从左边扔掉某一个，$w&lt;0$ 的状态只考虑从右边加上某一个，这样 $w$ 的值域就是 $[-D,D]$，可以简单地处理负号问题，有如下转移（此处 $\gets$ 表示取或）：</p>
+<p>乍一看显然答案与 <span class="arithmatex">\(d\)</span> 的顺序是无关的，长得就很像背包。但要把 <span class="arithmatex">\(d\)</span> 分成四个集合，看起来非常不好做啊。这时候就有一个超级无敌牛逼，让所有人直呼“啊？”的方法：将坐标系顺时针旋转 <span class="arithmatex">\(45^{\circ}\)</span> 即可。</p>
+<p>容易发现这样每个 <span class="arithmatex">\(d_i\)</span> 都会给 <span class="arithmatex">\(x,y\)</span> 轴分别贡献 <span class="arithmatex">\(\pm \frac{d_i}{\sqrt{2}}\)</span>，并且两轴是互相独立的。就变成了两个独立的“分成两个集合”的问题。</p>
+<p>此时 <span class="arithmatex">\((A,B)\)</span> 的横纵坐标分别为 <span class="arithmatex">\((\frac{A-B}{\sqrt{2}},\frac{A+B}{\sqrt{2}})\)</span>，那么容易发现我们可以把新坐标系的所有信息乘以 <span class="arithmatex">\(\sqrt{2}\)</span>，就是整数了。</p>
+<p>为了避免正负号的影响可以假设最初全取负（相当于容量 <span class="arithmatex">\(+\sum d_i\)</span>），然后每把一个改成正的就加 <span class="arithmatex">\(2d_i\)</span>（相当于再将总容量除以 <span class="arithmatex">\(2\)</span>）。这样就变成了一个经典的 <span class="arithmatex">\(01\)</span> 背包问题。设背包容量为 <span class="arithmatex">\(C,\max\begin{Bmatrix}d_i\end{Bmatrix}=D\)</span>。</p>
+<p>一般的 01 背包复杂度是 <span class="arithmatex">\(O(n\sum d_i)\)</span> 的，考虑如何优化（这道题其实可以直接 <code>bitset</code>，但是有一个更强力的做法）。</p>
+<p>这里介绍一个非常强力的算法：<span class="arithmatex">\(O(nD)\)</span> 判断 01 背包是否能恰好装满。</p>
+<p>首先从前往后遍历，直到找到一个 <span class="arithmatex">\(pos\)</span> 使得 <span class="arithmatex">\(\sum_{i=1}^{pos-1}d_i\le C,sum_{i=1}^{pos}d_i&gt; C\)</span>。接下来就是要在左边扔掉一部分的同时在右边加入一部分。</p>
+<p>那么可以想到一个很简单的 DP：设 <span class="arithmatex">\(f_{l,r,w}\)</span> 表示左端点考虑到 <span class="arithmatex">\(l\)</span>，右端点考虑到 <span class="arithmatex">\(r\)</span>，总体积能否恰好为 <span class="arithmatex">\(C+w\)</span>（<span class="arithmatex">\(w\)</span> 可能为负数，这个后面解决）。</p>
+<p>由于我们想凑出 <span class="arithmatex">\(C\)</span>（即 <span class="arithmatex">\(w=0\)</span>），所以对于 <span class="arithmatex">\(w&gt;0\)</span> 的状态只考虑从左边扔掉某一个，<span class="arithmatex">\(w&lt;0\)</span> 的状态只考虑从右边加上某一个，这样 <span class="arithmatex">\(w\)</span> 的值域就是 <span class="arithmatex">\([-D,D]\)</span>，可以简单地处理负号问题，有如下转移（此处 <span class="arithmatex">\(\gets\)</span> 表示取或）：</p>
 <ul>
-<li>$f_{l-1,r,w}\gets f_{l,r,w}$（即往左拓展但不操作）</li>
-<li>$f_{l,r+1,w}\gets f_{l,r,w}$（即往右拓展但不操作）</li>
-<li>$f_{l,r+1,w+d_{r+1}}\gets f_{l,r,w}(w&lt;0)$（即往右拓展并加入对应物品）</li>
-<li>$f_{l-1,r,w-d_{l-1}}\gets f_{l,r,w}(w&gt;0)$（即往左拓展并扔掉对应物品）</li>
+<li><span class="arithmatex">\(f_{l-1,r,w}\gets f_{l,r,w}\)</span>（即往左拓展但不操作）</li>
+<li><span class="arithmatex">\(f_{l,r+1,w}\gets f_{l,r,w}\)</span>（即往右拓展但不操作）</li>
+<li><span class="arithmatex">\(f_{l,r+1,w+d_{r+1}}\gets f_{l,r,w}(w&lt;0)\)</span>（即往右拓展并加入对应物品）</li>
+<li><span class="arithmatex">\(f_{l-1,r,w-d_{l-1}}\gets f_{l,r,w}(w&gt;0)\)</span>（即往左拓展并扔掉对应物品）</li>
 </ul>
-<p>这样复杂度变成 $O(n^2D)$ 了，但是优化的空间变大了。容易想到 DP 值只存存在性过于浪费了，考虑设 $g_{r,w}$ 表示若 $f_{l,r,w}=1$，$l$ 最大是多少，若不存在则取 $0$。</p>
-<p>这样的转移也很简单（此处 $\gets$ 表示取 $\max$）：</p>
+<p>这样复杂度变成 <span class="arithmatex">\(O(n^2D)\)</span> 了，但是优化的空间变大了。容易想到 DP 值只存存在性过于浪费了，考虑设 <span class="arithmatex">\(g_{r,w}\)</span> 表示若 <span class="arithmatex">\(f_{l,r,w}=1\)</span>，<span class="arithmatex">\(l\)</span> 最大是多少，若不存在则取 <span class="arithmatex">\(0\)</span>。</p>
+<p>这样的转移也很简单（此处 <span class="arithmatex">\(\gets\)</span> 表示取 <span class="arithmatex">\(\max\)</span>）：</p>
 <ul>
-<li>$g_{r+1,w}\gets f_{l,r,w}$</li>
-<li>$g_{r+1,w+d_{r+1}}\gets f_{l,r,w}$</li>
-<li>$g_{r+1,w-d_{l}}\gets l(w&gt;0,l\in[1,g_{r,w}-1])$</li>
+<li><span class="arithmatex">\(g_{r+1,w}\gets f_{l,r,w}\)</span></li>
+<li><span class="arithmatex">\(g_{r+1,w+d_{r+1}}\gets f_{l,r,w}\)</span></li>
+<li><span class="arithmatex">\(g_{r+1,w-d_{l}}\gets l(w&gt;0,l\in[1,g_{r,w}-1])\)</span></li>
 </ul>
-<p>这里不需要考虑向左拓展且不操作，因为 $g_{r,w}$ 存的是最大值，若向左拓展且不操作显然不优。</p>
-<p>但是容易发现单次转移的复杂度变成 $O(n)$ 了，复杂度仍是 $O(n^2D)$，考虑寻找单调性。容易发现若 $g_{r+1,w-d_l}&lt;g_{r-1,w}$，那么会从 $g_{r-1,w}\to g_{r,w-d_l}\to g_{r+1,w-d_l}$ 的路径转移一次。所以第三个转移时只需要考虑 $l\in [g_{r-1,w},g_{r,w}-1]$ 即可。由于对于同一个 $w$，$g_{r,w}$ 是随着 $r$ 单调不减的（显然，因为每次转移必定会和 $g_{r-1,w}$ 取 $\max$），故总复杂度为 $O(D\sum (g_{r,w}-g{r-1,w}))=O(nD)$，然后就能做了。</p>
-<p>总复杂度 $O(nD)$，注意输出方案自己推一下。</p>
+<p>这里不需要考虑向左拓展且不操作，因为 <span class="arithmatex">\(g_{r,w}\)</span> 存的是最大值，若向左拓展且不操作显然不优。</p>
+<p>但是容易发现单次转移的复杂度变成 <span class="arithmatex">\(O(n)\)</span> 了，复杂度仍是 <span class="arithmatex">\(O(n^2D)\)</span>，考虑寻找单调性。容易发现若 <span class="arithmatex">\(g_{r+1,w-d_l}&lt;g_{r-1,w}\)</span>，那么会从 <span class="arithmatex">\(g_{r-1,w}\to g_{r,w-d_l}\to g_{r+1,w-d_l}\)</span> 的路径转移一次。所以第三个转移时只需要考虑 <span class="arithmatex">\(l\in [g_{r-1,w},g_{r,w}-1]\)</span> 即可。由于对于同一个 <span class="arithmatex">\(w\)</span>，<span class="arithmatex">\(g_{r,w}\)</span> 是随着 <span class="arithmatex">\(r\)</span> 单调不减的（显然，因为每次转移必定会和 <span class="arithmatex">\(g_{r-1,w}\)</span> 取 <span class="arithmatex">\(\max\)</span>），故总复杂度为 <span class="arithmatex">\(O(D\sum (g_{r,w}-g{r-1,w}))=O(nD)\)</span>，然后就能做了。</p>
+<p>总复杂度 <span class="arithmatex">\(O(nD)\)</span>，注意输出方案自己推一下。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6868,21 +6896,21 @@
 <p><a href="https://www.luogu.com.cn/problem/P6326">传送门</a></p>
 <h3 id="_7">题意</h3>
 <ul>
-<li>给定一棵 $n$ 个点的树，每个点上有若干物品，其中每个点有三个权值 $w_i,c_i,d_i$，分别代表对应结点上物品<strong>权值</strong>、<strong>价格</strong>、<strong>数量</strong>。</li>
-<li>现在你需要选定一个连通块，其中每个物品至少买一个。在总价格不超过 $m$ 的情况下最大化权值和。</li>
-<li>$1\le n\le 500,1\le c_i\le m,\le 4000,1\le w_i \le 4000,1\le d_i \le 100$，多测。</li>
+<li>给定一棵 <span class="arithmatex">\(n\)</span> 个点的树，每个点上有若干物品，其中每个点有三个权值 <span class="arithmatex">\(w_i,c_i,d_i\)</span>，分别代表对应结点上物品<strong>权值</strong>、<strong>价格</strong>、<strong>数量</strong>。</li>
+<li>现在你需要选定一个连通块，其中每个物品至少买一个。在总价格不超过 <span class="arithmatex">\(m\)</span> 的情况下最大化权值和。</li>
+<li><span class="arithmatex">\(1\le n\le 500,1\le c_i\le m,\le 4000,1\le w_i \le 4000,1\le d_i \le 100\)</span>，多测。</li>
 </ul>
 <h3 id="_8">题解</h3>
 <p>多重背包部分没什么说的，二进制优化，比较老生常谈。重点来说一下这种树上问题怎么做。</p>
-<p>考虑钦定选一个点 $x$（就是说直接点分治解决，下文叙述单个连通块内如何解决）。那么就是一个根必选的有根树，显然如果不选某个点那么它的子树必定都不能选，那可以考虑用 dfs 序直接跳过其子树。然后大体思路就这样，令 $dp_{i,j}$ 表示考虑到 dfs 序上 $[1,n]$，消耗代价 $j$ 最多能得到多少权值，具体转移如下：</p>
+<p>考虑钦定选一个点 <span class="arithmatex">\(x\)</span>（就是说直接点分治解决，下文叙述单个连通块内如何解决）。那么就是一个根必选的有根树，显然如果不选某个点那么它的子树必定都不能选，那可以考虑用 dfs 序直接跳过其子树。然后大体思路就这样，令 <span class="arithmatex">\(dp_{i,j}\)</span> 表示考虑到 dfs 序上 <span class="arithmatex">\([1,n]\)</span>，消耗代价 <span class="arithmatex">\(j\)</span> 最多能得到多少权值，具体转移如下：</p>
 <ul>
-<li>$dp_{i,j}=dp_{i+1,j-c_{I}}+w_{I}$</li>
-<li>对 $dp_i$ 跑多重背包，转移不好概括，但是这里的 $d$ 记得 $-1$。</li>
-<li>$dp_{i,j}=\max(dp_{i,j},dp_{next_i,j})$</li>
+<li><span class="arithmatex">\(dp_{i,j}=dp_{i+1,j-c_{I}}+w_{I}\)</span></li>
+<li>对 <span class="arithmatex">\(dp_i\)</span> 跑多重背包，转移不好概括，但是这里的 <span class="arithmatex">\(d\)</span> 记得 <span class="arithmatex">\(-1\)</span>。</li>
+<li><span class="arithmatex">\(dp_{i,j}=\max(dp_{i,j},dp_{next_i,j})\)</span></li>
 </ul>
-<p>其中 $I$ 表示 dfs 序 $i$ 对应的点，$next_i$ 表示跳过 $i$ 子树后的下一个点。</p>
-<p>然后 $dp_{1,m}$ 即答案。</p>
-<p>复杂度 $O(\sum_i nm\log n\log d_i)$，还是比较轻松的。</p>
+<p>其中 <span class="arithmatex">\(I\)</span> 表示 dfs 序 <span class="arithmatex">\(i\)</span> 对应的点，<span class="arithmatex">\(next_i\)</span> 表示跳过 <span class="arithmatex">\(i\)</span> 子树后的下一个点。</p>
+<p>然后 <span class="arithmatex">\(dp_{1,m}\)</span> 即答案。</p>
+<p>复杂度 <span class="arithmatex">\(O(\sum_i nm\log n\log d_i)\)</span>，还是比较轻松的。</p>
 <p>总结下来就是若 DP 信息与连通块中具体的点有关可以考虑在 dfs 序上倒着 DP。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -7012,25 +7040,25 @@
 <p><a href="https://www.luogu.com.cn/problem/P10197">传送门</a></p>
 <h3 id="_9">题意</h3>
 <ul>
-<li>有一个长度为 $n$ 的序列 $\begin{Bmatrix}a_n\end{Bmatrix}$，定义序列的权值为 $\sum_{i=1}^{n-1}\max(a_i,a_{i+1})$。</li>
-<li>现在规定 $k$ 个位置不能动，其余位置随意交换，问得到的序列权值最小为多少。</li>
-<li>$2\le n\le 300,0\le k\le \min(n,6),1\le a_i\le 10^6$</li>
+<li>有一个长度为 <span class="arithmatex">\(n\)</span> 的序列 <span class="arithmatex">\(\begin{Bmatrix}a_n\end{Bmatrix}\)</span>，定义序列的权值为 <span class="arithmatex">\(\sum_{i=1}^{n-1}\max(a_i,a_{i+1})\)</span>。</li>
+<li>现在规定 <span class="arithmatex">\(k\)</span> 个位置不能动，其余位置随意交换，问得到的序列权值最小为多少。</li>
+<li><span class="arithmatex">\(2\le n\le 300,0\le k\le \min(n,6),1\le a_i\le 10^6\)</span></li>
 </ul>
 <h3 id="_10">题解</h3>
-<p>考虑最大值之和不好做。但是注意到 $\max(a,b)=\frac{a+b+|a-b|}{2}$，容易发现 $a+b$ 这一部分是固定的（对于边界情况，解决办法是在 $a_0,a_{n+1}$ 分别塞一个大于 $\max\begin{Bmatrix}a_i\end{Bmatrix}$ 的数，最后减掉），那么只需要考虑最小化 $\sum_{i=1}^{n-1} |a_i-a_{i+1}|$ 即可。  </p>
-<p>先不考虑 $k$ 个位置不能动，显然排成单调不减/单调不增是最小的，此时贡献为 $\max\begin{Bmatrix}a_i\end{Bmatrix}-\min\begin{Bmatrix}a_i\end{Bmatrix}$（并且容易发现任何序列无论怎么排都会产生至少这么多贡献，一个简单方法是考虑把从最小值到最大值的单调子序列取出来），下文令 $mn=\min\begin{Bmatrix}a_i\end{Bmatrix},mx=\max\begin{Bmatrix}a_i\end{Bmatrix}$。</p>
-<p>然后考虑只有左右两个固定的（设它们两个分别为 $a_L,a_R$）。容易发现无论怎么排，必定都会产生 $|a_L-mn|+|a_R-mx|+mx-mn$ 的贡献（或者 $a_L,a_r$ 反过来）。那么显然把 $mn$ 分给较小的那个是较优的，即<strong>确定一个区间内数的集合 $P$ 中的最大最小值后，最小贡献是唯一确定的</strong>，此处（以及下文）的“区间”均指两个固定的数中间夹的空格。</p>
-<p>下面考虑每一个区间塞哪些数。给出引理：存在最优解满足不存在两区间 $I,J$，使得 $mn_I&lt;mn_J&lt;mx_I&lt;mx_J$（即两区间内的数不是包含就是相离）。</p>
-<p>证明考虑调整，若出现上面的连不等式，显然可以通过交换 $I,J$ 内一定数得到 $mn_I&lt;mx_I'&lt;mn_J'&lt;mx_J$（满足上述情况时 $|I|$ 和 $|J|$ 必不可能等于 $1$，不存在需要动 $mn_I$ 和 $mx_J$ 的情况），此时 $mx_I'&lt;mx_I$ ，容易发现贡献中与 $mx_I$ 相关的是 $mx_I+|a_R-mx_I|$，分类讨论拆绝对值容易发现这个数不是不变就是变小，对于 $mn_J'$ 也同理。</p>
-<p>那么把自由的数拿出来，容易想到在它们按单调不降排成的序列 $\begin{Bmatrix}b_i\end{Bmatrix}$ 上区间 DP。具体来说，令 $f_{l,r,S}$ 表示考虑 $[b_l,b_r]$，已经把 $S$ 集合内的区间填满（$S$ 是一个元素为“区间”的集合，这里比较容易混淆），所能得到的最小贡献。因为两区间内的数不是包含就是相离，所以每次只考虑一个区间的 $b_i$ 是能概括所有情况的。</p>
+<p>考虑最大值之和不好做。但是注意到 <span class="arithmatex">\(\max(a,b)=\frac{a+b+|a-b|}{2}\)</span>，容易发现 <span class="arithmatex">\(a+b\)</span> 这一部分是固定的（对于边界情况，解决办法是在 <span class="arithmatex">\(a_0,a_{n+1}\)</span> 分别塞一个大于 <span class="arithmatex">\(\max\begin{Bmatrix}a_i\end{Bmatrix}\)</span> 的数，最后减掉），那么只需要考虑最小化 <span class="arithmatex">\(\sum_{i=1}^{n-1} |a_i-a_{i+1}|\)</span> 即可。  </p>
+<p>先不考虑 <span class="arithmatex">\(k\)</span> 个位置不能动，显然排成单调不减/单调不增是最小的，此时贡献为 <span class="arithmatex">\(\max\begin{Bmatrix}a_i\end{Bmatrix}-\min\begin{Bmatrix}a_i\end{Bmatrix}\)</span>（并且容易发现任何序列无论怎么排都会产生至少这么多贡献，一个简单方法是考虑把从最小值到最大值的单调子序列取出来），下文令 <span class="arithmatex">\(mn=\min\begin{Bmatrix}a_i\end{Bmatrix},mx=\max\begin{Bmatrix}a_i\end{Bmatrix}\)</span>。</p>
+<p>然后考虑只有左右两个固定的（设它们两个分别为 <span class="arithmatex">\(a_L,a_R\)</span>）。容易发现无论怎么排，必定都会产生 <span class="arithmatex">\(|a_L-mn|+|a_R-mx|+mx-mn\)</span> 的贡献（或者 <span class="arithmatex">\(a_L,a_r\)</span> 反过来）。那么显然把 <span class="arithmatex">\(mn\)</span> 分给较小的那个是较优的，即<strong>确定一个区间内数的集合 <span class="arithmatex">\(P\)</span> 中的最大最小值后，最小贡献是唯一确定的</strong>，此处（以及下文）的“区间”均指两个固定的数中间夹的空格。</p>
+<p>下面考虑每一个区间塞哪些数。给出引理：存在最优解满足不存在两区间 <span class="arithmatex">\(I,J\)</span>，使得 <span class="arithmatex">\(mn_I&lt;mn_J&lt;mx_I&lt;mx_J\)</span>（即两区间内的数不是包含就是相离）。</p>
+<p>证明考虑调整，若出现上面的连不等式，显然可以通过交换 <span class="arithmatex">\(I,J\)</span> 内一定数得到 <span class="arithmatex">\(mn_I&lt;mx_I'&lt;mn_J'&lt;mx_J\)</span>（满足上述情况时 <span class="arithmatex">\(|I|\)</span> 和 <span class="arithmatex">\(|J|\)</span> 必不可能等于 <span class="arithmatex">\(1\)</span>，不存在需要动 <span class="arithmatex">\(mn_I\)</span> 和 <span class="arithmatex">\(mx_J\)</span> 的情况），此时 <span class="arithmatex">\(mx_I'&lt;mx_I\)</span> ，容易发现贡献中与 <span class="arithmatex">\(mx_I\)</span> 相关的是 <span class="arithmatex">\(mx_I+|a_R-mx_I|\)</span>，分类讨论拆绝对值容易发现这个数不是不变就是变小，对于 <span class="arithmatex">\(mn_J'\)</span> 也同理。</p>
+<p>那么把自由的数拿出来，容易想到在它们按单调不降排成的序列 <span class="arithmatex">\(\begin{Bmatrix}b_i\end{Bmatrix}\)</span> 上区间 DP。具体来说，令 <span class="arithmatex">\(f_{l,r,S}\)</span> 表示考虑 <span class="arithmatex">\([b_l,b_r]\)</span>，已经把 <span class="arithmatex">\(S\)</span> 集合内的区间填满（<span class="arithmatex">\(S\)</span> 是一个元素为“区间”的集合，这里比较容易混淆），所能得到的最小贡献。因为两区间内的数不是包含就是相离，所以每次只考虑一个区间的 <span class="arithmatex">\(b_i\)</span> 是能概括所有情况的。</p>
 <p>转移考虑这个位置作不作最小值/最大值，以及两相离区间的合并：</p>
 <ul>
-<li>$f_{l,r,S}\gets \min(f_{l+1,r,S},f_{l,r-1,S})$，表示 $l,r$ 都不作区间边界，预留给后面的区间。</li>
-<li>$f_{l,r,S}\gets \min_{x\in S}\begin{Bmatrix}f_{l+1,r-1,S-\begin{Bmatrix}x\end{Bmatrix}}+w(b_l,b_r,x)\end{Bmatrix}$，其中 $w(l,r,x)$ 表示 $x$ 区间最大最小值分别为 $l,r$ 时所能产生的贡献。这个表示 $l,r$ 分别作最大最小值新开一个区间的贡献。这个转移可以只在 $r-l+1=sz_S$ 时做，$sz_S$ 表示 $S$ 集合内区间总长度，因为当 $sz_S$ 恰好等于 $r-l+1$ 时所得到的的答案必定是不劣的，证明参考上文的调整法。</li>
-<li>$f_{l,r,S}\gets \min_{S'\subsetneq S}\begin{Bmatrix}f_{l,l+sz_{S'}-1,S'}+f_{l+sz_{S'},r,S-S'}\end{Bmatrix}$，即合并两相离区间，这里仍能只在 $r-l+1=sz_S$ 时做，证明类似。</li>
+<li><span class="arithmatex">\(f_{l,r,S}\gets \min(f_{l+1,r,S},f_{l,r-1,S})\)</span>，表示 <span class="arithmatex">\(l,r\)</span> 都不作区间边界，预留给后面的区间。</li>
+<li><span class="arithmatex">\(f_{l,r,S}\gets \min_{x\in S}\begin{Bmatrix}f_{l+1,r-1,S-\begin{Bmatrix}x\end{Bmatrix}}+w(b_l,b_r,x)\end{Bmatrix}\)</span>，其中 <span class="arithmatex">\(w(l,r,x)\)</span> 表示 <span class="arithmatex">\(x\)</span> 区间最大最小值分别为 <span class="arithmatex">\(l,r\)</span> 时所能产生的贡献。这个表示 <span class="arithmatex">\(l,r\)</span> 分别作最大最小值新开一个区间的贡献。这个转移可以只在 <span class="arithmatex">\(r-l+1=sz_S\)</span> 时做，<span class="arithmatex">\(sz_S\)</span> 表示 <span class="arithmatex">\(S\)</span> 集合内区间总长度，因为当 <span class="arithmatex">\(sz_S\)</span> 恰好等于 <span class="arithmatex">\(r-l+1\)</span> 时所得到的的答案必定是不劣的，证明参考上文的调整法。</li>
+<li><span class="arithmatex">\(f_{l,r,S}\gets \min_{S'\subsetneq S}\begin{Bmatrix}f_{l,l+sz_{S'}-1,S'}+f_{l+sz_{S'},r,S-S'}\end{Bmatrix}\)</span>，即合并两相离区间，这里仍能只在 <span class="arithmatex">\(r-l+1=sz_S\)</span> 时做，证明类似。</li>
 </ul>
-<p>对于复杂度，第一个转移单次的复杂度是 $O(1)$，总共为 $O(n^2 2^n)$。第二个只做 $O(2^kn)$ 次，总共为 $O(kn2^k)$，第三个也只做 $O(n2^k)$ 次，因为要子集枚举所以复杂度是 $O(n2^k3^k)$ 次。</p>
-<p>瓶颈在转移三，总复杂度为 $O(n6^k)$。</p>
+<p>对于复杂度，第一个转移单次的复杂度是 <span class="arithmatex">\(O(1)\)</span>，总共为 <span class="arithmatex">\(O(n^2 2^n)\)</span>。第二个只做 <span class="arithmatex">\(O(2^kn)\)</span> 次，总共为 <span class="arithmatex">\(O(kn2^k)\)</span>，第三个也只做 <span class="arithmatex">\(O(n2^k)\)</span> 次，因为要子集枚举所以复杂度是 <span class="arithmatex">\(O(n2^k3^k)\)</span> 次。</p>
+<p>瓶颈在转移三，总复杂度为 <span class="arithmatex">\(O(n6^k)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7133,28 +7161,28 @@
 </span><span id="__span-4-98"><a id="__codelineno-4-98" name="__codelineno-4-98" href="#__codelineno-4-98"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
 </span><span id="__span-4-99"><a id="__codelineno-4-99" name="__codelineno-4-99" href="#__codelineno-4-99"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>乐，正好 $99$ 行。</p>
+<p>乐，正好 <span class="arithmatex">\(99\)</span> 行。</p>
 </details>
 <h2 id="cf1830d-mex-tree">CF1830D Mex Tree</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1830D">传送门</a></p>
 <h3 id="_11">题意</h3>
 <ul>
-<li>给定一棵 $n$ 个结点的树，点有点权，点权为 $0$ 或 $1$。你需要给一种指定点权的方案，使得每一条路径的点权 $\mathrm{mex}$ 之和最大。</li>
-<li>$1\le \sum n\le 2\times 10^5$，多组数据。</li>
+<li>给定一棵 <span class="arithmatex">\(n\)</span> 个结点的树，点有点权，点权为 <span class="arithmatex">\(0\)</span> 或 <span class="arithmatex">\(1\)</span>。你需要给一种指定点权的方案，使得每一条路径的点权 <span class="arithmatex">\(\mathrm{mex}\)</span> 之和最大。</li>
+<li><span class="arithmatex">\(1\le \sum n\le 2\times 10^5\)</span>，多组数据。</li>
 </ul>
 <h3 id="_12">题解</h3>
-<p>容易发现 $\mathrm{mex}$ 只有 $0,1,2$ 三种，那么第一反应肯定是最大化 $2$ 的个数。显然一眼就能看出按二分图染色能得到一个看起来很优的答案，因为除去长度为 $1$ 的链（其实就是点）外其它链的 $\mathrm{mex}$ 均为 $2$。但是学 OI 学的比较久的就能感受到一股“显然不是最优解”的感觉。反例也比较好构造，就搞个菊花图然后把中间的点拆成两个连起来，这样中间两个取 $1$ 其余取 $0$ 比较优。</p>
-<p>但是容易发现这说明不管什么图答案必定大于等于 $n(n-1)+\left\lceil\frac{n}{2}\right\rceil$，即<strong>最多有 $O(n)$ 条链没有产生 $2$ 的贡献</strong>。</p>
-<p>容易发现一条链没产生贡献当且仅当这条链上只有一种颜色，换句话说，<strong>同一种颜色的连通块大小不会超过 $O(\sqrt{n})$ 级别</strong>。</p>
-<p>假设所有路径的权值均为 $2$，那么答案就是 $n(n+1)$。考虑减去多算的，那么显然要最小化减去的东西。容易想到一个子树 DP，令 $f_{u,i,0/1}$ 表示只考虑点 $u$ 及其子树，$u$ 所在连通块大小为 $i$，颜色为 $0/1$，整个子树的最小贡献。</p>
+<p>容易发现 <span class="arithmatex">\(\mathrm{mex}\)</span> 只有 <span class="arithmatex">\(0,1,2\)</span> 三种，那么第一反应肯定是最大化 <span class="arithmatex">\(2\)</span> 的个数。显然一眼就能看出按二分图染色能得到一个看起来很优的答案，因为除去长度为 <span class="arithmatex">\(1\)</span> 的链（其实就是点）外其它链的 <span class="arithmatex">\(\mathrm{mex}\)</span> 均为 <span class="arithmatex">\(2\)</span>。但是学 OI 学的比较久的就能感受到一股“显然不是最优解”的感觉。反例也比较好构造，就搞个菊花图然后把中间的点拆成两个连起来，这样中间两个取 <span class="arithmatex">\(1\)</span> 其余取 <span class="arithmatex">\(0\)</span> 比较优。</p>
+<p>但是容易发现这说明不管什么图答案必定大于等于 <span class="arithmatex">\(n(n-1)+\left\lceil\frac{n}{2}\right\rceil\)</span>，即<strong>最多有 <span class="arithmatex">\(O(n)\)</span> 条链没有产生 <span class="arithmatex">\(2\)</span> 的贡献</strong>。</p>
+<p>容易发现一条链没产生贡献当且仅当这条链上只有一种颜色，换句话说，<strong>同一种颜色的连通块大小不会超过 <span class="arithmatex">\(O(\sqrt{n})\)</span> 级别</strong>。</p>
+<p>假设所有路径的权值均为 <span class="arithmatex">\(2\)</span>，那么答案就是 <span class="arithmatex">\(n(n+1)\)</span>。考虑减去多算的，那么显然要最小化减去的东西。容易想到一个子树 DP，令 <span class="arithmatex">\(f_{u,i,0/1}\)</span> 表示只考虑点 <span class="arithmatex">\(u\)</span> 及其子树，<span class="arithmatex">\(u\)</span> 所在连通块大小为 <span class="arithmatex">\(i\)</span>，颜色为 <span class="arithmatex">\(0/1\)</span>，整个子树的最小贡献。</p>
 <p>转移比较简单，就是考虑当前点和下一个子树颜色是否一样，然后合并即可，注意上下界，不要写假了。具体转移就不列了。</p>
-<p>因为 $O(n\sqrt{n})$ 的空间存不下，所以需要用动态数组。</p>
-<p>下面证明时间复杂度（其实很经典，证明 $n$ 个点，体积为 $k$，每个点至少占 $1$ 体积的树上背包复杂度是 $O(nk)$）：</p>
-<p>把所有子树按是否比 $k$ 大分为“小的”和“大的”。</p>
-<p>首先考虑小子树合到大子树上。小子树合到大子树后就始终属于大子树了，所以每个点只会出现一次这种情况，故复杂度为 $O(nk)$。</p>
-<p>然后考虑小子树合到小子树上，这种情况始终抵不到上界。那么假如 $v$ 合到 $u$ 上，可以看做是 $u,v$ 子树中分别选一个点做匹配。由于任意两个点只会在 $\mathrm{lca}$ 处相遇一次，故大小为 $x$ 的小子树中合并的总复杂度是 $O(x^2)$ 的。那么考虑所有极大的小子树，显然每一棵大小都为 $k$ 时复杂度最劣，为 $O(\frac{n}{k}\times k^2)=O(nk)$。</p>
-<p>最后考虑两大子树合并。容易发现互不包含的大子树最多有 $\frac{n}{k}$ 个，那么最多合 $O(\frac{n}{k})$ 次，复杂度 $O(\frac{n}{k}\times k^2)=O(nk)$。</p>
-<p>综上，这道题复杂度是 $O(n\sqrt{n})$。</p>
+<p>因为 <span class="arithmatex">\(O(n\sqrt{n})\)</span> 的空间存不下，所以需要用动态数组。</p>
+<p>下面证明时间复杂度（其实很经典，证明 <span class="arithmatex">\(n\)</span> 个点，体积为 <span class="arithmatex">\(k\)</span>，每个点至少占 <span class="arithmatex">\(1\)</span> 体积的树上背包复杂度是 <span class="arithmatex">\(O(nk)\)</span>）：</p>
+<p>把所有子树按是否比 <span class="arithmatex">\(k\)</span> 大分为“小的”和“大的”。</p>
+<p>首先考虑小子树合到大子树上。小子树合到大子树后就始终属于大子树了，所以每个点只会出现一次这种情况，故复杂度为 <span class="arithmatex">\(O(nk)\)</span>。</p>
+<p>然后考虑小子树合到小子树上，这种情况始终抵不到上界。那么假如 <span class="arithmatex">\(v\)</span> 合到 <span class="arithmatex">\(u\)</span> 上，可以看做是 <span class="arithmatex">\(u,v\)</span> 子树中分别选一个点做匹配。由于任意两个点只会在 <span class="arithmatex">\(\mathrm{lca}\)</span> 处相遇一次，故大小为 <span class="arithmatex">\(x\)</span> 的小子树中合并的总复杂度是 <span class="arithmatex">\(O(x^2)\)</span> 的。那么考虑所有极大的小子树，显然每一棵大小都为 <span class="arithmatex">\(k\)</span> 时复杂度最劣，为 <span class="arithmatex">\(O(\frac{n}{k}\times k^2)=O(nk)\)</span>。</p>
+<p>最后考虑两大子树合并。容易发现互不包含的大子树最多有 <span class="arithmatex">\(\frac{n}{k}\)</span> 个，那么最多合 <span class="arithmatex">\(O(\frac{n}{k})\)</span> 次，复杂度 <span class="arithmatex">\(O(\frac{n}{k}\times k^2)=O(nk)\)</span>。</p>
+<p>综上，这道题复杂度是 <span class="arithmatex">\(O(n\sqrt{n})\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#pragma GCC optimize(2) </span>
@@ -7246,18 +7274,18 @@
 <p><a href="https://www.luogu.com.cn/problem/CF755F">传送门</a></p>
 <h3 id="_13">题意</h3>
 <ul>
-<li>给定一个长度为 $n$ 的排列 $p_i$，你要从中选择 $m$ 个涂黑。</li>
-<li>令权值为 $\sum_{i=1}^n[c_i=1\lor c_{p_i} =1]$，其中 $c_i=1$ 表示 $i$ 为黑色。</li>
+<li>给定一个长度为 <span class="arithmatex">\(n\)</span> 的排列 <span class="arithmatex">\(p_i\)</span>，你要从中选择 <span class="arithmatex">\(m\)</span> 个涂黑。</li>
+<li>令权值为 <span class="arithmatex">\(\sum_{i=1}^n[c_i=1\lor c_{p_i} =1]\)</span>，其中 <span class="arithmatex">\(c_i=1\)</span> 表示 <span class="arithmatex">\(i\)</span> 为黑色。</li>
 <li>问权值可能的最大值/最小值分别是多少。</li>
-<li>$2\le n \le 10^6,0\le m \le n$</li>
+<li><span class="arithmatex">\(2\le n \le 10^6,0\le m \le n\)</span></li>
 </ul>
 <h3 id="_14">题解</h3>
 <p>远古水紫。</p>
 <p>看到排列考虑置换环。</p>
-<p>先求最大值。容易发现在置换环上各一个涂一个产生的权值最大（这样每涂一个能产生 $2$ 的权值），但奇数环最后一次只会产生一个权值，解决办法是贪心的先选能产生 $2$ 贡献的，再考虑产生 $1$ 贡献的。这部分比较简单。</p>
+<p>先求最大值。容易发现在置换环上各一个涂一个产生的权值最大（这样每涂一个能产生 <span class="arithmatex">\(2\)</span> 的权值），但奇数环最后一次只会产生一个权值，解决办法是贪心的先选能产生 <span class="arithmatex">\(2\)</span> 贡献的，再考虑产生 <span class="arithmatex">\(1\)</span> 贡献的。这部分比较简单。</p>
 <p>然后考虑最小值。容易想到理想情况是把所有黑色涂成连续的，这样除去其中一个端点以外其它每个点都只产生一个贡献。又容易发现如果恰好填满一个环那么<strong>所有点都只产生一个贡献</strong>。所以我们就希望恰好能涂满若干个环，那么容易想到 01 背包。</p>
-<p>但是直接 01 背包是 $O(nm)$ 的，显然会 TLE。怎么办呢？这里考虑一个经典结论：<strong>总和为 $n$ 的若干个数中，最多有 $O(\sqrt{n})$ 种不同的数</strong>。证明也非常简单，考虑最大化数的种类数显然应该类似 $1+2+3\dots k$ 地构造，那么此时总和为 $\frac{k^2+k}{2}$，是 $k^2$ 级别的。那显然 $k$ 是 $O(\sqrt{n})$ 级别的。</p>
-<p>那么多重背包加二进制优化即可，复杂度 $O(\frac{m\sqrt{n}\log n}{w})$。</p>
+<p>但是直接 01 背包是 <span class="arithmatex">\(O(nm)\)</span> 的，显然会 TLE。怎么办呢？这里考虑一个经典结论：<strong>总和为 <span class="arithmatex">\(n\)</span> 的若干个数中，最多有 <span class="arithmatex">\(O(\sqrt{n})\)</span> 种不同的数</strong>。证明也非常简单，考虑最大化数的种类数显然应该类似 <span class="arithmatex">\(1+2+3\dots k\)</span> 地构造，那么此时总和为 <span class="arithmatex">\(\frac{k^2+k}{2}\)</span>，是 <span class="arithmatex">\(k^2\)</span> 级别的。那显然 <span class="arithmatex">\(k\)</span> 是 <span class="arithmatex">\(O(\sqrt{n})\)</span> 级别的。</p>
+<p>那么多重背包加二进制优化即可，复杂度 <span class="arithmatex">\(O(\frac{m\sqrt{n}\log n}{w})\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7325,8 +7353,8 @@
 </span><span id="__span-6-63"><a id="__codelineno-6-63" name="__codelineno-6-63" href="#__codelineno-6-63"></a><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p>但是其实还可以把那个 $\log$ 去掉，要用一个叫 3k-trick 的东西。</p>
-<p>具体来说，容易发现二进制拆分后仍然有很多相同的数，那么其实可以考虑从小到大遍历，每有三个相同的 $k$ 就把其中两个合起来变成 $2k$，容易发现对结果不产生影响，能拼出来的数照样能拼出来，然后由于不同的数最多有 $O(\sqrt{n})$ 种，每种最多俩，那么相当于只有 $\sqrt{n}$ 个物品的 01 背包。总复杂度 $O(\frac{m\sqrt{n}}{w})$。</p>
+<p>但是其实还可以把那个 <span class="arithmatex">\(\log\)</span> 去掉，要用一个叫 3k-trick 的东西。</p>
+<p>具体来说，容易发现二进制拆分后仍然有很多相同的数，那么其实可以考虑从小到大遍历，每有三个相同的 <span class="arithmatex">\(k\)</span> 就把其中两个合起来变成 <span class="arithmatex">\(2k\)</span>，容易发现对结果不产生影响，能拼出来的数照样能拼出来，然后由于不同的数最多有 <span class="arithmatex">\(O(\sqrt{n})\)</span> 种，每种最多俩，那么相当于只有 <span class="arithmatex">\(\sqrt{n}\)</span> 个物品的 01 背包。总复杂度 <span class="arithmatex">\(O(\frac{m\sqrt{n}}{w})\)</span>。</p>
 <details class="note">
 <summary>参考代码片段</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="w">    </span><span class="n">dp</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
@@ -7347,18 +7375,18 @@
 <p><a href="https://www.luogu.com.cn/problem/P2305">传送门</a></p>
 <h3 id="_15">题意</h3>
 <ul>
-<li>给定一棵 $n$ 个点边带权的树，每个店有三个权值 $p_i,q_i,l_i$，代表<strong>跳到距离为 $x$ 的祖先需要消耗 $p_i\cdot x +q_i$ 的代价，最多跳到距离为 $l_i$ 的祖先</strong>。</li>
+<li>给定一棵 <span class="arithmatex">\(n\)</span> 个点边带权的树，每个店有三个权值 <span class="arithmatex">\(p_i,q_i,l_i\)</span>，代表<strong>跳到距离为 <span class="arithmatex">\(x\)</span> 的祖先需要消耗 <span class="arithmatex">\(p_i\cdot x +q_i\)</span> 的代价，最多跳到距离为 <span class="arithmatex">\(l_i\)</span> 的祖先</strong>。</li>
 <li>问每个点跳到根节点的最小代价。</li>
-<li>每个点到根的距离不超过 $2\times 10^{11}$，$0\le p_i\le 10^6,0\le q_i\le 10^{12}$，其余数据在合理范围内，保证 $l_i$ 大于 $i$ 到其父亲的距离。</li>
+<li>每个点到根的距离不超过 <span class="arithmatex">\(2\times 10^{11}\)</span>，<span class="arithmatex">\(0\le p_i\le 10^6,0\le q_i\le 10^{12}\)</span>，其余数据在合理范围内，保证 <span class="arithmatex">\(l_i\)</span> 大于 <span class="arithmatex">\(i\)</span> 到其父亲的距离。</li>
 </ul>
 <h3 id="_16">题解</h3>
 <p>一眼就能看出来从根到每个点是更好做的。有一个非常显然的 DP，转移如下：</p>
-<p>$$dp_u\gets \min_{v\in\mathrm{ancestor_{\mathit{u}}}}^{dis_u-dis_v\le l_u}\begin{Bmatrix}dp_v +(dis_u-dis_v)p_u+q_u\end{Bmatrix}$$</p>
-<p>其中 $dis_u$ 表示 $u$ 和根结点的距离，$\mathrm{ancestor_{\mathit{u}}}$ 是 $u$ 的祖先集合。</p>
-<p>这个东西一看就非常斜率优化，然后就是比较版的对 $dis$ 离散化后用线段树维护凸包单点修区间查，这部分略过。注意如果用向量维护叉乘会爆 <code>long long</code>，记得开 <code>__int128</code>。</p>
+<div class="arithmatex">\[dp_u\gets \min_{v\in\mathrm{ancestor_{\mathit{u}}}}^{dis_u-dis_v\le l_u}\begin{Bmatrix}dp_v +(dis_u-dis_v)p_u+q_u\end{Bmatrix}\]</div>
+<p>其中 <span class="arithmatex">\(dis_u\)</span> 表示 <span class="arithmatex">\(u\)</span> 和根结点的距离，<span class="arithmatex">\(\mathrm{ancestor_{\mathit{u}}}\)</span> 是 <span class="arithmatex">\(u\)</span> 的祖先集合。</p>
+<p>这个东西一看就非常斜率优化，然后就是比较版的对 <span class="arithmatex">\(dis\)</span> 离散化后用线段树维护凸包单点修区间查，这部分略过。注意如果用向量维护叉乘会爆 <code>long long</code>，记得开 <code>__int128</code>。</p>
 <p>但是容易发现和序列一直往后加相比，一棵树的遍历过程类似于栈，对于末尾有“加入”和“弹出”两个操作，这个怎么用凸包维护呢？</p>
 <p>这种时候不要被 STL 局限了想象力，考虑手写栈是怎么做的。容易发现“弹出”的部分还在那个地方没动过，只是之后的操作可能把它们覆盖了。观察斜优的过程容易发现每个点的操作必定是<strong>弹出若干个后，再压入一个</strong>，那么在内存上就只有一个地方被修改了。可以把修改前栈的大小以及内存上被修改的那个值存下来，回滚时改回去即可。</p>
-<p>复杂度瓶颈在于线段树套凸包的区间查需要在每个结点上二分，复杂度 $O(n\log^2 n)$。</p>
+<p>复杂度瓶颈在于线段树套凸包的区间查需要在每个结点上二分，复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5852,7 +5880,7 @@
 <p><a href="../../files/20230828.rar">压缩包密码是 CW 通用密码，大小写敏感</a></p>
 <h2 id="t1">T1</h2>
 <p>签到题，赛时五分钟秒了，但写了半小时对拍验证自己的结论。</p>
-<p>考虑排序的过程，容易想到每个逆序对需要一次交换，且仅需一次交换。那么就可以猜结论了：每对逆序对 $(i,j)$ 提供 $|p_i-p_j|$ 的贡献。证明其实可以从刚刚猜结论的那句话得出，因为那两句话恰好说明它是是充分必要条件。</p>
+<p>考虑排序的过程，容易想到每个逆序对需要一次交换，且仅需一次交换。那么就可以猜结论了：每对逆序对 <span class="arithmatex">\((i,j)\)</span> 提供 <span class="arithmatex">\(|p_i-p_j|\)</span> 的贡献。证明其实可以从刚刚猜结论的那句话得出，因为那两句话恰好说明它是是充分必要条件。</p>
 <p>然后树状数组随便维护一下就好了。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -5890,20 +5918,20 @@
 </span></code></pre></div>
 </details>
 <h2 id="t2">T2</h2>
-<p>首先，设 $f(i)$ 为恰好在第 $i$ 轮删掉 $a_1$ 的概率，那么期望就是 $\sum_{i=1}^ki\cdot f(i)$（根据期望的定义）。但是容易发现 $f(i)$ 很不好求（或者说求出来也不好优化到比较能过的复杂度），那么考虑求 $\sum_{i=0}^{k-1}g(i)$，其中 $g(i)$ 为在第 $i$ 轮 $1$ 还没有被删掉的概率。正确性显然，因为每个 $f(i)$ 会对 $g(0,1,2\dots i-1)$ 分别提供 $f(i)$ 的贡献，加起来就是 $i\cdot f(i)$ 了。</p>
+<p>首先，设 <span class="arithmatex">\(f(i)\)</span> 为恰好在第 <span class="arithmatex">\(i\)</span> 轮删掉 <span class="arithmatex">\(a_1\)</span> 的概率，那么期望就是 <span class="arithmatex">\(\sum_{i=1}^ki\cdot f(i)\)</span>（根据期望的定义）。但是容易发现 <span class="arithmatex">\(f(i)\)</span> 很不好求（或者说求出来也不好优化到比较能过的复杂度），那么考虑求 <span class="arithmatex">\(\sum_{i=0}^{k-1}g(i)\)</span>，其中 <span class="arithmatex">\(g(i)\)</span> 为在第 <span class="arithmatex">\(i\)</span> 轮 <span class="arithmatex">\(1\)</span> 还没有被删掉的概率。正确性显然，因为每个 <span class="arithmatex">\(f(i)\)</span> 会对 <span class="arithmatex">\(g(0,1,2\dots i-1)\)</span> 分别提供 <span class="arithmatex">\(f(i)\)</span> 的贡献，加起来就是 <span class="arithmatex">\(i\cdot f(i)\)</span> 了。</p>
 <p><del>结果我赛时想到这一步后没想到后面怎么做。</del></p>
-<p>然后考虑如何求 $g(i)$，首先容易发现，在任何时候想要不删掉 $a_1$，那么需要满足以下条件：</p>
+<p>然后考虑如何求 <span class="arithmatex">\(g(i)\)</span>，首先容易发现，在任何时候想要不删掉 <span class="arithmatex">\(a_1\)</span>，那么需要满足以下条件：</p>
 <ol>
-<li>$[a_1,a_2)$ 中所有点加起来至多被选 $0$ 次。</li>
-<li>$[a_1,a_3)$ 中所有点加起来至多被选 $1$ 次。</li>
-<li>$[a_1,a_4)$ 中所有点加起来至多被选 $2$ 次。</li>
-<li>$\cdots$</li>
-<li>$[a_1,n]$ 中中所有点加起来至多被选 $k-1$ 次。</li>
+<li><span class="arithmatex">\([a_1,a_2)\)</span> 中所有点加起来至多被选 <span class="arithmatex">\(0\)</span> 次。</li>
+<li><span class="arithmatex">\([a_1,a_3)\)</span> 中所有点加起来至多被选 <span class="arithmatex">\(1\)</span> 次。</li>
+<li><span class="arithmatex">\([a_1,a_4)\)</span> 中所有点加起来至多被选 <span class="arithmatex">\(2\)</span> 次。</li>
+<li><span class="arithmatex">\(\cdots\)</span></li>
+<li><span class="arithmatex">\([a_1,n]\)</span> 中中所有点加起来至多被选 <span class="arithmatex">\(k-1\)</span> 次。</li>
 </ol>
-<p>那么就可以想到 dp 求解，先令 $a_{k+1}=n+1$（方便处理边界）。设 $dp_{i,j}$ 表示考虑前 $i$ 个点（即考虑到 $[a_1,a_{i+1})$ 中所有点是否被选），选 $j$ 个后点 $1$ 不被删的方案数。转移考虑在 $[a_i,a_{i+1})$ 中选几个，然后插入选择顺序中的哪些位置。转移方程如下：</p>
-<p>$$dp_{i,j}=\sum_{p=0}^jdp_{i-1,j-p}\times\dbinom{j}{k}\times\left(\dfrac{a_{i+1}-a_i}{n}\right)^k$$</p>
-<p>然后根据前面的结论答案就是 $\sum_{i=0}^{k-1}dp_{k,i}$。</p>
-<p>复杂度 $O(k^3)$，可以通过此题。</p>
+<p>那么就可以想到 dp 求解，先令 <span class="arithmatex">\(a_{k+1}=n+1\)</span>（方便处理边界）。设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 个点（即考虑到 <span class="arithmatex">\([a_1,a_{i+1})\)</span> 中所有点是否被选），选 <span class="arithmatex">\(j\)</span> 个后点 <span class="arithmatex">\(1\)</span> 不被删的方案数。转移考虑在 <span class="arithmatex">\([a_i,a_{i+1})\)</span> 中选几个，然后插入选择顺序中的哪些位置。转移方程如下：</p>
+<div class="arithmatex">\[dp_{i,j}=\sum_{p=0}^jdp_{i-1,j-p}\times\dbinom{j}{k}\times\left(\dfrac{a_{i+1}-a_i}{n}\right)^k\]</div>
+<p>然后根据前面的结论答案就是 <span class="arithmatex">\(\sum_{i=0}^{k-1}dp_{k,i}\)</span>。</p>
+<p>复杂度 <span class="arithmatex">\(O(k^3)\)</span>，可以通过此题。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5963,21 +5991,21 @@
 </details>
 <h2 id="t3">T3</h2>
 <p>很有意思的一道题。</p>
-<p>先不考虑第二问，容易想到考虑树形 DP，对于每一块的 $a$ 点，需要恰好一个长度为 $1$ 的儿子和一个长度为 $2$ 的儿子，剩下的不能向上延伸，那么容易想到设 $dp_{i,0/1/2}$ 表示考虑点 $i$ 及其字数，点 $i$ 不作为某一块的儿子/作为长度为 $1$ 的儿子/作为长度为 $2$ 的儿子的方案数。转移的话，$dp_{i,1}$ 从所有 $dp_{v\in son_i,0}$ 转移过来，$dp_{i,2}$ 需要一个儿子从 $dp_{v,1}$，其它从 $dp_{v,0}$ 转移，$dp_{i,0}$ 则分作不作为某一块的 $a$ 点考虑。直接做不好维护，因为要<strong>枚举</strong>哪个儿子的第二维不同。容易想到用 DP 套 DP 维护。</p>
-<p>具体地，设 $g_{i,0/1,0/1}$ 表示考虑前 $i$ 个儿子，有没有选一个长度为 $1$ 的儿子，有没有选一个长度为 $2$ 的儿子的方案数。设点 $i$ 的儿子分别是 $1,2,\dots k$，其中 $k$ 为点 $i$ 儿子的个数，转移如下：</p>
-<p>$$
+<p>先不考虑第二问，容易想到考虑树形 DP，对于每一块的 <span class="arithmatex">\(a\)</span> 点，需要恰好一个长度为 <span class="arithmatex">\(1\)</span> 的儿子和一个长度为 <span class="arithmatex">\(2\)</span> 的儿子，剩下的不能向上延伸，那么容易想到设 <span class="arithmatex">\(dp_{i,0/1/2}\)</span> 表示考虑点 <span class="arithmatex">\(i\)</span> 及其字数，点 <span class="arithmatex">\(i\)</span> 不作为某一块的儿子/作为长度为 <span class="arithmatex">\(1\)</span> 的儿子/作为长度为 <span class="arithmatex">\(2\)</span> 的儿子的方案数。转移的话，<span class="arithmatex">\(dp_{i,1}\)</span> 从所有 <span class="arithmatex">\(dp_{v\in son_i,0}\)</span> 转移过来，<span class="arithmatex">\(dp_{i,2}\)</span> 需要一个儿子从 <span class="arithmatex">\(dp_{v,1}\)</span>，其它从 <span class="arithmatex">\(dp_{v,0}\)</span> 转移，<span class="arithmatex">\(dp_{i,0}\)</span> 则分作不作为某一块的 <span class="arithmatex">\(a\)</span> 点考虑。直接做不好维护，因为要<strong>枚举</strong>哪个儿子的第二维不同。容易想到用 DP 套 DP 维护。</p>
+<p>具体地，设 <span class="arithmatex">\(g_{i,0/1,0/1}\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 个儿子，有没有选一个长度为 <span class="arithmatex">\(1\)</span> 的儿子，有没有选一个长度为 <span class="arithmatex">\(2\)</span> 的儿子的方案数。设点 <span class="arithmatex">\(i\)</span> 的儿子分别是 <span class="arithmatex">\(1,2,\dots k\)</span>，其中 <span class="arithmatex">\(k\)</span> 为点 <span class="arithmatex">\(i\)</span> 儿子的个数，转移如下：</p>
+<div class="arithmatex">\[
 g_{j,0,0}=g_{j-1,0,0}\times dp_{j,0}\\
 g_{j,1,0}=g_{j-1,0,0}\times dp_{j,1}+g_{j-1,1,0}\times dp_{j,0}\\
 g_{j,0,1}=g_{j-1,0,0}\times dp_{j,2}+g_{j-1,0,1}\times dp_{j,0}\\
 g_{j,1,1}=g_{j-1,0,1}\times dp_{j,1}+g_{j-1,1,0}\times dp_{j,2}+g_{j-1,1,1}\times dp_{j,0}
-$$</p>
-<p>最后 $dp_{i,1}=g_{k,0,0},dp_{i,2}=g_{k,1,0},dp_{i,0}=g_{k,0,0}+g_{k,1,1}$。然后就可以获得一半的分了。</p>
+\]</div>
+<p>最后 <span class="arithmatex">\(dp_{i,1}=g_{k,0,0},dp_{i,2}=g_{k,1,0},dp_{i,0}=g_{k,0,0}+g_{k,1,1}\)</span>。然后就可以获得一半的分了。</p>
 <p>考虑第二问怎么做。其实容易发现可以和第一问一起 DP，但是这样比较麻烦。可以考虑把两个 DP 数组开在一个结构体里面。</p>
-<p>具体来说，设二元组 $(a,b)$ 表示分别的答案，考虑给它重载加法和乘法。</p>
-<p>首先考虑 $(a_1,b_1)+(a_2,b_2)$，容易发现两边的方案和对应的集合数是绑定的，可以直接等于 $(a_1+a_2,b_1+b_2)$。</p>
-<p>然后考虑 $(a_1,b_1)\times(a_2,b_2)$，乘法的意义是在两边每边选一个方案拼在一起的方案数。那么左边的每个集合都可以对应右边一个方案，右边同理，故等于 $(a_1a_2,a_1b_2+a_2b_1)$。</p>
-<p>然后和之前一样转移就行了，需要注意此时 $dp_{i,0}=g_{k,0,0}+g_{k,1,1}\times(1,1)$，因为合并时集合数会增加。</p>
-<p>复杂度 $O(n)$，因为每个数会在计算到它自己和父亲时各计算常数次，加起来也是常数的。</p>
+<p>具体来说，设二元组 <span class="arithmatex">\((a,b)\)</span> 表示分别的答案，考虑给它重载加法和乘法。</p>
+<p>首先考虑 <span class="arithmatex">\((a_1,b_1)+(a_2,b_2)\)</span>，容易发现两边的方案和对应的集合数是绑定的，可以直接等于 <span class="arithmatex">\((a_1+a_2,b_1+b_2)\)</span>。</p>
+<p>然后考虑 <span class="arithmatex">\((a_1,b_1)\times(a_2,b_2)\)</span>，乘法的意义是在两边每边选一个方案拼在一起的方案数。那么左边的每个集合都可以对应右边一个方案，右边同理，故等于 <span class="arithmatex">\((a_1a_2,a_1b_2+a_2b_1)\)</span>。</p>
+<p>然后和之前一样转移就行了，需要注意此时 <span class="arithmatex">\(dp_{i,0}=g_{k,0,0}+g_{k,1,1}\times(1,1)\)</span>，因为合并时集合数会增加。</p>
+<p>复杂度 <span class="arithmatex">\(O(n)\)</span>，因为每个数会在计算到它自己和父亲时各计算常数次，加起来也是常数的。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6049,10 +6077,10 @@ $$</p>
 </details>
 <h2 id="t4">T4</h2>
 <p>点分治套路题。</p>
-<p>考虑进行一个简单的容斥，即“与点 $x$ 或 $y$ 的距离小于等于 $d$ 的点”等于“与点 $x$ 距离小于等于 $d$ 的点 $+$ 与点 $y$ 距离小于等于 $d$ 的点 $-$ 与点 $x,y$ 距离均小于等于 $d$ 的点”。</p>
-<p>假设 $x,y$ 距离为偶数，那么它们必定有一个中点 $l$，容易发现“与点 $x,y$ 距离均小于等于 $d$ 的点”就是与 $l$ 距离小于等于 $d-dis(x,l)$ 的点。因为与 $l$ 距离小于等于 $d-dis(x,l)$ 的点必定与 $x,y$ 距离均小于等于 $d$ （必要性），而于 $l$ 距离大于 $d-dis(x,l)$ 的点必定与 $x,y$ 其中至少一个的距离大于 $d$（反证充分性）。</p>
-<p>那么这个问题就拆成了三个经典问题，即“树上统计与某个点距离小于 $d$ 的点的个数”，可以离线下来用点分治做。</p>
-<p>注意求重心的时候子树大小应取“子树内节点数 $+$ 子树内询问数”，因为点分治过程中这两个会各被遍历常数遍（其实或许乘点常数效率会更高？），实测证明“子树内节点数 $+$ 子树内询问数”快于“子树内节点数”快于“子树内询问数”。</p>
+<p>考虑进行一个简单的容斥，即“与点 <span class="arithmatex">\(x\)</span> 或 <span class="arithmatex">\(y\)</span> 的距离小于等于 <span class="arithmatex">\(d\)</span> 的点”等于“与点 <span class="arithmatex">\(x\)</span> 距离小于等于 <span class="arithmatex">\(d\)</span> 的点 <span class="arithmatex">\(+\)</span> 与点 <span class="arithmatex">\(y\)</span> 距离小于等于 <span class="arithmatex">\(d\)</span> 的点 <span class="arithmatex">\(-\)</span> 与点 <span class="arithmatex">\(x,y\)</span> 距离均小于等于 <span class="arithmatex">\(d\)</span> 的点”。</p>
+<p>假设 <span class="arithmatex">\(x,y\)</span> 距离为偶数，那么它们必定有一个中点 <span class="arithmatex">\(l\)</span>，容易发现“与点 <span class="arithmatex">\(x,y\)</span> 距离均小于等于 <span class="arithmatex">\(d\)</span> 的点”就是与 <span class="arithmatex">\(l\)</span> 距离小于等于 <span class="arithmatex">\(d-dis(x,l)\)</span> 的点。因为与 <span class="arithmatex">\(l\)</span> 距离小于等于 <span class="arithmatex">\(d-dis(x,l)\)</span> 的点必定与 <span class="arithmatex">\(x,y\)</span> 距离均小于等于 <span class="arithmatex">\(d\)</span> （必要性），而于 <span class="arithmatex">\(l\)</span> 距离大于 <span class="arithmatex">\(d-dis(x,l)\)</span> 的点必定与 <span class="arithmatex">\(x,y\)</span> 其中至少一个的距离大于 <span class="arithmatex">\(d\)</span>（反证充分性）。</p>
+<p>那么这个问题就拆成了三个经典问题，即“树上统计与某个点距离小于 <span class="arithmatex">\(d\)</span> 的点的个数”，可以离线下来用点分治做。</p>
+<p>注意求重心的时候子树大小应取“子树内节点数 <span class="arithmatex">\(+\)</span> 子树内询问数”，因为点分治过程中这两个会各被遍历常数遍（其实或许乘点常数效率会更高？），实测证明“子树内节点数 <span class="arithmatex">\(+\)</span> 子树内询问数”快于“子树内节点数”快于“子树内询问数”。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

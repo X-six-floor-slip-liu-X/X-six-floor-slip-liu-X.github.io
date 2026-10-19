@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5831,19 +5859,19 @@
 <h2 id="t1">T1</h2>
 <p>这次 T1 挺简单的，但挺有意思。</p>
 <p>第一问很简单，发现最优是三个分一组，最后剩下的分情况讨论一下就行了，不多赘述。</p>
-<p>重点在第二问，考虑期望 DP，设 $dp_i$ 表示当 $n$ 变为 $i$ 时，$k$ 的期望值。易得转移方程：</p>
-<p>$$dp_i=\sum_{j=i+1}^n\dfrac{dp_j\times (j-i)}{j}$$</p>
-<p>边界是 $dp_{n}=1$，答案就是 $dp_0$。</p>
+<p>重点在第二问，考虑期望 DP，设 <span class="arithmatex">\(dp_i\)</span> 表示当 <span class="arithmatex">\(n\)</span> 变为 <span class="arithmatex">\(i\)</span> 时，<span class="arithmatex">\(k\)</span> 的期望值。易得转移方程：</p>
+<div class="arithmatex">\[dp_i=\sum_{j=i+1}^n\dfrac{dp_j\times (j-i)}{j}\]</div>
+<p>边界是 <span class="arithmatex">\(dp_{n}=1\)</span>，答案就是 <span class="arithmatex">\(dp_0\)</span>。</p>
 <p>这样直接做显然是过不了的，考虑优化。</p>
-<p>显然可以把式子中的 $i,j$ 拆开，那么式子就能化成这样：</p>
-<p>$$
+<p>显然可以把式子中的 <span class="arithmatex">\(i,j\)</span> 拆开，那么式子就能化成这样：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 dp_i&amp;=\left(\sum_{j=i+1}^n dp_j\times\dfrac{j}{j}\right)-\left(\sum_{j=i+1}^n dp_j\times\dfrac{i}{j}\right)\\
 &amp;=\left(\sum_{j=i+1}^n dp_j\right)-i\left(\sum_{j=i+1}^ndp_j\times\dfrac{1}{j}\right)
 \end{aligned}
-$$</p>
-<p>然后就很明了了，随便维护一下 $\sum dp_j$ 和 $\sum dp_j\times\frac{1}{j}$ 就行了。</p>
-<p>因为状态数是 $O(n)$ 的，转移是 $O(\log n)$ 的（因为要算逆元），复杂度是 $O(n\log n)$</p>
+\]</div>
+<p>然后就很明了了，随便维护一下 <span class="arithmatex">\(\sum dp_j\)</span> 和 <span class="arithmatex">\(\sum dp_j\times\frac{1}{j}\)</span> 就行了。</p>
+<p>因为状态数是 <span class="arithmatex">\(O(n)\)</span> 的，转移是 <span class="arithmatex">\(O(\log n)\)</span> 的（因为要算逆元），复杂度是 <span class="arithmatex">\(O(n\log n)\)</span></p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5896,22 +5924,22 @@ $$</p>
 </details>
 <h2 id="t2">T2</h2>
 <p>这道题赛时没想出来，感觉做法挺有参考价值的。</p>
-<p>首先假如没有上下界限制应该怎么做（即特殊性质 $1$）。</p>
-<p>这就非常典了。假如在 DP 中计入用了哪些数那么状态数将达到指数级别。发现其实我们其实只关心数的相对大小关系，那么可以定义 $dp_{i,j}$ 表示 $i$ 阶排列有 $j$ 个前缀最大值的方案数。转移就考虑在哪两个数之间插入一个数。相当于比它小的数不变，比它大的整体加一，然后把它插在排列末尾，那么转移方程就很显然：</p>
-<p>$$dp_{i,j}=dp_{i-1,j}\times(i-1)+dp_{i-1,j-1}$$</p>
+<p>首先假如没有上下界限制应该怎么做（即特殊性质 <span class="arithmatex">\(1\)</span>）。</p>
+<p>这就非常典了。假如在 DP 中计入用了哪些数那么状态数将达到指数级别。发现其实我们其实只关心数的相对大小关系，那么可以定义 <span class="arithmatex">\(dp_{i,j}\)</span> 表示 <span class="arithmatex">\(i\)</span> 阶排列有 <span class="arithmatex">\(j\)</span> 个前缀最大值的方案数。转移就考虑在哪两个数之间插入一个数。相当于比它小的数不变，比它大的整体加一，然后把它插在排列末尾，那么转移方程就很显然：</p>
+<div class="arithmatex">\[dp_{i,j}=dp_{i-1,j}\times(i-1)+dp_{i-1,j-1}\]</div>
 <p>注意判断一下边界。然后就可以得 40pts 啦。</p>
-<p>然后考虑怎么解决上下界问题。首先区间问题转化为前缀问题，转化成字典序必须小于 $b$ 的方案数减去 必须小于 $a$ 的方案数加上特判 $b$ 自己是否合法，然后再考虑咋做。</p>
+<p>然后考虑怎么解决上下界问题。首先区间问题转化为前缀问题，转化成字典序必须小于 <span class="arithmatex">\(b\)</span> 的方案数减去 必须小于 <span class="arithmatex">\(a\)</span> 的方案数加上特判 <span class="arithmatex">\(b\)</span> 自己是否合法，然后再考虑咋做。</p>
 <p>这种字典序比较的题可以考虑类似于数位 DP 的思路，就是考虑前面卡到上界，后面能怎么填。</p>
-<p>假设我们的字典序必须比排列 $s$ 小。</p>
-<p>考虑前面 $i-1$ 位都卡到上界，且前面最大值为 $mx$，前面有 $nw$ 个前缀最大值，后面有多少种填法。</p>
-<p>首先假如 $nw&gt;k$，肯定只有 $0$ 种填法。因为你总不可能让前缀最大值数量变小吧？</p>
-<p>然后考虑这一位填 $j(1 \le j &lt; s_i)$ 后面的分 $j&gt;mx,j&lt;mx$ 两种情况的填法。</p>
-<p>首先 $j&lt;mx$，这一位本身不会有贡献，且后面小于 $mx$ 的也肯定不会有贡献，那么后面需要的前缀最大值个数就是 $k-nw$，且后面有 $n-mx$ 个可能做贡献，也就是说后面 $(mx,n]$ 这些数的相对位置有 $dp_{n-mx,k-nw}$ 种。</p>
-<p>然后考虑不会做贡献的可以随意排列，有 $(mx-i)!$ 种，然后 $(mx,n]$ 这些数的位置有 $\binom{n-i}{n-mx}$ 种，故总填法为：</p>
-<p>$$dp_{n-mx,k-nw}\times(mx-i)!\times\dbinom{n-i}{n-mx}$$</p>
-<p>然后从前往后扫一遍维护 $mx,nw$ 的值即可，注意不要用到重复的数。</p>
-<p>而 $j&gt;mx$ 的情况其实差不多，不同点在于 $j$ 会产生一点贡献以及 $mx$ 变成了 $j$，特判一下就行了。</p>
-<p>状态数为 $O(n^2)$，转移是 $O(1)$ 的（预处理阶乘与组合数），总复杂度 $O(n^2)$。</p>
+<p>假设我们的字典序必须比排列 <span class="arithmatex">\(s\)</span> 小。</p>
+<p>考虑前面 <span class="arithmatex">\(i-1\)</span> 位都卡到上界，且前面最大值为 <span class="arithmatex">\(mx\)</span>，前面有 <span class="arithmatex">\(nw\)</span> 个前缀最大值，后面有多少种填法。</p>
+<p>首先假如 <span class="arithmatex">\(nw&gt;k\)</span>，肯定只有 <span class="arithmatex">\(0\)</span> 种填法。因为你总不可能让前缀最大值数量变小吧？</p>
+<p>然后考虑这一位填 <span class="arithmatex">\(j(1 \le j &lt; s_i)\)</span> 后面的分 <span class="arithmatex">\(j&gt;mx,j&lt;mx\)</span> 两种情况的填法。</p>
+<p>首先 <span class="arithmatex">\(j&lt;mx\)</span>，这一位本身不会有贡献，且后面小于 <span class="arithmatex">\(mx\)</span> 的也肯定不会有贡献，那么后面需要的前缀最大值个数就是 <span class="arithmatex">\(k-nw\)</span>，且后面有 <span class="arithmatex">\(n-mx\)</span> 个可能做贡献，也就是说后面 <span class="arithmatex">\((mx,n]\)</span> 这些数的相对位置有 <span class="arithmatex">\(dp_{n-mx,k-nw}\)</span> 种。</p>
+<p>然后考虑不会做贡献的可以随意排列，有 <span class="arithmatex">\((mx-i)!\)</span> 种，然后 <span class="arithmatex">\((mx,n]\)</span> 这些数的位置有 <span class="arithmatex">\(\binom{n-i}{n-mx}\)</span> 种，故总填法为：</p>
+<div class="arithmatex">\[dp_{n-mx,k-nw}\times(mx-i)!\times\dbinom{n-i}{n-mx}\]</div>
+<p>然后从前往后扫一遍维护 <span class="arithmatex">\(mx,nw\)</span> 的值即可，注意不要用到重复的数。</p>
+<p>而 <span class="arithmatex">\(j&gt;mx\)</span> 的情况其实差不多，不同点在于 <span class="arithmatex">\(j\)</span> 会产生一点贡献以及 <span class="arithmatex">\(mx\)</span> 变成了 <span class="arithmatex">\(j\)</span>，特判一下就行了。</p>
+<p>状态数为 <span class="arithmatex">\(O(n^2)\)</span>，转移是 <span class="arithmatex">\(O(1)\)</span> 的（预处理阶乘与组合数），总复杂度 <span class="arithmatex">\(O(n^2)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5992,46 +6020,46 @@ $$</p>
 </details>
 <h2 id="t3">T3</h2>
 <p>首先有个结论能让这道看起来不可做的题变成可做题：</p>
-<p>假如你要把一个序列切成 $k$ 段，每切一刀的代价是切成的两段分别的总和相乘，那么总代价就是整个序列总和的平方减去最后每一段总和的平方最后除以二。</p>
-<p>很好证明，首先容易发现无论切的顺序如何，只要 $i,j$ 不在同一段，那么它们就会产生 $a_i\times a_j$ 的贡献。可以自己分情况讨论一下，在此略过。那么这个结论就很显然了，比较基础的容斥。</p>
-<p>然后由于最后一定要切成 $n$ 段，所以第一部分的和就是 $(\sum a_i)^2-(\sum a_i^2)$。那么我们只用管 $h=1$ 时的 $w$ 了。</p>
-<p>这时这个问题就转化成了把序列分成 $k$ 段，每段的权值是那坨式子，最小化权值和。</p>
-<p>容易想到 DP，设 $dp_{i,j}$ 表示考虑前 $j$ 个，分了 $i$ 段的最小权值和。那么有个显然的转移方程：</p>
-<p>$$dp_{i,j}=\min_{l=1}^{j-1}dp_{i-1,l}+w(l+1,j)$$</p>
-<p>其中 $w(l,r)$ 表示区间 $[l,r]$ 的权值。由于 $q$ 可以倒序遍历 $l$ 时求出，$\sum_{i=l+1,r}\left|a_i-a_{i-1}\right|+(a_i\oplus a_{i-1})$ 可以前缀和维护，所以可以 $O(n^2k)$ 获得 67pts 的好成绩。</p>
-<p>考虑如何优化。这种式子我们一般猜它有决策单调性（即 $w(l,r)$ 满足四边形不等式）来优化，那么 $w(l,r)=\left(\sum_{i=l+1}^r\left|a_i-a_{i-1}\right|+(a_i\oplus a_{i-1})\right)q(l,r)$ 满不满足四边形不等式呢？答案是满足。</p>
-<p>首先看 $q(l,r)$，这个非常经典，在 <a href="https://www.luogu.com.cn/problem/CF833B">CF833B The Bakery</a> 里面就是这个式子满足四边形不等式。</p>
-<p>具体来说，我们要证 $q(a,d)+q(b,c)\ge q(a,c)+q(b,d)(a &lt; b &lt; c &lt; d)$，首先容易发现其实 $q$ 就是区间内相等的数的对数乘以二加上区间长度（考虑乘法原理），那么考虑相等的数对 $a_i,a_j(i&lt;j)$ 的位置，分几种情况讨论：</p>
+<p>假如你要把一个序列切成 <span class="arithmatex">\(k\)</span> 段，每切一刀的代价是切成的两段分别的总和相乘，那么总代价就是整个序列总和的平方减去最后每一段总和的平方最后除以二。</p>
+<p>很好证明，首先容易发现无论切的顺序如何，只要 <span class="arithmatex">\(i,j\)</span> 不在同一段，那么它们就会产生 <span class="arithmatex">\(a_i\times a_j\)</span> 的贡献。可以自己分情况讨论一下，在此略过。那么这个结论就很显然了，比较基础的容斥。</p>
+<p>然后由于最后一定要切成 <span class="arithmatex">\(n\)</span> 段，所以第一部分的和就是 <span class="arithmatex">\((\sum a_i)^2-(\sum a_i^2)\)</span>。那么我们只用管 <span class="arithmatex">\(h=1\)</span> 时的 <span class="arithmatex">\(w\)</span> 了。</p>
+<p>这时这个问题就转化成了把序列分成 <span class="arithmatex">\(k\)</span> 段，每段的权值是那坨式子，最小化权值和。</p>
+<p>容易想到 DP，设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示考虑前 <span class="arithmatex">\(j\)</span> 个，分了 <span class="arithmatex">\(i\)</span> 段的最小权值和。那么有个显然的转移方程：</p>
+<div class="arithmatex">\[dp_{i,j}=\min_{l=1}^{j-1}dp_{i-1,l}+w(l+1,j)\]</div>
+<p>其中 <span class="arithmatex">\(w(l,r)\)</span> 表示区间 <span class="arithmatex">\([l,r]\)</span> 的权值。由于 <span class="arithmatex">\(q\)</span> 可以倒序遍历 <span class="arithmatex">\(l\)</span> 时求出，<span class="arithmatex">\(\sum_{i=l+1,r}\left|a_i-a_{i-1}\right|+(a_i\oplus a_{i-1})\)</span> 可以前缀和维护，所以可以 <span class="arithmatex">\(O(n^2k)\)</span> 获得 67pts 的好成绩。</p>
+<p>考虑如何优化。这种式子我们一般猜它有决策单调性（即 <span class="arithmatex">\(w(l,r)\)</span> 满足四边形不等式）来优化，那么 <span class="arithmatex">\(w(l,r)=\left(\sum_{i=l+1}^r\left|a_i-a_{i-1}\right|+(a_i\oplus a_{i-1})\right)q(l,r)\)</span> 满不满足四边形不等式呢？答案是满足。</p>
+<p>首先看 <span class="arithmatex">\(q(l,r)\)</span>，这个非常经典，在 <a href="https://www.luogu.com.cn/problem/CF833B">CF833B The Bakery</a> 里面就是这个式子满足四边形不等式。</p>
+<p>具体来说，我们要证 <span class="arithmatex">\(q(a,d)+q(b,c)\ge q(a,c)+q(b,d)(a &lt; b &lt; c &lt; d)\)</span>，首先容易发现其实 <span class="arithmatex">\(q\)</span> 就是区间内相等的数的对数乘以二加上区间长度（考虑乘法原理），那么考虑相等的数对 <span class="arithmatex">\(a_i,a_j(i&lt;j)\)</span> 的位置，分几种情况讨论：</p>
 <ul>
-<li>$b \le i,j \le c$：对不等号两侧都产生 $2$ 的贡献。</li>
-<li>$a\le i,j \le b\;\vee\;c\le i,j\le d$：对不等号两侧都产生 $1$ 的贡献。</li>
-<li>$a\le i \le b &lt; j \le c \; \vee\;b\le i &lt;c \le j\le d$：对不等号两侧都产生 $1$ 的贡献。</li>
-<li>$a\le i &lt; b &lt;c &lt; j \le d$：对不等号左侧产生 $1$ 的贡献。</li>
+<li><span class="arithmatex">\(b \le i,j \le c\)</span>：对不等号两侧都产生 <span class="arithmatex">\(2\)</span> 的贡献。</li>
+<li><span class="arithmatex">\(a\le i,j \le b\;\vee\;c\le i,j\le d\)</span>：对不等号两侧都产生 <span class="arithmatex">\(1\)</span> 的贡献。</li>
+<li><span class="arithmatex">\(a\le i \le b &lt; j \le c \; \vee\;b\le i &lt;c \le j\le d\)</span>：对不等号两侧都产生 <span class="arithmatex">\(1\)</span> 的贡献。</li>
+<li><span class="arithmatex">\(a\le i &lt; b &lt;c &lt; j \le d\)</span>：对不等号左侧产生 <span class="arithmatex">\(1\)</span> 的贡献。</li>
 </ul>
-<p>而区间长度之和相等，故 $q(l,r)$ 满足四边形不等式。</p>
-<p>然后剩下的那一坨我们不管内容是什么，设 $x=\left(\sum_{i=a+1}^b\left|a_i-a_{i-1}\right|+(a_i\oplus a_{i-1})\right),y=\left(\sum_{i=b+1}^c\cdots\right),z=\left(\sum_{i=c+1}^d\cdots\right)$，那么 $w(a,d)+w(b,c)\ge w(a,c)+w(b,d)$ 可以化成这样：</p>
-<p>$$q(a,d)(x+y+z)+q(b,c)y\ge q(a,c)(x+y)+q(b,d)(y+z)$$</p>
+<p>而区间长度之和相等，故 <span class="arithmatex">\(q(l,r)\)</span> 满足四边形不等式。</p>
+<p>然后剩下的那一坨我们不管内容是什么，设 <span class="arithmatex">\(x=\left(\sum_{i=a+1}^b\left|a_i-a_{i-1}\right|+(a_i\oplus a_{i-1})\right),y=\left(\sum_{i=b+1}^c\cdots\right),z=\left(\sum_{i=c+1}^d\cdots\right)\)</span>，那么 <span class="arithmatex">\(w(a,d)+w(b,c)\ge w(a,c)+w(b,d)\)</span> 可以化成这样：</p>
+<div class="arithmatex">\[q(a,d)(x+y+z)+q(b,c)y\ge q(a,c)(x+y)+q(b,d)(y+z)\]</div>
 <p>而左边可以这样化：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
    &amp;q(a,d)(x+y+z)+q(b,c)y\\
 =  &amp;q(a,d)(x+z)+y(q(b,c)+q(a,d))\\
 \ge&amp;q(a,c)x+q(b,y)z+y(q(a,c)+q(b,d))\\
 =  &amp;q(a,c)(x+y)+q(b,d)(y+z)
 \end{aligned}
-$$</p>
-<p>那么不等号成立。所以 $w(l,r)$ 满足四边形不等式。</p>
+\]</div>
+<p>那么不等号成立。所以 <span class="arithmatex">\(w(l,r)\)</span> 满足四边形不等式。</p>
 <p>接下来是经典证明，四边形不等式推结论单调性。因为我以前没证过所以这里写一下：</p>
-<p>设 $dp_{i,j}$ 的最优决策点为 $l_1$（即 $\forall l'\ne l_1,dp_{i-1,l'}+w(l'+1,j)\ge dp_{i-1,l_1}+w(l_1+1,j)$），$dp_{i,j+1}$ 的最优决策点为 $l_2$（同理），那么我们就要证 $l_1\le l_2$。不妨假设 $l_1&gt;l_2$，那么有:</p>
-<p>$$
+<p>设 <span class="arithmatex">\(dp_{i,j}\)</span> 的最优决策点为 <span class="arithmatex">\(l_1\)</span>（即 <span class="arithmatex">\(\forall l'\ne l_1,dp_{i-1,l'}+w(l'+1,j)\ge dp_{i-1,l_1}+w(l_1+1,j)\)</span>），<span class="arithmatex">\(dp_{i,j+1}\)</span> 的最优决策点为 <span class="arithmatex">\(l_2\)</span>（同理），那么我们就要证 <span class="arithmatex">\(l_1\le l_2\)</span>。不妨假设 <span class="arithmatex">\(l_1&gt;l_2\)</span>，那么有:</p>
+<div class="arithmatex">\[
 dp_{i-1,l_2}+w(l_2+1,j)\ge dp_{i-1,l_1}+w(l_1+1,j)\\
 dp_{i-1,l_1}+w(l_1+1,j+1)\ge dp_{i-1,l_2}+w(l_2+1,j+1)
-$$</p>
+\]</div>
 <p>不等式具有同向可加性，两式相加，可得：</p>
-<p>$$w(l_2+1,j)+w(l_1+1,j+1)\ge w(l_1+1,j)+w(l_2+1,j+1)$$</p>
-<p>由于 $l_1&gt;l_2$，故上式与四边形不等式矛盾。故 $l_1$ 必定小于等于 $l_2$。</p>
-<p>有了四边形不等式就可以直接分治了。另外 $q(l,r)$ 直接求不是很好处理，我们可以考虑类似莫队用双指针解决，如果推平分治那每一层就是 $O(n)$ 的。</p>
-<p>复杂度 $O(kn\log n)$</p>
+<div class="arithmatex">\[w(l_2+1,j)+w(l_1+1,j+1)\ge w(l_1+1,j)+w(l_2+1,j+1)\]</div>
+<p>由于 <span class="arithmatex">\(l_1&gt;l_2\)</span>，故上式与四边形不等式矛盾。故 <span class="arithmatex">\(l_1\)</span> 必定小于等于 <span class="arithmatex">\(l_2\)</span>。</p>
+<p>有了四边形不等式就可以直接分治了。另外 <span class="arithmatex">\(q(l,r)\)</span> 直接求不是很好处理，我们可以考虑类似莫队用双指针解决，如果推平分治那每一层就是 <span class="arithmatex">\(O(n)\)</span> 的。</p>
+<p>复杂度 <span class="arithmatex">\(O(kn\log n)\)</span></p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6010,19 +6038,19 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定 $n$ 个字符串 $s_i$ 和 $m$ 个字符串 $t_i$。</li>
-<li>求由若干个 $s_i$ 顺次相连，长度恰好为 $l$ 且不包含任何<strong>恰好等于 $t_i$ 的子串</strong>的字符串数量。</li>
+<li>给定 <span class="arithmatex">\(n\)</span> 个字符串 <span class="arithmatex">\(s_i\)</span> 和 <span class="arithmatex">\(m\)</span> 个字符串 <span class="arithmatex">\(t_i\)</span>。</li>
+<li>求由若干个 <span class="arithmatex">\(s_i\)</span> 顺次相连，长度恰好为 <span class="arithmatex">\(l\)</span> 且不包含任何<strong>恰好等于 <span class="arithmatex">\(t_i\)</span> 的子串</strong>的字符串数量。</li>
 <li>有两个子任务：
-    - $\sum |s_i|,|t_i|\le 100,l\le 100,1\le n,m\le 50$
-    - $\sum |s_i|,|t_i|\le 100,|s_i|\le 2,l\le 10^8,1\le n,m\le 50$</li>
+    - <span class="arithmatex">\(\sum |s_i|,|t_i|\le 100,l\le 100,1\le n,m\le 50\)</span>
+    - <span class="arithmatex">\(\sum |s_i|,|t_i|\le 100,|s_i|\le 2,l\le 10^8,1\le n,m\le 50\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>AC 自动机 $+$ DP。</p>
-<p>不难想到建出 $t$ 的 AC 自动机，设 $f_{i,j}$ 表示长度为 $i$ 的字符串恰好在 AC 自动机上走到结点 $j$ 的方案数，转移在 AC 自动机上走路即可。</p>
-<p>sub1 直接暴力，sub2 用矩阵保存相邻两个 $i$ 的状态，然后预处理转移即可。</p>
-<p>sub1 复杂度 $O(\left(\sum |t_i|\right)+l\sum s_i)$，sub2 复杂度 $O(\left(\sum |s_i|\right)\times\left(\sum |t_i|\right)+\log l\times \left(\sum |t_i|\right)^3)$。</p>
+<p>AC 自动机 <span class="arithmatex">\(+\)</span> DP。</p>
+<p>不难想到建出 <span class="arithmatex">\(t\)</span> 的 AC 自动机，设 <span class="arithmatex">\(f_{i,j}\)</span> 表示长度为 <span class="arithmatex">\(i\)</span> 的字符串恰好在 AC 自动机上走到结点 <span class="arithmatex">\(j\)</span> 的方案数，转移在 AC 自动机上走路即可。</p>
+<p>sub1 直接暴力，sub2 用矩阵保存相邻两个 <span class="arithmatex">\(i\)</span> 的状态，然后预处理转移即可。</p>
+<p>sub1 复杂度 <span class="arithmatex">\(O(\left(\sum |t_i|\right)+l\sum s_i)\)</span>，sub2 复杂度 <span class="arithmatex">\(O(\left(\sum |s_i|\right)\times\left(\sum |t_i|\right)+\log l\times \left(\sum |t_i|\right)^3)\)</span>。</p>
 <p>/// details | 参考代码
     open: False
     typeL success</p>
@@ -6205,18 +6233,18 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>有一个 $k$ 层的图，第 $i$ 层有 $n_i$ 个点，每一层只会向下一层连边，$n_1=n_k$。</li>
-<li>假设每一层的点按编号依次排列在一条直线上，不难发现假如把边画在纸上它们之间可能有交，具体来说，对于第 $p$ 层向 $p+1$ 层的连边 $u_1\to v_1,u_2\to v_2$，有交当且仅当 $u_1 &gt; u_2$ 且 $v_1 &lt; v_2$</li>
-<li>设 $S$ 为一个路径集合大小等于 $n_1$，满足第一层所有点均为某一条路径的起点，最后一层均为终点，并且点不重复。设 $f(S)$ 为路径集合 $S$ 中的交点总数，求 $f(S)$ 为偶数的方案数减去 $f(S)$ 为奇数的方案数。</li>
-<li>$1\le n_1,k\le 100,n_1\le n_i\le 2n_1,n_k=n_1$，无重边自环。</li>
+<li>有一个 <span class="arithmatex">\(k\)</span> 层的图，第 <span class="arithmatex">\(i\)</span> 层有 <span class="arithmatex">\(n_i\)</span> 个点，每一层只会向下一层连边，<span class="arithmatex">\(n_1=n_k\)</span>。</li>
+<li>假设每一层的点按编号依次排列在一条直线上，不难发现假如把边画在纸上它们之间可能有交，具体来说，对于第 <span class="arithmatex">\(p\)</span> 层向 <span class="arithmatex">\(p+1\)</span> 层的连边 <span class="arithmatex">\(u_1\to v_1,u_2\to v_2\)</span>，有交当且仅当 <span class="arithmatex">\(u_1 &gt; u_2\)</span> 且 <span class="arithmatex">\(v_1 &lt; v_2\)</span></li>
+<li>设 <span class="arithmatex">\(S\)</span> 为一个路径集合大小等于 <span class="arithmatex">\(n_1\)</span>，满足第一层所有点均为某一条路径的起点，最后一层均为终点，并且点不重复。设 <span class="arithmatex">\(f(S)\)</span> 为路径集合 <span class="arithmatex">\(S\)</span> 中的交点总数，求 <span class="arithmatex">\(f(S)\)</span> 为偶数的方案数减去 <span class="arithmatex">\(f(S)\)</span> 为奇数的方案数。</li>
+<li><span class="arithmatex">\(1\le n_1,k\le 100,n_1\le n_i\le 2n_1,n_k=n_1\)</span>，无重边自环。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>LGV 引理版题。</p>
-<p>不难发现交点数量和 $n_1\to n_k$ 对应关系中的逆序对数量奇偶性相同。</p>
+<p>不难发现交点数量和 <span class="arithmatex">\(n_1\to n_k\)</span> 对应关系中的逆序对数量奇偶性相同。</p>
 <p>于是变成 LGV 引理模板了，参考<a href="../../algo/math/linear_algebra/">这篇博客</a>。</p>
-<p>中间的 $e(u,v)$ 可以 bfs 预处理，复杂度大概是 $O(n_1^3k)$。</p>
+<p>中间的 <span class="arithmatex">\(e(u,v)\)</span> 可以 bfs 预处理，复杂度大概是 <span class="arithmatex">\(O(n_1^3k)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6329,20 +6357,20 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一个字符串 $S$，设 $T_i$ 表示从点 $i$ 开始的后缀，求：<p>$$
+<li>给定一个字符串 <span class="arithmatex">\(S\)</span>，设 <span class="arithmatex">\(T_i\)</span> 表示从点 <span class="arithmatex">\(i\)</span> 开始的后缀，求：<p>$<span class="arithmatex">\(
   \sum_{1\le i &lt; j\le n}|T_i|+|T_j|-2\mathrm{lcp}(T_i,T_j)
-  $$</p>
+  \)</span>$</p>
 </li>
 </ul>
 <ul>
-<li>$1\le |S|\le 5\times 10^5$，字符集为小写字母集。</li>
+<li><span class="arithmatex">\(1\le |S|\le 5\times 10^5\)</span>，字符集为小写字母集。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>不难发现 $\sum_{1\le i &lt; j\le n}|T_i|+|T_j|$ 是可以直接算的，于是只需要算 $\sum_{1\le i &lt; j\le n}\mathrm{lcp}(T_i,T_j)$。</p>
+<p>不难发现 <span class="arithmatex">\(\sum_{1\le i &lt; j\le n}|T_i|+|T_j|\)</span> 是可以直接算的，于是只需要算 <span class="arithmatex">\(\sum_{1\le i &lt; j\le n}\mathrm{lcp}(T_i,T_j)\)</span>。</p>
 <p>首先我们不喜欢后缀的最长公共前缀，于是将整个字符串 <code>reverse</code> 一下就变成求前缀的最长公共后缀了。</p>
-<p>于是建出 SAM，那么 $\mathrm{lcp}$ 就转化成了 $\mathrm{lnk}$ 树上的 $\mathrm{lca}$。于是我们将每个点挂在自己的所有祖先，然后再从上往下传即可，注意不要算重。复杂度 $O(n|\Sigma|)$。</p>
+<p>于是建出 SAM，那么 <span class="arithmatex">\(\mathrm{lcp}\)</span> 就转化成了 <span class="arithmatex">\(\mathrm{lnk}\)</span> 树上的 <span class="arithmatex">\(\mathrm{lca}\)</span>。于是我们将每个点挂在自己的所有祖先，然后再从上往下传即可，注意不要算重。复杂度 <span class="arithmatex">\(O(n|\Sigma|)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6443,19 +6471,19 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>有一张 $1\times n$ 的棋盘，上面有 $k$ 个棋子（$k$ 是偶数），这些棋子是白色/黑色交替排列的，并且第一个是白色（那么显然最后一个是黑色）。</li>
-<li>有两个人在这张棋盘上进行游戏，其中先手操作白棋，后手操作黑棋。每一步可以选择不超过 $d$ 个自己操作的棋子移动一步。白棋只能向右移动，黑棋只能向左移动，不能操作者负。</li>
+<li>有一张 <span class="arithmatex">\(1\times n\)</span> 的棋盘，上面有 <span class="arithmatex">\(k\)</span> 个棋子（<span class="arithmatex">\(k\)</span> 是偶数），这些棋子是白色/黑色交替排列的，并且第一个是白色（那么显然最后一个是黑色）。</li>
+<li>有两个人在这张棋盘上进行游戏，其中先手操作白棋，后手操作黑棋。每一步可以选择不超过 <span class="arithmatex">\(d\)</span> 个自己操作的棋子移动一步。白棋只能向右移动，黑棋只能向左移动，不能操作者负。</li>
 <li>问有多少种摆放方式是先手必胜的。</li>
-<li>$1\le d\le k\le n\le 10^4$ 其中 $2\le k\le 100$。</li>
+<li><span class="arithmatex">\(1\le d\le k\le n\le 10^4\)</span> 其中 <span class="arithmatex">\(2\le k\le 100\)</span>。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>不难发现这就是一个经典的 k-Nim 问题，结论是将每一堆石子的数量按二进制表示出来后，进行模 $k+1$ 的不进位加法，若为 $0$ 则后手必胜，否则先手必胜。</p>
-<p>这道题的限制就是总石子个数不能超过 $n-k$。</p>
-<p>这种因为每一位是独立的，所以考虑按位 DP。具体来说，设 $f_{i,j}$ 表示考虑低 $i$ 位，用了 $j$ 个石子的方案数，转移就枚举这一位应该有 $d+1$ 的倍数个 $1$，用组合数分发到 $\frac{k}{2}$ 堆石子其中若干个就行了。</p>
+<p>不难发现这就是一个经典的 k-Nim 问题，结论是将每一堆石子的数量按二进制表示出来后，进行模 <span class="arithmatex">\(k+1\)</span> 的不进位加法，若为 <span class="arithmatex">\(0\)</span> 则后手必胜，否则先手必胜。</p>
+<p>这道题的限制就是总石子个数不能超过 <span class="arithmatex">\(n-k\)</span>。</p>
+<p>这种因为每一位是独立的，所以考虑按位 DP。具体来说，设 <span class="arithmatex">\(f_{i,j}\)</span> 表示考虑低 <span class="arithmatex">\(i\)</span> 位，用了 <span class="arithmatex">\(j\)</span> 个石子的方案数，转移就枚举这一位应该有 <span class="arithmatex">\(d+1\)</span> 的倍数个 <span class="arithmatex">\(1\)</span>，用组合数分发到 <span class="arithmatex">\(\frac{k}{2}\)</span> 堆石子其中若干个就行了。</p>
 <p>然后统计答案还需要计算没用到的格子的位置，也是组合数即可。</p>
-<p>复杂度 $O(n\log n+n^2)$，这个 $n^2$ 不会乘 $\log$ 是因为枚举 $d+1$ 的倍数这一部分不会超过 $\frac{n}{2^i}$，常数很小还是很能通过的。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n+n^2)\)</span>，这个 <span class="arithmatex">\(n^2\)</span> 不会乘 <span class="arithmatex">\(\log\)</span> 是因为枚举 <span class="arithmatex">\(d+1\)</span> 的倍数这一部分不会超过 <span class="arithmatex">\(\frac{n}{2^i}\)</span>，常数很小还是很能通过的。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6532,27 +6560,27 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>问满足以下所有条件的字符串 $s$ 可能有多少种不同的后缀数组：
-    - 长度为 $n$，字符集大小为 $m$。
-    - 第 $i$ 种（从小往大排列）字符出现次数不超过 $c_i$。</li>
-<li>$1\le n,m\le 200,0\le c_i\le n,\sum c_i\ge n$</li>
+<li>问满足以下所有条件的字符串 <span class="arithmatex">\(s\)</span> 可能有多少种不同的后缀数组：
+    - 长度为 <span class="arithmatex">\(n\)</span>，字符集大小为 <span class="arithmatex">\(m\)</span>。
+    - 第 <span class="arithmatex">\(i\)</span> 种（从小往大排列）字符出现次数不超过 <span class="arithmatex">\(c_i\)</span>。</li>
+<li><span class="arithmatex">\(1\le n,m\le 200,0\le c_i\le n,\sum c_i\ge n\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>很厉害的一道题。</p>
 <p>首先后缀数组显然不能直接做，考虑经典转化：将后缀数组转化为字符的大小关系。</p>
-<p>具体来说，设后缀数组为 $sa$（$sa_i$ 表示字典序第 $i$ 小的后缀），逆排列为 $rk$，那么 $s_{sa_i}\le s_{sa_{i+1}}$，并且若 $rk_{sa_i+1} &gt; rk_{sa_{i+1}+1}$ 则这个 $\le$ 必须替换为 $ &lt; $。即一个后缀数组能映射到一个由 $ &lt; $ 或 $\le$ 连接的大小关系序列。</p>
-<p>但是这个关系序列显然无法映射到后缀数组。一个观察是若钦定不同字符的数量恰好等于 $ &lt; $ 的个数加一，那么这个关系序列就能映射到唯一的字符串，进而映射到唯一的后缀数组。而不难发现我们只要确定由 $&lt;$ 连接的每一段长度（不妨设为 $a_i$）后，不同的后缀数组数量就是 $\frac{(\sum a_i)!}{\prod a_i!}$，但是显然会算重，这启发我们进行容斥。</p>
-<p>具体来说，我们对关系序列进行计数，每两个 $&lt;$ 之间的 $s_{sa_i}$ 尽量用同种字符填满，然后钦定 $k$ 个 $&lt;$ 替换为 $\le$，并且容斥系数为 $(-1)^k$。</p>
-<p>不难想到设 $f_{i,j,k}$ 表示考虑前 $i$ 种字符，已经填了前 $j$ 位，并且上一段的末尾为 $k$ 的方案数，因为方案数带 $n!$ 的系数，根据套路把它拆出来，那么转移有三种：</p>
+<p>具体来说，设后缀数组为 <span class="arithmatex">\(sa\)</span>（<span class="arithmatex">\(sa_i\)</span> 表示字典序第 <span class="arithmatex">\(i\)</span> 小的后缀），逆排列为 <span class="arithmatex">\(rk\)</span>，那么 <span class="arithmatex">\(s_{sa_i}\le s_{sa_{i+1}}\)</span>，并且若 <span class="arithmatex">\(rk_{sa_i+1} &gt; rk_{sa_{i+1}+1}\)</span> 则这个 <span class="arithmatex">\(\le\)</span> 必须替换为 <span class="arithmatex">\( &lt; \)</span>。即一个后缀数组能映射到一个由 <span class="arithmatex">\( &lt; \)</span> 或 <span class="arithmatex">\(\le\)</span> 连接的大小关系序列。</p>
+<p>但是这个关系序列显然无法映射到后缀数组。一个观察是若钦定不同字符的数量恰好等于 <span class="arithmatex">\( &lt; \)</span> 的个数加一，那么这个关系序列就能映射到唯一的字符串，进而映射到唯一的后缀数组。而不难发现我们只要确定由 <span class="arithmatex">\(&lt;\)</span> 连接的每一段长度（不妨设为 <span class="arithmatex">\(a_i\)</span>）后，不同的后缀数组数量就是 <span class="arithmatex">\(\frac{(\sum a_i)!}{\prod a_i!}\)</span>，但是显然会算重，这启发我们进行容斥。</p>
+<p>具体来说，我们对关系序列进行计数，每两个 <span class="arithmatex">\(&lt;\)</span> 之间的 <span class="arithmatex">\(s_{sa_i}\)</span> 尽量用同种字符填满，然后钦定 <span class="arithmatex">\(k\)</span> 个 <span class="arithmatex">\(&lt;\)</span> 替换为 <span class="arithmatex">\(\le\)</span>，并且容斥系数为 <span class="arithmatex">\((-1)^k\)</span>。</p>
+<p>不难想到设 <span class="arithmatex">\(f_{i,j,k}\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 种字符，已经填了前 <span class="arithmatex">\(j\)</span> 位，并且上一段的末尾为 <span class="arithmatex">\(k\)</span> 的方案数，因为方案数带 <span class="arithmatex">\(n!\)</span> 的系数，根据套路把它拆出来，那么转移有三种：</p>
 <ol>
-<li>$f_{i,j,k}\gets f_{i-1,j-c_i,k}$：将 $c_i$ 个字符全部填进这一段，并且不新建下一段。</li>
-<li>$f_{i,j,k}\gets -\sum_{t=1}^{c_i}f_{i-1,j-t,k}$：填 $t$ 个字符进这一段，但是钦定这个 $&lt;$ 变成 $\le$，即不新建一段，那么有 $-1$ 的系数。</li>
-<li>$f_{i,j,j}\gets \frac{1}{(j-k)!}\sum_{t=1}^{c_i}f_{i-1,j-t,k}$：填 $t$ 个字符进这一段，并且新建一段。</li>
+<li><span class="arithmatex">\(f_{i,j,k}\gets f_{i-1,j-c_i,k}\)</span>：将 <span class="arithmatex">\(c_i\)</span> 个字符全部填进这一段，并且不新建下一段。</li>
+<li><span class="arithmatex">\(f_{i,j,k}\gets -\sum_{t=1}^{c_i}f_{i-1,j-t,k}\)</span>：填 <span class="arithmatex">\(t\)</span> 个字符进这一段，但是钦定这个 <span class="arithmatex">\(&lt;\)</span> 变成 <span class="arithmatex">\(\le\)</span>，即不新建一段，那么有 <span class="arithmatex">\(-1\)</span> 的系数。</li>
+<li><span class="arithmatex">\(f_{i,j,j}\gets \frac{1}{(j-k)!}\sum_{t=1}^{c_i}f_{i-1,j-t,k}\)</span>：填 <span class="arithmatex">\(t\)</span> 个字符进这一段，并且新建一段。</li>
 </ol>
-<p>为什么后面两种转移从 $1$ 开始枚举 $t$ 呢？虽然实际选的字符并不一定是一个前缀，但是由于我们只关注每一段的长度所以并不会算漏情况。反而如果从 $0$ 开始枚举就可能需要加一堆特判。</p>
-<p>复杂度 $O(n^2m)$，需要前缀和优化。</p>
+<p>为什么后面两种转移从 <span class="arithmatex">\(1\)</span> 开始枚举 <span class="arithmatex">\(t\)</span> 呢？虽然实际选的字符并不一定是一个前缀，但是由于我们只关注每一段的长度所以并不会算漏情况。反而如果从 <span class="arithmatex">\(0\)</span> 开始枚举就可能需要加一堆特判。</p>
+<p>复杂度 <span class="arithmatex">\(O(n^2m)\)</span>，需要前缀和优化。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6643,17 +6671,17 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>有一个长度为 $n$ 的序列 $a$，维护两个操作共 $m$ 次：
+<li>有一个长度为 <span class="arithmatex">\(n\)</span> 的序列 <span class="arithmatex">\(a\)</span>，维护两个操作共 <span class="arithmatex">\(m\)</span> 次：
     - 单点修改。
-    - 区间查询是否每个数出现次数都是 $k$ 的倍数，每次询问的 $k$ 不一定相同。</li>
-<li>$1\le n,q\le 3\times 10^5,1\le a_i\le 10^9$。</li>
+    - 区间查询是否每个数出现次数都是 <span class="arithmatex">\(k\)</span> 的倍数，每次询问的 <span class="arithmatex">\(k\)</span> 不一定相同。</li>
+<li><span class="arithmatex">\(1\le n,q\le 3\times 10^5,1\le a_i\le 10^9\)</span>。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>典题，但是 zky 提供了一个拓展性更强的做法。</p>
-<p>一个想法是给每个值映射一个随机权值，查询区间和是否为 $k$ 的倍数。多映射几组错误概率就很低了。</p>
-<p>但是我们发现随机权值的范围缩小到 $0$ 或者 $1$ 仍然可以，此时出错当且仅当若干个不为 $k$ 倍数的数区间总个数是 $k$ 的倍数，然后全选或者全不选，发现只要存在这样的错误方案就必定会存在若干个正确方案（修改出错部分的一个子集），那么错误概率不超过 $\frac{1}{2}$（恰好两个数加起来出错，错误比例为 $\frac{2}{4}$），于是随机 $40$ 组映射差不多就能对了，错误概率 $2^{-40}$。</p>
+<p>一个想法是给每个值映射一个随机权值，查询区间和是否为 <span class="arithmatex">\(k\)</span> 的倍数。多映射几组错误概率就很低了。</p>
+<p>但是我们发现随机权值的范围缩小到 <span class="arithmatex">\(0\)</span> 或者 <span class="arithmatex">\(1\)</span> 仍然可以，此时出错当且仅当若干个不为 <span class="arithmatex">\(k\)</span> 倍数的数区间总个数是 <span class="arithmatex">\(k\)</span> 的倍数，然后全选或者全不选，发现只要存在这样的错误方案就必定会存在若干个正确方案（修改出错部分的一个子集），那么错误概率不超过 <span class="arithmatex">\(\frac{1}{2}\)</span>（恰好两个数加起来出错，错误比例为 <span class="arithmatex">\(\frac{2}{4}\)</span>），于是随机 <span class="arithmatex">\(40\)</span> 组映射差不多就能对了，错误概率 <span class="arithmatex">\(2^{-40}\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6746,19 +6774,19 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定 $n$ 个 $d$ 维向量，求是否存在两个向量 $v_i,v_j(i\ne j)$ 点积为 $k$ 的倍数，输出这两个向量的下标。</li>
+<li>给定 <span class="arithmatex">\(n\)</span> 个 <span class="arithmatex">\(d\)</span> 维向量，求是否存在两个向量 <span class="arithmatex">\(v_i,v_j(i\ne j)\)</span> 点积为 <span class="arithmatex">\(k\)</span> 的倍数，输出这两个向量的下标。</li>
 <li>两个 subtask：
-    - $1\le n\le 10^4,1\le d\le 100,2\le k\le 3$。
-    - $1\le n\le 10^5,1\le d\le 30,2\le k\le 3$。</li>
+    - <span class="arithmatex">\(1\le n\le 10^4,1\le d\le 100,2\le k\le 3\)</span>。
+    - <span class="arithmatex">\(1\le n\le 10^5,1\le d\le 30,2\le k\le 3\)</span>。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>zky 的神秘随机化做法。</p>
 <p>首先不妨直接在模意义下进行计算。</p>
-<p>考虑 $k=2$，那么点积只有可能是 $0$ 或者 $1$。显然不存在这样的一对 $(i,j)$ 当且仅当对于任意 $i,j$ 有 $v_i\cdot v_j = 1$。注意到点积对于向量加法有分配律，那么我们随机取出一个向量的集合 $S$，将其线性加起来得到 $V$。然后用所有不在 $S$ 中的向量和 $V$ 相乘，显然某 $i\in S$ 和 $j\notin S$ 满足 $v_i\cdot v_j=0$ 仅当 $j$ 和 $V$ 的点积奇偶性和 $|S|$ 的奇偶性不同。</p>
-<p>考虑这个判定条件的正确率，首先不难发现判定错误当且仅当有偶数对 $(i,j)$ 被分开了，发现无论有几对这样的数对，偶数对的情况都不会多于奇数对的情况，即正确率不低于 $\frac{1}{2}$。那么进行 $T$ 次错误概率就是 $2^{-T}$，复杂度 $O(\frac{Tnd}{\omega})$。</p>
-<p>然后考虑 $k=3$，发现在模 $3$ 意义下非 $0$ 数的平方都是 $1$，那么取点积的平方，则 $\left(\sum_{p=1}^dv_{i,p}v_{j,p}\right)=\sum_{1\le x,y\le d}v_{i,x}v_{i,y}v_{j,x}v_{j,y}$，于是转化为长度为 $d^2$ 的向量点积就又可以用奇偶性判断了。这个复杂度是 $O(\frac{Tnd^2}{\omega})$，错误概率还是 $2^{-T}$。</p>
+<p>考虑 <span class="arithmatex">\(k=2\)</span>，那么点积只有可能是 <span class="arithmatex">\(0\)</span> 或者 <span class="arithmatex">\(1\)</span>。显然不存在这样的一对 <span class="arithmatex">\((i,j)\)</span> 当且仅当对于任意 <span class="arithmatex">\(i,j\)</span> 有 <span class="arithmatex">\(v_i\cdot v_j = 1\)</span>。注意到点积对于向量加法有分配律，那么我们随机取出一个向量的集合 <span class="arithmatex">\(S\)</span>，将其线性加起来得到 <span class="arithmatex">\(V\)</span>。然后用所有不在 <span class="arithmatex">\(S\)</span> 中的向量和 <span class="arithmatex">\(V\)</span> 相乘，显然某 <span class="arithmatex">\(i\in S\)</span> 和 <span class="arithmatex">\(j\notin S\)</span> 满足 <span class="arithmatex">\(v_i\cdot v_j=0\)</span> 仅当 <span class="arithmatex">\(j\)</span> 和 <span class="arithmatex">\(V\)</span> 的点积奇偶性和 <span class="arithmatex">\(|S|\)</span> 的奇偶性不同。</p>
+<p>考虑这个判定条件的正确率，首先不难发现判定错误当且仅当有偶数对 <span class="arithmatex">\((i,j)\)</span> 被分开了，发现无论有几对这样的数对，偶数对的情况都不会多于奇数对的情况，即正确率不低于 <span class="arithmatex">\(\frac{1}{2}\)</span>。那么进行 <span class="arithmatex">\(T\)</span> 次错误概率就是 <span class="arithmatex">\(2^{-T}\)</span>，复杂度 <span class="arithmatex">\(O(\frac{Tnd}{\omega})\)</span>。</p>
+<p>然后考虑 <span class="arithmatex">\(k=3\)</span>，发现在模 <span class="arithmatex">\(3\)</span> 意义下非 <span class="arithmatex">\(0\)</span> 数的平方都是 <span class="arithmatex">\(1\)</span>，那么取点积的平方，则 <span class="arithmatex">\(\left(\sum_{p=1}^dv_{i,p}v_{j,p}\right)=\sum_{1\le x,y\le d}v_{i,x}v_{i,y}v_{j,x}v_{j,y}\)</span>，于是转化为长度为 <span class="arithmatex">\(d^2\)</span> 的向量点积就又可以用奇偶性判断了。这个复杂度是 <span class="arithmatex">\(O(\frac{Tnd^2}{\omega})\)</span>，错误概率还是 <span class="arithmatex">\(2^{-T}\)</span>。</p>
 <p>因为要可变长度 <code>bitset</code>，代码里用了模板技巧。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6908,19 +6936,19 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一个长度为 $n$ 的整数序列 $a$，支持以下两种操作共 $m$ 次：
+<li>给定一个长度为 <span class="arithmatex">\(n\)</span> 的整数序列 <span class="arithmatex">\(a\)</span>，支持以下两种操作共 <span class="arithmatex">\(m\)</span> 次：
     - 区间翻转。
     - 查询从区间中选出一个子集能获得的最大异或和。</li>
-<li>$1\le n,q\le 5\times 10^4,0\le a &lt; 2^{60}$</li>
+<li><span class="arithmatex">\(1\le n,q\le 5\times 10^4,0\le a &lt; 2^{60}\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>神秘啊神秘。</p>
-<p>考虑这样做：随机一个 $0/1$ 序列 $b$，再维护一个 $c_i=a_ib_i$，然后我们将区间 $c_i$ 的异或和拎出来。</p>
-<p>不难发现当我们随机 $b_i$ 的组数足够多时，把每个 $c_i$ 的区间异或和当成一个向量得到的张成空间（下称“新空间”）显然是区间张成空间（下称“原空间”）的子空间，并且<strong>很有可能</strong>就是原空间的张成空间。</p>
-<p>那么具体多有可能呢。首先不妨把原空间看作一个 $[0,2^l)$ 的集合，那么若新空间是原空间的真子空间，则新空间的正交补空间维数必定不小于 $1$，即存在一个向量 $v$ 和新空间内所有向量全部垂直。显然对于一个向量，在全集中恰有 $\frac{1}{2}$ 的向量和它垂直，那么存在一个向量和这些东西全部垂直的概率就是 $2^{-T}$（其中 $T$ 是取的组数）。</p>
-<p>那么平衡树维护 $T$ 个区间异或和即可，复杂度 $O(nT+qT(\log n+\log V))$。据 zky 说 $T$ 取 $100$ 是不难过的。</p>
+<p>考虑这样做：随机一个 <span class="arithmatex">\(0/1\)</span> 序列 <span class="arithmatex">\(b\)</span>，再维护一个 <span class="arithmatex">\(c_i=a_ib_i\)</span>，然后我们将区间 <span class="arithmatex">\(c_i\)</span> 的异或和拎出来。</p>
+<p>不难发现当我们随机 <span class="arithmatex">\(b_i\)</span> 的组数足够多时，把每个 <span class="arithmatex">\(c_i\)</span> 的区间异或和当成一个向量得到的张成空间（下称“新空间”）显然是区间张成空间（下称“原空间”）的子空间，并且<strong>很有可能</strong>就是原空间的张成空间。</p>
+<p>那么具体多有可能呢。首先不妨把原空间看作一个 <span class="arithmatex">\([0,2^l)\)</span> 的集合，那么若新空间是原空间的真子空间，则新空间的正交补空间维数必定不小于 <span class="arithmatex">\(1\)</span>，即存在一个向量 <span class="arithmatex">\(v\)</span> 和新空间内所有向量全部垂直。显然对于一个向量，在全集中恰有 <span class="arithmatex">\(\frac{1}{2}\)</span> 的向量和它垂直，那么存在一个向量和这些东西全部垂直的概率就是 <span class="arithmatex">\(2^{-T}\)</span>（其中 <span class="arithmatex">\(T\)</span> 是取的组数）。</p>
+<p>那么平衡树维护 <span class="arithmatex">\(T\)</span> 个区间异或和即可，复杂度 <span class="arithmatex">\(O(nT+qT(\log n+\log V))\)</span>。据 zky 说 <span class="arithmatex">\(T\)</span> 取 <span class="arithmatex">\(100\)</span> 是不难过的。</p>
 <p>代码懒得写了。</p>
 <h2 id="_1">一般图最大匹配</h2>
 <blockquote>
@@ -6928,20 +6956,20 @@
 </blockquote>
 <ul>
 <li>给定一张无向图，求最大匹配（找到最大的边集使得任意一个点至多出现一次）。</li>
-<li>$1\le n\le 500$</li>
+<li><span class="arithmatex">\(1\le n\le 500\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>这道题正解 $n\le 1000$ 是带花树算法（我不会），但是 zky 讲了一个很精妙的线性代数做法。</p>
-<p>考虑设计矩阵 $G$：</p>
-<p>对于 $i\le j$，若 $i,j$ 之间有边，则 $G_{i,j}=x_{i,j},G_{j,i}=-x_{i,j}$（这里的 $x_{i,j}$ 是一个代数对象，对于不同的 $(i,j)$ 两两不同）。</p>
-<p>结论：$\det G\ne 0$ 等价于原图存在完美匹配。</p>
-<p>为什么呢？考虑行列式的定义，$\sum_p\pi(p)G_{i,p_i}$（这里 $\pi$ 表示若 $p$ 逆序对数量为奇数则为 $-1$，否则为 $+1$），不难发现 $i\to p_i$ 构成了一个置换环，注意到若存在环为奇数则必定能反过来走一遍抵消，所以计算到 $\det$ 里面的都是环长全为偶数的方案了。显然环长全为偶数有平凡解。</p>
-<p>那么怎么求最大匹配呢？我们猜测答案是 $\frac{\mathrm{rank}\;G}{2}$。</p>
-<p>首先不难发现取出最大匹配对应的行，这些行线性无关（否则行列式就是 $0$ 了），则矩阵的值大于等于二倍最大匹配。</p>
-<p>并且我们显然可以取出一个 $\mathrm{rank}\;G\times \mathrm{rank}\;G$ 的矩阵行列式不等于 $0$，于是二倍最大匹配大于等于矩阵的秩。</p>
-<p>显然我们不能直接算多项式，于是我们随机 $x$ 求出 $\mathrm{rank}$ 即可，复杂度 $O(n^3)$。</p>
+<p>这道题正解 <span class="arithmatex">\(n\le 1000\)</span> 是带花树算法（我不会），但是 zky 讲了一个很精妙的线性代数做法。</p>
+<p>考虑设计矩阵 <span class="arithmatex">\(G\)</span>：</p>
+<p>对于 <span class="arithmatex">\(i\le j\)</span>，若 <span class="arithmatex">\(i,j\)</span> 之间有边，则 <span class="arithmatex">\(G_{i,j}=x_{i,j},G_{j,i}=-x_{i,j}\)</span>（这里的 <span class="arithmatex">\(x_{i,j}\)</span> 是一个代数对象，对于不同的 <span class="arithmatex">\((i,j)\)</span> 两两不同）。</p>
+<p>结论：<span class="arithmatex">\(\det G\ne 0\)</span> 等价于原图存在完美匹配。</p>
+<p>为什么呢？考虑行列式的定义，<span class="arithmatex">\(\sum_p\pi(p)G_{i,p_i}\)</span>（这里 <span class="arithmatex">\(\pi\)</span> 表示若 <span class="arithmatex">\(p\)</span> 逆序对数量为奇数则为 <span class="arithmatex">\(-1\)</span>，否则为 <span class="arithmatex">\(+1\)</span>），不难发现 <span class="arithmatex">\(i\to p_i\)</span> 构成了一个置换环，注意到若存在环为奇数则必定能反过来走一遍抵消，所以计算到 <span class="arithmatex">\(\det\)</span> 里面的都是环长全为偶数的方案了。显然环长全为偶数有平凡解。</p>
+<p>那么怎么求最大匹配呢？我们猜测答案是 <span class="arithmatex">\(\frac{\mathrm{rank}\;G}{2}\)</span>。</p>
+<p>首先不难发现取出最大匹配对应的行，这些行线性无关（否则行列式就是 <span class="arithmatex">\(0\)</span> 了），则矩阵的值大于等于二倍最大匹配。</p>
+<p>并且我们显然可以取出一个 <span class="arithmatex">\(\mathrm{rank}\;G\times \mathrm{rank}\;G\)</span> 的矩阵行列式不等于 <span class="arithmatex">\(0\)</span>，于是二倍最大匹配大于等于矩阵的秩。</p>
+<p>显然我们不能直接算多项式，于是我们随机 <span class="arithmatex">\(x\)</span> 求出 <span class="arithmatex">\(\mathrm{rank}\)</span> 即可，复杂度 <span class="arithmatex">\(O(n^3)\)</span>。</p>
 <p>代码就不贴了。</p>
 <h2 id="loj178">LOJ#178 多项式求根</h2>
 <p><a href="https://loj.ac/p/178">传送门</a></p>
@@ -6949,17 +6977,17 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一个多项式方程 $f(x)=\sum_{i=0}^na_ix^i=0$，求在模质数 $p$ 意义下的所有根。</li>
-<li>$1\le n\le 100,3\le p\le 10^9$</li>
+<li>给定一个多项式方程 <span class="arithmatex">\(f(x)=\sum_{i=0}^na_ix^i=0\)</span>，求在模质数 <span class="arithmatex">\(p\)</span> 意义下的所有根。</li>
+<li><span class="arithmatex">\(1\le n\le 100,3\le p\le 10^9\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>很妙的一个东西。</p>
-<p>首先要求根的话我们肯定希望写成 $\prod(x-b_i)$ 的形式。</p>
-<p>不难发现 $\prod_{i=0}^{p-1}(x-i)=x^p-x$，因为带任何值进去都是 $0$。那么我们求出 $\gcd(f,x^p-x)$ 就能得到一个只有根的东西了。并且我们又找到了一个<strong>分理出一部分根</strong>的方法。</p>
-<p>具体来说，我们构造一个多项式 $g$ 包含 $[0,p-1]$ 中的一部分根，取 $h=\gcd(f,g)$ 即可把 $f$ 的根分为 $h$ 中的和 $\frac{f}{h}$ 中的两部分了，一直递归到只有一个根就对了。</p>
-<p>那么如何构造多项式 $g$ 呢？注意到在模 $p$ 意义下，任何数的 $\frac{p-1}{2}$ 不是 $1$ 就是 $-1$（取决于这个数是不是二次剩余），而根据经典结论，二次剩余大约占 $\frac{1}{2}$，那么我们取 $g=h^{\frac{p-1}{2}}-1$ 即可（此处 $h$ 是一个随机的多项式）。</p>
+<p>首先要求根的话我们肯定希望写成 <span class="arithmatex">\(\prod(x-b_i)\)</span> 的形式。</p>
+<p>不难发现 <span class="arithmatex">\(\prod_{i=0}^{p-1}(x-i)=x^p-x\)</span>，因为带任何值进去都是 <span class="arithmatex">\(0\)</span>。那么我们求出 <span class="arithmatex">\(\gcd(f,x^p-x)\)</span> 就能得到一个只有根的东西了。并且我们又找到了一个<strong>分理出一部分根</strong>的方法。</p>
+<p>具体来说，我们构造一个多项式 <span class="arithmatex">\(g\)</span> 包含 <span class="arithmatex">\([0,p-1]\)</span> 中的一部分根，取 <span class="arithmatex">\(h=\gcd(f,g)\)</span> 即可把 <span class="arithmatex">\(f\)</span> 的根分为 <span class="arithmatex">\(h\)</span> 中的和 <span class="arithmatex">\(\frac{f}{h}\)</span> 中的两部分了，一直递归到只有一个根就对了。</p>
+<p>那么如何构造多项式 <span class="arithmatex">\(g\)</span> 呢？注意到在模 <span class="arithmatex">\(p\)</span> 意义下，任何数的 <span class="arithmatex">\(\frac{p-1}{2}\)</span> 不是 <span class="arithmatex">\(1\)</span> 就是 <span class="arithmatex">\(-1\)</span>（取决于这个数是不是二次剩余），而根据经典结论，二次剩余大约占 <span class="arithmatex">\(\frac{1}{2}\)</span>，那么我们取 <span class="arithmatex">\(g=h^{\frac{p-1}{2}}-1\)</span> 即可（此处 <span class="arithmatex">\(h\)</span> 是一个随机的多项式）。</p>
 <p>但是我不会写多项式全家桶，所以留坑待补。</p>
 <h2 id="p5811-ioi2019">P5811 [IOI2019] 景点划分</h2>
 <p><a href="https://www.luogu.com.cn/problem/P5811">传送门</a></p>
@@ -6967,20 +6995,20 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一张 $n$ 个点 $m$ 条边的无向图，将其划分为大小分别为 $a,b,c(a+b+c=n)$ 的三个点集，使得其中至少两个点集是连通的。构造方案或者判断无解。</li>
-<li>$3\le n\le 10^5,2\le m\le 2\times 10^5$，无重边自环，图连通。</li>
+<li>给定一张 <span class="arithmatex">\(n\)</span> 个点 <span class="arithmatex">\(m\)</span> 条边的无向图，将其划分为大小分别为 <span class="arithmatex">\(a,b,c(a+b+c=n)\)</span> 的三个点集，使得其中至少两个点集是连通的。构造方案或者判断无解。</li>
+<li><span class="arithmatex">\(3\le n\le 10^5,2\le m\le 2\times 10^5\)</span>，无重边自环，图连通。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>貌似有很巧妙的做法，但是可以直接利用双极定向知识比较板地做。</p>
-<p>首先不妨设 $a\le b\le c$，显然集合 $A,B$ 更容易是连通的，下文称 $A$ 中为红点，$B$ 中为蓝点。</p>
+<p>首先不妨设 <span class="arithmatex">\(a\le b\le c\)</span>，显然集合 <span class="arithmatex">\(A,B\)</span> 更容易是连通的，下文称 <span class="arithmatex">\(A\)</span> 中为红点，<span class="arithmatex">\(B\)</span> 中为蓝点。</p>
 <p>注意到任意一个点双都能双极定向，那么我们先建立原图的广义圆方树（下文简称圆方树），考虑寻找一个点双同时包含红蓝两色的点。不难想到点双有且仅有一个，首先必定存在至少一个解包含一个这样的点双，并且如果有两个同时包含红蓝两色的点双，那么中间那个割点不管取什么颜色都不对了。</p>
-<p>那么我们枚举每一个方点，找到它最大的子树大小（只算子树内圆点）记为 $sz$。</p>
+<p>那么我们枚举每一个方点，找到它最大的子树大小（只算子树内圆点）记为 <span class="arithmatex">\(sz\)</span>。</p>
 <ol>
-<li>若 $sz &gt; n-a$，那么显然这个方点不可能有解。</li>
-<li>否则，若 $sz\ge b$，那么必定能在这个子树内找到一个大小 $\ge b$ 的连通块同时，在子树外找到大小 $\ge a$ 的，直接构造即可。</li>
-<li>否则，我们对这个点双进行双极定向（随便找 $s\ne t$ 即可），由于每个子树大小都 $&lt; b$，那么前缀和不可能从小于 $a$ 突变到大于等于 $a+b$。由于 $a\le b\le c$，那么在第一个前缀大于等于 $a$ 的位置，后面的后缀必定大于等于 $c$ 于是也大于等于 $b$，那么就能构造出来的。</li>
+<li>若 <span class="arithmatex">\(sz &gt; n-a\)</span>，那么显然这个方点不可能有解。</li>
+<li>否则，若 <span class="arithmatex">\(sz\ge b\)</span>，那么必定能在这个子树内找到一个大小 <span class="arithmatex">\(\ge b\)</span> 的连通块同时，在子树外找到大小 <span class="arithmatex">\(\ge a\)</span> 的，直接构造即可。</li>
+<li>否则，我们对这个点双进行双极定向（随便找 <span class="arithmatex">\(s\ne t\)</span> 即可），由于每个子树大小都 <span class="arithmatex">\(&lt; b\)</span>，那么前缀和不可能从小于 <span class="arithmatex">\(a\)</span> 突变到大于等于 <span class="arithmatex">\(a+b\)</span>。由于 <span class="arithmatex">\(a\le b\le c\)</span>，那么在第一个前缀大于等于 <span class="arithmatex">\(a\)</span> 的位置，后面的后缀必定大于等于 <span class="arithmatex">\(c\)</span> 于是也大于等于 <span class="arithmatex">\(b\)</span>，那么就能构造出来的。</li>
 </ol>
 <p>显然代码不好写，现在正好已经很晚了于是留坑待补。</p>
 <h2 id="cf1073g-yet-another-lcp-problem">CF1073G Yet Another LCP Problem</h2>
@@ -6989,18 +7017,18 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一个长度为 $n$ 的字符串，有 $m$ 次询问。</li>
-<li>每次询问给定两个下标的集合 $A,B$，求出 $\sum_{i\in A}\sum_{j\in B}\mathrm{lcp}(i,j)$。</li>
-<li>此处 $\mathrm{lcp}(i,j)$ 表示后缀 $[i,n]$ 和后缀 $[j,n]$ 的最长公共前缀。</li>
-<li>$1\le n\le 2\times 10^5$</li>
+<li>给定一个长度为 <span class="arithmatex">\(n\)</span> 的字符串，有 <span class="arithmatex">\(m\)</span> 次询问。</li>
+<li>每次询问给定两个下标的集合 <span class="arithmatex">\(A,B\)</span>，求出 <span class="arithmatex">\(\sum_{i\in A}\sum_{j\in B}\mathrm{lcp}(i,j)\)</span>。</li>
+<li>此处 <span class="arithmatex">\(\mathrm{lcp}(i,j)\)</span> 表示后缀 <span class="arithmatex">\([i,n]\)</span> 和后缀 <span class="arithmatex">\([j,n]\)</span> 的最长公共前缀。</li>
+<li><span class="arithmatex">\(1\le n\le 2\times 10^5\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>一个完全不动脑子的 SAM 做法。</p>
-<p>首先把字符串 <code>std::reverse</code> 一下，不难想到两两在 parent tree 上求 $\mathrm{lca}$。</p>
-<p>然后发现可以将每个点点权置为为 $\mathrm{len_{\mathit{i}}}-\mathrm{len_{link_{\mathit{i}}}}$（除去根节点权值为 $0$），这样 $\mathrm{lca}$ 就转化为了两条延伸到 $1$ 的垂直树链交的点权和。</p>
-<p>然后直接树剖维护即可，注意链底的等价类不一定被全部包含，可以单独维护。总复杂度 $O(n\log^2 n)$。</p>
+<p>首先把字符串 <code>std::reverse</code> 一下，不难想到两两在 parent tree 上求 <span class="arithmatex">\(\mathrm{lca}\)</span>。</p>
+<p>然后发现可以将每个点点权置为为 <span class="arithmatex">\(\mathrm{len_{\mathit{i}}}-\mathrm{len_{link_{\mathit{i}}}}\)</span>（除去根节点权值为 <span class="arithmatex">\(0\)</span>），这样 <span class="arithmatex">\(\mathrm{lca}\)</span> 就转化为了两条延伸到 <span class="arithmatex">\(1\)</span> 的垂直树链交的点权和。</p>
+<p>然后直接树剖维护即可，注意链底的等价类不一定被全部包含，可以单独维护。总复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="succes">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

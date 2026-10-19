@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5924,64 +5952,64 @@
 
 <h1 id="sam">后缀自动机（SAM）学习笔记</h1>
 <h2 id="_1">算法引入</h2>
-<p>约定下标从 $1$ 开始，记 $s$ 以 $l$ 开头以 $r$ 结尾的子串为 $s[l:r]$。</p>
-<p>约定大写 $S$ 表示自动机状态集合，$S_0$ 表示初始状态，$\delta(x,c)$ 表示从状态 $x$ 走字符 $c$ 的转移边。</p>
+<p>约定下标从 <span class="arithmatex">\(1\)</span> 开始，记 <span class="arithmatex">\(s\)</span> 以 <span class="arithmatex">\(l\)</span> 开头以 <span class="arithmatex">\(r\)</span> 结尾的子串为 <span class="arithmatex">\(s[l:r]\)</span>。</p>
+<p>约定大写 <span class="arithmatex">\(S\)</span> 表示自动机状态集合，<span class="arithmatex">\(S_0\)</span> 表示初始状态，<span class="arithmatex">\(\delta(x,c)\)</span> 表示从状态 <span class="arithmatex">\(x\)</span> 走字符 <span class="arithmatex">\(c\)</span> 的转移边。</p>
 <p>在阅读本文前，请确保你已经了解字符串基础概念（至少你要知道自动机是什么吧），可以阅读我的<a href="../string_base/">这篇博客</a>。</p>
 <p>我曾经说过一句话：</p>
 <blockquote>
 <p>字符串算法就是一堆看起来没什么卵用实际上很有用的算法。</p>
 </blockquote>
 <p>后缀自动机（Suffix Automaton，简称 SAM）虽然目的明确，但是据高二学长 wqs 所说，他做 SAM 题从来没用过它原本的目的。</p>
-<p>SAM 被创造出来的目的是一个<strong>能接受指定 $S$ 字符串所有后缀</strong>的自动机，这样就能 $O(|t|)$ 地判断 $t$ 是不是 $s$ 的后缀了。</p>
-<p>考虑 KMP 是能接受<strong>以一个完整字符串 $s$ 为后缀的所有字符串</strong> $t$ 的自动机，而由于自动机数学模型每次只能读一个字符，故所有 $s$ 的前缀 $s'$ 对应的状态<strong>均在自动机状态集合 $S$ 中</strong>。</p>
-<p>而类比过来，SAM 的定义是能接受 <strong>指定字符串 $s$ 的所有后缀</strong>的自动机，那么显然，这个自动机必须保存 $s$ 的所有子串。所以 SAM 可以用来高效地处理子串信息。</p>
-<p>直观上，字符串的 SAM 可以理解为给定字符串的<strong>所有子串</strong>的压缩形式。值得注意的事实是，SAM 将所有的这些信息以高度压缩的形式储存。对于一个长度为 $n$ 的字符串，它的空间复杂度仅为 $O(n)$。此外，构造 SAM 的时间复杂度也仅为 $O(n)$。更准确地说，一个 SAM 最多有 $2n-1$ 个节点和 $3n-4$ 条转移边。</p>
+<p>SAM 被创造出来的目的是一个<strong>能接受指定 <span class="arithmatex">\(S\)</span> 字符串所有后缀</strong>的自动机，这样就能 <span class="arithmatex">\(O(|t|)\)</span> 地判断 <span class="arithmatex">\(t\)</span> 是不是 <span class="arithmatex">\(s\)</span> 的后缀了。</p>
+<p>考虑 KMP 是能接受<strong>以一个完整字符串 <span class="arithmatex">\(s\)</span> 为后缀的所有字符串</strong> <span class="arithmatex">\(t\)</span> 的自动机，而由于自动机数学模型每次只能读一个字符，故所有 <span class="arithmatex">\(s\)</span> 的前缀 <span class="arithmatex">\(s'\)</span> 对应的状态<strong>均在自动机状态集合 <span class="arithmatex">\(S\)</span> 中</strong>。</p>
+<p>而类比过来，SAM 的定义是能接受 <strong>指定字符串 <span class="arithmatex">\(s\)</span> 的所有后缀</strong>的自动机，那么显然，这个自动机必须保存 <span class="arithmatex">\(s\)</span> 的所有子串。所以 SAM 可以用来高效地处理子串信息。</p>
+<p>直观上，字符串的 SAM 可以理解为给定字符串的<strong>所有子串</strong>的压缩形式。值得注意的事实是，SAM 将所有的这些信息以高度压缩的形式储存。对于一个长度为 <span class="arithmatex">\(n\)</span> 的字符串，它的空间复杂度仅为 <span class="arithmatex">\(O(n)\)</span>。此外，构造 SAM 的时间复杂度也仅为 <span class="arithmatex">\(O(n)\)</span>。更准确地说，一个 SAM 最多有 <span class="arithmatex">\(2n-1\)</span> 个节点和 <span class="arithmatex">\(3n-4\)</span> 条转移边。</p>
 <h2 id="_2">算法简述</h2>
 <h3 id="_3">定义</h3>
-<p>字符串 $s$ 的 SAM 的定义是一个接受 $s$ 所有后缀的<strong>最小的 DFA</strong>（确定有限状态自动机）。</p>
+<p>字符串 <span class="arithmatex">\(s\)</span> 的 SAM 的定义是一个接受 <span class="arithmatex">\(s\)</span> 所有后缀的<strong>最小的 DFA</strong>（确定有限状态自动机）。</p>
 <h3 id="_4">应具有的性质</h3>
-<p>刚刚提到了，SAM 应保存 $s$ 的<strong>所有子串信息</strong>，即任意子串信息都能从初始状态 $S_0$ 经过若干条转移边得到。由于 SAM 是极小的，那么任意一条从 $S_0$ 出发的路径都应该是 $s$ 的一个子串。故 $s$ 的子串与自动机上从 $S_0$ 出发的路径应具有<strong>双射</strong>关系。为方便叙述，本文中称一条路径<strong>对应</strong>一个子串。</p>
-<p>由于自动机一次只能读一个字符，所以 $s[1:k]$ 的某个后缀必须通过 $s[1:k-1]$ 的某个后缀加上字符 $s_k$ 转移过来。故为了构建 $s[1:k]$ 的自动机，我们必须先构建 $s[1:k-1]$ 的自动机。换句话说，SAM 的构建应是一个<strong>在线</strong>的过程，对于任意一个时刻 $i$，自动机都应是可以使用的。所以我们考虑构建方法时可以直接从“如何在一个已经建好的 SAM 后面插入一个字符”的方面考虑。</p>
+<p>刚刚提到了，SAM 应保存 <span class="arithmatex">\(s\)</span> 的<strong>所有子串信息</strong>，即任意子串信息都能从初始状态 <span class="arithmatex">\(S_0\)</span> 经过若干条转移边得到。由于 SAM 是极小的，那么任意一条从 <span class="arithmatex">\(S_0\)</span> 出发的路径都应该是 <span class="arithmatex">\(s\)</span> 的一个子串。故 <span class="arithmatex">\(s\)</span> 的子串与自动机上从 <span class="arithmatex">\(S_0\)</span> 出发的路径应具有<strong>双射</strong>关系。为方便叙述，本文中称一条路径<strong>对应</strong>一个子串。</p>
+<p>由于自动机一次只能读一个字符，所以 <span class="arithmatex">\(s[1:k]\)</span> 的某个后缀必须通过 <span class="arithmatex">\(s[1:k-1]\)</span> 的某个后缀加上字符 <span class="arithmatex">\(s_k\)</span> 转移过来。故为了构建 <span class="arithmatex">\(s[1:k]\)</span> 的自动机，我们必须先构建 <span class="arithmatex">\(s[1:k-1]\)</span> 的自动机。换句话说，SAM 的构建应是一个<strong>在线</strong>的过程，对于任意一个时刻 <span class="arithmatex">\(i\)</span>，自动机都应是可以使用的。所以我们考虑构建方法时可以直接从“如何在一个已经建好的 SAM 后面插入一个字符”的方面考虑。</p>
 <h3 id="_5">如何构建</h3>
 <p>在本段中，请先不管代码实现以及复杂度问题。</p>
-<p>为方便叙述，称一个子串的<strong>出现位置</strong>为它最后一个字符的位置，比如 $s[3:5]$ 的出现位置就是 $5$。</p>
-<p>注意到对于多个本质相同的子串，由于我们读入字符串 $t$ 时只考虑它<strong>是不是</strong> $s$ 的子串，而不考虑它的位置。所以本质相同的子串显然可以合并为同一个状态。而转移就是这些子串所有结束位置 $e$ 的下一个字符 $s_{e+1}$。考虑令 $\mathrm{endpos_{\mathit{a}}}$ 表示子串 $a$ 的所有结束位置构成的集合。</p>
-<p>而容易发现，对于两个子串 $a,b$（钦定 $|a|\ge |b|$），若 $b$ 不是 $a$ 的后缀，那么 $\mathrm{endpos_{\mathit{b}}}\cap \mathrm{endpos_{\mathit{a}}}=\varnothing$，因为任意出现 $b$ 的位置都无法通过向前拓展的方式得到 $a$。而若 $b$ 是 $a$ 的后缀，那么有 $\mathrm{endpos_{\mathit{a}}}\subseteq \mathrm{endpos_{\mathit{b}}}$，因为任意出现了 $a$ 的位置都能通过删掉开头若干个字符得到 $b$，并且显然 $b$ 还可能在其他地方出现。那么显然，对于两个字符串 $a,b(|a|\ge|b|)$，它们 $\mathrm{endpos}$ 的交不是空集就是 $\mathrm{endpos_{\mathit{b}}}$</p>
-<p>然后着重考虑多个 $\mathrm{endpos}$ 相同的情况。容易想到若 $\mathrm{endpos}$ 那么对应的转移也相同，或许可以合并为同一个状态，考虑寻找性质。令 $t_1,t_2,\dots t_k$ 为某个满足 $\mathrm{endpos_{\mathit{t_1}}}=\mathrm{endpos_{\mathit{t_2}}}=\cdots=\mathrm{endpos_{\mathit{t_k}}}$ 的极大字符串集合（“极大”是指不存在其它字符串 $\mathrm{endpos}$ 和它们相同），且钦定 $|t_1|\ge |t_2|\ge\dots\ge |t_k|$。首先注意到两长度相同的本质不同子串 $\mathrm{endpos}$ 显然不可能相同，故上面对 $t$ 排列的要求就可以不取等了。由于它们的交不为空，那么所有 $t_i$ 必定都是 $t_1$ 的后缀，不妨从 $t_1$ 每次删掉开头字符考虑，容易发现每删掉一个字符，$\mathrm{endpos}$ 内部的元素是单调变多的，也就是说随着删开头字符，不可能出现 $\mathrm{endpos}$ 从等于 $\mathrm{endpos_{\mathit{t_1}}}$ 变成不等于 $\mathrm{endpos_{\mathit{t_1}}}$ 又变回 $\mathrm{endpos_{\mathit{t_1}}}$ 的情况。换句话说，$\forall i\in[1,k),t_{i+1}$ 必定是由 $t_i$ 删掉开头字符得到的。</p>
-<p>考虑把这些 $t_i$ 视为同一个等价类 $x$，那么根据之前的猜想，可以把一个等价类作为一个状态（下文的所有 $x$ 以及带任意下标的 $x$ 若没有另行说明均指代某自动机状态或其代表的等价类）。如果删掉 $t_k$ 的开头字符得到 $t'$，它必定属于另一个等价类，记为 $\mathrm{link_{\mathit{x}}}$。容易发现 $x\to \mathrm{link_{\mathit{x}}}$ 的关系形成了一个以初始状态 $S_0$ 为根的树形结构。其中对于任意一条树边，有 $\mathrm{endpos_{\mathit{x}}}\subsetneq \mathrm{endpos_{link_{\mathit{x}}}}$，对于任意一个 $x$，它的所有儿子对应的 $\mathrm{endpos}$ 必定互不相交（因为如果两 $\mathrm{endpos}$ 相交，那么它们对应的状态必定是祖先和后代的关系）。</p>
-<p>对于一个等价类 $x$，它必定有一个最长的字符串 $\mathrm{longest_{\mathit{x}}}$，它的长度记作 $\mathrm{len_{\mathit{x}}}$。以及最短的字符串 $\mathrm{shortest_{\mathit{x}}}$，它的长度记作 $\mathrm{minlen_{\mathit{x}}}$。只要找到了这两个字符串就能确定等价类 $x$ 内所有字符串。注意到 $\mathrm{len_{link_{\mathit{x}}}}+1=\mathrm{minlen_{\mathit{x}}}$（除非 $x=S_0$），所以我们其实不需要维护 $\mathrm{minlen_{\mathit{x}}}$ 和 $\mathrm{shortest_{\mathit{x}}}$。在后文我会说明其实 $\mathrm{longest_{\mathit{x}}}$ 也不需要维护。此外，容易发现从任意结点 $x$ 每次跳 $\mathrm{link_{\mathit{x}}}$ 直到 $S_0$，路径上所有等价类内字符串恰好是从 $\mathrm{longest_{\mathit{x}}}$ 开始每次删掉开头字符直到变为空串的所有字符串。</p>
-<p>根据前文的猜想，考虑已经构建好了 $s[1:k-1]$ 的 SAM，如何插入 $s_k$，令 $c=s_k$。</p>
-<p>首先显然地，子串 $s[1:k]$ 此时必定只出现了一次。那么新建一个结点 $x$ 包含所有<strong>第一次出现</strong> 的字符串，显然它们必然都是 $s[1:k]$ 的后缀，那么设 $x_0$ 为 $s[1:k-1]$ 所在的自动机状态。那么有 $\mathrm{len_{\mathit{x}}}=\mathrm{len_{\mathit{x_0}}}+1$ 显然所有<strong>有可能</strong>存在转移边 $\delta(x',c)=x$ 的 $x'$ 必定是 $x_0$ 的<strong>祖先</strong>（包括它自己）。</p>
-<p>考虑从 $x_0$ 开始一步一步往上跳 $\mathrm{link}$，最下面的一些状态本来就不存在转移边 $\delta(x',c)$，可以直接令 $\delta(x',c)=x$。考虑找到第一个存在 $\delta(x',c)$ 的 $x'$，记这个 $x'$ 为 $p$，又记 $\delta(p,c)=q$（注意可能找不到这个 $x'$，即 $\delta(S_0,c)$ 不存在，但是如果 $x'=S_0$ 也要进行下一步）。接下来分两种情况：</p>
+<p>为方便叙述，称一个子串的<strong>出现位置</strong>为它最后一个字符的位置，比如 <span class="arithmatex">\(s[3:5]\)</span> 的出现位置就是 <span class="arithmatex">\(5\)</span>。</p>
+<p>注意到对于多个本质相同的子串，由于我们读入字符串 <span class="arithmatex">\(t\)</span> 时只考虑它<strong>是不是</strong> <span class="arithmatex">\(s\)</span> 的子串，而不考虑它的位置。所以本质相同的子串显然可以合并为同一个状态。而转移就是这些子串所有结束位置 <span class="arithmatex">\(e\)</span> 的下一个字符 <span class="arithmatex">\(s_{e+1}\)</span>。考虑令 <span class="arithmatex">\(\mathrm{endpos_{\mathit{a}}}\)</span> 表示子串 <span class="arithmatex">\(a\)</span> 的所有结束位置构成的集合。</p>
+<p>而容易发现，对于两个子串 <span class="arithmatex">\(a,b\)</span>（钦定 <span class="arithmatex">\(|a|\ge |b|\)</span>），若 <span class="arithmatex">\(b\)</span> 不是 <span class="arithmatex">\(a\)</span> 的后缀，那么 <span class="arithmatex">\(\mathrm{endpos_{\mathit{b}}}\cap \mathrm{endpos_{\mathit{a}}}=\varnothing\)</span>，因为任意出现 <span class="arithmatex">\(b\)</span> 的位置都无法通过向前拓展的方式得到 <span class="arithmatex">\(a\)</span>。而若 <span class="arithmatex">\(b\)</span> 是 <span class="arithmatex">\(a\)</span> 的后缀，那么有 <span class="arithmatex">\(\mathrm{endpos_{\mathit{a}}}\subseteq \mathrm{endpos_{\mathit{b}}}\)</span>，因为任意出现了 <span class="arithmatex">\(a\)</span> 的位置都能通过删掉开头若干个字符得到 <span class="arithmatex">\(b\)</span>，并且显然 <span class="arithmatex">\(b\)</span> 还可能在其他地方出现。那么显然，对于两个字符串 <span class="arithmatex">\(a,b(|a|\ge|b|)\)</span>，它们 <span class="arithmatex">\(\mathrm{endpos}\)</span> 的交不是空集就是 <span class="arithmatex">\(\mathrm{endpos_{\mathit{b}}}\)</span></p>
+<p>然后着重考虑多个 <span class="arithmatex">\(\mathrm{endpos}\)</span> 相同的情况。容易想到若 <span class="arithmatex">\(\mathrm{endpos}\)</span> 那么对应的转移也相同，或许可以合并为同一个状态，考虑寻找性质。令 <span class="arithmatex">\(t_1,t_2,\dots t_k\)</span> 为某个满足 <span class="arithmatex">\(\mathrm{endpos_{\mathit{t_1}}}=\mathrm{endpos_{\mathit{t_2}}}=\cdots=\mathrm{endpos_{\mathit{t_k}}}\)</span> 的极大字符串集合（“极大”是指不存在其它字符串 <span class="arithmatex">\(\mathrm{endpos}\)</span> 和它们相同），且钦定 <span class="arithmatex">\(|t_1|\ge |t_2|\ge\dots\ge |t_k|\)</span>。首先注意到两长度相同的本质不同子串 <span class="arithmatex">\(\mathrm{endpos}\)</span> 显然不可能相同，故上面对 <span class="arithmatex">\(t\)</span> 排列的要求就可以不取等了。由于它们的交不为空，那么所有 <span class="arithmatex">\(t_i\)</span> 必定都是 <span class="arithmatex">\(t_1\)</span> 的后缀，不妨从 <span class="arithmatex">\(t_1\)</span> 每次删掉开头字符考虑，容易发现每删掉一个字符，<span class="arithmatex">\(\mathrm{endpos}\)</span> 内部的元素是单调变多的，也就是说随着删开头字符，不可能出现 <span class="arithmatex">\(\mathrm{endpos}\)</span> 从等于 <span class="arithmatex">\(\mathrm{endpos_{\mathit{t_1}}}\)</span> 变成不等于 <span class="arithmatex">\(\mathrm{endpos_{\mathit{t_1}}}\)</span> 又变回 <span class="arithmatex">\(\mathrm{endpos_{\mathit{t_1}}}\)</span> 的情况。换句话说，<span class="arithmatex">\(\forall i\in[1,k),t_{i+1}\)</span> 必定是由 <span class="arithmatex">\(t_i\)</span> 删掉开头字符得到的。</p>
+<p>考虑把这些 <span class="arithmatex">\(t_i\)</span> 视为同一个等价类 <span class="arithmatex">\(x\)</span>，那么根据之前的猜想，可以把一个等价类作为一个状态（下文的所有 <span class="arithmatex">\(x\)</span> 以及带任意下标的 <span class="arithmatex">\(x\)</span> 若没有另行说明均指代某自动机状态或其代表的等价类）。如果删掉 <span class="arithmatex">\(t_k\)</span> 的开头字符得到 <span class="arithmatex">\(t'\)</span>，它必定属于另一个等价类，记为 <span class="arithmatex">\(\mathrm{link_{\mathit{x}}}\)</span>。容易发现 <span class="arithmatex">\(x\to \mathrm{link_{\mathit{x}}}\)</span> 的关系形成了一个以初始状态 <span class="arithmatex">\(S_0\)</span> 为根的树形结构。其中对于任意一条树边，有 <span class="arithmatex">\(\mathrm{endpos_{\mathit{x}}}\subsetneq \mathrm{endpos_{link_{\mathit{x}}}}\)</span>，对于任意一个 <span class="arithmatex">\(x\)</span>，它的所有儿子对应的 <span class="arithmatex">\(\mathrm{endpos}\)</span> 必定互不相交（因为如果两 <span class="arithmatex">\(\mathrm{endpos}\)</span> 相交，那么它们对应的状态必定是祖先和后代的关系）。</p>
+<p>对于一个等价类 <span class="arithmatex">\(x\)</span>，它必定有一个最长的字符串 <span class="arithmatex">\(\mathrm{longest_{\mathit{x}}}\)</span>，它的长度记作 <span class="arithmatex">\(\mathrm{len_{\mathit{x}}}\)</span>。以及最短的字符串 <span class="arithmatex">\(\mathrm{shortest_{\mathit{x}}}\)</span>，它的长度记作 <span class="arithmatex">\(\mathrm{minlen_{\mathit{x}}}\)</span>。只要找到了这两个字符串就能确定等价类 <span class="arithmatex">\(x\)</span> 内所有字符串。注意到 <span class="arithmatex">\(\mathrm{len_{link_{\mathit{x}}}}+1=\mathrm{minlen_{\mathit{x}}}\)</span>（除非 <span class="arithmatex">\(x=S_0\)</span>），所以我们其实不需要维护 <span class="arithmatex">\(\mathrm{minlen_{\mathit{x}}}\)</span> 和 <span class="arithmatex">\(\mathrm{shortest_{\mathit{x}}}\)</span>。在后文我会说明其实 <span class="arithmatex">\(\mathrm{longest_{\mathit{x}}}\)</span> 也不需要维护。此外，容易发现从任意结点 <span class="arithmatex">\(x\)</span> 每次跳 <span class="arithmatex">\(\mathrm{link_{\mathit{x}}}\)</span> 直到 <span class="arithmatex">\(S_0\)</span>，路径上所有等价类内字符串恰好是从 <span class="arithmatex">\(\mathrm{longest_{\mathit{x}}}\)</span> 开始每次删掉开头字符直到变为空串的所有字符串。</p>
+<p>根据前文的猜想，考虑已经构建好了 <span class="arithmatex">\(s[1:k-1]\)</span> 的 SAM，如何插入 <span class="arithmatex">\(s_k\)</span>，令 <span class="arithmatex">\(c=s_k\)</span>。</p>
+<p>首先显然地，子串 <span class="arithmatex">\(s[1:k]\)</span> 此时必定只出现了一次。那么新建一个结点 <span class="arithmatex">\(x\)</span> 包含所有<strong>第一次出现</strong> 的字符串，显然它们必然都是 <span class="arithmatex">\(s[1:k]\)</span> 的后缀，那么设 <span class="arithmatex">\(x_0\)</span> 为 <span class="arithmatex">\(s[1:k-1]\)</span> 所在的自动机状态。那么有 <span class="arithmatex">\(\mathrm{len_{\mathit{x}}}=\mathrm{len_{\mathit{x_0}}}+1\)</span> 显然所有<strong>有可能</strong>存在转移边 <span class="arithmatex">\(\delta(x',c)=x\)</span> 的 <span class="arithmatex">\(x'\)</span> 必定是 <span class="arithmatex">\(x_0\)</span> 的<strong>祖先</strong>（包括它自己）。</p>
+<p>考虑从 <span class="arithmatex">\(x_0\)</span> 开始一步一步往上跳 <span class="arithmatex">\(\mathrm{link}\)</span>，最下面的一些状态本来就不存在转移边 <span class="arithmatex">\(\delta(x',c)\)</span>，可以直接令 <span class="arithmatex">\(\delta(x',c)=x\)</span>。考虑找到第一个存在 <span class="arithmatex">\(\delta(x',c)\)</span> 的 <span class="arithmatex">\(x'\)</span>，记这个 <span class="arithmatex">\(x'\)</span> 为 <span class="arithmatex">\(p\)</span>，又记 <span class="arithmatex">\(\delta(p,c)=q\)</span>（注意可能找不到这个 <span class="arithmatex">\(x'\)</span>，即 <span class="arithmatex">\(\delta(S_0,c)\)</span> 不存在，但是如果 <span class="arithmatex">\(x'=S_0\)</span> 也要进行下一步）。接下来分两种情况：</p>
 <ol>
-<li>$\mathrm{len_{\mathit{q}}}=\mathrm{len_{\mathit{p}}}+1$</li>
+<li><span class="arithmatex">\(\mathrm{len_{\mathit{q}}}=\mathrm{len_{\mathit{p}}}+1\)</span></li>
 </ol>
-<p>说明 $q$ 内所有字符串均能通过 $p$ 及其祖先内的字符串加上字符 $c$ 得到，即它们全都是子串 $s[1:k]$ 的后缀，由于 $p$ 是 $x_0$ 的祖先中最深的拥有 $\delta(p,c)$ 转移边的结点，也就是说 $\mathrm{longest_{\mathit{q}}}$ 是从 $s[1:k]$ 开始依次删除开头字符能得到的第一个 $\mathrm{endpos}$ 与 $x$ 不同的字符串，即 $q=\mathrm{link_{\mathit{x}}}$。</p>
+<p>说明 <span class="arithmatex">\(q\)</span> 内所有字符串均能通过 <span class="arithmatex">\(p\)</span> 及其祖先内的字符串加上字符 <span class="arithmatex">\(c\)</span> 得到，即它们全都是子串 <span class="arithmatex">\(s[1:k]\)</span> 的后缀，由于 <span class="arithmatex">\(p\)</span> 是 <span class="arithmatex">\(x_0\)</span> 的祖先中最深的拥有 <span class="arithmatex">\(\delta(p,c)\)</span> 转移边的结点，也就是说 <span class="arithmatex">\(\mathrm{longest_{\mathit{q}}}\)</span> 是从 <span class="arithmatex">\(s[1:k]\)</span> 开始依次删除开头字符能得到的第一个 <span class="arithmatex">\(\mathrm{endpos}\)</span> 与 <span class="arithmatex">\(x\)</span> 不同的字符串，即 <span class="arithmatex">\(q=\mathrm{link_{\mathit{x}}}\)</span>。</p>
 <ol start="2">
-<li>$\mathrm{len_{\mathit{q}}}\ne \mathrm{len_{\mathit{p}}}+1$。</li>
+<li><span class="arithmatex">\(\mathrm{len_{\mathit{q}}}\ne \mathrm{len_{\mathit{p}}}+1\)</span>。</li>
 </ol>
-<p>此时 $q$ 只有一部分（更具体地说，是长度小于 $len_p+1$ 的那一部分）能通过 $p$ 及其祖先内的字符串加上字符 $c$ 得到，考虑把这一部分分裂出来，得到一个新状态 $q'$，然后剩下的字符串视作 $q''$。</p>
-<p>考虑 $q',q''$ 的信息（$\mathrm{len},\mathrm{link},\delta$）应该怎么赋。</p>
-<p>首先对于 $\delta$，由于 $q$ 的转移边 $q'$ 和 $q''$ 显然都能转移（在对应位置都出现过），所以直接复制即可。</p>
-<p>然后是 $\mathrm{link}$，显然 $\mathrm{link_{\mathit{x}}}=\mathrm{link_{\mathit{q''}}}=q',\mathrm{link_{\mathit{q'}}}=\mathrm{link_{\mathit{q}}}$。</p>
-<p>接下来是 $\mathrm{len}$，根据定义可得 $\mathrm{len_{\mathit{q'}}}=len_{p}+1,\mathrm{len_{\mathit{q''}}}=\mathrm{len_{\mathit{q}}}$。</p>
-<p>然后从 $p$ 往上的一段链本来转移到 $q$，由于从 $p$ 分裂开，故这些 $\delta'(p',c)$ 一直到某位置的 $\delta(p',c)$ 是 $q$ 的祖先为止都要重新赋值为 $q'$。</p>
-<p>具体实现的时候，可以只新建一个 $q'$，然后 $q''$ 直接从 $q$ 上修改得到。</p>
-<p>然后比如你可能要维护 $\mathrm{endpos}$ 的各种信息。在离线的情况下，假如你只维护 $\mathrm{endpos}$ 的大小那比较简单，每次新建的结点 $x$ 大小是 $1$（加上子树信息，它可能在后面得到儿子），其余结点就是一个子树和（考虑等价类的性质）。如果要维护 $\mathrm{endpos}$ 内的元素，需要用一个叫“线段树的可持久化合并”的东西，具体过程大概就是在线段树合并时新建一个版本。如果强制在线，可能需要用 LCT 维护（虽然我不知道 LCT 是什么），因为所有点的 $\mathrm{link}$ 随时都会改变。</p>
+<p>此时 <span class="arithmatex">\(q\)</span> 只有一部分（更具体地说，是长度小于 <span class="arithmatex">\(len_p+1\)</span> 的那一部分）能通过 <span class="arithmatex">\(p\)</span> 及其祖先内的字符串加上字符 <span class="arithmatex">\(c\)</span> 得到，考虑把这一部分分裂出来，得到一个新状态 <span class="arithmatex">\(q'\)</span>，然后剩下的字符串视作 <span class="arithmatex">\(q''\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(q',q''\)</span> 的信息（<span class="arithmatex">\(\mathrm{len},\mathrm{link},\delta\)</span>）应该怎么赋。</p>
+<p>首先对于 <span class="arithmatex">\(\delta\)</span>，由于 <span class="arithmatex">\(q\)</span> 的转移边 <span class="arithmatex">\(q'\)</span> 和 <span class="arithmatex">\(q''\)</span> 显然都能转移（在对应位置都出现过），所以直接复制即可。</p>
+<p>然后是 <span class="arithmatex">\(\mathrm{link}\)</span>，显然 <span class="arithmatex">\(\mathrm{link_{\mathit{x}}}=\mathrm{link_{\mathit{q''}}}=q',\mathrm{link_{\mathit{q'}}}=\mathrm{link_{\mathit{q}}}\)</span>。</p>
+<p>接下来是 <span class="arithmatex">\(\mathrm{len}\)</span>，根据定义可得 <span class="arithmatex">\(\mathrm{len_{\mathit{q'}}}=len_{p}+1,\mathrm{len_{\mathit{q''}}}=\mathrm{len_{\mathit{q}}}\)</span>。</p>
+<p>然后从 <span class="arithmatex">\(p\)</span> 往上的一段链本来转移到 <span class="arithmatex">\(q\)</span>，由于从 <span class="arithmatex">\(p\)</span> 分裂开，故这些 <span class="arithmatex">\(\delta'(p',c)\)</span> 一直到某位置的 <span class="arithmatex">\(\delta(p',c)\)</span> 是 <span class="arithmatex">\(q\)</span> 的祖先为止都要重新赋值为 <span class="arithmatex">\(q'\)</span>。</p>
+<p>具体实现的时候，可以只新建一个 <span class="arithmatex">\(q'\)</span>，然后 <span class="arithmatex">\(q''\)</span> 直接从 <span class="arithmatex">\(q\)</span> 上修改得到。</p>
+<p>然后比如你可能要维护 <span class="arithmatex">\(\mathrm{endpos}\)</span> 的各种信息。在离线的情况下，假如你只维护 <span class="arithmatex">\(\mathrm{endpos}\)</span> 的大小那比较简单，每次新建的结点 <span class="arithmatex">\(x\)</span> 大小是 <span class="arithmatex">\(1\)</span>（加上子树信息，它可能在后面得到儿子），其余结点就是一个子树和（考虑等价类的性质）。如果要维护 <span class="arithmatex">\(\mathrm{endpos}\)</span> 内的元素，需要用一个叫“线段树的可持久化合并”的东西，具体过程大概就是在线段树合并时新建一个版本。如果强制在线，可能需要用 LCT 维护（虽然我不知道 LCT 是什么），因为所有点的 <span class="arithmatex">\(\mathrm{link}\)</span> 随时都会改变。</p>
 <h3 id="_6">复杂度证明</h3>
-<p>前文说过 SAM 的状态数和转移数都是 $O(n)$ 的，并且点数上界是 $2n-1$，边数是 $3n-4$。</p>
+<p>前文说过 SAM 的状态数和转移数都是 <span class="arithmatex">\(O(n)\)</span> 的，并且点数上界是 <span class="arithmatex">\(2n-1\)</span>，边数是 <span class="arithmatex">\(3n-4\)</span>。</p>
 <hr />
-<p>首先点数很好证，初始只有一个结点 $S_0$，每一次插入字符至多增加两个结点（$x,q'$），但是前两次显然不可能分裂出 $q'$。能卡到这个上界的字符串必定形如 <code>abbbbb...</code>，因为第三次及以后每次都会分裂出一个 $q'$。</p>
+<p>首先点数很好证，初始只有一个结点 <span class="arithmatex">\(S_0\)</span>，每一次插入字符至多增加两个结点（<span class="arithmatex">\(x,q'\)</span>），但是前两次显然不可能分裂出 <span class="arithmatex">\(q'\)</span>。能卡到这个上界的字符串必定形如 <code>abbbbb...</code>，因为第三次及以后每次都会分裂出一个 <span class="arithmatex">\(q'\)</span>。</p>
 <hr />
-<p>然后是边数。容易发现对于任意一个状态 $q$，都存在一个转移 $(p,q)$ 使得 $\mathrm{len_{\mathit{q}}}=\mathrm{len_{\mathit{p}}}+1$。我们称这样的转移是<strong>连续的</strong>。</p>
-<p>容易发现连续的边必定能组成一棵以 $S_0$ 为根的外向树，故这一部分边数上界是 $2n-2$。考虑非连续转移的数量。</p>
-<p>注意到对于一个非连续转移 $u\to v$，必定存在唯一的一条只走连续转移从 $S_0$ 到 $u$ 的路径。然后从 $v$ 开始，走到以 $S_0\to v$ 路径对应的子串开头的后缀中最长的一个所对应的接收状态。容易发现 $u\to v$ 是这一个后缀中<strong>第一条</strong>非连续转移边。我们可以由此建立一个映射关系 $f(e)$，表示以 $e$ 为第一条非连续转移边对应的后缀。容易发现若 $f(a)=f(b)$，那么必然有 $a=b$（因为一个后缀在自动机上最多只存在一条<strong>第一条</strong>转移边）。这说明非连续转移边数量<strong>小于等于</strong>后缀数量。并且容易发现，对于 $s[1:n]$ 后缀，它对应的路径中间显然不可能有非连续转移边（$s[1:n]$ 每次走的路径就是每次插入的 $x_0\to x$），故我们能得到转移数上界为 $3n-3$。但是由于状态数上界 $2n-1$ 只会在形如 <code>abbb...</code> 的字符串中产生，但此时边界数小于 $3n-3$。故我们能得到转移数的上界是 $3n-4$，字符串 <code>abbb...bbbc</code> 就能卡到这个上界，需要注意不一定能卡到上界的字符串都形如这样。</p>
+<p>然后是边数。容易发现对于任意一个状态 <span class="arithmatex">\(q\)</span>，都存在一个转移 <span class="arithmatex">\((p,q)\)</span> 使得 <span class="arithmatex">\(\mathrm{len_{\mathit{q}}}=\mathrm{len_{\mathit{p}}}+1\)</span>。我们称这样的转移是<strong>连续的</strong>。</p>
+<p>容易发现连续的边必定能组成一棵以 <span class="arithmatex">\(S_0\)</span> 为根的外向树，故这一部分边数上界是 <span class="arithmatex">\(2n-2\)</span>。考虑非连续转移的数量。</p>
+<p>注意到对于一个非连续转移 <span class="arithmatex">\(u\to v\)</span>，必定存在唯一的一条只走连续转移从 <span class="arithmatex">\(S_0\)</span> 到 <span class="arithmatex">\(u\)</span> 的路径。然后从 <span class="arithmatex">\(v\)</span> 开始，走到以 <span class="arithmatex">\(S_0\to v\)</span> 路径对应的子串开头的后缀中最长的一个所对应的接收状态。容易发现 <span class="arithmatex">\(u\to v\)</span> 是这一个后缀中<strong>第一条</strong>非连续转移边。我们可以由此建立一个映射关系 <span class="arithmatex">\(f(e)\)</span>，表示以 <span class="arithmatex">\(e\)</span> 为第一条非连续转移边对应的后缀。容易发现若 <span class="arithmatex">\(f(a)=f(b)\)</span>，那么必然有 <span class="arithmatex">\(a=b\)</span>（因为一个后缀在自动机上最多只存在一条<strong>第一条</strong>转移边）。这说明非连续转移边数量<strong>小于等于</strong>后缀数量。并且容易发现，对于 <span class="arithmatex">\(s[1:n]\)</span> 后缀，它对应的路径中间显然不可能有非连续转移边（<span class="arithmatex">\(s[1:n]\)</span> 每次走的路径就是每次插入的 <span class="arithmatex">\(x_0\to x\)</span>），故我们能得到转移数上界为 <span class="arithmatex">\(3n-3\)</span>。但是由于状态数上界 <span class="arithmatex">\(2n-1\)</span> 只会在形如 <code>abbb...</code> 的字符串中产生，但此时边界数小于 <span class="arithmatex">\(3n-3\)</span>。故我们能得到转移数的上界是 <span class="arithmatex">\(3n-4\)</span>，字符串 <code>abbb...bbbc</code> 就能卡到这个上界，需要注意不一定能卡到上界的字符串都形如这样。</p>
 <hr />
 <p>接下来思考构建过程中的时间复杂度。</p>
-<p>首先对于暴力从 $x_0$ 向上跳找到 $p$，由于每跳一次就会新增一条转移边，所以这一部分总复杂度就是 $O(n)$ 的。</p>
-<p>然后下一步若不分裂 $q$ 复杂度显然是 $O(1)$ 的。若要分裂 $q$，$\mathrm{len},\mathrm{link}$ 的更新都是 $O(1)$ 的，$\delta$ 的更新确实没办法，是 $O(|\Sigma|)$ 的（但是如果你用 <code>map</code> 存边就是 $O(\log |\Sigma|)$ 的，因为你每次操作都会新增一个转移，均摊是插入次数 $O(1)$ 的，但是你插入一条边是 $O(\log |\Sigma|)$ 的）。最后考虑本来指向 $q$ 的转移边更新为 $q'$ 的复杂度。</p>
+<p>首先对于暴力从 <span class="arithmatex">\(x_0\)</span> 向上跳找到 <span class="arithmatex">\(p\)</span>，由于每跳一次就会新增一条转移边，所以这一部分总复杂度就是 <span class="arithmatex">\(O(n)\)</span> 的。</p>
+<p>然后下一步若不分裂 <span class="arithmatex">\(q\)</span> 复杂度显然是 <span class="arithmatex">\(O(1)\)</span> 的。若要分裂 <span class="arithmatex">\(q\)</span>，<span class="arithmatex">\(\mathrm{len},\mathrm{link}\)</span> 的更新都是 <span class="arithmatex">\(O(1)\)</span> 的，<span class="arithmatex">\(\delta\)</span> 的更新确实没办法，是 <span class="arithmatex">\(O(|\Sigma|)\)</span> 的（但是如果你用 <code>map</code> 存边就是 <span class="arithmatex">\(O(\log |\Sigma|)\)</span> 的，因为你每次操作都会新增一个转移，均摊是插入次数 <span class="arithmatex">\(O(1)\)</span> 的，但是你插入一条边是 <span class="arithmatex">\(O(\log |\Sigma|)\)</span> 的）。最后考虑本来指向 <span class="arithmatex">\(q\)</span> 的转移边更新为 <span class="arithmatex">\(q'\)</span> 的复杂度。</p>
 <p>仍沿用之前实现过程中的变量名。</p>
-<p>首先 $p$ 必定是 $\mathrm{link_{\mathit{x_{\mathrm{0}}}}}$ 或其祖先，然后一直到某个 $p'$ 使得 $\delta(p',c)\ne q$ 为止的一段都需要赋值。这个 $p'$ 必然是 $\mathrm{link_{link_{\mathit{x_{\mathrm{0}}}}}}$ 或其祖先，并且它会转移到 $\mathrm{link_{link_{\mathit{x}}}}$，即 $\mathrm{len_{link_{link_{\mathit{x}}}}}=\mathrm{len_{\mathit{p'}}}+1$。那么每跳一次都会使 $\mathrm{len_{\mathit{p'}}}$ 至少减少 $1$，而转移到的 $\mathrm{link_{link_{\mathit{x}}}}$ 就会成为下一次“可能的最大的 $p'$”，那么假如你取一个指针维护这个东西，他就至多会变化 $O(n)$ 次（虽然一般不这么写）。</p>
+<p>首先 <span class="arithmatex">\(p\)</span> 必定是 <span class="arithmatex">\(\mathrm{link_{\mathit{x_{\mathrm{0}}}}}\)</span> 或其祖先，然后一直到某个 <span class="arithmatex">\(p'\)</span> 使得 <span class="arithmatex">\(\delta(p',c)\ne q\)</span> 为止的一段都需要赋值。这个 <span class="arithmatex">\(p'\)</span> 必然是 <span class="arithmatex">\(\mathrm{link_{link_{\mathit{x_{\mathrm{0}}}}}}\)</span> 或其祖先，并且它会转移到 <span class="arithmatex">\(\mathrm{link_{link_{\mathit{x}}}}\)</span>，即 <span class="arithmatex">\(\mathrm{len_{link_{link_{\mathit{x}}}}}=\mathrm{len_{\mathit{p'}}}+1\)</span>。那么每跳一次都会使 <span class="arithmatex">\(\mathrm{len_{\mathit{p'}}}\)</span> 至少减少 <span class="arithmatex">\(1\)</span>，而转移到的 <span class="arithmatex">\(\mathrm{link_{link_{\mathit{x}}}}\)</span> 就会成为下一次“可能的最大的 <span class="arithmatex">\(p'\)</span>”，那么假如你取一个指针维护这个东西，他就至多会变化 <span class="arithmatex">\(O(n)\)</span> 次（虽然一般不这么写）。</p>
 <details class="success">
 <summary><a href="https://www.luogu.com.cn/problem/P3804">模板题</a>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6060,25 +6088,25 @@
 </span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>把 $\mathrm{link_{0}}$ 设为 $-1$，此处 $-1$ 相当于 $\mathrm{null}$ 状态，即一个不能到达任何接收状态的状态。这样实现起来也更方便。</li>
+<li>把 <span class="arithmatex">\(\mathrm{link_{0}}\)</span> 设为 <span class="arithmatex">\(-1\)</span>，此处 <span class="arithmatex">\(-1\)</span> 相当于 <span class="arithmatex">\(\mathrm{null}\)</span> 状态，即一个不能到达任何接收状态的状态。这样实现起来也更方便。</li>
 </ol>
 </details>
 <h3 id="_7">其它性质</h3>
 <p>然后在彻底理解 SAM 的正确性后，我们还能发现一些新的性质。</p>
-<p>显然 $\mathrm{link}$ 关系会形成一棵树，我们称之为 parent tree。</p>
-<p>SAM 肯定是一个 DAG。因为任意一个转移 $(p,q)$，都有 $\mathrm{len_{\mathit{q}}}\le \mathrm{len_{\mathit{p}}}+1$，显然不会形成环。并且这个 DAG 的总路径数小到令人发指，是 $O(n^2)$ 级别（原串中本质不同子串个数）的（随机 DAG 路径数是指数级别的）。因为任意一个是原串子串的字符串都有唯一一条路径与它对应，而对于任意一条不是原串子串的字符串，都必定不存在一条对应的路径。</p>
-<p>并且，同一个等价类内部不可能出现“存在两字符串 $s,t$，使得 $s$ 在 $t$ 中能匹配两次”的情况。因为等价类的意义是 $\mathrm{endpos}$ 相同，如果 $s$ 能匹配两次 $t$ 那么必然 $t$ 在前面一次也出现了，这就无限递归了。</p>
+<p>显然 <span class="arithmatex">\(\mathrm{link}\)</span> 关系会形成一棵树，我们称之为 parent tree。</p>
+<p>SAM 肯定是一个 DAG。因为任意一个转移 <span class="arithmatex">\((p,q)\)</span>，都有 <span class="arithmatex">\(\mathrm{len_{\mathit{q}}}\le \mathrm{len_{\mathit{p}}}+1\)</span>，显然不会形成环。并且这个 DAG 的总路径数小到令人发指，是 <span class="arithmatex">\(O(n^2)\)</span> 级别（原串中本质不同子串个数）的（随机 DAG 路径数是指数级别的）。因为任意一个是原串子串的字符串都有唯一一条路径与它对应，而对于任意一条不是原串子串的字符串，都必定不存在一条对应的路径。</p>
+<p>并且，同一个等价类内部不可能出现“存在两字符串 <span class="arithmatex">\(s,t\)</span>，使得 <span class="arithmatex">\(s\)</span> 在 <span class="arithmatex">\(t\)</span> 中能匹配两次”的情况。因为等价类的意义是 <span class="arithmatex">\(\mathrm{endpos}\)</span> 相同，如果 <span class="arithmatex">\(s\)</span> 能匹配两次 <span class="arithmatex">\(t\)</span> 那么必然 <span class="arithmatex">\(t\)</span> 在前面一次也出现了，这就无限递归了。</p>
 <h2 id="_8">常见用法</h2>
 <p>考虑直接报菜名（排序不分先后，但是大致是按难度排的）。</p>
 <ol>
 <li>先给定文本串，再给定模式串的多模式匹配</li>
 </ol>
-<p>建出文本串 $s$ 的 SAM 后读入模式串 $t_i$ 即可，如果能完整读入说明匹配。复杂度 $O(|s|+\sum |t_i|)$。</p>
+<p>建出文本串 <span class="arithmatex">\(s\)</span> 的 SAM 后读入模式串 <span class="arithmatex">\(t_i\)</span> 即可，如果能完整读入说明匹配。复杂度 <span class="arithmatex">\(O(|s|+\sum |t_i|)\)</span>。</p>
 <ol start="2">
 <li>本质不同子串个数</li>
 </ol>
-<p>经典 $O(n\log n)$ SA 例题，但是 SAM 可以做到 $O(n)$，还能求出每个前缀的答案。</p>
-<p>本质不同子串个数就是每个等价类的 $\mathrm{len}-\mathrm{minlen}+1=\mathrm{len}-\mathrm{len_{link}}$，每次插入的时候动态维护即可，另外显然分裂 $q$ 的时候不会增加本质不同子串个数。</p>
+<p>经典 <span class="arithmatex">\(O(n\log n)\)</span> SA 例题，但是 SAM 可以做到 <span class="arithmatex">\(O(n)\)</span>，还能求出每个前缀的答案。</p>
+<p>本质不同子串个数就是每个等价类的 <span class="arithmatex">\(\mathrm{len}-\mathrm{minlen}+1=\mathrm{len}-\mathrm{len_{link}}\)</span>，每次插入的时候动态维护即可，另外显然分裂 <span class="arithmatex">\(q\)</span> 的时候不会增加本质不同子串个数。</p>
 <p>例题 <a href="https://www.luogu.com.cn/problem/P4070">P4070 [SDOI2016] 生成魔咒</a>。</p>
 <ol start="3">
 <li>所有本质不同子串总长度</li>
@@ -6087,8 +6115,8 @@
 <ol start="4">
 <li>出现次数</li>
 </ol>
-<p>就是 $\mathrm{endpos}$ 的大小，parent tree 上的子树和。</p>
-<p>具体来说，每次新增的 $x$ 自带一个 $\mathrm{endpos}$，其余均为 $0$，然后做子树和。</p>
+<p>就是 <span class="arithmatex">\(\mathrm{endpos}\)</span> 的大小，parent tree 上的子树和。</p>
+<p>具体来说，每次新增的 <span class="arithmatex">\(x\)</span> 自带一个 <span class="arithmatex">\(\mathrm{endpos}\)</span>，其余均为 <span class="arithmatex">\(0\)</span>，然后做子树和。</p>
 <ol start="5">
 <li>第一次出现位置</li>
 </ol>
@@ -6096,14 +6124,14 @@
 <ol start="6">
 <li>最小循环移位</li>
 </ol>
-<p>容易发现字符串 $S+S$ 包含字符串 $S$ 的所有循环移位作为子串。</p>
-<p>所以问题简化为在 $S+S$ 对应的后缀自动机上寻找最小的长度为 $|S|$ 的路径，这可以通过平凡的方法做到：我们从初始状态开始，贪心地访问最小的字符即可。</p>
-<p>总的时间复杂度为 $O(|S|)$。</p>
+<p>容易发现字符串 <span class="arithmatex">\(S+S\)</span> 包含字符串 <span class="arithmatex">\(S\)</span> 的所有循环移位作为子串。</p>
+<p>所以问题简化为在 <span class="arithmatex">\(S+S\)</span> 对应的后缀自动机上寻找最小的长度为 <span class="arithmatex">\(|S|\)</span> 的路径，这可以通过平凡的方法做到：我们从初始状态开始，贪心地访问最小的字符即可。</p>
+<p>总的时间复杂度为 <span class="arithmatex">\(O(|S|)\)</span>。</p>
 <ol start="7">
 <li>所有出现位置</li>
 </ol>
 <p><strong>线段树的可持久化合并</strong>（这个名字我看一次笑一次）。</p>
-<p>用动态开点线段树维护 $\mathrm{endpos}$，然后每个点往父亲合并就是线段树合并。</p>
+<p>用动态开点线段树维护 <span class="arithmatex">\(\mathrm{endpos}\)</span>，然后每个点往父亲合并就是线段树合并。</p>
 <p>但是我们在合并的同时可能还要保留儿子的信息，怎么办呢？容易想到可持久化。</p>
 <p>具体来说，在线段树合并的基础上，每次新增一个结点。</p>
 <p>感觉很抽象啊，建议看代码：</p>
@@ -6126,26 +6154,26 @@
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div></td></tr></table></div>
 </details>
-<p>然后你就对每个点得到了一棵保存所有 $\mathrm{endpos}$ 的线段树。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>然后你就对每个点得到了一棵保存所有 <span class="arithmatex">\(\mathrm{endpos}\)</span> 的线段树。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <ol start="8">
 <li>两个字符串的最长公共子串</li>
 </ol>
-<p>考虑对 $s$ 建 SAM，然后读入 $t$。</p>
-<p>如果不能拓展，就暴力跳 $\mathrm{link}$ 知道有对应转移（或者到 $\mathrm{null}$）为止，相当于删掉开头。</p>
-<p>显然跳的次数不会超过 $O(|t|)$。</p>
-<p>注意转移不一定是连续的，一个比较方便的做法是求出 $t$ 每个右端点是和 $s$ 的公共子串的最小左端点。</p>
-<p>复杂度 $O(|s|+|t|)$。</p>
+<p>考虑对 <span class="arithmatex">\(s\)</span> 建 SAM，然后读入 <span class="arithmatex">\(t\)</span>。</p>
+<p>如果不能拓展，就暴力跳 <span class="arithmatex">\(\mathrm{link}\)</span> 知道有对应转移（或者到 <span class="arithmatex">\(\mathrm{null}\)</span>）为止，相当于删掉开头。</p>
+<p>显然跳的次数不会超过 <span class="arithmatex">\(O(|t|)\)</span>。</p>
+<p>注意转移不一定是连续的，一个比较方便的做法是求出 <span class="arithmatex">\(t\)</span> 每个右端点是和 <span class="arithmatex">\(s\)</span> 的公共子串的最小左端点。</p>
+<p>复杂度 <span class="arithmatex">\(O(|s|+|t|)\)</span>。</p>
 <ol start="9">
 <li>多个字符串的最长公共子串</li>
 </ol>
 <p>这玩意貌似不算常见。</p>
 <p>考虑把所以字符串连在一起，在其间加上<strong>互不相同的没在原字符集中出现过的字符</strong>。</p>
-<p>$$T=C_1+S_1+C_2+S_2\dots +C_k+S_k$$</p>
-<p>然后对 $T$ 建 SAM。</p>
-<p>容易发现若某子串 $s$ 在 $S_i$ 中出现当且仅当存在一条从以 $C_i$ 结尾的状态，且不经过以其余 $C$ 结尾的状态，能到达 $s$ 所在等价类的路径。</p>
+<div class="arithmatex">\[T=C_1+S_1+C_2+S_2\dots +C_k+S_k\]</div>
+<p>然后对 <span class="arithmatex">\(T\)</span> 建 SAM。</p>
+<p>容易发现若某子串 <span class="arithmatex">\(s\)</span> 在 <span class="arithmatex">\(S_i\)</span> 中出现当且仅当存在一条从以 <span class="arithmatex">\(C_i\)</span> 结尾的状态，且不经过以其余 <span class="arithmatex">\(C\)</span> 结尾的状态，能到达 <span class="arithmatex">\(s\)</span> 所在等价类的路径。</p>
 <p>那么 DAG 上 DP，状压统计可达性即可。</p>
-<p>这种题 $k$ 不会太大。</p>
+<p>这种题 <span class="arithmatex">\(k\)</span> 不会太大。</p>
 <ol start="10">
 <li>区间本质不同子串</li>
 </ol>

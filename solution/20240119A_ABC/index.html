@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5830,9 +5858,9 @@
 <p>这次 T3 居然在谷上和校内 OJ 都是最优解，长度还贼小。</p>
 <h2 id="t1">T1</h2>
 <p>没人看懂题解。</p>
-<p>但是赛时有不止一个<strong>注意力异常集中</strong>的同学注意到了答案是 $(n+2k-1)\cdot \left(\binom{n}{k}-\binom{n}{k-1}\right)$，然后就能 $O(n)$ 做了。</p>
-<p>那么是怎么注意到的呢？据某位不愿意透露姓名的<strong>在前一天中午单抽出莱伊</strong>的同学所说，需要打一个 $O(n^3)$ 暴力。</p>
-<p>具体怎么打呢？注意到必定是在某些价格为 $1$ 的位置买入，价格为 $2$ 的地方卖出。那么就是一个括号序列的形式。然后就能 $O(n^3)$ DP 了，具体过程略（这个总不可能不会吧）。</p>
+<p>但是赛时有不止一个<strong>注意力异常集中</strong>的同学注意到了答案是 <span class="arithmatex">\((n+2k-1)\cdot \left(\binom{n}{k}-\binom{n}{k-1}\right)\)</span>，然后就能 <span class="arithmatex">\(O(n)\)</span> 做了。</p>
+<p>那么是怎么注意到的呢？据某位不愿意透露姓名的<strong>在前一天中午单抽出莱伊</strong>的同学所说，需要打一个 <span class="arithmatex">\(O(n^3)\)</span> 暴力。</p>
+<p>具体怎么打呢？注意到必定是在某些价格为 <span class="arithmatex">\(1\)</span> 的位置买入，价格为 <span class="arithmatex">\(2\)</span> 的地方卖出。那么就是一个括号序列的形式。然后就能 <span class="arithmatex">\(O(n^3)\)</span> DP 了，具体过程略（这个总不可能不会吧）。</p>
 <p><a href="https://www.luogu.com.cn/blog/chenggeorshidao/ka-te-lan-shuo-di-zi-juan-ji">有理有据的证明</a></p>
 <details class="success">
 <summary>参考代码</summary>
@@ -5840,13 +5868,13 @@
 </details>
 <h2 id="t2">T2</h2>
 <p>唉。之前看过一道类似但是是最小值版本，这下就不会了。</p>
-<p>令每次询问的点为 $a_i,b_i$。</p>
-<p>首先考虑 sub3 的部分分，即所有 $a_i$ 相同。那么可以求出每个点与 $a_i$ 的距离作为 $T_2$ 上的点权，然后维护每个点在 $T_2$ 上和 $b_i$ 的带权距离（就是距离加点权）。具体维护方式可以考虑把询问挂在 $T_2$ 上，然后用线段树维护 dfn 序列，具体来说对于一条边权为 $w$ 的边 $u\to v$，容易发现 $v$ 子树内的点与 $v$ 的距离比与 $u$ 的距离小 $w$，其余的要大 $w$，那么区间加即可。</p>
+<p>令每次询问的点为 <span class="arithmatex">\(a_i,b_i\)</span>。</p>
+<p>首先考虑 sub3 的部分分，即所有 <span class="arithmatex">\(a_i\)</span> 相同。那么可以求出每个点与 <span class="arithmatex">\(a_i\)</span> 的距离作为 <span class="arithmatex">\(T_2\)</span> 上的点权，然后维护每个点在 <span class="arithmatex">\(T_2\)</span> 上和 <span class="arithmatex">\(b_i\)</span> 的带权距离（就是距离加点权）。具体维护方式可以考虑把询问挂在 <span class="arithmatex">\(T_2\)</span> 上，然后用线段树维护 dfn 序列，具体来说对于一条边权为 <span class="arithmatex">\(w\)</span> 的边 <span class="arithmatex">\(u\to v\)</span>，容易发现 <span class="arithmatex">\(v\)</span> 子树内的点与 <span class="arithmatex">\(v\)</span> 的距离比与 <span class="arithmatex">\(u\)</span> 的距离小 <span class="arithmatex">\(w\)</span>，其余的要大 <span class="arithmatex">\(w\)</span>，那么区间加即可。</p>
 <p>考虑正解怎么写。根据套路，最小距离想点分治，最大距离想直径。</p>
 <p>首先容易发现“每个点距离最远的点一定能在直径端点上取到”这个结论在上文所说的带权距离上仍成立，证明略。</p>
-<p>那么可以在 $T_1$ 上用之前的方法维护 $T_2$ 点权，然后维护 $T_1$ 的 dfn 线段树中每个区间点集在 $T_2$ 上的最远带权点对，就得到了维护直径的效果。</p>
-<p>那么如何维护呢？容易发现 $V_1\cup V_2$ 的最远点对两端点必定是 $V_1$ 或 $V_2$ 的最远点对的端点。证明可以考虑先假设不对，然后在取错的直径上随便取一个点反证法。</p>
-<p>复杂度 $O(m\log n)$。</p>
+<p>那么可以在 <span class="arithmatex">\(T_1\)</span> 上用之前的方法维护 <span class="arithmatex">\(T_2\)</span> 点权，然后维护 <span class="arithmatex">\(T_1\)</span> 的 dfn 线段树中每个区间点集在 <span class="arithmatex">\(T_2\)</span> 上的最远带权点对，就得到了维护直径的效果。</p>
+<p>那么如何维护呢？容易发现 <span class="arithmatex">\(V_1\cup V_2\)</span> 的最远点对两端点必定是 <span class="arithmatex">\(V_1\)</span> 或 <span class="arithmatex">\(V_2\)</span> 的最远点对的端点。证明可以考虑先假设不对，然后在取错的直径上随便取一个点反证法。</p>
+<p>复杂度 <span class="arithmatex">\(O(m\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6021,14 +6049,14 @@
 <h2 id="t3">T3</h2>
 <p>妙题。</p>
 <p>首先容易想到一个暴力，即枚举腰的数量，然后对每一对腰找一个底。</p>
-<p>注意到对于一对长度为 $l$ 的腰，底的可选区间是 $[1,2l)$，那么让腰尽可能长，底尽可能短显然是不劣的。</p>
-<p>所以可以保留最长的 $k$ 对相同长度的边作为腰，然后从小到大双指针找能匹配的底即可。二分 $k$ 能做到 $O(nq\log s)$，其中 $s=\sum c_i$。</p>
-<p>注意到<strong>对每一对腰匹配一个底</strong>是一个二分图匹配的形式，那么可以直接套 Hall 定理了！令 $f(S)$ 为腰集合 $S$ 能连向的底集合的并。由于每个腰能匹配的底都是一个前缀，所以 $f(S)$ 其实就是 $S$ 中最大的那个腰能匹配的前缀。那么可以考虑对每个前缀维护一个 $|f(S)|-|S|$。</p>
-<p>具体来说，对于一条长度为 $l$ 的底，视为在 $l$ 处 $+1$，对于一对长度为 $L$ 的腰，视为在 $2L-1$ 处 $-1$，然后维护这个数组的前缀和。容易发现 $P$ 处的前缀和就是一个包含小于 $\frac{P+1}{2}$ 的所有腰的 $S$（显然这样的 $S$ 得到的 $|f(S)|-|S|$ 最有可能小于 $0$）的 $|f(S)|-|S|$。</p>
-<p>考虑先假设每一对长度相同的边都作为腰出现。那么在前缀上就有可能有一些负数，所以需要拆掉一些腰。那么设前缀和最小值为 $-x$（注意这里有个负号）。结论是需要拆掉恰好 $\left\lceil\frac{x}{3}\right\rceil$ 对腰。证明考虑由于此处前缀和是 $-x$，那么前面至少有 $x$ 对腰。而每拆一对长度为 $l$ 的腰会使 $l$ 处 $+2$，并且使 $2l-1$ 处 $+1$，即总共 $+3$。那么既然此处都加到非负了，由于它后面的地方均大于等于它，必定也被加到非负了。而前面的可以考虑拆最小的若干对腰，显然也能加到非负。</p>
+<p>注意到对于一对长度为 <span class="arithmatex">\(l\)</span> 的腰，底的可选区间是 <span class="arithmatex">\([1,2l)\)</span>，那么让腰尽可能长，底尽可能短显然是不劣的。</p>
+<p>所以可以保留最长的 <span class="arithmatex">\(k\)</span> 对相同长度的边作为腰，然后从小到大双指针找能匹配的底即可。二分 <span class="arithmatex">\(k\)</span> 能做到 <span class="arithmatex">\(O(nq\log s)\)</span>，其中 <span class="arithmatex">\(s=\sum c_i\)</span>。</p>
+<p>注意到<strong>对每一对腰匹配一个底</strong>是一个二分图匹配的形式，那么可以直接套 Hall 定理了！令 <span class="arithmatex">\(f(S)\)</span> 为腰集合 <span class="arithmatex">\(S\)</span> 能连向的底集合的并。由于每个腰能匹配的底都是一个前缀，所以 <span class="arithmatex">\(f(S)\)</span> 其实就是 <span class="arithmatex">\(S\)</span> 中最大的那个腰能匹配的前缀。那么可以考虑对每个前缀维护一个 <span class="arithmatex">\(|f(S)|-|S|\)</span>。</p>
+<p>具体来说，对于一条长度为 <span class="arithmatex">\(l\)</span> 的底，视为在 <span class="arithmatex">\(l\)</span> 处 <span class="arithmatex">\(+1\)</span>，对于一对长度为 <span class="arithmatex">\(L\)</span> 的腰，视为在 <span class="arithmatex">\(2L-1\)</span> 处 <span class="arithmatex">\(-1\)</span>，然后维护这个数组的前缀和。容易发现 <span class="arithmatex">\(P\)</span> 处的前缀和就是一个包含小于 <span class="arithmatex">\(\frac{P+1}{2}\)</span> 的所有腰的 <span class="arithmatex">\(S\)</span>（显然这样的 <span class="arithmatex">\(S\)</span> 得到的 <span class="arithmatex">\(|f(S)|-|S|\)</span> 最有可能小于 <span class="arithmatex">\(0\)</span>）的 <span class="arithmatex">\(|f(S)|-|S|\)</span>。</p>
+<p>考虑先假设每一对长度相同的边都作为腰出现。那么在前缀上就有可能有一些负数，所以需要拆掉一些腰。那么设前缀和最小值为 <span class="arithmatex">\(-x\)</span>（注意这里有个负号）。结论是需要拆掉恰好 <span class="arithmatex">\(\left\lceil\frac{x}{3}\right\rceil\)</span> 对腰。证明考虑由于此处前缀和是 <span class="arithmatex">\(-x\)</span>，那么前面至少有 <span class="arithmatex">\(x\)</span> 对腰。而每拆一对长度为 <span class="arithmatex">\(l\)</span> 的腰会使 <span class="arithmatex">\(l\)</span> 处 <span class="arithmatex">\(+2\)</span>，并且使 <span class="arithmatex">\(2l-1\)</span> 处 <span class="arithmatex">\(+1\)</span>，即总共 <span class="arithmatex">\(+3\)</span>。那么既然此处都加到非负了，由于它后面的地方均大于等于它，必定也被加到非负了。而前面的可以考虑拆最小的若干对腰，显然也能加到非负。</p>
 <p>那么维护一棵单点加，整体求前缀和最小值的线段树即可。具体实现就是对线段树每个结点维护<strong>总和</strong>和<strong>当前结点内前缀和最小值</strong>，然后合并就比较简单了，具体见代码。</p>
-<p>注意 $2l-1$ 上界是 $2n-1$，线段树要开两倍（因为可能在 $n$ 后面取到最小值）。</p>
-<p>复杂度 $O(n\log n)$，我当前不仅是洛谷最优解，还是长度最短解，这就是 zkw 线段树带给我的自信。</p>
+<p>注意 <span class="arithmatex">\(2l-1\)</span> 上界是 <span class="arithmatex">\(2n-1\)</span>，线段树要开两倍（因为可能在 <span class="arithmatex">\(n\)</span> 后面取到最小值）。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>，我当前不仅是洛谷最优解，还是长度最短解，这就是 zkw 线段树带给我的自信。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

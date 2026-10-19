@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5856,7 +5884,7 @@
 <p><img alt="图示" src="../../img/20231023B_ABCD_1.png" /></p>
 <p>如图，容易发现路线只有四种可能，分别是<strong>从纵向的最小值绕过去</strong>，<strong>从横向的最小值绕过去</strong>和两种不绕的路线。</p>
 <p>分类讨论即可。</p>
-<p>复杂度 $O(n+m+q)$，瓶颈在于读入。</p>
+<p>复杂度 <span class="arithmatex">\(O(n+m+q)\)</span>，瓶颈在于读入。</p>
 <details class="success">
 <summary>Success</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5897,10 +5925,10 @@
 </details>
 <h2 id="t2">T2</h2>
 <p>比较简单的换根 dp 吧？</p>
-<p>首先第一步，对于子树内的答案是好求的。设 $dp_{i,j}$ 表示考虑以 $i$ 为根的子树，$i$ 度数为 $j$，子树内其余点度数都不大于 $2$ 的连通子图个数。转移就每次 $dp_{i,k}\gets dp_{i,k-1}\times (dp_{v,0}+dp_{v,1})$ 即可（$v\in son_i$，注意倒序枚举 $k$）。</p>
-<p>然后考虑换根和求答案，首先假如当前节点是 $u$ 要换根到 $v$，那么显然要先扣掉 $dp_v$ 对 $dp_u$ 的贡献。设扣掉 $dp_v$ 贡献后的数组为 $g_i$，那么容易发现，$dp_v$ 对所有 $dp_{u,k}$ 的贡献都形如 $(dp_{v,0}+dp_{v,1})\times g_{k-1}$，而显然 $g_0$ 是已知的（显然一条边也不连的方案为 $1$ 吧），那么就可以直接推出 $g$ 了。然后的转移是简单的，和之前一样，自己推一下。</p>
-<p>接下来考虑答案的计算，即 $\sum_{i=0}^m\sum_{j=0}^{m-i}dp_{v,i}\times g_j$，然后简单地，把内部的 $\sum$ 扔到 $g$ 那边去，就变成了 $\sum_{i=0}^mdp_{v,i}\times \sum_{j=0}^{m-i}g_j$，容易发现 $\sum_{j=0}^{m-i}g_j$ 是一个前缀和，然后就能直接维护了。</p>
-<p>复杂度 $O(nm)$。</p>
+<p>首先第一步，对于子树内的答案是好求的。设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示考虑以 <span class="arithmatex">\(i\)</span> 为根的子树，<span class="arithmatex">\(i\)</span> 度数为 <span class="arithmatex">\(j\)</span>，子树内其余点度数都不大于 <span class="arithmatex">\(2\)</span> 的连通子图个数。转移就每次 <span class="arithmatex">\(dp_{i,k}\gets dp_{i,k-1}\times (dp_{v,0}+dp_{v,1})\)</span> 即可（<span class="arithmatex">\(v\in son_i\)</span>，注意倒序枚举 <span class="arithmatex">\(k\)</span>）。</p>
+<p>然后考虑换根和求答案，首先假如当前节点是 <span class="arithmatex">\(u\)</span> 要换根到 <span class="arithmatex">\(v\)</span>，那么显然要先扣掉 <span class="arithmatex">\(dp_v\)</span> 对 <span class="arithmatex">\(dp_u\)</span> 的贡献。设扣掉 <span class="arithmatex">\(dp_v\)</span> 贡献后的数组为 <span class="arithmatex">\(g_i\)</span>，那么容易发现，<span class="arithmatex">\(dp_v\)</span> 对所有 <span class="arithmatex">\(dp_{u,k}\)</span> 的贡献都形如 <span class="arithmatex">\((dp_{v,0}+dp_{v,1})\times g_{k-1}\)</span>，而显然 <span class="arithmatex">\(g_0\)</span> 是已知的（显然一条边也不连的方案为 <span class="arithmatex">\(1\)</span> 吧），那么就可以直接推出 <span class="arithmatex">\(g\)</span> 了。然后的转移是简单的，和之前一样，自己推一下。</p>
+<p>接下来考虑答案的计算，即 <span class="arithmatex">\(\sum_{i=0}^m\sum_{j=0}^{m-i}dp_{v,i}\times g_j\)</span>，然后简单地，把内部的 <span class="arithmatex">\(\sum\)</span> 扔到 <span class="arithmatex">\(g\)</span> 那边去，就变成了 <span class="arithmatex">\(\sum_{i=0}^mdp_{v,i}\times \sum_{j=0}^{m-i}g_j\)</span>，容易发现 <span class="arithmatex">\(\sum_{j=0}^{m-i}g_j\)</span> 是一个前缀和，然后就能直接维护了。</p>
+<p>复杂度 <span class="arithmatex">\(O(nm)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5986,21 +6014,21 @@
 </details>
 <h2 id="t3">T3</h2>
 <p>神秘构造题，但是思路还挺好想的。</p>
-<p>为和直觉相符，可以把 $a,b$ 数列均 <code>reverse</code> 一下，就相当于前缀是 $a$，后缀是 $n\sim 1$ 的排列。</p>
-<p>首先考虑 50pts 部分分，即序列长度不大于 $2n^2$，容易发现这道题的构造相当于要你把 $a$ 排序，但是限制你每次一个数不能前移超过一个位置，要你输出中间序列。容易发现冒泡排序是满足这个条件的，那么就可以拿到 50pts 了。但是容易发现后面的 20pts 特殊性质也能拿到，因为数据很水，而除非精心构造数据不然排完这样的数据需要的趟数是很少的。</p>
-<p>然后就是正解，正解和部分分一点关系也没有（这是 ac 这道题的人数极少的原因之一）。首先考虑由于两个相同的数间隔不小于 $n-1$，相当于连续 $n-1$ 个数互不相同。那么可以考虑把 $b$ 序列分成 $n-1$ 个一段（先不考虑边界）。容易发现每一段内恰有一个数没出现过，不妨设上一段中这个数为 $x$，显然它在这一段是可以随意填的，还能发现每一段不会和上一段相差太大（这个比较感性，因为每个数不能往前移，即不会出现随意交换的情况）。那么可以考虑再简化问题，即对一段长度为 $n-1$ 的序列 $s$ 进行操作，并且你有一个自由的 $x$。</p>
-<p>那么考虑你能对序列做什么，首先你可以把 $x$ 填到一个位置 $i$，那么 $s_i$ 就会变成下一段的 $x'$，相当于 <code>swap</code> 操作。然后你容易发现这个 $s_i$ 也能在 $i\sim n-1$ 中充当 $x$ 的作用。由于你每个数只能往后移动，换句话说，你只有 $x$ 是能自由交换的，那么显然你没有其它操作能做了。</p>
-<p>总结下来，你的操作只有从左到右扫描 $s$，然后决策是否将当前 $x$ 与 $s_i$ 交换。</p>
+<p>为和直觉相符，可以把 <span class="arithmatex">\(a,b\)</span> 数列均 <code>reverse</code> 一下，就相当于前缀是 <span class="arithmatex">\(a\)</span>，后缀是 <span class="arithmatex">\(n\sim 1\)</span> 的排列。</p>
+<p>首先考虑 50pts 部分分，即序列长度不大于 <span class="arithmatex">\(2n^2\)</span>，容易发现这道题的构造相当于要你把 <span class="arithmatex">\(a\)</span> 排序，但是限制你每次一个数不能前移超过一个位置，要你输出中间序列。容易发现冒泡排序是满足这个条件的，那么就可以拿到 50pts 了。但是容易发现后面的 20pts 特殊性质也能拿到，因为数据很水，而除非精心构造数据不然排完这样的数据需要的趟数是很少的。</p>
+<p>然后就是正解，正解和部分分一点关系也没有（这是 ac 这道题的人数极少的原因之一）。首先考虑由于两个相同的数间隔不小于 <span class="arithmatex">\(n-1\)</span>，相当于连续 <span class="arithmatex">\(n-1\)</span> 个数互不相同。那么可以考虑把 <span class="arithmatex">\(b\)</span> 序列分成 <span class="arithmatex">\(n-1\)</span> 个一段（先不考虑边界）。容易发现每一段内恰有一个数没出现过，不妨设上一段中这个数为 <span class="arithmatex">\(x\)</span>，显然它在这一段是可以随意填的，还能发现每一段不会和上一段相差太大（这个比较感性，因为每个数不能往前移，即不会出现随意交换的情况）。那么可以考虑再简化问题，即对一段长度为 <span class="arithmatex">\(n-1\)</span> 的序列 <span class="arithmatex">\(s\)</span> 进行操作，并且你有一个自由的 <span class="arithmatex">\(x\)</span>。</p>
+<p>那么考虑你能对序列做什么，首先你可以把 <span class="arithmatex">\(x\)</span> 填到一个位置 <span class="arithmatex">\(i\)</span>，那么 <span class="arithmatex">\(s_i\)</span> 就会变成下一段的 <span class="arithmatex">\(x'\)</span>，相当于 <code>swap</code> 操作。然后你容易发现这个 <span class="arithmatex">\(s_i\)</span> 也能在 <span class="arithmatex">\(i\sim n-1\)</span> 中充当 <span class="arithmatex">\(x\)</span> 的作用。由于你每个数只能往后移动，换句话说，你只有 <span class="arithmatex">\(x\)</span> 是能自由交换的，那么显然你没有其它操作能做了。</p>
+<p>总结下来，你的操作只有从左到右扫描 <span class="arithmatex">\(s\)</span>，然后决策是否将当前 <span class="arithmatex">\(x\)</span> 与 <span class="arithmatex">\(s_i\)</span> 交换。</p>
 <hr />
-<p>考虑如何构造决策方案，从考虑边界情况开始。容易发现若你取 $1\sim n-1$ 为第一段（注意前面说了序列是 <code>reverse</code> 过的），那么下一个数是固定的 $a_n$，我们无法进行操作。而你取 $2\sim n$ 为第一段，那么 $a_1$ 恰好能充当第二段的 $x$。而在最后，容易想到你需要让 $x=1$ 放到末尾，那么前面就是 $n\sim 2$ 的排列。</p>
-<p>这里题解有个非常妙的构造，首先你可以知道最终需要使得 $s_i=n-i+1$，分两种情况。</p>
+<p>考虑如何构造决策方案，从考虑边界情况开始。容易发现若你取 <span class="arithmatex">\(1\sim n-1\)</span> 为第一段（注意前面说了序列是 <code>reverse</code> 过的），那么下一个数是固定的 <span class="arithmatex">\(a_n\)</span>，我们无法进行操作。而你取 <span class="arithmatex">\(2\sim n\)</span> 为第一段，那么 <span class="arithmatex">\(a_1\)</span> 恰好能充当第二段的 <span class="arithmatex">\(x\)</span>。而在最后，容易想到你需要让 <span class="arithmatex">\(x=1\)</span> 放到末尾，那么前面就是 <span class="arithmatex">\(n\sim 2\)</span> 的排列。</p>
+<p>这里题解有个非常妙的构造，首先你可以知道最终需要使得 <span class="arithmatex">\(s_i=n-i+1\)</span>，分两种情况。</p>
 <ol>
-<li>若 $x=1$ 且序列 $s$ 还没排好，那么无论如何你肯定要动序列，晚动不如早动，你找到后面的第一个 $s_i\ne n-i+1$，然后交换 $x,s_i$。</li>
-<li>若 $x\ne 1$，那么等到 $x=n-i+1$ 的位置就把 $x$ 给塞进去即可。</li>
+<li>若 <span class="arithmatex">\(x=1\)</span> 且序列 <span class="arithmatex">\(s\)</span> 还没排好，那么无论如何你肯定要动序列，晚动不如早动，你找到后面的第一个 <span class="arithmatex">\(s_i\ne n-i+1\)</span>，然后交换 <span class="arithmatex">\(x,s_i\)</span>。</li>
+<li>若 <span class="arithmatex">\(x\ne 1\)</span>，那么等到 <span class="arithmatex">\(x=n-i+1\)</span> 的位置就把 <span class="arithmatex">\(x\)</span> 给塞进去即可。</li>
 </ol>
-<p>考虑这样为什么是对的，首先决策 $1$ 相当于随便找一个置换环，然后进入置换环。那么最劣情况就是耗费整整一轮才找到下一个置换环，由于数据随机，我们考虑置换环个数期望，设 $h(n)$ 表示 $n$ 阶排列置换环个数期望，考虑把 $n$ 均匀随机插入 $n-1$ 阶排列中，那么有 $\frac{1}{n}$ 的概率恰好插到 $n$ 这个位置，使置换环数量加一，其余位置不变，那么有 $h(n)=\frac{1}{n}(h(n-1)+1)+\frac{n-1}{n}h(n-1)=h(n-1)+\frac{1}{n}$，即 $h(n)=\sum_{i=1}^n\frac{1}{n}$，是一个经典的调和级数结论，大约是 $\log n$。</p>
-<p>然后考虑对于每个 $x\ne 1$，我们的构造相当于让它前进若干步（放回原问题看了，或者你可以视为长度为 $n-1$ 的环），那么容易发现前进的步数为 $p_i-i+n[p_i&lt;i]$。考虑求这玩意的期望，由于排列总数是好求的（就是 $n!$），那么考虑求出所有情况的总贡献，即 $\sum_{i=1}^n\sum_{j=1}^n(j-i+n[j&lt;i])\times (n-1)!=n\times\frac{n(n-1)}{2}\times(n-1)!=n!\times\frac{n(n-1)}{2}$，然后再除以 $n!$ 就能得到期望是 $\frac{n(n-1)}{2}$。</p>
-<p>那么 $b$ 序列期望长度就是 $(n-1)\log n+\frac{n(n-1)}{2}$，可以过了。</p>
+<p>考虑这样为什么是对的，首先决策 <span class="arithmatex">\(1\)</span> 相当于随便找一个置换环，然后进入置换环。那么最劣情况就是耗费整整一轮才找到下一个置换环，由于数据随机，我们考虑置换环个数期望，设 <span class="arithmatex">\(h(n)\)</span> 表示 <span class="arithmatex">\(n\)</span> 阶排列置换环个数期望，考虑把 <span class="arithmatex">\(n\)</span> 均匀随机插入 <span class="arithmatex">\(n-1\)</span> 阶排列中，那么有 <span class="arithmatex">\(\frac{1}{n}\)</span> 的概率恰好插到 <span class="arithmatex">\(n\)</span> 这个位置，使置换环数量加一，其余位置不变，那么有 <span class="arithmatex">\(h(n)=\frac{1}{n}(h(n-1)+1)+\frac{n-1}{n}h(n-1)=h(n-1)+\frac{1}{n}\)</span>，即 <span class="arithmatex">\(h(n)=\sum_{i=1}^n\frac{1}{n}\)</span>，是一个经典的调和级数结论，大约是 <span class="arithmatex">\(\log n\)</span>。</p>
+<p>然后考虑对于每个 <span class="arithmatex">\(x\ne 1\)</span>，我们的构造相当于让它前进若干步（放回原问题看了，或者你可以视为长度为 <span class="arithmatex">\(n-1\)</span> 的环），那么容易发现前进的步数为 <span class="arithmatex">\(p_i-i+n[p_i&lt;i]\)</span>。考虑求这玩意的期望，由于排列总数是好求的（就是 <span class="arithmatex">\(n!\)</span>），那么考虑求出所有情况的总贡献，即 <span class="arithmatex">\(\sum_{i=1}^n\sum_{j=1}^n(j-i+n[j&lt;i])\times (n-1)!=n\times\frac{n(n-1)}{2}\times(n-1)!=n!\times\frac{n(n-1)}{2}\)</span>，然后再除以 <span class="arithmatex">\(n!\)</span> 就能得到期望是 <span class="arithmatex">\(\frac{n(n-1)}{2}\)</span>。</p>
+<p>那么 <span class="arithmatex">\(b\)</span> 序列期望长度就是 <span class="arithmatex">\((n-1)\log n+\frac{n(n-1)}{2}\)</span>，可以过了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6049,19 +6077,19 @@
 </span></code></pre></div>
 </details>
 <h2 id="t4">T4</h2>
-<p>首先，“每个 $a_i&gt;1$ 的边都存在一条边 $j$，使得 $i,j$ 相邻且 $a_i&gt;a_j$”这个条件是不符合思维直觉的。考虑先把它转化成一个好想的。容易发现若从小到大加边，那么相当于每加一条边都要与之前的一条边相邻。即相当于从边 $1$ 开始，每次选一条与已染色边相邻的边染成黑色。</p>
-<p>考虑此时如何计算代价。若在第一次涂黑以点 $u$ 为端点的边时视为把 $u$ “点亮”，把以它为端点的边全涂黑时视为把它“熄灭”，容易发现一个点的贡献就是它点亮的时间差。这时候我们就能推出来一些结论了。</p>
+<p>首先，“每个 <span class="arithmatex">\(a_i&gt;1\)</span> 的边都存在一条边 <span class="arithmatex">\(j\)</span>，使得 <span class="arithmatex">\(i,j\)</span> 相邻且 <span class="arithmatex">\(a_i&gt;a_j\)</span>”这个条件是不符合思维直觉的。考虑先把它转化成一个好想的。容易发现若从小到大加边，那么相当于每加一条边都要与之前的一条边相邻。即相当于从边 <span class="arithmatex">\(1\)</span> 开始，每次选一条与已染色边相邻的边染成黑色。</p>
+<p>考虑此时如何计算代价。若在第一次涂黑以点 <span class="arithmatex">\(u\)</span> 为端点的边时视为把 <span class="arithmatex">\(u\)</span> “点亮”，把以它为端点的边全涂黑时视为把它“熄灭”，容易发现一个点的贡献就是它点亮的时间差。这时候我们就能推出来一些结论了。</p>
 <p>首先，必定是涂完一整棵子树后才去涂其他边，因为假如一棵子树中有任何一个结点连了任何一条边，除非整棵子树都被涂完了，不然内部必定有至少一个点是点亮的状态。考虑画一画时间轴，容易发现总时间是固定的，那我们肯定希望同时点亮的点数尽可能少。</p>
-<p>然后，我们就要考虑若已经把 $u$ 点亮了，应以什么顺序点亮它的儿子。首先由于上面的结论，那么显然子树内的答案是独立的，只需要考虑 $u$ 自己产生的贡献。那么 $u$ 产生的贡献如何计算呢？考虑在点亮最后一个儿子之前，$u$ 都是点亮的。不妨设最后一个点亮的儿子是 $v$，那么 $u$ 产生的贡献就是 $size_u-size_v$，那么显然，$v$ 取 $u$ 的重儿子最优。</p>
-<p>综上，记 $u$ 的重儿子为 $son_u$，那么 $u$ 产生的贡献就是 $size_u-size_{son_u}$，这个就比较好计算了，可以先 dfs 一遍预处理出来（注意这个计算方式<strong>不适用</strong>于 $u$ 是叶子结点的情况）。</p>
-<p>接下来考虑断边如何处理。首先由于我们已经把贡献化的与边无关了，那么我们完全可以把断边视作切下一棵子树 $u$，那么分四种情况讨论它到根的路径上的点 $x$ 贡献的变化。</p>
+<p>然后，我们就要考虑若已经把 <span class="arithmatex">\(u\)</span> 点亮了，应以什么顺序点亮它的儿子。首先由于上面的结论，那么显然子树内的答案是独立的，只需要考虑 <span class="arithmatex">\(u\)</span> 自己产生的贡献。那么 <span class="arithmatex">\(u\)</span> 产生的贡献如何计算呢？考虑在点亮最后一个儿子之前，<span class="arithmatex">\(u\)</span> 都是点亮的。不妨设最后一个点亮的儿子是 <span class="arithmatex">\(v\)</span>，那么 <span class="arithmatex">\(u\)</span> 产生的贡献就是 <span class="arithmatex">\(size_u-size_v\)</span>，那么显然，<span class="arithmatex">\(v\)</span> 取 <span class="arithmatex">\(u\)</span> 的重儿子最优。</p>
+<p>综上，记 <span class="arithmatex">\(u\)</span> 的重儿子为 <span class="arithmatex">\(son_u\)</span>，那么 <span class="arithmatex">\(u\)</span> 产生的贡献就是 <span class="arithmatex">\(size_u-size_{son_u}\)</span>，这个就比较好计算了，可以先 dfs 一遍预处理出来（注意这个计算方式<strong>不适用</strong>于 <span class="arithmatex">\(u\)</span> 是叶子结点的情况）。</p>
+<p>接下来考虑断边如何处理。首先由于我们已经把贡献化的与边无关了，那么我们完全可以把断边视作切下一棵子树 <span class="arithmatex">\(u\)</span>，那么分四种情况讨论它到根的路径上的点 <span class="arithmatex">\(x\)</span> 贡献的变化。</p>
 <ol>
-<li><strong>本来不是叶子的变成了叶子</strong>：这个显然只有 $u$ 的父亲可能做到，贡献变成 $0$。</li>
-<li><strong>本来 $u$ 所在的儿子不是 $x$ 的重儿子</strong>：那么 $x$ 的贡献会从 $size_x-size_{son_x}$ 变成 $size_x-size_u-size_{son_x}$，即全局贡献减去 $size_{u}$。</li>
-<li><strong>本来 $u$ 所在的儿子是 $x$ 的重儿子，删了还是重儿子</strong>：贡献变成 $(size_x-size_u)-(size_{son_x}-size_u)$，即不变。</li>
-<li><strong>本来是重儿子删掉之后变成不是重儿子了</strong>：那么新的重儿子必定是次大儿子，不妨记作 $sec_x$。首先，这种情况会出现当且仅当 $size_{son_x}-size_{sec_x}&lt;size_u$，然后贡献会从 $size_x-size_{son_x}$ 变成 $(size_x-size_u)-size_{sec_x}$，即全局贡献加上 $size_{son_x}-size_{sec_x}-size_u$。容易发现一个 $u$ 对应会产生这种贡献的 $size_{son_x}-size_{sec_x}$ 是一个前缀，那么可以用树状数组维护。</li>
+<li><strong>本来不是叶子的变成了叶子</strong>：这个显然只有 <span class="arithmatex">\(u\)</span> 的父亲可能做到，贡献变成 <span class="arithmatex">\(0\)</span>。</li>
+<li><strong>本来 <span class="arithmatex">\(u\)</span> 所在的儿子不是 <span class="arithmatex">\(x\)</span> 的重儿子</strong>：那么 <span class="arithmatex">\(x\)</span> 的贡献会从 <span class="arithmatex">\(size_x-size_{son_x}\)</span> 变成 <span class="arithmatex">\(size_x-size_u-size_{son_x}\)</span>，即全局贡献减去 <span class="arithmatex">\(size_{u}\)</span>。</li>
+<li><strong>本来 <span class="arithmatex">\(u\)</span> 所在的儿子是 <span class="arithmatex">\(x\)</span> 的重儿子，删了还是重儿子</strong>：贡献变成 <span class="arithmatex">\((size_x-size_u)-(size_{son_x}-size_u)\)</span>，即不变。</li>
+<li><strong>本来是重儿子删掉之后变成不是重儿子了</strong>：那么新的重儿子必定是次大儿子，不妨记作 <span class="arithmatex">\(sec_x\)</span>。首先，这种情况会出现当且仅当 <span class="arithmatex">\(size_{son_x}-size_{sec_x}&lt;size_u\)</span>，然后贡献会从 <span class="arithmatex">\(size_x-size_{son_x}\)</span> 变成 <span class="arithmatex">\((size_x-size_u)-size_{sec_x}\)</span>，即全局贡献加上 <span class="arithmatex">\(size_{son_x}-size_{sec_x}-size_u\)</span>。容易发现一个 <span class="arithmatex">\(u\)</span> 对应会产生这种贡献的 <span class="arithmatex">\(size_{son_x}-size_{sec_x}\)</span> 是一个前缀，那么可以用树状数组维护。</li>
 </ol>
-<p>复杂度 $O(n\log n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

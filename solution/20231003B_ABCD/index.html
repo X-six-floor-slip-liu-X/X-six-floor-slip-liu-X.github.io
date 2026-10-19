@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5851,13 +5879,13 @@
 <p>这场爆大零，总结下来是基础知识不牢固导致卡 T1 最后一步树形背包板子，以后有时间复习一下。</p>
 <p><a href="../../files/20231003.rar">密码是通用密码，大小写敏感</a></p>
 <h2 id="t1">T1</h2>
-<p>首先容易发现一个性质，所有通过某一条边的的松果必然方向相同（即不是全 $u\to v$ 就是全 $v\to u$），这个性质很容易猜出来也很容易证，考虑两个松果的路径经过某条边相向而行，那么必然可以吧两条路径的两半边连上删掉中间这条边，显然是不劣的。</p>
+<p>首先容易发现一个性质，所有通过某一条边的的松果必然方向相同（即不是全 <span class="arithmatex">\(u\to v\)</span> 就是全 <span class="arithmatex">\(v\to u\)</span>），这个性质很容易猜出来也很容易证，考虑两个松果的路径经过某条边相向而行，那么必然可以吧两条路径的两半边连上删掉中间这条边，显然是不劣的。</p>
 <p><img alt="图示 1" src="../../img/20231003B_ABCD_1.png" /></p>
 <p>上图中红色路径显然不如橙色路径。</p>
 <p>那么每条边就只有一个方向，容易想到树形 DP。</p>
-<p>另外，由于要求方差最小，那么必然有 $sum\bmod n$ 个点最后的松果数是 $\left\lfloor\frac{sum}{n}\right\rfloor+1$，其余是 $\left\lfloor\frac{sum}{n}\right\rfloor$。</p>
-<p>我们设 $dp_{i,j}$ 表示 $i$ 子树内有 $j$ 个 $\left\lfloor\frac{sum}{n}\right\rfloor+1$ 的最小代价。容易发现我们很容易算出有多少个松果通过 $i-father_i$ 这条边，可以直接预处理这个代价。</p>
-<p>然后转移就是一个树形背包了。容易证明复杂度是 $O(n^2)$ 的。考虑树形背包是把很多东西放在一起，那么两个东西只会在 $\mathrm{lca}$ 处单独合并（其余地方都是捆绑销售），那么这样的合并只会发生 $O(n^2)$ 次，所以是 $O(n^2)$ 的。</p>
+<p>另外，由于要求方差最小，那么必然有 <span class="arithmatex">\(sum\bmod n\)</span> 个点最后的松果数是 <span class="arithmatex">\(\left\lfloor\frac{sum}{n}\right\rfloor+1\)</span>，其余是 <span class="arithmatex">\(\left\lfloor\frac{sum}{n}\right\rfloor\)</span>。</p>
+<p>我们设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示 <span class="arithmatex">\(i\)</span> 子树内有 <span class="arithmatex">\(j\)</span> 个 <span class="arithmatex">\(\left\lfloor\frac{sum}{n}\right\rfloor+1\)</span> 的最小代价。容易发现我们很容易算出有多少个松果通过 <span class="arithmatex">\(i-father_i\)</span> 这条边，可以直接预处理这个代价。</p>
+<p>然后转移就是一个树形背包了。容易证明复杂度是 <span class="arithmatex">\(O(n^2)\)</span> 的。考虑树形背包是把很多东西放在一起，那么两个东西只会在 <span class="arithmatex">\(\mathrm{lca}\)</span> 处单独合并（其余地方都是捆绑销售），那么这样的合并只会发生 <span class="arithmatex">\(O(n^2)\)</span> 次，所以是 <span class="arithmatex">\(O(n^2)\)</span> 的。</p>
 <p>注意树形背包复杂度不要写假了。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -5926,23 +5954,23 @@
 </details>
 <h2 id="t2">T2</h2>
 <p>一道很奇怪，又简单又难的题。</p>
-<p>首先一眼望过去不容易看出复杂度小于 $O(r)$ 的做法，先考虑特殊情况应该怎么做。</p>
-<p>在此之前，我们注意到或有一个很好的性质，即 $x|y\ge x,y$，因为 $x|y$ 必然包含 $x,y$ 中所有的 $1$，只会多不会少。</p>
+<p>首先一眼望过去不容易看出复杂度小于 <span class="arithmatex">\(O(r)\)</span> 的做法，先考虑特殊情况应该怎么做。</p>
+<p>在此之前，我们注意到或有一个很好的性质，即 <span class="arithmatex">\(x|y\ge x,y\)</span>，因为 <span class="arithmatex">\(x|y\)</span> 必然包含 <span class="arithmatex">\(x,y\)</span> 中所有的 <span class="arithmatex">\(1\)</span>，只会多不会少。</p>
 <ol>
-<li>$l=1,r=x$</li>
+<li><span class="arithmatex">\(l=1,r=x\)</span></li>
 </ol>
-<p>容易发现在这些数里有 $2^0,2^1\dots 2^{\left\lfloor\log x\right\rfloor}$ 次方这些（二进制下）的整数。而题目里又不限定你用几个数或起来，那么 $[1,2^{\left\lfloor\log x\right\rfloor+1}-1]$ 中所有整数均可取到，且显然取不到其它数。</p>
+<p>容易发现在这些数里有 <span class="arithmatex">\(2^0,2^1\dots 2^{\left\lfloor\log x\right\rfloor}\)</span> 次方这些（二进制下）的整数。而题目里又不限定你用几个数或起来，那么 <span class="arithmatex">\([1,2^{\left\lfloor\log x\right\rfloor+1}-1]\)</span> 中所有整数均可取到，且显然取不到其它数。</p>
 <ol start="2">
-<li>$l\le 2^k,r=2^k$</li>
+<li><span class="arithmatex">\(l\le 2^k,r=2^k\)</span></li>
 </ol>
-<p>容易发现 $[l,2^k-1]$ 中的数单独或起来只能得到 $[l,2^k-1]$（不会凭空出现更高位，又不可能变小），那么这些数只能和 $2^k$ 或起来得到 $[2^k+l,2^{k+1}-1]$，容易发现除去原本的 $[l,r]$ 以外只能得到这些数。</p>
+<p>容易发现 <span class="arithmatex">\([l,2^k-1]\)</span> 中的数单独或起来只能得到 <span class="arithmatex">\([l,2^k-1]\)</span>（不会凭空出现更高位，又不可能变小），那么这些数只能和 <span class="arithmatex">\(2^k\)</span> 或起来得到 <span class="arithmatex">\([2^k+l,2^{k+1}-1]\)</span>，容易发现除去原本的 <span class="arithmatex">\([l,r]\)</span> 以外只能得到这些数。</p>
 <ol start="3">
 <li>那么我们可以把这两部分结合在一起。</li>
 </ol>
-<p>首先容易发现 $l,r$ 高位的一段相同部分是没用的，那么我们先找到第一位不同的位。现在我们只讨论最高位为 $2^k$，且 $l,r$ 最高位不同的情况。</p>
-<p>那么 $[l,2^k]$ 可以用第二种方法，$[2^k,r]$ 可以用第一种方法。</p>
+<p>首先容易发现 <span class="arithmatex">\(l,r\)</span> 高位的一段相同部分是没用的，那么我们先找到第一位不同的位。现在我们只讨论最高位为 <span class="arithmatex">\(2^k\)</span>，且 <span class="arithmatex">\(l,r\)</span> 最高位不同的情况。</p>
+<p>那么 <span class="arithmatex">\([l,2^k]\)</span> 可以用第二种方法，<span class="arithmatex">\([2^k,r]\)</span> 可以用第一种方法。</p>
 <p>然后就做完了。</p>
-<p>复杂度 $O(\log r)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(\log r)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5963,13 +5991,13 @@
 </details>
 <h2 id="t3">T3</h2>
 <p>挺有意思的题，我现在听说了三种不同的做法。但是我只会最简单暴力的一种。</p>
-<p>首先核心思路是枚举 $\gcd$，设现在枚举的 $\gcd=g$，然后求出 $g$ 的倍数构成的序列的 $\mathrm{lcm}$ 的所有可能值相乘，然后就容易求解了。</p>
-<p>容易发现 $g$ 的倍数个数的总和为调和级数,约为 $m\log m$，所以复杂度在这部分不会炸。那么我们只需要考虑如何比较快地计算 $g$ 的倍数构成的序列的 $\mathrm{lcm}$ 的所有可能值相乘即可。</p>
-<p>$g$ 的倍数可以看做在值域大小为 $\left\lfloor\frac{m}{g}\right\rfloor$ 的问题中 $1$ 的倍数，下文均考虑值域为 $m$ 问题中 $1$ 的倍数的情况。</p>
-<p>那么如何计算某个质数 $p$ 出现了多少次呢？可以用算概率时的常见套路，用总的 $\mathrm{lcm}$ 个数减去不含 $p$ 的 $\mathrm{lcm}$ 个数。总序列个数是简单的，$m^n$ 即可。对于 $p$ 未出现的序列个数，我们考虑用 $[1,m]$ 中所有不含质因子 $p$ 的数来组成序列，那么总数量就是 $(m-\left\lfloor\frac{m}{p}\right\rfloor)^{n}$。</p>
-<p>但是容易发现 $\mathrm{lcm}$ 中 $p$ 可能以 $p^{c_p}$ 的形式出现，如何解决呢？其实也非常简单，用类似的方法计算 $p^2$ 出现了多少了次，容易发现 $p^2$ 的每一次出现必然在算 $p$ 的时候已经产生了 $p^1$ 的贡献了，那么对于每一次再多贡献一个 $p^1$ 即可，$p^3,p^4\dots$ 的计算也是同理。显然这部分复杂度是 $\log m$ 的。</p>
-<p>注意到 $\left\lfloor\frac{m}{g}\right\rfloor$ 的取值只有 $O(\sqrt{m})$ 种，每一个取值里面质数的总个数显然不会超过 $\sum_{g=1}^{m}\left\lfloor\frac{m}{g}\right\rfloor$，由调和级数得这个和为 $m\log m$，由于算的时候要用快速幂，所以这部分的总复杂度是 $O(m\log m\log n)$。</p>
-<p>但是这样求出来的序列 $\gcd$ 不一定恰好是 $g$，而可能是 $g$ 的任何倍数。这个其实也很简单，从大到小枚举 $g$ 然后简单容斥一下即可，复杂度 $O(m\log m\log P)$（$P$ 为模数，要求逆元的）。</p>
+<p>首先核心思路是枚举 <span class="arithmatex">\(\gcd\)</span>，设现在枚举的 <span class="arithmatex">\(\gcd=g\)</span>，然后求出 <span class="arithmatex">\(g\)</span> 的倍数构成的序列的 <span class="arithmatex">\(\mathrm{lcm}\)</span> 的所有可能值相乘，然后就容易求解了。</p>
+<p>容易发现 <span class="arithmatex">\(g\)</span> 的倍数个数的总和为调和级数,约为 <span class="arithmatex">\(m\log m\)</span>，所以复杂度在这部分不会炸。那么我们只需要考虑如何比较快地计算 <span class="arithmatex">\(g\)</span> 的倍数构成的序列的 <span class="arithmatex">\(\mathrm{lcm}\)</span> 的所有可能值相乘即可。</p>
+<p><span class="arithmatex">\(g\)</span> 的倍数可以看做在值域大小为 <span class="arithmatex">\(\left\lfloor\frac{m}{g}\right\rfloor\)</span> 的问题中 <span class="arithmatex">\(1\)</span> 的倍数，下文均考虑值域为 <span class="arithmatex">\(m\)</span> 问题中 <span class="arithmatex">\(1\)</span> 的倍数的情况。</p>
+<p>那么如何计算某个质数 <span class="arithmatex">\(p\)</span> 出现了多少次呢？可以用算概率时的常见套路，用总的 <span class="arithmatex">\(\mathrm{lcm}\)</span> 个数减去不含 <span class="arithmatex">\(p\)</span> 的 <span class="arithmatex">\(\mathrm{lcm}\)</span> 个数。总序列个数是简单的，<span class="arithmatex">\(m^n\)</span> 即可。对于 <span class="arithmatex">\(p\)</span> 未出现的序列个数，我们考虑用 <span class="arithmatex">\([1,m]\)</span> 中所有不含质因子 <span class="arithmatex">\(p\)</span> 的数来组成序列，那么总数量就是 <span class="arithmatex">\((m-\left\lfloor\frac{m}{p}\right\rfloor)^{n}\)</span>。</p>
+<p>但是容易发现 <span class="arithmatex">\(\mathrm{lcm}\)</span> 中 <span class="arithmatex">\(p\)</span> 可能以 <span class="arithmatex">\(p^{c_p}\)</span> 的形式出现，如何解决呢？其实也非常简单，用类似的方法计算 <span class="arithmatex">\(p^2\)</span> 出现了多少了次，容易发现 <span class="arithmatex">\(p^2\)</span> 的每一次出现必然在算 <span class="arithmatex">\(p\)</span> 的时候已经产生了 <span class="arithmatex">\(p^1\)</span> 的贡献了，那么对于每一次再多贡献一个 <span class="arithmatex">\(p^1\)</span> 即可，<span class="arithmatex">\(p^3,p^4\dots\)</span> 的计算也是同理。显然这部分复杂度是 <span class="arithmatex">\(\log m\)</span> 的。</p>
+<p>注意到 <span class="arithmatex">\(\left\lfloor\frac{m}{g}\right\rfloor\)</span> 的取值只有 <span class="arithmatex">\(O(\sqrt{m})\)</span> 种，每一个取值里面质数的总个数显然不会超过 <span class="arithmatex">\(\sum_{g=1}^{m}\left\lfloor\frac{m}{g}\right\rfloor\)</span>，由调和级数得这个和为 <span class="arithmatex">\(m\log m\)</span>，由于算的时候要用快速幂，所以这部分的总复杂度是 <span class="arithmatex">\(O(m\log m\log n)\)</span>。</p>
+<p>但是这样求出来的序列 <span class="arithmatex">\(\gcd\)</span> 不一定恰好是 <span class="arithmatex">\(g\)</span>，而可能是 <span class="arithmatex">\(g\)</span> 的任何倍数。这个其实也很简单，从大到小枚举 <span class="arithmatex">\(g\)</span> 然后简单容斥一下即可，复杂度 <span class="arithmatex">\(O(m\log m\log P)\)</span>（<span class="arithmatex">\(P\)</span> 为模数，要求逆元的）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6041,41 +6069,41 @@
 </span></code></pre></div>
 </details>
 <h2 id="t4">T4</h2>
-<p>这题洛谷有削弱版，$n\le 50$，是紫，CF*2600。但这道题 $n\le 1000$。</p>
-<p>容易发现最后连出来的图必然是一层一层，每一层与 $1$ 的距离相等的，且每一层的结点是相邻的，并且除去点 $1$，每个点会与前一层连<strong>恰好</strong> $1$ 条边（多了就不止一条最短路了，少了最短路长度就不对了）。然后每一层内剩余的度数随意连边即可。</p>
-<p>为方便叙述，我们称当前层还没用过的度数为“自由边”，容易发现，除了点 $1$ 外，每个点必定要向前连边，故本来的自由边就只有一条或两条。</p>
-<p>那么我们的初步思路就是每次枚举一段 $[l,r]$，然后枚举这一段内部自己连的边数 $c$ 计算内部连边方案数，其余自由边向后连。</p>
-<p>确定 $l,r$ 之后，我们就能确定自由边个数为 $1$ 的点数量为 $x$，个数为 $2$ 的点数量为 $y$。</p>
-<p>首先我们考虑内部的连边情况。把自由边为 $2$ 的点拆成两个点，那么连边方案数就是：</p>
-<p>$$\frac{(x+2y)!}{(x+2y-2c)!\times 2^c\times c!}$$</p>
-<p>很好理解，首先选出 $2c$ 个数，然后除去每一对内部的顺序，再除以对与对的相对顺序。</p>
+<p>这题洛谷有削弱版，<span class="arithmatex">\(n\le 50\)</span>，是紫，CF*2600。但这道题 <span class="arithmatex">\(n\le 1000\)</span>。</p>
+<p>容易发现最后连出来的图必然是一层一层，每一层与 <span class="arithmatex">\(1\)</span> 的距离相等的，且每一层的结点是相邻的，并且除去点 <span class="arithmatex">\(1\)</span>，每个点会与前一层连<strong>恰好</strong> <span class="arithmatex">\(1\)</span> 条边（多了就不止一条最短路了，少了最短路长度就不对了）。然后每一层内剩余的度数随意连边即可。</p>
+<p>为方便叙述，我们称当前层还没用过的度数为“自由边”，容易发现，除了点 <span class="arithmatex">\(1\)</span> 外，每个点必定要向前连边，故本来的自由边就只有一条或两条。</p>
+<p>那么我们的初步思路就是每次枚举一段 <span class="arithmatex">\([l,r]\)</span>，然后枚举这一段内部自己连的边数 <span class="arithmatex">\(c\)</span> 计算内部连边方案数，其余自由边向后连。</p>
+<p>确定 <span class="arithmatex">\(l,r\)</span> 之后，我们就能确定自由边个数为 <span class="arithmatex">\(1\)</span> 的点数量为 <span class="arithmatex">\(x\)</span>，个数为 <span class="arithmatex">\(2\)</span> 的点数量为 <span class="arithmatex">\(y\)</span>。</p>
+<p>首先我们考虑内部的连边情况。把自由边为 <span class="arithmatex">\(2\)</span> 的点拆成两个点，那么连边方案数就是：</p>
+<div class="arithmatex">\[\frac{(x+2y)!}{(x+2y-2c)!\times 2^c\times c!}\]</div>
+<p>很好理解，首先选出 <span class="arithmatex">\(2c\)</span> 个数，然后除去每一对内部的顺序，再除以对与对的相对顺序。</p>
 <p>但是这样是可能有自环与重边的，考虑容斥。</p>
-<p>容易发现只有自由边为 $2$ 的点才可能有自环或重边，假如我们钦定 $s$ 个点有自环与重边，其中有 $p$ 对重边，$q$ 个自环（$s=2p+q$），那么我们从 $y$ 个点中选出它们的方案数就是：</p>
-<p>$$\frac{y!\times 2^p}{(y-s)!\times p!\times q!\times 2^{p}}$$</p>
-<p>上面要乘个 $2^p$，因为前面随意连边时把一个点 $u$ 拆成 $u_1,u_2$ 两个点来算的，那么重边 $u,v$ 就有 $(u_1,v_1)(u_2,v_2)$ 和 $(u_1,v_2)(u_2,v_1)$ 两种，共有 $p$ 组重边所以有 $2^p$ 种。然后上面的式子约分一下：</p>
-<p>$$\frac{y!}{(y-s)!\times p!\times q!}$$</p>
-<p>钦定 $s$ 个点后，其余 $c-s$ 个点随意连边的方案就是：</p>
-<p>$$\frac{(x+2y-2s)!}{(x+2y-2c)!\times 2^{c-s}\times (c-s)!}$$</p>
-<p>然后剩余自由边必定向 $[r+1,r+x+2y-2c]$ 中每个点上连一个。方案数就是 $(x+2y-2c)!$。</p>
-<p>但是刚刚我们都忽略了一件事，虽然我们把二度点的两条自由边拆开了看做两个点，实际上它们是相同的！但多亏我们<strong>刚才</strong>没有发现。容易发现<strong>现在</strong>只要在最后乘一个 $\frac{1}{2^y}$，除去每一对的顺序即可。</p>
+<p>容易发现只有自由边为 <span class="arithmatex">\(2\)</span> 的点才可能有自环或重边，假如我们钦定 <span class="arithmatex">\(s\)</span> 个点有自环与重边，其中有 <span class="arithmatex">\(p\)</span> 对重边，<span class="arithmatex">\(q\)</span> 个自环（<span class="arithmatex">\(s=2p+q\)</span>），那么我们从 <span class="arithmatex">\(y\)</span> 个点中选出它们的方案数就是：</p>
+<div class="arithmatex">\[\frac{y!\times 2^p}{(y-s)!\times p!\times q!\times 2^{p}}\]</div>
+<p>上面要乘个 <span class="arithmatex">\(2^p\)</span>，因为前面随意连边时把一个点 <span class="arithmatex">\(u\)</span> 拆成 <span class="arithmatex">\(u_1,u_2\)</span> 两个点来算的，那么重边 <span class="arithmatex">\(u,v\)</span> 就有 <span class="arithmatex">\((u_1,v_1)(u_2,v_2)\)</span> 和 <span class="arithmatex">\((u_1,v_2)(u_2,v_1)\)</span> 两种，共有 <span class="arithmatex">\(p\)</span> 组重边所以有 <span class="arithmatex">\(2^p\)</span> 种。然后上面的式子约分一下：</p>
+<div class="arithmatex">\[\frac{y!}{(y-s)!\times p!\times q!}\]</div>
+<p>钦定 <span class="arithmatex">\(s\)</span> 个点后，其余 <span class="arithmatex">\(c-s\)</span> 个点随意连边的方案就是：</p>
+<div class="arithmatex">\[\frac{(x+2y-2s)!}{(x+2y-2c)!\times 2^{c-s}\times (c-s)!}\]</div>
+<p>然后剩余自由边必定向 <span class="arithmatex">\([r+1,r+x+2y-2c]\)</span> 中每个点上连一个。方案数就是 <span class="arithmatex">\((x+2y-2c)!\)</span>。</p>
+<p>但是刚刚我们都忽略了一件事，虽然我们把二度点的两条自由边拆开了看做两个点，实际上它们是相同的！但多亏我们<strong>刚才</strong>没有发现。容易发现<strong>现在</strong>只要在最后乘一个 <span class="arithmatex">\(\frac{1}{2^y}\)</span>，除去每一对的顺序即可。</p>
 <p>故最终式子为：</p>
-<p>$$\sum_{s=2p+q}^{s\in[0,\min(y,c)]}\frac{(-1)^{p+q}y!}{(y-s)!p!q!}\times \frac{(x+2y-2s)!}{(x+2y-2c)!2^{c-s}(c-s)!}\times (x+2y-2c)! \times \frac{1}{2^y}$$</p>
+<div class="arithmatex">\[\sum_{s=2p+q}^{s\in[0,\min(y,c)]}\frac{(-1)^{p+q}y!}{(y-s)!p!q!}\times \frac{(x+2y-2s)!}{(x+2y-2c)!2^{c-s}(c-s)!}\times (x+2y-2c)! \times \frac{1}{2^y}\]</div>
 <p>然后可以化一化式子：</p>
-<p>$$\sum_{s=2p+q}^{s\in[0,\min(y,c)]}\frac{(-1)^{p+q}(x+2y-2s)!y!}{p!q!(y-s)!2^y(c-s)!2^{c-s}}$$</p>
-<p>我们发现对于相同的 $s$，$\frac{(-1)^{p+q}}{p!q!}$ 是固定的。那么我们可以预处理 $v_s=\frac{(-1)^{p+q}}{p!q!}$，上式就能简化为：</p>
-<p>$$\sum_{s=0}^{\min(y,c)}\frac{v_s(x+2y-2s)!y!}{(y-s)!2^y(c-s)!2^{c-s}}$$</p>
-<p>那么我们就可以 DP 了。设 $dp_{i,j}$ 表示前 $i$ 个分好层，确定自由边连法，下一层长度为 $j$ 的方案数。转移就是从 $dp_{i,j}$ 转移到 $dp_{i+j,x+2y-2c}$。其中 $x,y$ 为 $[i+1,i+j]$ 中一度点与二度点的个数，$c$ 为枚举的下一层内部连边个数。</p>
-<p>但是这样有个问题，我们需要枚举 $i,j,c,s$ 四个值，复杂度就是 $O(n^4)$ 的。怎么优化呢？这里需要用到一个小 Trick，我称之为“分部转移”。我们先再化一化式子：</p>
-<p>$$\sum_{s=0}^{\min(y,c)}\frac{v_s(x+2y-2s)!y!}{(y-s)!2^y}\times \frac{1}{(c-s)!2^{c-s}}$$</p>
+<div class="arithmatex">\[\sum_{s=2p+q}^{s\in[0,\min(y,c)]}\frac{(-1)^{p+q}(x+2y-2s)!y!}{p!q!(y-s)!2^y(c-s)!2^{c-s}}\]</div>
+<p>我们发现对于相同的 <span class="arithmatex">\(s\)</span>，<span class="arithmatex">\(\frac{(-1)^{p+q}}{p!q!}\)</span> 是固定的。那么我们可以预处理 <span class="arithmatex">\(v_s=\frac{(-1)^{p+q}}{p!q!}\)</span>，上式就能简化为：</p>
+<div class="arithmatex">\[\sum_{s=0}^{\min(y,c)}\frac{v_s(x+2y-2s)!y!}{(y-s)!2^y(c-s)!2^{c-s}}\]</div>
+<p>那么我们就可以 DP 了。设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示前 <span class="arithmatex">\(i\)</span> 个分好层，确定自由边连法，下一层长度为 <span class="arithmatex">\(j\)</span> 的方案数。转移就是从 <span class="arithmatex">\(dp_{i,j}\)</span> 转移到 <span class="arithmatex">\(dp_{i+j,x+2y-2c}\)</span>。其中 <span class="arithmatex">\(x,y\)</span> 为 <span class="arithmatex">\([i+1,i+j]\)</span> 中一度点与二度点的个数，<span class="arithmatex">\(c\)</span> 为枚举的下一层内部连边个数。</p>
+<p>但是这样有个问题，我们需要枚举 <span class="arithmatex">\(i,j,c,s\)</span> 四个值，复杂度就是 <span class="arithmatex">\(O(n^4)\)</span> 的。怎么优化呢？这里需要用到一个小 Trick，我称之为“分部转移”。我们先再化一化式子：</p>
+<div class="arithmatex">\[\sum_{s=0}^{\min(y,c)}\frac{v_s(x+2y-2s)!y!}{(y-s)!2^y}\times \frac{1}{(c-s)!2^{c-s}}\]</div>
 <p>然后我们不看已知量：</p>
-<p>$$\sum_{s=0}^{\min(\dots,c)}\frac{v_s(\dots2s)!\dots}{\dots}\times \frac{1}{(c-s)!2^{c-s}}$$</p>
-<p>容易发现前一半只和 $s$ 有关，后一半只和 $(c-s)$ 有关。</p>
-<p>那么我们就可以考虑分部转移，先从 $dp_{i,j}$ 转移到 $f_{i+j,x+2y-2s}$。在 $i'=i+j$ 处，再从 $g_{i',j'-2(c-s)}$ 转移到 $g_{i',j'}$，这样只需要分开枚举 $s$ 和 $c-s$ 即可。</p>
+<div class="arithmatex">\[\sum_{s=0}^{\min(\dots,c)}\frac{v_s(\dots2s)!\dots}{\dots}\times \frac{1}{(c-s)!2^{c-s}}\]</div>
+<p>容易发现前一半只和 <span class="arithmatex">\(s\)</span> 有关，后一半只和 <span class="arithmatex">\((c-s)\)</span> 有关。</p>
+<p>那么我们就可以考虑分部转移，先从 <span class="arithmatex">\(dp_{i,j}\)</span> 转移到 <span class="arithmatex">\(f_{i+j,x+2y-2s}\)</span>。在 <span class="arithmatex">\(i'=i+j\)</span> 处，再从 <span class="arithmatex">\(g_{i',j'-2(c-s)}\)</span> 转移到 <span class="arithmatex">\(g_{i',j'}\)</span>，这样只需要分开枚举 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(c-s\)</span> 即可。</p>
 <p>具体来说：</p>
-<p>$$\forall b\in\left[0,\left\lfloor\frac{j}{2}\right\rfloor\right],dp_{i,j}\gets g_{i,j-b}\times \frac{1}{b!2^{b}}$$
-$$\forall s\in[0,y],g_{i+j,x+2y-2s}\gets dp_{i,j}\times \frac{v_s(x+2y-2s)!y!}{(y-s)!2^y}$$</p>
-<p>然后复杂度就是 $O(n^3)$ 的了，空间复杂度 $O(n^2)$。</p>
-<p>这道题怪就怪在 $O(n^3)$ 能过 $1000$。而且我大常数居然也只跑了 $400ms$。</p>
+<div class="arithmatex">\[\forall b\in\left[0,\left\lfloor\frac{j}{2}\right\rfloor\right],dp_{i,j}\gets g_{i,j-b}\times \frac{1}{b!2^{b}}$$
+$$\forall s\in[0,y],g_{i+j,x+2y-2s}\gets dp_{i,j}\times \frac{v_s(x+2y-2s)!y!}{(y-s)!2^y}\]</div>
+<p>然后复杂度就是 <span class="arithmatex">\(O(n^3)\)</span> 的了，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。</p>
+<p>这道题怪就怪在 <span class="arithmatex">\(O(n^3)\)</span> 能过 <span class="arithmatex">\(1000\)</span>。而且我大常数居然也只跑了 <span class="arithmatex">\(400ms\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

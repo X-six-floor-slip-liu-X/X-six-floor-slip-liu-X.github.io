@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5779,13 +5807,13 @@
 
 
 <h1 id="_1">快速莫比乌斯变换，快速沃尔什变换</h1>
-<p>这两个算法用于处理位运算卷积，即 $h(x)=\sum_{a\otimes b=x}f(a)g(b)$，其中 $\otimes$ 表示按位与，按位或或按位异或。</p>
+<p>这两个算法用于处理位运算卷积，即 <span class="arithmatex">\(h(x)=\sum_{a\otimes b=x}f(a)g(b)\)</span>，其中 <span class="arithmatex">\(\otimes\)</span> 表示按位与，按位或或按位异或。</p>
 <h2 id="_2">快速莫比乌斯变换</h2>
 <p>前置知识：<a href="../../dp/SOSDP/">高维前缀和</a></p>
 <p>快速莫比乌斯变换用于处理与卷积和或卷积。</p>
-<p>对于 $h(x)=\sum_{a\;\mathrm{or}\; b=x}f(a)g(b)$</p>
-<p>具体来说，设 $\hat{f}(x)=\sum_{y\;\mathrm{or}\; x=x}f(y)$，我们发现：</p>
-<p>$$
+<p>对于 <span class="arithmatex">\(h(x)=\sum_{a\;\mathrm{or}\; b=x}f(a)g(b)\)</span></p>
+<p>具体来说，设 <span class="arithmatex">\(\hat{f}(x)=\sum_{y\;\mathrm{or}\; x=x}f(y)\)</span>，我们发现：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 \hat{f}(x)\times\hat{g}(x)
 &amp;=\left(\sum_{y\;\mathrm{or}\; x=x}f(y)\right)\times \left(\sum_{y\;\mathrm{or}\; x=x}g(y)\right)\\
@@ -5793,16 +5821,16 @@
 &amp;=\sum_{(y\;\mathrm{or}\; z)\;\mathrm{or}\; x=x} f(y)g(z)\\
 &amp;=\hat{h}(x)
 \end{aligned}
-$$</p>
-<p>于是我们高维前缀和得到 $\hat{f},\hat{g}$，把 $\hat{f},\hat{g}$ 的点值相乘得到 $\hat{h}$，再做高维差分即可得到 $h$。</p>
+\]</div>
+<p>于是我们高维前缀和得到 <span class="arithmatex">\(\hat{f},\hat{g}\)</span>，把 <span class="arithmatex">\(\hat{f},\hat{g}\)</span> 的点值相乘得到 <span class="arithmatex">\(\hat{h}\)</span>，再做高维差分即可得到 <span class="arithmatex">\(h\)</span>。</p>
 <p>同理对于“与”的情况，我们改成高维后缀和和高维后缀差分即可。</p>
 <h2 id="_3">快速沃尔什变换</h2>
 <p>FWT 也能处理与卷积和或卷积，但是显然不如 FMT 好写。所以我们只说异或卷积。</p>
-<p>做法仍然是构造变换 $f\to \hat{f}$，我们希望有 $\hat{h}=\hat{f}\times \hat{h}$。</p>
-<p>定义 $x\odot y$ 表示 $\mathrm{popcount}(x\;\mathrm{and}\; y)\bmod 2$，其中 $\mathrm{popcount}(x)$ 表示 $x$ 的二进制位数。</p>
-<p>我们发现，$(x\odot y)\;\mathrm{xor}\;(x\odot z)=x\odot(y\;\mathrm{xor}\; z)$，注意到异或后 $\mathrm{popcount}$ 的奇偶性等于 $\mathrm{popcount}$ 奇偶性的异或，而 $x\odot y$ 相当于只保留 $y$ 在 $x$ 中 $1$ 处的位数，那么这个的证明是显然的。</p>
-<p>我们设 $\hat{f}(x)=\left(\sum_{x\odot y=0}f(y)\right)-\left(\sum_{x\odot y=1}f(y)\right)$ 则：</p>
-<p>$$
+<p>做法仍然是构造变换 <span class="arithmatex">\(f\to \hat{f}\)</span>，我们希望有 <span class="arithmatex">\(\hat{h}=\hat{f}\times \hat{h}\)</span>。</p>
+<p>定义 <span class="arithmatex">\(x\odot y\)</span> 表示 <span class="arithmatex">\(\mathrm{popcount}(x\;\mathrm{and}\; y)\bmod 2\)</span>，其中 <span class="arithmatex">\(\mathrm{popcount}(x)\)</span> 表示 <span class="arithmatex">\(x\)</span> 的二进制位数。</p>
+<p>我们发现，<span class="arithmatex">\((x\odot y)\;\mathrm{xor}\;(x\odot z)=x\odot(y\;\mathrm{xor}\; z)\)</span>，注意到异或后 <span class="arithmatex">\(\mathrm{popcount}\)</span> 的奇偶性等于 <span class="arithmatex">\(\mathrm{popcount}\)</span> 奇偶性的异或，而 <span class="arithmatex">\(x\odot y\)</span> 相当于只保留 <span class="arithmatex">\(y\)</span> 在 <span class="arithmatex">\(x\)</span> 中 <span class="arithmatex">\(1\)</span> 处的位数，那么这个的证明是显然的。</p>
+<p>我们设 <span class="arithmatex">\(\hat{f}(x)=\left(\sum_{x\odot y=0}f(y)\right)-\left(\sum_{x\odot y=1}f(y)\right)\)</span> 则：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 \hat{f}(x)\times \hat{g}(y)
 &amp;=\left(\sum_{x\odot y=0}f(y)-\sum_{x\odot y=1}f(y)\right)\times \left(\sum_{x\odot y=0}g(y)-\sum_{x\odot y=1}g(y)\right)\\
@@ -5811,11 +5839,11 @@ $$</p>
 &amp;=\sum_{x\odot (y\;\mathrm{xor}\;z)=0}f(y)g(z)-\sum_{x\odot (y\;\mathrm{xor}\;z)=1}f(y)g(z)\\
 &amp;=\hat{h}(x)
 \end{aligned}
-$$</p>
-<p>那么我们应该怎么实现 $f\to\hat{f}$ 和 $\hat{f}\to f$ 的变换呢？考虑一个类似于 FFT 的分治：</p>
-<p>假设我们已经处理完了前 $i$ 位（即每个数只考虑和它后面完全相同的数，并且计算 $\odot$ 时只考虑前 $i$ 位）得到了 $\hat{f_i}(x)$，现在有两个数 $x,y$，前 $i$ 位完全相同，后面也完全相同，只有第 $i$ 位 $x$ 为 $0$ 而 $y$ 为 $1$。</p>
-<p>因为 $x$ 第 $i$ 位为 $0$，那么它和所有数 $\odot$ 的值应该都和只考虑前 $i-1$ 位时相同，则 $\hat{f_{i}}(x)=\hat{f_{i-1}}(x)+\hat{f_{i-1}}(y)$。因为 $y$ 第 $i$ 位为 $1$，那么它和第 $i$ 位为 $0$ 的数 $\odot$ 答案不变，但是和这一位为 $1$ 的 $\odot$ 答案反转，于是 $\hat{f_{i}}(y)=\hat{f_{i-1}}(x)-\hat{f_{i-1}}(y)$。</p>
-<p>逆运算是简单的，有 $\hat{f_{i-1}}(x)=\frac{\hat{f_{i}}(x)+\hat{f_{i}}(y)}{2},\hat{f_{i-1}}(y)=\frac{\hat{f_{i}}(x)-\hat{f_{i}}(y)}{2}$， <del>小学奥数和差问题</del> 。</p>
+\]</div>
+<p>那么我们应该怎么实现 <span class="arithmatex">\(f\to\hat{f}\)</span> 和 <span class="arithmatex">\(\hat{f}\to f\)</span> 的变换呢？考虑一个类似于 FFT 的分治：</p>
+<p>假设我们已经处理完了前 <span class="arithmatex">\(i\)</span> 位（即每个数只考虑和它后面完全相同的数，并且计算 <span class="arithmatex">\(\odot\)</span> 时只考虑前 <span class="arithmatex">\(i\)</span> 位）得到了 <span class="arithmatex">\(\hat{f_i}(x)\)</span>，现在有两个数 <span class="arithmatex">\(x,y\)</span>，前 <span class="arithmatex">\(i\)</span> 位完全相同，后面也完全相同，只有第 <span class="arithmatex">\(i\)</span> 位 <span class="arithmatex">\(x\)</span> 为 <span class="arithmatex">\(0\)</span> 而 <span class="arithmatex">\(y\)</span> 为 <span class="arithmatex">\(1\)</span>。</p>
+<p>因为 <span class="arithmatex">\(x\)</span> 第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(0\)</span>，那么它和所有数 <span class="arithmatex">\(\odot\)</span> 的值应该都和只考虑前 <span class="arithmatex">\(i-1\)</span> 位时相同，则 <span class="arithmatex">\(\hat{f_{i}}(x)=\hat{f_{i-1}}(x)+\hat{f_{i-1}}(y)\)</span>。因为 <span class="arithmatex">\(y\)</span> 第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(1\)</span>，那么它和第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(0\)</span> 的数 <span class="arithmatex">\(\odot\)</span> 答案不变，但是和这一位为 <span class="arithmatex">\(1\)</span> 的 <span class="arithmatex">\(\odot\)</span> 答案反转，于是 <span class="arithmatex">\(\hat{f_{i}}(y)=\hat{f_{i-1}}(x)-\hat{f_{i-1}}(y)\)</span>。</p>
+<p>逆运算是简单的，有 <span class="arithmatex">\(\hat{f_{i-1}}(x)=\frac{\hat{f_{i}}(x)+\hat{f_{i}}(y)}{2},\hat{f_{i-1}}(y)=\frac{\hat{f_{i}}(x)-\hat{f_{i}}(y)}{2}\)</span>， <del>小学奥数和差问题</del> 。</p>
 <details class="success">
 <summary><a href="https://www.luogu.com.cn/problem/P4717">模板题</a> 参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

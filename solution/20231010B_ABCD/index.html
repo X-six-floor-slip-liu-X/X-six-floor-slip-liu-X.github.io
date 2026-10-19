@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5852,7 +5880,7 @@
 <p>然后这场四道都是原题，一看就是 h 先生的模拟赛。</p>
 <p><a href="../../files/20231010.rar">密码是通用密码</a></p>
 <h2 id="t1">T1</h2>
-<p>首先可以 $O(n)$ DFS 一遍给能从东侧到达的所有点染色，然后就只关注这些染了色的点了，把其它点全删掉，下文默认所有点都能从东侧到达。</p>
+<p>首先可以 <span class="arithmatex">\(O(n)\)</span> DFS 一遍给能从东侧到达的所有点染色，然后就只关注这些染了色的点了，把其它点全删掉，下文默认所有点都能从东侧到达。</p>
 <p>注意这句话：</p>
 <blockquote>
 <p>保证边在结点以外的任何地⽅不相交</p>
@@ -5862,7 +5890,7 @@
 <p>假如黑色点和绿色边是已知的，然后存在一条路径从左侧红色点连到右侧红色点（橙色虚线）。由于边不相交，这就说明橙色路径中必定不和绿色路径相交，也就是必定经过黑色点。</p>
 <p><img alt="图示 2" src="../../img/20231010B_ABCD_2.png" /></p>
 <p>比如可能是这样的。</p>
-<p>这说明什么？若存在两条路径 $u\to x,v\to y$ 相交，那么 $u$ 也能到达 $y$，$v$ 也能到达 $x$。那么考虑再进一步，容易发现，东侧点某个点 $u$ 必定能到达西侧的一整个连续的区间（或者无法到达西侧）。</p>
+<p>这说明什么？若存在两条路径 <span class="arithmatex">\(u\to x,v\to y\)</span> 相交，那么 <span class="arithmatex">\(u\)</span> 也能到达 <span class="arithmatex">\(y\)</span>，<span class="arithmatex">\(v\)</span> 也能到达 <span class="arithmatex">\(x\)</span>。那么考虑再进一步，容易发现，东侧点某个点 <span class="arithmatex">\(u\)</span> 必定能到达西侧的一整个连续的区间（或者无法到达西侧）。</p>
 <p>那么就简单了，首先由于我们只关注连通性，可以缩掉强连通分量，然后就是一个 DAG 了，那么我们可以按反图的拓扑序 DP，维护每个强连通分量能到达的西侧最高点和最低点，然后把编号相减即可。具体转移很简单，不做赘述。</p>
 <p>貌似有不用缩点的办法，但是我不太懂。</p>
 <details class="success">
@@ -6020,16 +6048,16 @@
 <p>期望题（还是离散型的），赛时直接跳了。但貌似暴力很好打的样子，痛失暴力分。</p>
 <p>首先注意提示中的这句话：</p>
 <blockquote>
-<p>对于 $n$ 个 $[0,1]$ 之间的随机变量 $x_1,x_2,\dots,x_n$，第 $k$ ⼩的那个的期望值是 $\frac{k}{n+1}$。</p>
+<p>对于 <span class="arithmatex">\(n\)</span> 个 <span class="arithmatex">\([0,1]\)</span> 之间的随机变量 <span class="arithmatex">\(x_1,x_2,\dots,x_n\)</span>，第 <span class="arithmatex">\(k\)</span> ⼩的那个的期望值是 <span class="arithmatex">\(\frac{k}{n+1}\)</span>。</p>
 </blockquote>
-<p>他给这个提示肯定是有用的，容易发现我们只要求出最小生成树上最大的那条边的<strong>排名</strong>取到 $k\in[1,m]$ 的概率分别是多少，然后乘以贡献相加即可。</p>
-<p>那么假如我们按边权从小到大加边，当整张图第一次联通的时候，正在加的这条边就会产生贡献。形象化的，把恰好加到第 $n$ 条边时整张图首次联通的概率记作 $P(x=n)$，那么答案就是 $\sum_{k=0}^m\frac{k}{m+1}P(x=k)=\frac{1}{m+1}\sum_{k=0}^mkP(x=k)$。套路地，转化为 $\frac{1}{m+1}\sum_{k+0}^mP(x&gt;k)$，其中 $P(x&gt;k)$ 表示加到 $k$ 条边时整张图仍不连通的概率。</p>
-<p>由于 $n$ 很小，考虑状压，这里开始就非常巧妙了。设 $f_{i,msk}$ 表示加入了 $i$ 条边，每条边的左右端点都在 $msk$ 中，使 $msk$ 不连通的方案数，$g_{i,msk}$，表示连通的方案数。为方便叙述，设 $h(msk)$ 表示左右端点都在 $msk$ 内的边的总数，易得（？）转移方程：</p>
-<p>$$f_{i,msk}=\sum_{S\subsetneq msk\land p\in S}\sum_{j=0}^ig_{j,S}\dbinom{h(msk-S)}{i-j}$$</p>
-<p>其中 $p$ 是随意钦定的一个点，满足 $p\in msk$。</p>
-<p>首先，上面的意思是把 $msk$ 分成 $S,msk-S$ 两个集合，然后钦定两个集合之间不连边，然后 $S$ 内部用 $j$ 条边连通，其余随意连边。</p>
-<p>至于为什么要钦定一个 $p$，容易发现 $msk-S$ 是有可能连通的，如果不钦定会在 $j'=i-j$ 时将当前情况重复计算，如果钦定连通的那一半包含某个点，由于每个点必然属于其中一边，那么就会自动去掉重复的情况。而在每种情况下，钦定的 $p$ 必然属于某个连通块，而 $S$ 显然能取遍 $p$ 可能所属的所有连通块，这样就不重不漏了。</p>
-<p>那么如何求 $g$ 呢？这其实非常简单，因为显然 $f_{i,msk}+g_{i,msk}=\dbinom{h(msk)}{i}$，$g$ 可以直接计算。于是就做完了，复杂度 $O(3^nm^2)$。</p>
+<p>他给这个提示肯定是有用的，容易发现我们只要求出最小生成树上最大的那条边的<strong>排名</strong>取到 <span class="arithmatex">\(k\in[1,m]\)</span> 的概率分别是多少，然后乘以贡献相加即可。</p>
+<p>那么假如我们按边权从小到大加边，当整张图第一次联通的时候，正在加的这条边就会产生贡献。形象化的，把恰好加到第 <span class="arithmatex">\(n\)</span> 条边时整张图首次联通的概率记作 <span class="arithmatex">\(P(x=n)\)</span>，那么答案就是 <span class="arithmatex">\(\sum_{k=0}^m\frac{k}{m+1}P(x=k)=\frac{1}{m+1}\sum_{k=0}^mkP(x=k)\)</span>。套路地，转化为 <span class="arithmatex">\(\frac{1}{m+1}\sum_{k+0}^mP(x&gt;k)\)</span>，其中 <span class="arithmatex">\(P(x&gt;k)\)</span> 表示加到 <span class="arithmatex">\(k\)</span> 条边时整张图仍不连通的概率。</p>
+<p>由于 <span class="arithmatex">\(n\)</span> 很小，考虑状压，这里开始就非常巧妙了。设 <span class="arithmatex">\(f_{i,msk}\)</span> 表示加入了 <span class="arithmatex">\(i\)</span> 条边，每条边的左右端点都在 <span class="arithmatex">\(msk\)</span> 中，使 <span class="arithmatex">\(msk\)</span> 不连通的方案数，<span class="arithmatex">\(g_{i,msk}\)</span>，表示连通的方案数。为方便叙述，设 <span class="arithmatex">\(h(msk)\)</span> 表示左右端点都在 <span class="arithmatex">\(msk\)</span> 内的边的总数，易得（？）转移方程：</p>
+<div class="arithmatex">\[f_{i,msk}=\sum_{S\subsetneq msk\land p\in S}\sum_{j=0}^ig_{j,S}\dbinom{h(msk-S)}{i-j}\]</div>
+<p>其中 <span class="arithmatex">\(p\)</span> 是随意钦定的一个点，满足 <span class="arithmatex">\(p\in msk\)</span>。</p>
+<p>首先，上面的意思是把 <span class="arithmatex">\(msk\)</span> 分成 <span class="arithmatex">\(S,msk-S\)</span> 两个集合，然后钦定两个集合之间不连边，然后 <span class="arithmatex">\(S\)</span> 内部用 <span class="arithmatex">\(j\)</span> 条边连通，其余随意连边。</p>
+<p>至于为什么要钦定一个 <span class="arithmatex">\(p\)</span>，容易发现 <span class="arithmatex">\(msk-S\)</span> 是有可能连通的，如果不钦定会在 <span class="arithmatex">\(j'=i-j\)</span> 时将当前情况重复计算，如果钦定连通的那一半包含某个点，由于每个点必然属于其中一边，那么就会自动去掉重复的情况。而在每种情况下，钦定的 <span class="arithmatex">\(p\)</span> 必然属于某个连通块，而 <span class="arithmatex">\(S\)</span> 显然能取遍 <span class="arithmatex">\(p\)</span> 可能所属的所有连通块，这样就不重不漏了。</p>
+<p>那么如何求 <span class="arithmatex">\(g\)</span> 呢？这其实非常简单，因为显然 <span class="arithmatex">\(f_{i,msk}+g_{i,msk}=\dbinom{h(msk)}{i}\)</span>，<span class="arithmatex">\(g\)</span> 可以直接计算。于是就做完了，复杂度 <span class="arithmatex">\(O(3^nm^2)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6106,20 +6134,20 @@
 <h2 id="t3">T3</h2>
 <p>挺板的数据结构题，但是赛后没看题解改出来了，中间大部分维护思路是在研学的时候想的，自己独立发明了线段树维护历史总和，感觉自己屌爆了。</p>
 <p>首先考虑最大值怎么维护，最小值类似。</p>
-<p>我们可以单调栈求出 $i$ 左侧最近的大于 $a_i$ 的位置 $L_i$，右侧第一个 $R_i$，那么 $i$ 在 $l\in(L_i,i],r\in [i,R_i)$ 的区间 $[l,r]$ 中会产生贡献，如果把区间按 $l$ 为纵坐标 $r$ 为横坐标放在矩阵上就是一个矩形，可以扫描线维护。</p>
-<p>那么题意就转化成了有若干个三元组 $((x_1,y_1),(x_2,y_2),v)$，表示两点围成的矩形中所有点 $a_{i,j}$ 的权值都加 $v$，然后查询某矩形内所有点权值和。</p>
-<p>那么可以把修改和查询都拆成两条垂直线段 $(x_1,y_1)-(x_1,y_2),(x_2,y_1)-(x_2,y_2)$，然后扫描线维护区间历史总和（即扫描到第 $i$ 列时 $v_i=\sum_{j=1}^ia_{i,j}$），然后前缀和减一减就完事了。</p>
+<p>我们可以单调栈求出 <span class="arithmatex">\(i\)</span> 左侧最近的大于 <span class="arithmatex">\(a_i\)</span> 的位置 <span class="arithmatex">\(L_i\)</span>，右侧第一个 <span class="arithmatex">\(R_i\)</span>，那么 <span class="arithmatex">\(i\)</span> 在 <span class="arithmatex">\(l\in(L_i,i],r\in [i,R_i)\)</span> 的区间 <span class="arithmatex">\([l,r]\)</span> 中会产生贡献，如果把区间按 <span class="arithmatex">\(l\)</span> 为纵坐标 <span class="arithmatex">\(r\)</span> 为横坐标放在矩阵上就是一个矩形，可以扫描线维护。</p>
+<p>那么题意就转化成了有若干个三元组 <span class="arithmatex">\(((x_1,y_1),(x_2,y_2),v)\)</span>，表示两点围成的矩形中所有点 <span class="arithmatex">\(a_{i,j}\)</span> 的权值都加 <span class="arithmatex">\(v\)</span>，然后查询某矩形内所有点权值和。</p>
+<p>那么可以把修改和查询都拆成两条垂直线段 <span class="arithmatex">\((x_1,y_1)-(x_1,y_2),(x_2,y_1)-(x_2,y_2)\)</span>，然后扫描线维护区间历史总和（即扫描到第 <span class="arithmatex">\(i\)</span> 列时 <span class="arithmatex">\(v_i=\sum_{j=1}^ia_{i,j}\)</span>），然后前缀和减一减就完事了。</p>
 <p>那么考虑如何维护，首先我们每个区间维护的东西形如这样：</p>
 <p><img alt="图示 3" src="../../img/20231010B_ABCD_3.png" /></p>
 <p>其中不同颜色的交界表示一个修改操作。</p>
 <p>容易发现在上一次修改之前（不包含修改的那一刻）的历史总和是固定，后面不会再改变的，但是最后的橙色那段长度是随时间递增的。</p>
-<p>那么容易想到对每个区间维护三个值：<strong>上一次修改之前的总和</strong> $hsum$，<strong>上一次修改的时间</strong> $modi$，<strong>当前值（即橙色部分每个切片的值）</strong> $sum$，然后查询时下传当前的时间 $T$，区间历史总和就是 $hsum+(T-modi+1)\times sum$。</p>
-<p>接下来考虑如何修改。首先考虑合并怎么写，其实很好想，上次修改的时间是两个儿子取较大值，那么 $hsum$ 就要加上另一边在差的这段时间的贡献，可以自己想一想。</p>
+<p>那么容易想到对每个区间维护三个值：<strong>上一次修改之前的总和</strong> <span class="arithmatex">\(hsum\)</span>，<strong>上一次修改的时间</strong> <span class="arithmatex">\(modi\)</span>，<strong>当前值（即橙色部分每个切片的值）</strong> <span class="arithmatex">\(sum\)</span>，然后查询时下传当前的时间 <span class="arithmatex">\(T\)</span>，区间历史总和就是 <span class="arithmatex">\(hsum+(T-modi+1)\times sum\)</span>。</p>
+<p>接下来考虑如何修改。首先考虑合并怎么写，其实很好想，上次修改的时间是两个儿子取较大值，那么 <span class="arithmatex">\(hsum\)</span> 就要加上另一边在差的这段时间的贡献，可以自己想一想。</p>
 <p>接下来是难点，如何下传懒标记（因为你要区间修改嘛）。如果你稍微熟悉一点线段树，就会发现懒标记是一段时间的积累。也就是说，懒标记也要维护一个形如上面那条色彩斑斓的东西的玩意。</p>
-<p>另外你也容易发现区间加的懒标记维护的是一段时间的<strong>增量</strong>，那么我们维护四个值：<strong>懒标记的开始时间</strong> $stmark$，<strong>懒标记的结束时间</strong> $edmark$，<strong>懒标记总增量</strong> $smark$，<strong>增量从开始到结束的总和</strong> $mark$。然后下传懒标记时，对区间历史总和的贡献就是 $(smark+sum\times (ed-modi))\times len$，其中 $len$ 是区间长度。</p>
+<p>另外你也容易发现区间加的懒标记维护的是一段时间的<strong>增量</strong>，那么我们维护四个值：<strong>懒标记的开始时间</strong> <span class="arithmatex">\(stmark\)</span>，<strong>懒标记的结束时间</strong> <span class="arithmatex">\(edmark\)</span>，<strong>懒标记总增量</strong> <span class="arithmatex">\(smark\)</span>，<strong>增量从开始到结束的总和</strong> <span class="arithmatex">\(mark\)</span>。然后下传懒标记时，对区间历史总和的贡献就是 <span class="arithmatex">\((smark+sum\times (ed-modi))\times len\)</span>，其中 <span class="arithmatex">\(len\)</span> 是区间长度。</p>
 <p>至于懒标记下传给懒标记，仿照这个即可，不多做赘述了。</p>
 <p>然后我突然发现其实不需要维护懒标记开始时间，鉴定为研学的时候没纸没笔脑子秀逗导致的，但是代码懒得改了。</p>
-<p>复杂度 $O(n\log n)$，常数不小。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>，常数不小。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6282,10 +6310,10 @@
 </details>
 <h2 id="t4">T4</h2>
 <p>首先，题给你的是个内向基环森林，这点后面会用到。</p>
-<p>考虑如何构造，容易发现加的所有边都从点 $1$ 指出必然是不劣的，且基环树的叶子结点必须引一条边。</p>
-<p>那么每次找到最深的距离大于 $k$/无法到达（但不能在环上）的点连边，容易发现你连得每条边都是必要的，即这样必定是最优解。</p>
-<p>接下来就只有环没处理了，那么问题就转化成了一个环上有若干个黑点与若干个白点，然后你一次操作可以把从指定点 $i$ 开始往后连续的 $k-1$ 个点全部染黑，问把环全染黑的最小操作数。</p>
-<p>这个有非常巧妙的贪心。容易发现连续 $k-1$ 个白点（指的不是紧挨着，两个连续的白点可能越过多个黑点），中必定至少有一个要操作一次（不然就涂不完了）。而你涂色操作可以每次跳 $k$ 个 $O(\frac{n}{k})$ 算出一个环至少要操作多少次才完成，那么复杂度就是 $O(k\times \frac{n}{k})=O(n)$！那么我们就能愉快地通过此题了（可能有一些操作实现比较复杂）。</p>
+<p>考虑如何构造，容易发现加的所有边都从点 <span class="arithmatex">\(1\)</span> 指出必然是不劣的，且基环树的叶子结点必须引一条边。</p>
+<p>那么每次找到最深的距离大于 <span class="arithmatex">\(k\)</span>/无法到达（但不能在环上）的点连边，容易发现你连得每条边都是必要的，即这样必定是最优解。</p>
+<p>接下来就只有环没处理了，那么问题就转化成了一个环上有若干个黑点与若干个白点，然后你一次操作可以把从指定点 <span class="arithmatex">\(i\)</span> 开始往后连续的 <span class="arithmatex">\(k-1\)</span> 个点全部染黑，问把环全染黑的最小操作数。</p>
+<p>这个有非常巧妙的贪心。容易发现连续 <span class="arithmatex">\(k-1\)</span> 个白点（指的不是紧挨着，两个连续的白点可能越过多个黑点），中必定至少有一个要操作一次（不然就涂不完了）。而你涂色操作可以每次跳 <span class="arithmatex">\(k\)</span> 个 <span class="arithmatex">\(O(\frac{n}{k})\)</span> 算出一个环至少要操作多少次才完成，那么复杂度就是 <span class="arithmatex">\(O(k\times \frac{n}{k})=O(n)\)</span>！那么我们就能愉快地通过此题了（可能有一些操作实现比较复杂）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

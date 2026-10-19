@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6028,29 +6056,29 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定 $n,m\le 10^7$，求 $1\le x\le n,1\le y\le m$，且 $\gcd(x,y)$ 是质数的 $(x,y)$ 有多少对。有多测 $t\le 10^4$。</li>
+<li>给定 <span class="arithmatex">\(n,m\le 10^7\)</span>，求 <span class="arithmatex">\(1\le x\le n,1\le y\le m\)</span>，且 <span class="arithmatex">\(\gcd(x,y)\)</span> 是质数的 <span class="arithmatex">\((x,y)\)</span> 有多少对。有多测 <span class="arithmatex">\(t\le 10^4\)</span>。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>容易想到莫反，考虑化式子：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\sum_{p\in prime}^{p\le \min(n,m)}\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{p}\right\rfloor}[\gcd(i,j)=1]\\
 =&amp;\sum_{p\in prime}^{p\le \min(n,m)}\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{p}\right\rfloor}\sum_{d\mid \gcd(i,j)}\mu(d)\\
 =&amp;\sum_{p\in prime}^{p\le \min(n,m)}\sum_{d=1}^{d\le \min(\left\lfloor\frac{n}{p}\right\rfloor,\left\lfloor\frac{m}{p}\right\rfloor)}\mu(d)\sum_{d\mid i}^{i\le \left\lfloor\frac{n}{p}\right\rfloor}\sum_{d\mid j}^{j\le \left\lfloor\frac{m}{p}\right\rfloor}1\\
 =&amp;\sum_{p\in prime}^{p\le \min(n,m)}\sum_{d=1}^{d\le \min(\left\lfloor\frac{n}{p}\right\rfloor,\left\lfloor\frac{m}{p}\right\rfloor)}\mu(d)\left\lfloor\frac{n}{p\cdot d}\right\rfloor\left\lfloor\frac{m}{p\cdot d}\right\rfloor\\
 \end{aligned}
-$$</p>
-<p>这个看起来已经很简了，但还是会 TLE，考虑继续优化。如果先枚举 $T=p\cdot d$ 的话，容易发现：</p>
-<p>$$
+\]</div>
+<p>这个看起来已经很简了，但还是会 TLE，考虑继续优化。如果先枚举 <span class="arithmatex">\(T=p\cdot d\)</span> 的话，容易发现：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\sum_{p\in prime}^{p\le \min(n,m)}\sum_{d=1}^{d\le \min(\left\lfloor\frac{n}{p}\right\rfloor,\left\lfloor\frac{m}{p}\right\rfloor)}\mu(d)\left\lfloor\frac{n}{p\cdot d}\right\rfloor\left\lfloor\frac{m}{p\cdot d}\right\rfloor\\
 =&amp;\sum_{T=1}^{\min(n,m)}\left\lfloor\frac{n}{T}\right\rfloor\left\lfloor\frac{m}{T}\right\rfloor\sum_{p\in prime}^{p\mid T}\mu(\frac{T}{p})\\
 \end{aligned}
-$$</p>
-<p>而 $\sum_{p\in prime}^{p\mid T}\mu(\frac{T}{p})$ 是可以在线性筛的过程中求出来的，设 $g(T)=\sum_{p\in prime}^{p\mid T}\mu(\frac{T}{p})$。具体考虑线性筛每次枚举的 $i$ 和质数 $j$，若 $i\bmod j=0$，则 $g(ij)=\mu(i)-g(i)$（$i$ 里面已有的会乘上 $\mu(j)$，再加上取 $p=j$），否则，$g(ij)=\mu(i)$（如果 $p\ne j$，那么 $j^2\mid \frac{T}{p}$，则 $\mu(\frac{T}{p})=0$，$p$ 只能取 $j$），然后算一下前缀和就做完了。</p>
-<p>复杂度 $O(n+t\sqrt{n})$。</p>
+\]</div>
+<p>而 <span class="arithmatex">\(\sum_{p\in prime}^{p\mid T}\mu(\frac{T}{p})\)</span> 是可以在线性筛的过程中求出来的，设 <span class="arithmatex">\(g(T)=\sum_{p\in prime}^{p\mid T}\mu(\frac{T}{p})\)</span>。具体考虑线性筛每次枚举的 <span class="arithmatex">\(i\)</span> 和质数 <span class="arithmatex">\(j\)</span>，若 <span class="arithmatex">\(i\bmod j=0\)</span>，则 <span class="arithmatex">\(g(ij)=\mu(i)-g(i)\)</span>（<span class="arithmatex">\(i\)</span> 里面已有的会乘上 <span class="arithmatex">\(\mu(j)\)</span>，再加上取 <span class="arithmatex">\(p=j\)</span>），否则，<span class="arithmatex">\(g(ij)=\mu(i)\)</span>（如果 <span class="arithmatex">\(p\ne j\)</span>，那么 <span class="arithmatex">\(j^2\mid \frac{T}{p}\)</span>，则 <span class="arithmatex">\(\mu(\frac{T}{p})=0\)</span>，<span class="arithmatex">\(p\)</span> 只能取 <span class="arithmatex">\(j\)</span>），然后算一下前缀和就做完了。</p>
+<p>复杂度 <span class="arithmatex">\(O(n+t\sqrt{n})\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6117,18 +6145,18 @@ $$</p>
 </details>
 <h2 id="p2522-haoi2011-problem-b">P2522 [HAOI2011] Problem b</h2>
 <p><a href="https://www.luogu.com.cn/problem/P2522">传送门</a></p>
-<p>一眼莫反板子，首先简单转化成 $\gcd=1$ 的问题，然后化一下式子：</p>
-<p>$$
+<p>一眼莫反板子，首先简单转化成 <span class="arithmatex">\(\gcd=1\)</span> 的问题，然后化一下式子：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\sum_{i=a}^b\sum_{j=c}^d[\gcd(i,j)=1]\\
 =&amp;\sum_{i=a}^b\sum_{j=c}^d\sum_{t\mid \gcd(i,j)}\mu(t)\\
 =&amp;\sum_{t}\mu(t)\sum_{t\mid i}^{a\le i\le b}\sum_{t\mid j}^{c\le j\le d}1\\
 =&amp;\sum_{t}\mu(t)(\left\lfloor\frac{b}{t}\right\rfloor-\left\lfloor\frac{a-1}{t}\right\rfloor)(\left\lfloor\frac{d}{t}\right\rfloor-\left\lfloor\frac{c-1}{t}\right\rfloor)\\
 \end{aligned}
-$$</p>
+\]</div>
 <p>然后数论分块即可。</p>
-<p>转化为 $\gcd=1$ 问题时，注意 $a,c$ 要上取整，$c,d$ 要下取整，以及数论分块边界问题。</p>
-<p>复杂度 $O(a+n\sqrt{a})$。</p>
+<p>转化为 <span class="arithmatex">\(\gcd=1\)</span> 问题时，注意 <span class="arithmatex">\(a,c\)</span> 要上取整，<span class="arithmatex">\(c,d\)</span> 要下取整，以及数论分块边界问题。</p>
+<p>复杂度 <span class="arithmatex">\(O(a+n\sqrt{a})\)</span>。</p>
 <details class="success">
 <summary>参考代码片段</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="o">=</span><span class="mf">5e4</span><span class="o">+</span><span class="mi">5</span><span class="p">;</span>
@@ -6157,30 +6185,30 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定 $n$，问有多少 $(a,b,c)$ 正整数三元组，满足 $a^2+b^2=c^2$，且 $1\le a\le n$。</li>
-<li>$1\le n\le 10^{10}$。</li>
+<li>给定 <span class="arithmatex">\(n\)</span>，问有多少 <span class="arithmatex">\((a,b,c)\)</span> 正整数三元组，满足 <span class="arithmatex">\(a^2+b^2=c^2\)</span>，且 <span class="arithmatex">\(1\le a\le n\)</span>。</li>
+<li><span class="arithmatex">\(1\le n\le 10^{10}\)</span>。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>赛时一点思路没有，感觉很神秘啊。</p>
-<p>考虑 $a^2+b^2=c^2\Leftrightarrow a^2=(b+c)(b-c)$，那么对于一个 $a$，每个满足 $d\mid a^2,d\equiv \frac{a}{d}\pmod 2,d\ne a$ 的正整数 $d$ 都能对应一个 $b-c$（或者 $b+c$，显然同一个情况会在 $b-c,b+c$ 各算一次，除以二即可）。其中 $d\equiv \frac{a}{d}\pmod 2$ 是保证 $b,c$ 是整数，其余两个限制都显然。</p>
-<p>设 $\tau(x)$（<code>\tau</code>） 表示 $x$ 的约数个数。容易想到 $a$ 的贡献就是 $\frac{\tau(a^2)-1}{2}$，其中 $-1$ 是去掉 $d=a$ 的情况（这种情况 $c=0$ 了）。</p>
-<p>但这个没有考虑 $d,\frac{a}{d}$ 奇偶性不同的情况。如果 $a$ 是奇数，那么这两个东西的奇偶性必然相同，可以直接用上面那个式子。但当 $a$ 是偶数时，必须两边各分至少一个 $2$，那么不妨直接将两边均除以 $2$ 来计算，这样就能避免奇偶性的限制了，于是贡献为 $\frac{\tau(\frac{a^2}{4})-1}{2}$。</p>
+<p>考虑 <span class="arithmatex">\(a^2+b^2=c^2\Leftrightarrow a^2=(b+c)(b-c)\)</span>，那么对于一个 <span class="arithmatex">\(a\)</span>，每个满足 <span class="arithmatex">\(d\mid a^2,d\equiv \frac{a}{d}\pmod 2,d\ne a\)</span> 的正整数 <span class="arithmatex">\(d\)</span> 都能对应一个 <span class="arithmatex">\(b-c\)</span>（或者 <span class="arithmatex">\(b+c\)</span>，显然同一个情况会在 <span class="arithmatex">\(b-c,b+c\)</span> 各算一次，除以二即可）。其中 <span class="arithmatex">\(d\equiv \frac{a}{d}\pmod 2\)</span> 是保证 <span class="arithmatex">\(b,c\)</span> 是整数，其余两个限制都显然。</p>
+<p>设 <span class="arithmatex">\(\tau(x)\)</span>（<code>\tau</code>） 表示 <span class="arithmatex">\(x\)</span> 的约数个数。容易想到 <span class="arithmatex">\(a\)</span> 的贡献就是 <span class="arithmatex">\(\frac{\tau(a^2)-1}{2}\)</span>，其中 <span class="arithmatex">\(-1\)</span> 是去掉 <span class="arithmatex">\(d=a\)</span> 的情况（这种情况 <span class="arithmatex">\(c=0\)</span> 了）。</p>
+<p>但这个没有考虑 <span class="arithmatex">\(d,\frac{a}{d}\)</span> 奇偶性不同的情况。如果 <span class="arithmatex">\(a\)</span> 是奇数，那么这两个东西的奇偶性必然相同，可以直接用上面那个式子。但当 <span class="arithmatex">\(a\)</span> 是偶数时，必须两边各分至少一个 <span class="arithmatex">\(2\)</span>，那么不妨直接将两边均除以 <span class="arithmatex">\(2\)</span> 来计算，这样就能避免奇偶性的限制了，于是贡献为 <span class="arithmatex">\(\frac{\tau(\frac{a^2}{4})-1}{2}\)</span>。</p>
 <p>综上，答案即为：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\left(\sum_{a=1,2\mid a}^{n}\frac{\tau(\frac{a^2}{4})-1}{2}\right)+\left(\sum_{a=1,2\nmid a}^n\frac{\tau(a)-1}{2}\right)\\
 =&amp;\dfrac{\left(\sum_{i=1}^{\frac{n}{2}}\tau(i^2)\right)-\left\lfloor\frac{n}{2}\right\rfloor+\left(\sum_{i=1,2\nmid i}^{n}\tau(i^2)\right)-\left\lceil\frac{n}{2}\right\rceil}{2}
 \end{aligned}
-$$</p>
-<p>那么难点就规约成了计算 $\sum_{i=1}^{n}\tau(i^2)$ 和 $\sum_{i=1,i\nmid 2}^{\frac{n}{2}}\tau(i^2)$。</p>
+\]</div>
+<p>那么难点就规约成了计算 <span class="arithmatex">\(\sum_{i=1}^{n}\tau(i^2)\)</span> 和 <span class="arithmatex">\(\sum_{i=1,i\nmid 2}^{\frac{n}{2}}\tau(i^2)\)</span>。</p>
 <ul>
-<li>$\sum_{i=1}^{n}\tau(i^2)$</li>
+<li><span class="arithmatex">\(\sum_{i=1}^{n}\tau(i^2)\)</span></li>
 </ul>
-<p>考虑一个经典（？）结论，$\tau(n^2)=\sum_{x\mid n}\sum_{y\mid n}[\gcd(x,y)=1]$，大概思路就是每一对 $(x,y)$ 二元组对应 $\frac{n\times x}{y}$，当 $x,y$ 不互质时就会和某对互质的 $(x',y')$ 算重。</p>
+<p>考虑一个经典（？）结论，<span class="arithmatex">\(\tau(n^2)=\sum_{x\mid n}\sum_{y\mid n}[\gcd(x,y)=1]\)</span>，大概思路就是每一对 <span class="arithmatex">\((x,y)\)</span> 二元组对应 <span class="arithmatex">\(\frac{n\times x}{y}\)</span>，当 <span class="arithmatex">\(x,y\)</span> 不互质时就会和某对互质的 <span class="arithmatex">\((x',y')\)</span> 算重。</p>
 <p>于是：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 \sum_{i=1}^{n}\tau(i^2)
 &amp;=\sum_{i=1}^n\sum_{x\mid i}\sum_{y\mid i}[\gcd(x,y)=1]\\
@@ -6193,20 +6221,20 @@ $$</p>
 &amp;=\sum_{d=1}^{\left\lfloor\sqrt{n}\right\rfloor}\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\left\lfloor\frac{n}{ij\times d^2}\right\rfloor\\
 &amp;=\sum_{d=1}^{\left\lfloor\sqrt{n}\right\rfloor}\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\left\lfloor\frac{\left\lfloor\frac{n}{i\times d^2}\right\rfloor}{j}\right\rfloor
 \end{aligned}
-$$</p>
-<p>其中 $n\to \left\lfloor\sqrt{n}\right\rfloor$ 的这一步是因为当 $d&gt;\sqrt{n}$ 时 $\left\lfloor\frac{n}{ij\times d^2}\right\rfloor$ 就变成 $0$ 了，$i,j$ 上界的变化也同理。</p>
-<p>容易发现我们可以维护 $H(n)=\sum_{i=1}^n \left\lfloor\frac{n}{i}\right\rfloor=\sum_{i=1}^n\tau(i)$（线性筛求），大于 $n^{\frac{2}{3}}$ 时暴力数论分块，小于时线性筛预处理。</p>
-<p>这样先暴力枚举 $d$，再数论分块 $i$，再引用 $H(\left\lfloor\frac{n}{i\times d^2}\right\rfloor)$，复杂度是 $O(n^{\frac{2}{3}})$。证明不会，要用一堆神秘撬棍符号，总之能过 $10^{10}$。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(n\to \left\lfloor\sqrt{n}\right\rfloor\)</span> 的这一步是因为当 <span class="arithmatex">\(d&gt;\sqrt{n}\)</span> 时 <span class="arithmatex">\(\left\lfloor\frac{n}{ij\times d^2}\right\rfloor\)</span> 就变成 <span class="arithmatex">\(0\)</span> 了，<span class="arithmatex">\(i,j\)</span> 上界的变化也同理。</p>
+<p>容易发现我们可以维护 <span class="arithmatex">\(H(n)=\sum_{i=1}^n \left\lfloor\frac{n}{i}\right\rfloor=\sum_{i=1}^n\tau(i)\)</span>（线性筛求），大于 <span class="arithmatex">\(n^{\frac{2}{3}}\)</span> 时暴力数论分块，小于时线性筛预处理。</p>
+<p>这样先暴力枚举 <span class="arithmatex">\(d\)</span>，再数论分块 <span class="arithmatex">\(i\)</span>，再引用 <span class="arithmatex">\(H(\left\lfloor\frac{n}{i\times d^2}\right\rfloor)\)</span>，复杂度是 <span class="arithmatex">\(O(n^{\frac{2}{3}})\)</span>。证明不会，要用一堆神秘撬棍符号，总之能过 <span class="arithmatex">\(10^{10}\)</span>。</p>
 <ul>
-<li>$\sum_{i=1,i\nmid 2}^{\frac{n}{2}}\tau(i^2)$</li>
+<li><span class="arithmatex">\(\sum_{i=1,i\nmid 2}^{\frac{n}{2}}\tau(i^2)\)</span></li>
 </ul>
-<p>其实类似吧，但是容易发现每个 $\sum$ 符号下面都要加 $2\nmid i$，然后把 $\left\lfloor\frac{n}{xy}\right\rfloor$ 换成 $\left\lceil\frac{\left\lfloor\frac{n}{xy}\right\rfloor}{2}\right\rceil$（因为只算奇数），于是有：</p>
-<p>$$
+<p>其实类似吧，但是容易发现每个 <span class="arithmatex">\(\sum\)</span> 符号下面都要加 <span class="arithmatex">\(2\nmid i\)</span>，然后把 <span class="arithmatex">\(\left\lfloor\frac{n}{xy}\right\rfloor\)</span> 换成 <span class="arithmatex">\(\left\lceil\frac{\left\lfloor\frac{n}{xy}\right\rfloor}{2}\right\rceil\)</span>（因为只算奇数），于是有：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\sum_{d=1,2\nmid d}^{\left\lfloor\sqrt{n}\right\rfloor}\mu(d)\sum_{i=1,2\nmid i}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\sum_{j=1,2\nmid j}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\left\lceil\frac{\left\lfloor\frac{\left\lfloor\frac{n}{i\times d^2}\right\rfloor}{j}\right\rfloor}{2}\right\rceil\\
 \end{aligned}
-$$</p>
-<p>然后就维护 $H'(n)=\sum_{i=1,2\nmid i}^n\left\lceil\frac{\left\lfloor\frac{n}{i}\right\rfloor}{2}\right\rceil=\sum_{i=1,2\nmid i}^n\tau(i)$，因为 $\left\lceil\frac{\left\lfloor\frac{n}{i}\right\rfloor}{2}\right\rceil$ 就是 $i$ 的奇倍数个数，那么就是所有奇数的约数和。接着用同样方法维护即可。</p>
+\]</div>
+<p>然后就维护 <span class="arithmatex">\(H'(n)=\sum_{i=1,2\nmid i}^n\left\lceil\frac{\left\lfloor\frac{n}{i}\right\rfloor}{2}\right\rceil=\sum_{i=1,2\nmid i}^n\tau(i)\)</span>，因为 <span class="arithmatex">\(\left\lceil\frac{\left\lfloor\frac{n}{i}\right\rfloor}{2}\right\rceil\)</span> 就是 <span class="arithmatex">\(i\)</span> 的奇倍数个数，那么就是所有奇数的约数和。接着用同样方法维护即可。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6322,17 +6350,17 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一棵树 $T$ 和一张无向图简单连通 $G$，点数均为 $n$。</li>
-<li>问有多少个排列 $p_i$，满足 $\forall (u,v)\in E_T,(p_u,p_v)\in E_G$。</li>
-<li>$1\le n\le 17$，保证至少有一解。</li>
+<li>给定一棵树 <span class="arithmatex">\(T\)</span> 和一张无向图简单连通 <span class="arithmatex">\(G\)</span>，点数均为 <span class="arithmatex">\(n\)</span>。</li>
+<li>问有多少个排列 <span class="arithmatex">\(p_i\)</span>，满足 <span class="arithmatex">\(\forall (u,v)\in E_T,(p_u,p_v)\in E_G\)</span>。</li>
+<li><span class="arithmatex">\(1\le n\le 17\)</span>，保证至少有一解。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>首先有个显然的 DP，设 $dp_{i,j,S}$ 表示考虑 $i$ 子树内 $p_i=j$ 且 $i$ 的子树恰好占满 $S$ 的方案数，转移就是一个枚举子集，复杂度 $O(n^23^n)$，显然过不了。</p>
-<p>考虑“排列”是个非常强的限制，因为它要求 $p_i$ 不能重复。如何把这玩意去掉呢？容易想到子集反演。</p>
-<p>具体来说，设 $f(S)$ 表示用过的 $p_i$ 恰好是 $S$ 集合的方案数（可重复使用），显然 $f(V)$ 就是答案（$V$ 是点集的全集），容易发现可以用 $g(S)=\sum_{T\subseteq S}f(T)$ 表示用过的 $p_i$ 是 $S$ 的子集的方案数。根据子集反演，有 $f(S)=\sum_{T\subseteq S}(-1)^{|S|-|T|}g(T)$。</p>
-<p>而 $g(S)$ 可以在枚举 $S$ 后 $O(n^2)$ 求出（还是考虑 DP），于是复杂度 $O(n^22^n)$ ，就能过了。</p>
+<p>首先有个显然的 DP，设 <span class="arithmatex">\(dp_{i,j,S}\)</span> 表示考虑 <span class="arithmatex">\(i\)</span> 子树内 <span class="arithmatex">\(p_i=j\)</span> 且 <span class="arithmatex">\(i\)</span> 的子树恰好占满 <span class="arithmatex">\(S\)</span> 的方案数，转移就是一个枚举子集，复杂度 <span class="arithmatex">\(O(n^23^n)\)</span>，显然过不了。</p>
+<p>考虑“排列”是个非常强的限制，因为它要求 <span class="arithmatex">\(p_i\)</span> 不能重复。如何把这玩意去掉呢？容易想到子集反演。</p>
+<p>具体来说，设 <span class="arithmatex">\(f(S)\)</span> 表示用过的 <span class="arithmatex">\(p_i\)</span> 恰好是 <span class="arithmatex">\(S\)</span> 集合的方案数（可重复使用），显然 <span class="arithmatex">\(f(V)\)</span> 就是答案（<span class="arithmatex">\(V\)</span> 是点集的全集），容易发现可以用 <span class="arithmatex">\(g(S)=\sum_{T\subseteq S}f(T)\)</span> 表示用过的 <span class="arithmatex">\(p_i\)</span> 是 <span class="arithmatex">\(S\)</span> 的子集的方案数。根据子集反演，有 <span class="arithmatex">\(f(S)=\sum_{T\subseteq S}(-1)^{|S|-|T|}g(T)\)</span>。</p>
+<p>而 <span class="arithmatex">\(g(S)\)</span> 可以在枚举 <span class="arithmatex">\(S\)</span> 后 <span class="arithmatex">\(O(n^2)\)</span> 求出（还是考虑 DP），于是复杂度 <span class="arithmatex">\(O(n^22^n)\)</span> ，就能过了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6420,19 +6448,19 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一棵 $n$ 个点（$n\equiv 0\pmod 2$）的树，上面有一半白点一半黑点。</li>
-<li>现在你要把白点和黑点两两匹配，称一个匹配 $(w_i,b_i)$ 的权值为 $\sum_{i=1}^{\frac{n}{2}}[w_i\text{ is an ancestor of }b_i \lor b_i\text{ is an ancestor of }w_i ]$。</li>
-<li>对于 $k\in[0,\frac{n}{2}]$，求出权值为 $k$ 的匹配个数。称两个匹配不同当且仅当同一个白点与不同的黑点匹配了。</li>
-<li>$1\le n\le 5000$</li>
+<li>给定一棵 <span class="arithmatex">\(n\)</span> 个点（<span class="arithmatex">\(n\equiv 0\pmod 2\)</span>）的树，上面有一半白点一半黑点。</li>
+<li>现在你要把白点和黑点两两匹配，称一个匹配 <span class="arithmatex">\((w_i,b_i)\)</span> 的权值为 <span class="arithmatex">\(\sum_{i=1}^{\frac{n}{2}}[w_i\text{ is an ancestor of }b_i \lor b_i\text{ is an ancestor of }w_i ]\)</span>。</li>
+<li>对于 <span class="arithmatex">\(k\in[0,\frac{n}{2}]\)</span>，求出权值为 <span class="arithmatex">\(k\)</span> 的匹配个数。称两个匹配不同当且仅当同一个白点与不同的黑点匹配了。</li>
+<li><span class="arithmatex">\(1\le n\le 5000\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>非常经典的二项式反演。</p>
-<p>容易发现权值<strong>恰好</strong>为 $k$ 是不好做的，因为还需要要求剩下的不能产生贡献。考虑把剩下的限制去掉，容易想到二项式反演。</p>
-<p>设 $g(k)$ 表示权值恰好为 $k$ 的匹配数，$f(k)$ 表示权值至少为 $k$ 的匹配数，显然有 $f(k)=\sum_{i\ge k}\binom{i}{k}g(i)$，于是根据二项式反演，有 $g(k)=\sum_{i\ge k}(-1)^{i-k}\binom{i}{k}f(i)$。</p>
-<p>那么如何求 $f(k)$ 呢？有一个很显然的树形背包，设 $dp_{i,j}$ 表示考虑 $i$ 及其子树，钦定 $j$ 对产生贡献的方案数。转移首先是将不同儿子的贡献乘起来再加，然后考虑 $i$ 和子树内颜色不同的点产生一次贡献。显然子树内没用过的点就是总数减去已经匹配过的对数，这个可以在 $dfn$ 上前缀和。复杂度分析同树形背包，为 $O(n^2)$。</p>
-<p>然后 $f(i)=dp_{1,i}\times (n-i)!$，于是做完了，复杂度 $O(n^2)$。</p>
+<p>容易发现权值<strong>恰好</strong>为 <span class="arithmatex">\(k\)</span> 是不好做的，因为还需要要求剩下的不能产生贡献。考虑把剩下的限制去掉，容易想到二项式反演。</p>
+<p>设 <span class="arithmatex">\(g(k)\)</span> 表示权值恰好为 <span class="arithmatex">\(k\)</span> 的匹配数，<span class="arithmatex">\(f(k)\)</span> 表示权值至少为 <span class="arithmatex">\(k\)</span> 的匹配数，显然有 <span class="arithmatex">\(f(k)=\sum_{i\ge k}\binom{i}{k}g(i)\)</span>，于是根据二项式反演，有 <span class="arithmatex">\(g(k)=\sum_{i\ge k}(-1)^{i-k}\binom{i}{k}f(i)\)</span>。</p>
+<p>那么如何求 <span class="arithmatex">\(f(k)\)</span> 呢？有一个很显然的树形背包，设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示考虑 <span class="arithmatex">\(i\)</span> 及其子树，钦定 <span class="arithmatex">\(j\)</span> 对产生贡献的方案数。转移首先是将不同儿子的贡献乘起来再加，然后考虑 <span class="arithmatex">\(i\)</span> 和子树内颜色不同的点产生一次贡献。显然子树内没用过的点就是总数减去已经匹配过的对数，这个可以在 <span class="arithmatex">\(dfn\)</span> 上前缀和。复杂度分析同树形背包，为 <span class="arithmatex">\(O(n^2)\)</span>。</p>
+<p>然后 <span class="arithmatex">\(f(i)=dp_{1,i}\times (n-i)!\)</span>，于是做完了，复杂度 <span class="arithmatex">\(O(n^2)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6525,17 +6553,17 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>有一个二分完全图，$u$ 的权值为 $w_u$，点权互不相同，称一个匹配的权值为 $\sum_{(u,v)}[w_u&gt;w_v]-[w_v&gt;w_u]$。</li>
-<li>求权值恰为 $k$ 的匹配数。</li>
-<li>$1\le k\le n\le 2000$（两边的点数均为 $n$）</li>
+<li>有一个二分完全图，<span class="arithmatex">\(u\)</span> 的权值为 <span class="arithmatex">\(w_u\)</span>，点权互不相同，称一个匹配的权值为 <span class="arithmatex">\(\sum_{(u,v)}[w_u&gt;w_v]-[w_v&gt;w_u]\)</span>。</li>
+<li>求权值恰为 <span class="arithmatex">\(k\)</span> 的匹配数。</li>
+<li><span class="arithmatex">\(1\le k\le n\le 2000\)</span>（两边的点数均为 <span class="arithmatex">\(n\)</span>）</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>版。</p>
-<p>首先若 $n-k$ 是奇数显然无解。</p>
-<p>若 $n-k$ 是偶数，容易发现把两边放到一起离散化后就变成了上一道题链的情况只算白点在上黑点在下的权值而且只有单组询问。</p>
-<p>复杂度 $O(n^2)$。</p>
+<p>首先若 <span class="arithmatex">\(n-k\)</span> 是奇数显然无解。</p>
+<p>若 <span class="arithmatex">\(n-k\)</span> 是偶数，容易发现把两边放到一起离散化后就变成了上一道题链的情况只算白点在上黑点在下的权值而且只有单组询问。</p>
+<p>复杂度 <span class="arithmatex">\(O(n^2)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6608,16 +6636,16 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>求 $\sum_{i=1}^n\sum_{j=1}^m\tau(i\times j)$，其中 $\tau(i)$ 表示 $i$ 的约数个数。</li>
-<li>$1\le n,m,T\le 50000$，$T$ 是测试数据组数。</li>
+<li>求 <span class="arithmatex">\(\sum_{i=1}^n\sum_{j=1}^m\tau(i\times j)\)</span>，其中 <span class="arithmatex">\(\tau(i)\)</span> 表示 <span class="arithmatex">\(i\)</span> 的约数个数。</li>
+<li><span class="arithmatex">\(1\le n,m,T\le 50000\)</span>，<span class="arithmatex">\(T\)</span> 是测试数据组数。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>莫反套路题。</p>
-<p>考虑 $\tau(n\times m)=\sum_{i\mid n}\sum_{j\mid m}[\gcd(i,j)=1]$，一对 $(i,j)$ 代表 $\frac{n\times j}{i}$，如果不互质就会算重。</p>
-<p>于是（钦定 $n&lt;m$）：</p>
-<p>$$
+<p>考虑 <span class="arithmatex">\(\tau(n\times m)=\sum_{i\mid n}\sum_{j\mid m}[\gcd(i,j)=1]\)</span>，一对 <span class="arithmatex">\((i,j)\)</span> 代表 <span class="arithmatex">\(\frac{n\times j}{i}\)</span>，如果不互质就会算重。</p>
+<p>于是（钦定 <span class="arithmatex">\(n&lt;m\)</span>）：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\sum_{i=1}^n\sum_{j=1}^m\tau(i\times j)\\
 =&amp;\sum_{i=1}^n\sum_{j=1}^m\sum_{x\mid i}\sum_{y\mid j}[\gcd(x,y)=1]\\
@@ -6627,9 +6655,9 @@ $$</p>
 =&amp;\sum_{d=1}^n\mu(d)\sum_{x=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\left\lfloor\frac{n}{x\times d}\right\rfloor\sum_{y=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\left\lfloor\frac{m}{y\times d}\right\rfloor\\
 =&amp;\sum_{d=1}^n\mu(d)\sum_{x=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\tau(x)\sum_{y=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\tau(y)\\
 \end{aligned}
-$$</p>
-<p>最后一步是因为每个数在 $\left\lfloor\frac{n}{d}\right\rfloor$ 以内的倍数个数和就是这个范围内每个数的因数个数和。</p>
-<p>然后就可以线性筛预处理 $\tau(n)$ 的前缀和然后数论分块做了。复杂度 $O(n+T\sqrt{n})$。</p>
+\]</div>
+<p>最后一步是因为每个数在 <span class="arithmatex">\(\left\lfloor\frac{n}{d}\right\rfloor\)</span> 以内的倍数个数和就是这个范围内每个数的因数个数和。</p>
+<p>然后就可以线性筛预处理 <span class="arithmatex">\(\tau(n)\)</span> 的前缀和然后数论分块做了。复杂度 <span class="arithmatex">\(O(n+T\sqrt{n})\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6704,17 +6732,17 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定 $n,m$，求 $\sum_{i=1}^n\sum_{j=1}^m\mathrm{lcm}(i,j)$。</li>
-<li>单组询问，$1\le n,m\le 10^7$。</li>
+<li>给定 <span class="arithmatex">\(n,m\)</span>，求 <span class="arithmatex">\(\sum_{i=1}^n\sum_{j=1}^m\mathrm{lcm}(i,j)\)</span>。</li>
+<li>单组询问，<span class="arithmatex">\(1\le n,m\le 10^7\)</span>。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>怎么所有人都觉得这道题很简单，我觉得很复杂啊。</p>
-<p>考虑 $\mathrm{lcm}$ 不好做，但是有 $\mathrm{lcm}(i,j)=\frac{i\times j}{\gcd(i,j)}$，而 $\gcd$ 是好做一点的。</p>
-<p>但是 $\gcd$ 在分母仍然不好搞，考虑令 $i'=\frac{i}{\gcd(i,j)},j'=\frac{j}{\gcd(i,j)}$，显然 $\gcd(i',j')=1$，并且有 $\frac{i\times j}{\gcd(i,j)}=\gcd(i,j)i'j'$，于是就把 $\gcd$ 提到分子了。</p>
-<p>于是有（钦定 $n\le m$）：</p>
-<p>$$
+<p>考虑 <span class="arithmatex">\(\mathrm{lcm}\)</span> 不好做，但是有 <span class="arithmatex">\(\mathrm{lcm}(i,j)=\frac{i\times j}{\gcd(i,j)}\)</span>，而 <span class="arithmatex">\(\gcd\)</span> 是好做一点的。</p>
+<p>但是 <span class="arithmatex">\(\gcd\)</span> 在分母仍然不好搞，考虑令 <span class="arithmatex">\(i'=\frac{i}{\gcd(i,j)},j'=\frac{j}{\gcd(i,j)}\)</span>，显然 <span class="arithmatex">\(\gcd(i',j')=1\)</span>，并且有 <span class="arithmatex">\(\frac{i\times j}{\gcd(i,j)}=\gcd(i,j)i'j'\)</span>，于是就把 <span class="arithmatex">\(\gcd\)</span> 提到分子了。</p>
+<p>于是有（钦定 <span class="arithmatex">\(n\le m\)</span>）：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\sum_{i=1}^n\sum_{j=1}^m\mathrm{lca}(i,j)\\
 =&amp;\sum_{d=1}^n d\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}[\gcd(i,j)=1]ij\\
@@ -6722,8 +6750,8 @@ $$</p>
 =&amp;\sum_{d=1}^n d\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)\sum_{i=1}^{\left\lfloor\frac{n}{d\times t}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d\times t}\right\rfloor}(i\cdot t)(j\cdot t)\\
 =&amp;\sum_{d=1}^n d\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)t^2\left(\sum_{i=1}^{\left\lfloor\frac{n}{d\times t}\right\rfloor}i\right)\left(\sum_{j=1}^{\left\lfloor\frac{m}{d\times t}\right\rfloor}j\right)\\
 \end{aligned}
-$$</p>
-<p>然后容易发现 $\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)t^2\left(\sum_{i=1}^{\left\lfloor\frac{n}{d\times t}\right\rfloor}i\right)\left(\sum_{j=1}^{\left\lfloor\frac{m}{d\times t}\right\rfloor}j\right)$ 可以预处理 $\mu(t)t^2$ 的前缀和然后数论分块做，外层也能数论分块做。于是套两层数论分块，复杂度不会分析但是显然小于 $O(\sqrt{n}^2)=O(n)$。</p>
+\]</div>
+<p>然后容易发现 <span class="arithmatex">\(\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)t^2\left(\sum_{i=1}^{\left\lfloor\frac{n}{d\times t}\right\rfloor}i\right)\left(\sum_{j=1}^{\left\lfloor\frac{m}{d\times t}\right\rfloor}j\right)\)</span> 可以预处理 <span class="arithmatex">\(\mu(t)t^2\)</span> 的前缀和然后数论分块做，外层也能数论分块做。于是套两层数论分块，复杂度不会分析但是显然小于 <span class="arithmatex">\(O(\sqrt{n}^2)=O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6797,16 +6825,16 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定 $n$,求 $\sum_{i=1}^n\sum_{j=1}^nij\gcd(i,j)$。</li>
-<li>防止答案过大，答案模 $p$ 输出（其实对做法没有影响），$p$ 是质数。</li>
-<li>$1\le n\le 10^{10},5\times 10^8\le p\le1.1\times 10^9$</li>
+<li>给定 <span class="arithmatex">\(n\)</span>,求 <span class="arithmatex">\(\sum_{i=1}^n\sum_{j=1}^nij\gcd(i,j)\)</span>。</li>
+<li>防止答案过大，答案模 <span class="arithmatex">\(p\)</span> 输出（其实对做法没有影响），<span class="arithmatex">\(p\)</span> 是质数。</li>
+<li><span class="arithmatex">\(1\le n\le 10^{10},5\times 10^8\le p\le1.1\times 10^9\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>还是比较套路的。</p>
-<p>看到 $\gcd$ 想到往反演方向推：</p>
-<p>$$
+<p>看到 <span class="arithmatex">\(\gcd\)</span> 想到往反演方向推：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\sum_{i=1}^n\sum_{j=1}^nij\gcd(i,j)\\
 =&amp;\sum_{p=1}^np\sum_{p\mid i}\sum_{p\mid j}ij[\gcd(i/p,j/p)=1]\\
@@ -6822,10 +6850,10 @@ $$</p>
 =&amp;\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)T^2(id\ast\mu)(T)\\
 =&amp;\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)T^2\varphi(T)\\
 \end{aligned}
-$$</p>
-<p>其中 $\left(\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i\right)^2=\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i^3$ 是经典小学奥数，我证不来。然后 $id\ast \mu=\varphi$ 是经典结论。</p>
-<p>那么前面 $\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3$ 的部分可以数论分块解决，问题在于我们需要求 $T^2\varphi(T)$ 的前缀和。因为 $n=10^{10}$ 肯定考虑筛法了。考虑杜教筛。</p>
-<p>那么我们需要构造 $h=g\ast f$，其中 $f(i)=i^2\varphi(i)$，有经典结论 $id=\varphi\ast I$，即 $\sum_{d\mid n}\varphi(d)=n$，容易想到 $\sum_{d\mid n}d^2\varphi(d)(\frac{n}{d})^2=n^3$，即 $id^3=(id^2\times\varphi)\ast id^2$。而 $id^3$ 和 $id^2$ 的前缀和都能经典小学奥数求出，于是套个板子就做完了。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(\left(\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i\right)^2=\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i^3\)</span> 是经典小学奥数，我证不来。然后 <span class="arithmatex">\(id\ast \mu=\varphi\)</span> 是经典结论。</p>
+<p>那么前面 <span class="arithmatex">\(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\)</span> 的部分可以数论分块解决，问题在于我们需要求 <span class="arithmatex">\(T^2\varphi(T)\)</span> 的前缀和。因为 <span class="arithmatex">\(n=10^{10}\)</span> 肯定考虑筛法了。考虑杜教筛。</p>
+<p>那么我们需要构造 <span class="arithmatex">\(h=g\ast f\)</span>，其中 <span class="arithmatex">\(f(i)=i^2\varphi(i)\)</span>，有经典结论 <span class="arithmatex">\(id=\varphi\ast I\)</span>，即 <span class="arithmatex">\(\sum_{d\mid n}\varphi(d)=n\)</span>，容易想到 <span class="arithmatex">\(\sum_{d\mid n}d^2\varphi(d)(\frac{n}{d})^2=n^3\)</span>，即 <span class="arithmatex">\(id^3=(id^2\times\varphi)\ast id^2\)</span>。而 <span class="arithmatex">\(id^3\)</span> 和 <span class="arithmatex">\(id^2\)</span> 的前缀和都能经典小学奥数求出，于是套个板子就做完了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6933,16 +6961,16 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>求 $\sum_{i=1}^nf(i)$，其中 $f(i)$ 是积性函数，满足 $f(p^k)=p^k(p^k-1)$。</li>
-<li>$1\le n\le 10^{10}$</li>
+<li>求 <span class="arithmatex">\(\sum_{i=1}^nf(i)\)</span>，其中 <span class="arithmatex">\(f(i)\)</span> 是积性函数，满足 <span class="arithmatex">\(f(p^k)=p^k(p^k-1)\)</span>。</li>
+<li><span class="arithmatex">\(1\le n\le 10^{10}\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>积性函数前缀和考虑 PN 筛（主要是我不会 Min_25 筛）。</p>
-<p>那么先考虑构造积性函数 $g$ 满足 $g(p)=f(p)$。看到“积性”和“$p-1$”容易想到 $\varphi$。容易发现构造 $g(i)=i\varphi(i)$ 是符合条件的。然后考虑寻找 $h\ast g=f$。</p>
-<p>容易发现 $g(p^k)=p^k\left(p^{k-1}(p-1)\right)=p^{2k-1}(p-1)$（根据欧拉函数通项公式。另外 $k=0$ 不满足这个，$k=0$ 时 $g(1)=1$）那么有 $f(p^k)=p^k(p^k-1)=h(p^k)+\sum_{i=1}^kp^{2i-1}(p-1)h(p^{k-i})$，则 $h(p^k)=p^k(p^k-1)-\sum_{i=1}^kp^{2i-1}(p-1)h(p^{k-i})$，手模一下，容易得到：</p>
-<p>$$
+<p>那么先考虑构造积性函数 <span class="arithmatex">\(g\)</span> 满足 <span class="arithmatex">\(g(p)=f(p)\)</span>。看到“积性”和“<span class="arithmatex">\(p-1\)</span>”容易想到 <span class="arithmatex">\(\varphi\)</span>。容易发现构造 <span class="arithmatex">\(g(i)=i\varphi(i)\)</span> 是符合条件的。然后考虑寻找 <span class="arithmatex">\(h\ast g=f\)</span>。</p>
+<p>容易发现 <span class="arithmatex">\(g(p^k)=p^k\left(p^{k-1}(p-1)\right)=p^{2k-1}(p-1)\)</span>（根据欧拉函数通项公式。另外 <span class="arithmatex">\(k=0\)</span> 不满足这个，<span class="arithmatex">\(k=0\)</span> 时 <span class="arithmatex">\(g(1)=1\)</span>）那么有 <span class="arithmatex">\(f(p^k)=p^k(p^k-1)=h(p^k)+\sum_{i=1}^kp^{2i-1}(p-1)h(p^{k-i})\)</span>，则 <span class="arithmatex">\(h(p^k)=p^k(p^k-1)-\sum_{i=1}^kp^{2i-1}(p-1)h(p^{k-i})\)</span>，手模一下，容易得到：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 h(1)&amp;=1\\
 h(p)&amp;=0\\
@@ -6955,12 +6983,12 @@ h(p^4)&amp;=p^4(p^4-1)-p^{1\times 2-1}(p-1)h(p^3)-p^{2\times 2-1}(p-1)h(p^2)-p^{
       &amp;=p^4(p^4-1)-p(p-1)2(p^4-p^3)-p^{3}(p-1)(p^3-p^2)-p^{7}(p-1)\\
       &amp;=3(p^5-p^4)\\
 \end{aligned}
-$$</p>
-<p>大胆猜测 $h(p^i)=(i-1)(p^{i+1}-p^{i})$（除去 $i=0$ 时，$h(1)=1$），考虑证明：</p>
+\]</div>
+<p>大胆猜测 <span class="arithmatex">\(h(p^i)=(i-1)(p^{i+1}-p^{i})\)</span>（除去 <span class="arithmatex">\(i=0\)</span> 时，<span class="arithmatex">\(h(1)=1\)</span>），考虑证明：</p>
 <p>考虑数学归纳法。</p>
-<p>首先对于 $k=1$，$p^k$ 不是 Powerful Number，则 $h(p^k)=0$，符合条件。</p>
-<p>考虑假设对于所有 $1\le i\le k-1$ 上述结论均成立，证明 $h(p^k)=(k-1)(p^{k+1}-p^k)$。对于 $k&gt;1$，注意到（具体注意方法是发现后面每个 $\sum_{i=1}^kg(p^i)h(p^{k-i})$ 中，对于指数相同的 $h$，$g$ 的指数都变大 $2$，那么把第一项 $f(p^k)$ 去掉乘以 $p^2$ 后再加上新增的项）：</p>
-<p>$$
+<p>首先对于 <span class="arithmatex">\(k=1\)</span>，<span class="arithmatex">\(p^k\)</span> 不是 Powerful Number，则 <span class="arithmatex">\(h(p^k)=0\)</span>，符合条件。</p>
+<p>考虑假设对于所有 <span class="arithmatex">\(1\le i\le k-1\)</span> 上述结论均成立，证明 <span class="arithmatex">\(h(p^k)=(k-1)(p^{k+1}-p^k)\)</span>。对于 <span class="arithmatex">\(k&gt;1\)</span>，注意到（具体注意方法是发现后面每个 <span class="arithmatex">\(\sum_{i=1}^kg(p^i)h(p^{k-i})\)</span> 中，对于指数相同的 <span class="arithmatex">\(h\)</span>，<span class="arithmatex">\(g\)</span> 的指数都变大 <span class="arithmatex">\(2\)</span>，那么把第一项 <span class="arithmatex">\(f(p^k)\)</span> 去掉乘以 <span class="arithmatex">\(p^2\)</span> 后再加上新增的项）：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 h(p^k)&amp;=p^2(h(p^{k-1})-p^{k-1}(p^{k-1}-1))+p^k(p^k-1)-p(p-1)h(p^{k-1})\\
 &amp;=(p^2-p^2+p)h(k-1)-p^{k+1}(p^{k-1}-1)+p^k(p^k-1)\\
@@ -6969,10 +6997,10 @@ h(p^k)&amp;=p^2(h(p^{k-1})-p^{k-1}(p^{k-1}-1))+p^k(p^k-1)-p(p-1)h(p^{k-1})\\
 &amp;=(k-2)(p^{k+1}-p^k)+(p^{k+1}-p^k)\\
 &amp;=(k-1)(p^{k+1}-p^k)
 \end{aligned}
-$$</p>
+\]</div>
 <p>得证。</p>
-<p>然后 $h$ 可以在找 Powerful Number 的时候顺便求出，瓶颈在于求 $g$ 的前缀和，考虑杜教筛（$g\ast id=id^2$）。找到所有 $\left\lfloor\frac{n}{i}\right\rfloor$ 处前缀和值的复杂度为 $O(n^{\frac{2}{3}})$。于是总复杂度 $O(n^{\frac{2}{3}})$。</p>
-<p>注意 $n=1$ 的时候如果写得不好访问第一个质数会 RE，考虑特判或者多预处理几个质数。</p>
+<p>然后 <span class="arithmatex">\(h\)</span> 可以在找 Powerful Number 的时候顺便求出，瓶颈在于求 <span class="arithmatex">\(g\)</span> 的前缀和，考虑杜教筛（<span class="arithmatex">\(g\ast id=id^2\)</span>）。找到所有 <span class="arithmatex">\(\left\lfloor\frac{n}{i}\right\rfloor\)</span> 处前缀和值的复杂度为 <span class="arithmatex">\(O(n^{\frac{2}{3}})\)</span>。于是总复杂度 <span class="arithmatex">\(O(n^{\frac{2}{3}})\)</span>。</p>
+<p>注意 <span class="arithmatex">\(n=1\)</span> 的时候如果写得不好访问第一个质数会 RE，考虑特判或者多预处理几个质数。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7072,25 +7100,25 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定 $n$，求积性函数 $f$ 的前缀和 $\sum_{i=1}^nf(i)$。</li>
-<li>其中 $f(1)=1,f(p^c)=p\oplus c$，$\oplus$ 表示按位异或。</li>
-<li>$1\le n\le 10^{10}$</li>
+<li>给定 <span class="arithmatex">\(n\)</span>，求积性函数 <span class="arithmatex">\(f\)</span> 的前缀和 <span class="arithmatex">\(\sum_{i=1}^nf(i)\)</span>。</li>
+<li>其中 <span class="arithmatex">\(f(1)=1,f(p^c)=p\oplus c\)</span>，<span class="arithmatex">\(\oplus\)</span> 表示按位异或。</li>
+<li><span class="arithmatex">\(1\le n\le 10^{10}\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>因为我不会 Min_25 筛所以考虑 Powerful Number 筛。先来构造 $g\ast h=f$。</p>
-<p>因为需要积性函数，又发现在奇质数的位置 $f(p)=p-1$，而偶数的位置有 $f(2)=3$，容易想到构造：</p>
-<p>$$
+<p>因为我不会 Min_25 筛所以考虑 Powerful Number 筛。先来构造 <span class="arithmatex">\(g\ast h=f\)</span>。</p>
+<p>因为需要积性函数，又发现在奇质数的位置 <span class="arithmatex">\(f(p)=p-1\)</span>，而偶数的位置有 <span class="arithmatex">\(f(2)=3\)</span>，容易想到构造：</p>
+<div class="arithmatex">\[
 g(n)=\begin{cases}
 \varphi(n)&amp;,n\bmod 2=1\\
 3\varphi(n)&amp;,n\bmod 2=0
 \end{cases}
-$$</p>
-<p>容易发现这个也是积性函数。设 $a,b$ 互质，显然里面最多有一个是偶数。若两个都是奇数则显然正确。否则不妨钦定 $a$ 是偶数，那么 $g(ab)=3\varphi(ab)=3\varphi(a)\varphi(b)=g(a)g(b)$。于是积性。</p>
-<p>这个怎么求前缀和呢？容易发现等于 $\varphi$ 的前缀和加上偶数位置的总和乘 $2$。不妨把偶数 $i$ 全部除以二。若 $\frac{i}{2}$ 不是偶数那么 $\varphi(i)=\varphi(\frac{i}{2})$，否则 $\varphi(i)=2\varphi(\frac{i}{2})$（考虑带 $\varphi$ 的通项公式）。而这就变成了一个子问题（只不过变成偶数位置不用乘二），可以递归求解。而容易发现这样需要求的前缀和的下标均是 $\left\lfloor\frac{n}{2^k}\right\rfloor$ 的形式。于是考虑杜教筛，这部分复杂度是 $O(n^{\frac{2}{3}}+\sqrt{n}\log^2 n)$，其中这个 $\sqrt{n}$ 是枚举 Powerful Number 的复杂度，$\log^2$ 是因为如果用 map 记忆化每次访问会带个 $\log$。</p>
-<p>然后考虑 $h$。手模几组容易发现没有显著规律，那么只能暴力求 $h$ 了，复杂度是 $O(\sqrt{n}\log n)$。</p>
-<p>综上，复杂度 $O(n^{\frac{2}{3}}+\sqrt{n}\log^2 n)$。</p>
+\]</div>
+<p>容易发现这个也是积性函数。设 <span class="arithmatex">\(a,b\)</span> 互质，显然里面最多有一个是偶数。若两个都是奇数则显然正确。否则不妨钦定 <span class="arithmatex">\(a\)</span> 是偶数，那么 <span class="arithmatex">\(g(ab)=3\varphi(ab)=3\varphi(a)\varphi(b)=g(a)g(b)\)</span>。于是积性。</p>
+<p>这个怎么求前缀和呢？容易发现等于 <span class="arithmatex">\(\varphi\)</span> 的前缀和加上偶数位置的总和乘 <span class="arithmatex">\(2\)</span>。不妨把偶数 <span class="arithmatex">\(i\)</span> 全部除以二。若 <span class="arithmatex">\(\frac{i}{2}\)</span> 不是偶数那么 <span class="arithmatex">\(\varphi(i)=\varphi(\frac{i}{2})\)</span>，否则 <span class="arithmatex">\(\varphi(i)=2\varphi(\frac{i}{2})\)</span>（考虑带 <span class="arithmatex">\(\varphi\)</span> 的通项公式）。而这就变成了一个子问题（只不过变成偶数位置不用乘二），可以递归求解。而容易发现这样需要求的前缀和的下标均是 <span class="arithmatex">\(\left\lfloor\frac{n}{2^k}\right\rfloor\)</span> 的形式。于是考虑杜教筛，这部分复杂度是 <span class="arithmatex">\(O(n^{\frac{2}{3}}+\sqrt{n}\log^2 n)\)</span>，其中这个 <span class="arithmatex">\(\sqrt{n}\)</span> 是枚举 Powerful Number 的复杂度，<span class="arithmatex">\(\log^2\)</span> 是因为如果用 map 记忆化每次访问会带个 <span class="arithmatex">\(\log\)</span>。</p>
+<p>然后考虑 <span class="arithmatex">\(h\)</span>。手模几组容易发现没有显著规律，那么只能暴力求 <span class="arithmatex">\(h\)</span> 了，复杂度是 <span class="arithmatex">\(O(\sqrt{n}\log n)\)</span>。</p>
+<p>综上，复杂度 <span class="arithmatex">\(O(n^{\frac{2}{3}}+\sqrt{n}\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7197,32 +7225,32 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定 $n,m$，求 $\prod_{i=1}^n\prod_{j=1}^mf(\gcd(i,j))$。</li>
-<li>其中 $f_n$ 表示斐波那契数列的第 $n$ 项。此处定义 $f(0)=0,f(1)=1$，后面每个数等于它前面两个数相加。</li>
-<li>$1\le n,m\le 10^6$，多组询问，询问数量 $1\le T\le 1000$</li>
+<li>给定 <span class="arithmatex">\(n,m\)</span>，求 <span class="arithmatex">\(\prod_{i=1}^n\prod_{j=1}^mf(\gcd(i,j))\)</span>。</li>
+<li>其中 <span class="arithmatex">\(f_n\)</span> 表示斐波那契数列的第 <span class="arithmatex">\(n\)</span> 项。此处定义 <span class="arithmatex">\(f(0)=0,f(1)=1\)</span>，后面每个数等于它前面两个数相加。</li>
+<li><span class="arithmatex">\(1\le n,m\le 10^6\)</span>，多组询问，询问数量 <span class="arithmatex">\(1\le T\le 1000\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>想了一下午带通项公式乘起来无果瞄了一眼题解发现可以直接莫反，破防了。</p>
-<p>考虑化式子（钦定 $n\le m$）：</p>
-<p>$$
+<p>考虑化式子（钦定 <span class="arithmatex">\(n\le m\)</span>）：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\prod_{i=1}^n\prod_{j=1}^mf(\gcd(i,j))\\
 =&amp;\prod_{d=1}^nf(d)^{\sum_{i=1}^n\sum_{j=1}^m[\gcd(i,j)=d]}\\
 =&amp;\prod_{d=1}^nf(d)^{\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}[\gcd(i,j)=1]}\\
 =&amp;\prod_{d=1}^nf(d)^{\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)\left\lfloor\frac{n}{d\cdot t}\right\rfloor\left\lfloor\frac{m}{d\cdot t}\right\rfloor}
 \end{aligned}
-$$</p>
-<p>看起来化不了了。根据套路，把 $d\cdot t$ 乘在一起枚举：</p>
-<p>$$
+\]</div>
+<p>看起来化不了了。根据套路，把 <span class="arithmatex">\(d\cdot t\)</span> 乘在一起枚举：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 =&amp;\sum_{p=1}^n\sum_{d\mid p}f(d)^{\mu(\frac{p}{d})\left\lfloor\frac{n}{p}\right\rfloor\left\lfloor\frac{m}{p}\right\rfloor}\\
 =&amp;\sum_{p=1}^n\left(\sum_{d\mid p}f(d)^{\mu(\frac{p}{d})}\right)^{\left\lfloor\frac{n}{p}\right\rfloor\left\lfloor\frac{m}{p}\right\rfloor}\\
 \end{aligned}
-$$</p>
-<p>容易发现中间这坨可以暴力预处理，枚举每个数和它的倍数即可，预处理复杂度 $O(n\log n)$。</p>
-<p>然后单次询问可以数论分块 $+$ 快速幂，复杂度 $O(n\log n+T\sqrt{n}\log n)$。</p>
+\]</div>
+<p>容易发现中间这坨可以暴力预处理，枚举每个数和它的倍数即可，预处理复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
+<p>然后单次询问可以数论分块 <span class="arithmatex">\(+\)</span> 快速幂，复杂度 <span class="arithmatex">\(O(n\log n+T\sqrt{n}\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7329,48 +7357,48 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定 $n,d$，求小于 $n$ 且与 $n$ 互质的数的 $d$ 次方之和。</li>
-<li>形式化地，求 $G(n)=\sum_{i=1}^ni^d[\gcd(n,i)=1]$</li>
-<li>本题中 $n$ 以质因数分解 $\prod_{i=1}^w p_i^{a_i}$ 给出</li>
-<li>$1\le p_i,a_i\le 10^9,1\le w\le 1000,1\le d\le 100$，保证 $p$ 是质数。</li>
+<li>给定 <span class="arithmatex">\(n,d\)</span>，求小于 <span class="arithmatex">\(n\)</span> 且与 <span class="arithmatex">\(n\)</span> 互质的数的 <span class="arithmatex">\(d\)</span> 次方之和。</li>
+<li>形式化地，求 <span class="arithmatex">\(G(n)=\sum_{i=1}^ni^d[\gcd(n,i)=1]\)</span></li>
+<li>本题中 <span class="arithmatex">\(n\)</span> 以质因数分解 <span class="arithmatex">\(\prod_{i=1}^w p_i^{a_i}\)</span> 给出</li>
+<li><span class="arithmatex">\(1\le p_i,a_i\le 10^9,1\le w\le 1000,1\le d\le 100\)</span>，保证 <span class="arithmatex">\(p\)</span> 是质数。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>之前 zmy 看到这道题的时候跟 XD 说，XD 没看数据范围说他会多项式做法，然后看了一眼数据范围说不会了。</p>
 <p>然后 lh 看到了直接秒了，这就是银牌爷的实力吗。</p>
-<p>看到 $[\gcd=1]$ 考虑直接套路化式子：</p>
-<p>$$
+<p>看到 <span class="arithmatex">\([\gcd=1]\)</span> 考虑直接套路化式子：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 G(n)&amp;=\sum_{i=1}^ni^d[\gcd(n,i)=1]\\
     &amp;=\sum_{i=1}^ni^d\sum_{k\mid \gcd(n,i)}\mu(k)\\
     &amp;=\sum_{k\mid n}\mu(k)\sum_{k\mid i}^{i\le n}i^d\\
     &amp;=\sum_{k\mid n}\mu(k)k^d\sum_{i=1}^{\frac{n}{d}}i^d
 \end{aligned}
-$$</p>
-<p>根据经典结论，自然数幂的前缀和（即形如 $\sum_{i=1}^ni^k$ 的东西）是一个 $k+1$ 次多项式，于是我们可以把 $\sum_{i=1}^{\frac{n}{d}}i^d$ 写成 $\sum_{i=0}^{d+1}f_i(\frac{n}{d})^i$，其中 $f$ 待定，为多项式系数。</p>
-<p>$$
+\]</div>
+<p>根据经典结论，自然数幂的前缀和（即形如 <span class="arithmatex">\(\sum_{i=1}^ni^k\)</span> 的东西）是一个 <span class="arithmatex">\(k+1\)</span> 次多项式，于是我们可以把 <span class="arithmatex">\(\sum_{i=1}^{\frac{n}{d}}i^d\)</span> 写成 <span class="arithmatex">\(\sum_{i=0}^{d+1}f_i(\frac{n}{d})^i\)</span>，其中 <span class="arithmatex">\(f\)</span> 待定，为多项式系数。</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;=\sum_{k\mid n}\mu(k)k^d\sum_{i=0}^{d+1}f_i(\frac{n}{d})^i\\
 &amp;=\sum_{i=0}^{d+1}f_in^i\sum_{k\mid n}\mu(k)k^{d-i}
 \end{aligned}
-$$</p>
-<p>显然 $\mu(k)k^{d-i}$ 是一个积性函数，那么考虑把 $k$ 质因数分解为 $\prod_{j=1}^w p_j^{e_j}$，$p,w$ 即题目输入。</p>
-<p>$$
+\]</div>
+<p>显然 <span class="arithmatex">\(\mu(k)k^{d-i}\)</span> 是一个积性函数，那么考虑把 <span class="arithmatex">\(k\)</span> 质因数分解为 <span class="arithmatex">\(\prod_{j=1}^w p_j^{e_j}\)</span>，<span class="arithmatex">\(p,w\)</span> 即题目输入。</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;=\sum_{i=0}^{d+1}f_in^i\sum_{k\mid n}\prod_{j=1}^w\mu(p_j^{e_j})p_j^{e_j(d-i)}\\
 &amp;=\sum_{i=0}^{d+1}f_in^i\prod_{j=1}^w\sum_{e=0}^{a_j}\mu(p_j^e)p_j^{e(d-i)}
 \end{aligned}
-$$</p>
-<p>这里的 $a_j$ 还是题上给的。这一步转化考虑乘法分配律即可。注意到 $\mu(p^e)$ 有非常好的性质，具体来说，它在 $e=0$ 时取 $1$，$e=1$ 时取 $-1$，$e&gt;1$ 时取 $0$，那么其实 $e$ 只需要枚举到 $1$ 即可，而显然 $a_j$ 全都大于等于 $1$，则：</p>
-<p>$$
+\]</div>
+<p>这里的 <span class="arithmatex">\(a_j\)</span> 还是题上给的。这一步转化考虑乘法分配律即可。注意到 <span class="arithmatex">\(\mu(p^e)\)</span> 有非常好的性质，具体来说，它在 <span class="arithmatex">\(e=0\)</span> 时取 <span class="arithmatex">\(1\)</span>，<span class="arithmatex">\(e=1\)</span> 时取 <span class="arithmatex">\(-1\)</span>，<span class="arithmatex">\(e&gt;1\)</span> 时取 <span class="arithmatex">\(0\)</span>，那么其实 <span class="arithmatex">\(e\)</span> 只需要枚举到 <span class="arithmatex">\(1\)</span> 即可，而显然 <span class="arithmatex">\(a_j\)</span> 全都大于等于 <span class="arithmatex">\(1\)</span>，则：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;=\sum_{i=0}^{d+1}f_in^i\prod_{j=1}^w(1-p_j^{d-i})
 \end{aligned}
-$$</p>
-<p>那么我们只要求出 $f_i$ 就能暴力 $O(wd)$ 得到答案了。</p>
-<p>求 $f_i$ 考虑插值即可。具体来说，我们随便选 $d+2$（注意本题是 $d+1$ 次多项式）个点求出点值 $(x_i,y_i)$，则多项式 $F(x)=\sum_{i=1}^{d+2}y_i\prod_{j\ne i}\frac{x-x_j}{x_i-x_j}$，即 $d+2$ 个只有对应点值处取 $y$，其余地方取 $0$（相当于方程的根）的多项式相加，直接暴力是 $O(d^3)$ 的，随便过的，也可以预处理多项式 $\prod x-x_i$，每次除一个多项式乘一个常数即可做到 $O(d^2)$。</p>
-<p>复杂度 $O(d^3+wd)$。</p>
+\]</div>
+<p>那么我们只要求出 <span class="arithmatex">\(f_i\)</span> 就能暴力 <span class="arithmatex">\(O(wd)\)</span> 得到答案了。</p>
+<p>求 <span class="arithmatex">\(f_i\)</span> 考虑插值即可。具体来说，我们随便选 <span class="arithmatex">\(d+2\)</span>（注意本题是 <span class="arithmatex">\(d+1\)</span> 次多项式）个点求出点值 <span class="arithmatex">\((x_i,y_i)\)</span>，则多项式 <span class="arithmatex">\(F(x)=\sum_{i=1}^{d+2}y_i\prod_{j\ne i}\frac{x-x_j}{x_i-x_j}\)</span>，即 <span class="arithmatex">\(d+2\)</span> 个只有对应点值处取 <span class="arithmatex">\(y\)</span>，其余地方取 <span class="arithmatex">\(0\)</span>（相当于方程的根）的多项式相加，直接暴力是 <span class="arithmatex">\(O(d^3)\)</span> 的，随便过的，也可以预处理多项式 <span class="arithmatex">\(\prod x-x_i\)</span>，每次除一个多项式乘一个常数即可做到 <span class="arithmatex">\(O(d^2)\)</span>。</p>
+<p>复杂度 <span class="arithmatex">\(O(d^3+wd)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

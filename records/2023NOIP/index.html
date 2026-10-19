@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6160,19 +6188,19 @@
 <p>首先有包含、相交但不包含、不交三种情况。分别对应从小的往大的连有向边、连无向边、不连边。</p>
 <p>显然我们可以把每个由无向边链接的连通块看成一个<strong>等价区间</strong>，下文<strong>等价区间</strong>均指连成连通块的区间。</p>
 <ul>
-<li>结论 $1$：两等价区间不是包含就是不交。</li>
+<li>结论 <span class="arithmatex">\(1\)</span>：两等价区间不是包含就是不交。</li>
 </ul>
-<p>挺显然的，假如等价区间 $A$ 与等价区间 $B$ 相交但不包含，那么必然存在区间 $a \in A$ 与区间 $b\in B$ 相交但不包含。那么 $A,B$ 其实是同一个等价区间。</p>
+<p>挺显然的，假如等价区间 <span class="arithmatex">\(A\)</span> 与等价区间 <span class="arithmatex">\(B\)</span> 相交但不包含，那么必然存在区间 <span class="arithmatex">\(a \in A\)</span> 与区间 <span class="arithmatex">\(b\in B\)</span> 相交但不包含。那么 <span class="arithmatex">\(A,B\)</span> 其实是同一个等价区间。</p>
 <ul>
-<li>结论 $2$：等价区间 $A$ 向等价区间 $B$ 连有向边当且仅当等价区间 $B$ 包含等价区间 $A$。</li>
+<li>结论 <span class="arithmatex">\(2\)</span>：等价区间 <span class="arithmatex">\(A\)</span> 向等价区间 <span class="arithmatex">\(B\)</span> 连有向边当且仅当等价区间 <span class="arithmatex">\(B\)</span> 包含等价区间 <span class="arithmatex">\(A\)</span>。</li>
 </ul>
-<p>先证充分性，假如等价区间 $A$ 向等价区间 $B$ 连有向边，那么必然存在一个区间 $a\in A$ 被区间 $b \in B$ 包含。由结论 $1$，必定是 $A$ 包含 $B$ 或者 $B$ 包含 $A$。由于 $A$ 和 $B$ 是两个不同的等价区间，故 $A$ 中任意区间和 $B$ 中任意区间不是包含就是相离，由于 $a$ 已经被 $b$ 包含了，故 $A$ 必然也被 $b$ 包含，显然 $A$ 被 $B$ 包含。</p>
-<p>再证必要性，假如等价区间 $B$ 包含等价区间 $A$，由于 $A$ 和 $B$ 是两个不同的等价区间，故 $A,B$ 中任意区间不是包含就是相离（复读），由于 $A$ 被 $B$ 包含，故 $A$ 必定向 $B$ 连有向边。</p>
-<p>但是我们上面的证明都是建立在区间端点不重合的基础上的，假如 $A$ 和 $B$ 完全重合，且 $A$ 中只含有一个区间，那么 $A$ 是无法到达 $B$ 的。</p>
+<p>先证充分性，假如等价区间 <span class="arithmatex">\(A\)</span> 向等价区间 <span class="arithmatex">\(B\)</span> 连有向边，那么必然存在一个区间 <span class="arithmatex">\(a\in A\)</span> 被区间 <span class="arithmatex">\(b \in B\)</span> 包含。由结论 <span class="arithmatex">\(1\)</span>，必定是 <span class="arithmatex">\(A\)</span> 包含 <span class="arithmatex">\(B\)</span> 或者 <span class="arithmatex">\(B\)</span> 包含 <span class="arithmatex">\(A\)</span>。由于 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 是两个不同的等价区间，故 <span class="arithmatex">\(A\)</span> 中任意区间和 <span class="arithmatex">\(B\)</span> 中任意区间不是包含就是相离，由于 <span class="arithmatex">\(a\)</span> 已经被 <span class="arithmatex">\(b\)</span> 包含了，故 <span class="arithmatex">\(A\)</span> 必然也被 <span class="arithmatex">\(b\)</span> 包含，显然 <span class="arithmatex">\(A\)</span> 被 <span class="arithmatex">\(B\)</span> 包含。</p>
+<p>再证必要性，假如等价区间 <span class="arithmatex">\(B\)</span> 包含等价区间 <span class="arithmatex">\(A\)</span>，由于 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 是两个不同的等价区间，故 <span class="arithmatex">\(A,B\)</span> 中任意区间不是包含就是相离（复读），由于 <span class="arithmatex">\(A\)</span> 被 <span class="arithmatex">\(B\)</span> 包含，故 <span class="arithmatex">\(A\)</span> 必定向 <span class="arithmatex">\(B\)</span> 连有向边。</p>
+<p>但是我们上面的证明都是建立在区间端点不重合的基础上的，假如 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 完全重合，且 <span class="arithmatex">\(A\)</span> 中只含有一个区间，那么 <span class="arithmatex">\(A\)</span> 是无法到达 <span class="arithmatex">\(B\)</span> 的。</p>
 <p>那么我们用并查集维护等价区间，再记录每个等价区间的左右端点，查询时直接查两个对应的等价区间是否包含即可，这个非常简单。</p>
 <p>考虑如何维护等价区间，首先由于区间大小单调递增，故后面的区间不可能被前面的区间包含，我们只要考虑当前区间两端点被前面的哪些等价区间包含即可。</p>
 <p>考虑维护一棵线段树套 <code>set</code>，线段树上每个结点用一个 <code>set</code> 维护这个区间被哪些等价区间完全包含，要用标记永久化思想，每次把经过的结点所有 <code>set</code> 全部加到当前取件的等价区间里。注意维护开区间。</p>
-<p>由于每加一个区间最多打 $\log n$ 个标记，每个标记最多被删一次，势能分析得这部分复杂度为 $O(n\log n)$，由于标记删除时要用并查集维护故维护等价区间的复杂度为 $O(n\log^2 n)$，线段树复杂度为 $O(n \log n)$，故总复杂度为 $O(n\log^2 n)$。</p>
+<p>由于每加一个区间最多打 <span class="arithmatex">\(\log n\)</span> 个标记，每个标记最多被删一次，势能分析得这部分复杂度为 <span class="arithmatex">\(O(n\log n)\)</span>，由于标记删除时要用并查集维护故维护等价区间的复杂度为 <span class="arithmatex">\(O(n\log^2 n)\)</span>，线段树复杂度为 <span class="arithmatex">\(O(n \log n)\)</span>，故总复杂度为 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6274,23 +6302,23 @@
 </details>
 <h2 id="cf1284d-new-year-and-conference">CF1284D New Year and Conference</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1284D">传送门</a></p>
-<p>比较暴力的做法是用线段树维护第二个会场内每个讲座在第一个会场内最早的结束时间和最晚的开始时间，因为这样的讲座最有可能是不交的，然后排序后每次先查询相交的区间再上传。复杂度 $O(n\log n)$。</p>
-<p>有一个非常妙的线性做法，先给每个讲座随机赋一个权值 $V_i$，然后设两会场的权值为 $\sum_{i \cap j\ne \varnothing}V_iV_j$，用前缀和维护 $\sum V_j$ 然后计算 $V_i\sum_{i \cap j \ne \varnothing} V_j$ 即可。假如两会场权值不同说明存在若干区间再其中一个相交另一个相离。</p>
+<p>比较暴力的做法是用线段树维护第二个会场内每个讲座在第一个会场内最早的结束时间和最晚的开始时间，因为这样的讲座最有可能是不交的，然后排序后每次先查询相交的区间再上传。复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
+<p>有一个非常妙的线性做法，先给每个讲座随机赋一个权值 <span class="arithmatex">\(V_i\)</span>，然后设两会场的权值为 <span class="arithmatex">\(\sum_{i \cap j\ne \varnothing}V_iV_j\)</span>，用前缀和维护 <span class="arithmatex">\(\sum V_j\)</span> 然后计算 <span class="arithmatex">\(V_i\sum_{i \cap j \ne \varnothing} V_j\)</span> 即可。假如两会场权值不同说明存在若干区间再其中一个相交另一个相离。</p>
 <p>口胡的，代码就不放了。</p>
 <h2 id="gym-life-as-a-monster">GYM 题不知道怎么写题号 Life as a Monster</h2>
 <p><a href="https://codeforces.com/gym/100739/problem/E">传送门</a></p>
 <p>首先可以走到周围八格，那么求的就是切比雪夫距离。</p>
 <p>故题意即为：</p>
 <ul>
-<li>有 $n$ 个点，第 $i$ 个点的坐标为 $(x_i,y_i)$。</li>
+<li>有 <span class="arithmatex">\(n\)</span> 个点，第 <span class="arithmatex">\(i\)</span> 个点的坐标为 <span class="arithmatex">\((x_i,y_i)\)</span>。</li>
 <li>有两个询问操作：
     - 修改某个点的坐标。
     - 查询某个坐标到所有点的切比雪夫距离之和。</li>
 </ul>
 <p>第二个操作输出时转化一下，在此不多赘述。</p>
 <p>发现切比雪夫距离没有很好的性质，考虑转化为曼哈顿距离。</p>
-<p>关于切比雪夫距离和曼哈顿距离相互转化可以参考我的<a href="../solution/20230704B_ABCD/#t4">这篇博客</a>。总之 $A(x_1,y_2)$ 和 $B(x_2,y_2)$ 的切比雪夫距离等于 $A'(x_1+y_1,x_1-y_1)$ 和 $B'(x_2+y_2,x_2-y_2)$ 的曼哈顿距离的二分之一。下文所有坐标均指转化后的坐标。</p>
-<p>设询问 $2$ 的坐标为 $(X,Y)$，考虑把 $x,y$ 坐标分开考虑，然后拆绝对值，可以用平衡树维护所有比 $X$ 小的 $x_i$ 的加和与数量，比 $X$ 大的 $x_j$ 同理，$Y$ 也同理，然后就很好算了。</p>
+<p>关于切比雪夫距离和曼哈顿距离相互转化可以参考我的<a href="../solution/20230704B_ABCD/#t4">这篇博客</a>。总之 <span class="arithmatex">\(A(x_1,y_2)\)</span> 和 <span class="arithmatex">\(B(x_2,y_2)\)</span> 的切比雪夫距离等于 <span class="arithmatex">\(A'(x_1+y_1,x_1-y_1)\)</span> 和 <span class="arithmatex">\(B'(x_2+y_2,x_2-y_2)\)</span> 的曼哈顿距离的二分之一。下文所有坐标均指转化后的坐标。</p>
+<p>设询问 <span class="arithmatex">\(2\)</span> 的坐标为 <span class="arithmatex">\((X,Y)\)</span>，考虑把 <span class="arithmatex">\(x,y\)</span> 坐标分开考虑，然后拆绝对值，可以用平衡树维护所有比 <span class="arithmatex">\(X\)</span> 小的 <span class="arithmatex">\(x_i\)</span> 的加和与数量，比 <span class="arithmatex">\(X\)</span> 大的 <span class="arithmatex">\(x_j\)</span> 同理，<span class="arithmatex">\(Y\)</span> 也同理，然后就很好算了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6420,10 +6448,10 @@
 <p><a href="https://www.luogu.com.cn/problem/CF1149C">传送门</a></p>
 <p>这是一道能体现 zkw 线段树优势的题。</p>
 <p>首先结点深度等于在括号序列上的的前缀和，左括号加一右括号减一。</p>
-<p>设前缀和为 $d_i$，容易想到这道题就是要求以下式子：</p>
-<p>$$\max_{u \le l \le v}\begin{Bmatrix}d_u+d_v-2d_l\end{Bmatrix}$$</p>
-<p>很好理解，两结点深度减去 $\mathrm{lca}$ 的深度，假如 $l$ 不是 $\mathrm{lca}$ 那么它得到的答案必定小于 $\mathrm{lca}$，所以可以直接这样求。</p>
-<p>那么就转化成了线段树维护三元组最大值，合并时有四种情况，两左一右，一左两右，三左，三右。所以我们还要维护每个区间提供 $u,l$ 和 $l,v$ 的最大值，类似地，分三种情况合并，所以还要维护区间前缀和最大最小值。由于要维护前缀和，还要维护一个区间和。具体看代码。</p>
+<p>设前缀和为 <span class="arithmatex">\(d_i\)</span>，容易想到这道题就是要求以下式子：</p>
+<div class="arithmatex">\[\max_{u \le l \le v}\begin{Bmatrix}d_u+d_v-2d_l\end{Bmatrix}\]</div>
+<p>很好理解，两结点深度减去 <span class="arithmatex">\(\mathrm{lca}\)</span> 的深度，假如 <span class="arithmatex">\(l\)</span> 不是 <span class="arithmatex">\(\mathrm{lca}\)</span> 那么它得到的答案必定小于 <span class="arithmatex">\(\mathrm{lca}\)</span>，所以可以直接这样求。</p>
+<p>那么就转化成了线段树维护三元组最大值，合并时有四种情况，两左一右，一左两右，三左，三右。所以我们还要维护每个区间提供 <span class="arithmatex">\(u,l\)</span> 和 <span class="arithmatex">\(l,v\)</span> 的最大值，类似地，分三种情况合并，所以还要维护区间前缀和最大最小值。由于要维护前缀和，还要维护一个区间和。具体看代码。</p>
 <p>单点修总体查，zkw 线段树薄纱。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6488,20 +6516,20 @@
 <p><a href="https://www.luogu.com.cn/problem/CF906D">传送门</a></p>
 <p>非常有意思的一道题。</p>
 <p>首先根据扩展欧拉定理有：</p>
-<p>$$
+<div class="arithmatex">\[
 a^b \equiv \begin{cases}
 a^{b\bmod \varphi(m)+\varphi(m)} &amp;b \ge \varphi(m)\\
 a^b &amp;b&lt; \varphi(m)
 \end{cases}\pmod m
-$$</p>
+\]</div>
 <p>所以要求的就可以转化成这玩意：</p>
-<p>$$w_l^{w_{l+1}^{w_{l+2}^{\cdots}\bmod \varphi(\varphi(m))+\varphi(\varphi(m))}\bmod \varphi(m)+\varphi(m)}\bmod m$$</p>
-<p>（此处假设每次指数都大于对应的 $\varphi$）</p>
-<p>容易发现 $\varphi(\varphi(\varphi(\varphi(\cdots(m)$ 一直套下去最多套 $O(\log m)$ 次就会变成一。</p>
-<p>简要证明一下，假设 $m$ 为奇数，那么 $\varphi(m)=m \prod (\frac{p-1}{p})$ 必定为偶数，假如 $m$ 是个偶数那 $\varphi(m)=m \prod (\frac{p-1}{p})\le \frac{m}{2}$，所以下降次数是 $\log$ 级别的。</p>
-<p>那么直接预处理下降前几次直到下降至 $1$，设这个次数为 $p$，然后每次快速幂暴力算 $[l,\min(l+p,r)]$ 的答案即可，复杂度 $O(q \log m)$。</p>
+<div class="arithmatex">\[w_l^{w_{l+1}^{w_{l+2}^{\cdots}\bmod \varphi(\varphi(m))+\varphi(\varphi(m))}\bmod \varphi(m)+\varphi(m)}\bmod m\]</div>
+<p>（此处假设每次指数都大于对应的 <span class="arithmatex">\(\varphi\)</span>）</p>
+<p>容易发现 <span class="arithmatex">\(\varphi(\varphi(\varphi(\varphi(\cdots(m)\)</span> 一直套下去最多套 <span class="arithmatex">\(O(\log m)\)</span> 次就会变成一。</p>
+<p>简要证明一下，假设 <span class="arithmatex">\(m\)</span> 为奇数，那么 <span class="arithmatex">\(\varphi(m)=m \prod (\frac{p-1}{p})\)</span> 必定为偶数，假如 <span class="arithmatex">\(m\)</span> 是个偶数那 <span class="arithmatex">\(\varphi(m)=m \prod (\frac{p-1}{p})\le \frac{m}{2}\)</span>，所以下降次数是 <span class="arithmatex">\(\log\)</span> 级别的。</p>
+<p>那么直接预处理下降前几次直到下降至 <span class="arithmatex">\(1\)</span>，设这个次数为 <span class="arithmatex">\(p\)</span>，然后每次快速幂暴力算 <span class="arithmatex">\([l,\min(l+p,r)]\)</span> 的答案即可，复杂度 <span class="arithmatex">\(O(q \log m)\)</span>。</p>
 <p>然后注意快速幂时判一下有没有取过模来判断代扩展欧拉定理的哪个式子。</p>
-<p>最近经常遇到最多变化 $\log n$ / $\sqrt{n}$ / 常数次就变为 $0/1$ 的题，以后遇到要多加小心。</p>
+<p>最近经常遇到最多变化 <span class="arithmatex">\(\log n\)</span> / <span class="arithmatex">\(\sqrt{n}\)</span> / 常数次就变为 <span class="arithmatex">\(0/1\)</span> 的题，以后遇到要多加小心。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6590,21 +6618,21 @@ $$</p>
 <h2 id="hdu-6265-master-of-phi">HDU-6265 Master of Phi</h2>
 <p>没有 HDU 账号找不到链接。</p>
 <p>这道题也非常有意思，我有一个巨简单的做法。</p>
-<p>题意就是求 $\sum_{d|n}\varphi(d)\times \frac{n}{d}$，其中 $n$ 由所有质因子 $p_i$ 及其指数 $q_i$ 给出。</p>
-<p>首先 $\varphi(d)=d\times \text{一堆分数相乘}$。</p>
+<p>题意就是求 <span class="arithmatex">\(\sum_{d|n}\varphi(d)\times \frac{n}{d}\)</span>，其中 <span class="arithmatex">\(n\)</span> 由所有质因子 <span class="arithmatex">\(p_i\)</span> 及其指数 <span class="arithmatex">\(q_i\)</span> 给出。</p>
+<p>首先 <span class="arithmatex">\(\varphi(d)=d\times \text{一堆分数相乘}\)</span>。</p>
 <p>那么原式 </p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;=\sum_{d|n}\text{一堆分数相乘}\times d \times \frac{n}{d}\\
 &amp;=\sum_{d|n}\text{一堆分数相乘}\times n\\
 &amp;=n\times\sum_{d|n}\text{一堆分数相乘}
 \end{aligned}
-$$</p>
-<p>我们只要算出 $\sum_{d|n}\text{一堆分数相乘}$ 就行了。</p>
-<p>发现这堆分数里有 $\frac{p_i-1}{p_i}$ 当且仅当在 $d$ 中 $p_i$ 的指数不为 $0$。</p>
+\]</div>
+<p>我们只要算出 <span class="arithmatex">\(\sum_{d|n}\text{一堆分数相乘}\)</span> 就行了。</p>
+<p>发现这堆分数里有 <span class="arithmatex">\(\frac{p_i-1}{p_i}\)</span> 当且仅当在 <span class="arithmatex">\(d\)</span> 中 <span class="arithmatex">\(p_i\)</span> 的指数不为 <span class="arithmatex">\(0\)</span>。</p>
 <p>进行一些简单的因式分解，容易得到以下式子：</p>
-<p>$$\prod_{i=1}^mq\frac{p_i-1}{p_i}+1$$</p>
-<p>然后直接快速幂算就行了，复杂度 $O(Tm\log 998244353)$。</p>
+<div class="arithmatex">\[\prod_{i=1}^mq\frac{p_i-1}{p_i}+1\]</div>
+<p>然后直接快速幂算就行了，复杂度 <span class="arithmatex">\(O(Tm\log 998244353)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
@@ -6652,10 +6680,10 @@ $$</p>
 <h2 id="cf1010c-border">CF1010C Border</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1010C">传送门</a></p>
 <p>很简单的题，但很有意思。</p>
-<p>首先题意等价于求给你的这些数的线性组合在模 $k$ 意义下能取到的所有数。</p>
-<p>由于是模意义下，所以也不用担心是负数，假如 $ax+by \equiv c \pmod k$，其中 $y$ 是负数，那必然存在 $r$ 使得 $ax+b(y+r\cdot k) \equiv c \pmod k$，且 $y+r \cdot k$ 是非负数。</p>
-<p>那么直接裴蜀定理，求出给你的所有数的 $\gcd$ 与 $k$ 的 $\gcd$，然后输出模 $k$ 意义下这个数的所有倍数即可。</p>
-<p>这道题有趣在 $k$ 进制末位等价于模 $k$ 意义下的问题。</p>
+<p>首先题意等价于求给你的这些数的线性组合在模 <span class="arithmatex">\(k\)</span> 意义下能取到的所有数。</p>
+<p>由于是模意义下，所以也不用担心是负数，假如 <span class="arithmatex">\(ax+by \equiv c \pmod k\)</span>，其中 <span class="arithmatex">\(y\)</span> 是负数，那必然存在 <span class="arithmatex">\(r\)</span> 使得 <span class="arithmatex">\(ax+b(y+r\cdot k) \equiv c \pmod k\)</span>，且 <span class="arithmatex">\(y+r \cdot k\)</span> 是非负数。</p>
+<p>那么直接裴蜀定理，求出给你的所有数的 <span class="arithmatex">\(\gcd\)</span> 与 <span class="arithmatex">\(k\)</span> 的 <span class="arithmatex">\(\gcd\)</span>，然后输出模 <span class="arithmatex">\(k\)</span> 意义下这个数的所有倍数即可。</p>
+<p>这道题有趣在 <span class="arithmatex">\(k\)</span> 进制末位等价于模 <span class="arithmatex">\(k\)</span> 意义下的问题。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6694,17 +6722,17 @@ $$</p>
 <h2 id="at_joisc2019_e-two-dishes">AT_joisc2019_e ふたつの料理 (Two Dishes)</h2>
 <p><a href="https://www.luogu.com.cn/problem/AT_joisc2019_e">传送门</a></p>
 <p>这道题让人耳目一新。</p>
-<p>首先容易发现做 $A$ 的第 $i$ 步需要把前面步骤全部完成，那么我们可以很容易二分得到在它产生贡献的情况下 $B$ 最多能完成多少步，设这个数为 $X_i$，类似地，设完成 $B$ 的第 $j$ 步最多能完成 $A$ 的 $Y_j$ 步。</p>
-<p>容易把它转化成一个在平面直角坐标系里面的行走问题：设所有蓝点为 $(i,X_i)$，红点为 $(Y_j,j)$。</p>
+<p>首先容易发现做 <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(i\)</span> 步需要把前面步骤全部完成，那么我们可以很容易二分得到在它产生贡献的情况下 <span class="arithmatex">\(B\)</span> 最多能完成多少步，设这个数为 <span class="arithmatex">\(X_i\)</span>，类似地，设完成 <span class="arithmatex">\(B\)</span> 的第 <span class="arithmatex">\(j\)</span> 步最多能完成 <span class="arithmatex">\(A\)</span> 的 <span class="arithmatex">\(Y_j\)</span> 步。</p>
+<p>容易把它转化成一个在平面直角坐标系里面的行走问题：设所有蓝点为 <span class="arithmatex">\((i,X_i)\)</span>，红点为 <span class="arithmatex">\((Y_j,j)\)</span>。</p>
 <p><img alt="图示 1" src="../../img/2023NOIP_1.png" /></p>
-<p>然后每次可以往上走，等价于做一步 $B$，或者往右走，等价于做一步 $A$。</p>
+<p>然后每次可以往上走，等价于做一步 <span class="arithmatex">\(B\)</span>，或者往右走，等价于做一步 <span class="arithmatex">\(A\)</span>。</p>
 <p>那么我们就可以得到一条这样的路径：</p>
 <p><img alt="图示 2" src="../../img/2023NOIP_2.png" /></p>
 <p>容易发现这条线下方的红点和上方的蓝点以及线上的所有点就是能产生贡献的所有点。</p>
-<p>以蓝点为例，假如线在它的下面说明z在做 $X_i$ 之前做了 $i$，所以能产生贡献，红点类似。</p>
-<p>注意到有些负数点（这个细节非常重要），假如 $X_i=0$ 说明要 $i$ 产生贡献 $B$ 一步也不能做，但假如为负数说明它无论如何都无法产生贡献。</p>
+<p>以蓝点为例，假如线在它的下面说明z在做 <span class="arithmatex">\(X_i\)</span> 之前做了 <span class="arithmatex">\(i\)</span>，所以能产生贡献，红点类似。</p>
+<p>注意到有些负数点（这个细节非常重要），假如 <span class="arithmatex">\(X_i=0\)</span> 说明要 <span class="arithmatex">\(i\)</span> 产生贡献 <span class="arithmatex">\(B\)</span> 一步也不能做，但假如为负数说明它无论如何都无法产生贡献。</p>
 <p>但是有的在上方有的在下方非常不好维护，考虑假设最开始所有蓝点都能产生贡献，但是在线严格下方会产生负的贡献。容易发现这两个问题是等价的。</p>
-<p>这又产生新的问题，红点可以在线上，蓝点必须在线的下方。这个非常容易，只要把所有蓝点往左上角平移一格（即变为 $(i-1,X_i+1)$）即可。</p>
+<p>这又产生新的问题，红点可以在线上，蓝点必须在线的下方。这个非常容易，只要把所有蓝点往左上角平移一格（即变为 <span class="arithmatex">\((i-1,X_i+1)\)</span>）即可。</p>
 <p>考虑如何统计答案，首先贡献为正的点肯定选的越多越好，假如一个贡献为负的点左上角所有点贡献加起来都不能让它变成正的，那它显然不优，我们应该绕着它走，具体实现可以考虑从左到右扫用 <code>map</code> 维护左上角所有点权和的差分，这样假设某点点权为负我们可以通过删几个点找到第一个让它变成正的位置，具体实现见代码。</p>
 <p>然后有一些显而易见的特判，具体见代码。</p>
 <details class="success">
@@ -6790,10 +6818,10 @@ $$</p>
 <h2 id="p6009-usaco20jan-non-decreasing-subsequences-p">洛谷 P6009 [USACO20JAN] Non-Decreasing Subsequences P</h2>
 <p><a href="https://www.luogu.com.cn/problem/P6009">传送门</a></p>
 <p>矩阵乘法的优化是算法竞赛的一部分，不得不尝。</p>
-<p>考虑 $dp_{i,j}$ 表示末尾位置小于等于 $i$，值为 $j$ 的不降子序列个数，$j \in [0,K]$。</p>
+<p>考虑 <span class="arithmatex">\(dp_{i,j}\)</span> 表示末尾位置小于等于 <span class="arithmatex">\(i\)</span>，值为 <span class="arithmatex">\(j\)</span> 的不降子序列个数，<span class="arithmatex">\(j \in [0,K]\)</span>。</p>
 <p>转移方程略。</p>
-<p>容易写成矩阵的形式，大概就是主对角线加上一列，比如 $K=5,a_i=3$ 的矩阵 $A_i$ 长这样：</p>
-<p>$$
+<p>容易写成矩阵的形式，大概就是主对角线加上一列，比如 <span class="arithmatex">\(K=5,a_i=3\)</span> 的矩阵 <span class="arithmatex">\(A_i\)</span> 长这样：</p>
+<div class="arithmatex">\[
 \begin{pmatrix}
 1 &amp;0 &amp;0 &amp;1 &amp;0 &amp;0\\
 0 &amp;1 &amp;0 &amp;1 &amp;0 &amp;0\\
@@ -6802,9 +6830,9 @@ $$</p>
 0 &amp;0 &amp;0 &amp;0 &amp;1 &amp;0\\
 0 &amp;0 &amp;0 &amp;0 &amp;0 &amp;1
 \end{pmatrix}
-$$</p>
+\]</div>
 <p>容易发现整个序列的答案如下：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{pmatrix}
 1 &amp;0 &amp;0 &amp;0 &amp;\cdots
 \end{pmatrix}
@@ -6816,9 +6844,9 @@ $$</p>
 1\\
 \vdots
 \end{pmatrix}
-$$</p>
-<p>然后拓展到区间 $[l,r]$</p>
-<p>$$
+\]</div>
+<p>然后拓展到区间 <span class="arithmatex">\([l,r]\)</span></p>
+<div class="arithmatex">\[
 \begin{pmatrix}
 1 &amp;0 &amp;0 &amp;0 &amp;\cdots
 \end{pmatrix}
@@ -6830,9 +6858,9 @@ $$</p>
 1\\
 \vdots
 \end{pmatrix}
-$$</p>
-<p>考虑差分，注意矩阵的逆元是可交换的，即 $AA^{-1}=A^{-1}A=E$，所以我们可以把矩阵 $A_1^{-1}\dots A_{l-1}^{-1}$ 按顺序乘在 $A_i$ 前缀积前面，每次 $A_i^{-1}$ 都会把 $A_i$ 变成 $E$。设 $P_i$ 为 $A_i$ 的前缀积（$A_1A_2A_3\dots A_i$），$Q_i$ 为 $A_i^{-1}$ 的前缀积（$A_iA_{i-1}A_{i-2}\dots A_1$），那么式子可以化成这样：</p>
-<p>$$
+\]</div>
+<p>考虑差分，注意矩阵的逆元是可交换的，即 <span class="arithmatex">\(AA^{-1}=A^{-1}A=E\)</span>，所以我们可以把矩阵 <span class="arithmatex">\(A_1^{-1}\dots A_{l-1}^{-1}\)</span> 按顺序乘在 <span class="arithmatex">\(A_i\)</span> 前缀积前面，每次 <span class="arithmatex">\(A_i^{-1}\)</span> 都会把 <span class="arithmatex">\(A_i\)</span> 变成 <span class="arithmatex">\(E\)</span>。设 <span class="arithmatex">\(P_i\)</span> 为 <span class="arithmatex">\(A_i\)</span> 的前缀积（<span class="arithmatex">\(A_1A_2A_3\dots A_i\)</span>），<span class="arithmatex">\(Q_i\)</span> 为 <span class="arithmatex">\(A_i^{-1}\)</span> 的前缀积（<span class="arithmatex">\(A_iA_{i-1}A_{i-2}\dots A_1\)</span>），那么式子可以化成这样：</p>
+<div class="arithmatex">\[
 \begin{pmatrix}
 1 &amp;0 &amp;0 &amp;0 &amp;\cdots
 \end{pmatrix}
@@ -6844,10 +6872,10 @@ Q_{l-1}P_{r}
 1\\
 \vdots
 \end{pmatrix}
-$$</p>
+\]</div>
 <p>再次注意前缀积每次乘在左边还是右边很重要。</p>
-<p>考虑如何求 $A^{-1}$，其实无论你手动构造还是求解一个 $(K+1)^2$ 元线性方程组，结果都是主对角线然后第 $a$ 列减去 $\frac{1}{2}$。比如 $K=5,a_i=3$ 的 $A_i^{-1}$ 长这样：</p>
-<p>$$
+<p>考虑如何求 <span class="arithmatex">\(A^{-1}\)</span>，其实无论你手动构造还是求解一个 <span class="arithmatex">\((K+1)^2\)</span> 元线性方程组，结果都是主对角线然后第 <span class="arithmatex">\(a\)</span> 列减去 <span class="arithmatex">\(\frac{1}{2}\)</span>。比如 <span class="arithmatex">\(K=5,a_i=3\)</span> 的 <span class="arithmatex">\(A_i^{-1}\)</span> 长这样：</p>
+<div class="arithmatex">\[
 \begin{pmatrix}
 1 &amp;0 &amp;0 &amp;-\frac{1}{2} &amp;0 &amp;0\\
 0 &amp;1 &amp;0 &amp;-\frac{1}{2} &amp;0 &amp;0\\
@@ -6856,11 +6884,11 @@ $$</p>
 0 &amp;0 &amp;0 &amp;0 &amp;1 &amp;0\\
 0 &amp;0 &amp;0 &amp;0 &amp;0 &amp;1
 \end{pmatrix}
-$$</p>
-<p>这样直接做复杂度就是 $O(nK^3+qK^3)$，考虑如何优化。</p>
-<p>容易发现 $A$ 和 $A^{-1}$ 都十分稀疏，我们乘的时候可以只算有值的位置，就可以 $O(K^2)$ 做矩阵乘法了。</p>
-<p>另外可以先把两个向量分别乘给 $Q,P$，这样不会增加预处理的复杂度，但是算答案的时候就是两个向量相乘，复杂度就是 $O(K)$ 了。</p>
-<p>故总复杂度 $O(nK^2+qK)$。</p>
+\]</div>
+<p>这样直接做复杂度就是 <span class="arithmatex">\(O(nK^3+qK^3)\)</span>，考虑如何优化。</p>
+<p>容易发现 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(A^{-1}\)</span> 都十分稀疏，我们乘的时候可以只算有值的位置，就可以 <span class="arithmatex">\(O(K^2)\)</span> 做矩阵乘法了。</p>
+<p>另外可以先把两个向量分别乘给 <span class="arithmatex">\(Q,P\)</span>，这样不会增加预处理的复杂度，但是算答案的时候就是两个向量相乘，复杂度就是 <span class="arithmatex">\(O(K)\)</span> 了。</p>
+<p>故总复杂度 <span class="arithmatex">\(O(nK^2+qK)\)</span>。</p>
 <p>这道题告诉我们比较稀疏的矩阵乘法有很好的性质，很好优化。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6959,11 +6987,11 @@ $$</p>
 <h2 id="at_keyence2019_e-connecting-cities">AT_keyence2019_e Connecting Cities</h2>
 <p><a href="https://www.luogu.com.cn/problem/AT_keyence2019_e">传送门</a></p>
 <p>很有意思的一道题，用 Kruskal 的思路和 Prim 的思路都能做。</p>
-<p>先讲 Kruskal 思路。首先边数是 $n^2$，直接做 Kruskal 会 T 飞掉。考虑能不能忽略一些绝对不可能被选的边。</p>
-<p>首先假如我们知道了 $i,j$ 的大小关系（设 $i&lt;j$），显然可以把绝对值拆开把式子化成这样：</p>
-<p>$$(A_i-Di)+(A_j+Dj)$$</p>
-<p>考虑分治，对于分治的某个阶段，有两半边 $[l,mid],[mid+1,r]$，把所有边分成左半边内，右半边内和横跨三部分，左右半边往下递归，只管横跨的。容易发现只有两边最小值向另一半边连边必定是不劣的，假如两半边最小值分别是 $x,y$，考虑另一对 $x',y'$，发现 $(x,y),(x',y),(x,y'),(x',y')$ 四条边构成一个环，显然 $(x',y')$ 这条边是边权最大的，可以被删掉。</p>
-<p>这样总边数就是 $O(n \log n)$ 级别的，做 Kruskal 的复杂度就是 $O(n \log^2 n)$ 的。</p>
+<p>先讲 Kruskal 思路。首先边数是 <span class="arithmatex">\(n^2\)</span>，直接做 Kruskal 会 T 飞掉。考虑能不能忽略一些绝对不可能被选的边。</p>
+<p>首先假如我们知道了 <span class="arithmatex">\(i,j\)</span> 的大小关系（设 <span class="arithmatex">\(i&lt;j\)</span>），显然可以把绝对值拆开把式子化成这样：</p>
+<div class="arithmatex">\[(A_i-Di)+(A_j+Dj)\]</div>
+<p>考虑分治，对于分治的某个阶段，有两半边 <span class="arithmatex">\([l,mid],[mid+1,r]\)</span>，把所有边分成左半边内，右半边内和横跨三部分，左右半边往下递归，只管横跨的。容易发现只有两边最小值向另一半边连边必定是不劣的，假如两半边最小值分别是 <span class="arithmatex">\(x,y\)</span>，考虑另一对 <span class="arithmatex">\(x',y'\)</span>，发现 <span class="arithmatex">\((x,y),(x',y),(x,y'),(x',y')\)</span> 四条边构成一个环，显然 <span class="arithmatex">\((x',y')\)</span> 这条边是边权最大的，可以被删掉。</p>
+<p>这样总边数就是 <span class="arithmatex">\(O(n \log n)\)</span> 级别的，做 Kruskal 的复杂度就是 <span class="arithmatex">\(O(n \log^2 n)\)</span> 的。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7037,15 +7065,15 @@ $$</p>
 </span></code></pre></div>
 </details>
 <p>然后讲 Prim 做法，我觉得这个做法非常自然。</p>
-<p>设已经连好的点的集合为 $S$，其余的为 $T$。那么只要能快速从从 $S$ 和 $T$ 里面分别找出两个点 $u,v$ 使得它们间边权最小就能做 Prim。</p>
+<p>设已经连好的点的集合为 <span class="arithmatex">\(S\)</span>，其余的为 <span class="arithmatex">\(T\)</span>。那么只要能快速从从 <span class="arithmatex">\(S\)</span> 和 <span class="arithmatex">\(T\)</span> 里面分别找出两个点 <span class="arithmatex">\(u,v\)</span> 使得它们间边权最小就能做 Prim。</p>
 <p>由于有绝对值，考虑拆绝对值，那么分两种情况讨论：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{cases}
 (A_u-uD)+(A_v+vD)   &amp;u&lt;v\\
 (A_u+uD)+(A_v-vD)  &amp;u \ge v
 \end{cases}
-$$</p>
-<p>那么可以直接用线段树维护，合并的时候分 $u$ 左 $v$ 右，$v$ 左 $u$ 右，两个都在左边和两个都在右边四种情况考虑。那么我们对于每个点维护 <strong>$(A_u-uD),(A_v+vD),(A_u+uD),(A_v-vD)$ 分别的最小值</strong>，<strong>答案</strong> 五个值即可解决问题，但是由于我们要维护加入集合 $S$ 的操作，还要维护答案是由哪个 $v$ 得到的。</p>
+\]</div>
+<p>那么可以直接用线段树维护，合并的时候分 <span class="arithmatex">\(u\)</span> 左 <span class="arithmatex">\(v\)</span> 右，<span class="arithmatex">\(v\)</span> 左 <span class="arithmatex">\(u\)</span> 右，两个都在左边和两个都在右边四种情况考虑。那么我们对于每个点维护 <strong><span class="arithmatex">\((A_u-uD),(A_v+vD),(A_u+uD),(A_v-vD)\)</span> 分别的最小值</strong>，<strong>答案</strong> 五个值即可解决问题，但是由于我们要维护加入集合 <span class="arithmatex">\(S\)</span> 的操作，还要维护答案是由哪个 <span class="arithmatex">\(v\)</span> 得到的。</p>
 <p>由于是单调修改整体查询，使用 zkw 线段树十分好写。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -7124,27 +7152,27 @@ $$</p>
 <h2 id="cf1270i-xor-on-figures">CF1270I Xor on Figures</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1270I">传送门</a></p>
 <p>非常巧妙的题，考察对数学归纳法的理解。</p>
-<p>首先下标从 $1$ 开始的话，取模很难受，改为下标从 $0$ 到 $2^k-1$，这样就能直接取模了，不影响答案。</p>
-<p>容易想到修改等价于修改 $t$ 个从 $(p,q)$ 引出的向量 $(x_i,y_i)$。容易想到具体怎么修改其实和 $(p,q)$ 关系不大，那么把每个向量 $(x_i,y_i)$ 改为 $(x_i-x_1,y_i-y_1)$ 后可以转化为在 $(x_1,y_1)$ 上进行操作（其实不转化也能做，只是转化了更好想，毕竟少一个要考虑的点）。</p>
+<p>首先下标从 <span class="arithmatex">\(1\)</span> 开始的话，取模很难受，改为下标从 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(2^k-1\)</span>，这样就能直接取模了，不影响答案。</p>
+<p>容易想到修改等价于修改 <span class="arithmatex">\(t\)</span> 个从 <span class="arithmatex">\((p,q)\)</span> 引出的向量 <span class="arithmatex">\((x_i,y_i)\)</span>。容易想到具体怎么修改其实和 <span class="arithmatex">\((p,q)\)</span> 关系不大，那么把每个向量 <span class="arithmatex">\((x_i,y_i)\)</span> 改为 <span class="arithmatex">\((x_i-x_1,y_i-y_1)\)</span> 后可以转化为在 <span class="arithmatex">\((x_1,y_1)\)</span> 上进行操作（其实不转化也能做，只是转化了更好想，毕竟少一个要考虑的点）。</p>
 <p>这里有一个小推论，对每个点<strong>至多只会操作一次</strong>，因为无论操作多少次都可以用一次完成，为了最小化肯定最多只操作一次。</p>
-<p>考虑对哪些点操作会影响点 $(x,y)$，显然，是所有 $(x-x_i,y-y_i)(i \in [i,t])$，容易想到假如所有的这种点异或起来等于 $0$，那么假如只对这些点操作使它们各自等于 $0$，$(x,y)$ 天然等于 $0$。那么设 $f(x,y)$ 表示 $\bigoplus_{i=1}^t(x-x_i,y-y_i)$（其中 $\bigoplus$ 表示按位异或），有可能把 $a$ 矩阵变为 $0$ 等价于把 $f$ 矩阵变为 $0$。这个猜想是否正确呢？</p>
-<p>先思考 $f$ 矩阵能怎么操作。或者说对哪些点操作会影响 $f(x,y)$。很显然是在矩阵 $a$ 中能影响 $(x-x_i,y-y_i)$ 的所有点 $(x-x_i-x_j,y-y_i-y_j)(i,j \in [1,t])$，即任意两个在 $(-x_i,-y_i)$ 中的向量的和，我们设这些向量为 $\mathbf{A_{\mathit{i}}}$。容易发现 $\mathbf{A_{\mathit{i}}}+\mathbf{A_{\mathit{j}}}=\mathbf{A_{\mathit{j}}}+\mathbf{A_{\mathit{i}}}$，换句话说，由于 $i,j$ 都取遍 $[1,t]$，那么 $\mathbf{A_{\mathit{i}}}+\mathbf{A_{\mathit{j}}}$ 得到的向量有很多两两重复的，而两两重复的相异或显然等于 $0$。也就是说只有不重复的才会影响 $f(x,y)$。那么哪些不会重复呢？显然，$i=j$ 的情况。能推出一个很重要的结论：</p>
+<p>考虑对哪些点操作会影响点 <span class="arithmatex">\((x,y)\)</span>，显然，是所有 <span class="arithmatex">\((x-x_i,y-y_i)(i \in [i,t])\)</span>，容易想到假如所有的这种点异或起来等于 <span class="arithmatex">\(0\)</span>，那么假如只对这些点操作使它们各自等于 <span class="arithmatex">\(0\)</span>，<span class="arithmatex">\((x,y)\)</span> 天然等于 <span class="arithmatex">\(0\)</span>。那么设 <span class="arithmatex">\(f(x,y)\)</span> 表示 <span class="arithmatex">\(\bigoplus_{i=1}^t(x-x_i,y-y_i)\)</span>（其中 <span class="arithmatex">\(\bigoplus\)</span> 表示按位异或），有可能把 <span class="arithmatex">\(a\)</span> 矩阵变为 <span class="arithmatex">\(0\)</span> 等价于把 <span class="arithmatex">\(f\)</span> 矩阵变为 <span class="arithmatex">\(0\)</span>。这个猜想是否正确呢？</p>
+<p>先思考 <span class="arithmatex">\(f\)</span> 矩阵能怎么操作。或者说对哪些点操作会影响 <span class="arithmatex">\(f(x,y)\)</span>。很显然是在矩阵 <span class="arithmatex">\(a\)</span> 中能影响 <span class="arithmatex">\((x-x_i,y-y_i)\)</span> 的所有点 <span class="arithmatex">\((x-x_i-x_j,y-y_i-y_j)(i,j \in [1,t])\)</span>，即任意两个在 <span class="arithmatex">\((-x_i,-y_i)\)</span> 中的向量的和，我们设这些向量为 <span class="arithmatex">\(\mathbf{A_{\mathit{i}}}\)</span>。容易发现 <span class="arithmatex">\(\mathbf{A_{\mathit{i}}}+\mathbf{A_{\mathit{j}}}=\mathbf{A_{\mathit{j}}}+\mathbf{A_{\mathit{i}}}\)</span>，换句话说，由于 <span class="arithmatex">\(i,j\)</span> 都取遍 <span class="arithmatex">\([1,t]\)</span>，那么 <span class="arithmatex">\(\mathbf{A_{\mathit{i}}}+\mathbf{A_{\mathit{j}}}\)</span> 得到的向量有很多两两重复的，而两两重复的相异或显然等于 <span class="arithmatex">\(0\)</span>。也就是说只有不重复的才会影响 <span class="arithmatex">\(f(x,y)\)</span>。那么哪些不会重复呢？显然，<span class="arithmatex">\(i=j\)</span> 的情况。能推出一个很重要的结论：</p>
 <blockquote>
-<p>能影响 $f(x,y)$ 的点为 $(x-2x_i,y-2y_i)(i\in [1,t])$。</p>
+<p>能影响 <span class="arithmatex">\(f(x,y)\)</span> 的点为 <span class="arithmatex">\((x-2x_i,y-2y_i)(i\in [1,t])\)</span>。</p>
 </blockquote>
-<p>那么把 $f$ 全变为 $0$ 和把 $a$ 全变为 $0$ 其实是类似的问题，我们可以类似地设 $f^2(x,y)=\bigoplus_{i=1}^tf(x-2x_i,y-2y_i)$，显然也能推出类似的结论，那么上面的结论可以拓展一下：</p>
+<p>那么把 <span class="arithmatex">\(f\)</span> 全变为 <span class="arithmatex">\(0\)</span> 和把 <span class="arithmatex">\(a\)</span> 全变为 <span class="arithmatex">\(0\)</span> 其实是类似的问题，我们可以类似地设 <span class="arithmatex">\(f^2(x,y)=\bigoplus_{i=1}^tf(x-2x_i,y-2y_i)\)</span>，显然也能推出类似的结论，那么上面的结论可以拓展一下：</p>
 <blockquote>
-<p>能影响 $f^p(x,y)$ 的点为 $(x-2^px_i,y-2^py_i)(i\in [1,t])$。</p>
+<p>能影响 <span class="arithmatex">\(f^p(x,y)\)</span> 的点为 <span class="arithmatex">\((x-2^px_i,y-2^py_i)(i\in [1,t])\)</span>。</p>
 </blockquote>
-<p>容易发现当 $p=k$ 的时候，所有能影响 $f^k(x,y)$ 的点均重合在了 $(x,y)$ 上，这时候可以很简单地求出需要操作多少次，就是 $f^k(x,y)$ 中不为 $0$ 的点。</p>
+<p>容易发现当 <span class="arithmatex">\(p=k\)</span> 的时候，所有能影响 <span class="arithmatex">\(f^k(x,y)\)</span> 的点均重合在了 <span class="arithmatex">\((x,y)\)</span> 上，这时候可以很简单地求出需要操作多少次，就是 <span class="arithmatex">\(f^k(x,y)\)</span> 中不为 <span class="arithmatex">\(0\)</span> 的点。</p>
 <p>这时候我们发现只要前面的猜想成立就能快速求解。</p>
-<p>令 $a=f^0$，考虑数学归纳法，下证若 $f^{k}(x,y)$ 全变为 $0$， $f^{0}(x,y)$ 也全为 $0$。</p>
-<p>必要性显然，因为 $f^0$ 全为那么后面的必然全为 $0$。下面证充分性。</p>
-<p>下证若 $f^{p}(p&gt;0)$ 全为 $0$，$f^{p-1}$ 全为 $0$。</p>
-<p>首先当 $k=0$，必有 $p \ge k$ ，由之前的推论可知结论成立。</p>
-<p>假设对于所有 $0 \le k'&lt;k$ 的 $k'$ 结论成立。由于 $2x_i,2y_i$ 必定全为偶数，所以所有能影响 $f^p(x,y)$ 的 $(x-x_i,y-y_i)$ 横纵坐标奇偶性必定与 $(x,y)$ 相同。那么我们可以按横纵坐标奇偶性分成 $4$ 个独立的 $k'=k-1$ 的矩阵，由之前的假设可知结论成立。</p>
-<p>由于若 $f^{p}$ 全为 $0$，$f^{p-1}$ 全为 $0$，稍微推一推可知若 $f^k$ 全为 $0$，$f^0$ 全为 $0$。而 $f^k$ 中每点能影响的点只有它自己，我们对每个不为 $0$ 的点异或自己即可。</p>
-<p>只要求出 $f^k$ 然后遍历一下即可，复杂度 $O(4^kkt)$，可以通过此题。</p>
+<p>令 <span class="arithmatex">\(a=f^0\)</span>，考虑数学归纳法，下证若 <span class="arithmatex">\(f^{k}(x,y)\)</span> 全变为 <span class="arithmatex">\(0\)</span>， <span class="arithmatex">\(f^{0}(x,y)\)</span> 也全为 <span class="arithmatex">\(0\)</span>。</p>
+<p>必要性显然，因为 <span class="arithmatex">\(f^0\)</span> 全为那么后面的必然全为 <span class="arithmatex">\(0\)</span>。下面证充分性。</p>
+<p>下证若 <span class="arithmatex">\(f^{p}(p&gt;0)\)</span> 全为 <span class="arithmatex">\(0\)</span>，<span class="arithmatex">\(f^{p-1}\)</span> 全为 <span class="arithmatex">\(0\)</span>。</p>
+<p>首先当 <span class="arithmatex">\(k=0\)</span>，必有 <span class="arithmatex">\(p \ge k\)</span> ，由之前的推论可知结论成立。</p>
+<p>假设对于所有 <span class="arithmatex">\(0 \le k'&lt;k\)</span> 的 <span class="arithmatex">\(k'\)</span> 结论成立。由于 <span class="arithmatex">\(2x_i,2y_i\)</span> 必定全为偶数，所以所有能影响 <span class="arithmatex">\(f^p(x,y)\)</span> 的 <span class="arithmatex">\((x-x_i,y-y_i)\)</span> 横纵坐标奇偶性必定与 <span class="arithmatex">\((x,y)\)</span> 相同。那么我们可以按横纵坐标奇偶性分成 <span class="arithmatex">\(4\)</span> 个独立的 <span class="arithmatex">\(k'=k-1\)</span> 的矩阵，由之前的假设可知结论成立。</p>
+<p>由于若 <span class="arithmatex">\(f^{p}\)</span> 全为 <span class="arithmatex">\(0\)</span>，<span class="arithmatex">\(f^{p-1}\)</span> 全为 <span class="arithmatex">\(0\)</span>，稍微推一推可知若 <span class="arithmatex">\(f^k\)</span> 全为 <span class="arithmatex">\(0\)</span>，<span class="arithmatex">\(f^0\)</span> 全为 <span class="arithmatex">\(0\)</span>。而 <span class="arithmatex">\(f^k\)</span> 中每点能影响的点只有它自己，我们对每个不为 <span class="arithmatex">\(0\)</span> 的点异或自己即可。</p>
+<p>只要求出 <span class="arithmatex">\(f^k\)</span> 然后遍历一下即可，复杂度 <span class="arithmatex">\(O(4^kkt)\)</span>，可以通过此题。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7280,15 +7308,15 @@ $$</p>
 </span><span id="__span-11-63"><a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>注意两个长度为 $1$ 的字符串必定相等，所以这里可以直接 <code>++j</code>。</li>
+<li>注意两个长度为 <span class="arithmatex">\(1\)</span> 的字符串必定相等，所以这里可以直接 <code>++j</code>。</li>
 </ol>
 </details>
 <h2 id="p3426-poi2005-sza-template">P3426 [POI2005] SZA-Template</h2>
 <p><a href="https://www.luogu.com.cn/problem/P3426">传送门</a></p>
-<p>首先答案肯定是某个前缀，显然如果要最大化它那么它必定是某个 $next_i$，那么考虑在 kmp 方向上思考。</p>
-<p>容易发现某个以 $i$ 结尾的前缀的答案不是 $i$ 就是 $next_i$ 的答案，因为要覆盖 $i$ 至少要覆盖 $next_i$，考虑什么情况才能取到 $next_i$。</p>
-<p>首先第一种，$next_i\ge\frac{i}{2}$，这个显然可以取到，不管。</p>
-<p>那么考虑中间那段满足什么条件才不会影响答案，显然，当存在一个 $j\ge i-next_i$，使得以 $j$ 结尾的前缀的答案等于 $next_i$ 的答案时就可以取到 $next_i$ 的答案，那么顺理成章地使用 DP。</p>
+<p>首先答案肯定是某个前缀，显然如果要最大化它那么它必定是某个 <span class="arithmatex">\(next_i\)</span>，那么考虑在 kmp 方向上思考。</p>
+<p>容易发现某个以 <span class="arithmatex">\(i\)</span> 结尾的前缀的答案不是 <span class="arithmatex">\(i\)</span> 就是 <span class="arithmatex">\(next_i\)</span> 的答案，因为要覆盖 <span class="arithmatex">\(i\)</span> 至少要覆盖 <span class="arithmatex">\(next_i\)</span>，考虑什么情况才能取到 <span class="arithmatex">\(next_i\)</span>。</p>
+<p>首先第一种，<span class="arithmatex">\(next_i\ge\frac{i}{2}\)</span>，这个显然可以取到，不管。</p>
+<p>那么考虑中间那段满足什么条件才不会影响答案，显然，当存在一个 <span class="arithmatex">\(j\ge i-next_i\)</span>，使得以 <span class="arithmatex">\(j\)</span> 结尾的前缀的答案等于 <span class="arithmatex">\(next_i\)</span> 的答案时就可以取到 <span class="arithmatex">\(next_i\)</span> 的答案，那么顺理成章地使用 DP。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7330,15 +7358,15 @@ $$</p>
 <h2 id="cf713d-animals-and-puzzle">CF713D Animals and Puzzle</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF713D">传送门</a></p>
 <p>以前 CW 模拟赛考过，这次又做到了感觉挺有趣的拿出来说说。</p>
-<p>假如没有区间限制，这道题应该怎么做呢？有一个很显然的 DP，设 $dp_{i,j}$ 表示以 $(i,j)$ 为右下角的最大的全 $1$ 正方形边长，易得转移方程：</p>
-<p>$$
+<p>假如没有区间限制，这道题应该怎么做呢？有一个很显然的 DP，设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示以 <span class="arithmatex">\((i,j)\)</span> 为右下角的最大的全 <span class="arithmatex">\(1\)</span> 正方形边长，易得转移方程：</p>
+<div class="arithmatex">\[
 dp_{i,j}=\begin{cases}
 0 &amp; a_{i,j}=0\\
 \min\begin{Bmatrix}dp_{i-1,j},dp_{i,j-1},dp_{i-1,j-1}\end{Bmatrix}+1 &amp; a_{i,j}=1
 \end{cases}
-$$</p>
-<p>感性理解一下就是向上最多延伸多少，向左最多延伸多少，左上角最多有多远，取个 $\min$，严谨证明可以自己分类讨论。</p>
-<p>那么假如询问 $(x_1,y_1),(x_2,y_2)$ 这个区间答案为 $l$，显然答案对应正方形的右下角必定在 $(x_1+l-1,y_1+l-1),(x_2,y_2)$ 这个区间内，二分答案加二维 ST 表即可。</p>
+\]</div>
+<p>感性理解一下就是向上最多延伸多少，向左最多延伸多少，左上角最多有多远，取个 <span class="arithmatex">\(\min\)</span>，严谨证明可以自己分类讨论。</p>
+<p>那么假如询问 <span class="arithmatex">\((x_1,y_1),(x_2,y_2)\)</span> 这个区间答案为 <span class="arithmatex">\(l\)</span>，显然答案对应正方形的右下角必定在 <span class="arithmatex">\((x_1+l-1,y_1+l-1),(x_2,y_2)\)</span> 这个区间内，二分答案加二维 ST 表即可。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7415,11 +7443,11 @@ $$</p>
 <h2 id="p6881-joi-2020-final">P6881 [JOI 2020 Final] 火事</h2>
 <p><a href="https://www.luogu.com.cn/problem/P6881">传送门</a></p>
 <p>写了这道题对扫描线有了新的理解。</p>
-<p>首先假如将 $T$ 作为纵坐标，$n$ 作为横坐标，容易发现每个数出现的位置是个平行四边形。</p>
-<p>设 $i$ 左侧第一个大于 $s_i$ 的位置为 $L_i$，右侧第一个大于等于 $s_i$ 的位置为 $R_i$，容易发现 $s_i$ 出现的平行四边形四顶点分别是 $(i,0),(i,i-L_i-1),(R_i-1,R_i-L_i-2),(R_i-1,R_i-i-1)$。然后每次查询就是一条水平的线段，可以转化为两个前缀的差分。</p>
-<p>考虑一条竖着的扫描线从左到右扫一遍求解所有 $t$ 时刻某个前缀的和，首先最 simple 的做法就是把每个平行四边形切成一列一列的，但是这样条数显然炸了。这时候根据笛卡尔树的常见结论：$\sum_{i=1}^n\min(i-L_i,R_i-i)\approx n\log n$（考虑启发式合并），又发现平行四边形与 $t$ 轴垂直的边长度为 $i-L_i$，与 $n$ 轴垂直的高长度为 $R_i-i$，考虑利用那个性质解决。</p>
-<p>首先竖着的很好处理，那么斜着切应该怎么做呢？容易发现一条斜着的边的 $(x-y)$ 是定值，那么我们可以在另一个坐标系中，每个点映射到 $(x-y,y)$ 上。这样斜着的边就变成正的了，横着的边依然是横着的。</p>
-<p>然后把两部分的答案直接加起来即可，复杂度应该是 $O(n\log^2 n)$。</p>
+<p>首先假如将 <span class="arithmatex">\(T\)</span> 作为纵坐标，<span class="arithmatex">\(n\)</span> 作为横坐标，容易发现每个数出现的位置是个平行四边形。</p>
+<p>设 <span class="arithmatex">\(i\)</span> 左侧第一个大于 <span class="arithmatex">\(s_i\)</span> 的位置为 <span class="arithmatex">\(L_i\)</span>，右侧第一个大于等于 <span class="arithmatex">\(s_i\)</span> 的位置为 <span class="arithmatex">\(R_i\)</span>，容易发现 <span class="arithmatex">\(s_i\)</span> 出现的平行四边形四顶点分别是 <span class="arithmatex">\((i,0),(i,i-L_i-1),(R_i-1,R_i-L_i-2),(R_i-1,R_i-i-1)\)</span>。然后每次查询就是一条水平的线段，可以转化为两个前缀的差分。</p>
+<p>考虑一条竖着的扫描线从左到右扫一遍求解所有 <span class="arithmatex">\(t\)</span> 时刻某个前缀的和，首先最 simple 的做法就是把每个平行四边形切成一列一列的，但是这样条数显然炸了。这时候根据笛卡尔树的常见结论：<span class="arithmatex">\(\sum_{i=1}^n\min(i-L_i,R_i-i)\approx n\log n\)</span>（考虑启发式合并），又发现平行四边形与 <span class="arithmatex">\(t\)</span> 轴垂直的边长度为 <span class="arithmatex">\(i-L_i\)</span>，与 <span class="arithmatex">\(n\)</span> 轴垂直的高长度为 <span class="arithmatex">\(R_i-i\)</span>，考虑利用那个性质解决。</p>
+<p>首先竖着的很好处理，那么斜着切应该怎么做呢？容易发现一条斜着的边的 <span class="arithmatex">\((x-y)\)</span> 是定值，那么我们可以在另一个坐标系中，每个点映射到 <span class="arithmatex">\((x-y,y)\)</span> 上。这样斜着的边就变成正的了，横着的边依然是横着的。</p>
+<p>然后把两部分的答案直接加起来即可，复杂度应该是 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7521,8 +7549,8 @@ $$</p>
 <p><a href="https://www.luogu.com.cn/problem/CF1386C">传送门</a></p>
 <p>我觉得这是道基于值域分治的好题（如果你像我一样不会 LCT 但是会<strong>可撤销并查集</strong>又恰好对基于值域分治不熟悉的话这其实能算基于值域分治的入门题），但很多洛谷题解都说这是整体二分，甚至最后一篇题解交错题，但题解中出现了“整体二分”字眼都给过了，可见你谷管理员对黑题审核之松。</p>
 <p>首先删除这个操作是不好维护的，我们考虑把边序列复制一份接到原序列后面，这样没被删的边就是一段连续的区间，考虑如何求连续区间内有没有奇环。</p>
-<p>我们发现假如边集 $[l,r]$ 中有奇环，那么 $<a href="k&gt;0">l,r+k</a>$ 中也有奇环（显然吧），那么考虑预处理每个 $l$ 能对应的能出现奇环的最小的 $r=f_l$，假如查询区间 $[L,R]$ 中 $R \ge f_l$ 就说明有奇环，用扩展域并查集就能得到 $O(n^2 \log n)$ 做法，对于每个左端点向右扫一遍即可。</p>
-<p>考虑如何优化，容易发现 $f_i \le f_{j}(i&lt;j)$，那么我们可以基于 $f$ 的值域分治，具体来说，我们先求出中间 $mid$ 的答案 $f_{mid}$，然后对于所有 $l<mid$ 的答案必定小于等于 $f_{mid}$，$l>mid$ 的答案必定大于等于 $f_{mid}$，然后就可以递归解决。容易发现每次下一层都可以继承一些上一层的边，具体来讲，设每次查找的区间为 $[l,r]$，答案所在区间为 $[L,R]$，容易发现 $(r,L)$ 这一段是必定会保留的（为什么不算 $[mid,r]$ 这段呢？因为用可撤销并查集不好维护），我们并查集删边时可以保留这一段，这样每层要额外访问的边数就是 $O(n)$ 的，加上可撤销并查集总复杂度为 $O(n\log ^2 n)$。</p>
+<p>我们发现假如边集 <span class="arithmatex">\([l,r]\)</span> 中有奇环，那么 <span class="arithmatex">\([l,r+k](k&gt;0)\)</span> 中也有奇环（显然吧），那么考虑预处理每个 <span class="arithmatex">\(l\)</span> 能对应的能出现奇环的最小的 <span class="arithmatex">\(r=f_l\)</span>，假如查询区间 <span class="arithmatex">\([L,R]\)</span> 中 <span class="arithmatex">\(R \ge f_l\)</span> 就说明有奇环，用扩展域并查集就能得到 <span class="arithmatex">\(O(n^2 \log n)\)</span> 做法，对于每个左端点向右扫一遍即可。</p>
+<p>考虑如何优化，容易发现 <span class="arithmatex">\(f_i \le f_{j}(i&lt;j)\)</span>，那么我们可以基于 <span class="arithmatex">\(f\)</span> 的值域分治，具体来说，我们先求出中间 <span class="arithmatex">\(mid\)</span> 的答案 <span class="arithmatex">\(f_{mid}\)</span>，然后对于所有 <span class="arithmatex">\(l&lt;mid\)</span> 的答案必定小于等于 <span class="arithmatex">\(f_{mid}\)</span>，<span class="arithmatex">\(l&gt;mid\)</span> 的答案必定大于等于 <span class="arithmatex">\(f_{mid}\)</span>，然后就可以递归解决。容易发现每次下一层都可以继承一些上一层的边，具体来讲，设每次查找的区间为 <span class="arithmatex">\([l,r]\)</span>，答案所在区间为 <span class="arithmatex">\([L,R]\)</span>，容易发现 <span class="arithmatex">\((r,L)\)</span> 这一段是必定会保留的（为什么不算 <span class="arithmatex">\([mid,r]\)</span> 这段呢？因为用可撤销并查集不好维护），我们并查集删边时可以保留这一段，这样每层要额外访问的边数就是 <span class="arithmatex">\(O(n)\)</span> 的，加上可撤销并查集总复杂度为 <span class="arithmatex">\(O(n\log ^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7618,10 +7646,10 @@ $$</p>
 <p><a href="https://www.luogu.com.cn/problem/P4654">传送门</a></p>
 <p>又到了不定期的卡博弈论时间。</p>
 <p>这道题博弈部分其实不难分析。假设以陷阱为根，老鼠肯定不能直接往上跳，这样显然不优（除非只有一条链），那么老鼠肯定会进入某棵子树，管理员肯定希望尽快把老鼠赶出来。</p>
-<p>发现从“老鼠从父亲进入子树”到“把老鼠从子树赶出来”需要的步数是很好求的，考虑树形 DP。设从<strong>进入结点 $u$</strong> 到 <strong>把老鼠赶出结点 $u$</strong> 需要的步数为 $f_u$，首先当老鼠进入结点 $u$，考虑所有 $u$ 的儿子 $v$ 需要的步数 $f_v$，管理员肯定会堵上 $f_v$ 最大的边，不然老鼠进入 $v$ 一定不优于其它边，堵上之后老鼠必定会进入 $f_v$ 第二大的边，因为其它边对老鼠说必定不优于这一条。最终老鼠必定会被堵在某个位置。这时候管理员可以把从老鼠的位置到根路径的所有岔路都堵上，然后慢慢清理路径，这样显然是最优的（不然走到一半老鼠反手钻进另一棵子树需要的代价肯定不少于把它堵上的）。</p>
-<p>那么整个过程就是老鼠可能向上走一点，然后钻进一棵子树，被赶到某个地方停下，最后直接一步到位走进陷阱，我们可以预处理根到每个结点的岔路数和 $f$，然后就能 $O(1)$ 求出老鼠钻进每棵子树需要的代价。</p>
-<p>首先容易发现，老鼠钻进的子树肯定是路径 $(s,t)$ 的一条岔路（这里为了方便把 $s$ 的儿子也算作岔路）。那么假如我们知道了答案 $mid$ 就能很快求出这个答案可不可行（从 $s$ 向上跳判断有没有堵不住的子树需要的代价超过 $mid$），直接二分即可，注意这个过程中堵住岔路也要算代价。</p>
-<p>需要注意，有些时候某个结点的岔路所需代价全都不超过 $mid$，这时候管理员显然可以先堵后面大于 $mid$ 的岔路 <del>回合制游戏总不能跳过回合吧？</del> 可以考虑存一个标记记录之前有多少次没有操作，起一个类似懒惰标记的效果。</p>
+<p>发现从“老鼠从父亲进入子树”到“把老鼠从子树赶出来”需要的步数是很好求的，考虑树形 DP。设从<strong>进入结点 <span class="arithmatex">\(u\)</span></strong> 到 <strong>把老鼠赶出结点 <span class="arithmatex">\(u\)</span></strong> 需要的步数为 <span class="arithmatex">\(f_u\)</span>，首先当老鼠进入结点 <span class="arithmatex">\(u\)</span>，考虑所有 <span class="arithmatex">\(u\)</span> 的儿子 <span class="arithmatex">\(v\)</span> 需要的步数 <span class="arithmatex">\(f_v\)</span>，管理员肯定会堵上 <span class="arithmatex">\(f_v\)</span> 最大的边，不然老鼠进入 <span class="arithmatex">\(v\)</span> 一定不优于其它边，堵上之后老鼠必定会进入 <span class="arithmatex">\(f_v\)</span> 第二大的边，因为其它边对老鼠说必定不优于这一条。最终老鼠必定会被堵在某个位置。这时候管理员可以把从老鼠的位置到根路径的所有岔路都堵上，然后慢慢清理路径，这样显然是最优的（不然走到一半老鼠反手钻进另一棵子树需要的代价肯定不少于把它堵上的）。</p>
+<p>那么整个过程就是老鼠可能向上走一点，然后钻进一棵子树，被赶到某个地方停下，最后直接一步到位走进陷阱，我们可以预处理根到每个结点的岔路数和 <span class="arithmatex">\(f\)</span>，然后就能 <span class="arithmatex">\(O(1)\)</span> 求出老鼠钻进每棵子树需要的代价。</p>
+<p>首先容易发现，老鼠钻进的子树肯定是路径 <span class="arithmatex">\((s,t)\)</span> 的一条岔路（这里为了方便把 <span class="arithmatex">\(s\)</span> 的儿子也算作岔路）。那么假如我们知道了答案 <span class="arithmatex">\(mid\)</span> 就能很快求出这个答案可不可行（从 <span class="arithmatex">\(s\)</span> 向上跳判断有没有堵不住的子树需要的代价超过 <span class="arithmatex">\(mid\)</span>），直接二分即可，注意这个过程中堵住岔路也要算代价。</p>
+<p>需要注意，有些时候某个结点的岔路所需代价全都不超过 <span class="arithmatex">\(mid\)</span>，这时候管理员显然可以先堵后面大于 <span class="arithmatex">\(mid\)</span> 的岔路 <del>回合制游戏总不能跳过回合吧？</del> 可以考虑存一个标记记录之前有多少次没有操作，起一个类似懒惰标记的效果。</p>
 <p>还有点细节注释在代码里了。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -7704,26 +7732,26 @@ $$</p>
 </span><span id="__span-16-77"><a id="__codelineno-16-77" name="__codelineno-16-77" href="#__codelineno-16-77"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>为什么 <code>pp==s</code> 的时候不用减呢？考虑求岔路的过程，是不算到父亲的边和到儿子的边的，假如 <code>pp==s</code> 那么 $i$ 就是 $pp$ 的儿子了，之前已经省略过了。</li>
+<li>为什么 <code>pp==s</code> 的时候不用减呢？考虑求岔路的过程，是不算到父亲的边和到儿子的边的，假如 <code>pp==s</code> 那么 <span class="arithmatex">\(i\)</span> 就是 <span class="arithmatex">\(pp\)</span> 的儿子了，之前已经省略过了。</li>
 </ol>
 </details>
 <h2 id="p7154-usaco20dec-sleeping-cows-p">P7154 [USACO20DEC] Sleeping Cows P</h2>
 <p><a href="https://www.luogu.com.cn/problem/P7154">传送门</a></p>
 <p>莫名感觉这道题有点像偏序问题。</p>
 <p>首先 <em>当且仅当每头奶牛可以进入分配给她的牛棚，且对于每头未被分配牛棚的奶牛无法进入任何未分配的空牛棚。</em> 这个限制等价于对于每个没有牛棚的牛，比她大的棚都住满了。</p>
-<p>另外容易发现，一个大小为 $p$ 的牛棚可以住任意大小小于等于 $p$ 的牛，那么考虑把棚和牛混在一起排序然后 DP 解决。</p>
-<p>设 $dp_{i,j,0/1}$ 表示考虑前 $i$ 个牛/棚，有 $j$ 头牛要分配牛棚但暂时没有分配牛棚，有/无不分配牛棚的牛。</p>
+<p>另外容易发现，一个大小为 <span class="arithmatex">\(p\)</span> 的牛棚可以住任意大小小于等于 <span class="arithmatex">\(p\)</span> 的牛，那么考虑把棚和牛混在一起排序然后 DP 解决。</p>
+<p>设 <span class="arithmatex">\(dp_{i,j,0/1}\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 个牛/棚，有 <span class="arithmatex">\(j\)</span> 头牛要分配牛棚但暂时没有分配牛棚，有/无不分配牛棚的牛。</p>
 <p>首先显然把牛和棚分开处理，转移挺显然的，对于牛：</p>
-<p>$$
+<div class="arithmatex">\[
 dp_{i,j,0}=dp_{i-1,j,0}+dp_{i-1,j,1}+dp_{i-1,j-1,0}\\
 dp_{i,j,1}=dp_{i-1,j-1,1}
-$$</p>
+\]</div>
 <p>对于棚：</p>
-<p>$$
+<div class="arithmatex">\[
 dp_{i,j,0}=dp_{i-1,j+1,0}\times(j+1)\\
 dp_{i,j,1}=dp_{i-1,j+1,1}\times(j+1)+dp_{i-1,j,1}
-$$</p>
-<p>然后答案就是 $dp_{2n,0,0}+dp_{2n,0,1}$。</p>
+\]</div>
+<p>然后答案就是 <span class="arithmatex">\(dp_{2n,0,0}+dp_{2n,0,1}\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

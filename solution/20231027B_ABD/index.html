@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5829,8 +5857,8 @@
 <p>T3 非常复杂，可拓展性低，几乎没人改，就不改了。</p>
 <p><a href="../../files/20231027.rar">密码是通用密码</a></p>
 <h2 id="t1">T1</h2>
-<p>简单题。容易想到 $O(n^3)$ dp。</p>
-<p>具体来说，设状态 $dp_{l,r,k}$ 表示左侧 $[1,l)$，右侧 $(r,n]$ 全拿完了，先手已经在其中拿了 $k$ 个菜，先手是否会赢。由于 $l,r$ 已知我们可以通过奇偶性判断当前是谁的回合。若是先手那么转移就是两个后继状态取或（因为先手肯定会选会赢的那个后继），若是后手转移就是取与（因为他肯定不希望先手赢）。比较简单的记搜。</p>
+<p>简单题。容易想到 <span class="arithmatex">\(O(n^3)\)</span> dp。</p>
+<p>具体来说，设状态 <span class="arithmatex">\(dp_{l,r,k}\)</span> 表示左侧 <span class="arithmatex">\([1,l)\)</span>，右侧 <span class="arithmatex">\((r,n]\)</span> 全拿完了，先手已经在其中拿了 <span class="arithmatex">\(k\)</span> 个菜，先手是否会赢。由于 <span class="arithmatex">\(l,r\)</span> 已知我们可以通过奇偶性判断当前是谁的回合。若是先手那么转移就是两个后继状态取或（因为先手肯定会选会赢的那个后继），若是后手转移就是取与（因为他肯定不希望先手赢）。比较简单的记搜。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5886,7 +5914,7 @@
 <h2 id="t2">T2</h2>
 <p>这道题我记得赛时想了个鬼畜做法。然后寄了。</p>
 <p>首先如果不看操作三那么就是一个线段树模板二。考虑操作三如何处理。</p>
-<p>其实很简单，容易发现若封锁区间对应的 $\log n$ 个结点，那么先把这些边断开。除去断开的部分后，它们会影响的部分恰好是递归寻找它们途中的那些结点。也就是说操作是可以在线段树的 <code>PushUp</code> 中完成的。注意断开后仍在封锁和查询操作时需要进入对应结点。</p>
+<p>其实很简单，容易发现若封锁区间对应的 <span class="arithmatex">\(\log n\)</span> 个结点，那么先把这些边断开。除去断开的部分后，它们会影响的部分恰好是递归寻找它们途中的那些结点。也就是说操作是可以在线段树的 <code>PushUp</code> 中完成的。注意断开后仍在封锁和查询操作时需要进入对应结点。</p>
 <p>那么我们可以把它拆成“封锁”和“解封”两个操作。</p>
 <p>为了维护区间加，需要记区间内<strong>没被封锁的点数</strong>。为了维护区间乘需要维护区间内<strong>没被封锁的总和</strong>。注意查询时被封锁区间仍然会产生贡献。</p>
 <p>然后考虑一些实现细节。首先根据懒标记的理解，它是一些修改的堆积。那么封锁时不会出问题吗？其实不会出问题，因为你封锁和解封时都会提前下传多余的懒标记，所以不会出现封锁期间的懒标记被传入封锁结点或者该下传的没有下传的情况。</p>
@@ -6032,45 +6060,45 @@
 </details>
 <h2 id="t4">T4</h2>
 <p>好题。</p>
-<p>这一类“求前 $k$ 优解”的问题有一个固定的套路。</p>
+<p>这一类“求前 <span class="arithmatex">\(k\)</span> 优解”的问题有一个固定的套路。</p>
 <p>这种问题的做法一般基于一种类似 Dijkstra 的堆贪心。</p>
-<p>记状态集合为 $T$，每个状态  $i\in T$ 的权值为 $val(i)$。</p>
-<p>我们考虑对于每一个状态 $i$，建立形如 $i\to trans(i)$ 的转移。</p>
-<p>其中 $trans(i)$ 为<strong>常数</strong>个可以通过对 $i$ <strong>进行常数次调整</strong>得到的状态，并保证 $val(i)&lt;val(trans(i))$。并且，额外要求若 $j\in trans(i)，\nexists i'\ne i,j\in trans(i')$。即每个状态只能从<strong>一个</strong>状态转移过来。</p>
-<p>容易发现为了满足这个条件，必定要找到一个初始状态 $I$，使得 $val(I)$ <strong>最小</strong>。且可以以它为起点到达所有合法状态。</p>
-<p>容易发现这样的转移构成了一棵外向树的形式，那么我们就可以建一个堆，初始只有根结点，然后每次取出堆顶 $t$ 加入 $trans(t)$。就能在 $O(k\log k)$ 的时间内求解。</p>
+<p>记状态集合为 <span class="arithmatex">\(T\)</span>，每个状态  <span class="arithmatex">\(i\in T\)</span> 的权值为 <span class="arithmatex">\(val(i)\)</span>。</p>
+<p>我们考虑对于每一个状态 <span class="arithmatex">\(i\)</span>，建立形如 <span class="arithmatex">\(i\to trans(i)\)</span> 的转移。</p>
+<p>其中 <span class="arithmatex">\(trans(i)\)</span> 为<strong>常数</strong>个可以通过对 <span class="arithmatex">\(i\)</span> <strong>进行常数次调整</strong>得到的状态，并保证 <span class="arithmatex">\(val(i)&lt;val(trans(i))\)</span>。并且，额外要求若 <span class="arithmatex">\(j\in trans(i)，\nexists i'\ne i,j\in trans(i')\)</span>。即每个状态只能从<strong>一个</strong>状态转移过来。</p>
+<p>容易发现为了满足这个条件，必定要找到一个初始状态 <span class="arithmatex">\(I\)</span>，使得 <span class="arithmatex">\(val(I)\)</span> <strong>最小</strong>。且可以以它为起点到达所有合法状态。</p>
+<p>容易发现这样的转移构成了一棵外向树的形式，那么我们就可以建一个堆，初始只有根结点，然后每次取出堆顶 <span class="arithmatex">\(t\)</span> 加入 <span class="arithmatex">\(trans(t)\)</span>。就能在 <span class="arithmatex">\(O(k\log k)\)</span> 的时间内求解。</p>
 <p>所以这类问题的重点通常在于如何构建<strong>唯一的不漏转移</strong>，最基本的一种考量是贪心地扩展代价差尽量小的，再有就是考虑进行一些钦定来去重之类的。</p>
-<p>另外，此处状态的定义和 DP 不同，两个长得一样的状态可能是本质不同的。此处定义状态只是为了方便 $trans$ 的设计，你或许可以在后文看到例子。</p>
+<p>另外，此处状态的定义和 DP 不同，两个长得一样的状态可能是本质不同的。此处定义状态只是为了方便 <span class="arithmatex">\(trans\)</span> 的设计，你或许可以在后文看到例子。</p>
 <hr />
-<p>首先从简化版本的问题开始考虑如何构建 $trans$：</p>
+<p>首先从简化版本的问题开始考虑如何构建 <span class="arithmatex">\(trans\)</span>：</p>
 <ol>
-<li>只有 $1$ 类商品，必须选择恰好 $1$ 个。</li>
+<li>只有 <span class="arithmatex">\(1\)</span> 类商品，必须选择恰好 <span class="arithmatex">\(1\)</span> 个。</li>
 </ol>
-<p>这个太简单了，先按价格排序，设一个状态为 $x$，$trans(x)$ 就是 $\begin{Bmatrix}x+1\end{Bmatrix}$，初始状态即 $x=1$。</p>
+<p>这个太简单了，先按价格排序，设一个状态为 <span class="arithmatex">\(x\)</span>，<span class="arithmatex">\(trans(x)\)</span> 就是 <span class="arithmatex">\(\begin{Bmatrix}x+1\end{Bmatrix}\)</span>，初始状态即 <span class="arithmatex">\(x=1\)</span>。</p>
 <ol start="2">
-<li>只有 $1$ 类商品，必须选择恰好 $k$ 个（可以把 $k$ 视作常数）。</li>
+<li>只有 <span class="arithmatex">\(1\)</span> 类商品，必须选择恰好 <span class="arithmatex">\(k\)</span> 个（可以把 <span class="arithmatex">\(k\)</span> 视作常数）。</li>
 </ol>
-<p>仍按价格排序，一个简单的想法是记一个状态 $X=(x_1,x_2,x_3\dots,x_k)$ 表示选择的 $k$ 个商品分别是什么。并且钦定 $x_1&lt; x_2&lt; x_3\dots &lt;x_k$。初始状态即 $I=(1,2,3\dots k)$，$trans$ 就是把每个 $x_i$ 分别 $+1$，注意不要越过 $x_{i+1}$。</p>
-<p>但是这样有个问题，显然会算重。比如当 $k=2$，$(2,4)$ 状态可以从 $(1,4)$ 和 $(2,3)$ 两种状态转移过来。考虑通过某种钦定使得其中一种转移失效。</p>
-<p>对于 $k=2$，容易想到可以在动了 $x_1$ 之后就不动 $x_2$，即对于每个状态额外记一个 $p$，$(x_1,x_2,p)$ 表示当前 $x_p$ 在动。初始状态就是 $(1,2,2)$，然后对于 $p=2$，$trans$ 是 $(x_1,x_2+1,2)$ 和 $(x_1+1,x_2,1)$（注意这里要先移动 $x_1$，因为 $(x_1,x_2,1)$ 和 $(x_1,x_2,2)$ 其实是本质相同的）。注意 $x_1$ 不能越过 $x_2$。容易发现这样就不重不漏了。</p>
-<p>然后推广到一般情况。类似于 $k=2$，于每个状态，都有一个前缀 $x_1=1,x_2=2\dots,x_p=p$（$p$ 可以为 $0$），然后 $x_{p+1}$ 正在移动中，$x_{p+2}\sim x_{k}$ 已经固定。在 $k=2$ 的情况要注意不能越过 $x_2$，那么这里就要注意不能越过 $x_{p+2}$。容易想到设状态 $(p,y,z)$ 表示前缀 $1\sim p$ 没动过，当前正在动 $x_{p+1}$，且 $x_{p+1}=y$，$x_{p+2}=z$ 的代价。容易发现本质不同的状态可能具有相同的表示，但是刚刚说过，我们只关心 $trans$ 的构造，所以不用担心。然后 $trans$ 就是 $(p,y+1,z)$ 和 $(p,p+1,y)$。初始状态是 $(k-1,k,\infty)$，注意边界条件。</p>
+<p>仍按价格排序，一个简单的想法是记一个状态 <span class="arithmatex">\(X=(x_1,x_2,x_3\dots,x_k)\)</span> 表示选择的 <span class="arithmatex">\(k\)</span> 个商品分别是什么。并且钦定 <span class="arithmatex">\(x_1&lt; x_2&lt; x_3\dots &lt;x_k\)</span>。初始状态即 <span class="arithmatex">\(I=(1,2,3\dots k)\)</span>，<span class="arithmatex">\(trans\)</span> 就是把每个 <span class="arithmatex">\(x_i\)</span> 分别 <span class="arithmatex">\(+1\)</span>，注意不要越过 <span class="arithmatex">\(x_{i+1}\)</span>。</p>
+<p>但是这样有个问题，显然会算重。比如当 <span class="arithmatex">\(k=2\)</span>，<span class="arithmatex">\((2,4)\)</span> 状态可以从 <span class="arithmatex">\((1,4)\)</span> 和 <span class="arithmatex">\((2,3)\)</span> 两种状态转移过来。考虑通过某种钦定使得其中一种转移失效。</p>
+<p>对于 <span class="arithmatex">\(k=2\)</span>，容易想到可以在动了 <span class="arithmatex">\(x_1\)</span> 之后就不动 <span class="arithmatex">\(x_2\)</span>，即对于每个状态额外记一个 <span class="arithmatex">\(p\)</span>，<span class="arithmatex">\((x_1,x_2,p)\)</span> 表示当前 <span class="arithmatex">\(x_p\)</span> 在动。初始状态就是 <span class="arithmatex">\((1,2,2)\)</span>，然后对于 <span class="arithmatex">\(p=2\)</span>，<span class="arithmatex">\(trans\)</span> 是 <span class="arithmatex">\((x_1,x_2+1,2)\)</span> 和 <span class="arithmatex">\((x_1+1,x_2,1)\)</span>（注意这里要先移动 <span class="arithmatex">\(x_1\)</span>，因为 <span class="arithmatex">\((x_1,x_2,1)\)</span> 和 <span class="arithmatex">\((x_1,x_2,2)\)</span> 其实是本质相同的）。注意 <span class="arithmatex">\(x_1\)</span> 不能越过 <span class="arithmatex">\(x_2\)</span>。容易发现这样就不重不漏了。</p>
+<p>然后推广到一般情况。类似于 <span class="arithmatex">\(k=2\)</span>，于每个状态，都有一个前缀 <span class="arithmatex">\(x_1=1,x_2=2\dots,x_p=p\)</span>（<span class="arithmatex">\(p\)</span> 可以为 <span class="arithmatex">\(0\)</span>），然后 <span class="arithmatex">\(x_{p+1}\)</span> 正在移动中，<span class="arithmatex">\(x_{p+2}\sim x_{k}\)</span> 已经固定。在 <span class="arithmatex">\(k=2\)</span> 的情况要注意不能越过 <span class="arithmatex">\(x_2\)</span>，那么这里就要注意不能越过 <span class="arithmatex">\(x_{p+2}\)</span>。容易想到设状态 <span class="arithmatex">\((p,y,z)\)</span> 表示前缀 <span class="arithmatex">\(1\sim p\)</span> 没动过，当前正在动 <span class="arithmatex">\(x_{p+1}\)</span>，且 <span class="arithmatex">\(x_{p+1}=y\)</span>，<span class="arithmatex">\(x_{p+2}=z\)</span> 的代价。容易发现本质不同的状态可能具有相同的表示，但是刚刚说过，我们只关心 <span class="arithmatex">\(trans\)</span> 的构造，所以不用担心。然后 <span class="arithmatex">\(trans\)</span> 就是 <span class="arithmatex">\((p,y+1,z)\)</span> 和 <span class="arithmatex">\((p,p+1,y)\)</span>。初始状态是 <span class="arithmatex">\((k-1,k,\infty)\)</span>，注意边界条件。</p>
 <ol start="3">
-<li>只有 $1$ 类商品，需要选择 $[l,r]$ 个。</li>
+<li>只有 <span class="arithmatex">\(1\)</span> 类商品，需要选择 <span class="arithmatex">\([l,r]\)</span> 个。</li>
 </ol>
-<p>其实很简单，把初始状态设为 $(l-1,l,\infty)$，然后给满足 $y=p+1,z=\infty$ 的状态加一个 $(p+1,y+1,\infty)$ 的 $trans$ 即可，其余部分和情况 $2$ 类似。</p>
+<p>其实很简单，把初始状态设为 <span class="arithmatex">\((l-1,l,\infty)\)</span>，然后给满足 <span class="arithmatex">\(y=p+1,z=\infty\)</span> 的状态加一个 <span class="arithmatex">\((p+1,y+1,\infty)\)</span> 的 <span class="arithmatex">\(trans\)</span> 即可，其余部分和情况 <span class="arithmatex">\(2\)</span> 类似。</p>
 <ol start="4">
-<li>有 $m$ 类商品，每种需要选择 $1$ 个。</li>
+<li>有 <span class="arithmatex">\(m\)</span> 类商品，每种需要选择 <span class="arithmatex">\(1\)</span> 个。</li>
 </ol>
-<p>依旧对每一类按价格排序，一个状态 $X=(x_1,x_2,x_3\dots x_m)$。容易想到初始状态就是每种选第一个，但是 $trans$ 不太好设计。依旧考虑先简单设计再用钦定的方式去重。</p>
-<p>一个容易想到的简单设计就是每个种类选下一个，但是显然会算重。那么仿照之前的，可以钦定一个指针 $p$，每次只改 $p$ 或者把 $p$ 移向下一个。这样就不会算重了，而且 $trans$ 的大小也变小，更容易转移了。</p>
-<p>但是还有个问题，我们的状态是 $(X,p)$，容易发现 $X$ 相同，$p$ 不同的两状态是本质相同的。如何解决呢？除初始状态外，我们可以钦定 $x_p&gt;1$，然后新增一个 $trans$ 为 $(x_p-1,x_{p+1}+1,p+1)$（这里省略了其它东西，但应该能看懂），这样就不会有问题了。</p>
+<p>依旧对每一类按价格排序，一个状态 <span class="arithmatex">\(X=(x_1,x_2,x_3\dots x_m)\)</span>。容易想到初始状态就是每种选第一个，但是 <span class="arithmatex">\(trans\)</span> 不太好设计。依旧考虑先简单设计再用钦定的方式去重。</p>
+<p>一个容易想到的简单设计就是每个种类选下一个，但是显然会算重。那么仿照之前的，可以钦定一个指针 <span class="arithmatex">\(p\)</span>，每次只改 <span class="arithmatex">\(p\)</span> 或者把 <span class="arithmatex">\(p\)</span> 移向下一个。这样就不会算重了，而且 <span class="arithmatex">\(trans\)</span> 的大小也变小，更容易转移了。</p>
+<p>但是还有个问题，我们的状态是 <span class="arithmatex">\((X,p)\)</span>，容易发现 <span class="arithmatex">\(X\)</span> 相同，<span class="arithmatex">\(p\)</span> 不同的两状态是本质相同的。如何解决呢？除初始状态外，我们可以钦定 <span class="arithmatex">\(x_p&gt;1\)</span>，然后新增一个 <span class="arithmatex">\(trans\)</span> 为 <span class="arithmatex">\((x_p-1,x_{p+1}+1,p+1)\)</span>（这里省略了其它东西，但应该能看懂），这样就不会有问题了。</p>
 <ol start="5">
-<li>有 $m$ 类商品，每种需要选择 $[l_i,r_i]$ 个。</li>
+<li>有 <span class="arithmatex">\(m\)</span> 类商品，每种需要选择 <span class="arithmatex">\([l_i,r_i]\)</span> 个。</li>
 </ol>
 <p>这就是原问题了。</p>
-<p>考虑对每一类商品进行一个 $1\to 3$ 的转化，然后就做完了。</p>
+<p>考虑对每一类商品进行一个 <span class="arithmatex">\(1\to 3\)</span> 的转化，然后就做完了。</p>
 <p>为什么呢？考虑你可以把每一种商品看做一个黑盒，你每次只需要找到“下一小的方案”，并不关心它具体是怎么得到的。</p>
-<p>每次对每一个商品的转化是 $O(\log k)$ 的，总复杂度大概是 $O(k\log^2k)$，这个上界貌似是卡不到的，因为可以对每一类商品记忆化已经求出来的前几小，大部分转移就是单 $\log$ 的。另外注意边界问题。</p>
+<p>每次对每一个商品的转化是 <span class="arithmatex">\(O(\log k)\)</span> 的，总复杂度大概是 <span class="arithmatex">\(O(k\log^2k)\)</span>，这个上界貌似是卡不到的，因为可以对每一类商品记忆化已经求出来的前几小，大部分转移就是单 <span class="arithmatex">\(\log\)</span> 的。另外注意边界问题。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

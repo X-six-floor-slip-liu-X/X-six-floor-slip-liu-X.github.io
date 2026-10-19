@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5883,31 +5911,31 @@
 <h2 id="_1">概述</h2>
 <p>顾名思义，扩展 KMP 即 KMP 算法的扩展。但是总所周知 KMP 其实叫前缀函数，只是国内喜欢叫它 KMP 算法。同理，国外一般称扩展 KMP 算法为 Z Algorithm（Z 算法），但这都不太重要。</p>
 <blockquote>
-<p>约定：字符串下标从 $0$ 开始</p>
+<p>约定：字符串下标从 <span class="arithmatex">\(0\)</span> 开始</p>
 </blockquote>
 <h2 id="_2">定义</h2>
-<p>对于一个长度为 $n$ 的字符串 $s$，定义函数 $z_i$ 表示 $s$ 和 $s$ 以 $i$ 开头的后缀的 LCP 的长度，其中 $z_i$ 被称为 Z 函数，特别地，$z_0=0$。</p>
-<p>但是我不是这样理解的，为了实现方便，我定义了 $nxt_i$，大部分和 $z$ 相同，唯一不同在于 $nxt_0=n$。</p>
+<p>对于一个长度为 <span class="arithmatex">\(n\)</span> 的字符串 <span class="arithmatex">\(s\)</span>，定义函数 <span class="arithmatex">\(z_i\)</span> 表示 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(s\)</span> 以 <span class="arithmatex">\(i\)</span> 开头的后缀的 LCP 的长度，其中 <span class="arithmatex">\(z_i\)</span> 被称为 Z 函数，特别地，<span class="arithmatex">\(z_0=0\)</span>。</p>
+<p>但是我不是这样理解的，为了实现方便，我定义了 <span class="arithmatex">\(nxt_i\)</span>，大部分和 <span class="arithmatex">\(z\)</span> 相同，唯一不同在于 <span class="arithmatex">\(nxt_0=n\)</span>。</p>
 <h2 id="_3">求解</h2>
 <p>我曾经说过我对字符串算法的理解：</p>
 <blockquote>
 <p>一堆看起来毫无卵用其实非常有用的东西。</p>
 </blockquote>
 <p>所以我们先不讲用法，而是先讲求法。</p>
-<p>首先有个显然的 $O(n^2)$ 暴力，在此不多赘述了。</p>
-<p><del>观察模板题数据范围可知</del> 扩展 KMP 有 $O(n)$ 的求法：</p>
-<p>首先回顾一下我们是怎么求 KMP 的，先不管推出算法的思路是什么，最终算法就是利用先前求出的 $nxt_{0\le j&lt; i}$ 求出 $nxt_i$。那么我们能否用类似的方法求出扩展 KMP 的 $nxt_i$ 呢？答案是肯定的。</p>
-<p>首先，假设我们已经求出了 $0\le j&lt;i$ 的 $nxt_j$，那么肯定存在一个 $0\le k&lt;i$ 使得 $k+nxt_k-1$ 最大化，设这个最大的 $k+nxt_k-1=p$，这里暂且假定 $p\ge i$，我们画个图理解：</p>
+<p>首先有个显然的 <span class="arithmatex">\(O(n^2)\)</span> 暴力，在此不多赘述了。</p>
+<p><del>观察模板题数据范围可知</del> 扩展 KMP 有 <span class="arithmatex">\(O(n)\)</span> 的求法：</p>
+<p>首先回顾一下我们是怎么求 KMP 的，先不管推出算法的思路是什么，最终算法就是利用先前求出的 <span class="arithmatex">\(nxt_{0\le j&lt; i}\)</span> 求出 <span class="arithmatex">\(nxt_i\)</span>。那么我们能否用类似的方法求出扩展 KMP 的 <span class="arithmatex">\(nxt_i\)</span> 呢？答案是肯定的。</p>
+<p>首先，假设我们已经求出了 <span class="arithmatex">\(0\le j&lt;i\)</span> 的 <span class="arithmatex">\(nxt_j\)</span>，那么肯定存在一个 <span class="arithmatex">\(0\le k&lt;i\)</span> 使得 <span class="arithmatex">\(k+nxt_k-1\)</span> 最大化，设这个最大的 <span class="arithmatex">\(k+nxt_k-1=p\)</span>，这里暂且假定 <span class="arithmatex">\(p\ge i\)</span>，我们画个图理解：</p>
 <p><img alt="图示 1" src="../../../img/string_exKMP_1.png" /></p>
 <p>那么根据定义，上图中两段绿色线段是相等的。所以可以得出下图两段蓝色线段是相等的。</p>
 <p><img alt="图示 2" src="../../../img/string_exKMP_2.png" /></p>
-<p>我们设 $l=i-k$，容易发现 $l$ 就是左边那段蓝色线段的开头。</p>
-<p>那么容易想到 $nxt_l$ 可能有什么性质，我们分情况讨论一下。</p>
+<p>我们设 <span class="arithmatex">\(l=i-k\)</span>，容易发现 <span class="arithmatex">\(l\)</span> 就是左边那段蓝色线段的开头。</p>
+<p>那么容易想到 <span class="arithmatex">\(nxt_l\)</span> 可能有什么性质，我们分情况讨论一下。</p>
 <p><img alt="图示 3" src="../../../img/string_exKMP_3.png" /></p>
-<p>首先上面的情况，$nxt_l\le p-i$，这种情况下显然 $nxt_i=nxt_l$。</p>
-<p>另一种情况，我们无法判断最后粉色线段冒出绿色线段的部分匹配的有多长，但无论如何 $i$ 都会成为新的 $k$（根据定义），那么 $p$ 只会单调向右移动，可以直接暴力移动 $p$ 求出 $nxt_i$。</p>
-<p>然后我们就可以考虑 $p&lt;i$ 的情况了，容易发现这直接可以相当于图 $3$ 下面的那种情况，就不多赘述了。</p>
-<p>复杂度 $O(n)$。</p>
+<p>首先上面的情况，<span class="arithmatex">\(nxt_l\le p-i\)</span>，这种情况下显然 <span class="arithmatex">\(nxt_i=nxt_l\)</span>。</p>
+<p>另一种情况，我们无法判断最后粉色线段冒出绿色线段的部分匹配的有多长，但无论如何 <span class="arithmatex">\(i\)</span> 都会成为新的 <span class="arithmatex">\(k\)</span>（根据定义），那么 <span class="arithmatex">\(p\)</span> 只会单调向右移动，可以直接暴力移动 <span class="arithmatex">\(p\)</span> 求出 <span class="arithmatex">\(nxt_i\)</span>。</p>
+<p>然后我们就可以考虑 <span class="arithmatex">\(p&lt;i\)</span> 的情况了，容易发现这直接可以相当于图 <span class="arithmatex">\(3\)</span> 下面的那种情况，就不多赘述了。</p>
+<p>复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">getnxt</span><span class="p">(){</span>
@@ -5930,7 +5958,7 @@
 </details>
 <h2 id="_4">例题</h2>
 <h3 id="_5">字符串匹配</h3>
-<p>首先类似于普通的 KMP，exKMP 也可以做字符串匹配，具体来说，可以类似于 $nxt$ 的求法，求出模式串和文本串每个后缀的 LCP（类比普通 KMP），代码类似 $nxt$ 数组的求法。</p>
+<p>首先类似于普通的 KMP，exKMP 也可以做字符串匹配，具体来说，可以类似于 <span class="arithmatex">\(nxt\)</span> 的求法，求出模式串和文本串每个后缀的 LCP（类比普通 KMP），代码类似 <span class="arithmatex">\(nxt\)</span> 数组的求法。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">getf</span><span class="p">(){</span>
@@ -5953,17 +5981,17 @@
 </details>
 <h3 id="p7114-noip2020">P7114 [NOIP2020] 字符串匹配</h3>
 <p><a href="https://www.luogu.com.cn/problem/P7114">传送门</a></p>
-<p>题意就是给你一个字符串，让你求出把字符串分为 $(AB)^iC$ 的方案数，其中 $A^i$ 表示把字符串 $A$ 循环 $i$ 遍，且要求 $A$ 中出现奇数次的字符个数小于 $C$。</p>
-<p>先不考虑 $A$ 中出现奇数次的字符个数小于 $C$ 的条件，那么我们可以考虑枚举 $AB$ 及其循环次数。</p>
-<p>这个问题就可以用 exKMP 解决（和 KMP 求出字符串最短循环节长度类似），先说结论，字符串 $s$ 中以长度为 $i$ 的前缀为循环节的前缀个数为：</p>
-<p>$$\left\lfloor\frac{nxt_i}{i}\right\rfloor+1$$</p>
+<p>题意就是给你一个字符串，让你求出把字符串分为 <span class="arithmatex">\((AB)^iC\)</span> 的方案数，其中 <span class="arithmatex">\(A^i\)</span> 表示把字符串 <span class="arithmatex">\(A\)</span> 循环 <span class="arithmatex">\(i\)</span> 遍，且要求 <span class="arithmatex">\(A\)</span> 中出现奇数次的字符个数小于 <span class="arithmatex">\(C\)</span>。</p>
+<p>先不考虑 <span class="arithmatex">\(A\)</span> 中出现奇数次的字符个数小于 <span class="arithmatex">\(C\)</span> 的条件，那么我们可以考虑枚举 <span class="arithmatex">\(AB\)</span> 及其循环次数。</p>
+<p>这个问题就可以用 exKMP 解决（和 KMP 求出字符串最短循环节长度类似），先说结论，字符串 <span class="arithmatex">\(s\)</span> 中以长度为 <span class="arithmatex">\(i\)</span> 的前缀为循环节的前缀个数为：</p>
+<div class="arithmatex">\[\left\lfloor\frac{nxt_i}{i}\right\rfloor+1\]</div>
 <hr />
 <p>证明：</p>
 <p>考虑画图：</p>
 <p><img alt="图示 4" src="../../../img/string_exKMP_4.png" /></p>
-<p>假如图中的绿色线段是一个 $nxt$，那么显然，两绿色段相等，因此两青色段相等，因此两橙色与青色段均相等，那么显然青色段就是一个循环节，而最多的循环次数为 $3$ 次，是 $\left\lfloor\frac{nxt_i}{i}\right\rfloor+1$。</p>
+<p>假如图中的绿色线段是一个 <span class="arithmatex">\(nxt\)</span>，那么显然，两绿色段相等，因此两青色段相等，因此两橙色与青色段均相等，那么显然青色段就是一个循环节，而最多的循环次数为 <span class="arithmatex">\(3\)</span> 次，是 <span class="arithmatex">\(\left\lfloor\frac{nxt_i}{i}\right\rfloor+1\)</span>。</p>
 <hr />
-<p>然后考虑字符出现的次数，由于循环节是相等的，那么 $c$ 中字符出现次数的奇偶性只与 $AB$ 循环次数的奇偶性有关，用桶预处理一下每个前后缀奇数个数字符出现次数，分奇偶讨论后树状数组维护即可，具体方法参考原题题解。</p>
+<p>然后考虑字符出现的次数，由于循环节是相等的，那么 <span class="arithmatex">\(c\)</span> 中字符出现次数的奇偶性只与 <span class="arithmatex">\(AB\)</span> 循环次数的奇偶性有关，用桶预处理一下每个前后缀奇数个数字符出现次数，分奇偶讨论后树状数组维护即可，具体方法参考原题题解。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">const</span><span class="w"> </span><span class="n">i64</span><span class="w"> </span><span class="n">N</span><span class="o">=</span><span class="mf">2e6</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">inf</span><span class="o">=</span><span class="mh">0x3f3f3f3f</span><span class="p">;</span>

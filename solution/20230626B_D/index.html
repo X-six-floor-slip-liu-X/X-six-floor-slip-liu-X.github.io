@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3370,7 +3398,7 @@
   <a href="#siwcap-slcap-sr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        $S(i)=W\cap S(l)\cap S(r)$
+        \(S(i)=W\cap S(l)\cap S(r)\)
       
     </span>
   </a>
@@ -3381,7 +3409,7 @@
   <a href="#siwcup-slcup-sr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        $S(i)=W\cup S(l)\cup S(r)$
+        \(S(i)=W\cup S(l)\cup S(r)\)
       
     </span>
   </a>
@@ -3392,7 +3420,7 @@
   <a href="#siw-cap-slcupwcap-srcup-slcap-sr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        $S(i)=(W \cap S(l))\cup(W\cap S(r))\cup (S(l)\cap S(r))$
+        \(S(i)=(W \cap S(l))\cup(W\cap S(r))\cup (S(l)\cap S(r))\)
       
     </span>
   </a>
@@ -5815,7 +5843,7 @@
   <a href="#siwcap-slcap-sr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        $S(i)=W\cap S(l)\cap S(r)$
+        \(S(i)=W\cap S(l)\cap S(r)\)
       
     </span>
   </a>
@@ -5826,7 +5854,7 @@
   <a href="#siwcup-slcup-sr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        $S(i)=W\cup S(l)\cup S(r)$
+        \(S(i)=W\cup S(l)\cup S(r)\)
       
     </span>
   </a>
@@ -5837,7 +5865,7 @@
   <a href="#siw-cap-slcupwcap-srcup-slcap-sr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        $S(i)=(W \cap S(l))\cup(W\cap S(r))\cup (S(l)\cap S(r))$
+        \(S(i)=(W \cap S(l))\cup(W\cap S(r))\cup (S(l)\cap S(r))\)
       
     </span>
   </a>
@@ -5887,26 +5915,26 @@
 <p>由于讲题的人（指 @<a href="https://www.luogu.com.cn/user/932169">Caiest_Oier</a>）自己没有写代码有些实现细节他没搞清楚，讲得有点复杂，导致被坑了。我附的代码里的注释的内容就是具体怎么被坑的，大家看个乐子就行了o(╥﹏╥)o。</p>
 <h2 id="_3">正文</h2>
 <p>首先看到这种题肯定考虑树形 DP，由于操作二的存在只用子树内的信息是无法表示一个状态的，故 DP 状态的定义要结合子树外的信息。</p>
-<p>容易想到设 $dp_{i,j}$ 表示 $i$ 的祖先的操作二增量总和在模 $K$ 意义下为 $j$，$i$ 的子树内还需要至少多少次操作。</p>
+<p>容易想到设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示 <span class="arithmatex">\(i\)</span> 的祖先的操作二增量总和在模 <span class="arithmatex">\(K\)</span> 意义下为 <span class="arithmatex">\(j\)</span>，<span class="arithmatex">\(i\)</span> 的子树内还需要至少多少次操作。</p>
 <blockquote>
-<p>注：本文除 DP 转移中的加法外其余加法计算均在模 $K$ 意义下进行。</p>
+<p>注：本文除 DP 转移中的加法外其余加法计算均在模 <span class="arithmatex">\(K\)</span> 意义下进行。</p>
 </blockquote>
-<p>首先不考虑对 $i$ 进行操作二，易得转移方程：</p>
-<p>$$dp_{i,j}=dp_{ls(i),j}+dp_{rs(i),j}+w(i,j)$$</p>
-<p>其中 $ls(i),rs(i)$ 分别表示结点 $i$ 的左右子树，下同。</p>
-<p>这时候眼尖的读者（<del>这不是一眼就看出来吗</del>）就会发现我们在转移方程的后面加了一个 $w(i,j)$，这表示结点 $i$ 在加了 $j$ 后是否还需要进行一次操作 $1$ 使其合法。</p>
-<p>然后再考虑操作二，容易发现一次操作二可以使 $dp_{i,j}$ 变成 $dp_{i,k}+1$，易得转移方程。</p>
-<p>$$
+<p>首先不考虑对 <span class="arithmatex">\(i\)</span> 进行操作二，易得转移方程：</p>
+<div class="arithmatex">\[dp_{i,j}=dp_{ls(i),j}+dp_{rs(i),j}+w(i,j)\]</div>
+<p>其中 <span class="arithmatex">\(ls(i),rs(i)\)</span> 分别表示结点 <span class="arithmatex">\(i\)</span> 的左右子树，下同。</p>
+<p>这时候眼尖的读者（<del>这不是一眼就看出来吗</del>）就会发现我们在转移方程的后面加了一个 <span class="arithmatex">\(w(i,j)\)</span>，这表示结点 <span class="arithmatex">\(i\)</span> 在加了 <span class="arithmatex">\(j\)</span> 后是否还需要进行一次操作 <span class="arithmatex">\(1\)</span> 使其合法。</p>
+<p>然后再考虑操作二，容易发现一次操作二可以使 <span class="arithmatex">\(dp_{i,j}\)</span> 变成 <span class="arithmatex">\(dp_{i,k}+1\)</span>，易得转移方程。</p>
+<div class="arithmatex">\[
 dp_{i,j}=\begin{cases}
-\min\limits_{k=0}^{K-1}{dp_{i,k}}+1,&amp;dp_{i,j}\ne \min\limits_{k=0}^{K-1}{dp_{i,k}}\\
-dp_{i,j} &amp;dp_{i,j}=\min\limits_{k=0}^{K-1}{dp_{i,k}}
+\min\limits_{k=0}^{K-1}\{dp_{i,k}\}+1,&amp;dp_{i,j}\ne \min\limits_{k=0}^{K-1}\{dp_{i,k}\}\\
+dp_{i,j} &amp;dp_{i,j}=\min\limits_{k=0}^{K-1}\{dp_{i,k}\}
 \end{cases}
-$$</p>
-<p>然后你直接 DP 就能获得 $30pts$ 的高分（本题赛时最高分 $5pts$，你推出这个 DP 式子就可以薄纱全场 $11$ 人），复杂度 $O(nK)$。</p>
-<p>考虑如何优化，容易发现对于同一个 $i$，$dp_{i,j}$ 只有两种取值，一种是 $\min_{k=0}^{K-1}{dp_{i,k}}$，另一种是 $\min_{k=0}^{K-1}{dp_{i,k}}+1$，那么我们可以对每个结点只存一个最小值，然后用某种东西存下能取到最小值的区间，设这个最小值为 $f_i$，考虑如何转移。</p>
-<p>另外容易发现，对于同一个 $i$，$w(i,j)$ 能取到最小值的区间只可能有一个或者两个，这个性质后面有用。</p>
-<p>设 $f_{ls(i)},f_{rs(i)},f_{i}$ 能取到最小值的区间分别是 $S(l),S(r),S(i)$，又设 $w(i,j)=0$ 的区间为 $W$，易得转移方程：</p>
-<p>$$
+\]</div>
+<p>然后你直接 DP 就能获得 <span class="arithmatex">\(30pts\)</span> 的高分（本题赛时最高分 <span class="arithmatex">\(5pts\)</span>，你推出这个 DP 式子就可以薄纱全场 <span class="arithmatex">\(11\)</span> 人），复杂度 <span class="arithmatex">\(O(nK)\)</span>。</p>
+<p>考虑如何优化，容易发现对于同一个 <span class="arithmatex">\(i\)</span>，<span class="arithmatex">\(dp_{i,j}\)</span> 只有两种取值，一种是 <span class="arithmatex">\(\min_{k=0}^{K-1}\{dp_{i,k}\}\)</span>，另一种是 <span class="arithmatex">\(\min_{k=0}^{K-1}\{dp_{i,k}\}+1\)</span>，那么我们可以对每个结点只存一个最小值，然后用某种东西存下能取到最小值的区间，设这个最小值为 <span class="arithmatex">\(f_i\)</span>，考虑如何转移。</p>
+<p>另外容易发现，对于同一个 <span class="arithmatex">\(i\)</span>，<span class="arithmatex">\(w(i,j)\)</span> 能取到最小值的区间只可能有一个或者两个，这个性质后面有用。</p>
+<p>设 <span class="arithmatex">\(f_{ls(i)},f_{rs(i)},f_{i}\)</span> 能取到最小值的区间分别是 <span class="arithmatex">\(S(l),S(r),S(i)\)</span>，又设 <span class="arithmatex">\(w(i,j)=0\)</span> 的区间为 <span class="arithmatex">\(W\)</span>，易得转移方程：</p>
+<div class="arithmatex">\[
 \begin{cases}
 f_{i}=f_{ls(i)}+f_{rs(i)},
 &amp;S(i)=W\cap S(l)\cap S(r);
@@ -5918,16 +5946,16 @@ f_{i}=f_{ls(i)}+f_{rs(i)}+1,
 &amp;S(i)=(W \cap S(l))\cup(W\cap S(r))\cup (S(l)\cap S(r)),
 &amp; else
 \end{cases}
-$$</p>
+\]</div>
 <p><del>自己想办法看，太长了我也没办法，你可以试试 ctrl+A。</del></p>
 <p>很好理解，最小值肯定是三个集合尽量多取最小值的位置，然后自己画图推一推就行了。</p>
-<p>假如你用 <code>bitset</code> 实现的话，复杂度是 $O(\frac{nK}{w})$，可以得 $50pts$。</p>
+<p>假如你用 <code>bitset</code> 实现的话，复杂度是 <span class="arithmatex">\(O(\frac{nK}{w})\)</span>，可以得 <span class="arithmatex">\(50pts\)</span>。</p>
 <p>接下来隆重介绍正解：<code>set</code> 存二元组模拟区间的交和并。</p>
 <p><del>然后这十五个字花了我 6.5kb 的代码来实现。</del></p>
-<p>首先暴力合并是 $O(n^2)$ 的，但合并集合我们还有一种优化的方法，<strong>启发式合并</strong>，但是这要求我们单次合并的复杂度是 $O(\min(|S_1|,|S_2|))$，由于求交需要遍历两个集合这显然是做不到的，但是由于最初所有集合内最多有总共 $2n$ 个二元组，而一个二元组被删掉了就再也不会回来了，对删除进行势能分析，复杂度是 $O(n)$，所以我们只需要考虑修改的复杂度，故可以做到 $O(\min(|S_1|,|S_2|))$。</p>
-<p>关于如何实现，我们分别讲，以下默认 $|S(l)|\le|S(r)|$。</p>
-<h3 id="siwcap-slcap-sr">$S(i)=W\cap S(l)\cap S(r)$</h3>
-<p>首先容易发现 $W$ 中的元素非常少，所以我们可以在遍历 $S(l)$ 的时候直接和 $W$ 取交，代码片段如下（变量名和叙述不统一但是懒得改了）：</p>
+<p>首先暴力合并是 <span class="arithmatex">\(O(n^2)\)</span> 的，但合并集合我们还有一种优化的方法，<strong>启发式合并</strong>，但是这要求我们单次合并的复杂度是 <span class="arithmatex">\(O(\min(|S_1|,|S_2|))\)</span>，由于求交需要遍历两个集合这显然是做不到的，但是由于最初所有集合内最多有总共 <span class="arithmatex">\(2n\)</span> 个二元组，而一个二元组被删掉了就再也不会回来了，对删除进行势能分析，复杂度是 <span class="arithmatex">\(O(n)\)</span>，所以我们只需要考虑修改的复杂度，故可以做到 <span class="arithmatex">\(O(\min(|S_1|,|S_2|))\)</span>。</p>
+<p>关于如何实现，我们分别讲，以下默认 <span class="arithmatex">\(|S(l)|\le|S(r)|\)</span>。</p>
+<h3 id="siwcap-slcap-sr"><span class="arithmatex">\(S(i)=W\cap S(l)\cap S(r)\)</span></h3>
+<p>首先容易发现 <span class="arithmatex">\(W\)</span> 中的元素非常少，所以我们可以在遍历 <span class="arithmatex">\(S(l)\)</span> 的时候直接和 <span class="arithmatex">\(W\)</span> 取交，代码片段如下（变量名和叙述不统一但是懒得改了）：</p>
 <details class="success">
 <summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">bool</span><span class="w"> </span><span class="nf">_ad0</span><span class="p">(</span><span class="n">set</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="n">set</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="n">set</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">){</span><span class="c1">// (1)!</span>
@@ -5962,7 +5990,7 @@ $$</p>
 <li>这个函数是用来判断三个集合有没有交的。</li>
 </ol>
 </details>
-<p>然后考虑如何实现合并操作，思路很简单，首先像上面这个函数一样算出 <code>nl,nr</code>，然后在 $S(r)$ 中从这两个位置切开，把没有被 $S(l)$ 中的区间完全覆盖的全部删掉。</p>
+<p>然后考虑如何实现合并操作，思路很简单，首先像上面这个函数一样算出 <code>nl,nr</code>，然后在 <span class="arithmatex">\(S(r)\)</span> 中从这两个位置切开，把没有被 <span class="arithmatex">\(S(l)\)</span> 中的区间完全覆盖的全部删掉。</p>
 <details class="success">
 <summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">split</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">set</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">){</span><span class="c1">// (1)!</span>
@@ -6020,7 +6048,7 @@ $$</p>
 <li>这个 <code>split</code> 后面还会用到。</li>
 </ol>
 </details>
-<h3 id="siwcup-slcup-sr">$S(i)=W\cup S(l)\cup S(r)$</h3>
+<h3 id="siwcup-slcup-sr"><span class="arithmatex">\(S(i)=W\cup S(l)\cup S(r)\)</span></h3>
 <p>这个非常简单，因为你发现要求并时所有区间必定是没有交的。</p>
 <details class="success">
 <summary>code</summary>
@@ -6047,13 +6075,13 @@ $$</p>
 </span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>这个复杂度为什么对呢？容易发现 $|W|$ 只可能等于 $1$ 或 $2$，几乎可以看做常数。</li>
+<li>这个复杂度为什么对呢？容易发现 <span class="arithmatex">\(|W|\)</span> 只可能等于 <span class="arithmatex">\(1\)</span> 或 <span class="arithmatex">\(2\)</span>，几乎可以看做常数。</li>
 </ol>
 </details>
-<h3 id="siw-cap-slcupwcap-srcup-slcap-sr">$S(i)=(W \cap S(l))\cup(W\cap S(r))\cup (S(l)\cap S(r))$</h3>
-<p>这个直接算不能做到 $O(\min(|S(l)|,|S(r)|))$，考虑化一下式子。</p>
-<p>因为 <a href="https://www.zhihu.com/question/28454415">交对并有分配率</a>，所以原式 $=[W\cap (S(l)\cup S(r)]\cup(S(l)\cap S(r))$。</p>
-<p>这就非常好做了，在 $W$ 内的 $S(l),S(r)$ 并起来，其余的交起来，注意到这里的并也保证两两不交，不然它就是前面第一种情况了。</p>
+<h3 id="siw-cap-slcupwcap-srcup-slcap-sr"><span class="arithmatex">\(S(i)=(W \cap S(l))\cup(W\cap S(r))\cup (S(l)\cap S(r))\)</span></h3>
+<p>这个直接算不能做到 <span class="arithmatex">\(O(\min(|S(l)|,|S(r)|))\)</span>，考虑化一下式子。</p>
+<p>因为 <a href="https://www.zhihu.com/question/28454415">交对并有分配率</a>，所以原式 <span class="arithmatex">\(=[W\cap (S(l)\cup S(r)]\cup(S(l)\cap S(r))\)</span>。</p>
+<p>这就非常好做了，在 <span class="arithmatex">\(W\)</span> 内的 <span class="arithmatex">\(S(l),S(r)\)</span> 并起来，其余的交起来，注意到这里的并也保证两两不交，不然它就是前面第一种情况了。</p>
 <details class="success">
 <summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">union3</span><span class="p">(</span><span class="n">set</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="n">set</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="n">set</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">){</span>

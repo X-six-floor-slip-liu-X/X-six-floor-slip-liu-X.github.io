@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5831,13 +5859,13 @@
 <h2 id="t1">T1</h2>
 <p>首先题目的意思就是边带权。</p>
 <p>不管具体怎么做，先考虑应该如何构造方案。</p>
-<p>可以把整棵树分成点 $1$ 的所有子树，容易发现无解当且仅当 $1\in T$ 或者 $\exists i\in T$，并且 $i$ 所在的子树中没有 $S$。</p>
+<p>可以把整棵树分成点 <span class="arithmatex">\(1\)</span> 的所有子树，容易发现无解当且仅当 <span class="arithmatex">\(1\in T\)</span> 或者 <span class="arithmatex">\(\exists i\in T\)</span>，并且 <span class="arithmatex">\(i\)</span> 所在的子树中没有 <span class="arithmatex">\(S\)</span>。</p>
 <p>那么只考虑有解的情况。</p>
-<p>首先容易想到可以先占领每棵含有 $T$ 的子树的根，这样显然是合法的。然后发现这样其实很浪费，因为首先一个子树不一定所有分叉中都有 $T$，只需要占领有 $T$ 的分叉即可。其次假如这样的分叉比较远，只需要保证在 Alice 能摸到这样的分叉之前占领即可，不必提前涂色。</p>
-<p>那么容易想到树形 DP。设 $dp_i$ 表示若 Alice 第一步就能进入 $i$，Bob 在此之前至少需要行动多少步。</p>
-<p>首先，若 $i\notin T$，那么显然 $dp_{i}=\sum_{v\in son_i}\max(dp_v-w,0)$，其中 $w$ 为 $(i,v)$ 的边权。</p>
-<p>若 $i\in T$，记 $f_i$ 为 $i$ 子树中离 $i$ 最近的 $S$ 点。因为 Alice 是先手，转移后需要多走一步，故为了方便转移，此时必须找一个拓展过来，故 $dp_i=f_i+1$，并且显然上一种情况需要和 $f_i+1$ 取 $\min$（因为找一个拓展过来显然也是合法的）。</p>
-<p>然后就做完了，复杂度 $O(n)$。</p>
+<p>首先容易想到可以先占领每棵含有 <span class="arithmatex">\(T\)</span> 的子树的根，这样显然是合法的。然后发现这样其实很浪费，因为首先一个子树不一定所有分叉中都有 <span class="arithmatex">\(T\)</span>，只需要占领有 <span class="arithmatex">\(T\)</span> 的分叉即可。其次假如这样的分叉比较远，只需要保证在 Alice 能摸到这样的分叉之前占领即可，不必提前涂色。</p>
+<p>那么容易想到树形 DP。设 <span class="arithmatex">\(dp_i\)</span> 表示若 Alice 第一步就能进入 <span class="arithmatex">\(i\)</span>，Bob 在此之前至少需要行动多少步。</p>
+<p>首先，若 <span class="arithmatex">\(i\notin T\)</span>，那么显然 <span class="arithmatex">\(dp_{i}=\sum_{v\in son_i}\max(dp_v-w,0)\)</span>，其中 <span class="arithmatex">\(w\)</span> 为 <span class="arithmatex">\((i,v)\)</span> 的边权。</p>
+<p>若 <span class="arithmatex">\(i\in T\)</span>，记 <span class="arithmatex">\(f_i\)</span> 为 <span class="arithmatex">\(i\)</span> 子树中离 <span class="arithmatex">\(i\)</span> 最近的 <span class="arithmatex">\(S\)</span> 点。因为 Alice 是先手，转移后需要多走一步，故为了方便转移，此时必须找一个拓展过来，故 <span class="arithmatex">\(dp_i=f_i+1\)</span>，并且显然上一种情况需要和 <span class="arithmatex">\(f_i+1\)</span> 取 <span class="arithmatex">\(\min\)</span>（因为找一个拓展过来显然也是合法的）。</p>
+<p>然后就做完了，复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5915,8 +5943,8 @@
 </details>
 <h2 id="t2">T2</h2>
 <p>带权二分图匹配典题，或许能算是最大流经典建模（因为我不会 KM 算法）。</p>
-<p>由于保证有解，首先考虑假如每一行每一列都分别需要一个数产生贡献，那么显然代价就是 $\sum a+\sum b$（$a$ 是每一行的限定，$b$ 是每一列的限定）。</p>
-<p>但是有些行列可以共用最大值，那么考虑对于一个可以填数的位置 $(x,y)$，若 $a_x=b_y$，那么就有一边可以少产生一次贡献。</p>
+<p>由于保证有解，首先考虑假如每一行每一列都分别需要一个数产生贡献，那么显然代价就是 <span class="arithmatex">\(\sum a+\sum b\)</span>（<span class="arithmatex">\(a\)</span> 是每一行的限定，<span class="arithmatex">\(b\)</span> 是每一列的限定）。</p>
+<p>但是有些行列可以共用最大值，那么考虑对于一个可以填数的位置 <span class="arithmatex">\((x,y)\)</span>，若 <span class="arithmatex">\(a_x=b_y\)</span>，那么就有一边可以少产生一次贡献。</p>
 <p>然后容易发现这是一个带权二分图匹配的形式，直接 dinic 秒了。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6018,18 +6046,18 @@
 </span></code></pre></div>
 </details>
 <h2 id="t3">T3</h2>
-<p>首先套路地，把期望拆成贡献除以概率。总子区间数很好算，考虑如何算区间 $[q_l,q_r]$ 内所有子区间 $[L,R]$ 的 $w(L,R)$ 的总和。</p>
+<p>首先套路地，把期望拆成贡献除以概率。总子区间数很好算，考虑如何算区间 <span class="arithmatex">\([q_l,q_r]\)</span> 内所有子区间 <span class="arithmatex">\([L,R]\)</span> 的 <span class="arithmatex">\(w(L,R)\)</span> 的总和。</p>
 <p>这种看起来就不太好维护的首先可以考虑离线下来把询问挂在右端点上，然后求左端点的答案。</p>
-<p>由于 $[L,R]$ 两边端点都不固定不好考虑，可以试着先固定 $R$，求 $L\in [q_l,q_r]$ 的所有 $[L,q_r]$ 的区间并。</p>
-<p>那么容易想到如果我们能维护固定右端点 $R$，然后对每个左端点 $L$ 维护 $[L,R]$ 的区间并，那么这个操作就是一个区间查。所以考虑如何维护单个左端点的答案。</p>
+<p>由于 <span class="arithmatex">\([L,R]\)</span> 两边端点都不固定不好考虑，可以试着先固定 <span class="arithmatex">\(R\)</span>，求 <span class="arithmatex">\(L\in [q_l,q_r]\)</span> 的所有 <span class="arithmatex">\([L,q_r]\)</span> 的区间并。</p>
+<p>那么容易想到如果我们能维护固定右端点 <span class="arithmatex">\(R\)</span>，然后对每个左端点 <span class="arithmatex">\(L\)</span> 维护 <span class="arithmatex">\([L,R]\)</span> 的区间并，那么这个操作就是一个区间查。所以考虑如何维护单个左端点的答案。</p>
 <p>考虑把区间作为纵坐标，时间作为纵坐标考虑：</p>
 <p><img alt="图示 1" src="../../img/20231031B_ABC_1.png" /></p>
 <p>容易发现，对于红色的区间，当时间左端点取到黄色部分，右端点取到它右边时，它会产生贡献。</p>
 <p>那么这个可以用珂朵莉树维护区间上一次被覆盖的时间，然后可以用数据结构维护区间加区间查解决。</p>
 <p>然后考虑右端点也不固定应该怎么做，容易发现这就是区间历史版本和，然后就做完了。</p>
-<p>然后简要讲一下区间历史版本和怎么维护。这个可以简单容斥，用总时间（可以维护总和再乘以查询的时间）减去没产生贡献的时间（就是上传的时间 $-1$，这个上传的时候就可以维护）。开两个线段树即可。</p>
+<p>然后简要讲一下区间历史版本和怎么维护。这个可以简单容斥，用总时间（可以维护总和再乘以查询的时间）减去没产生贡献的时间（就是上传的时间 <span class="arithmatex">\(-1\)</span>，这个上传的时候就可以维护）。开两个线段树即可。</p>
 <p>但是这道题卡常，需要用区间加区间查的树状数组。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5899,19 +5927,19 @@
 <p>所以前三题我只写简略题解，第四题比较有意思。</p>
 <h3 id="_2">前三题简略题解：</h3>
 <h4 id="t1">T1</h4>
-<p>删点不好维护，倒着加点，并查集维护，复杂度 $O((n+m)\log n)$。</p>
+<p>删点不好维护，倒着加点，并查集维护，复杂度 <span class="arithmatex">\(O((n+m)\log n)\)</span>。</p>
 <h4 id="t2">T2</h4>
-<p>打表发现 $f^k_{0,0}=\bigoplus_{(i|j)\subseteq k}a_{i,j}$（其中 $|$ 表示按位或，$\bigoplus$ 表示按位异或，$\subseteq $ 表示二进制下 $1$ 的集合的从属关系），直接高维前缀和维护。</p>
+<p>打表发现 <span class="arithmatex">\(f^k_{0,0}=\bigoplus_{(i|j)\subseteq k}a_{i,j}\)</span>（其中 <span class="arithmatex">\(|\)</span> 表示按位或，<span class="arithmatex">\(\bigoplus\)</span> 表示按位异或，<span class="arithmatex">\(\subseteq \)</span> 表示二进制下 <span class="arithmatex">\(1\)</span> 的集合的从属关系），直接高维前缀和维护。</p>
 <h4 id="t3">T3</h4>
 <p>考虑分成有空集和没空集两种情况，前一种贪心，后一种把式子化一下然后贪心。</p>
 <h2 id="t4">T4</h2>
 <p>首先这道题长得很像树形 DP，那先考虑直接在树上做。</p>
 <p>这里有个技巧，树上维护连通块可以考虑从上往下 DP（这么说可能有点抽象，详见状态设计）。</p>
-<p>那么我们很容易设出一个状态，设 $dp_{rt,i,j}$ 表示考虑以 $rt$ 为根，考虑 dfs 序前 $i$ 个点，乘积为 $j$ 的方案数，转移枚举之前的乘积即可，具体转移方程略。</p>
-<p>容易发现，为了不重不漏，我们只要对每个结点独立求出它子树内的答案即可，那么显然可以把第一维压掉，所以设 $dp_{i,j}$，意义和上文相同。</p>
-<p>这样复杂度上界是 $O(n^2m)$ 的（考虑一条链），那么考虑优化。</p>
-<p>首先这个 $m$ 应该先优化掉，因为第二维只和乘法有关，那么我们可以考虑除法下取整的一个性质，即 $\left\lfloor\frac{\left\lfloor\frac{x}{n}\right\rfloor}{m}\right\rfloor=\left\lfloor\frac{x}{nm}\right\rfloor$，那么我们可以把第二维改为维护 $\left\lfloor\frac{m}{j}\right\rfloor$，这样第二维的取值就只有 $\sqrt{m}$ 种了。</p>
-<p>然后是前面的 $n^2$，容易发现这个数其实和树的形态有关，那么我们可以考虑使用点分治优化成 $O(n\log n)$ 的。</p>
+<p>那么我们很容易设出一个状态，设 <span class="arithmatex">\(dp_{rt,i,j}\)</span> 表示考虑以 <span class="arithmatex">\(rt\)</span> 为根，考虑 dfs 序前 <span class="arithmatex">\(i\)</span> 个点，乘积为 <span class="arithmatex">\(j\)</span> 的方案数，转移枚举之前的乘积即可，具体转移方程略。</p>
+<p>容易发现，为了不重不漏，我们只要对每个结点独立求出它子树内的答案即可，那么显然可以把第一维压掉，所以设 <span class="arithmatex">\(dp_{i,j}\)</span>，意义和上文相同。</p>
+<p>这样复杂度上界是 <span class="arithmatex">\(O(n^2m)\)</span> 的（考虑一条链），那么考虑优化。</p>
+<p>首先这个 <span class="arithmatex">\(m\)</span> 应该先优化掉，因为第二维只和乘法有关，那么我们可以考虑除法下取整的一个性质，即 <span class="arithmatex">\(\left\lfloor\frac{\left\lfloor\frac{x}{n}\right\rfloor}{m}\right\rfloor=\left\lfloor\frac{x}{nm}\right\rfloor\)</span>，那么我们可以把第二维改为维护 <span class="arithmatex">\(\left\lfloor\frac{m}{j}\right\rfloor\)</span>，这样第二维的取值就只有 <span class="arithmatex">\(\sqrt{m}\)</span> 种了。</p>
+<p>然后是前面的 <span class="arithmatex">\(n^2\)</span>，容易发现这个数其实和树的形态有关，那么我们可以考虑使用点分治优化成 <span class="arithmatex">\(O(n\log n)\)</span> 的。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

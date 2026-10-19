@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5956,21 +5984,21 @@
 <p>这次数据结构大佬说 T2 是砂玻题，思维题大佬说 T3 是砂玻题，我说我是砂玻。</p>
 <h2 id="t1">T1</h2>
 <p>这道题好多人都是打表找的规律，让我这个用数学方法推的格格不入。</p>
-<p>先特判 $k=0$ 的情况，然后考虑假设 $k&gt; 1$ 个 $1$ 把剩下的 $0$ 分成 $k+1$ 段应该如何处理。</p>
-<p>假设第一段连续的 $0$ 长度为 $a_1$，第二段为 $a_2$，依次类推。容易发现假如某区间的左端点在 $a_1$ 中或在 $a_1$ 右侧的 $1$ 上，右端点在 $a_2$ 或其左侧的 $1$ 上，区间内就只有一个 $1$，这样的情况有 $(a_1+1)\times (a_2+1)$ 种，同理，右端点在 $a_4,a_6,a_8 \dots$ 中都合法。容易推出结论：当且仅当某区间左右端点所在区间下标奇偶性不同，区间内有奇数个 $1$，证明显然。</p>
+<p>先特判 <span class="arithmatex">\(k=0\)</span> 的情况，然后考虑假设 <span class="arithmatex">\(k&gt; 1\)</span> 个 <span class="arithmatex">\(1\)</span> 把剩下的 <span class="arithmatex">\(0\)</span> 分成 <span class="arithmatex">\(k+1\)</span> 段应该如何处理。</p>
+<p>假设第一段连续的 <span class="arithmatex">\(0\)</span> 长度为 <span class="arithmatex">\(a_1\)</span>，第二段为 <span class="arithmatex">\(a_2\)</span>，依次类推。容易发现假如某区间的左端点在 <span class="arithmatex">\(a_1\)</span> 中或在 <span class="arithmatex">\(a_1\)</span> 右侧的 <span class="arithmatex">\(1\)</span> 上，右端点在 <span class="arithmatex">\(a_2\)</span> 或其左侧的 <span class="arithmatex">\(1\)</span> 上，区间内就只有一个 <span class="arithmatex">\(1\)</span>，这样的情况有 <span class="arithmatex">\((a_1+1)\times (a_2+1)\)</span> 种，同理，右端点在 <span class="arithmatex">\(a_4,a_6,a_8 \dots\)</span> 中都合法。容易推出结论：当且仅当某区间左右端点所在区间下标奇偶性不同，区间内有奇数个 <span class="arithmatex">\(1\)</span>，证明显然。</p>
 <p>那么总区间个数就可以用以下式子表示：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 &amp;\sum_{i \equiv 1\pmod 2}^{1 \le i \le k+1}(a_i+1)\times\sum_{j\equiv 0\pmod 2}^{1 \le j \le k+1} (a_j+1)\\
 =&amp;\left(\left\lceil\dfrac{k+1}{2}\right\rceil+\sum_{i \equiv 1 \pmod 2}^{1 \le i \le k+1}a_i\right)\times\left(\left\lfloor\dfrac{k+1}{2}\right\rfloor+\sum_{j \equiv 0 \pmod 2}^{1 \le j \le k+1}a_j\right)
 \end{aligned}
-$$</p>
-<p>容易发现答案仅与 $\sum_{i \equiv 1 \pmod 2}^{1 \le i \le k+1}a_i$ 和 $\sum_{j \equiv 0 \pmod 2}^{1 \le j \le k+1}a_j$  有关，假如把它们分别看做两个整体 $x$ 和 $y$，那么式子就能化成这样：</p>
-<p>$$\left(\left\lceil\dfrac{k+1}{2}\right\rceil+x\right)\left(\left\lfloor\dfrac{k+1}{2}\right\rfloor+y\right)$$</p>
-<p>另外容易发现 $x+y=n-k$，证明显然，那么 $y=n-k-x$，带入原式：</p>
-<p>$$\left(\left\lceil\dfrac{k+1}{2}\right\rceil+x\right)\left(\left\lfloor\dfrac{k+1}{2}\right\rfloor+n-k-x\right)$$</p>
-<p>容易发现这是个关于 $x$ 的二次函数且开口向下，化成一般式找到对称轴求最大值，过程略。总之当 $x=\frac{n-k}{2}$ 时 $f(x)$ 取到最大值。</p>
-<p>另外容易发现这个式子的大小和 $x,y$ 具体分给哪个 $a_i$ 无关，故构造方案时可以直接把 $a_1\sim a_{k-1}$ 全部取为 $0$（即输出一堆 $1$），然后把 $n-k$ 分给后面两个空。</p>
+\]</div>
+<p>容易发现答案仅与 <span class="arithmatex">\(\sum_{i \equiv 1 \pmod 2}^{1 \le i \le k+1}a_i\)</span> 和 <span class="arithmatex">\(\sum_{j \equiv 0 \pmod 2}^{1 \le j \le k+1}a_j\)</span>  有关，假如把它们分别看做两个整体 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span>，那么式子就能化成这样：</p>
+<div class="arithmatex">\[\left(\left\lceil\dfrac{k+1}{2}\right\rceil+x\right)\left(\left\lfloor\dfrac{k+1}{2}\right\rfloor+y\right)\]</div>
+<p>另外容易发现 <span class="arithmatex">\(x+y=n-k\)</span>，证明显然，那么 <span class="arithmatex">\(y=n-k-x\)</span>，带入原式：</p>
+<div class="arithmatex">\[\left(\left\lceil\dfrac{k+1}{2}\right\rceil+x\right)\left(\left\lfloor\dfrac{k+1}{2}\right\rfloor+n-k-x\right)\]</div>
+<p>容易发现这是个关于 <span class="arithmatex">\(x\)</span> 的二次函数且开口向下，化成一般式找到对称轴求最大值，过程略。总之当 <span class="arithmatex">\(x=\frac{n-k}{2}\)</span> 时 <span class="arithmatex">\(f(x)\)</span> 取到最大值。</p>
+<p>另外容易发现这个式子的大小和 <span class="arithmatex">\(x,y\)</span> 具体分给哪个 <span class="arithmatex">\(a_i\)</span> 无关，故构造方案时可以直接把 <span class="arithmatex">\(a_1\sim a_{k-1}\)</span> 全部取为 <span class="arithmatex">\(0\)</span>（即输出一堆 <span class="arithmatex">\(1\)</span>），然后把 <span class="arithmatex">\(n-k\)</span> 分给后面两个空。</p>
 <h3 id="code">code</h3>
 <details class="success">
 <summary>code</summary>
@@ -6026,7 +6054,7 @@ $$</p>
 </blockquote>
 <p>首先考虑假如只有一个区间，或者说假设是求某个序列在哪次修改后才合法应该如何解决。</p>
 <p>显而易见，只用对这个区间开个桶动态统计每种颜色是否只出现了一次就行了，空间复杂度和时间复杂度都是线性的。</p>
-<p>但是这道题区间的数量是 $O(n)$ 级别的，这样空间复杂度和时间复杂度就变成了平方级别，双双超标，考虑如何优化。</p>
+<p>但是这道题区间的数量是 <span class="arithmatex">\(O(n)\)</span> 级别的，这样空间复杂度和时间复杂度就变成了平方级别，双双超标，考虑如何优化。</p>
 <p>首先桶是肯定不能用了，我们可以用某种数据结构代替桶，比如动态开点权值线段树或者平衡树。但我们显然不能存完每个区间中所有颜色，不然空间复杂度不降反增，我们需要一种方法来重复利用空间。</p>
 <p>看到题面上有这么一句话：</p>
 <blockquote>
@@ -6038,7 +6066,7 @@ $$</p>
 <blockquote>
 <p>一个区间（以下可以认为“区间”和“结点”是同义词）合法的必要条件是它子树内所有结点均合法。</p>
 </blockquote>
-<p>或者换句话说，<strong>假如一个结点不合法，那么它所有祖先均不合法</strong>。也就是说我们每次只需要考虑所有叶子结点是否合法，假如它合法了才需要考虑它的祖先。而所有叶子结点所覆盖的区间长度和是 $O(n)$ 的，这就非常棒了。</p>
+<p>或者换句话说，<strong>假如一个结点不合法，那么它所有祖先均不合法</strong>。也就是说我们每次只需要考虑所有叶子结点是否合法，假如它合法了才需要考虑它的祖先。而所有叶子结点所覆盖的区间长度和是 <span class="arithmatex">\(O(n)\)</span> 的，这就非常棒了。</p>
 <p>注意到题面中要求的是每个结点<strong>第一次合法</strong>的时间戳，也就是说假如某个结点合法了后面就不用管它了，可以直接删掉它，这样就可以直接把子结点的空间交给父结点，方便快捷。（<del>我不会告诉你我赛时就是没想到这一层报灵了。</del>）</p>
 <p>“把子结点的空间交给父结点”是个合并的过程，这道题线段树合并和启发式合并都可做，实测启发式更快更短空间更小。</p>
 <p>另外我们需要快速求出序列上每个点对应的最深的结点是哪个，我用了个数组+DSU 乱搞，不想动脑子的可以用线段树。</p>
@@ -6393,24 +6421,24 @@ $$</p>
 <p>这道题 @<a href="https://www.luogu.com.cn/user/477865">GM_Joanna</a> 说很简单，我觉得也不难，但是实现细节没搞懂报灵了。</p>
 <p>首先看到最长距离容易想到树的直径的性质：</p>
 <blockquote>
-<p>定理：在一棵树上，与任意节点 $y$ 距离最远的节点 $z$ 必为直径的一端。</p>
+<p>定理：在一棵树上，与任意节点 <span class="arithmatex">\(y\)</span> 距离最远的节点 <span class="arithmatex">\(z\)</span> 必为直径的一端。</p>
 </blockquote>
 <p>摘自 <a href="https://oi-wiki.org/graph/tree-diameter/#%E8%BF%87%E7%A8%8B">OI Wiki</a>，证明这个链接里有。</p>
 <p>也就是说无论怎么染色距离最远的两同色点其中一个必定是直径端点。</p>
-<p>假设我们求出了直径为 $AB$。</p>
-<p>首先考虑无论怎么染色价值都等于直径的情况，这种情况必然存在一个结点 $C$，使得 $AB=AC=BC$，易证这是个充分必要条件，因为无论怎么涂色 $ABC$ 三点至少有两个同色。</p>
-<p>排除这种情况后还可能出现 $AB=AC \ne BC$ 的情况，但这无所谓，后面会发现它不影响结果。</p>
-<p>首先考虑直径两端点同色的情况，这种情况总的贡献就是 $2^{n-2}\times length\;of\;diameter\times 2$，后面要乘二的原因是每种情况全部反色也是一种情况，这很好算，而且可以排除一种在通常情况下很难处理的情况。</p>
-<p>然后排除这两个点后，容易发现其它点距离两直径有两个距离（<del>这不一眼就看出来了吗</del>），设其中比较大的为 $L_i$，另一个为 $S_i$，有一个显然的结论：<strong>无论如何涂色，这棵树的价值必然大于等于 $\max{S_i}$</strong>。因为由于直径两端点异色，无论如何涂色取到 $\max{S_i}$ 的这个点与同色端点的距离必然大于等于 $S_i$，得证。</p>
-<p>考虑何时能使价值等于一个点 $i$ 的 $L_i$，发现能取到 $L_i$ 当且仅当 $L_i \ge \max{S}$ 且对于所有 $j$ 使得 $L_j&gt;L_i$，$j$ 取到最小值，$L$ 更小的随便取即可。发现这是可以构造出来的，只要每个点取与某个合适的直径端点相同的颜色即可。对于 $L_i&lt;\max{S}$ 的情况，我们也假设它产生了 $\max(L_i,\max{S})$ 的贡献，这样实现起来比较方便。这样就能列出式子：</p>
-<p>$$\max(L_i,\max{S})\times 2^{Number\;of\;nodes\;with\;L\;less\;than\;L_i}\times 2$$</p>
-<p>但上面的式子只考虑了 $L_i$ 两两不同的情况，对于 $L_i$ 相同的数个结点，我们发现假设将它们随意排序然后把排序后 $L$ 比 $i$ 靠前的全视为比它小来计算仍然是不重不漏的，故我们可以把所有结点按 $L_i$ 升序排列，然后总的价值就是：</p>
-<p>$$\max(L_i,\max{S})\times 2^{i-1}\times 2$$</p>
-<p>OK 到这一步就基本结束了，但想想我们漏掉了什么？我们没考虑全都取较小值的情况，容易发现只能构造出两组这样的涂色方案，价值为 $\max{S}$。</p>
+<p>假设我们求出了直径为 <span class="arithmatex">\(AB\)</span>。</p>
+<p>首先考虑无论怎么染色价值都等于直径的情况，这种情况必然存在一个结点 <span class="arithmatex">\(C\)</span>，使得 <span class="arithmatex">\(AB=AC=BC\)</span>，易证这是个充分必要条件，因为无论怎么涂色 <span class="arithmatex">\(ABC\)</span> 三点至少有两个同色。</p>
+<p>排除这种情况后还可能出现 <span class="arithmatex">\(AB=AC \ne BC\)</span> 的情况，但这无所谓，后面会发现它不影响结果。</p>
+<p>首先考虑直径两端点同色的情况，这种情况总的贡献就是 <span class="arithmatex">\(2^{n-2}\times length\;of\;diameter\times 2\)</span>，后面要乘二的原因是每种情况全部反色也是一种情况，这很好算，而且可以排除一种在通常情况下很难处理的情况。</p>
+<p>然后排除这两个点后，容易发现其它点距离两直径有两个距离（<del>这不一眼就看出来了吗</del>），设其中比较大的为 <span class="arithmatex">\(L_i\)</span>，另一个为 <span class="arithmatex">\(S_i\)</span>，有一个显然的结论：<strong>无论如何涂色，这棵树的价值必然大于等于 <span class="arithmatex">\(\max\{S_i\}\)</span></strong>。因为由于直径两端点异色，无论如何涂色取到 <span class="arithmatex">\(\max\{S_i\}\)</span> 的这个点与同色端点的距离必然大于等于 <span class="arithmatex">\(S_i\)</span>，得证。</p>
+<p>考虑何时能使价值等于一个点 <span class="arithmatex">\(i\)</span> 的 <span class="arithmatex">\(L_i\)</span>，发现能取到 <span class="arithmatex">\(L_i\)</span> 当且仅当 <span class="arithmatex">\(L_i \ge \max\{S\}\)</span> 且对于所有 <span class="arithmatex">\(j\)</span> 使得 <span class="arithmatex">\(L_j&gt;L_i\)</span>，<span class="arithmatex">\(j\)</span> 取到最小值，<span class="arithmatex">\(L\)</span> 更小的随便取即可。发现这是可以构造出来的，只要每个点取与某个合适的直径端点相同的颜色即可。对于 <span class="arithmatex">\(L_i&lt;\max\{S\}\)</span> 的情况，我们也假设它产生了 <span class="arithmatex">\(\max(L_i,\max\{S\})\)</span> 的贡献，这样实现起来比较方便。这样就能列出式子：</p>
+<div class="arithmatex">\[\max(L_i,\max\{S\})\times 2^{Number\;of\;nodes\;with\;L\;less\;than\;L_i}\times 2\]</div>
+<p>但上面的式子只考虑了 <span class="arithmatex">\(L_i\)</span> 两两不同的情况，对于 <span class="arithmatex">\(L_i\)</span> 相同的数个结点，我们发现假设将它们随意排序然后把排序后 <span class="arithmatex">\(L\)</span> 比 <span class="arithmatex">\(i\)</span> 靠前的全视为比它小来计算仍然是不重不漏的，故我们可以把所有结点按 <span class="arithmatex">\(L_i\)</span> 升序排列，然后总的价值就是：</p>
+<div class="arithmatex">\[\max(L_i,\max\{S\})\times 2^{i-1}\times 2\]</div>
+<p>OK 到这一步就基本结束了，但想想我们漏掉了什么？我们没考虑全都取较小值的情况，容易发现只能构造出两组这样的涂色方案，价值为 <span class="arithmatex">\(\max\{S\}\)</span>。</p>
 <p>综上，分以下几种情况考虑。</p>
 <ul>
-<li>$AB=BC=AC,ans=2^{n+1} \times length\;of\;diameter$</li>
-<li>$else,ans=2^{n-1}\times length\;of\;diameter+\left(\sum\limits_{i-1}^n \max(L_i,\max{S}) \times 2^i\right)+\max{S}\times 2$</li>
+<li><span class="arithmatex">\(AB=BC=AC,ans=2^{n+1} \times length\;of\;diameter\)</span></li>
+<li><span class="arithmatex">\(else,ans=2^{n-1}\times length\;of\;diameter+\left(\sum\limits_{i-1}^n \max(L_i,\max\{S\}) \times 2^i\right)+\max\{S\}\times 2\)</span></li>
 </ul>
 <h3 id="code_2">code</h3>
 <details class="success">

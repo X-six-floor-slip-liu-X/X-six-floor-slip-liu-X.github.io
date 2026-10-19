@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5851,8 +5879,8 @@
 <p>这场我记得赛时切 T1T4，最终得分 100+45+15+100=260，排名贼高。这告诉我们正确的开题顺序有多重要。</p>
 <p><a href="../../files/20231007.rar">密码是通用密码</a></p>
 <h2 id="t1">T1</h2>
-<p>这道题很简单，考虑自己模拟一下。容易发现必然是先向一个方向走（下文以起始方向向右为例），遇到第一个 $L$ 回头，而之前经过的 $R$ 都变成 $L$ 了，那么向左遇到起点左侧第一个 $R$ 再回头，再往右的时候容易发现之前的 $L$， 就变成 $R$ 了，会碰到下一个 $L$ 再回头。那么我们只需要统计初始序列当前位置左侧有多少个 $R$，右侧有多少个 $L$ 就行了。具体计算很简单，我就不多赘述了。</p>
-<p>复杂度可以 $O(n)$，取决于你维护的方式。</p>
+<p>这道题很简单，考虑自己模拟一下。容易发现必然是先向一个方向走（下文以起始方向向右为例），遇到第一个 <span class="arithmatex">\(L\)</span> 回头，而之前经过的 <span class="arithmatex">\(R\)</span> 都变成 <span class="arithmatex">\(L\)</span> 了，那么向左遇到起点左侧第一个 <span class="arithmatex">\(R\)</span> 再回头，再往右的时候容易发现之前的 <span class="arithmatex">\(L\)</span>， 就变成 <span class="arithmatex">\(R\)</span> 了，会碰到下一个 <span class="arithmatex">\(L\)</span> 再回头。那么我们只需要统计初始序列当前位置左侧有多少个 <span class="arithmatex">\(R\)</span>，右侧有多少个 <span class="arithmatex">\(L\)</span> 就行了。具体计算很简单，我就不多赘述了。</p>
+<p>复杂度可以 <span class="arithmatex">\(O(n)\)</span>，取决于你维护的方式。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5921,14 +5949,14 @@
 </span></code></pre></div>
 </details>
 <h2 id="t2">T2</h2>
-<p>首先，对于划分成 $k$ 段的答案，容易发现重排后必定是一个前缀贡献其 $0$ 的数量，一个后缀贡献其 $1$ 的数量，中间有至多一个贡献前半部分 $1$ 与后半部分 $0$。而容易想到是不是可以把这一段分成两半，然后算分成 $k+1$ 段，每一的段贡献就是 $\max(cnt_0,cnt_1)$。</p>
-<p>为方便叙述，称贡献为 $cnt_0$ 的段为“零段”，贡献为 $cnt_1$ 的段为“壹段”（大写是为了防止歧义）。容易发现上面的猜想其实在 $k\le 2$ 的时候都是可以的。首先若存在某一段 $i$，使得原序列上第 $i$ 段是零段，第 $i+1$ 段是壹段，那么直接可以把这两段合在一起。否则必然原序列上前缀全是壹段，后缀全是零段，那么必然存在至少一个 $i$，使得 $i,i+1$ 类型相同。可以考虑把这两段合在一起。对于 $k=1$，直接暴力即可，方法很多，不多赘述。</p>
-<p>另外，容易发现原序列 $s$ 上连续的 $0$ 和 $1$ 分不分开其实无所谓，或者说连续的同一个数可以当成一个固定不分开的块，不影响答案，对于大于等于块数的 $k$，容易发现答案就是 $n$（虽然其实这并不重要）。</p>
-<p>那么问题就转化成了有一个 $01$ 交替的带权序列，你要把它分成 $k$ 段，每一段的权值是 $\max\left(\sum val_0,\sum val_1\right)$，求最大权值和。</p>
-<p>而容易发现这其实是一个经典的反悔贪心，相当于最初所有段都做贡献，然后每次删掉一些段不做贡献，再把左右两段合并（比如最初是 $010$，假如合并成一个 $0$ 相当于把中间一个 $1$ 的贡献删掉了）。另外，容易发现每一对相邻的 $01$ 中必定有至少一个会产生贡献，即永远不会删除两个相邻的段。</p>
-<p>套路地，这可以用优先队列 $+$ 双向链表维护，先不考虑边界，最初插入所有初始段，每次选出权值最小的一段 $x$ 删掉，然后把它前后两段 $px,nx$ 合并，合并的一段权值为 $val_{px}+val_{nx}-val_x$，下次如果删掉这段相当于删掉 $px,nx$ 再把 $x$ 重新加入贡献，由于每次选的都是最小的，它必定不会产生负数。合并后段数 $-2$，更新对应段数的答案。</p>
-<p>容易发现边界不太好处理，我们可以分类讨论左右边界删掉/不删掉来解决。注意删掉边界只会使段数 $-1$，另外注意假如钦定边界删掉那么边界的下一个必定不会删掉，注意特判。</p>
-<p>然后对答案求一个前缀最大值（因为中间可能有空缺），更新原问题答案即可，复杂度 $O(n\log n)$。</p>
+<p>首先，对于划分成 <span class="arithmatex">\(k\)</span> 段的答案，容易发现重排后必定是一个前缀贡献其 <span class="arithmatex">\(0\)</span> 的数量，一个后缀贡献其 <span class="arithmatex">\(1\)</span> 的数量，中间有至多一个贡献前半部分 <span class="arithmatex">\(1\)</span> 与后半部分 <span class="arithmatex">\(0\)</span>。而容易想到是不是可以把这一段分成两半，然后算分成 <span class="arithmatex">\(k+1\)</span> 段，每一的段贡献就是 <span class="arithmatex">\(\max(cnt_0,cnt_1)\)</span>。</p>
+<p>为方便叙述，称贡献为 <span class="arithmatex">\(cnt_0\)</span> 的段为“零段”，贡献为 <span class="arithmatex">\(cnt_1\)</span> 的段为“壹段”（大写是为了防止歧义）。容易发现上面的猜想其实在 <span class="arithmatex">\(k\le 2\)</span> 的时候都是可以的。首先若存在某一段 <span class="arithmatex">\(i\)</span>，使得原序列上第 <span class="arithmatex">\(i\)</span> 段是零段，第 <span class="arithmatex">\(i+1\)</span> 段是壹段，那么直接可以把这两段合在一起。否则必然原序列上前缀全是壹段，后缀全是零段，那么必然存在至少一个 <span class="arithmatex">\(i\)</span>，使得 <span class="arithmatex">\(i,i+1\)</span> 类型相同。可以考虑把这两段合在一起。对于 <span class="arithmatex">\(k=1\)</span>，直接暴力即可，方法很多，不多赘述。</p>
+<p>另外，容易发现原序列 <span class="arithmatex">\(s\)</span> 上连续的 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(1\)</span> 分不分开其实无所谓，或者说连续的同一个数可以当成一个固定不分开的块，不影响答案，对于大于等于块数的 <span class="arithmatex">\(k\)</span>，容易发现答案就是 <span class="arithmatex">\(n\)</span>（虽然其实这并不重要）。</p>
+<p>那么问题就转化成了有一个 <span class="arithmatex">\(01\)</span> 交替的带权序列，你要把它分成 <span class="arithmatex">\(k\)</span> 段，每一段的权值是 <span class="arithmatex">\(\max\left(\sum val_0,\sum val_1\right)\)</span>，求最大权值和。</p>
+<p>而容易发现这其实是一个经典的反悔贪心，相当于最初所有段都做贡献，然后每次删掉一些段不做贡献，再把左右两段合并（比如最初是 <span class="arithmatex">\(010\)</span>，假如合并成一个 <span class="arithmatex">\(0\)</span> 相当于把中间一个 <span class="arithmatex">\(1\)</span> 的贡献删掉了）。另外，容易发现每一对相邻的 <span class="arithmatex">\(01\)</span> 中必定有至少一个会产生贡献，即永远不会删除两个相邻的段。</p>
+<p>套路地，这可以用优先队列 <span class="arithmatex">\(+\)</span> 双向链表维护，先不考虑边界，最初插入所有初始段，每次选出权值最小的一段 <span class="arithmatex">\(x\)</span> 删掉，然后把它前后两段 <span class="arithmatex">\(px,nx\)</span> 合并，合并的一段权值为 <span class="arithmatex">\(val_{px}+val_{nx}-val_x\)</span>，下次如果删掉这段相当于删掉 <span class="arithmatex">\(px,nx\)</span> 再把 <span class="arithmatex">\(x\)</span> 重新加入贡献，由于每次选的都是最小的，它必定不会产生负数。合并后段数 <span class="arithmatex">\(-2\)</span>，更新对应段数的答案。</p>
+<p>容易发现边界不太好处理，我们可以分类讨论左右边界删掉/不删掉来解决。注意删掉边界只会使段数 <span class="arithmatex">\(-1\)</span>，另外注意假如钦定边界删掉那么边界的下一个必定不会删掉，注意特判。</p>
+<p>然后对答案求一个前缀最大值（因为中间可能有空缺），更新原问题答案即可，复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6035,24 +6063,24 @@
 </span><span id="__span-1-102"><a id="__codelineno-1-102" name="__codelineno-1-102" href="#__codelineno-1-102"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>暴力计算 $k=1$ 的答案。</li>
+<li>暴力计算 <span class="arithmatex">\(k=1\)</span> 的答案。</li>
 <li>分类讨论边界删不删掉。</li>
 </ol>
 </details>
 <h2 id="t3">T3</h2>
 <p>本场考试最难题。</p>
-<p>设原序列为 $S$，分出来的两个序列为 $A,B$，$P(S)$ 表示 $S$ 序列中前缀最大值集合，$Q(S)=S-P(S)$。</p>
-<p>首先，由于要求字典序最小的序列，我们可以考虑从前往后贪心地，能填 $0$ 就填 $0$，否则填 $1$。换句话说，我们希望求出在确定某一前缀后，后面是否存在某种分配方式使得 $A,B$ 序列中前缀最大值的个数相等。</p>
-<p>首先可以想到设 $f_{i,a,b,s}$ 表示考虑后缀 $S_{i\sim n}$，$A$ 的下一个前缀最大值为 $a$，$B$ 的下一个前缀最大值为 $b$，$|P(A')-P(B')|=s$ 的后缀方案是否存在，这个可以很简单地 $O(n^4)$ 求出。但是很不好优化。考虑寻找性质。</p>
-<p>容易发现，$P(A)\cup P(B)\supseteq P(S)$，这个比较显然，因为若 $S_i$ 为前缀最大值，无论怎么分，你显然不可能在 $S_{1\sim i-1}$ 之间找到任何一个大于 $S_i$ 的让它变成不是前缀最大值。那么我们其实更关心 $Q(S)$ 在 $P(A),P(B)$ 中的部分。</p>
-<p>而我们又可以发现，必定可以构造出解使得 $Q(S)$ 仅与 $P(A),P(B)$ 其中之一（或者两者都不）有交。考虑若 $u,v\in Q(S),u\in P(A),v\in P(B)$，那么假如把 $u$ 放到 $B$ 中，$v$ 放到 $A$ 中，会使得 $u\in Q(A),v\in Q(B)$（因为 $S$ 中 $u$ 前面必定存在大于 $u$ 数，且被分到 $B$ 中了，$v$ 同理），$|P(A)-P(B)|$ 的值没变，但是两边的 $P$ 与 $Q(S)$ 的交都减小了 $1$，最终必定能使得其中一边与 $Q(S)$ 完全无交。</p>
-<p>另外值得注意的是，我们只用这样的构造（指只有至多一个 $P$ 与 $Q(S)$ 有交）来判断后缀是否有解，并不影响答案的构造。（但是有趣的是如果就按这样构造答案仍能通过 CatOJ 以及 AtCoder 原题所有数据，但我不会证啊。等个有缘人）</p>
-<p>因为上面的结论，若钦定 $P(A')\cap Q(S)=\varnothing$ 显然有 $|P(A')|+c_A=|SP(B')|+|SQ(B')|+c_B$，其中 $A',B'$ 表示当前后缀，$c_A,c_b$ 表示前面已有的前缀最大值个数，$SP(B')$ 表示 $P(B')\cap P(S)$，$SQ(B')$ 表示 $P(B')\cap Q(S)$。</p>
-<p>然后移一下项，能得到 $c_A+c_B+|P(A')|+|SP(B')|=c_A+c_B+|P(S')|=2|SP(B')|+|SQ(B')|$。</p>
-<p>容易发现 $c_a+c_b+|P(S')|$ 是已知的，也就是说只要能凑出 $2|SP(B')|+|SQ(B')|$ 等于某已知量就说明后缀有解。令 $x=|SP(B')|,y=|SQ(B')|$。</p>
-<p>另外，容易发现若能凑出 $2x+y$，那么也能凑出 $2(x-1)+y$，因为上面的那个式子左边和 $A$ 完全没有关系，你可以吧 $SP(B')$ 里面的东西换到 $P(A')$ 里面，而如果 $x=0$，那么 $SQ(B')$ 中所有东西放到 $A$ 中都不会产生贡献，因为 $P(A)$ 中必定有比它们大的前缀最大值。这说明什么？说明奇偶性相同的数中，小于等于能凑出的最大值的数均可凑出来。</p>
-<p>那么这就是一个带权最大上升子序列，可以用线段树维护当前后缀信息。并且由于 $S$ 是一个排列，那么线段树维护区间最大值其实就是可撤回的了（这么说有点抽象，可以看看代码）。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>设原序列为 <span class="arithmatex">\(S\)</span>，分出来的两个序列为 <span class="arithmatex">\(A,B\)</span>，<span class="arithmatex">\(P(S)\)</span> 表示 <span class="arithmatex">\(S\)</span> 序列中前缀最大值集合，<span class="arithmatex">\(Q(S)=S-P(S)\)</span>。</p>
+<p>首先，由于要求字典序最小的序列，我们可以考虑从前往后贪心地，能填 <span class="arithmatex">\(0\)</span> 就填 <span class="arithmatex">\(0\)</span>，否则填 <span class="arithmatex">\(1\)</span>。换句话说，我们希望求出在确定某一前缀后，后面是否存在某种分配方式使得 <span class="arithmatex">\(A,B\)</span> 序列中前缀最大值的个数相等。</p>
+<p>首先可以想到设 <span class="arithmatex">\(f_{i,a,b,s}\)</span> 表示考虑后缀 <span class="arithmatex">\(S_{i\sim n}\)</span>，<span class="arithmatex">\(A\)</span> 的下一个前缀最大值为 <span class="arithmatex">\(a\)</span>，<span class="arithmatex">\(B\)</span> 的下一个前缀最大值为 <span class="arithmatex">\(b\)</span>，<span class="arithmatex">\(|P(A')-P(B')|=s\)</span> 的后缀方案是否存在，这个可以很简单地 <span class="arithmatex">\(O(n^4)\)</span> 求出。但是很不好优化。考虑寻找性质。</p>
+<p>容易发现，<span class="arithmatex">\(P(A)\cup P(B)\supseteq P(S)\)</span>，这个比较显然，因为若 <span class="arithmatex">\(S_i\)</span> 为前缀最大值，无论怎么分，你显然不可能在 <span class="arithmatex">\(S_{1\sim i-1}\)</span> 之间找到任何一个大于 <span class="arithmatex">\(S_i\)</span> 的让它变成不是前缀最大值。那么我们其实更关心 <span class="arithmatex">\(Q(S)\)</span> 在 <span class="arithmatex">\(P(A),P(B)\)</span> 中的部分。</p>
+<p>而我们又可以发现，必定可以构造出解使得 <span class="arithmatex">\(Q(S)\)</span> 仅与 <span class="arithmatex">\(P(A),P(B)\)</span> 其中之一（或者两者都不）有交。考虑若 <span class="arithmatex">\(u,v\in Q(S),u\in P(A),v\in P(B)\)</span>，那么假如把 <span class="arithmatex">\(u\)</span> 放到 <span class="arithmatex">\(B\)</span> 中，<span class="arithmatex">\(v\)</span> 放到 <span class="arithmatex">\(A\)</span> 中，会使得 <span class="arithmatex">\(u\in Q(A),v\in Q(B)\)</span>（因为 <span class="arithmatex">\(S\)</span> 中 <span class="arithmatex">\(u\)</span> 前面必定存在大于 <span class="arithmatex">\(u\)</span> 数，且被分到 <span class="arithmatex">\(B\)</span> 中了，<span class="arithmatex">\(v\)</span> 同理），<span class="arithmatex">\(|P(A)-P(B)|\)</span> 的值没变，但是两边的 <span class="arithmatex">\(P\)</span> 与 <span class="arithmatex">\(Q(S)\)</span> 的交都减小了 <span class="arithmatex">\(1\)</span>，最终必定能使得其中一边与 <span class="arithmatex">\(Q(S)\)</span> 完全无交。</p>
+<p>另外值得注意的是，我们只用这样的构造（指只有至多一个 <span class="arithmatex">\(P\)</span> 与 <span class="arithmatex">\(Q(S)\)</span> 有交）来判断后缀是否有解，并不影响答案的构造。（但是有趣的是如果就按这样构造答案仍能通过 CatOJ 以及 AtCoder 原题所有数据，但我不会证啊。等个有缘人）</p>
+<p>因为上面的结论，若钦定 <span class="arithmatex">\(P(A')\cap Q(S)=\varnothing\)</span> 显然有 <span class="arithmatex">\(|P(A')|+c_A=|SP(B')|+|SQ(B')|+c_B\)</span>，其中 <span class="arithmatex">\(A',B'\)</span> 表示当前后缀，<span class="arithmatex">\(c_A,c_b\)</span> 表示前面已有的前缀最大值个数，<span class="arithmatex">\(SP(B')\)</span> 表示 <span class="arithmatex">\(P(B')\cap P(S)\)</span>，<span class="arithmatex">\(SQ(B')\)</span> 表示 <span class="arithmatex">\(P(B')\cap Q(S)\)</span>。</p>
+<p>然后移一下项，能得到 <span class="arithmatex">\(c_A+c_B+|P(A')|+|SP(B')|=c_A+c_B+|P(S')|=2|SP(B')|+|SQ(B')|\)</span>。</p>
+<p>容易发现 <span class="arithmatex">\(c_a+c_b+|P(S')|\)</span> 是已知的，也就是说只要能凑出 <span class="arithmatex">\(2|SP(B')|+|SQ(B')|\)</span> 等于某已知量就说明后缀有解。令 <span class="arithmatex">\(x=|SP(B')|,y=|SQ(B')|\)</span>。</p>
+<p>另外，容易发现若能凑出 <span class="arithmatex">\(2x+y\)</span>，那么也能凑出 <span class="arithmatex">\(2(x-1)+y\)</span>，因为上面的那个式子左边和 <span class="arithmatex">\(A\)</span> 完全没有关系，你可以吧 <span class="arithmatex">\(SP(B')\)</span> 里面的东西换到 <span class="arithmatex">\(P(A')\)</span> 里面，而如果 <span class="arithmatex">\(x=0\)</span>，那么 <span class="arithmatex">\(SQ(B')\)</span> 中所有东西放到 <span class="arithmatex">\(A\)</span> 中都不会产生贡献，因为 <span class="arithmatex">\(P(A)\)</span> 中必定有比它们大的前缀最大值。这说明什么？说明奇偶性相同的数中，小于等于能凑出的最大值的数均可凑出来。</p>
+<p>那么这就是一个带权最大上升子序列，可以用线段树维护当前后缀信息。并且由于 <span class="arithmatex">\(S\)</span> 是一个排列，那么线段树维护区间最大值其实就是可撤回的了（这么说有点抽象，可以看看代码）。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6148,15 +6176,15 @@
 </span><span id="__span-2-91"><a id="__codelineno-2-91" name="__codelineno-2-91" href="#__codelineno-2-91"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>注意 $P(A'),P(B')$ 都有可能和 $Q(S)$ 相交。</li>
+<li>注意 <span class="arithmatex">\(P(A'),P(B')\)</span> 都有可能和 <span class="arithmatex">\(Q(S)\)</span> 相交。</li>
 </ol>
 </details>
 <h2 id="t4">T4</h2>
 <p>有彼阳出题人把最简单题放 T4。</p>
 <p>要维护的东西线段树可以直接维护。</p>
 <p>具体来说，对每个结点维护<strong>区间内剩余车辆价值总和</strong>，<strong>区间内剩余车辆数量</strong>，<strong>该区间有多少个删除操作无法在区间内部解决</strong>。</p>
-<p>然后合并的时候，考虑右儿子的删除操作对左儿子的影响，然后递归合并，容易发现每次只会进一个儿子所以复杂度是 $O(\log n)$ 的。</p>
-<p>总复杂度 $O(n\log^2 n)$，具体如何维护见代码，太板了懒得讲。</p>
+<p>然后合并的时候，考虑右儿子的删除操作对左儿子的影响，然后递归合并，容易发现每次只会进一个儿子所以复杂度是 <span class="arithmatex">\(O(\log n)\)</span> 的。</p>
+<p>总复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>，具体如何维护见代码，太板了懒得讲。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

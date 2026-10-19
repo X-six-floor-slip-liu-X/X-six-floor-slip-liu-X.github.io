@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6073,27 +6101,27 @@
 <p>改完错就开始卷算法了。</p>
 <h2 id="_2">引入</h2>
 <p>首先，生成树的定义是很自然的。</p>
-<p>很多时候我们会使用搜索算法遍历某一张无向图上的 $n$ 个点。那么为了遍历这些点我们会经过 $n-1$ 条边（若图连通）。而稍微有点图论直觉的人都会发现，$G=(V,E),|V|=n,|E|=n-1$ 这样的定义很容易让我们联想到树，那么生成树的定义就呼之欲出了。</p>
-<p>用数学语言就是：若 $G'=(V,E'),G=(V,E),E'\subseteq E$，且 $G'$ 是一棵树。那么称 $G'$ 为 $G$ 的生成树（<strong>Spanning Tree</strong>）。</p>
+<p>很多时候我们会使用搜索算法遍历某一张无向图上的 <span class="arithmatex">\(n\)</span> 个点。那么为了遍历这些点我们会经过 <span class="arithmatex">\(n-1\)</span> 条边（若图连通）。而稍微有点图论直觉的人都会发现，<span class="arithmatex">\(G=(V,E),|V|=n,|E|=n-1\)</span> 这样的定义很容易让我们联想到树，那么生成树的定义就呼之欲出了。</p>
+<p>用数学语言就是：若 <span class="arithmatex">\(G'=(V,E'),G=(V,E),E'\subseteq E\)</span>，且 <span class="arithmatex">\(G'\)</span> 是一棵树。那么称 <span class="arithmatex">\(G'\)</span> 为 <span class="arithmatex">\(G\)</span> 的生成树（<strong>Spanning Tree</strong>）。</p>
 <p>而显然，每个连通图必然有生成树，考虑有环就断掉，最后必然是无环连通图。</p>
-<p>而最小生成树（MST，<strong>Minimum Spanning Tree</strong>）即图 $G$ 的所有生成树中边权和<strong>最小</strong>的。容易发现最小生成树<strong>不唯一</strong>。</p>
+<p>而最小生成树（MST，<strong>Minimum Spanning Tree</strong>）即图 <span class="arithmatex">\(G\)</span> 的所有生成树中边权和<strong>最小</strong>的。容易发现最小生成树<strong>不唯一</strong>。</p>
 <h2 id="_3">求解</h2>
 <h3 id="prim">Prim 算法</h3>
-<p>Prim 的思路和求解最短路的 dijkstra 算法类似，把图分为两个集合 $S,T$，$S$ 最初为任意一个点 $u$，$T$ 最初为 $V\setminus \begin{Bmatrix}u\end{Bmatrix}$，然后每次从 $T$ 集合中取出距离最小的点加入 $S$ 集合，经过的这条边就是树边。</p>
+<p>Prim 的思路和求解最短路的 dijkstra 算法类似，把图分为两个集合 <span class="arithmatex">\(S,T\)</span>，<span class="arithmatex">\(S\)</span> 最初为任意一个点 <span class="arithmatex">\(u\)</span>，<span class="arithmatex">\(T\)</span> 最初为 <span class="arithmatex">\(V\setminus \begin{Bmatrix}u\end{Bmatrix}\)</span>，然后每次从 <span class="arithmatex">\(T\)</span> 集合中取出距离最小的点加入 <span class="arithmatex">\(S\)</span> 集合，经过的这条边就是树边。</p>
 <p>代码很简单，就不贴了。</p>
 <div class="admonition quote">
 <p class="admonition-title">正确性证明</p>
 <p>考虑说明在每一步，都存在一棵最小生成树包含已选边集。</p>
 <p>首先只有一个结点的时候，显然成立。</p>
-<p>然后考虑归纳证明，如果某一步成立，当前边集为 $F$，属于 $T$ 这棵 MST，接下来要加入边 $e$。</p>
-<p>如果 $e$ 属于 $T$，那么成立。</p>
-<p>否则考虑 $T+e$ 中环上另一条可以加入当前边集的边 $f$。</p>
-<p>首先，$f$ 的权值一定不小于 $e$ 的权值，否则就会选择 $f$ 而不是 $e$ 了。</p>
-<p>然后，$f$ 的权值一定不大于 $e$ 的权值，否则 $T+e-f$ 就是一棵更小的生成树了。</p>
-<p>因此，$e$ 和 $f$ 的权值相等，$T+e-f$ 也是一棵最小生成树，且包含了当前边集 $F$。</p>
+<p>然后考虑归纳证明，如果某一步成立，当前边集为 <span class="arithmatex">\(F\)</span>，属于 <span class="arithmatex">\(T\)</span> 这棵 MST，接下来要加入边 <span class="arithmatex">\(e\)</span>。</p>
+<p>如果 <span class="arithmatex">\(e\)</span> 属于 <span class="arithmatex">\(T\)</span>，那么成立。</p>
+<p>否则考虑 <span class="arithmatex">\(T+e\)</span> 中环上另一条可以加入当前边集的边 <span class="arithmatex">\(f\)</span>。</p>
+<p>首先，<span class="arithmatex">\(f\)</span> 的权值一定不小于 <span class="arithmatex">\(e\)</span> 的权值，否则就会选择 <span class="arithmatex">\(f\)</span> 而不是 <span class="arithmatex">\(e\)</span> 了。</p>
+<p>然后，<span class="arithmatex">\(f\)</span> 的权值一定不大于 <span class="arithmatex">\(e\)</span> 的权值，否则 <span class="arithmatex">\(T+e-f\)</span> 就是一棵更小的生成树了。</p>
+<p>因此，<span class="arithmatex">\(e\)</span> 和 <span class="arithmatex">\(f\)</span> 的权值相等，<span class="arithmatex">\(T+e-f\)</span> 也是一棵最小生成树，且包含了当前边集 <span class="arithmatex">\(F\)</span>。</p>
 <p>摘自 <a href="https://oi.wiki/graph/mst/#%E8%AF%81%E6%98%8E_1">OI Wiki</a></p>
 </div>
-<p>直接暴力复杂度是 $O(n^2+m)$ 的，若使用优先队列复杂度是 $O((n+m)\log m)$ 的。如果使用斐波那契堆复杂度是 $O(n\log n+m)$ 的，但是代码会比较难写。</p>
+<p>直接暴力复杂度是 <span class="arithmatex">\(O(n^2+m)\)</span> 的，若使用优先队列复杂度是 <span class="arithmatex">\(O((n+m)\log m)\)</span> 的。如果使用斐波那契堆复杂度是 <span class="arithmatex">\(O(n\log n+m)\)</span> 的，但是代码会比较难写。</p>
 <h3 id="kruskal_1">Kruskal 算法</h3>
 <p>与 Prim 不同，Kruskal 算法的核心思想在于加边而不是加点。具体来说，我们从小到大考虑每条边。若不会形成环就加入 MST，否则跳过。判定会不会形成环可以使用并查集维护，把每个连通块维护为一个集合即可。</p>
 <p>代码也不贴了。</p>
@@ -6102,27 +6130,27 @@
 <p>仍然考虑说明在每一步，都存在一棵最小生成树包含已选边集。</p>
 <p>考虑使用归纳法，证明任何时候算法选择的边集都被某棵 MST 所包含。</p>
 <p>对于算法刚开始时，显然成立（最小生成树存在，边集为空集）。</p>
-<p>假设某时刻成立，当前边集为 $F$，令 $T$ 为这棵 MST，考虑下一条加入的边 $e$。</p>
-<p>如果 $e$ 属于 $T$，那么成立。</p>
-<p>否则，$T+e$ 一定存在一个环，考虑这个环上不属于 $F$ 的另一条边 $f$（一定只有一条）。</p>
-<p>首先，$f$ 的权值一定不会比 $e$ 小，不然 $f$ 会在 $e$ 之前被选取。</p>
-<p>然后，$f$ 的权值一定不会比 $e$ 大，不然 $T+e-f$ 就是一棵比 $T$ 还优的生成树了。</p>
-<p>所以，$T+e-f$ 包含了 $F$，并且也是一棵最小生成树，归纳成立。</p>
+<p>假设某时刻成立，当前边集为 <span class="arithmatex">\(F\)</span>，令 <span class="arithmatex">\(T\)</span> 为这棵 MST，考虑下一条加入的边 <span class="arithmatex">\(e\)</span>。</p>
+<p>如果 <span class="arithmatex">\(e\)</span> 属于 <span class="arithmatex">\(T\)</span>，那么成立。</p>
+<p>否则，<span class="arithmatex">\(T+e\)</span> 一定存在一个环，考虑这个环上不属于 <span class="arithmatex">\(F\)</span> 的另一条边 <span class="arithmatex">\(f\)</span>（一定只有一条）。</p>
+<p>首先，<span class="arithmatex">\(f\)</span> 的权值一定不会比 <span class="arithmatex">\(e\)</span> 小，不然 <span class="arithmatex">\(f\)</span> 会在 <span class="arithmatex">\(e\)</span> 之前被选取。</p>
+<p>然后，<span class="arithmatex">\(f\)</span> 的权值一定不会比 <span class="arithmatex">\(e\)</span> 大，不然 <span class="arithmatex">\(T+e-f\)</span> 就是一棵比 <span class="arithmatex">\(T\)</span> 还优的生成树了。</p>
+<p>所以，<span class="arithmatex">\(T+e-f\)</span> 包含了 <span class="arithmatex">\(F\)</span>，并且也是一棵最小生成树，归纳成立。</p>
 <p>摘自 <a href="https://oi.wiki/graph/mst/#%E8%AF%81%E6%98%8E_1">OI Wiki</a></p>
 </div>
-<p>若排序的复杂度是 $O(m\log m)$，并查集使用路径压缩+按秩合并，复杂度为 $O(m\alpha(n))$，那么总复杂度就是 $O(m\log m)$，在相同的代码难度（优先队列写法）下复杂度优于 Prim。且由于常数问题在大部分图下使用斐波那契堆的 Prim 也不一定能跑过 Kruskal。</p>
+<p>若排序的复杂度是 <span class="arithmatex">\(O(m\log m)\)</span>，并查集使用路径压缩+按秩合并，复杂度为 <span class="arithmatex">\(O(m\alpha(n))\)</span>，那么总复杂度就是 <span class="arithmatex">\(O(m\log m)\)</span>，在相同的代码难度（优先队列写法）下复杂度优于 Prim。且由于常数问题在大部分图下使用斐波那契堆的 Prim 也不一定能跑过 Kruskal。</p>
 <p>另外，上述两个算法也可以求解<strong>最大生成树</strong>问题，证明略。</p>
 <h2 id="_4">瓶颈路</h2>
 <p>那么最小生成树有什么用呢？</p>
-<p>考虑这样一个问题，某地区的路径规划为一张无向图，每条边有一个限制 $w$，仅有权限大于 $w$ 的车才能经过，问权限为 $h$ 的车能否从 $A$ 地到 $B$ 地。</p>
-<p>容易发现，这个存在性只与 $AB$ 两地间限制<strong>最大值最小</strong>的路径有关。我们把这条路称为瓶颈路。</p>
-<p>那么类似的，我们可以定义瓶颈生成树，即 $G$ 所有生成树中边权最大值最小的。</p>
+<p>考虑这样一个问题，某地区的路径规划为一张无向图，每条边有一个限制 <span class="arithmatex">\(w\)</span>，仅有权限大于 <span class="arithmatex">\(w\)</span> 的车才能经过，问权限为 <span class="arithmatex">\(h\)</span> 的车能否从 <span class="arithmatex">\(A\)</span> 地到 <span class="arithmatex">\(B\)</span> 地。</p>
+<p>容易发现，这个存在性只与 <span class="arithmatex">\(AB\)</span> 两地间限制<strong>最大值最小</strong>的路径有关。我们把这条路称为瓶颈路。</p>
+<p>那么类似的，我们可以定义瓶颈生成树，即 <span class="arithmatex">\(G\)</span> 所有生成树中边权最大值最小的。</p>
 <p>容易发现，瓶颈生成树上的简单路径是瓶颈路的充分不必要条件。证明略。</p>
 <p>另外还有一个结论：最小生成树是瓶颈生成树的充分不必要条件。</p>
 <div class="admonition quote">
 <p class="admonition-title">证明</p>
 <p>考虑使用反证法。</p>
-<p>我们设最小生成树中的最大边权为 $w$，如果最小生成树不是瓶颈生成树的话，则瓶颈生成树的所有边权都小于 $w$，我们只需删去原最小生成树中的最长边，用瓶颈生成树中的一条边来连接删去边后形成的两棵树，得到的新生成树一定比原最小生成树的权值和还要小，这样就产生了矛盾。</p>
+<p>我们设最小生成树中的最大边权为 <span class="arithmatex">\(w\)</span>，如果最小生成树不是瓶颈生成树的话，则瓶颈生成树的所有边权都小于 <span class="arithmatex">\(w\)</span>，我们只需删去原最小生成树中的最长边，用瓶颈生成树中的一条边来连接删去边后形成的两棵树，得到的新生成树一定比原最小生成树的权值和还要小，这样就产生了矛盾。</p>
 </div>
 <p>很多时候，树上信息会比图上信息更好维护，那么就可以用最小生成树算法把一般图上问题转化为树上问题求解。</p>
 <p>例题不太能找到。我现在只能想到一道校内 OJ 的题目。</p>
@@ -6132,9 +6160,9 @@
 <p>Kruskal 重构树算法是基于 Kruskal 算法得到的。</p>
 <p>具体来说，我们在每次合并集合的时候，新建一个结点表示当前合并的这条边。它的点权就是原来边的边权，左右儿子就是当前正在合并的两集合原来的根。</p>
 <p>容易发现，这样构造出来的二叉树上，所有叶子结点均是原图上的点，其余结点代表最小生成树上的边。</p>
-<p>那我们来分析一下这棵树 $T$ 有什么性质。</p>
+<p>那我们来分析一下这棵树 <span class="arithmatex">\(T\)</span> 有什么性质。</p>
 <p>首先，它把<strong>边的信息</strong>转化为了<strong>点的信息</strong>。容易发现除去叶子结点，每个点的点权均大于等于其子树内所有点的点权（考虑构造过程），也就是说，从叶子结点到根的路径上的点权是<strong>单调不降</strong>的。</p>
-<p>另外，容易发现原图 $G$ 中 $A,B$ 间瓶颈路上的最小值正是 $T$ 上 $\mathrm{lca}(A,B)$ 的点权。仍然考虑树的构造过程，这是显然的。</p>
+<p>另外，容易发现原图 <span class="arithmatex">\(G\)</span> 中 <span class="arithmatex">\(A,B\)</span> 间瓶颈路上的最小值正是 <span class="arithmatex">\(T\)</span> 上 <span class="arithmatex">\(\mathrm{lca}(A,B)\)</span> 的点权。仍然考虑树的构造过程，这是显然的。</p>
 <details>
 <summary>参考实现</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="p">{</span>
@@ -6170,10 +6198,10 @@
 <details>
 <summary>P4768 [NOI2018] 归程</summary>
 <p><a href="https://www.luogu.com.cn/problem/P4768">传送门</a></p>
-<p>首先题意可以转化为每次求点 $v$ 只经过点权大于 $p$ 的边能到达的所有结点中，与结点 $1$ 间最短路最小是多少。</p>
+<p>首先题意可以转化为每次求点 <span class="arithmatex">\(v\)</span> 只经过点权大于 <span class="arithmatex">\(p\)</span> 的边能到达的所有结点中，与结点 <span class="arithmatex">\(1\)</span> 间最短路最小是多少。</p>
 <p>我们之前说过，Kruskal 是可以跑最大生成树的，且最大生成树也具有类似性质。</p>
-<p>那么设这样构造的 Kruskal 重构树为 $T$。根据上面的结论，容易发现 $v$ 必然存在一个祖先 $f$（可能是它自己），$a_f&gt;p,a_{father(f)}\le p$，那么 $f$ 子树内所有叶子结点就是从 $v$ 出发可达的结点，因为它们和 $v$ 的 $\mathrm{lca}$ 的点权显然均小于等于 $f$。</p>
-<p>那么我们可以先跑一遍以 $1$ 为起点的单源最短路，然后对每个点维护子树内叶子结点最短路最小值，最后在线倍增找到这个 $f$ 即可。复杂度 $O(m\log m+q\log m)$。</p>
+<p>那么设这样构造的 Kruskal 重构树为 <span class="arithmatex">\(T\)</span>。根据上面的结论，容易发现 <span class="arithmatex">\(v\)</span> 必然存在一个祖先 <span class="arithmatex">\(f\)</span>（可能是它自己），<span class="arithmatex">\(a_f&gt;p,a_{father(f)}\le p\)</span>，那么 <span class="arithmatex">\(f\)</span> 子树内所有叶子结点就是从 <span class="arithmatex">\(v\)</span> 出发可达的结点，因为它们和 <span class="arithmatex">\(v\)</span> 的 <span class="arithmatex">\(\mathrm{lca}\)</span> 的点权显然均小于等于 <span class="arithmatex">\(f\)</span>。</p>
+<p>那么我们可以先跑一遍以 <span class="arithmatex">\(1\)</span> 为起点的单源最短路，然后对每个点维护子树内叶子结点最短路最小值，最后在线倍增找到这个 <span class="arithmatex">\(f\)</span> 即可。复杂度 <span class="arithmatex">\(O(m\log m+q\log m)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6298,12 +6326,12 @@
 </details>
 </details>
 <h3 id="kruskal_3">基于点的 Kruskal 重构树</h3>
-<p>还有这么一类问题，就是只能经过点权小于/大于某值的点，然后要查询连通块信息。这个当然可以把 $(u,v)$ 的边权赋成 $\max(w_u,w_v)$ 然后直接跑 Kruskal 重构树。但其实还有一个更简洁的方法。</p>
-<p>具体来说，先将点权从小到大排序，然后每加入一个点就将它所有<strong>指向的点已加入重构树</strong>的出边指向的连通块作为它的儿子。容易发现这样构造出来结构仍类似于 Kruskal 重构树，并且只有 $n$ 个点。暂未找到例题。</p>
+<p>还有这么一类问题，就是只能经过点权小于/大于某值的点，然后要查询连通块信息。这个当然可以把 <span class="arithmatex">\((u,v)\)</span> 的边权赋成 <span class="arithmatex">\(\max(w_u,w_v)\)</span> 然后直接跑 Kruskal 重构树。但其实还有一个更简洁的方法。</p>
+<p>具体来说，先将点权从小到大排序，然后每加入一个点就将它所有<strong>指向的点已加入重构树</strong>的出边指向的连通块作为它的儿子。容易发现这样构造出来结构仍类似于 Kruskal 重构树，并且只有 <span class="arithmatex">\(n\)</span> 个点。暂未找到例题。</p>
 <h2 id="_7">其余典型问题</h2>
 <h3 id="_8">黑白生成树</h3>
 <p>接下来讨论一类最小生成树的常见问题：黑白最小生成树。</p>
-<p>这类问题的设问大概是每条边除了边权以外还有一个黑白颜色，问恰好有 $k$ 条白色边的最小生成树。这个的常见做法是 wqs 二分。</p>
+<p>这类问题的设问大概是每条边除了边权以外还有一个黑白颜色，问恰好有 <span class="arithmatex">\(k\)</span> 条白色边的最小生成树。这个的常见做法是 wqs 二分。</p>
 <p>然后 wqs 二分可以参考我的<a href="../../misc/wqs_binary_search/">这篇博客</a></p>
 <h3 id="_9">最小生成树数量</h3>
 <p>这个比较考验对 kruskal 的理解。</p>

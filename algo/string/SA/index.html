@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6103,16 +6131,16 @@
 <h1 id="sa">后缀数组（SA）学习笔记</h1>
 <h2 id="_1">前言</h2>
 <p>事实证明字符串算法就是一堆看起来卵用没有实际上巨有用的东西。</p>
-<p>本文中所有字符串下标从 $1$ 开始。用 $suf(i)$ 表示字符串 $s$ 从 $i$ 开始的后缀。</p>
+<p>本文中所有字符串下标从 <span class="arithmatex">\(1\)</span> 开始。用 <span class="arithmatex">\(suf(i)\)</span> 表示字符串 <span class="arithmatex">\(s\)</span> 从 <span class="arithmatex">\(i\)</span> 开始的后缀。</p>
 <h2 id="_2">什么是后缀数组</h2>
 <p>通俗来讲，后缀数组（Suffix Array,SA）就是把字符串所有后缀按字典序排序构成的数组。</p>
-<p>实际实现中，我们通常用两个数组来存储，分别是 $sa_i$ 和 $rk_i$。其中 $sa_i$ 是排名 $\to$ 编号的数组，$rk_i$ 是编号 $\to$ 排名的数组。那么显然对于所有 $i$ 都有 $rk_{sa_i}=sa_{rk_i}=i$。</p>
+<p>实际实现中，我们通常用两个数组来存储，分别是 <span class="arithmatex">\(sa_i\)</span> 和 <span class="arithmatex">\(rk_i\)</span>。其中 <span class="arithmatex">\(sa_i\)</span> 是排名 <span class="arithmatex">\(\to\)</span> 编号的数组，<span class="arithmatex">\(rk_i\)</span> 是编号 <span class="arithmatex">\(\to\)</span> 排名的数组。那么显然对于所有 <span class="arithmatex">\(i\)</span> 都有 <span class="arithmatex">\(rk_{sa_i}=sa_{rk_i}=i\)</span>。</p>
 <h2 id="_3">如何求后缀数组</h2>
 <h3 id="_4">朴素做法</h3>
-<p>首先有个显然的 $O(n^2 \log n)$ 做法，就是把所有后缀拎出来排序就行了，由于字典序比较是 $O(n)$ 的，要进行 $O(n\log n)$ 次比较所以复杂度长这样，代码就不贴了。</p>
+<p>首先有个显然的 <span class="arithmatex">\(O(n^2 \log n)\)</span> 做法，就是把所有后缀拎出来排序就行了，由于字典序比较是 <span class="arithmatex">\(O(n)\)</span> 的，要进行 <span class="arithmatex">\(O(n\log n)\)</span> 次比较所以复杂度长这样，代码就不贴了。</p>
 <h3 id="_5">基于倍增的做法</h3>
-<p>设从 $i$ 开始的长度为 $2^j$ 的子串为 $c_j(i)$，所有 $c_j(i)$ 的 $sa$ 数组为 $sa_j(i)$，$rk_j(i)$ 同理。</p>
-<p>然后先 $O(n \log n)$ 对 $c_0$ 排序，发现排 $c_1$ 的时候只要把 $c_0(i)$ 作为第一关键字，$c_0(i+2^0)$（越界视为无限小）作为第二关键字排序即可。这样子每层排序的复杂度就是 $O(n\log n)$，总复杂度 $O(n\log^2 n)$。</p>
+<p>设从 <span class="arithmatex">\(i\)</span> 开始的长度为 <span class="arithmatex">\(2^j\)</span> 的子串为 <span class="arithmatex">\(c_j(i)\)</span>，所有 <span class="arithmatex">\(c_j(i)\)</span> 的 <span class="arithmatex">\(sa\)</span> 数组为 <span class="arithmatex">\(sa_j(i)\)</span>，<span class="arithmatex">\(rk_j(i)\)</span> 同理。</p>
+<p>然后先 <span class="arithmatex">\(O(n \log n)\)</span> 对 <span class="arithmatex">\(c_0\)</span> 排序，发现排 <span class="arithmatex">\(c_1\)</span> 的时候只要把 <span class="arithmatex">\(c_0(i)\)</span> 作为第一关键字，<span class="arithmatex">\(c_0(i+2^0)\)</span>（越界视为无限小）作为第二关键字排序即可。这样子每层排序的复杂度就是 <span class="arithmatex">\(O(n\log n)\)</span>，总复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="o">=</span><span class="mf">1e6</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">inf</span><span class="o">=</span><span class="mh">0x3f3f3f3f</span><span class="p">;</span>
@@ -6150,23 +6178,23 @@
 </span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>因为每层 $rk$ 前面的会覆盖后面的所以要复制一份 $ork$（origin rank）。</li>
+<li>因为每层 <span class="arithmatex">\(rk\)</span> 前面的会覆盖后面的所以要复制一份 <span class="arithmatex">\(ork\)</span>（origin rank）。</li>
 <li>假如两个都相等说明排名一样。</li>
-<li>$w$ 定义成全局变量（或者使用我不会的 lambda 表达式），然后因为要越界访问所以要开二倍数组。</li>
+<li><span class="arithmatex">\(w\)</span> 定义成全局变量（或者使用我不会的 lambda 表达式），然后因为要越界访问所以要开二倍数组。</li>
 <li>一开始可以直接把 ASCII 码当排名，总之就是能概括它大小就行。</li>
 </ol>
 </details>
 <p>这篇代码开了 O2 已经能通过<a href="https://www.luogu.com.cn/problem/P3809">洛谷模板题</a>了。</p>
 <p><img alt="图示 1" src="../../../img/SA_1.png" /></p>
-<p>但是双 $\log$ 复杂度显然不够优美（而且我也不知道为什么双 $\log$ 可以过 $10^6$），极限数据甚至跑了将近 1.5s。</p>
+<p>但是双 <span class="arithmatex">\(\log\)</span> 复杂度显然不够优美（而且我也不知道为什么双 <span class="arithmatex">\(\log\)</span> 可以过 <span class="arithmatex">\(10^6\)</span>），极限数据甚至跑了将近 1.5s。</p>
 <h3 id="_6">倍增 + 基数排序优化</h3>
-<p>在 OI 界有一个传奇，它作为一种排序算法，只多了常数的空间复杂度，换来的却是吊打一切基于比较的排序算法的 $O(n)$ 复杂度。它就是<strong>基数排序</strong>。</p>
+<p>在 OI 界有一个传奇，它作为一种排序算法，只多了常数的空间复杂度，换来的却是吊打一切基于比较的排序算法的 <span class="arithmatex">\(O(n)\)</span> 复杂度。它就是<strong>基数排序</strong>。</p>
 <p><del>然而由于排序元素的局限性以及有一个更方便的东西叫快排基本没人用基排。</del></p>
 <p>以防有人不知道基数排序：</p>
 <details class="info">
 <summary>基数排序</summary>
 <p>这里讲的是我的理解，如果想要更严谨的版本清<strong>上网自己搜</strong>。</p>
-<p>基排大概是对计数排序的空间优化。计数排序就是用桶统计每个数的出现次数求出每个数的排名但是它的空间复杂度等于值域大小 <del>不然你用平衡树存又变成 $O(n\log n)$ 的了。</del></p>
+<p>基排大概是对计数排序的空间优化。计数排序就是用桶统计每个数的出现次数求出每个数的排名但是它的空间复杂度等于值域大小 <del>不然你用平衡树存又变成 <span class="arithmatex">\(O(n\log n)\)</span> 的了。</del></p>
 <p>基数排序的思想就是把数分成多个值域能开的下的关键字，然后从次要关键字到主要关键字依次做计数排序（要保证排序稳定），这样最后就能排好了。</p>
 </details>
 <p>由于字符集多半不会太大，又恰好是两个关键字的排序，后缀数组完全可以使用基数排序实现。</p>
@@ -6221,10 +6249,10 @@
 </details>
 <p>发现速度显著提升：</p>
 <p><img alt="图示 2" src="../../../img/SA_2.png" /></p>
-<p>但是没有预料中那么显著，毕竟一个 $\log 10^6$ 的差距显然不止两倍。</p>
+<p>但是没有预料中那么显著，毕竟一个 <span class="arithmatex">\(\log 10^6\)</span> 的差距显然不止两倍。</p>
 <p>原因在于我们遍历了八遍数组，常数巨大。考虑进行一些常数优化。</p>
-<p>首先简单地，当 $m=n$，即每个后缀在当前阶段已经两两不同，说明后缀排序已经完成，两两之间大小关系已经确定，就可以退出了。</p>
-<p>然后另外，容易发现其实不需要对第二关键字进行计数排序。因为第二关键字其实在 $w-1$ 阶段已经排好了，除去末尾 $i+2^w&gt;n$ 的一部分以外，但这部分显然可以直接塞到序列开头。</p>
+<p>首先简单地，当 <span class="arithmatex">\(m=n\)</span>，即每个后缀在当前阶段已经两两不同，说明后缀排序已经完成，两两之间大小关系已经确定，就可以退出了。</p>
+<p>然后另外，容易发现其实不需要对第二关键字进行计数排序。因为第二关键字其实在 <span class="arithmatex">\(w-1\)</span> 阶段已经排好了，除去末尾 <span class="arithmatex">\(i+2^w&gt;n\)</span> 的一部分以外，但这部分显然可以直接塞到序列开头。</p>
 <details class="success">
 <summary>优化后代码</summary>
 <p>除去这一段以外其余是一样的。</p>
@@ -6254,7 +6282,7 @@
 </details>
 <p>效率更加显著地提升。</p>
 <p><img alt="图示 3" src="../../../img/SA_3.png" /></p>
-<p>另外还有很多 $O(n)$ 的做法。但是这个已经不在 OI 学习范畴了。</p>
+<p>另外还有很多 <span class="arithmatex">\(O(n)\)</span> 的做法。但是这个已经不在 OI 学习范畴了。</p>
 <h2 id="_7">后缀数组有什么用</h2>
 <p>还记得我开头说了什么吗？</p>
 <blockquote>
@@ -6262,26 +6290,26 @@
 </blockquote>
 <p>所以这个看起来没有卵用的东西其实非常有用。</p>
 <h3 id="_8">已知文本串，每次给定模式串进行字符串匹配</h3>
-<p>由于一个字串必定是某个后缀的前缀，那么假如原文本串为 $T$，每次的模式串为 $S$，我们可以在后缀数组中二分找到第一个前缀为 $S$ 的后缀，复杂度 $O(|S|\log |T|)$，并且容易发现假如 $T$ 中 $S$ 出现了不止一次，那么它们对应的后缀在后缀数组中显然是相邻的。</p>
+<p>由于一个字串必定是某个后缀的前缀，那么假如原文本串为 <span class="arithmatex">\(T\)</span>，每次的模式串为 <span class="arithmatex">\(S\)</span>，我们可以在后缀数组中二分找到第一个前缀为 <span class="arithmatex">\(S\)</span> 的后缀，复杂度 <span class="arithmatex">\(O(|S|\log |T|)\)</span>，并且容易发现假如 <span class="arithmatex">\(T\)</span> 中 <span class="arithmatex">\(S\)</span> 出现了不止一次，那么它们对应的后缀在后缀数组中显然是相邻的。</p>
 <h3 id="lcp-height">LCP 及 height 数组</h3>
 <p>但其实 SA 本身的用处并不大（ <del>这不是前后矛盾吗</del> ），用的更多的其实是 SA 的拓展知识 height 数组。</p>
 <h4 id="lcp">LCP</h4>
 <p>在了解 height 数组之前，先了解一下 LCP 是什么。</p>
 <div class="admonition quote">
 <p class="admonition-title">什么是 LCP</p>
-<p>两个字符串 $S$ 和 $T$ 的 LCP（longest common prefix，最长公共前缀）就是最大的 $x(x\le \min(|S|, |T|))$ 使得 $S_i=T_i (\forall 1\le i\le x)$。</p>
-<p>下文中以 $\mathrm{lcp}(i,j)$（Longest Common Prefix）表示后缀 $i$ 和后缀 $j$ 的最长公共前缀的长度。</p>
+<p>两个字符串 <span class="arithmatex">\(S\)</span> 和 <span class="arithmatex">\(T\)</span> 的 LCP（longest common prefix，最长公共前缀）就是最大的 <span class="arithmatex">\(x(x\le \min(|S|, |T|))\)</span> 使得 <span class="arithmatex">\(S_i=T_i\ (\forall\ 1\le i\le x)\)</span>。</p>
+<p>下文中以 <span class="arithmatex">\(\mathrm{lcp}(i,j)\)</span>（Longest Common Prefix）表示后缀 <span class="arithmatex">\(i\)</span> 和后缀 <span class="arithmatex">\(j\)</span> 的最长公共前缀的长度。</p>
 </div>
 <h4 id="height">height 数组</h4>
-<p>height 数组的定义为 $height_i=\mathrm{lcp}(sa_i,sa_{i-1})$（这里的 $sa$ 是那个后缀对应的字符串），特别地，令 $height_1=0$（其实就相当于和空字符串的 $\mathrm{lcp}$）。</p>
+<p>height 数组的定义为 <span class="arithmatex">\(height_i=\mathrm{lcp}(sa_i,sa_{i-1})\)</span>（这里的 <span class="arithmatex">\(sa\)</span> 是那个后缀对应的字符串），特别地，令 <span class="arithmatex">\(height_1=0\)</span>（其实就相当于和空字符串的 <span class="arithmatex">\(\mathrm{lcp}\)</span>）。</p>
 <h4 id="height_1">求 height 数组</h4>
-<p>height 数组可以 $O(n)$ 求出，但需要一个引理：</p>
+<p>height 数组可以 <span class="arithmatex">\(O(n)\)</span> 求出，但需要一个引理：</p>
 <details class="abstract" open="open">
 <summary>引理及其证明</summary>
-<p>引理：$height_{rk_i}\ge height_{rk_{i-1}}-1$。</p>
+<p>引理：<span class="arithmatex">\(height_{rk_i}\ge height_{rk_{i-1}}-1\)</span>。</p>
 <p>证明：</p>
-<p>其实很简单，考虑设 $suf(i-1)=cAB$，其中 $c$ 是一个字符，$AB$ 均是字符串，$cA$ 是 $height_{rk_{i-1}}$ 对应的那个 $\mathrm{lcp}$，这说明 $suf(sa_{rk_{i-1}-1})=cAD$，其中 $D$ 也是一个字符串。</p>
-<p>容易发现 $suf(i)=AB$，并且由于存在 $suf(sa_{rk_{i-1}-1}+1)=AD$，所以 $height_{rk_i}$ 至少也是 $A$，并且由于去掉了一个 $c$，还可能存在一个 $\mathrm{lcp}$ 更长的后缀。</p>
+<p>其实很简单，考虑设 <span class="arithmatex">\(suf(i-1)=cAB\)</span>，其中 <span class="arithmatex">\(c\)</span> 是一个字符，<span class="arithmatex">\(AB\)</span> 均是字符串，<span class="arithmatex">\(cA\)</span> 是 <span class="arithmatex">\(height_{rk_{i-1}}\)</span> 对应的那个 <span class="arithmatex">\(\mathrm{lcp}\)</span>，这说明 <span class="arithmatex">\(suf(sa_{rk_{i-1}-1})=cAD\)</span>，其中 <span class="arithmatex">\(D\)</span> 也是一个字符串。</p>
+<p>容易发现 <span class="arithmatex">\(suf(i)=AB\)</span>，并且由于存在 <span class="arithmatex">\(suf(sa_{rk_{i-1}-1}+1)=AD\)</span>，所以 <span class="arithmatex">\(height_{rk_i}\)</span> 至少也是 <span class="arithmatex">\(A\)</span>，并且由于去掉了一个 <span class="arithmatex">\(c\)</span>，还可能存在一个 <span class="arithmatex">\(\mathrm{lcp}\)</span> 更长的后缀。</p>
 </details>
 <p>那么就可以直接暴力了：</p>
 <details class="success">
@@ -6295,23 +6323,23 @@
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p>由于 $k$ 至多只会减小 $n$ 次，且 $k$ 最大时不会超过 $n$，故至多对 $k$ 进行 $2n$ 次操作，复杂度 $O(n)$。</p>
+<p>由于 <span class="arithmatex">\(k\)</span> 至多只会减小 <span class="arithmatex">\(n\)</span> 次，且 <span class="arithmatex">\(k\)</span> 最大时不会超过 <span class="arithmatex">\(n\)</span>，故至多对 <span class="arithmatex">\(k\)</span> 进行 <span class="arithmatex">\(2n\)</span> 次操作，复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <h3 id="_9">任意两后缀的最长公共前缀</h3>
 <p>那么 height 数组有什么用呢？</p>
-<p>首先，可以求任意两后缀的 $\mathrm{lcp}$。</p>
-<p>考虑把所有后缀压入一棵 Trie，那么两后缀的 $\mathrm{lcp}$ 就是对应结束状态在 Trie 上的 $\mathrm{lca}$。</p>
-<p>然后根据经典结论，序列上两点 $u,v$ 的 $\mathrm{lca}$ 就是按 dfn 排序后，区间 $[u,v]$ 中所有相邻两点的 $\mathrm{lca}$ 中深度最小的。</p>
-<p>而容易发现，按字典序排序恰好就是 Trie 上的 dfn 序列，而 $height_i$ 就是 $\mathrm{lca}(sa_i,sa_{i-1})$，那么做个 RMQ 即可。</p>
+<p>首先，可以求任意两后缀的 <span class="arithmatex">\(\mathrm{lcp}\)</span>。</p>
+<p>考虑把所有后缀压入一棵 Trie，那么两后缀的 <span class="arithmatex">\(\mathrm{lcp}\)</span> 就是对应结束状态在 Trie 上的 <span class="arithmatex">\(\mathrm{lca}\)</span>。</p>
+<p>然后根据经典结论，序列上两点 <span class="arithmatex">\(u,v\)</span> 的 <span class="arithmatex">\(\mathrm{lca}\)</span> 就是按 dfn 排序后，区间 <span class="arithmatex">\([u,v]\)</span> 中所有相邻两点的 <span class="arithmatex">\(\mathrm{lca}\)</span> 中深度最小的。</p>
+<p>而容易发现，按字典序排序恰好就是 Trie 上的 dfn 序列，而 <span class="arithmatex">\(height_i\)</span> 就是 <span class="arithmatex">\(\mathrm{lca}(sa_i,sa_{i-1})\)</span>，那么做个 RMQ 即可。</p>
 <h3 id="_10">本质不同子串个数</h3>
 <p>height 数组还可以求本质不同子串个数。</p>
 <p>考虑多个字符串的本质不同前缀个数怎么求（求出 SA 后就转化成这个问题了）。</p>
 <p>容易想到压入一棵 Trie，那么这个问题的答案就是 Trie 上的结点数量了。</p>
-<p>然后同样用 dfn 的结论，每次新增的结点数量就是 $n-sa_i+1-height_i$。</p>
+<p>然后同样用 dfn 的结论，每次新增的结点数量就是 <span class="arithmatex">\(n-sa_i+1-height_i\)</span>。</p>
 <p>代码就不贴了。</p>
 <h3 id="k">排名第 k 小的子串</h3>
 <p>如果只算本质不同的子串，那么就是上一个问题略微转化一下。</p>
 <p>如果长得一样但位置不同的子串算作不同的，应该怎么做呢？</p>
-<p>仍然考虑 Trie，容易发现对于一条没有分叉的树链中的每个状态的数量是可以计算的，就是这条树链被经过的次数。而显然 Trie 中状态的字典序就是先序遍历，那么考虑按先序遍历枚举关键点（就是所有 $sa_i,height_i$）即可。</p>
+<p>仍然考虑 Trie，容易发现对于一条没有分叉的树链中的每个状态的数量是可以计算的，就是这条树链被经过的次数。而显然 Trie 中状态的字典序就是先序遍历，那么考虑按先序遍历枚举关键点（就是所有 <span class="arithmatex">\(sa_i,height_i\)</span>）即可。</p>
 <p>可以得到一个长得像分治的做法：</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6344,8 +6372,8 @@
 </span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li><code>query(l,r)</code> 会返回区间内 <code>ht</code> 最小的下标，<code>ht</code> 就是上文的 $height$ 数组。</li>
-<li>相当于遍历到 $sa_i$。</li>
+<li><code>query(l,r)</code> 会返回区间内 <code>ht</code> 最小的下标，<code>ht</code> 就是上文的 <span class="arithmatex">\(height\)</span> 数组。</li>
+<li>相当于遍历到 <span class="arithmatex">\(sa_i\)</span>。</li>
 <li>相当于中间的树链。</li>
 </ol>
 </details>

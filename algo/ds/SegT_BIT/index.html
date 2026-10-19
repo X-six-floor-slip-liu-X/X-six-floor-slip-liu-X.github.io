@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5998,16 +6026,16 @@
 <p>顾名思义，线段树是一棵二叉树，每个结点代表一段线段，其中任意非叶子结点的两儿子所代表的线段首尾连接能得到该结点代表的线段。</p>
 <p><img alt="图示 2" src="../../../img/ds_SegT_BIT_2.png" /></p>
 <p>图片来自于<a href="https://zhuanlan.zhihu.com/p/106118909">网络</a>。</p>
-<p>那么假如我们要动态维护每条线段的信息，比如说区间求和之类的，那么我们就可以每次把子节点的信息合并到父亲，这样能在 $O(\log n)$ 的复杂度内实现单点修改，然后由于二进制的性质，每个大区间至多只会覆盖 $O(\log n)$ 个结点，那么区间查询也是 $O(\log n)$ 的。</p>
+<p>那么假如我们要动态维护每条线段的信息，比如说区间求和之类的，那么我们就可以每次把子节点的信息合并到父亲，这样能在 <span class="arithmatex">\(O(\log n)\)</span> 的复杂度内实现单点修改，然后由于二进制的性质，每个大区间至多只会覆盖 <span class="arithmatex">\(O(\log n)\)</span> 个结点，那么区间查询也是 <span class="arithmatex">\(O(\log n)\)</span> 的。</p>
 <p>另外非常重要的一点是（这点会贯穿全文）线段树维护的信息需要满足什么性质。但结论很显然，只要满足结合律即可：</p>
-<p>$$(A\oplus B)\oplus C=A\oplus(B\oplus C)$$</p>
-<p>其中 $\oplus$ 是你要维护的运算，包括但不限于加法，乘法，$\max$，$\min$，按位与，按位或，按位异或等。</p>
+<div class="arithmatex">\[(A\oplus B)\oplus C=A\oplus(B\oplus C)\]</div>
+<p>其中 <span class="arithmatex">\(\oplus\)</span> 是你要维护的运算，包括但不限于加法，乘法，<span class="arithmatex">\(\max\)</span>，<span class="arithmatex">\(\min\)</span>，按位与，按位或，按位异或等。</p>
 <p>然后大部分线段树基本只有合并部分有区别，所以想线段树要如何维护基本只需要搞懂如何合并即可。</p>
 <p>很基础，就不贴代码了。</p>
 <h3 id="_4">懒标记</h3>
-<p>考虑有些时候，我们要用线段树维护区间修改（比如区间加，区间赋值），区间查询。但是和某个区间有关的节点数量是 $O(n\log n)$ 级别的，直接做还不如暴力，何解？</p>
+<p>考虑有些时候，我们要用线段树维护区间修改（比如区间加，区间赋值），区间查询。但是和某个区间有关的节点数量是 <span class="arithmatex">\(O(n\log n)\)</span> 级别的，直接做还不如暴力，何解？</p>
 <p>过去的某个天才想出了<strong>懒标记</strong>这么一个好办法：</p>
-<p>具体来说，我们修改时只修改区间完全覆盖的极大的 $O(\log n)$ 个结点，并在这些结点上打一个懒标记。当我们下一次访问到这些结点时，就把它们的子节点修改了，并下传懒标记。这样就能保证修改的复杂度是 $O(\log n)$ 的了。</p>
+<p>具体来说，我们修改时只修改区间完全覆盖的极大的 <span class="arithmatex">\(O(\log n)\)</span> 个结点，并在这些结点上打一个懒标记。当我们下一次访问到这些结点时，就把它们的子节点修改了，并下传懒标记。这样就能保证修改的复杂度是 <span class="arithmatex">\(O(\log n)\)</span> 的了。</p>
 <p>然后多个懒标记时要注意懒标记下传的顺序，比如乘法和加法一起维护时要注意先乘后加，加法和赋值一起维护时要考虑赋值对加法的覆盖等。</p>
 <p>还是很基础，就不贴代码了（主要是在网上也能找到）。</p>
 <h3 id="_5">标记永久化</h3>
@@ -6015,10 +6043,10 @@
 <p>具体来说，不把懒标记下传，只是在查询的时候把经过的所有结点的懒标记统计到一起。容易发现这样和下传其实是等价的，因为代码略难写所以不太常用。而且不太好调试，非必须不建议使用。</p>
 <h3 id="_6">非递归线段树</h3>
 <p>通常的线段树是从根到叶子维护的，但是还有一种线段树，是从叶子到根维护的。</p>
-<p>一般的线段树并不容易快速找到叶子结点，但在特殊的数据下，我们可以 $O(1)$ 找到叶子结点，最典型的就是完全二叉树（但是其实我也不知道其它的例子 ￣□￣｜｜）。</p>
-<p>假设 $N=2^k$，不够就补齐，考虑线段树维护的东西长啥样：</p>
+<p>一般的线段树并不容易快速找到叶子结点，但在特殊的数据下，我们可以 <span class="arithmatex">\(O(1)\)</span> 找到叶子结点，最典型的就是完全二叉树（但是其实我也不知道其它的例子 ￣□￣｜｜）。</p>
+<p>假设 <span class="arithmatex">\(N=2^k\)</span>，不够就补齐，考虑线段树维护的东西长啥样：</p>
 <p><img alt="图示 1" src="../../../img/ds_SegT_BIT_1.png" /></p>
-<p>那么我们容易定位到一个点 $i$ 对应的叶子结点，即 $i+N-1$。我们每次除以二再下取整就可以得到这个点的父亲结点。</p>
+<p>那么我们容易定位到一个点 <span class="arithmatex">\(i\)</span> 对应的叶子结点，即 <span class="arithmatex">\(i+N-1\)</span>。我们每次除以二再下取整就可以得到这个点的父亲结点。</p>
 <p>这里以单点加，区间求和为例。容易得到一个非常简短的建树：</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6052,49 +6080,49 @@
 </span></code></pre></div>
 <ol>
 <li>转化为开区间。</li>
-<li>假如 $l$ 是左儿子说明它的兄弟在区间内，$r$ 同理。</li>
+<li>假如 <span class="arithmatex">\(l\)</span> 是左儿子说明它的兄弟在区间内，<span class="arithmatex">\(r\)</span> 同理。</li>
 </ol>
 </details>
 <p>这就是 zkw 线段树。</p>
 <p>有人可能会问，为什么单点修区间查不用树状数组，但树状数组要维护的东西（如果不是前缀/后缀）必须满足这样两个性质：</p>
 <ol>
-<li>$A+(B+C)=(A+B)+C$（即结合律）</li>
-<li>$A+B-A=B$（即可减性）</li>
+<li><span class="arithmatex">\(A+(B+C)=(A+B)+C\)</span>（即结合律）</li>
+<li><span class="arithmatex">\(A+B-A=B\)</span>（即可减性）</li>
 </ol>
-<p>这里的 $+,-$ 不一定特指加减法，比如异或也满足这样的性质。</p>
-<p>而之前说过，线段树维护的只需要满足结合律就行了，比如 $\min,\max$，与，或等常见操作均有结合律，但是没有可减性。这就非常好。</p>
+<p>这里的 <span class="arithmatex">\(+,-\)</span> 不一定特指加减法，比如异或也满足这样的性质。</p>
+<p>而之前说过，线段树维护的只需要满足结合律就行了，比如 <span class="arithmatex">\(\min,\max\)</span>，与，或等常见操作均有结合律，但是没有可减性。这就非常好。</p>
 <p>zkw 线段树在单点修改区间查询时表现极其优秀（从各方面），但是区间修改时和普通线段树相比没有明显优势。</p>
 <h3 id="_7">拓展</h3>
-<p>但是线段树维护信息必须满足结合律是建立在要求 $O(1)$ 合并的情况下的。</p>
-<p>有些时候，当复杂度要求不高时，我们可以考虑 $O(\log n)$ 的合并，并且假如信息不方便存储到每个结点时，可以考虑只存储部分信息然后递归合并。</p>
+<p>但是线段树维护信息必须满足结合律是建立在要求 <span class="arithmatex">\(O(1)\)</span> 合并的情况下的。</p>
+<p>有些时候，当复杂度要求不高时，我们可以考虑 <span class="arithmatex">\(O(\log n)\)</span> 的合并，并且假如信息不方便存储到每个结点时，可以考虑只存储部分信息然后递归合并。</p>
 <p>比如 <a href="https://www.luogu.com.cn/problem/P4198">P4198 楼房重建</a>。</p>
 <h3 id="_8">总结</h3>
-<p>线段树的优势在于可以在线修改 $+$ 询问，并且维护的信息仅必要结合律（有些时候甚至都不必要），所以功能很广泛。缺点在于常数较大（与树状数组对比）。据说以前某位 ACM 金牌曾说过他数据结构只学过线段树就拿到金牌了，可见线段树应用之广泛。</p>
+<p>线段树的优势在于可以在线修改 <span class="arithmatex">\(+\)</span> 询问，并且维护的信息仅必要结合律（有些时候甚至都不必要），所以功能很广泛。缺点在于常数较大（与树状数组对比）。据说以前某位 ACM 金牌曾说过他数据结构只学过线段树就拿到金牌了，可见线段树应用之广泛。</p>
 <h2 id="bit">树状数组（BIT）</h2>
 <p>然后就是刚刚提过树状数组了，国外貌似叫这个东西 BIT（Binary Index Tree，二叉索引树），国内由于形式像数组，而且空间是线性的，喜欢叫它树状数组。</p>
 <p>树状数组和线段树很像，相当于去掉每个结点的第一级别右儿子的线段树：</p>
 <p><img alt="图示 3" src="../../../img/ds_SegT_BIT_3.png" /></p>
-<p>由于二进制的性质，BIT 可以在 $O(\log n)$ 的时间内维护每个前缀的信息（当然假如你删的是左儿子就能维护后缀的信息了），当维护的信息具有可减性时，就可以利用前缀信息维护区间的信息了。</p>
+<p>由于二进制的性质，BIT 可以在 <span class="arithmatex">\(O(\log n)\)</span> 的时间内维护每个前缀的信息（当然假如你删的是左儿子就能维护后缀的信息了），当维护的信息具有可减性时，就可以利用前缀信息维护区间的信息了。</p>
 <p>再强调一遍：</p>
 <blockquote>
 <p>仅维护前缀/后缀信息所需运算律：</p>
 </blockquote>
-<p>$$(A\oplus B)\oplus C=A\oplus(B\oplus C)$$</p>
+<div class="arithmatex">\[(A\oplus B)\oplus C=A\oplus(B\oplus C)\]</div>
 <blockquote>
 <p>维护区间信息所需运算律：</p>
 </blockquote>
-<p>$$(A\oplus B)\oplus C=A\oplus(B\oplus C)$$</p>
-<p>$$A\oplus B\ominus A=B$$</p>
-<p>其中 $\ominus$ 表示 $\oplus$ 的逆运算。</p>
+<div class="arithmatex">\[(A\oplus B)\oplus C=A\oplus(B\oplus C)\]</div>
+<div class="arithmatex">\[A\oplus B\ominus A=B\]</div>
+<p>其中 <span class="arithmatex">\(\ominus\)</span> 表示 <span class="arithmatex">\(\oplus\)</span> 的逆运算。</p>
 <p>然后由于二进制的性质，我们只需要加上 lowbit 就能找到覆盖某结点的上一层结点，减去 lowbit 就能找到结点左侧最高的结点，这使得 BIT 的代码极其好写。</p>
 <h2 id="st_1">ST 表</h2>
 <p>ST 表（Sparse Table，稀疏表）通常用来处理 RMQ（Range Maximum/Minimum Query，区间最大/最小值查询）问题。主要利用了<strong>倍增</strong>算法。</p>
-<p>具体来说，我们预处理以每个结点为左端点，长度为 $2$ 的整数次幂的所有区间内的信息，这样的区间显然有 $O(n\log n)$ 个。预处理可以利用倍增实现，复杂度 $O(n\log n)$。</p>
-<p>然后查询时，假设我们要查询的区间为 $[l,r]$，长度为 $len$，小于等于 $len$ 的最大 $2$ 的整数次幂为 $2^k$，那么我们将 $[l,l+2^k-1],[r-2^k+1,r]$ 两个区间的信息合并即可 $O(1)$ 查询。</p>
+<p>具体来说，我们预处理以每个结点为左端点，长度为 <span class="arithmatex">\(2\)</span> 的整数次幂的所有区间内的信息，这样的区间显然有 <span class="arithmatex">\(O(n\log n)\)</span> 个。预处理可以利用倍增实现，复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
+<p>然后查询时，假设我们要查询的区间为 <span class="arithmatex">\([l,r]\)</span>，长度为 <span class="arithmatex">\(len\)</span>，小于等于 <span class="arithmatex">\(len\)</span> 的最大 <span class="arithmatex">\(2\)</span> 的整数次幂为 <span class="arithmatex">\(2^k\)</span>，那么我们将 <span class="arithmatex">\([l,l+2^k-1],[r-2^k+1,r]\)</span> 两个区间的信息合并即可 <span class="arithmatex">\(O(1)\)</span> 查询。</p>
 <p>于是显而易见，ST 表维护的信息必须满足以下运算律：</p>
-<p>$$(A\oplus B)\oplus C=A\oplus(B\oplus C)$$
-$$A\oplus A=A$$</p>
-<p>比如 $\min$，$\max$，按位与，按位或等运算都满足以上性质。</p>
+<div class="arithmatex">\[(A\oplus B)\oplus C=A\oplus(B\oplus C)$$
+$$A\oplus A=A\]</div>
+<p>比如 <span class="arithmatex">\(\min\)</span>，<span class="arithmatex">\(\max\)</span>，按位与，按位或等运算都满足以上性质。</p>
 <p>但是 ST 表不能在线修改，所以应用面较窄。</p>
 <h2 id="_9">总结</h2>
 <p>感觉不太好总结。</p>

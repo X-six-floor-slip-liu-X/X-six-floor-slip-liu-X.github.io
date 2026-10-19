@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5905,24 +5933,24 @@
 <p>本文中“反演”均指线性反演。</p>
 <h2 id="_2">什么是反演</h2>
 <p>反演是一个定义在线性变换上的关系。</p>
-<p>称 $T$ 和 $T'$ 两个矩阵为反演关系当且仅当 $x\times  T\times T'=x$。</p>
-<p>容易发现 $T$ 和 $T'$ 互逆，根据矩阵乘法的结合律易证。</p>
-<p>举个栗子，设 $x$ 是数列，那么前缀和和差分互为反演关系，因为从 $x$ 作前缀和得到 $x'$ 再做差分就回来了。</p>
-<p>考虑前缀和的矩阵（此处考虑把 $x$ 当成一个行向量右乘转移矩阵，我们通常把这样描述线性关系的矩阵叫<strong>关系矩阵</strong>）是 $T_{i,j}=[j\ge i]$，差分的矩阵是 $T_{i,j}'=[j=i]-[j=i+1]$，容易发现两矩阵相乘就能得到单位矩阵 $I$。</p>
+<p>称 <span class="arithmatex">\(T\)</span> 和 <span class="arithmatex">\(T'\)</span> 两个矩阵为反演关系当且仅当 <span class="arithmatex">\(x\times  T\times T'=x\)</span>。</p>
+<p>容易发现 <span class="arithmatex">\(T\)</span> 和 <span class="arithmatex">\(T'\)</span> 互逆，根据矩阵乘法的结合律易证。</p>
+<p>举个栗子，设 <span class="arithmatex">\(x\)</span> 是数列，那么前缀和和差分互为反演关系，因为从 <span class="arithmatex">\(x\)</span> 作前缀和得到 <span class="arithmatex">\(x'\)</span> 再做差分就回来了。</p>
+<p>考虑前缀和的矩阵（此处考虑把 <span class="arithmatex">\(x\)</span> 当成一个行向量右乘转移矩阵，我们通常把这样描述线性关系的矩阵叫<strong>关系矩阵</strong>）是 <span class="arithmatex">\(T_{i,j}=[j\ge i]\)</span>，差分的矩阵是 <span class="arithmatex">\(T_{i,j}'=[j=i]-[j=i+1]\)</span>，容易发现两矩阵相乘就能得到单位矩阵 <span class="arithmatex">\(I\)</span>。</p>
 <p>那么线性代数比较强的同学就能用矩阵的知识来分析反演了。</p>
-<p>并且容易发现 OI 范围内讨论的反演其实就是一堆容斥套路，通常用来解决计数问题。比如有时候要求一个函数 $F(n)$，但它不好求，而存在一个 $G=F\times T$ 是好求的，并且存在 $T'$ 和 $T$ 为反演关系，那么可以用 $F=G\times T'$ 来求出 $F$。</p>
+<p>并且容易发现 OI 范围内讨论的反演其实就是一堆容斥套路，通常用来解决计数问题。比如有时候要求一个函数 <span class="arithmatex">\(F(n)\)</span>，但它不好求，而存在一个 <span class="arithmatex">\(G=F\times T\)</span> 是好求的，并且存在 <span class="arithmatex">\(T'\)</span> 和 <span class="arithmatex">\(T\)</span> 为反演关系，那么可以用 <span class="arithmatex">\(F=G\times T'\)</span> 来求出 <span class="arithmatex">\(F\)</span>。</p>
 <h2 id="_3">二项式反演</h2>
 <p>比较基础的反演，后面很多东西都需要用这个证明。关系矩阵是把杨辉三角横过来填到上三角矩阵，然后奇数行全取相反数。</p>
-<p>形式化的（此处的 $G(x),F(x)$ 均为数列）：</p>
-<p>$$
+<p>形式化的（此处的 <span class="arithmatex">\(G(x),F(x)\)</span> 均为数列）：</p>
+<div class="arithmatex">\[
 G(n)=\sum_{i=0}^n(-1)^i\dbinom{n}{i}F(i)
-$$</p>
+\]</div>
 <p>然后用矩阵描述就是：</p>
-<p>$$
+<div class="arithmatex">\[
 T_{i,j}=(-1)^i\dbinom{j}{i}
-$$</p>
+\]</div>
 <p>它和自己互为反演关系，考虑把两个关系矩阵乘起来：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
  &amp;(T\times T)_{i,j}\\
 =&amp;\sum_{k=0}^nT_{i,k}\times T_{k,j}\\
@@ -5930,121 +5958,121 @@ $$</p>
 =&amp;(-1)^j\sum_{k=j}^i(-1)^k\binom{i}{j}\binom{i-j}{k-j}\\
 =&amp;(-1)^j\binom{i}{j}\sum_{k=j}^i(-1)^k\binom{i-j}{k-j}\\
 \end{aligned}
-$$</p>
-<p>其中第三步能改 $\sum$ 的范围是因为 $[j,i]$ 外面 $\binom{i}{k}\binom{k}{j}=0$，第四步是经典组合意义，$i$ 个里面选 $k$ 个再从 $k$ 个里面选 $j$ 个等价于直接选 $j$ 个然后在剩下的里面选出第一步选了但第二步没选的。</p>
-<p>容易发现 $\sum_{k=j}^i(-1)^k\binom{i-j}{k-j}$ 是杨辉三角第 $i-j$ 这一整行中偶数列减去奇数列。根据经典结论，这个东西不等于 $0$ 当且仅当 $i-j=0$，原因是当 $i-j&gt; 0$ 时杨辉三角前一行每个数都能对这一行的奇数之和和偶数之和各产生一次贡献。</p>
-<p>于是容易发现 $(T\times T)_{i,j}=I$，故 $T$ 和自己互为反演关系，于是能得到这样的式子：</p>
-<p>$$
+\]</div>
+<p>其中第三步能改 <span class="arithmatex">\(\sum\)</span> 的范围是因为 <span class="arithmatex">\([j,i]\)</span> 外面 <span class="arithmatex">\(\binom{i}{k}\binom{k}{j}=0\)</span>，第四步是经典组合意义，<span class="arithmatex">\(i\)</span> 个里面选 <span class="arithmatex">\(k\)</span> 个再从 <span class="arithmatex">\(k\)</span> 个里面选 <span class="arithmatex">\(j\)</span> 个等价于直接选 <span class="arithmatex">\(j\)</span> 个然后在剩下的里面选出第一步选了但第二步没选的。</p>
+<p>容易发现 <span class="arithmatex">\(\sum_{k=j}^i(-1)^k\binom{i-j}{k-j}\)</span> 是杨辉三角第 <span class="arithmatex">\(i-j\)</span> 这一整行中偶数列减去奇数列。根据经典结论，这个东西不等于 <span class="arithmatex">\(0\)</span> 当且仅当 <span class="arithmatex">\(i-j=0\)</span>，原因是当 <span class="arithmatex">\(i-j&gt; 0\)</span> 时杨辉三角前一行每个数都能对这一行的奇数之和和偶数之和各产生一次贡献。</p>
+<p>于是容易发现 <span class="arithmatex">\((T\times T)_{i,j}=I\)</span>，故 <span class="arithmatex">\(T\)</span> 和自己互为反演关系，于是能得到这样的式子：</p>
+<div class="arithmatex">\[
 G(n)=\sum_{i=0}^n(-1)^i\dbinom{n}{i}F(i)
-$$
-$$
+\]</div>
+<div class="arithmatex">\[
 F(n)=\sum_{i=0}^n(-1)^i\dbinom{n}{i}G(i)
-$$</p>
+\]</div>
 <p>考虑一些简单的变换：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 F(n)&amp;=\sum_{i=0}^n(-1)^i\dbinom{n}{i}G(i)\\
 (-1)^{-n}F(n)&amp;=\sum_{i=0}^n(-1)^{i-n}\binom{n}{i}G(i)\\
 (-1)^nF(n)&amp;=\sum_{i=0}^n(-1)^{n-i}\binom{n}{i}G(i)
 \end{aligned}
-$$</p>
-<p>其中第三步指数取相反数是因为 $(-1)^x=(-1)^{-x}$，而不是因为两边指数同时取相反数有什么神秘性质。</p>
-<p>然后令 $H(n)=(-1)^nF(n)$，易得：</p>
-<p>$$
+\]</div>
+<p>其中第三步指数取相反数是因为 <span class="arithmatex">\((-1)^x=(-1)^{-x}\)</span>，而不是因为两边指数同时取相反数有什么神秘性质。</p>
+<p>然后令 <span class="arithmatex">\(H(n)=(-1)^nF(n)\)</span>，易得：</p>
+<div class="arithmatex">\[
 G(n)=\sum_{i=0}^n\binom{n}{i}H(i)
-$$
-$$
+\]</div>
+<div class="arithmatex">\[
 H(n)=\sum_{i=0}^n(-1)^{n-i}\binom{n}{i}G(i)
-$$</p>
-<p>这个更好看的形式。而且这个结论非常强力，只要式子 $1$ 成立，那么式子 $2$ 成立。</p>
-<p>容易发现，可以用 $G(n)$ 表示从 $n$ 个中选任意个组成某种特定结构的方案数，$F(n)$ 表示用恰好 $n$ 个组成特定结构的方案数。通常 $G$ 是比 $F$ 好算的，那么就能通过这个式子用 $G$ 求出 $F$ 了。通常来说，二项式反演是把<strong>恰好</strong>转化为<strong>至多</strong>来解题了。</p>
+\]</div>
+<p>这个更好看的形式。而且这个结论非常强力，只要式子 <span class="arithmatex">\(1\)</span> 成立，那么式子 <span class="arithmatex">\(2\)</span> 成立。</p>
+<p>容易发现，可以用 <span class="arithmatex">\(G(n)\)</span> 表示从 <span class="arithmatex">\(n\)</span> 个中选任意个组成某种特定结构的方案数，<span class="arithmatex">\(F(n)\)</span> 表示用恰好 <span class="arithmatex">\(n\)</span> 个组成特定结构的方案数。通常 <span class="arithmatex">\(G\)</span> 是比 <span class="arithmatex">\(F\)</span> 好算的，那么就能通过这个式子用 <span class="arithmatex">\(G\)</span> 求出 <span class="arithmatex">\(F\)</span> 了。通常来说，二项式反演是把<strong>恰好</strong>转化为<strong>至多</strong>来解题了。</p>
 <p>二项式反演还有一个形式：</p>
-<p>$$
+<div class="arithmatex">\[
 G(n)=\sum_{i\ge n}\binom{i}{n}H(i)
-$$
-$$
+\]</div>
+<div class="arithmatex">\[
 H(n)=\sum_{i\ge n}(-1)^{i-n}\binom{i}{n}G(i)
-$$</p>
+\]</div>
 <p>其实就是换成把杨辉三角填到下三角矩阵，证明还是类似。</p>
-<p>这个也非常有用，$H(i)$ 可以表示<strong>恰好 $i$ 个满足特定结构</strong>，$G(i)$ 可以表示<strong>钦定 $i$ 个满足特定结构（其余的无要求）</strong>，就能把“恰好”转化为“钦定”了（好像比前面的形式还好使一点）。</p>
+<p>这个也非常有用，<span class="arithmatex">\(H(i)\)</span> 可以表示<strong>恰好 <span class="arithmatex">\(i\)</span> 个满足特定结构</strong>，<span class="arithmatex">\(G(i)\)</span> 可以表示<strong>钦定 <span class="arithmatex">\(i\)</span> 个满足特定结构（其余的无要求）</strong>，就能把“恰好”转化为“钦定”了（好像比前面的形式还好使一点）。</p>
 <h3 id="_4">经典问题：错排问题</h3>
-<p>这里以错排问题为例，即有多少个 $n$ 阶排列 $p_i$，满足 $\forall_{i=1}^na_i\ne i$。</p>
-<p>那么可以令 $H(n)$ 表示 $n$ 阶错排，$G(n)$ 表示 $n$ 阶排列。</p>
-<p>显然 $G(n)=n!$，且 $G(n)=\sum_{i=0}^n\binom{n}{i}H(i)$（考虑其它地方不动，选 $i$ 个搞成错排）。</p>
+<p>这里以错排问题为例，即有多少个 <span class="arithmatex">\(n\)</span> 阶排列 <span class="arithmatex">\(p_i\)</span>，满足 <span class="arithmatex">\(\forall_{i=1}^na_i\ne i\)</span>。</p>
+<p>那么可以令 <span class="arithmatex">\(H(n)\)</span> 表示 <span class="arithmatex">\(n\)</span> 阶错排，<span class="arithmatex">\(G(n)\)</span> 表示 <span class="arithmatex">\(n\)</span> 阶排列。</p>
+<p>显然 <span class="arithmatex">\(G(n)=n!\)</span>，且 <span class="arithmatex">\(G(n)=\sum_{i=0}^n\binom{n}{i}H(i)\)</span>（考虑其它地方不动，选 <span class="arithmatex">\(i\)</span> 个搞成错排）。</p>
 <p>于是有：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 H(n)&amp;=\sum_{i=0}^n(-1)^{n-i}\binom{n}{i}G(i)\\
     &amp;=\sum_{i=0}^n(-1)^{n-i}\frac{n!}{i!(n-i)!}i!\\
     &amp;=n!\sum_{i=0}^n\frac{(-1)^{i}}{i!}\\
 \end{aligned}
-$$</p>
-<p>其中第三步是直接改成枚举 $n-i$。</p>
+\]</div>
+<p>其中第三步是直接改成枚举 <span class="arithmatex">\(n-i\)</span>。</p>
 <p>这就是经典的错排公式。</p>
 <h2 id="_5">子集反演</h2>
 <p>和二项式反演非常类似。</p>
-<p>$$
+<div class="arithmatex">\[
 G(A)=\sum_{B\subseteq A}H(B)
-$$
-$$
+\]</div>
+<div class="arithmatex">\[
 H(A)=\sum_{B\subseteq A}(-1)^{|A|-|B|}G(B)
-$$</p>
-<p>其中 $G(S),H(S)$ 均是定义在集合上的函数，$A,B$ 为集合。</p>
-<p>我们把集合离散化到整数上，然后对这个东西定义矩阵 $T,T'$，考虑用 $x\times T\times T'=x$ 来证明。则：</p>
-<p>$$
+\]</div>
+<p>其中 <span class="arithmatex">\(G(S),H(S)\)</span> 均是定义在集合上的函数，<span class="arithmatex">\(A,B\)</span> 为集合。</p>
+<p>我们把集合离散化到整数上，然后对这个东西定义矩阵 <span class="arithmatex">\(T,T'\)</span>，考虑用 <span class="arithmatex">\(x\times T\times T'=x\)</span> 来证明。则：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 H(A)&amp;=\sum_{B\subseteq A}(-1)^{|A|-|B|}G(B)\\
     &amp;=\sum_{B\subseteq A}(-1)^{|A|-|B|}\sum_{C\subseteq B}H(C)\\
     &amp;=\sum_{C\subseteq A}H(C)\sum_{C\subseteq B\subseteq A}(-1)^{|A|-|B|}
 \end{aligned}
-$$</p>
-<p>容易发现 $\sum_{C\subseteq B\subseteq A}(-1)^{|A|-|B|}=\sum_{k=|C|}^{|A|}(-1)^{|A|-k}\binom{|A|-|C|}{k-|C|}$，当且仅当 $|A|=|C|$ 时为 $1$，其余时候为 $0$。则 $\sum_{C\subseteq A}H(C)\sum_{C\subseteq B\subseteq A}(-1)^{|A|-|B|}=H(A)$，得证。</p>
-<p>然后使用也和二项式反演类似，把<strong>恰为集合</strong> $S$ 转化为 <strong>是集合 $S$ 的子集</strong>来解决问题。</p>
-<p>并且也是类似的，子集反演还有超集版本（把所有 $\subseteq$ 符号倒过来即可），证明类似。</p>
+\]</div>
+<p>容易发现 <span class="arithmatex">\(\sum_{C\subseteq B\subseteq A}(-1)^{|A|-|B|}=\sum_{k=|C|}^{|A|}(-1)^{|A|-k}\binom{|A|-|C|}{k-|C|}\)</span>，当且仅当 <span class="arithmatex">\(|A|=|C|\)</span> 时为 <span class="arithmatex">\(1\)</span>，其余时候为 <span class="arithmatex">\(0\)</span>。则 <span class="arithmatex">\(\sum_{C\subseteq A}H(C)\sum_{C\subseteq B\subseteq A}(-1)^{|A|-|B|}=H(A)\)</span>，得证。</p>
+<p>然后使用也和二项式反演类似，把<strong>恰为集合</strong> <span class="arithmatex">\(S\)</span> 转化为 <strong>是集合 <span class="arithmatex">\(S\)</span> 的子集</strong>来解决问题。</p>
+<p>并且也是类似的，子集反演还有超集版本（把所有 <span class="arithmatex">\(\subseteq\)</span> 符号倒过来即可），证明类似。</p>
 <h2 id="_6">斯特林反演</h2>
 <p>前置知识：<a href="../stirling/">斯特林数</a>。</p>
 <p>斯特林反演形如以下式子：</p>
-<p>$$
+<div class="arithmatex">\[
 G(n)=\sum_{i=0}^n\begin{Bmatrix}n\\i\end{Bmatrix}F(i)
-$$
-$$
+\]</div>
+<div class="arithmatex">\[
 F(n)=\sum_{i=0}^n(-1)^{n-i}\begin{bmatrix}n\\i\end{bmatrix}G(i)
-$$</p>
+\]</div>
 <p>证明非常神秘：</p>
 <p>考虑转移矩阵乘起来长这样：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
  &amp;(T\times T')_{i,j}\\
 =&amp;\sum_{k=0}^nT_{i,k}\cdot T_{k,j}'\\
 =&amp;\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\k\end{Bmatrix}\begin{bmatrix}k\\j\end{bmatrix}\\
 \end{aligned}
-$$</p>
-<p>我们希望证明 $\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\k\end{Bmatrix}\begin{bmatrix}k\\j\end{bmatrix}=[i=j]$</p>
+\]</div>
+<p>我们希望证明 <span class="arithmatex">\(\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\k\end{Bmatrix}\begin{bmatrix}k\\j\end{bmatrix}=[i=j]\)</span></p>
 <p>根据经典结论，有：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 m^{\underline{n}}&amp;=\sum_{i=0}^n(-1)^{n-i}\begin{bmatrix}n\\i\end{bmatrix}m^i\\
                  &amp;=\sum_{i=0}^n(-1)^{n-i}\begin{bmatrix}n\\i\end{bmatrix}\sum_{j=0}^i\begin{Bmatrix}i\\j\end{Bmatrix}m^{\underline{j}}\\
                  &amp;=\sum_{i=0}^nm^{\underline{i}}\sum_{j=i}^n(-1)^{n-j}\begin{bmatrix}n\\j\end{bmatrix}\begin{Bmatrix}j\\i\end{Bmatrix}
 \end{aligned}
-$$</p>
-<p>那么显然当 $i\ne n$ 时，$\sum_{j=i}^n(-1)^{n-j}\begin{bmatrix}n\\j\end{bmatrix}\begin{Bmatrix}j\\i\end{Bmatrix}=0$，否则等号无法成立。</p>
-<p>则 $\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\k\end{Bmatrix}\begin{bmatrix}k\\j\end{bmatrix}=[i=j]$，得证。</p>
-<p>另外斯特林反演也有 $i\ge n$ 版本，长这样：</p>
-<p>$$
+\]</div>
+<p>那么显然当 <span class="arithmatex">\(i\ne n\)</span> 时，<span class="arithmatex">\(\sum_{j=i}^n(-1)^{n-j}\begin{bmatrix}n\\j\end{bmatrix}\begin{Bmatrix}j\\i\end{Bmatrix}=0\)</span>，否则等号无法成立。</p>
+<p>则 <span class="arithmatex">\(\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\k\end{Bmatrix}\begin{bmatrix}k\\j\end{bmatrix}=[i=j]\)</span>，得证。</p>
+<p>另外斯特林反演也有 <span class="arithmatex">\(i\ge n\)</span> 版本，长这样：</p>
+<div class="arithmatex">\[
 G(n)=\sum_{i\ge n}\begin{Bmatrix}i\\n\end{Bmatrix}F(i)
-$$
-$$
+\]</div>
+<div class="arithmatex">\[
 F(n)=\sum_{i\ge n}(-1)^{n-i}\begin{bmatrix}i\\n\end{bmatrix}G(i)
-$$</p>
-<p>证明和上面类似，但要证的是 $\sum_{k=j}^i(-1)^{k-j}\begin{bmatrix}i\\k\end{bmatrix}\begin{Bmatrix}k\\j\end{Bmatrix}=[i=j]$，先把普通幂换成第二类斯特林数和下降幂的积，再把下降幂换成第一类斯特林数即可。</p>
-<p>然后和二项式反演相同，我们可以移动 $(-1)^{n-i}$ 的位置（取 $F_{\ast}(n)=(-1)^{-n}F(n)=(-1)^{n}F(n),G_{\ast}(n)=(-1)^{-n}G(n)=(-1)^nG(n)$）。于是：</p>
-<p>$$
+\]</div>
+<p>证明和上面类似，但要证的是 <span class="arithmatex">\(\sum_{k=j}^i(-1)^{k-j}\begin{bmatrix}i\\k\end{bmatrix}\begin{Bmatrix}k\\j\end{Bmatrix}=[i=j]\)</span>，先把普通幂换成第二类斯特林数和下降幂的积，再把下降幂换成第一类斯特林数即可。</p>
+<p>然后和二项式反演相同，我们可以移动 <span class="arithmatex">\((-1)^{n-i}\)</span> 的位置（取 <span class="arithmatex">\(F_{\ast}(n)=(-1)^{-n}F(n)=(-1)^{n}F(n),G_{\ast}(n)=(-1)^{-n}G(n)=(-1)^nG(n)\)</span>）。于是：</p>
+<div class="arithmatex">\[
 G_{\ast}(n)=\sum_{i=0}^n(-1)^{n-i}\begin{Bmatrix}n\\i\end{Bmatrix}F_{\ast}(i)
-$$
-$$
+\]</div>
+<div class="arithmatex">\[
 F_{\ast}(n)=\sum_{i=0}^n\begin{bmatrix}n\\i\end{bmatrix}G_{\ast}(i)
-$$</p>
+\]</div>
 <p>常用做法还是用来做计数题。</p>
 <h2 id="_7">莫比乌斯反演</h2>
 <p>右转<a href="../Mobius_inversion/">狄利克雷卷积与莫比乌斯反演入门</a>。</p>

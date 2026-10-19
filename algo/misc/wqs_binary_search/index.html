@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5781,30 +5809,30 @@
 <h1 id="wqs">wqs 二分</h1>
 <h2 id="_1">引入</h2>
 <p>wqs 二分最初由王钦石在他的 2012 年国家集训队论文中提出，而从 IOI 2016 的 Aliens 题目开始，这种方法开始逐步在竞赛圈中有了一定的地位。在国内我们一般称为「wqs 二分」，而在国外一般称为「Alien Trick」。</p>
-<p>通常来说，设问中有<strong>恰好选 $k$ 个</strong>之类限制的问题可以考虑 wqs 二分。需要注意用 wqs 二分的前提是问题具有<strong>凸完全单调性</strong>。</p>
+<p>通常来说，设问中有<strong>恰好选 <span class="arithmatex">\(k\)</span> 个</strong>之类限制的问题可以考虑 wqs 二分。需要注意用 wqs 二分的前提是问题具有<strong>凸完全单调性</strong>。</p>
 <h2 id="_2">算法简述</h2>
-<p>首先解释<strong>凸完全单调性</strong>，具体来说，设 $g_i$ 是某变量取到 $i$ 时的权值，那么若：</p>
-<p>$$\forall i\in [1,n-2],g_{i+1}-g_i\ge g_{i+2}-g_{i+1}$$</p>
+<p>首先解释<strong>凸完全单调性</strong>，具体来说，设 <span class="arithmatex">\(g_i\)</span> 是某变量取到 <span class="arithmatex">\(i\)</span> 时的权值，那么若：</p>
+<div class="arithmatex">\[\forall i\in [1,n-2],g_{i+1}-g_i\ge g_{i+2}-g_{i+1}\]</div>
 <p>或者：</p>
-<p>$$\forall i\in [1,n-2],g_{i+1}-g_i\le g_{i+2}-g_{i+1}$$</p>
-<p>则称 $g_i$ 关于 $i$ 具有<strong>凸完全单调性</strong>。</p>
+<div class="arithmatex">\[\forall i\in [1,n-2],g_{i+1}-g_i\le g_{i+2}-g_{i+1}\]</div>
+<p>则称 <span class="arithmatex">\(g_i\)</span> 关于 <span class="arithmatex">\(i\)</span> 具有<strong>凸完全单调性</strong>。</p>
 <p>至于为什么叫这个名字，容易发现这样画出来图像的斜率是单调的，也就是说大概长得是个凸壳的样子。</p>
 <p>这里以经典问题 <a href="https://www.luogu.com.cn/problem/P2619">P2619 [国家集训队] Tree I</a> 为例。</p>
-<p>令最小生成树大小关于白边数量的函数为 $f(x)$，那么它的图像大概长这样：</p>
+<p>令最小生成树大小关于白边数量的函数为 <span class="arithmatex">\(f(x)\)</span>，那么它的图像大概长这样：</p>
 <p><img alt="图示 1" src="../../../img/wqs_binary_search_1.png" /></p>
-<p>首先整张图的最小生成树白边数量是可以找到的（可能有多个最小生成树，但是不重要），然后你容易发现对于原图上的一个环，最小生成树肯定是断开了某条边的。那么你可以删一条边再加一条边，仍然是生成树。这样显然每次只会将白边数量变化 $0$ 或 $1$。</p>
+<p>首先整张图的最小生成树白边数量是可以找到的（可能有多个最小生成树，但是不重要），然后你容易发现对于原图上的一个环，最小生成树肯定是断开了某条边的。那么你可以删一条边再加一条边，仍然是生成树。这样显然每次只会将白边数量变化 <span class="arithmatex">\(0\)</span> 或 <span class="arithmatex">\(1\)</span>。</p>
 <p>为保证每次都是最小生成树，每次肯定选代价最小的一个环断掉。这样最小值两侧的差是递增的，显然是满足凸完全单调性的（就大概长上面那样）。</p>
-<p>然后考虑如何解决问题。这个非常巧妙，可以考虑用一条直线 $h(x)=\lambda x$ 去切这个图像：</p>
+<p>然后考虑如何解决问题。这个非常巧妙，可以考虑用一条直线 <span class="arithmatex">\(h(x)=\lambda x\)</span> 去切这个图像：</p>
 <p>显然，对于不同的斜率，切点可能不同。</p>
 <p><img alt="图示 2" src="../../../img/wqs_binary_search_2.png" /></p>
-<p>那么容易发现在切点处，$g(x)=f(x)-h(x)$ 恰好取到最小值（就是切线的截距）。</p>
+<p>那么容易发现在切点处，<span class="arithmatex">\(g(x)=f(x)-h(x)\)</span> 恰好取到最小值（就是切线的截距）。</p>
 <p><img alt="图示 3" src="../../../img/wqs_binary_search_3.png" /></p>
-<p>那么可以考虑枚举这个 $\lambda$，在这个问题上就相当于每条白边的权值都减小 $\lambda$。然后跑一边 Kruskal 就能找到切点的纵坐标，并且还能知道有多少条白边，即切点的横坐标。此时 $f(x)=g(x)+h(x)$。</p>
-<p>然后容易发现，随着 $\lambda$ 增大，切点的横坐标单调不降，就可以考虑二分了。并且由于这道题的点都是整点，且横坐标是连续的整数，那么两点之间的斜率都是整数，只需要二分整数斜率就能切到所有点了。</p>
+<p>那么可以考虑枚举这个 <span class="arithmatex">\(\lambda\)</span>，在这个问题上就相当于每条白边的权值都减小 <span class="arithmatex">\(\lambda\)</span>。然后跑一边 Kruskal 就能找到切点的纵坐标，并且还能知道有多少条白边，即切点的横坐标。此时 <span class="arithmatex">\(f(x)=g(x)+h(x)\)</span>。</p>
+<p>然后容易发现，随着 <span class="arithmatex">\(\lambda\)</span> 增大，切点的横坐标单调不降，就可以考虑二分了。并且由于这道题的点都是整点，且横坐标是连续的整数，那么两点之间的斜率都是整数，只需要二分整数斜率就能切到所有点了。</p>
 <p>但这里有个问题，即大于等于三点共线的情况：</p>
 <p><img alt="图示 4" src="../../../img/wqs_binary_search_4.png" /></p>
 <p>容易发现中间的点是切不到的。这个用实数斜率也切不到。</p>
-<p>但其实我们只需要知道斜率和截距 $x$，然后若限制为 $t$，且也在当前这条线上，那么 $k$ 这个点的纵坐标就是 $g(x)+h(k)$，是可以直接算的。</p>
+<p>但其实我们只需要知道斜率和截距 <span class="arithmatex">\(x\)</span>，然后若限制为 <span class="arithmatex">\(t\)</span>，且也在当前这条线上，那么 <span class="arithmatex">\(k\)</span> 这个点的纵坐标就是 <span class="arithmatex">\(g(x)+h(k)\)</span>，是可以直接算的。</p>
 <p>那么对于每个斜率，只需要找到横坐标最大的点，然后若这个点横坐标大于你要找的点就带公式即可，最后一定能找到想要的斜率。</p>
 <details class="success">
 <summary>参考代码</summary>

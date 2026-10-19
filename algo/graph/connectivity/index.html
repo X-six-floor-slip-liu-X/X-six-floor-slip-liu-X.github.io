@@ -1058,6 +1058,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5809,7 +5837,7 @@
 <h2 id="_2">三连通</h2>
 <h3 id="_3">割集</h3>
 <p>在讨论无向图三连通前，我们先定义割集。</p>
-<p>割集为一个边集，满足一个连通图中某个连通的点对删掉这个边集后就不连通了。我们熟悉的边双连通图即所有割集均不小于 $2$ 的连通图，同理，我们称两个点是三连通的当且仅当它们两个之间不存在大小小于 $3$ 的割集，边三连通图即所有割集均不小于 $3$ 的连通图。</p>
+<p>割集为一个边集，满足一个连通图中某个连通的点对删掉这个边集后就不连通了。我们熟悉的边双连通图即所有割集均不小于 <span class="arithmatex">\(2\)</span> 的连通图，同理，我们称两个点是三连通的当且仅当它们两个之间不存在大小小于 <span class="arithmatex">\(3\)</span> 的割集，边三连通图即所有割集均不小于 <span class="arithmatex">\(3\)</span> 的连通图。</p>
 <p>我们不妨先来讨论如何判断一个边集是否为割集。有经典构造：</p>
 <div class="admonition example">
 <p class="admonition-title"><a href="https://www.luogu.com.cn/problem/P10778">P10778</a> BZOJ3569 DZY Loves Chinese II</p>
@@ -5817,18 +5845,18 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一张 $n$ 个点 $m$ 条边的无向图。</li>
-<li>$q$ 次询问，每次询问一个边集是否为割集。</li>
-<li>$1\le n\le 10^5,1\le m\le 5\times 10^5,1\le q\le 5\times 10^4$，每次给定边集的大小 $k$ 不超过 $15$。</li>
+<li>给定一张 <span class="arithmatex">\(n\)</span> 个点 <span class="arithmatex">\(m\)</span> 条边的无向图。</li>
+<li><span class="arithmatex">\(q\)</span> 次询问，每次询问一个边集是否为割集。</li>
+<li><span class="arithmatex">\(1\le n\le 10^5,1\le m\le 5\times 10^5,1\le q\le 5\times 10^4\)</span>，每次给定边集的大小 <span class="arithmatex">\(k\)</span> 不超过 <span class="arithmatex">\(15\)</span>。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>经典构造。</p>
-<p>考虑给每条边赋边权，使得一个点所有出边异或和为 $0$，显然这些边就是一个割集。</p>
-<p>对于两个相邻的点，我们发现这个连通块向外连的边异或和也是 $0$，因为两点之间边的边权就是其它边的异或和。对于更多点组成的连通块也是同理。于是“边集存在一个异或和为 $0$ 的子集”是“这个边集是割集”的必要条件，当我们给边赋的权值尽可能随机时就不容易错了。</p>
-<p>那么怎么赋边权才能让每个点所有出边异或和为 $0$ 呢？构造是找一棵 dfs 生成树，给非树边随机赋值 $[0,2^{64})$，树边赋值为所有包含它的非树边的异或和，正确性显然。</p>
-<p>求解时需要线性基，复杂度 $O(n+m+qk\log V)$，其中 $V$ 是赋的边权的值域。</p>
+<p>考虑给每条边赋边权，使得一个点所有出边异或和为 <span class="arithmatex">\(0\)</span>，显然这些边就是一个割集。</p>
+<p>对于两个相邻的点，我们发现这个连通块向外连的边异或和也是 <span class="arithmatex">\(0\)</span>，因为两点之间边的边权就是其它边的异或和。对于更多点组成的连通块也是同理。于是“边集存在一个异或和为 <span class="arithmatex">\(0\)</span> 的子集”是“这个边集是割集”的必要条件，当我们给边赋的权值尽可能随机时就不容易错了。</p>
+<p>那么怎么赋边权才能让每个点所有出边异或和为 <span class="arithmatex">\(0\)</span> 呢？构造是找一棵 dfs 生成树，给非树边随机赋值 <span class="arithmatex">\([0,2^{64})\)</span>，树边赋值为所有包含它的非树边的异或和，正确性显然。</p>
+<p>求解时需要线性基，复杂度 <span class="arithmatex">\(O(n+m+qk\log V)\)</span>，其中 <span class="arithmatex">\(V\)</span> 是赋的边权的值域。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5924,17 +5952,17 @@
 </div>
 <h3 id="_4">三连通分量</h3>
 <p>那么我们如何判断一个图是否是三连通的呢？</p>
-<p>如果一张图不是三连通的，则必然存在大小不超过 $2$ 的割集，即在经过上文的赋值后存在两条边边权相等，这个是好做的，搞个哈希表（<code>std::unordered_map</code>）即可。</p>
-<p>不难发现三连通是具有传递性的，即若 $a,b$ 三连通，$b,c$ 三连通，那么 $a,c$ 也是三连通的。那么我们也可以类似双连通分量地定义三连通分量。另外一个有趣的事实是边三连通分量不一定是连通的。</p>
-<p>那么我们怎么求三连通分量呢？显然我们只要找到所有割集就能分出三连通分量，考虑一个大小不超过 $2$ 的割集无非三种情况：</p>
+<p>如果一张图不是三连通的，则必然存在大小不超过 <span class="arithmatex">\(2\)</span> 的割集，即在经过上文的赋值后存在两条边边权相等，这个是好做的，搞个哈希表（<code>std::unordered_map</code>）即可。</p>
+<p>不难发现三连通是具有传递性的，即若 <span class="arithmatex">\(a,b\)</span> 三连通，<span class="arithmatex">\(b,c\)</span> 三连通，那么 <span class="arithmatex">\(a,c\)</span> 也是三连通的。那么我们也可以类似双连通分量地定义三连通分量。另外一个有趣的事实是边三连通分量不一定是连通的。</p>
+<p>那么我们怎么求三连通分量呢？显然我们只要找到所有割集就能分出三连通分量，考虑一个大小不超过 <span class="arithmatex">\(2\)</span> 的割集无非三种情况：</p>
 <ol>
 <li>只有一条树边。</li>
 <li>一条树边和一条非树边。</li>
 <li>两条树边。</li>
 </ol>
-<p>不难发现，前两种情况都会将若干个子树和整张图的其余部分分开。一个想法是再给每个点赋一个 $[0,2^{64})$ 的权值，权值相同表示在同一三连通分量。初始所有点都是 $0$，每次找到割集就将对应的部分全部异或一个随机数，最后将权值相同的点设为同一集合，这个可以树上前缀和。</p>
-<p>对于第三种情况，必然是覆盖两条边的返祖边集合相同，那么这两条边 $(u,v)$ 和 $(x,y)$ 必定是祖先后代关系（不妨设深度关系为 $y &lt; x &lt; v &lt; u$），则这两条边中间的部分会被划分为一个三连通分量，那么在 $x$ 处异或一下，再在 $u$ 处异或一下即可。</p>
-<p>复杂度大常数 $O(n)$，瓶颈在哈希表处。</p>
+<p>不难发现，前两种情况都会将若干个子树和整张图的其余部分分开。一个想法是再给每个点赋一个 <span class="arithmatex">\([0,2^{64})\)</span> 的权值，权值相同表示在同一三连通分量。初始所有点都是 <span class="arithmatex">\(0\)</span>，每次找到割集就将对应的部分全部异或一个随机数，最后将权值相同的点设为同一集合，这个可以树上前缀和。</p>
+<p>对于第三种情况，必然是覆盖两条边的返祖边集合相同，那么这两条边 <span class="arithmatex">\((u,v)\)</span> 和 <span class="arithmatex">\((x,y)\)</span> 必定是祖先后代关系（不妨设深度关系为 <span class="arithmatex">\(y &lt; x &lt; v &lt; u\)</span>），则这两条边中间的部分会被划分为一个三连通分量，那么在 <span class="arithmatex">\(x\)</span> 处异或一下，再在 <span class="arithmatex">\(u\)</span> 处异或一下即可。</p>
+<p>复杂度大常数 <span class="arithmatex">\(O(n)\)</span>，瓶颈在哈希表处。</p>
 <p>注意一开始图就不连通的情况。</p>
 <details class="success">
 <summary><a href="https://www.luogu.com.cn/problem/P6658">模板题</a> 参考代码</summary>
@@ -6076,27 +6104,27 @@
 </span></code></pre></div>
 </details>
 <h2 id="_5">耳分解</h2>
-<p>对于一张无向图 $G=(V,E)$，对于一张子图 $G'=(V',E')$。若一条路径 $v_1,v_2,v_2,\dots v_k$，满足 $v_1,v_k\in V'$，且其余点互不相同均不在 $V'$ 内（注意 $v_1$ 可以等于 $v_k$），则称这条路径是一个“耳”（很形象吧），特别地，若 $v_1\ne v_k$，则称这条路径是一个开耳。</p>
-<p>耳分解直观的定义就是将一张无向图分为若干个耳。形式化地，设一个由 $G$ 的子图构成的序列 $G_0,G_1,\dots G_k$，满足：</p>
+<p>对于一张无向图 <span class="arithmatex">\(G=(V,E)\)</span>，对于一张子图 <span class="arithmatex">\(G'=(V',E')\)</span>。若一条路径 <span class="arithmatex">\(v_1,v_2,v_2,\dots v_k\)</span>，满足 <span class="arithmatex">\(v_1,v_k\in V'\)</span>，且其余点互不相同均不在 <span class="arithmatex">\(V'\)</span> 内（注意 <span class="arithmatex">\(v_1\)</span> 可以等于 <span class="arithmatex">\(v_k\)</span>），则称这条路径是一个“耳”（很形象吧），特别地，若 <span class="arithmatex">\(v_1\ne v_k\)</span>，则称这条路径是一个开耳。</p>
+<p>耳分解直观的定义就是将一张无向图分为若干个耳。形式化地，设一个由 <span class="arithmatex">\(G\)</span> 的子图构成的序列 <span class="arithmatex">\(G_0,G_1,\dots G_k\)</span>，满足：</p>
 <ul>
-<li>$G_k=G$，且 $G_0$ 是一个简单环或一个点。</li>
-<li>$\forall 1\le i\le k$，$G_i$ 相对 $G_{i-1}$ 多了一个 $G_{i-1}$ 的耳，或者说 $G_i$ 是 $G_{i-1}$ 上加了一个耳得到的。</li>
+<li><span class="arithmatex">\(G_k=G\)</span>，且 <span class="arithmatex">\(G_0\)</span> 是一个简单环或一个点。</li>
+<li><span class="arithmatex">\(\forall 1\le i\le k\)</span>，<span class="arithmatex">\(G_i\)</span> 相对 <span class="arithmatex">\(G_{i-1}\)</span> 多了一个 <span class="arithmatex">\(G_{i-1}\)</span> 的耳，或者说 <span class="arithmatex">\(G_i\)</span> 是 <span class="arithmatex">\(G_{i-1}\)</span> 上加了一个耳得到的。</li>
 </ul>
 <p>类似地也可以定义开耳分解，即每次必须加一个开耳。</p>
 <h3 id="_6">耳分解的条件</h3>
 <p>一张无向图存在耳分解的充要条件是这张图是边双连通的。</p>
 <div class="admonition note">
 <p class="admonition-title">证明</p>
-<p>$\Rightarrow$：首先初始的一个简单环或者点肯定是边双连通的，后面每加一个耳并不会破坏边双连通性。</p>
-<p>$\Leftarrow$：考虑构造证明：</p>
+<p><span class="arithmatex">\(\Rightarrow\)</span>：首先初始的一个简单环或者点肯定是边双连通的，后面每加一个耳并不会破坏边双连通性。</p>
+<p><span class="arithmatex">\(\Leftarrow\)</span>：考虑构造证明：</p>
 <ul>
-<li>找到边双连通图的一棵 dfs 生成树，随便找一条以 $1$ 为端点的非树边 $(1,x)$，将这条边围出的环当作 $G_0$。</li>
-<li>每次找到一个 $u$ 满足 $u\notin G_i,fa_u\in G_i$，根据边双的性质，$u$ 的子树必定存在一个点 $p$ 使得有一条从 $p$ 开始的非树边 $p,q$ 连向 $fa_u$ 的祖先（或者 $fa_u$ 自己），不难发现这就是一个耳，将其加入即可。</li>
+<li>找到边双连通图的一棵 dfs 生成树，随便找一条以 <span class="arithmatex">\(1\)</span> 为端点的非树边 <span class="arithmatex">\((1,x)\)</span>，将这条边围出的环当作 <span class="arithmatex">\(G_0\)</span>。</li>
+<li>每次找到一个 <span class="arithmatex">\(u\)</span> 满足 <span class="arithmatex">\(u\notin G_i,fa_u\in G_i\)</span>，根据边双的性质，<span class="arithmatex">\(u\)</span> 的子树必定存在一个点 <span class="arithmatex">\(p\)</span> 使得有一条从 <span class="arithmatex">\(p\)</span> 开始的非树边 <span class="arithmatex">\(p,q\)</span> 连向 <span class="arithmatex">\(fa_u\)</span> 的祖先（或者 <span class="arithmatex">\(fa_u\)</span> 自己），不难发现这就是一个耳，将其加入即可。</li>
 <li>将所有点加入后，剩下的边可以每个都当成一个独立的耳加入。</li>
 </ul>
 </div>
 <p>一张无向图存在开耳分解的充要条件是这张图是点双连通的。</p>
-<p>证明也是类似，唯一的区别是找 $p\to q$ 这一步时必定能找到 $q$ 是 $fa_u$ 的严格祖先（即不包含 $fa_u$ 自己）。</p>
+<p>证明也是类似，唯一的区别是找 <span class="arithmatex">\(p\to q\)</span> 这一步时必定能找到 <span class="arithmatex">\(q\)</span> 是 <span class="arithmatex">\(fa_u\)</span> 的严格祖先（即不包含 <span class="arithmatex">\(fa_u\)</span> 自己）。</p>
 <p>直接按照这个构造来求并不是很好写，后文会提到好一点的构造方法。另外显然耳分解的方案很可能不是唯一的。</p>
 <h3 id="_7">应用/例题</h3>
 <p><del>猜猜为什么叫不常用算法</del></p>
@@ -6106,18 +6134,18 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一张 $n$ 个点 $m$ 条边无向连通图，边带权，可能有重边，没有自环。</li>
+<li>给定一张 <span class="arithmatex">\(n\)</span> 个点 <span class="arithmatex">\(m\)</span> 条边无向连通图，边带权，可能有重边，没有自环。</li>
 <li>求出这张图的一个边双连通子图，要求包含所有点，使得边权和最小，无解输出 <code>impossible</code>。</li>
-<li>$1\le n\le 12,1\le m\le 40$，带多测，边权的范围不明，但实测不用开 <code>long long</code></li>
+<li><span class="arithmatex">\(1\le n\le 12,1\le m\le 40\)</span>，带多测，边权的范围不明，但实测不用开 <code>long long</code></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>我们可以用耳分解来进行一些双连通分量相关的 DP 状态设计。</p>
-<p>因为耳分解是边双连通分量的充要条件，那么不妨设 $dp_{msk}$ 表示点集 $msk$ 的答案。转移就枚举 $msk$ 的一个耳 $S$，然后从 $dp_{msk}$ 转移到 $dp_{msk|S}$。复杂度 $O(3^npoly(n))$。</p>
+<p>因为耳分解是边双连通分量的充要条件，那么不妨设 <span class="arithmatex">\(dp_{msk}\)</span> 表示点集 <span class="arithmatex">\(msk\)</span> 的答案。转移就枚举 <span class="arithmatex">\(msk\)</span> 的一个耳 <span class="arithmatex">\(S\)</span>，然后从 <span class="arithmatex">\(dp_{msk}\)</span> 转移到 <span class="arithmatex">\(dp_{msk|S}\)</span>。复杂度 <span class="arithmatex">\(O(3^npoly(n))\)</span>。</p>
 <p>然后因为我们需要枚举一个耳，不可避免地需要枚举子集，考虑能不能把枚举的耳扔到状态里面。</p>
-<p>设 $dp_{msk,u,t}$ 表示已经经过了点集 $msk$，现在正在刻画一个耳，目标是走到点 $t$，已经走到了点 $u$。特别地，设 $dp_{msk,0,0}$ 表示并非正在刻画一个耳的状态。考虑一些边界情况后 DP 是简单的，具体转移略。</p>
-<p>复杂度 $O(2^nn^3)$，可能能压掉一个 $n$ 吧。</p>
+<p>设 <span class="arithmatex">\(dp_{msk,u,t}\)</span> 表示已经经过了点集 <span class="arithmatex">\(msk\)</span>，现在正在刻画一个耳，目标是走到点 <span class="arithmatex">\(t\)</span>，已经走到了点 <span class="arithmatex">\(u\)</span>。特别地，设 <span class="arithmatex">\(dp_{msk,0,0}\)</span> 表示并非正在刻画一个耳的状态。考虑一些边界情况后 DP 是简单的，具体转移略。</p>
+<p>复杂度 <span class="arithmatex">\(O(2^nn^3)\)</span>，可能能压掉一个 <span class="arithmatex">\(n\)</span> 吧。</p>
 <details class="success">
 <summary>Success</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6220,47 +6248,47 @@
 </details>
 <p>然后还能给一张边双连通图的边定向变成强连通图，每次加耳的时候随便定一个向即可，没有找到例题。</p>
 <h2 id="_8">双极定向</h2>
-<p>双极定向，即对于一张无向图 $G=(V,E)$，给定源汇点 $s,t$，求出一个 DAG 使得 $s$ 能到达所有点，且所有点都能到达 $t$（等价于 $s$ 没有出度，$t$ 没有入度，其余所有点出入度均非 $0$）。</p>
+<p>双极定向，即对于一张无向图 <span class="arithmatex">\(G=(V,E)\)</span>，给定源汇点 <span class="arithmatex">\(s,t\)</span>，求出一个 DAG 使得 <span class="arithmatex">\(s\)</span> 能到达所有点，且所有点都能到达 <span class="arithmatex">\(t\)</span>（等价于 <span class="arithmatex">\(s\)</span> 没有出度，<span class="arithmatex">\(t\)</span> 没有入度，其余所有点出入度均非 <span class="arithmatex">\(0\)</span>）。</p>
 <h3 id="_9">引理及证明</h3>
 <p>引理：下面四个结论等价：</p>
 <ol>
-<li>图 $G$ 加上边 $(s,t)$ 是点双连通的。</li>
-<li>在由点双连通分量求出的广义园方树中，可以找到一条链，使得其两端点分别是 $s,t$，并且包含所有方点。</li>
-<li>存在给所有边定向的方案，使得 $s$ 没有出度，$t$ 没有入度，其余所有点出入度均非 $0$（你会发现我们其实不关心是不是 DAG，因为肯定能反转一些边让它变成 DAG）。</li>
-<li>存在一个点的排列 $p_1,p_2,\dots p_n$，使得 $p_1=s,p_n=t$，且任意一个前缀和任意一个后缀均是连通的。</li>
+<li>图 <span class="arithmatex">\(G\)</span> 加上边 <span class="arithmatex">\((s,t)\)</span> 是点双连通的。</li>
+<li>在由点双连通分量求出的广义园方树中，可以找到一条链，使得其两端点分别是 <span class="arithmatex">\(s,t\)</span>，并且包含所有方点。</li>
+<li>存在给所有边定向的方案，使得 <span class="arithmatex">\(s\)</span> 没有出度，<span class="arithmatex">\(t\)</span> 没有入度，其余所有点出入度均非 <span class="arithmatex">\(0\)</span>（你会发现我们其实不关心是不是 DAG，因为肯定能反转一些边让它变成 DAG）。</li>
+<li>存在一个点的排列 <span class="arithmatex">\(p_1,p_2,\dots p_n\)</span>，使得 <span class="arithmatex">\(p_1=s,p_n=t\)</span>，且任意一个前缀和任意一个后缀均是连通的。</li>
 </ol>
 <p>考虑这样证明 <del>只要若干个命题连成强连通分量就行了</del> ：</p>
 <ol>
 <li>
-<p>$2\Rightarrow 1$：</p>
+<p><span class="arithmatex">\(2\Rightarrow 1\)</span>：</p>
 <p>显然，这条边会把覆盖的所有方点合并。</p>
 </li>
 <li>
-<p>$1\Rightarrow 2$：</p>
+<p><span class="arithmatex">\(1\Rightarrow 2\)</span>：</p>
 <p>若添加之前是点双则显然正确。</p>
-<p>若添加之前不是点双，那么把所有割点删掉后只有两个连通块，并且 $s,t$ 分别在两个连通块内，否则加上这条边后仍然由割点，就不是点双连通图了。</p>
+<p>若添加之前不是点双，那么把所有割点删掉后只有两个连通块，并且 <span class="arithmatex">\(s,t\)</span> 分别在两个连通块内，否则加上这条边后仍然由割点，就不是点双连通图了。</p>
 </li>
 <li>
-<p>$1\Rightarrow 3$：</p>
-<p>在添加 $(s,t)$ 之前先求出以 $s$ 为根的 dfs 生成树，则 $(s,t)$ 必是非树边，那么我们将 $(s,t)$ 及其覆盖的树边作为 $G_0$，做开耳分解。</p>
-<p>首先 $G_0$ 是一个环，易于进行双极定向，后面每个耳也是易于定向的。</p>
+<p><span class="arithmatex">\(1\Rightarrow 3\)</span>：</p>
+<p>在添加 <span class="arithmatex">\((s,t)\)</span> 之前先求出以 <span class="arithmatex">\(s\)</span> 为根的 dfs 生成树，则 <span class="arithmatex">\((s,t)\)</span> 必是非树边，那么我们将 <span class="arithmatex">\((s,t)\)</span> 及其覆盖的树边作为 <span class="arithmatex">\(G_0\)</span>，做开耳分解。</p>
+<p>首先 <span class="arithmatex">\(G_0\)</span> 是一个环，易于进行双极定向，后面每个耳也是易于定向的。</p>
 </li>
 <li>
-<p>$3\Rightarrow 4$：</p>
-<p>由于可以双极定向为 DAG，那么我们任取一拓扑序，那么对于任意一 $p_i$，必定和 $p_{1}\sim p_{i-1}$ 有至少一条边，也和 $p_{i+1}\sim p_n$ 有至少一条边，则前后缀必定连通。</p>
+<p><span class="arithmatex">\(3\Rightarrow 4\)</span>：</p>
+<p>由于可以双极定向为 DAG，那么我们任取一拓扑序，那么对于任意一 <span class="arithmatex">\(p_i\)</span>，必定和 <span class="arithmatex">\(p_{1}\sim p_{i-1}\)</span> 有至少一条边，也和 <span class="arithmatex">\(p_{i+1}\sim p_n\)</span> 有至少一条边，则前后缀必定连通。</p>
 </li>
 <li>
-<p>$4\Rightarrow 1$：</p>
+<p><span class="arithmatex">\(4\Rightarrow 1\)</span>：</p>
 <p>最困难的一步，考虑反证法。</p>
-<p>假设 $1$ 不成立，那么必定存在一个割点 $u$，使得删掉它后 $s,t$ 在同一连通块内（和 $1\Rightarrow 2$ 的证明中类似），设其余点集为 $S$。</p>
-<p>我们找到由命题 $4$ 得到的序列 $p$，设 $S$ 中最小的点为 $p_x$，最大的为 $p_y$。由于 $u$ 是个割点，则必定 $p_x\ne p_y$，那么不等的那边就不可能和前/后缀连通，与假设矛盾。</p>
+<p>假设 <span class="arithmatex">\(1\)</span> 不成立，那么必定存在一个割点 <span class="arithmatex">\(u\)</span>，使得删掉它后 <span class="arithmatex">\(s,t\)</span> 在同一连通块内（和 <span class="arithmatex">\(1\Rightarrow 2\)</span> 的证明中类似），设其余点集为 <span class="arithmatex">\(S\)</span>。</p>
+<p>我们找到由命题 <span class="arithmatex">\(4\)</span> 得到的序列 <span class="arithmatex">\(p\)</span>，设 <span class="arithmatex">\(S\)</span> 中最小的点为 <span class="arithmatex">\(p_x\)</span>，最大的为 <span class="arithmatex">\(p_y\)</span>。由于 <span class="arithmatex">\(u\)</span> 是个割点，则必定 <span class="arithmatex">\(p_x\ne p_y\)</span>，那么不等的那边就不可能和前/后缀连通，与假设矛盾。</p>
 </li>
 </ol>
 <h3 id="_10">构造方案</h3>
-<p>最暴力的方法是直接暴力构造耳分解然后做，大概 $O(n^2)$ 吧。</p>
-<p>显然，如果一张图可以双极定向，那么把所有度数为 $2$ 的点（除去 $s,t$）缩掉并不影响连通性。</p>
-<p>观察 dfs 树，一个点的出边无非是树边和返祖边，而只保留最浅的返祖边（$low_u$）是不影响连通性的，那么我们就可以依次把叶子缩掉了。最后会得到一条 $s\to t$ 的链，就很简单了。中间缩掉的点递归处理即可，这个做法比较难写。</p>
-<p>一个较为好写的做法是，考虑每个叶子有两个邻居 $low_u$ 和 $fa_u$，那么每当访问到这两者其一时下一个都能访问 $u$，那么对每个点维护一个后继序列 $next_u$，表示访问这个点后下一个就可以访问的点。然后由深到浅枚举叶子，按顺序加入 $next_{low_u}$ 和 $next_{fa_u}$ 即可，最后还是剩 $s\to t$ 的链，那么遍历过去，每访问到一个点就直接按深度优先的顺序访问它的后继序列（然后你会发现其实和递归做法差不多）。不难发现 $t$ 必然是最后遍历的（因为 $t$ 不是割点），这样就能保证 $s$ 没有入度，$t$ 没有出度，并且中间每个点都既有入度又有出度了。</p>
+<p>最暴力的方法是直接暴力构造耳分解然后做，大概 <span class="arithmatex">\(O(n^2)\)</span> 吧。</p>
+<p>显然，如果一张图可以双极定向，那么把所有度数为 <span class="arithmatex">\(2\)</span> 的点（除去 <span class="arithmatex">\(s,t\)</span>）缩掉并不影响连通性。</p>
+<p>观察 dfs 树，一个点的出边无非是树边和返祖边，而只保留最浅的返祖边（<span class="arithmatex">\(low_u\)</span>）是不影响连通性的，那么我们就可以依次把叶子缩掉了。最后会得到一条 <span class="arithmatex">\(s\to t\)</span> 的链，就很简单了。中间缩掉的点递归处理即可，这个做法比较难写。</p>
+<p>一个较为好写的做法是，考虑每个叶子有两个邻居 <span class="arithmatex">\(low_u\)</span> 和 <span class="arithmatex">\(fa_u\)</span>，那么每当访问到这两者其一时下一个都能访问 <span class="arithmatex">\(u\)</span>，那么对每个点维护一个后继序列 <span class="arithmatex">\(next_u\)</span>，表示访问这个点后下一个就可以访问的点。然后由深到浅枚举叶子，按顺序加入 <span class="arithmatex">\(next_{low_u}\)</span> 和 <span class="arithmatex">\(next_{fa_u}\)</span> 即可，最后还是剩 <span class="arithmatex">\(s\to t\)</span> 的链，那么遍历过去，每访问到一个点就直接按深度优先的顺序访问它的后继序列（然后你会发现其实和递归做法差不多）。不难发现 <span class="arithmatex">\(t\)</span> 必然是最后遍历的（因为 <span class="arithmatex">\(t\)</span> 不是割点），这样就能保证 <span class="arithmatex">\(s\)</span> 没有入度，<span class="arithmatex">\(t\)</span> 没有出度，并且中间每个点都既有入度又有出度了。</p>
 <p>据说这个方法改一下还能求耳分解，但是我没有试过，一般也不会有题专门喊你求耳分解吧。</p>
 <h3 id="_11">例题</h3>
 <details class="example" open="open">
@@ -6269,20 +6297,20 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一张 $n$ 个点 $m$ 条边的无向连通图。</li>
-<li>将其划分为若干个两两不交，且并集为全集的的集合 $S_1,S_2\dots S_p$，使得 $\forall 1\le x\le p$，$\bigcup_{i=1}^x S_i$ 和 $\bigcup_{i=k}^x S_i$ 都是连通的。</li>
-<li>最小化最大集合的大小 $k$，输出方案。</li>
-<li>$1\le n,m\le 2.3\times 10^5$</li>
+<li>给定一张 <span class="arithmatex">\(n\)</span> 个点 <span class="arithmatex">\(m\)</span> 条边的无向连通图。</li>
+<li>将其划分为若干个两两不交，且并集为全集的的集合 <span class="arithmatex">\(S_1,S_2\dots S_p\)</span>，使得 <span class="arithmatex">\(\forall 1\le x\le p\)</span>，<span class="arithmatex">\(\bigcup_{i=1}^x S_i\)</span> 和 <span class="arithmatex">\(\bigcup_{i=k}^x S_i\)</span> 都是连通的。</li>
+<li>最小化最大集合的大小 <span class="arithmatex">\(k\)</span>，输出方案。</li>
+<li><span class="arithmatex">\(1\le n,m\le 2.3\times 10^5\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>不难想到双极定向的结论。显然只有所有点双连成一条链时 $k$ 可以等于 $1$。</p>
-<p>否则，我们找到 $S_1,S_p$（不妨各取一个代表点 $x,y$）所在的点双在圆方树上的简单路径，显然路径上的每个分叉都必须完全放在一个 $S_i$ 里面，否则就必定会让某个前缀/后缀不连通。</p>
-<p>更准确地说，对于路径上的原点，它子集必须和它的分叉放在一起。对于方点，它的所有分叉必须放在一起。$k$ 即这些点集大小的最小值。</p>
-<p>那么如何得到最小的 $k$ 呢？不难想到一个贪心。我们先假设 $y$ 是圆方树的根，考虑从 $x$ 开始到 $y$ 的链是 $x_0,x_1,\dots x_p$，对于每个 $i &lt; p$，$x_i$ 都是 $x_{i+1}$ 的最大子树，否则显然不优，具体证明从 $x_{i+1}$ 是圆点还是方点分别考虑就行了，此处不展开。</p>
-<p>那么设 $f_u$ 表示以 $u$ 为最顶上结点，链延伸到叶子的最小答案，统计答案就对于每个点假设它是 $x\to y$ 链的 $\mathrm{lca}$，将最大子树 $p$ 和次大子树 $q$ 的 $f$ 贡献 $\max(f_p,f_q,g_u)$ 即可，这里 $g_u$ 是点 $u$ 自己作为 $\mathrm{lca}$ 的贡献，注意特判一些边界情况。</p>
-<p>这样我们就知道了 $S_1,S_p$，那么我们就能知道要把哪些点放在一起了，将它们缩成一个点后就变成了双极定向板题了。复杂度 $O(n)$。</p>
+<p>不难想到双极定向的结论。显然只有所有点双连成一条链时 <span class="arithmatex">\(k\)</span> 可以等于 <span class="arithmatex">\(1\)</span>。</p>
+<p>否则，我们找到 <span class="arithmatex">\(S_1,S_p\)</span>（不妨各取一个代表点 <span class="arithmatex">\(x,y\)</span>）所在的点双在圆方树上的简单路径，显然路径上的每个分叉都必须完全放在一个 <span class="arithmatex">\(S_i\)</span> 里面，否则就必定会让某个前缀/后缀不连通。</p>
+<p>更准确地说，对于路径上的原点，它子集必须和它的分叉放在一起。对于方点，它的所有分叉必须放在一起。<span class="arithmatex">\(k\)</span> 即这些点集大小的最小值。</p>
+<p>那么如何得到最小的 <span class="arithmatex">\(k\)</span> 呢？不难想到一个贪心。我们先假设 <span class="arithmatex">\(y\)</span> 是圆方树的根，考虑从 <span class="arithmatex">\(x\)</span> 开始到 <span class="arithmatex">\(y\)</span> 的链是 <span class="arithmatex">\(x_0,x_1,\dots x_p\)</span>，对于每个 <span class="arithmatex">\(i &lt; p\)</span>，<span class="arithmatex">\(x_i\)</span> 都是 <span class="arithmatex">\(x_{i+1}\)</span> 的最大子树，否则显然不优，具体证明从 <span class="arithmatex">\(x_{i+1}\)</span> 是圆点还是方点分别考虑就行了，此处不展开。</p>
+<p>那么设 <span class="arithmatex">\(f_u\)</span> 表示以 <span class="arithmatex">\(u\)</span> 为最顶上结点，链延伸到叶子的最小答案，统计答案就对于每个点假设它是 <span class="arithmatex">\(x\to y\)</span> 链的 <span class="arithmatex">\(\mathrm{lca}\)</span>，将最大子树 <span class="arithmatex">\(p\)</span> 和次大子树 <span class="arithmatex">\(q\)</span> 的 <span class="arithmatex">\(f\)</span> 贡献 <span class="arithmatex">\(\max(f_p,f_q,g_u)\)</span> 即可，这里 <span class="arithmatex">\(g_u\)</span> 是点 <span class="arithmatex">\(u\)</span> 自己作为 <span class="arithmatex">\(\mathrm{lca}\)</span> 的贡献，注意特判一些边界情况。</p>
+<p>这样我们就知道了 <span class="arithmatex">\(S_1,S_p\)</span>，那么我们就能知道要把哪些点放在一起了，将它们缩成一个点后就变成了双极定向板题了。复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5802,16 +5830,16 @@
 <p>赛时过了，以后再说。</p>
 <h2 id="t2">T2</h2>
 <p>考虑题设是什么。</p>
-<p>其实容易发现他的算法正确当且仅当 $\forall i,f_i=0\cup f_i=f_{i-1}+1$（显然吧）。</p>
-<p>先考虑一个比较本质的做法。枚举 $f$ 的最大值在哪个位置以及它具体是多少（若有多个只枚举第一个），那么显然我们就能找到一段 $S[l\sim r]=T[1\sim r-l+1]$，即我们能确定 $T$ 的前若干位。由于我们枚举的是最大值，故 $T$ 的下一位要根据那一段的每次出现受到若干限制，然后剩下就可以乱填了。</p>
-<p>然后我们就可以确定整个 $f$ 长什么样了，这样就有了一个很本质的 $O(n^3)$ 做法。</p>
-<p>注意到固定 $l$（就是上文 $S[l\sim r]$ 的 $l$）后，每次 $r$ 增加到 $r'$ 只有 $S[l\sim r']$ 每次出现位置的 $f$ 会改变，那么先枚举 $l$ 再从第一个第一次出现的 $S[l\sim r]$ 开始往右枚举，总修改次数就是 $O(n^2)$ 的，然后对于每个 $l$ 求 $f$ 的初值总复杂度也是 $O(n^2)$ 的。</p>
+<p>其实容易发现他的算法正确当且仅当 <span class="arithmatex">\(\forall i,f_i=0\cup f_i=f_{i-1}+1\)</span>（显然吧）。</p>
+<p>先考虑一个比较本质的做法。枚举 <span class="arithmatex">\(f\)</span> 的最大值在哪个位置以及它具体是多少（若有多个只枚举第一个），那么显然我们就能找到一段 <span class="arithmatex">\(S[l\sim r]=T[1\sim r-l+1]\)</span>，即我们能确定 <span class="arithmatex">\(T\)</span> 的前若干位。由于我们枚举的是最大值，故 <span class="arithmatex">\(T\)</span> 的下一位要根据那一段的每次出现受到若干限制，然后剩下就可以乱填了。</p>
+<p>然后我们就可以确定整个 <span class="arithmatex">\(f\)</span> 长什么样了，这样就有了一个很本质的 <span class="arithmatex">\(O(n^3)\)</span> 做法。</p>
+<p>注意到固定 <span class="arithmatex">\(l\)</span>（就是上文 <span class="arithmatex">\(S[l\sim r]\)</span> 的 <span class="arithmatex">\(l\)</span>）后，每次 <span class="arithmatex">\(r\)</span> 增加到 <span class="arithmatex">\(r'\)</span> 只有 <span class="arithmatex">\(S[l\sim r']\)</span> 每次出现位置的 <span class="arithmatex">\(f\)</span> 会改变，那么先枚举 <span class="arithmatex">\(l\)</span> 再从第一个第一次出现的 <span class="arithmatex">\(S[l\sim r]\)</span> 开始往右枚举，总修改次数就是 <span class="arithmatex">\(O(n^2)\)</span> 的，然后对于每个 <span class="arithmatex">\(l\)</span> 求 <span class="arithmatex">\(f\)</span> 的初值总复杂度也是 <span class="arithmatex">\(O(n^2)\)</span> 的。</p>
 <p>据说有复杂度正确的暴力求法，但是我只能想到 sam。</p>
 <h2 id="t3">T3</h2>
 <p>和题目说的一样，把边分成两部分考虑。</p>
 <p>第一部分区间连区间可以线段树优化建图然后 dij。</p>
-<p>然后后面还是考虑 dij，容易发现差不多是个 $kx+b$ 的形式，并且从 $i$ 开始，对于一对 $i&lt;j&lt;j'$ 必定只有在 $j$ 已经被标了 $vis$ 后才可能用 $i$ 更新 $j'$（左边同理）。由于是一次函数可以想到用李超树，那么对于每个 $j$，把所有修改全部堆在 $j$ 一直到给 $j$ 标 $vis$ 时再传给左右，这个可以李超树合并。</p>
-<p>复杂度 $O(n \log^2 n)$，瓶颈在前面的线段树优化建图。</p>
+<p>然后后面还是考虑 dij，容易发现差不多是个 <span class="arithmatex">\(kx+b\)</span> 的形式，并且从 <span class="arithmatex">\(i\)</span> 开始，对于一对 <span class="arithmatex">\(i&lt;j&lt;j'\)</span> 必定只有在 <span class="arithmatex">\(j\)</span> 已经被标了 <span class="arithmatex">\(vis\)</span> 后才可能用 <span class="arithmatex">\(i\)</span> 更新 <span class="arithmatex">\(j'\)</span>（左边同理）。由于是一次函数可以想到用李超树，那么对于每个 <span class="arithmatex">\(j\)</span>，把所有修改全部堆在 <span class="arithmatex">\(j\)</span> 一直到给 <span class="arithmatex">\(j\)</span> 标 <span class="arithmatex">\(vis\)</span> 时再传给左右，这个可以李超树合并。</p>
+<p>复杂度 <span class="arithmatex">\(O(n \log^2 n)\)</span>，瓶颈在前面的线段树优化建图。</p>
 
 
 

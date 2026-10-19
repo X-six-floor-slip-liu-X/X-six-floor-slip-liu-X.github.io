@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5808,8 +5836,8 @@
 <p><a href="../../files/20230909.rar">密码是今年的通用密码，大小写敏感</a></p>
 <h2 id="t1">T1</h2>
 <p>简单题，但赛时被数据范围诈骗了，痛失 2h。</p>
-<p>赛时一开始看到数据范围以为是指数复杂度，就猜了个最优解当且仅当两维都是最优解的结论，结果过不了第二个样例，然后又想 $O(n^6)$ DP 发现写不出来，最后想到了一维暴力枚举，另一维 DP。</p>
-<p>首先第一维直接 $O(2^n)$ 枚举，然后第二维可以设计一个 DP。设 $dp_{i,j}$ 表示考虑前 $i$ 列，切 $j$ 刀可以得到的最小值最大是多少，转移是简单的，二维前缀和维护一下即可。复杂度 $O(2^nnm^2)$。</p>
+<p>赛时一开始看到数据范围以为是指数复杂度，就猜了个最优解当且仅当两维都是最优解的结论，结果过不了第二个样例，然后又想 <span class="arithmatex">\(O(n^6)\)</span> DP 发现写不出来，最后想到了一维暴力枚举，另一维 DP。</p>
+<p>首先第一维直接 <span class="arithmatex">\(O(2^n)\)</span> 枚举，然后第二维可以设计一个 DP。设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 列，切 <span class="arithmatex">\(j\)</span> 刀可以得到的最小值最大是多少，转移是简单的，二维前缀和维护一下即可。复杂度 <span class="arithmatex">\(O(2^nnm^2)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5884,9 +5912,9 @@
 </details>
 <h2 id="t2">T2</h2>
 <p>不难，但赛时不仅打的暴力，还因为数组开大 TLE 了。</p>
-<p>首先考虑假如没有交换操作，这道题应该怎么做，那么容易想到 DP，设 $dp_{i,j}$ 表示考虑 $a$ 前 $i$ 个、$b$ 前 $j$ 个的所有决策中，所需阈值最小是多少，由于只要知道了 $i,j$ 就能知道当前 $S$ 里面还剩几个元素，所以转移是简单的，就是考虑当前个数加一和之前的最大值取 $\max$，然后转移到下一个即可，在此略过。</p>
-<p>那么假如把每个 $i,j$ 时剩下的元素数放在一个 $i$ 行 $j$ 列的矩阵里，容易发现交换 $a_i,a_{i+1}$ 就只有第 $i$ 行会改变，另外容易发现我们的 $dp_{i,j}$ 就等价于在刚才那个矩阵上找一条 $(0,0)\to (i,j)$ 的路径，路径上最大值最小是多少（再 $+1$），那么我们可以再预处理每个点 $(i,j)\to (n,n)$ 的路径上最大值最小是多少，这样我们最后在改变的这一列上贪心一下即可求出答案（这里“贪心”指每个阶段只保留一个状态的 DP）。</p>
-<p>预处理可以 $O(n^2)$，然后求每个答案是 $O(n)$ 的，总复杂度 $O(n^2)$。</p>
+<p>首先考虑假如没有交换操作，这道题应该怎么做，那么容易想到 DP，设 <span class="arithmatex">\(dp_{i,j}\)</span> 表示考虑 <span class="arithmatex">\(a\)</span> 前 <span class="arithmatex">\(i\)</span> 个、<span class="arithmatex">\(b\)</span> 前 <span class="arithmatex">\(j\)</span> 个的所有决策中，所需阈值最小是多少，由于只要知道了 <span class="arithmatex">\(i,j\)</span> 就能知道当前 <span class="arithmatex">\(S\)</span> 里面还剩几个元素，所以转移是简单的，就是考虑当前个数加一和之前的最大值取 <span class="arithmatex">\(\max\)</span>，然后转移到下一个即可，在此略过。</p>
+<p>那么假如把每个 <span class="arithmatex">\(i,j\)</span> 时剩下的元素数放在一个 <span class="arithmatex">\(i\)</span> 行 <span class="arithmatex">\(j\)</span> 列的矩阵里，容易发现交换 <span class="arithmatex">\(a_i,a_{i+1}\)</span> 就只有第 <span class="arithmatex">\(i\)</span> 行会改变，另外容易发现我们的 <span class="arithmatex">\(dp_{i,j}\)</span> 就等价于在刚才那个矩阵上找一条 <span class="arithmatex">\((0,0)\to (i,j)\)</span> 的路径，路径上最大值最小是多少（再 <span class="arithmatex">\(+1\)</span>），那么我们可以再预处理每个点 <span class="arithmatex">\((i,j)\to (n,n)\)</span> 的路径上最大值最小是多少，这样我们最后在改变的这一列上贪心一下即可求出答案（这里“贪心”指每个阶段只保留一个状态的 DP）。</p>
+<p>预处理可以 <span class="arithmatex">\(O(n^2)\)</span>，然后求每个答案是 <span class="arithmatex">\(O(n)\)</span> 的，总复杂度 <span class="arithmatex">\(O(n^2)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

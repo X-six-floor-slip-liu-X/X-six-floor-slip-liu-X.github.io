@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6200,7 +6228,7 @@
 <p>其实大部分都是佳老师图论专题的题，但是万一做了其他题呢？所以还是叫杂题。</p>
 <h2 id="cf1163f-indecisive-taxi-fee">CF1163F Indecisive Taxi Fee</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1163F">传送门</a></p>
-<p>题意很友好，需要注意虽然保证 $1,n$ 连通，但不保证整张图连通。</p>
+<p>题意很友好，需要注意虽然保证 <span class="arithmatex">\(1,n\)</span> 连通，但不保证整张图连通。</p>
 <p>首先容易发现修改一条边后，只有两种情况：</p>
 <ol>
 <li>新的最短路包含这条边。</li>
@@ -6210,7 +6238,7 @@
 <p>容易发现第一种就是起点到一端点的最短路加上边权加上另一端点到终点的最短路，这个很简单，预处理起点和终点的单源最短路即可。</p>
 <p>然后第二种情况，这个是个最短路树的常见技巧，即<strong>删边最短路</strong>。</p>
 <p>这个可以参考我的<a href="">这篇博客</a>。</p>
-<p>然后就做完了，复杂度 $O(m\log m+m\log^2n+q)$。</p>
+<p>然后就做完了，复杂度 <span class="arithmatex">\(O(m\log m+m\log^2n+q)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6366,7 +6394,7 @@
 <p><a href="https://www.luogu.com.cn/problem/P5633">传送门</a></p>
 <p>容易发现把对应点周围的边涂成白色，其余涂成黑色就是上一道题。</p>
 <p>但是有个问题，如何判无解。</p>
-<p>其实很简单，容易发现有解的必定是一段连续的区间，因为每次变化只删一条边加一条边，不可能突然多两条白边。判一下 $k$ 是不是在区间内即可。</p>
+<p>其实很简单，容易发现有解的必定是一段连续的区间，因为每次变化只删一条边加一条边，不可能突然多两条白边。判一下 <span class="arithmatex">\(k\)</span> 是不是在区间内即可。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6583,8 +6611,8 @@
 <p><a href="https://www.luogu.com.cn/problem/CF152E">传送门</a></p>
 <p>斯坦纳树板题。</p>
 <p>首先如果按四联通建图，显然选出来的应该是一棵树（其实因为这道题统计的是点权貌似不按树统计也行，但是按树统计要方便一些），不然可以考虑换成选你选出来的东西的最小生成树。</p>
-<p>考虑 DP，设 $dp_{msk,i}$ 表示考虑一棵以 $i$ 为根的树，包含 $msk$ 内的关键点，需要的最小代价。</p>
-<p>考虑如何转移，对于第一维就是一个子集枚举，不用担心后效性。但是第二维有后效性，怎么办呢？容易发现这是一个类似于最短路的东西，可以考虑用类似于 Bellman 的算法做。具体来说先枚举第一维做子集枚举，然后对于第二维可以松弛每条边 $nm$ 次，这样就能保证一个点的最短路传到其余所有点了。由于只统计最小值，必定能找到一个地方没算重，然后就做完了，复杂度 $O(n^2m^23^k)$。</p>
+<p>考虑 DP，设 <span class="arithmatex">\(dp_{msk,i}\)</span> 表示考虑一棵以 <span class="arithmatex">\(i\)</span> 为根的树，包含 <span class="arithmatex">\(msk\)</span> 内的关键点，需要的最小代价。</p>
+<p>考虑如何转移，对于第一维就是一个子集枚举，不用担心后效性。但是第二维有后效性，怎么办呢？容易发现这是一个类似于最短路的东西，可以考虑用类似于 Bellman 的算法做。具体来说先枚举第一维做子集枚举，然后对于第二维可以松弛每条边 <span class="arithmatex">\(nm\)</span> 次，这样就能保证一个点的最短路传到其余所有点了。由于只统计最小值，必定能找到一个地方没算重，然后就做完了，复杂度 <span class="arithmatex">\(O(n^2m^23^k)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6684,10 +6712,10 @@
 <h2 id="cf1697f-too-many-constraints">CF1697F Too Many Constraints</h2>
 <p><a href="https://www.luogu.com.cn/problem/CF1697F">传送门</a></p>
 <p>这个问题乍一看像差分约束（ <del>其实我按差分约束想了 20min</del> ），后面发现其实更像 k-sat 问题，但 k-sat 是 NPC 问题， <del>所以我们考虑跳过这道题</del> 。</p>
-<p>考虑条件 $3$，即 $a_i+a_j\ge x$，容易发现这等价于对于每一对 $(p,q)$ 使得 $p+q=x+1$，必定有 $a_i\ge p$ 或者 $a_j\ge q$，因为如果 $a_i&lt;p$ 且 $a_j&lt;q$ 显然 $a_i+a_j\le p+q-2$（因为是整数），对于条件 $2$ 是类似的。那么这就能转化成一个 2-sat 问题了。</p>
-<p>那么考虑对于每个 $i$ 建 $k+1$ 个点，其中 $(i,j)$ 表示 $a_i\ge j$ 是否成立，然后建边是简单的，需要注意 $(i,1)$ 必定取 $1$，以及 $(1,k+1)$ 必定取 $0$，以及要求序列单调不减，其余略过。</p>
-<p>为什么要建 $k+1$ 个点呢？因为对于一个条件 $3$，当 $a_i$ 取到 $k$ 的上界时，$a_j$ 必须大于等于 $x+1-k$，这个限制需要用到 $k+1=0$。</p>
-<p>复杂度 $O(nk+q)$。</p>
+<p>考虑条件 <span class="arithmatex">\(3\)</span>，即 <span class="arithmatex">\(a_i+a_j\ge x\)</span>，容易发现这等价于对于每一对 <span class="arithmatex">\((p,q)\)</span> 使得 <span class="arithmatex">\(p+q=x+1\)</span>，必定有 <span class="arithmatex">\(a_i\ge p\)</span> 或者 <span class="arithmatex">\(a_j\ge q\)</span>，因为如果 <span class="arithmatex">\(a_i&lt;p\)</span> 且 <span class="arithmatex">\(a_j&lt;q\)</span> 显然 <span class="arithmatex">\(a_i+a_j\le p+q-2\)</span>（因为是整数），对于条件 <span class="arithmatex">\(2\)</span> 是类似的。那么这就能转化成一个 2-sat 问题了。</p>
+<p>那么考虑对于每个 <span class="arithmatex">\(i\)</span> 建 <span class="arithmatex">\(k+1\)</span> 个点，其中 <span class="arithmatex">\((i,j)\)</span> 表示 <span class="arithmatex">\(a_i\ge j\)</span> 是否成立，然后建边是简单的，需要注意 <span class="arithmatex">\((i,1)\)</span> 必定取 <span class="arithmatex">\(1\)</span>，以及 <span class="arithmatex">\((1,k+1)\)</span> 必定取 <span class="arithmatex">\(0\)</span>，以及要求序列单调不减，其余略过。</p>
+<p>为什么要建 <span class="arithmatex">\(k+1\)</span> 个点呢？因为对于一个条件 <span class="arithmatex">\(3\)</span>，当 <span class="arithmatex">\(a_i\)</span> 取到 <span class="arithmatex">\(k\)</span> 的上界时，<span class="arithmatex">\(a_j\)</span> 必须大于等于 <span class="arithmatex">\(x+1-k\)</span>，这个限制需要用到 <span class="arithmatex">\(k+1=0\)</span>。</p>
+<p>复杂度 <span class="arithmatex">\(O(nk+q)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6811,11 +6839,11 @@
 </details>
 <h2 id="p3209-hnoi2010">P3209 [HNOI2010] 平面图判定</h2>
 <p><a href="https://www.luogu.com.cn/problem/P3209">传送门</a></p>
-<p>首先有一个经典结论，对于任意平面图，有 $|E|\le 3|V|+6$。</p>
-<p>首先我们知道欧拉公式 $|V|+|F|-|E|=2$，然后容易发现一个面附近至少有 $3$ 条边，一条边附近至多有 $2$ 个面，即 $3|F|\le 2|E|$，然后解个不等式可以得到 $|E|\le 3|V|+6$。</p>
-<p>那么对于 $m&gt;3n+6$ 可以直接输出无解，就把边数压到 $O(n)$ 级别了。</p>
-<p>考虑哈密顿回路它自己肯定是能铺成平面图的，铺成一个环即可。那么对于一条不在哈密顿回路上的边，它显然可以放到环内侧或外侧。容易想到有一些边是不能放到同一侧的，即“$a$ 在内测且 $b$ 在外侧”和“$a$ 在外侧且 $b$ 在内测”至少要成立一个，那么直接对边的内外做 2-sat 即可。</p>
-<p>复杂度 $O(n^2)$（因为你要 $m^2$ 地找不能在同一侧的环，但是 $m$ 是 $O(n)$ 级别的）。</p>
+<p>首先有一个经典结论，对于任意平面图，有 <span class="arithmatex">\(|E|\le 3|V|+6\)</span>。</p>
+<p>首先我们知道欧拉公式 <span class="arithmatex">\(|V|+|F|-|E|=2\)</span>，然后容易发现一个面附近至少有 <span class="arithmatex">\(3\)</span> 条边，一条边附近至多有 <span class="arithmatex">\(2\)</span> 个面，即 <span class="arithmatex">\(3|F|\le 2|E|\)</span>，然后解个不等式可以得到 <span class="arithmatex">\(|E|\le 3|V|+6\)</span>。</p>
+<p>那么对于 <span class="arithmatex">\(m&gt;3n+6\)</span> 可以直接输出无解，就把边数压到 <span class="arithmatex">\(O(n)\)</span> 级别了。</p>
+<p>考虑哈密顿回路它自己肯定是能铺成平面图的，铺成一个环即可。那么对于一条不在哈密顿回路上的边，它显然可以放到环内侧或外侧。容易想到有一些边是不能放到同一侧的，即“<span class="arithmatex">\(a\)</span> 在内测且 <span class="arithmatex">\(b\)</span> 在外侧”和“<span class="arithmatex">\(a\)</span> 在外侧且 <span class="arithmatex">\(b\)</span> 在内测”至少要成立一个，那么直接对边的内外做 2-sat 即可。</p>
+<p>复杂度 <span class="arithmatex">\(O(n^2)\)</span>（因为你要 <span class="arithmatex">\(m^2\)</span> 地找不能在同一侧的环，但是 <span class="arithmatex">\(m\)</span> 是 <span class="arithmatex">\(O(n)\)</span> 级别的）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6933,17 +6961,17 @@
 <p><a href="https://qoj.ac/problem/5504">传送门</a></p>
 <p>题面太不友好了，这里概括一下：</p>
 <ul>
-<li>给定 $n$，你需要构造一个长为 $3n$ 的 $01$ 序列。</li>
-<li>有 $m$ 个限制，形如 $([l_1,r_1],[l_2,r_2])$ 表示 $[l_1,r_1]$ 全为 $0$ 和 $[l_2,r_2]$ 全为 $1$ 必须满足一个。</li>
-<li>要求序列里 $0,1$ 的数量均必须在 $[n,2n]$ 之间。</li>
+<li>给定 <span class="arithmatex">\(n\)</span>，你需要构造一个长为 <span class="arithmatex">\(3n\)</span> 的 <span class="arithmatex">\(01\)</span> 序列。</li>
+<li>有 <span class="arithmatex">\(m\)</span> 个限制，形如 <span class="arithmatex">\(([l_1,r_1],[l_2,r_2])\)</span> 表示 <span class="arithmatex">\([l_1,r_1]\)</span> 全为 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\([l_2,r_2]\)</span> 全为 <span class="arithmatex">\(1\)</span> 必须满足一个。</li>
+<li>要求序列里 <span class="arithmatex">\(0,1\)</span> 的数量均必须在 <span class="arithmatex">\([n,2n]\)</span> 之间。</li>
 <li>随便输出一个方案。</li>
 </ul>
 <p>容易发现它的限制长得很像 2-sat，考虑先按 2-sat 做。</p>
-<p>那么要连的边就是 $([l_1,r_1],1)\to ([l_2,r_2],1)$ 和 $([l_2,r_2],0)\to ([l_1,r_1],0)$。</p>
+<p>那么要连的边就是 <span class="arithmatex">\(([l_1,r_1],1)\to ([l_2,r_2],1)\)</span> 和 <span class="arithmatex">\(([l_2,r_2],0)\to ([l_1,r_1],0)\)</span>。</p>
 <p>对于区间连区间，可以考虑线段树优化建图。由于区间连区间是不好做的，可以新建一个点然后两个区间都向这个点连边。</p>
-<p>容易发现如果只考虑这些限制，显然是有解的（比如可以全填 $1$），因为 $0,1$ 其实是两张独立的图。这时候可以考虑只建 $0$ 的图。那么问题就转化成了你有一个 DAG，点权总和为 $3n$，然后要选择任意一个拓扑序的前缀，使得选出来的点权总和在 $[n,2n]$ 之间。</p>
-<p>首先若所有点点权都在 $[0,n]$ 中，随便找一个拓扑序的前缀即可，因为点权总和不可能从小于 $n$ 突变到大于 $2n$。如果有一个点点权大于 $2n$，那显然无解，因为选它也不是不选它也不是。</p>
-<p>考虑存在点点权在 $(n,2n]$ 区间中的情况。这个很简单，求出不包含它的最大前缀（算拓扑序时不考虑这个点即可），和包含它的最小前缀（建反图，然后加上所有后继即可），然后你就会做了。</p>
+<p>容易发现如果只考虑这些限制，显然是有解的（比如可以全填 <span class="arithmatex">\(1\)</span>），因为 <span class="arithmatex">\(0,1\)</span> 其实是两张独立的图。这时候可以考虑只建 <span class="arithmatex">\(0\)</span> 的图。那么问题就转化成了你有一个 DAG，点权总和为 <span class="arithmatex">\(3n\)</span>，然后要选择任意一个拓扑序的前缀，使得选出来的点权总和在 <span class="arithmatex">\([n,2n]\)</span> 之间。</p>
+<p>首先若所有点点权都在 <span class="arithmatex">\([0,n]\)</span> 中，随便找一个拓扑序的前缀即可，因为点权总和不可能从小于 <span class="arithmatex">\(n\)</span> 突变到大于 <span class="arithmatex">\(2n\)</span>。如果有一个点点权大于 <span class="arithmatex">\(2n\)</span>，那显然无解，因为选它也不是不选它也不是。</p>
+<p>考虑存在点点权在 <span class="arithmatex">\((n,2n]\)</span> 区间中的情况。这个很简单，求出不包含它的最大前缀（算拓扑序时不考虑这个点即可），和包含它的最小前缀（建反图，然后加上所有后继即可），然后你就会做了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7187,11 +7215,11 @@
 </details>
 <h2 id="p4630-apio2018">P4630 [APIO2018] 铁人两项</h2>
 <p><a href="https://www.luogu.com.cn/problem/P4630">传送门</a></p>
-<p>容易发现题意等价于对于所有 $(s,f)$，求出它们间所有路径点集的交的大小总和。</p>
-<p>那么容易发现，对于一个点双，若确定了入口和出口，对于其中每个点都能找到一条路径经过它。我们要做的就是统计所有 $(s,f)$ 能经过的点双大小总和。</p>
-<p>那么可以直接考虑圆方树，把方点点权赋为点双大小，原点赋为 $-1$ 即可。</p>
+<p>容易发现题意等价于对于所有 <span class="arithmatex">\((s,f)\)</span>，求出它们间所有路径点集的交的大小总和。</p>
+<p>那么容易发现，对于一个点双，若确定了入口和出口，对于其中每个点都能找到一条路径经过它。我们要做的就是统计所有 <span class="arithmatex">\((s,f)\)</span> 能经过的点双大小总和。</p>
+<p>那么可以直接考虑圆方树，把方点点权赋为点双大小，原点赋为 <span class="arithmatex">\(-1\)</span> 即可。</p>
 <p>然后统计答案可以计算每个点在多少条路径上出现过，这个很简单。</p>
-<p>复杂度 $O(n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7278,7 +7306,7 @@
 <p><a href="https://www.luogu.com.cn/problem/CF487E">传送门</a></p>
 <p>同样的，我们只需要考虑维护路径上每个点双的答案即可。</p>
 <p>那么对每个方点开 <code>multiset</code> 维护所有儿子的最小值，然后树剖即可。</p>
-<p>注意特判如果 $\mathrm{lca}$ 是个方点还要算上它的父亲的答案。</p>
+<p>注意特判如果 <span class="arithmatex">\(\mathrm{lca}\)</span> 是个方点还要算上它的父亲的答案。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7448,10 +7476,10 @@
 <p><a href="https://www.luogu.com.cn/problem/P5471">传送门</a></p>
 <p>第一眼觉得线段树套数优化建图然后跑 dij，结果发现空间要炸。</p>
 <p>考虑优化，发现只用开一维线段树，另一维可以用 <code>multiset</code> 维护。然后由于每次 <code>dis</code> 最小的点必定是一整个矩形内的点，优先队列里面可以塞矩形，然后每个点拓展一次就从线段树上删掉即可（赞美 dij）。</p>
-<p>复杂度 $O(n\log^2 n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
-<p>因为写代码时没想清楚，貌似实现的时候复杂度假到 $log^3$ 了，但是无所谓。</p>
+<p>因为写代码时没想清楚，貌似实现的时候复杂度假到 <span class="arithmatex">\(log^3\)</span> 了，但是无所谓。</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="cp">#define mem(a,b) memset(a,b,sizeof(a))</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="cp">#define forup(i,s,e) for(int i=(s);i&lt;=(e);i++)</span>
@@ -7567,7 +7595,7 @@
 <p>容易发现从小到大最小化拓扑序中每个数的下标等价于最大反图拓扑序的字典序。</p>
 <p>感性理解就是在反图上先把更大的用了更小的就更容易提到前面，严谨证明其实也差不多，可以考虑数学归纳，这里就略过了。</p>
 <p>那么求拓扑序时把队列换成优先队列即可。</p>
-<p>注意 <code>reverse</code>，复杂度 $O(n\log n)$。</p>
+<p>注意 <code>reverse</code>，复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7631,11 +7659,11 @@
 </details>
 <h2 id="abc237ex-hakata">[ABC237Ex] Hakata</h2>
 <p><a href="https://www.luogu.com.cn/problem/AT_abc237_h">传送门</a></p>
-<p>首先有个结论，就是一个字符串本质不同的回文字串数量不超过 $n$。</p>
+<p>首先有个结论，就是一个字符串本质不同的回文字串数量不超过 <span class="arithmatex">\(n\)</span>。</p>
 <p>因为考虑你假如在字符串末尾插入一个字符，以它结尾的回文字串中，除去最大的一个，其余都被最大的覆盖了，那肯定在之前出现过。那么每次只会新增一个。</p>
 <p>另外容易发现字符串的字串关系是个偏序集，然后我们要求的是最小反链覆盖，直接套 Dilworth 定理，求最小链划分即可。</p>
-<p>经典二分图建模，直接 dinic，这一部分复杂度 $O(n\sqrt{m})$，然后边数是 $O(n^2)$ 的，复杂度就是 $O(n^2)$。</p>
-<p>然后前面求偏序关系直接 $O(n^3)$ 暴力即可。</p>
+<p>经典二分图建模，直接 dinic，这一部分复杂度 <span class="arithmatex">\(O(n\sqrt{m})\)</span>，然后边数是 <span class="arithmatex">\(O(n^2)\)</span> 的，复杂度就是 <span class="arithmatex">\(O(n^2)\)</span>。</p>
+<p>然后前面求偏序关系直接 <span class="arithmatex">\(O(n^3)\)</span> 暴力即可。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7768,14 +7796,14 @@
 <p>很考验对点分治的理解。</p>
 <p>题面不是很友好，所以这里给出形式化题意：</p>
 <ul>
-<li>给你一棵有 $N$ 个点的树，每个点有颜色，共有 $K$ 种颜色。</li>
-<li>你一次操作可以把所有颜色为 $a$ 的点涂成颜色为 $b$ 的点（$a,b$ 你随意指定）。</li>
+<li>给你一棵有 <span class="arithmatex">\(N\)</span> 个点的树，每个点有颜色，共有 <span class="arithmatex">\(K\)</span> 种颜色。</li>
+<li>你一次操作可以把所有颜色为 <span class="arithmatex">\(a\)</span> 的点涂成颜色为 <span class="arithmatex">\(b\)</span> 的点（<span class="arithmatex">\(a,b\)</span> 你随意指定）。</li>
 <li>问至少需要多少次操作才能使某一种颜色的点是一个连通块。</li>
 </ul>
-<p>那么容易想到一个初步思路：先枚举最终的颜色 $c$，然后随意选一个该颜色的点，考虑把所有不和它连通且颜色为 $c$ 的点之间的路径全涂成 $c$。</p>
-<p>具体如何实现，可以考虑一个贪心。先把以你选的点为根求出所有点的父亲，再将所有颜色为 $c$ 的点压入一个队列，然后每次取出队首元素，若其父亲没涂成 $c$ 就将对应颜色涂成 $c$ 并压入队列。这个贪心显然是对的，因为你的每次涂色都是<strong>必要</strong>的，复杂度 $O(n)$。然后加上枚举颜色就是 $O(nm)$ 的。</p>
+<p>那么容易想到一个初步思路：先枚举最终的颜色 <span class="arithmatex">\(c\)</span>，然后随意选一个该颜色的点，考虑把所有不和它连通且颜色为 <span class="arithmatex">\(c\)</span> 的点之间的路径全涂成 <span class="arithmatex">\(c\)</span>。</p>
+<p>具体如何实现，可以考虑一个贪心。先把以你选的点为根求出所有点的父亲，再将所有颜色为 <span class="arithmatex">\(c\)</span> 的点压入一个队列，然后每次取出队首元素，若其父亲没涂成 <span class="arithmatex">\(c\)</span> 就将对应颜色涂成 <span class="arithmatex">\(c\)</span> 并压入队列。这个贪心显然是对的，因为你的每次涂色都是<strong>必要</strong>的，复杂度 <span class="arithmatex">\(O(n)\)</span>。然后加上枚举颜色就是 <span class="arithmatex">\(O(nm)\)</span> 的。</p>
 <p>考虑优化，容易发现对于选的那个点，我们的算法相当于“寻找一个包含它的连通块，使得它包含一个颜色集合的所有点”，即<strong>这是一个对连通块的查找</strong>！这种给定点找连通块的问题可以考虑用点分治优化。</p>
-<p>具体来说，对于每个分治中心，只考虑<strong>完全包含在对应连通块中的颜色</strong>，因为如果跨越了连通块，它会在其它分治中心被算到，如果贪心过程中发现没有被该连通块完全包含的直接当成无解即可。然后就做完了，复杂度 $O(n\log n)$。</p>
+<p>具体来说，对于每个分治中心，只考虑<strong>完全包含在对应连通块中的颜色</strong>，因为如果跨越了连通块，它会在其它分治中心被算到，如果贪心过程中发现没有被该连通块完全包含的直接当成无解即可。然后就做完了，复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7882,11 +7910,11 @@
 <h2 id="p3623-apio2008">P3623 [APIO2008] 免费道路</h2>
 <p><a href="https://www.luogu.com.cn/problem/P3623">传送门</a></p>
 <p>很考验对 Kruskal 的理解（感觉佳老师抓的题严格薄纱 <strong>匈牙利人（Hungary belonger）</strong> 或者 <strong>奥运评委（Olympic judge）</strong> 抓的啊）。</p>
-<p>这道题乍一看很像之前 Tree I 边权全为 $1$ 的削弱版加上输出方案。但其实容易发现这道题的图像是一条横向的线段，而 wqs 二分多点共线的情况要输出方案是很麻烦的（或许可以考虑给边随机赋权值然后跑 wqs 二分）。</p>
-<p>一个简单的想法是先随便加 $k$ 条不含环的 $0$ 权边。但是这样可能会让本来有解的判成无解，考虑如何保证有解。</p>
-<p>由于 Kruskal 是一个缩点的过程，容易发现把 $1$ 权边全缩完之后，在剩余的图上跑 Kruskal 就能找到必要的 $0$ 权边。而只要把这些“必要的边”缩了，其余边必定能连出一棵生成树（除非图不连通）。</p>
-<p>那么先跑一遍 Kruskal 找到必要的边，再跑一遍 Kruskal，先加必要的边，再补 $0$ 权边补到 $k$ 条，最后再连 $1$ 权边即可。</p>
-<p>复杂度 $O(m\log m\alpha(n))$。</p>
+<p>这道题乍一看很像之前 Tree I 边权全为 <span class="arithmatex">\(1\)</span> 的削弱版加上输出方案。但其实容易发现这道题的图像是一条横向的线段，而 wqs 二分多点共线的情况要输出方案是很麻烦的（或许可以考虑给边随机赋权值然后跑 wqs 二分）。</p>
+<p>一个简单的想法是先随便加 <span class="arithmatex">\(k\)</span> 条不含环的 <span class="arithmatex">\(0\)</span> 权边。但是这样可能会让本来有解的判成无解，考虑如何保证有解。</p>
+<p>由于 Kruskal 是一个缩点的过程，容易发现把 <span class="arithmatex">\(1\)</span> 权边全缩完之后，在剩余的图上跑 Kruskal 就能找到必要的 <span class="arithmatex">\(0\)</span> 权边。而只要把这些“必要的边”缩了，其余边必定能连出一棵生成树（除非图不连通）。</p>
+<p>那么先跑一遍 Kruskal 找到必要的边，再跑一遍 Kruskal，先加必要的边，再补 <span class="arithmatex">\(0\)</span> 权边补到 <span class="arithmatex">\(k\)</span> 条，最后再连 <span class="arithmatex">\(1\)</span> 权边即可。</p>
+<p>复杂度 <span class="arithmatex">\(O(m\log m\alpha(n))\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7961,16 +7989,16 @@
 </details>
 <h2 id="p9726-ec-final-2022-magic">P9726 [EC Final 2022] Magic</h2>
 <p><a href="https://www.luogu.com.cn/problem/P9726">传送门</a></p>
-<p>容易发现没有被其余操作覆盖的区间端点会产生贡献，那么考虑区间 $A,B$ 的关系：</p>
+<p>容易发现没有被其余操作覆盖的区间端点会产生贡献，那么考虑区间 <span class="arithmatex">\(A,B\)</span> 的关系：</p>
 <ol>
-<li>$A$ 区间完全覆盖 $B$ 区间：先执行 $B$ 再执行 $A$ 必定不劣。</li>
-<li>$A\cap B=\varnothing$：两区间显然互不影响。</li>
-<li>$A\cap B\ne\varnothing$：不妨设 $l_a&lt;l_b&lt;r_a&lt;r_b$，容易发现 $l_b,r_a$ 只有一个可以产生贡献。</li>
+<li><span class="arithmatex">\(A\)</span> 区间完全覆盖 <span class="arithmatex">\(B\)</span> 区间：先执行 <span class="arithmatex">\(B\)</span> 再执行 <span class="arithmatex">\(A\)</span> 必定不劣。</li>
+<li><span class="arithmatex">\(A\cap B=\varnothing\)</span>：两区间显然互不影响。</li>
+<li><span class="arithmatex">\(A\cap B\ne\varnothing\)</span>：不妨设 <span class="arithmatex">\(l_a&lt;l_b&lt;r_a&lt;r_b\)</span>，容易发现 <span class="arithmatex">\(l_b,r_a\)</span> 只有一个可以产生贡献。</li>
 </ol>
 <p>假如把形如“二选一能产生贡献”的两两连边，容易发现这是一个二分图的形式，而每条边的意义是“两端点<strong>只有一个能产生贡献</strong>”，那么显然贡献最大就是最大独立集，可以用最大流或者匈牙利算法解决。</p>
 <p>但是只有答案“小于等于最大独立集”是显然的，考虑证明答案能取到最大独立集。</p>
-<p>容易发现无解当且仅当操作顺序构成环，考虑假设存在一个环，环上存在一个 $(l_i,r_i)$ 是 $r_i$ 产生贡献，考虑一组和它有顺序要求的 $(l_i',r_i')$，假设 $l_i&lt;l_i'&lt;r_i&lt;r_i'$，那么显然是 $r_i'$ 产生贡献。容易发现环上 $r_i$ 是递增的，那显然这不是个环。</p>
-<p>但是这道题卡空间，可以考虑用 bitset 存邻接矩阵，然后空间就能过了，此时跑 dinic 时间复杂度是 $O(\frac{n^3\sqrt{n}}{w})$（还不如匈牙利 $O(\frac{n^3}{w})$，但是我不会匈牙利\kk）。</p>
+<p>容易发现无解当且仅当操作顺序构成环，考虑假设存在一个环，环上存在一个 <span class="arithmatex">\((l_i,r_i)\)</span> 是 <span class="arithmatex">\(r_i\)</span> 产生贡献，考虑一组和它有顺序要求的 <span class="arithmatex">\((l_i',r_i')\)</span>，假设 <span class="arithmatex">\(l_i&lt;l_i'&lt;r_i&lt;r_i'\)</span>，那么显然是 <span class="arithmatex">\(r_i'\)</span> 产生贡献。容易发现环上 <span class="arithmatex">\(r_i\)</span> 是递增的，那显然这不是个环。</p>
+<p>但是这道题卡空间，可以考虑用 bitset 存邻接矩阵，然后空间就能过了，此时跑 dinic 时间复杂度是 <span class="arithmatex">\(O(\frac{n^3\sqrt{n}}{w})\)</span>（还不如匈牙利 <span class="arithmatex">\(O(\frac{n^3}{w})\)</span>，但是我不会匈牙利\kk）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -8059,7 +8087,7 @@
 <p>然后卡空间的另一个办法是可持久化线段树优化建图。这个可以参考<a href="https://www.luogu.com.cn/blog/six-floor-slip-liu/solution-p9726">我的这篇洛谷题解</a>。</p>
 <h2 id="p5025-snoi2017">P5025 [SNOI2017] 炸弹</h2>
 <p><a href="https://www.luogu.com.cn/problem/P5025">传送门</a></p>
-<p>线段树优化建图后跑强连通分量。根据题设容易发现能引爆的区域必定是一个连续的区间，在缩点后反图上跑拓扑序列 DP 维护每个强连通分量能到达的最左和最右即可。复杂度 $O(n\log n)$。</p>
+<p>线段树优化建图后跑强连通分量。根据题设容易发现能引爆的区域必定是一个连续的区间，在缩点后反图上跑拓扑序列 DP 维护每个强连通分量能到达的最左和最右即可。复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -8191,8 +8219,8 @@
 </details>
 <h2 id="agc056c-01-balanced">[AGC056C] 01 Balanced</h2>
 <p>妙妙题。</p>
-<p>首先很自然能想到差分约束。具体来说，就是对前缀和进行差分约束，最开始限制 $a_i\le a_{i+1},a_{i+1}\le a_i+1$，然后每个条件用两个 $\le$ 拼成一个 $=$ 即可。但这样有个问题，就是要连负权边。不能用 dij 了，而且 $|V|=10^6,|E|&gt;2|V|$，不像是 SPFA 能过的样子（据说会被卡五个点），考虑构造出不用连负权边的方案。</p>
-<p>首先肯定不能直接用前缀和了，一个想法是把前缀和换成前缀“$0$ 的个数减去 $1$ 的个数”，容易发现最小化原序列字典序就是最大化这个序列的字典序，并且由于差分约束本来就是求的字典序最大值，所以还会更方便。然后这样限制就变成了 $a_i\le a_{i+1}+1,a_{i+1}\le a_i+1$，每个条件就拼出两值相等即可，然后就做完了。复杂度 $O(n\log n)$。</p>
+<p>首先很自然能想到差分约束。具体来说，就是对前缀和进行差分约束，最开始限制 <span class="arithmatex">\(a_i\le a_{i+1},a_{i+1}\le a_i+1\)</span>，然后每个条件用两个 <span class="arithmatex">\(\le\)</span> 拼成一个 <span class="arithmatex">\(=\)</span> 即可。但这样有个问题，就是要连负权边。不能用 dij 了，而且 <span class="arithmatex">\(|V|=10^6,|E|&gt;2|V|\)</span>，不像是 SPFA 能过的样子（据说会被卡五个点），考虑构造出不用连负权边的方案。</p>
+<p>首先肯定不能直接用前缀和了，一个想法是把前缀和换成前缀“<span class="arithmatex">\(0\)</span> 的个数减去 <span class="arithmatex">\(1\)</span> 的个数”，容易发现最小化原序列字典序就是最大化这个序列的字典序，并且由于差分约束本来就是求的字典序最大值，所以还会更方便。然后这样限制就变成了 <span class="arithmatex">\(a_i\le a_{i+1}+1,a_{i+1}\le a_i+1\)</span>，每个条件就拼出两值相等即可，然后就做完了。复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -8253,13 +8281,13 @@
 </details>
 <h2 id="p3953-noip2017">P3953 [NOIP2017 提高组] 逛公园</h2>
 <p><a href="https://www.luogu.com.cn/problem/P3953">传送门</a></p>
-<p>这道题乍一看很难做，因为长度小于等于 $D_n+K$ 的路径不一定能由最短路简单变化而来。但是注意到 $K\le 50$，所以它是能支持 $O(NK)$ 之类的做法的。容易想到可能是用 DP 做。</p>
-<p>首先不考虑边权为 $0$ 的边，这道题应该怎么做。</p>
-<p>容易发现，若不存在边权为 $0$ 的边，那么建出最短路 DAG（就是 $G'=(V,E'),E'=\begin{Bmatrix}(u,v,w)|D_v=D_u+w\end{Bmatrix}$）后，经过任意边都会使得这条路径<strong>大于等于</strong>最短路，那么按<strong>比最短路大多少</strong> DP 是没有后效性的！容易想到设 $dp_{u,i}$ 表示从 $1$ 到 $u$ 的路径中恰好比最短路 $D_u$ 大 $i$ 的有多少条。然后先枚举第二维就没有后效性了。</p>
-<p>但是有个问题，即第一维的枚举顺序问题。这个其实也好解决，容易发现经过不在最短路 DAG 上的边必定使得第二维增加，考虑 $dp_{u,i}$ 经过 $(u,v,w)$ 转移到 $dp_{v,j}$，容易发现 $j=D_u+i+w-D_j$（最短路三角不等式 $D_u+w\ge D_j$，且在最短路 DAG 上取等）。故不在最短路 DAG 上的边没有枚举顺序要求，而最短路 DAG 上的边可以考虑按点的拓扑序枚举点后再枚举出边，这样就能保证每个点从所有前驱转移过来。</p>
-<p>然后考虑有 $0$ 边的情况。容易发现若 $0$ 边没形成环那么岁月静好，无事发生。但如果 $0$ 边形成 $0$ 环，并且恰好存在至少一条经过它到达 $n$ 的路径长度小于等于 $D_n+K$，那么就有无穷多条合法路径了，输出 $-1$。</p>
-<p>然后反正你都要在最短路 DAG 上跑拓扑了，容易发现这样的 $0$ 边肯定都在最短路图上，可以直接跑拓扑找到它。</p>
-<p>然后注意若经过一个点到达 $n$ 的路径已经大于 $D_n+K$ 了，那么显然它和答案完全无关。</p>
+<p>这道题乍一看很难做，因为长度小于等于 <span class="arithmatex">\(D_n+K\)</span> 的路径不一定能由最短路简单变化而来。但是注意到 <span class="arithmatex">\(K\le 50\)</span>，所以它是能支持 <span class="arithmatex">\(O(NK)\)</span> 之类的做法的。容易想到可能是用 DP 做。</p>
+<p>首先不考虑边权为 <span class="arithmatex">\(0\)</span> 的边，这道题应该怎么做。</p>
+<p>容易发现，若不存在边权为 <span class="arithmatex">\(0\)</span> 的边，那么建出最短路 DAG（就是 <span class="arithmatex">\(G'=(V,E'),E'=\begin{Bmatrix}(u,v,w)|D_v=D_u+w\end{Bmatrix}\)</span>）后，经过任意边都会使得这条路径<strong>大于等于</strong>最短路，那么按<strong>比最短路大多少</strong> DP 是没有后效性的！容易想到设 <span class="arithmatex">\(dp_{u,i}\)</span> 表示从 <span class="arithmatex">\(1\)</span> 到 <span class="arithmatex">\(u\)</span> 的路径中恰好比最短路 <span class="arithmatex">\(D_u\)</span> 大 <span class="arithmatex">\(i\)</span> 的有多少条。然后先枚举第二维就没有后效性了。</p>
+<p>但是有个问题，即第一维的枚举顺序问题。这个其实也好解决，容易发现经过不在最短路 DAG 上的边必定使得第二维增加，考虑 <span class="arithmatex">\(dp_{u,i}\)</span> 经过 <span class="arithmatex">\((u,v,w)\)</span> 转移到 <span class="arithmatex">\(dp_{v,j}\)</span>，容易发现 <span class="arithmatex">\(j=D_u+i+w-D_j\)</span>（最短路三角不等式 <span class="arithmatex">\(D_u+w\ge D_j\)</span>，且在最短路 DAG 上取等）。故不在最短路 DAG 上的边没有枚举顺序要求，而最短路 DAG 上的边可以考虑按点的拓扑序枚举点后再枚举出边，这样就能保证每个点从所有前驱转移过来。</p>
+<p>然后考虑有 <span class="arithmatex">\(0\)</span> 边的情况。容易发现若 <span class="arithmatex">\(0\)</span> 边没形成环那么岁月静好，无事发生。但如果 <span class="arithmatex">\(0\)</span> 边形成 <span class="arithmatex">\(0\)</span> 环，并且恰好存在至少一条经过它到达 <span class="arithmatex">\(n\)</span> 的路径长度小于等于 <span class="arithmatex">\(D_n+K\)</span>，那么就有无穷多条合法路径了，输出 <span class="arithmatex">\(-1\)</span>。</p>
+<p>然后反正你都要在最短路 DAG 上跑拓扑了，容易发现这样的 <span class="arithmatex">\(0\)</span> 边肯定都在最短路图上，可以直接跑拓扑找到它。</p>
+<p>然后注意若经过一个点到达 <span class="arithmatex">\(n\)</span> 的路径已经大于 <span class="arithmatex">\(D_n+K\)</span> 了，那么显然它和答案完全无关。</p>
 <details class="success">
 <summary>参考代码</summary>
 <p>代码很屎山，因为写到一半发现错了但是不舍得重构。</p>
@@ -8427,12 +8455,12 @@
 </details>
 <h2 id="p3658-usaco17feb-why-did-the-cow-cross-the-road-iii-p">P3658 [USACO17FEB] Why Did the Cow Cross the Road III P</h2>
 <p><a href="https://www.luogu.com.cn/problem/P3658">传送门</a></p>
-<p>设一个数 $i$ 在第一个排列中的位置是 $x_i$，在第二个排列中是 $y_i$。</p>
-<p>容易发现要统计的就是这样的数对 $(i,j)$：</p>
+<p>设一个数 <span class="arithmatex">\(i\)</span> 在第一个排列中的位置是 <span class="arithmatex">\(x_i\)</span>，在第二个排列中是 <span class="arithmatex">\(y_i\)</span>。</p>
+<p>容易发现要统计的就是这样的数对 <span class="arithmatex">\((i,j)\)</span>：</p>
 <ol>
-<li>$x_i&lt;x_j$</li>
-<li>$y_i&gt;y_j$</li>
-<li>$|i-j|&gt; K$。</li>
+<li><span class="arithmatex">\(x_i&lt;x_j\)</span></li>
+<li><span class="arithmatex">\(y_i&gt;y_j\)</span></li>
+<li><span class="arithmatex">\(|i-j|&gt; K\)</span>。</li>
 </ol>
 <p>那么就是个三维偏序，其中第三个条件可以直接简单容斥，用总的减去不要的即可。</p>
 <p>/// details | 参考代码
@@ -8503,8 +8531,8 @@
 <p>///</p>
 <h2 id="p3157-cqoi2011">P3157 [CQOI2011] 动态逆序对</h2>
 <p><a href="https://www.luogu.com.cn/problem/P3157">传送门</a></p>
-<p>设某个数的大小为 $y$，在排列中的位置为 $x$，删除的时间为 $z$（若没被删除视作在 $m$ 时间删除）。</p>
-<p>容易发现，对于一个逆序对 $(i,j)$，若 $z_i\le z_j$，就会对 $z_i$ 之前（包括 $z_i$）的答案产生贡献，反之会对 $z_j$ 之前的答案产生贡献，然后转化成三维偏序就做完了。</p>
+<p>设某个数的大小为 <span class="arithmatex">\(y\)</span>，在排列中的位置为 <span class="arithmatex">\(x\)</span>，删除的时间为 <span class="arithmatex">\(z\)</span>（若没被删除视作在 <span class="arithmatex">\(m\)</span> 时间删除）。</p>
+<p>容易发现，对于一个逆序对 <span class="arithmatex">\((i,j)\)</span>，若 <span class="arithmatex">\(z_i\le z_j\)</span>，就会对 <span class="arithmatex">\(z_i\)</span> 之前（包括 <span class="arithmatex">\(z_i\)</span>）的答案产生贡献，反之会对 <span class="arithmatex">\(z_j\)</span> 之前的答案产生贡献，然后转化成三维偏序就做完了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

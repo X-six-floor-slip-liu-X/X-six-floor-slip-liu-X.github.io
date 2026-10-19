@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5879,13 +5907,13 @@
 
 
 <h1 id="k-d-tree">k-D Tree</h1>
-<p>k-D Tree(KDT , k-Dimension Tree) 是一种可以<strong>高效处理 $k$ 维空间信息</strong>的数据结构。</p>
-<p>在结点数 $n$ 远大于 $2^k$ 时，应用 k-D Tree 的时间效率很好（但还是根号级别的）。</p>
-<p>在算法竞赛中，$k$ 通常等于 $2$，但其实更高维度也不是不能做，本文若无特殊说明默认 $k=2$。</p>
+<p>k-D Tree(KDT , k-Dimension Tree) 是一种可以<strong>高效处理 <span class="arithmatex">\(k\)</span> 维空间信息</strong>的数据结构。</p>
+<p>在结点数 <span class="arithmatex">\(n\)</span> 远大于 <span class="arithmatex">\(2^k\)</span> 时，应用 k-D Tree 的时间效率很好（但还是根号级别的）。</p>
+<p>在算法竞赛中，<span class="arithmatex">\(k\)</span> 通常等于 <span class="arithmatex">\(2\)</span>，但其实更高维度也不是不能做，本文若无特殊说明默认 <span class="arithmatex">\(k=2\)</span>。</p>
 <h2 id="_1">建树</h2>
 <p>虽然 KDT 常用来维护高维信息，但它实际上是一种一维数据结构（而非树套树等二维数据结构）。</p>
 <p>具体来说，KDT 具有二叉搜索树的结构，每个子树代表一个矩形（或者超长方体，下文仍以“矩形”称），维护这个矩形内的所有点的信息。</p>
-<p>对于每个结点，我们用它将自己的子树分成两个不交的矩形，然后向下对两边的点集递归。这样 KDT 的深度就是 $\log n+O(1)$ 级别的。</p>
+<p>对于每个结点，我们用它将自己的子树分成两个不交的矩形，然后向下对两边的点集递归。这样 KDT 的深度就是 <span class="arithmatex">\(\log n+O(1)\)</span> 级别的。</p>
 <div class="admonition note">
 <p class="admonition-title">关于 KDT 是否 leafy</p>
 <p>通常来说，KDT 有两种常见写法：leafy 和 nodey。</p>
@@ -5893,25 +5921,25 @@
 <p>两者常数相近，空间相近（事实上，通常 nodey 写法的空间大一点，时间小一点），但是 leafy 更好写一点。</p>
 <p>刚刚说的“用它将自己的子树分成两不交的矩形”，在 leafy 时就是单纯分成两矩形，在 nodey 时就是找到一个点，去掉它之后再分成两矩形。</p>
 </div>
-<p>显然感觉上每次找中点是较优的。事实上，我们每一层轮流找 $k$ 个维度的中点分开（比如这一层找 $x$ 下一层找 $y$，依此类推），我们可以在后面的复杂度分析看到这为什么是对的。</p>
-<p>注意到我们需要找到区间中点，直接排序每一层是 $O(n\log n)$ 的，但是有神秘做法可以 $O(n)$ 找到中点，并且将更小的扔到左边，更大的扔到右边。具体来说，类似于快速排序，每次找一个基准点，然后将所有点按大小放在它的左右两侧，再向其中一边递归。这个算法是 $O(n)$ 的。事实上，我们可以直接引用标准库中的 <code>nth_element(s+l,s+mid+1,s+r+1,cmp)</code> 将 $s$ 数组中排序后第 $mid-1$ 个数放在第 $mid-1$ 位，更小的放在左边，更大的放在右边。</p>
-<p>这样我们就能 $O(n\log n)$ 建树了。</p>
+<p>显然感觉上每次找中点是较优的。事实上，我们每一层轮流找 <span class="arithmatex">\(k\)</span> 个维度的中点分开（比如这一层找 <span class="arithmatex">\(x\)</span> 下一层找 <span class="arithmatex">\(y\)</span>，依此类推），我们可以在后面的复杂度分析看到这为什么是对的。</p>
+<p>注意到我们需要找到区间中点，直接排序每一层是 <span class="arithmatex">\(O(n\log n)\)</span> 的，但是有神秘做法可以 <span class="arithmatex">\(O(n)\)</span> 找到中点，并且将更小的扔到左边，更大的扔到右边。具体来说，类似于快速排序，每次找一个基准点，然后将所有点按大小放在它的左右两侧，再向其中一边递归。这个算法是 <span class="arithmatex">\(O(n)\)</span> 的。事实上，我们可以直接引用标准库中的 <code>nth_element(s+l,s+mid+1,s+r+1,cmp)</code> 将 <span class="arithmatex">\(s\)</span> 数组中排序后第 <span class="arithmatex">\(mid-1\)</span> 个数放在第 <span class="arithmatex">\(mid-1\)</span> 位，更小的放在左边，更大的放在右边。</p>
+<p>这样我们就能 <span class="arithmatex">\(O(n\log n)\)</span> 建树了。</p>
 <h2 id="_2">查询</h2>
 <p>查询通常是查询某矩形内既有结合律又有交换律的信息，比如区间和。</p>
-<p>通常写法是记录每一棵子树每一维坐标的最小值/最大值，若和查询矩形 $R$ 相离就返回 $0$，若完全被 $R$ 包含返回区间和，否则向下递归。</p>
-<p>关于复杂度问题，考虑每一个结点代表的区间只有以上三种情况，显然复杂度应与与 $R$ 相交但不被 $R$ 完全包含的区间数级别相同。</p>
-<p>注意到这样的区间要么完全包含 $R$，要么和其相交但不包含，前者显然最多只有 $O(\log n)$ 个，因为树高是 $O(\log)$ 的，考虑后者。</p>
-<p>注意到相交但不包含的区间必定有至少一条 $R$ 的边穿过，于是不妨统计 $R$ 的边穿过了多少个区间。</p>
-<p>由于每一层是 $k$ 维轮流找中点，那么连续 $k$ 层必定把矩形每一维都分成了两半，我们不妨把这 $k$ 层放在一起看，于是一条边在 $k$ 层后至多穿过 $2^{k-1}$ 个区间，根据主定理，复杂度即为：</p>
-<p>$$
+<p>通常写法是记录每一棵子树每一维坐标的最小值/最大值，若和查询矩形 <span class="arithmatex">\(R\)</span> 相离就返回 <span class="arithmatex">\(0\)</span>，若完全被 <span class="arithmatex">\(R\)</span> 包含返回区间和，否则向下递归。</p>
+<p>关于复杂度问题，考虑每一个结点代表的区间只有以上三种情况，显然复杂度应与与 <span class="arithmatex">\(R\)</span> 相交但不被 <span class="arithmatex">\(R\)</span> 完全包含的区间数级别相同。</p>
+<p>注意到这样的区间要么完全包含 <span class="arithmatex">\(R\)</span>，要么和其相交但不包含，前者显然最多只有 <span class="arithmatex">\(O(\log n)\)</span> 个，因为树高是 <span class="arithmatex">\(O(\log)\)</span> 的，考虑后者。</p>
+<p>注意到相交但不包含的区间必定有至少一条 <span class="arithmatex">\(R\)</span> 的边穿过，于是不妨统计 <span class="arithmatex">\(R\)</span> 的边穿过了多少个区间。</p>
+<p>由于每一层是 <span class="arithmatex">\(k\)</span> 维轮流找中点，那么连续 <span class="arithmatex">\(k\)</span> 层必定把矩形每一维都分成了两半，我们不妨把这 <span class="arithmatex">\(k\)</span> 层放在一起看，于是一条边在 <span class="arithmatex">\(k\)</span> 层后至多穿过 <span class="arithmatex">\(2^{k-1}\)</span> 个区间，根据主定理，复杂度即为：</p>
+<div class="arithmatex">\[
 T(n)=2^{k-1}T(\frac{n}{2^k})+O(1)=O(n^{1-\frac{1}{k}})
-$$</p>
-<p>在 $k=2$ 时就是 $O(\sqrt{n})$。</p>
+\]</div>
+<p>在 <span class="arithmatex">\(k=2\)</span> 时就是 <span class="arithmatex">\(O(\sqrt{n})\)</span>。</p>
 <h2 id="_3">插入/删除</h2>
-<p>有时候我们需要在坐标系中插入一个点，但是直接向平衡树一样就不能保证树高恰为 $\log n+O(1)$ 了，这时候有一个神秘 Trick：二进制分组。</p>
-<p>具体来说，我们维护 $\left\lceil\log n\right\rceil$ 棵 KDT（这里的 $n$ 是插入总量），第 $i$ 棵的大小为 $2^i$（从 $0$ 开始标号），每次向二进制进位一样，加点时向这个二进制数 $+1$，将期间进位的 $1$ 全部合并到下一位上，合并就是把所有点取出来重新建树。</p>
-<p>容易发现一个点最多进位 $\log n$ 次，所以建树复杂度 $O(n\log^2 n)$。</p>
-<p>查询在每棵树上查即可，复杂度还是 $O(n^{1-\frac{1}{k}})$。</p>
+<p>有时候我们需要在坐标系中插入一个点，但是直接向平衡树一样就不能保证树高恰为 <span class="arithmatex">\(\log n+O(1)\)</span> 了，这时候有一个神秘 Trick：二进制分组。</p>
+<p>具体来说，我们维护 <span class="arithmatex">\(\left\lceil\log n\right\rceil\)</span> 棵 KDT（这里的 <span class="arithmatex">\(n\)</span> 是插入总量），第 <span class="arithmatex">\(i\)</span> 棵的大小为 <span class="arithmatex">\(2^i\)</span>（从 <span class="arithmatex">\(0\)</span> 开始标号），每次向二进制进位一样，加点时向这个二进制数 <span class="arithmatex">\(+1\)</span>，将期间进位的 <span class="arithmatex">\(1\)</span> 全部合并到下一位上，合并就是把所有点取出来重新建树。</p>
+<p>容易发现一个点最多进位 <span class="arithmatex">\(\log n\)</span> 次，所以建树复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
+<p>查询在每棵树上查即可，复杂度还是 <span class="arithmatex">\(O(n^{1-\frac{1}{k}})\)</span>。</p>
 <h3 id="_4">例题</h3>
 <p>//// <a href="https://www.luogu.com.cn/problem/P4148">洛谷 P4148 简单题</a>
     open: False
@@ -6060,15 +6088,15 @@ $$</p>
 </details>
 <p>////</p>
 <h2 id="_5">邻域查询</h2>
-<p>这玩意最坏复杂度还是 $O(n)$ 的，但是很多时候挺快的。</p>
+<p>这玩意最坏复杂度还是 <span class="arithmatex">\(O(n)\)</span> 的，但是很多时候挺快的。</p>
 <div class="admonition example">
 <p class="admonition-title">例题<a href="https://www.luogu.com.cn/problem/P2093">P2093 [国家集训队] JZPFAR</a></p>
 <ul>
-<li>平面上有 $n$ 个点，$m$ 次查询，每次查询和一个给定点欧几里得距离第 $k$ 大的点的编号，距离相同则取编号较小者。</li>
-<li>$1\le n\le 10^5,1\le m\le 10^4,1\le k\le 20$，坐标绝对值小于等于 $10^9$。</li>
+<li>平面上有 <span class="arithmatex">\(n\)</span> 个点，<span class="arithmatex">\(m\)</span> 次查询，每次查询和一个给定点欧几里得距离第 <span class="arithmatex">\(k\)</span> 大的点的编号，距离相同则取编号较小者。</li>
+<li><span class="arithmatex">\(1\le n\le 10^5,1\le m\le 10^4,1\le k\le 20\)</span>，坐标绝对值小于等于 <span class="arithmatex">\(10^9\)</span>。</li>
 </ul>
 </div>
-<p>首先我们可以用一个小根堆维护距离前 $k$ 大的点，那么显然若一个子树内最远点都不如前面找出来的第 $k$ 大远，这个子树内就不可能有答案了。</p>
+<p>首先我们可以用一个小根堆维护距离前 <span class="arithmatex">\(k\)</span> 大的点，那么显然若一个子树内最远点都不如前面找出来的第 <span class="arithmatex">\(k\)</span> 大远，这个子树内就不可能有答案了。</p>
 <p>然后若一个点两子树种都有可能有答案，我们可以类似于启发式搜索，写一个估价函数，先进入估价更优的子树。</p>
 <p>这道题可以直接用子树内最远距离当作估价函数。</p>
 <details class="success">
@@ -6188,16 +6216,16 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定四维超空间中 $n$ 个点，求四维都单调不减的最长点序列的长度。</li>
-<li>$1\le n\le 5\times 10^4$，坐标在 $[-10^9,10^9]$ 之内。</li>
+<li>给定四维超空间中 <span class="arithmatex">\(n\)</span> 个点，求四维都单调不减的最长点序列的长度。</li>
+<li><span class="arithmatex">\(1\le n\le 5\times 10^4\)</span>，坐标在 <span class="arithmatex">\([-10^9,10^9]\)</span> 之内。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>排序去掉一维对剩下三维直接 KDT 是 $O(n\log n+n^{\frac{5}{3}})$ 的，不太能过。</p>
+<p>排序去掉一维对剩下三维直接 KDT 是 <span class="arithmatex">\(O(n\log n+n^{\frac{5}{3}})\)</span> 的，不太能过。</p>
 <p>考虑一个很妙的算法：树状数组套 KDT。</p>
 <p>用树状数组维护其中一维，然后在每个结点上维护 KDT。因为树状数组的结构，在查询时只会访问到每个点一次，复杂度就是单根号的。</p>
-<p>于是总复杂度 $O(n\log^2 n+n\sqrt{n})$。</p>
+<p>于是总复杂度 <span class="arithmatex">\(O(n\log^2 n+n\sqrt{n})\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

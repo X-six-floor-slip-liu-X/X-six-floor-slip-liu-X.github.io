@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5783,45 +5811,45 @@
 <h1 id="dcpp-1s-512m">进化（D.cpp 1S 512M）</h1>
 <p><a href="https://local.cwoi.com.cn:8443/contest/C0216/problem/C">传送门</a></p>
 <h2 id="_1">题解</h2>
-<p>首先，$b[i]=(a[i+1]+a[i-1])\bmod 2$ 等价于 $b[i]=a[i+1] \oplus a[i-1]$。</p>
+<p>首先，<span class="arithmatex">\(b[i]=(a[i+1]+a[i-1])\bmod 2\)</span> 等价于 <span class="arithmatex">\(b[i]=a[i+1] \oplus a[i-1]\)</span>。</p>
 <p>我们考虑一种暴力做法。</p>
-<p>假设进化 $m$ 次后的数组为 $a_m$，那么注意到 $a_m[i]$ 可以转移到 $a_{m+1}[i+1]$ 和 $a_{m+1}[i-1]$。</p>
-<p>抽象一下，会发现对于每个 $i$，$a_1[i]$ 有 $2^T$ 种路径转移到 $a_T$。</p>
-<p>我们可以把每一条路径用一个二进制数（<code>bitset</code>？）概括一下（$0$ 表示向左，$1$ 表示向右），枚举路径判断每个 $a_1[i]$ 对 $a_T$ 的影响。</p>
-<p>复杂度 $O(n 2^T)$，<del>连最小的部分分都过不了。</del></p>
-<p>但是这个做法有巨大的优化空间，首先容易发现，并不需要枚举每条路径，因为每条路径的终点与且仅与路径中 $0$/$1$ 的个数有关，我们利用组合数可以把复杂度压至 $O(n^2)$（假如有某种方法可以预处理极其巨大的组合数）。</p>
-<p>但这还远不是这条思路的极限，假设每个 $i$ 到 $j$ 的路径中有 $r$ 个 $1$，显然有 $T-r$ 个 $0$。</p>
-<p>那么可以得到 $j-i=r-(T-r)=2r-T$。</p>
-<p>注意到，$i$ 对 $j$ 的影响只与 $a_1[i]$ 和 $\dbinom{T}{r}$ 的奇偶性有关，概括成数学语言 $i$ 对 $j$ 的影响就是 $\dbinom{T}{r}\bmod 2 \cdot a_1[i]$（这个 $r$ 是可以求出来的但我们暂且放一放）。</p>
+<p>假设进化 <span class="arithmatex">\(m\)</span> 次后的数组为 <span class="arithmatex">\(a_m\)</span>，那么注意到 <span class="arithmatex">\(a_m[i]\)</span> 可以转移到 <span class="arithmatex">\(a_{m+1}[i+1]\)</span> 和 <span class="arithmatex">\(a_{m+1}[i-1]\)</span>。</p>
+<p>抽象一下，会发现对于每个 <span class="arithmatex">\(i\)</span>，<span class="arithmatex">\(a_1[i]\)</span> 有 <span class="arithmatex">\(2^T\)</span> 种路径转移到 <span class="arithmatex">\(a_T\)</span>。</p>
+<p>我们可以把每一条路径用一个二进制数（<code>bitset</code>？）概括一下（<span class="arithmatex">\(0\)</span> 表示向左，<span class="arithmatex">\(1\)</span> 表示向右），枚举路径判断每个 <span class="arithmatex">\(a_1[i]\)</span> 对 <span class="arithmatex">\(a_T\)</span> 的影响。</p>
+<p>复杂度 <span class="arithmatex">\(O(n 2^T)\)</span>，<del>连最小的部分分都过不了。</del></p>
+<p>但是这个做法有巨大的优化空间，首先容易发现，并不需要枚举每条路径，因为每条路径的终点与且仅与路径中 <span class="arithmatex">\(0\)</span>/<span class="arithmatex">\(1\)</span> 的个数有关，我们利用组合数可以把复杂度压至 <span class="arithmatex">\(O(n^2)\)</span>（假如有某种方法可以预处理极其巨大的组合数）。</p>
+<p>但这还远不是这条思路的极限，假设每个 <span class="arithmatex">\(i\)</span> 到 <span class="arithmatex">\(j\)</span> 的路径中有 <span class="arithmatex">\(r\)</span> 个 <span class="arithmatex">\(1\)</span>，显然有 <span class="arithmatex">\(T-r\)</span> 个 <span class="arithmatex">\(0\)</span>。</p>
+<p>那么可以得到 <span class="arithmatex">\(j-i=r-(T-r)=2r-T\)</span>。</p>
+<p>注意到，<span class="arithmatex">\(i\)</span> 对 <span class="arithmatex">\(j\)</span> 的影响只与 <span class="arithmatex">\(a_1[i]\)</span> 和 <span class="arithmatex">\(\dbinom{T}{r}\)</span> 的奇偶性有关，概括成数学语言 <span class="arithmatex">\(i\)</span> 对 <span class="arithmatex">\(j\)</span> 的影响就是 <span class="arithmatex">\(\dbinom{T}{r}\bmod 2 \cdot a_1[i]\)</span>（这个 <span class="arithmatex">\(r\)</span> 是可以求出来的但我们暂且放一放）。</p>
 <p>看到组合数模一个小质数的形式想到 lucas 定理，即：</p>
-<p>$$\dbinom{T}{r}\bmod 2=\dbinom{\left\lfloor T/2 \right\rfloor}{\left\lfloor r/2 \right\rfloor}\cdot \dbinom{T \bmod 2}{r\bmod 2}\bmod 2$$</p>
-<p>左边还可以再拆但是我不想写了，我们换一种写法，将 $T$ 在二进制下的第 $c$ 位记作 $T_{c}$（其实并不存在这样的记法只是我为了方便叙述乱搞的），$r$ 同理。</p>
-<p>$$\dbinom{T}{r}\bmod 2 = \dbinom{T_{1}}{r_{1}}\cdot\dbinom{T_{2}}{r_{2}}\cdots \dbinom{T_{\log_T}}{r_{\log T}}$$</p>
-<p>注意到 $\dbinom{T_{c}}{r_{c}}$ 其实只有 $\dbinom{0}{0}=1,\dbinom{1}{1}=1,\dbinom{0}{1}=0,\dbinom{1}{0}=1$ 四种可能。发现当 $(T)_c=0$ 时结果与且仅与 $(r)_c$ 有关，想到将原先 $T$ 的每一位拆出来分别计算，下次计算时就由这次的结果为基础，以构造成 $10\dots00$ 的形式（通过部分分也可以想到这一点），设每次拆出来的数为 $t$。</p>
-<p>所以 $\dbinom{t}{r}\bmod 2 = 1$ 当且仅当 $\forall (t)_c=0,(r)_c=0$。</p>
-<p>换句话说，只有当 $r$ 的二进制为 $10\dots00$ 或者 $00\dots00$ 时，$\dbinom{t}{r}\bmod 2=1$。</p>
-<p>进一步，$\dbinom{t}{r}\bmod 2=1$ 当且仅当 $r=0$ 或 $r=t$。</p>
-<p>由于 $j-i=2r-t$，故 $a_t[j]$ 只会被 $a_1[j-t]$ 和 $a_1[j+t]$ 影响。概括成数学语言就是 $a_t[j]=a_1[j-t]\oplus a_1[j+t]$。</p>
+<div class="arithmatex">\[\dbinom{T}{r}\bmod 2=\dbinom{\left\lfloor T/2 \right\rfloor}{\left\lfloor r/2 \right\rfloor}\cdot \dbinom{T \bmod 2}{r\bmod 2}\bmod 2\]</div>
+<p>左边还可以再拆但是我不想写了，我们换一种写法，将 <span class="arithmatex">\(T\)</span> 在二进制下的第 <span class="arithmatex">\(c\)</span> 位记作 <span class="arithmatex">\(T_{c}\)</span>（其实并不存在这样的记法只是我为了方便叙述乱搞的），<span class="arithmatex">\(r\)</span> 同理。</p>
+<div class="arithmatex">\[\dbinom{T}{r}\bmod 2 = \dbinom{T_{1}}{r_{1}}\cdot\dbinom{T_{2}}{r_{2}}\cdots \dbinom{T_{\log_T}}{r_{\log T}}\]</div>
+<p>注意到 <span class="arithmatex">\(\dbinom{T_{c}}{r_{c}}\)</span> 其实只有 <span class="arithmatex">\(\dbinom{0}{0}=1,\dbinom{1}{1}=1,\dbinom{0}{1}=0,\dbinom{1}{0}=1\)</span> 四种可能。发现当 <span class="arithmatex">\((T)_c=0\)</span> 时结果与且仅与 <span class="arithmatex">\((r)_c\)</span> 有关，想到将原先 <span class="arithmatex">\(T\)</span> 的每一位拆出来分别计算，下次计算时就由这次的结果为基础，以构造成 <span class="arithmatex">\(10\dots00\)</span> 的形式（通过部分分也可以想到这一点），设每次拆出来的数为 <span class="arithmatex">\(t\)</span>。</p>
+<p>所以 <span class="arithmatex">\(\dbinom{t}{r}\bmod 2 = 1\)</span> 当且仅当 <span class="arithmatex">\(\forall (t)_c=0,(r)_c=0\)</span>。</p>
+<p>换句话说，只有当 <span class="arithmatex">\(r\)</span> 的二进制为 <span class="arithmatex">\(10\dots00\)</span> 或者 <span class="arithmatex">\(00\dots00\)</span> 时，<span class="arithmatex">\(\dbinom{t}{r}\bmod 2=1\)</span>。</p>
+<p>进一步，<span class="arithmatex">\(\dbinom{t}{r}\bmod 2=1\)</span> 当且仅当 <span class="arithmatex">\(r=0\)</span> 或 <span class="arithmatex">\(r=t\)</span>。</p>
+<p>由于 <span class="arithmatex">\(j-i=2r-t\)</span>，故 <span class="arithmatex">\(a_t[j]\)</span> 只会被 <span class="arithmatex">\(a_1[j-t]\)</span> 和 <span class="arithmatex">\(a_1[j+t]\)</span> 影响。概括成数学语言就是 <span class="arithmatex">\(a_t[j]=a_1[j-t]\oplus a_1[j+t]\)</span>。</p>
 <p>但是这里有个问题，数组会越界。</p>
 <p>容易想到把它转化成一个等价的环形问题（<del>其实并不容易</del>）。</p>
-<p>考虑构造一个环 $c$，它长这样：</p>
+<p>考虑构造一个环 <span class="arithmatex">\(c\)</span>，它长这样：</p>
 <p><img alt="图示" src="../../img/20230407C_C_1.png" /></p>
-<p>在环 $c$ 中进行题目描述中的“进化”操作和 $a$ 是等价的。</p>
-<p>首先，每个 $a[2]$ 到 $a[n-1]$ 中显然是等价的。</p>
-<p>$a[1]$ 和 $a[n]$ 的另一边为 $0$ 显然也是等价的。</p>
-<p>对于两端的 $0$，它的两侧永远都是相等的，无论何时都是 $0$。</p>
+<p>在环 <span class="arithmatex">\(c\)</span> 中进行题目描述中的“进化”操作和 <span class="arithmatex">\(a\)</span> 是等价的。</p>
+<p>首先，每个 <span class="arithmatex">\(a[2]\)</span> 到 <span class="arithmatex">\(a[n-1]\)</span> 中显然是等价的。</p>
+<p><span class="arithmatex">\(a[1]\)</span> 和 <span class="arithmatex">\(a[n]\)</span> 的另一边为 <span class="arithmatex">\(0\)</span> 显然也是等价的。</p>
+<p>对于两端的 <span class="arithmatex">\(0\)</span>，它的两侧永远都是相等的，无论何时都是 <span class="arithmatex">\(0\)</span>。</p>
 <p>（<del>我也不知道是怎么想出来的，反正也不是我想出来的。</del>）</p>
-<p>用数组存的时候左边那个 $0$ 下标设为 $0$ 然后顺时针转就行了。</p>
+<p>用数组存的时候左边那个 <span class="arithmatex">\(0\)</span> 下标设为 <span class="arithmatex">\(0\)</span> 然后顺时针转就行了。</p>
 <p>综上，最终做法如下：</p>
 <ol>
-<li>取出 $T$ 二进制最低位（记为 $t$），将 $T$ 减去 $t$。</li>
-<li>通过现有数组 $a$ 构造出环 $c$。</li>
-<li>对于所有 $1\le i \le n$，计算出 $b[i]=c[(i+t)\bmod (n\times 2+2) ] \oplus c[(i-t)\bmod (n\times 2+2) ] $（注意取模考虑负数）。</li>
-<li>将整个 $b$ 赋给 $a$。</li>
-<li>重复以上操作直至 $T$ 归零。</li>
+<li>取出 <span class="arithmatex">\(T\)</span> 二进制最低位（记为 <span class="arithmatex">\(t\)</span>），将 <span class="arithmatex">\(T\)</span> 减去 <span class="arithmatex">\(t\)</span>。</li>
+<li>通过现有数组 <span class="arithmatex">\(a\)</span> 构造出环 <span class="arithmatex">\(c\)</span>。</li>
+<li>对于所有 <span class="arithmatex">\(1\le i \le n\)</span>，计算出 <span class="arithmatex">\(b[i]=c[(i+t)\bmod (n\times 2+2) ] \oplus c[(i-t)\bmod (n\times 2+2) ] \)</span>（注意取模考虑负数）。</li>
+<li>将整个 <span class="arithmatex">\(b\)</span> 赋给 <span class="arithmatex">\(a\)</span>。</li>
+<li>重复以上操作直至 <span class="arithmatex">\(T\)</span> 归零。</li>
 </ol>
-<p>最终的数组 $a$ 即为答案。</p>
-<p>每一层复杂度 $O(n)$，最多有 $\log T$ 层，时间复杂度 $O(n\log T)$，空间复杂度 $O(n)$，可以通过此题。</p>
+<p>最终的数组 <span class="arithmatex">\(a\)</span> 即为答案。</p>
+<p>每一层复杂度 <span class="arithmatex">\(O(n)\)</span>，最多有 <span class="arithmatex">\(\log T\)</span> 层，时间复杂度 <span class="arithmatex">\(O(n\log T)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>，可以通过此题。</p>
 <h2 id="code">code</h2>
 <details class="success">
 <summary>code</summary>

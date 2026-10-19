@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5951,11 +5979,11 @@
 <p>但是这和子集有什么关系呢？</p>
 <p>考虑这么一个例题：</p>
 <blockquote>
-<p>给定序列 $a_{1...n}$，对于所有 $j\in[0,2^k-1]$，求 $\sum_{i\subseteq j}a_i$ 的值，其中 $\subseteq$ 表示二进制下 $1$ 的集合的包含关系。</p>
+<p>给定序列 <span class="arithmatex">\(a_{1...n}\)</span>，对于所有 <span class="arithmatex">\(j\in[0,2^k-1]\)</span>，求 <span class="arithmatex">\(\sum_{i\subseteq j}a_i\)</span> 的值，其中 <span class="arithmatex">\(\subseteq\)</span> 表示二进制下 <span class="arithmatex">\(1\)</span> 的集合的包含关系。</p>
 </blockquote>
-<p>首先可以暴力枚举子集 $O(2^k3^k)$ 求解，但是这道题其实可以用高维前缀和 $O(2^k)$ 求解。</p>
-<p>容易发现，二进制下 $1$ 的集合的包含关系其实可以看做 $0,1$ 的偏序关系，那么子集求和问题就可以看做 $k$ 维下，每一维下标为 $[0,1]$ 的高维前缀和。</p>
-<p>那么代码就很好想了，最外层循环从 $0$ 到 $k-1$ 枚举 $i$ 表示当前转移的维度，然后内层从 $0$ 到 $2^k-1$ 枚举 $j$ 等价于高维前缀和中对每一维的枚举，然后考虑若 $j$ 的第 $i$ 位为 $1$ 那么它在这一维就存在一个前驱 $0$。</p>
+<p>首先可以暴力枚举子集 <span class="arithmatex">\(O(2^k3^k)\)</span> 求解，但是这道题其实可以用高维前缀和 <span class="arithmatex">\(O(2^k)\)</span> 求解。</p>
+<p>容易发现，二进制下 <span class="arithmatex">\(1\)</span> 的集合的包含关系其实可以看做 <span class="arithmatex">\(0,1\)</span> 的偏序关系，那么子集求和问题就可以看做 <span class="arithmatex">\(k\)</span> 维下，每一维下标为 <span class="arithmatex">\([0,1]\)</span> 的高维前缀和。</p>
+<p>那么代码就很好想了，最外层循环从 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(k-1\)</span> 枚举 <span class="arithmatex">\(i\)</span> 表示当前转移的维度，然后内层从 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(2^k-1\)</span> 枚举 <span class="arithmatex">\(j\)</span> 等价于高维前缀和中对每一维的枚举，然后考虑若 <span class="arithmatex">\(j\)</span> 的第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(1\)</span> 那么它在这一维就存在一个前驱 <span class="arithmatex">\(0\)</span>。</p>
 <details open="open">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">k</span><span class="p">],</span><span class="n">sum</span><span class="p">[</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">k</span><span class="p">];</span>
@@ -5972,8 +6000,8 @@
 </span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p>然后我们就能 $O(2^k)$ 解决这个问题啦。</p>
-<p>然后还能拓展到超集求和，把 $01$ 反过来考虑即可。</p>
+<p>然后我们就能 <span class="arithmatex">\(O(2^k)\)</span> 解决这个问题啦。</p>
+<p>然后还能拓展到超集求和，把 <span class="arithmatex">\(01\)</span> 反过来考虑即可。</p>
 <p>另外值得一提的是，和前缀和类似，对于所有具有结合律和交换律的信息都能使用高维前缀和。</p>
 <h2 id="_4">例题</h2>
 <p>这个后面来补</p>

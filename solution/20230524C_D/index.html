@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3188,7 +3216,7 @@
   <a href="#x" class="md-nav__link">
     <span class="md-ellipsis">
       
-        如何求结点 $x$ 的期望深度
+        如何求结点 \(x\) 的期望深度
       
     </span>
   </a>
@@ -3199,7 +3227,7 @@
   <a href="#mathrmlca" class="md-nav__link">
     <span class="md-ellipsis">
       
-        如何处理 $\mathrm{lca}$ 的期望
+        如何处理 \(\mathrm{lca}\) 的期望
       
     </span>
   </a>
@@ -5786,7 +5814,7 @@
   <a href="#x" class="md-nav__link">
     <span class="md-ellipsis">
       
-        如何求结点 $x$ 的期望深度
+        如何求结点 \(x\) 的期望深度
       
     </span>
   </a>
@@ -5797,7 +5825,7 @@
   <a href="#mathrmlca" class="md-nav__link">
     <span class="md-ellipsis">
       
-        如何处理 $\mathrm{lca}$ 的期望
+        如何处理 \(\mathrm{lca}\) 的期望
       
     </span>
   </a>
@@ -5854,109 +5882,109 @@
 <p><img alt="" src="../../img/20230524C_D_1.png" /></p>
 <p>感谢 kk 的建议。</p>
 <h2 id="_2">分析</h2>
-<p>我们在处理树上链长度时，通常会转化为树上前缀和，所以这道题的询问就可以转化为 $dpt_u+dpt_v- 2dpt_{\mathrm{lca}(u,v)}$ 的期望，其中 $dpt_i$ 表示点 $i$ 与根节点（点 $1$）的距离，这样就可以把问题分为几个部分解决了。</p>
-<h2 id="x">如何求结点 $x$ 的期望深度</h2>
-<p>假如我们想知道点 $x$ 的深度，那我们肯定要知道它和点 $1$ 之间路径上所有边的边权，由于这道题边权只和结点有关，所以我们只要知道点 $x$ 到点 $1$ 之间具体有哪些点即可。设这些点（包括 $1$ 和 $x$）组成的集合为 $S'$，易得出现情况 $S'$ 的概率为：</p>
-<p>$$\prod\limits_{i=1}^{\left|S'\right|-1}\dfrac{a_{S_{i+1}'}}{\sum_{j=1}^{S_i'-1}a_j}$$</p>
-<p>其中 $S_i'$ 表示集合 $S'$ 中第 $i$ 大数。这个式子很好理解，因为所有点是从大到小顺次连接的，所以我们计算出每个点连向前一个点的概率求积即可。</p>
-<p>容易发现上式的分母是一段前缀和，令 $b_i=\sum\limits_{j=1}^ia_i$，上式可转化为：</p>
-<p>$$\prod\limits_{i=1}^{\left|S'\right|-1}\dfrac{a_{S_{i+1}'}}{b_{S_i'-1}}$$</p>
-<p>我们发现除了 $S_1'$ 和 $S_{\left|S'\right|}'$ 以外 $S$ 中所有元素都以 $a_i$ 和 $\frac{1}{b_{i-1}}$ 的两种形式分别出现过一次，而 $S_1'=x,S_{\left|S'\right|}'=1$，故我们可以把这两项提出来，把其余的数放在一个集合 $S$ 里（这就是为什么我最开始要用 $S'$），然后分子分母重新配对，可以把上式转化成这样：</p>
-<p>$$\dfrac{a_1}{b_{x-1}}\prod\limits_{i\in S}\dfrac{a_{i}}{b_{i-1}}$$</p>
+<p>我们在处理树上链长度时，通常会转化为树上前缀和，所以这道题的询问就可以转化为 <span class="arithmatex">\(dpt_u+dpt_v- 2dpt_{\mathrm{lca}(u,v)}\)</span> 的期望，其中 <span class="arithmatex">\(dpt_i\)</span> 表示点 <span class="arithmatex">\(i\)</span> 与根节点（点 <span class="arithmatex">\(1\)</span>）的距离，这样就可以把问题分为几个部分解决了。</p>
+<h2 id="x">如何求结点 <span class="arithmatex">\(x\)</span> 的期望深度</h2>
+<p>假如我们想知道点 <span class="arithmatex">\(x\)</span> 的深度，那我们肯定要知道它和点 <span class="arithmatex">\(1\)</span> 之间路径上所有边的边权，由于这道题边权只和结点有关，所以我们只要知道点 <span class="arithmatex">\(x\)</span> 到点 <span class="arithmatex">\(1\)</span> 之间具体有哪些点即可。设这些点（包括 <span class="arithmatex">\(1\)</span> 和 <span class="arithmatex">\(x\)</span>）组成的集合为 <span class="arithmatex">\(S'\)</span>，易得出现情况 <span class="arithmatex">\(S'\)</span> 的概率为：</p>
+<div class="arithmatex">\[\prod\limits_{i=1}^{\left|S'\right|-1}\dfrac{a_{S_{i+1}'}}{\sum_{j=1}^{S_i'-1}a_j}\]</div>
+<p>其中 <span class="arithmatex">\(S_i'\)</span> 表示集合 <span class="arithmatex">\(S'\)</span> 中第 <span class="arithmatex">\(i\)</span> 大数。这个式子很好理解，因为所有点是从大到小顺次连接的，所以我们计算出每个点连向前一个点的概率求积即可。</p>
+<p>容易发现上式的分母是一段前缀和，令 <span class="arithmatex">\(b_i=\sum\limits_{j=1}^ia_i\)</span>，上式可转化为：</p>
+<div class="arithmatex">\[\prod\limits_{i=1}^{\left|S'\right|-1}\dfrac{a_{S_{i+1}'}}{b_{S_i'-1}}\]</div>
+<p>我们发现除了 <span class="arithmatex">\(S_1'\)</span> 和 <span class="arithmatex">\(S_{\left|S'\right|}'\)</span> 以外 <span class="arithmatex">\(S\)</span> 中所有元素都以 <span class="arithmatex">\(a_i\)</span> 和 <span class="arithmatex">\(\frac{1}{b_{i-1}}\)</span> 的两种形式分别出现过一次，而 <span class="arithmatex">\(S_1'=x,S_{\left|S'\right|}'=1\)</span>，故我们可以把这两项提出来，把其余的数放在一个集合 <span class="arithmatex">\(S\)</span> 里（这就是为什么我最开始要用 <span class="arithmatex">\(S'\)</span>），然后分子分母重新配对，可以把上式转化成这样：</p>
+<div class="arithmatex">\[\dfrac{a_1}{b_{x-1}}\prod\limits_{i\in S}\dfrac{a_{i}}{b_{i-1}}\]</div>
 <p>这就非常优雅了。然后我们考虑用概率乘以权值（即路径长度）算期望，路径长度用类似的方法可以化成这样的形式：</p>
-<p>$$c_1+c_x+\sum\limits_{i\in S}2c_i$$</p>
+<div class="arithmatex">\[c_1+c_x+\sum\limits_{i\in S}2c_i\]</div>
 <p>然后相乘：</p>
-<p>$$\dfrac{a_1}{b_{x-1}}\prod\limits_{i\in S}\dfrac{a_{i}}{b_{i-1}}\times \left(c_1+c_x+\sum\limits_{i\in S}2c_i\right)$$</p>
-<p>然后我们在外层枚举集合 $S$，容易发现 $S\subseteq(1,x)$，我们枚举所有满足这个条件的 $S$ 就能得到 $x$ 深度的期望为：</p>
-<p>$$\sum\limits_{S \subseteq (1,x)}\left[\dfrac{a_1}{b_{x-1}}\prod\limits_{i\in S}\dfrac{a_{i}}{b_{i-1}}\times \left(c_1+c_x+\sum\limits_{i\in S}2c_i\right)\right]$$</p>
-<p>容易发现 $c_1+c_x$ 在每个 $S$ 中都出现了，它们产生贡献的概率为 $1$，对期望的贡献就是它们自己，直接提出来，$\frac{a_1}{b_x}$ 和 $2$ 也在每个 $S$ 中都出现了，用乘法分配律提出来：</p>
-<p>$$c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{S \subseteq (1,x)}\left(\prod\limits_{i\in S}\dfrac{a_{i}}{b_{i-1}}\times \sum\limits_{i\in S}c_i\right)$$</p>
-<p>看到 $\prod$ 和 $\sum$ 相乘的形式，考虑把 $\prod$ 乘到 $\sum$ 里面去：</p>
-<p>$$c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{S \subseteq (1,x)}\left[\sum\limits_{i\in S}\left(c_i \times \prod\limits_{j\in S}\dfrac{a_{j}}{b_{j-1}}\right)\right]$$</p>
+<div class="arithmatex">\[\dfrac{a_1}{b_{x-1}}\prod\limits_{i\in S}\dfrac{a_{i}}{b_{i-1}}\times \left(c_1+c_x+\sum\limits_{i\in S}2c_i\right)\]</div>
+<p>然后我们在外层枚举集合 <span class="arithmatex">\(S\)</span>，容易发现 <span class="arithmatex">\(S\subseteq(1,x)\)</span>，我们枚举所有满足这个条件的 <span class="arithmatex">\(S\)</span> 就能得到 <span class="arithmatex">\(x\)</span> 深度的期望为：</p>
+<div class="arithmatex">\[\sum\limits_{S \subseteq (1,x)}\left[\dfrac{a_1}{b_{x-1}}\prod\limits_{i\in S}\dfrac{a_{i}}{b_{i-1}}\times \left(c_1+c_x+\sum\limits_{i\in S}2c_i\right)\right]\]</div>
+<p>容易发现 <span class="arithmatex">\(c_1+c_x\)</span> 在每个 <span class="arithmatex">\(S\)</span> 中都出现了，它们产生贡献的概率为 <span class="arithmatex">\(1\)</span>，对期望的贡献就是它们自己，直接提出来，<span class="arithmatex">\(\frac{a_1}{b_x}\)</span> 和 <span class="arithmatex">\(2\)</span> 也在每个 <span class="arithmatex">\(S\)</span> 中都出现了，用乘法分配律提出来：</p>
+<div class="arithmatex">\[c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{S \subseteq (1,x)}\left(\prod\limits_{i\in S}\dfrac{a_{i}}{b_{i-1}}\times \sum\limits_{i\in S}c_i\right)\]</div>
+<p>看到 <span class="arithmatex">\(\prod\)</span> 和 <span class="arithmatex">\(\sum\)</span> 相乘的形式，考虑把 <span class="arithmatex">\(\prod\)</span> 乘到 <span class="arithmatex">\(\sum\)</span> 里面去：</p>
+<div class="arithmatex">\[c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{S \subseteq (1,x)}\left[\sum\limits_{i\in S}\left(c_i \times \prod\limits_{j\in S}\dfrac{a_{j}}{b_{j-1}}\right)\right]\]</div>
 <p>接下来这一步也是个套路，我们把它放到一个更一般的情况里（以下变量名与本题无关）。</p>
 <ul>
 <li>我是分割线（markdown 的分割线在透明背景下几乎看不到，将就一下）</li>
 </ul>
 <p>假如我们要算下面这个式子：</p>
-<p>$$\sum\limits_{s\subseteq S}\prod\limits_{i\in s}w_i$$</p>
-<p>那么我们可以发现，一个在 $S$ 中的 $i$ 要么在 $s$ 中，要么不在 $s$ 中，假如它在 $s$ 中它就会使结果乘以 $w_i$，假如它不在就会使结果乘以 $1$，所以假如我们把上式展开它大概就长这样（假设 $S$ 中的元素是 $1,2\dots n$）：</p>
-<p>$$(w_1w_2\dots w_n)+(1w_2w_3\dots w_n)+(w_11w_3\dots w_n)+(1\times1w_3\dots w_n)\dots$$</p>
-<p>我们对它因式分解，具体方法可以和分解这个式子 $ac+bc+ad+bd$ 一样，提两次公因式，只不过上式要提 $n$ 次公因式：</p>
-<p>$$(w_1+1)(w_2+1)(w_3+1)\dots(w_n+1)$$</p>
-<p>写成 $\prod$ 的形式长这样：</p>
-<p>$$\prod\limits_{i\in S}(w_i+1)$$</p>
+<div class="arithmatex">\[\sum\limits_{s\subseteq S}\prod\limits_{i\in s}w_i\]</div>
+<p>那么我们可以发现，一个在 <span class="arithmatex">\(S\)</span> 中的 <span class="arithmatex">\(i\)</span> 要么在 <span class="arithmatex">\(s\)</span> 中，要么不在 <span class="arithmatex">\(s\)</span> 中，假如它在 <span class="arithmatex">\(s\)</span> 中它就会使结果乘以 <span class="arithmatex">\(w_i\)</span>，假如它不在就会使结果乘以 <span class="arithmatex">\(1\)</span>，所以假如我们把上式展开它大概就长这样（假设 <span class="arithmatex">\(S\)</span> 中的元素是 <span class="arithmatex">\(1,2\dots n\)</span>）：</p>
+<div class="arithmatex">\[(w_1w_2\dots w_n)+(1w_2w_3\dots w_n)+(w_11w_3\dots w_n)+(1\times1w_3\dots w_n)\dots\]</div>
+<p>我们对它因式分解，具体方法可以和分解这个式子 <span class="arithmatex">\(ac+bc+ad+bd\)</span> 一样，提两次公因式，只不过上式要提 <span class="arithmatex">\(n\)</span> 次公因式：</p>
+<div class="arithmatex">\[(w_1+1)(w_2+1)(w_3+1)\dots(w_n+1)\]</div>
+<p>写成 <span class="arithmatex">\(\prod\)</span> 的形式长这样：</p>
+<div class="arithmatex">\[\prod\limits_{i\in S}(w_i+1)\]</div>
 <ul>
 <li>我是分割线</li>
 </ul>
 <p>回到本题，利用类似的方法我们可以把上式转化成这样：</p>
-<p>$$c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{i=2}^{x-1}\left(\dfrac{c_ia_i}{b_{i-1}} \times \prod\limits_{j=2,j\ne i}^{x-1}\dfrac{a_{j}+b_{j-1}}{b_{j-1}}\right)$$</p>
-<p>由于含有 $i$ 的集合中 $\frac{a_i}{b_{i-1}}$ 必须选，所以要拿出来单独考虑。但是这样很不优雅，我们可以先乘在里面再除出来：</p>
-<p>$$c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{i=2}^{x-1}\left(\dfrac{c_ia_i}{b_{i-1}} \times \dfrac{b_{i-1}}{a_i+b_{i-1}}\prod\limits_{j=2}^{x-1}\dfrac{a_{j}+b_{j-1}}{b_{j-1}}\right)$$</p>
-<p>注意到 $b$ 是 $a$ 的前缀和，所以 $a_j+b_{j-1}=b_j$，有：</p>
-<p>$$c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{i=2}^{x-1}\left(\dfrac{c_ia_i}{b_{i-1}} \times \dfrac{b_{i-1}}{b_{i}}\prod\limits_{j=2}^{x-1}\dfrac{b_{j}}{b_{j-1}}\right)$$</p>
-<p>发现内层的 $\prod$ 也可以把分子分母的 $b_j$ 配对，然后进行一些简单的约分：</p>
-<p>$$c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{i=2}^{x-1}\left(\dfrac{c_ia_i}{b_{i}}\times\dfrac{b_{x-1}}{b_1}\right)$$</p>
-<p>可以把里面的 $\frac{b_{x-1}}{b_1}$ 提出来，又发现 $b_1=a_1$，可得：</p>
-<p>$$c_1+c_x+2\sum\limits_{i=2}^{x-1}\dfrac{c_ia_i}{b_{i}}$$</p>
-<p>这样一个巨简短的式子，只要预处理 $\dfrac{c_ia_i}{b_{i}}$ 从 $2$ 开始的前缀和就可以 $O(1)$ 求。</p>
+<div class="arithmatex">\[c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{i=2}^{x-1}\left(\dfrac{c_ia_i}{b_{i-1}} \times \prod\limits_{j=2,j\ne i}^{x-1}\dfrac{a_{j}+b_{j-1}}{b_{j-1}}\right)\]</div>
+<p>由于含有 <span class="arithmatex">\(i\)</span> 的集合中 <span class="arithmatex">\(\frac{a_i}{b_{i-1}}\)</span> 必须选，所以要拿出来单独考虑。但是这样很不优雅，我们可以先乘在里面再除出来：</p>
+<div class="arithmatex">\[c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{i=2}^{x-1}\left(\dfrac{c_ia_i}{b_{i-1}} \times \dfrac{b_{i-1}}{a_i+b_{i-1}}\prod\limits_{j=2}^{x-1}\dfrac{a_{j}+b_{j-1}}{b_{j-1}}\right)\]</div>
+<p>注意到 <span class="arithmatex">\(b\)</span> 是 <span class="arithmatex">\(a\)</span> 的前缀和，所以 <span class="arithmatex">\(a_j+b_{j-1}=b_j\)</span>，有：</p>
+<div class="arithmatex">\[c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{i=2}^{x-1}\left(\dfrac{c_ia_i}{b_{i-1}} \times \dfrac{b_{i-1}}{b_{i}}\prod\limits_{j=2}^{x-1}\dfrac{b_{j}}{b_{j-1}}\right)\]</div>
+<p>发现内层的 <span class="arithmatex">\(\prod\)</span> 也可以把分子分母的 <span class="arithmatex">\(b_j\)</span> 配对，然后进行一些简单的约分：</p>
+<div class="arithmatex">\[c_1+c_x+2\cdot\dfrac{a_1}{b_{x-1}}\sum\limits_{i=2}^{x-1}\left(\dfrac{c_ia_i}{b_{i}}\times\dfrac{b_{x-1}}{b_1}\right)\]</div>
+<p>可以把里面的 <span class="arithmatex">\(\frac{b_{x-1}}{b_1}\)</span> 提出来，又发现 <span class="arithmatex">\(b_1=a_1\)</span>，可得：</p>
+<div class="arithmatex">\[c_1+c_x+2\sum\limits_{i=2}^{x-1}\dfrac{c_ia_i}{b_{i}}\]</div>
+<p>这样一个巨简短的式子，只要预处理 <span class="arithmatex">\(\dfrac{c_ia_i}{b_{i}}\)</span> 从 <span class="arithmatex">\(2\)</span> 开始的前缀和就可以 <span class="arithmatex">\(O(1)\)</span> 求。</p>
 <p>以防有人不想看过程我把结论放在这里：</p>
-<p>$$\boxed{E(dpt_x)=c_1+c_x+2\sum\limits_{i=2}^{x-1}\dfrac{c_ia_i}{b_{i}}}$$</p>
-<h2 id="mathrmlca">如何处理 $\mathrm{lca}$ 的期望</h2>
+<div class="arithmatex">\[\boxed{E(dpt_x)=c_1+c_x+2\sum\limits_{i=2}^{x-1}\dfrac{c_ia_i}{b_{i}}}\]</div>
+<h2 id="mathrmlca">如何处理 <span class="arithmatex">\(\mathrm{lca}\)</span> 的期望</h2>
 <p>还记得我们的目标式子吗？</p>
-<p>$$dpt_u+dpt_v- 2dpt_{\mathrm{lca}(u,v)}$$</p>
+<div class="arithmatex">\[dpt_u+dpt_v- 2dpt_{\mathrm{lca}(u,v)}\]</div>
 <p>它的期望可以表达成这样：</p>
-<p>$$E(dpt_u)+E(dpt_v)-2\sum\limits_{l=1}^{u}E(dpt_{l})P(l)$$</p>
-<p>这个式子的前提是 $u<v$（假如 $u>v$ 交换即可，$u=v$ 的话你还算什么，直接输出 $0$），其中 $P(l)$ 表示 $l=\mathrm{lca}(u,v)$ 的概率。我们可以把它分为 $l=u$ 和 $l \ne v$ 的情况分别计算。</p>
-<p>至于为什么 $dpt_{\mathrm{lca}(u,v)}=\sum_{l=1}^{u}E(dpt_l)P(l)$ 这要考虑到树的生成方式，容易发现某个点 $i$ 的父亲是谁与 $1\sim i$ 具体如何构造无关，只与 $a_1\sim a_{i-1}$ 的值有关，把这个结论具体到问题上，容易发现 $E(dpt_l)$ 只与 $a_1\sim a_{l-1}$ 的值有关，$P(l)$ 只与 $a_l\sim a_{v}$ 的值有关，换句话说，这是两个互相独立的事件，适用期望的可乘性。</p>
+<div class="arithmatex">\[E(dpt_u)+E(dpt_v)-2\sum\limits_{l=1}^{u}E(dpt_{l})P(l)\]</div>
+<p>这个式子的前提是 <span class="arithmatex">\(u&lt;v\)</span>（假如 <span class="arithmatex">\(u&gt;v\)</span> 交换即可，<span class="arithmatex">\(u=v\)</span> 的话你还算什么，直接输出 <span class="arithmatex">\(0\)</span>），其中 <span class="arithmatex">\(P(l)\)</span> 表示 <span class="arithmatex">\(l=\mathrm{lca}(u,v)\)</span> 的概率。我们可以把它分为 <span class="arithmatex">\(l=u\)</span> 和 <span class="arithmatex">\(l \ne v\)</span> 的情况分别计算。</p>
+<p>至于为什么 <span class="arithmatex">\(dpt_{\mathrm{lca}(u,v)}=\sum_{l=1}^{u}E(dpt_l)P(l)\)</span> 这要考虑到树的生成方式，容易发现某个点 <span class="arithmatex">\(i\)</span> 的父亲是谁与 <span class="arithmatex">\(1\sim i\)</span> 具体如何构造无关，只与 <span class="arithmatex">\(a_1\sim a_{i-1}\)</span> 的值有关，把这个结论具体到问题上，容易发现 <span class="arithmatex">\(E(dpt_l)\)</span> 只与 <span class="arithmatex">\(a_1\sim a_{l-1}\)</span> 的值有关，<span class="arithmatex">\(P(l)\)</span> 只与 <span class="arithmatex">\(a_l\sim a_{v}\)</span> 的值有关，换句话说，这是两个互相独立的事件，适用期望的可乘性。</p>
 <ul>
-<li>$l \ne u$</li>
+<li><span class="arithmatex">\(l \ne u\)</span></li>
 </ul>
-<p>发现 $l$ 是 $\mathrm{lca}(u,v)$ 当且仅当 $l$ 是 $u$ 的祖先且 $l$ 是 $v$ 的祖先并且路径 $ul$ 和 $vl$ 中无重复的点。那么 $l$ 是 $\mathrm{lca}(u,v)$ 的概率就是这三个事件的概率相乘，我们考虑类似于刚才的方法，枚举 $ul$ 和 $vl$ 路径上点的集合满足顺次为下一个的父亲的概率求解，同样不包括端点。</p>
-<p>$ul$ 的路径（跳了一点步骤，应该能看懂，和前文的转化差不多）：</p>
-<p>$$\dfrac{a_l}{b_{u-1}}\sum\limits_{A\subseteq (l,u)}\prod\limits_{i\in A}\dfrac{a_i}{b_{i-1}}$$</p>
-<p>$vl$ 的路径（同上）：</p>
-<p>$$\dfrac{a_l}{b_{v-1}}\sum\limits_{B\subseteq ((l,u)\setminus A)\cup(u,v)}\prod\limits_{i\in S}\dfrac{a_i}{b_{i-1}}$$</p>
-<p>考虑把这两个式子合并起来，容易发现 $B$ 和 $A$ 有一部分的范围是相同的（都是 $(l,u)$），由于 $A$ 和 $B$ 显然是没有交的（从式子的意义和它本身都能看出来），我们考虑把这一部分并起来，和剩下的（$(u,v)$ 这一部分）分开考虑（跳了一些步骤，应该能看懂）：</p>
-<p>$$\dfrac{a_l^2}{b_{u-1}b_{v-1}}\sum\limits_{S_1\subseteq(l,u)}2^{\left|S_1\right|}\sum\limits_{S_2\subseteq(u,v)}\prod\limits_{i\in S_1}\dfrac{a_i}{b_{i-1}}\prod\limits_{j\in S_2}\dfrac{a_j}{b_{j-1}}$$</p>
-<p>其中 $2^{\left|S_1\right|}$ 表示 $S_1$ 中的元素具体分给 $A$ 还是分给 $B$。</p>
-<p>为什么不同的分配方法可以套同一个式子呢？回顾一下，这个式子是用最初的式子分子分母错开重新配对得到的，而 $S_1$ 中的元素在所有情况下均以 $a_i$ 和 $\frac{1}{b_{i-1}}$ 的形式各出现过一次（自己推一推，可以画一画图），也就是说不管原式长啥样，错开后都能写成一样的形式。</p>
-<p>然后为了方便计算，把 $2$ 分配给第一个 $\prod$：</p>
-<p>$$\dfrac{a_l^2}{b_{u-1}b_{v-1}}\sum\limits_{S_1\subseteq(l,u)}\sum\limits_{S_2\subseteq(u,v)}\prod\limits_{i\in S_1}\dfrac{2a_i}{b_{i-1}}\prod\limits_{j\in S_2}\dfrac{a_j}{b_{j-1}}$$</p>
-<p>然后我们把两个 $\sum$ 分别分给两个 $\prod$：</p>
-<p>$$\dfrac{a_l^2}{b_{u-1}b_{v-1}}\sum\limits_{S_1\subseteq(l,u)}\prod\limits_{i\in S_1}\dfrac{2a_i}{b_{i-1}}\sum\limits_{S_2\subseteq(u,v)}\prod\limits_{j\in S_2}\dfrac{a_j}{b_{j-1}}$$</p>
+<p>发现 <span class="arithmatex">\(l\)</span> 是 <span class="arithmatex">\(\mathrm{lca}(u,v)\)</span> 当且仅当 <span class="arithmatex">\(l\)</span> 是 <span class="arithmatex">\(u\)</span> 的祖先且 <span class="arithmatex">\(l\)</span> 是 <span class="arithmatex">\(v\)</span> 的祖先并且路径 <span class="arithmatex">\(ul\)</span> 和 <span class="arithmatex">\(vl\)</span> 中无重复的点。那么 <span class="arithmatex">\(l\)</span> 是 <span class="arithmatex">\(\mathrm{lca}(u,v)\)</span> 的概率就是这三个事件的概率相乘，我们考虑类似于刚才的方法，枚举 <span class="arithmatex">\(ul\)</span> 和 <span class="arithmatex">\(vl\)</span> 路径上点的集合满足顺次为下一个的父亲的概率求解，同样不包括端点。</p>
+<p><span class="arithmatex">\(ul\)</span> 的路径（跳了一点步骤，应该能看懂，和前文的转化差不多）：</p>
+<div class="arithmatex">\[\dfrac{a_l}{b_{u-1}}\sum\limits_{A\subseteq (l,u)}\prod\limits_{i\in A}\dfrac{a_i}{b_{i-1}}\]</div>
+<p><span class="arithmatex">\(vl\)</span> 的路径（同上）：</p>
+<div class="arithmatex">\[\dfrac{a_l}{b_{v-1}}\sum\limits_{B\subseteq ((l,u)\setminus A)\cup(u,v)}\prod\limits_{i\in S}\dfrac{a_i}{b_{i-1}}\]</div>
+<p>考虑把这两个式子合并起来，容易发现 <span class="arithmatex">\(B\)</span> 和 <span class="arithmatex">\(A\)</span> 有一部分的范围是相同的（都是 <span class="arithmatex">\((l,u)\)</span>），由于 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 显然是没有交的（从式子的意义和它本身都能看出来），我们考虑把这一部分并起来，和剩下的（<span class="arithmatex">\((u,v)\)</span> 这一部分）分开考虑（跳了一些步骤，应该能看懂）：</p>
+<div class="arithmatex">\[\dfrac{a_l^2}{b_{u-1}b_{v-1}}\sum\limits_{S_1\subseteq(l,u)}2^{\left|S_1\right|}\sum\limits_{S_2\subseteq(u,v)}\prod\limits_{i\in S_1}\dfrac{a_i}{b_{i-1}}\prod\limits_{j\in S_2}\dfrac{a_j}{b_{j-1}}\]</div>
+<p>其中 <span class="arithmatex">\(2^{\left|S_1\right|}\)</span> 表示 <span class="arithmatex">\(S_1\)</span> 中的元素具体分给 <span class="arithmatex">\(A\)</span> 还是分给 <span class="arithmatex">\(B\)</span>。</p>
+<p>为什么不同的分配方法可以套同一个式子呢？回顾一下，这个式子是用最初的式子分子分母错开重新配对得到的，而 <span class="arithmatex">\(S_1\)</span> 中的元素在所有情况下均以 <span class="arithmatex">\(a_i\)</span> 和 <span class="arithmatex">\(\frac{1}{b_{i-1}}\)</span> 的形式各出现过一次（自己推一推，可以画一画图），也就是说不管原式长啥样，错开后都能写成一样的形式。</p>
+<p>然后为了方便计算，把 <span class="arithmatex">\(2\)</span> 分配给第一个 <span class="arithmatex">\(\prod\)</span>：</p>
+<div class="arithmatex">\[\dfrac{a_l^2}{b_{u-1}b_{v-1}}\sum\limits_{S_1\subseteq(l,u)}\sum\limits_{S_2\subseteq(u,v)}\prod\limits_{i\in S_1}\dfrac{2a_i}{b_{i-1}}\prod\limits_{j\in S_2}\dfrac{a_j}{b_{j-1}}\]</div>
+<p>然后我们把两个 <span class="arithmatex">\(\sum\)</span> 分别分给两个 <span class="arithmatex">\(\prod\)</span>：</p>
+<div class="arithmatex">\[\dfrac{a_l^2}{b_{u-1}b_{v-1}}\sum\limits_{S_1\subseteq(l,u)}\prod\limits_{i\in S_1}\dfrac{2a_i}{b_{i-1}}\sum\limits_{S_2\subseteq(u,v)}\prod\limits_{j\in S_2}\dfrac{a_j}{b_{j-1}}\]</div>
 <p>用之前讲过的套路化简：</p>
-<p>$$\dfrac{a_l^2}{b_{u-1}b_{v-1}}\prod\limits_{i=l+1}^{u-1}\dfrac{2a_i+b_{i-1}}{b_{i-1}}\prod\limits_{j=u+1}^{v-1}\dfrac{a_j+b_{j-1}}{b_{j-1}}$$</p>
-<p>把 $a_j+b_{j-1}$ 换成 $b_j$（中间那坨因为换不换耦合度一样就不管它了）：</p>
-<p>$$\dfrac{a_l^2}{b_{u-1}b_{v-1}}\prod\limits_{i=l+1}^{u-1}\dfrac{2a_i+b_{i-1}}{b_{i-1}}\prod\limits_{j=u+1}^{v-1}\dfrac{b_{j}}{b_{j-1}}$$</p>
-<p>对第二个 $\prod$ 约分：</p>
-<p>$$\dfrac{a_l^2}{b_{u-1}b_{v-1}}\prod\limits_{i=l+1}^{u-1}\dfrac{2a_i+b_{i-1}}{b_{i-1}}\cdot\dfrac{b_{v-1}}{b_{u}}$$</p>
+<div class="arithmatex">\[\dfrac{a_l^2}{b_{u-1}b_{v-1}}\prod\limits_{i=l+1}^{u-1}\dfrac{2a_i+b_{i-1}}{b_{i-1}}\prod\limits_{j=u+1}^{v-1}\dfrac{a_j+b_{j-1}}{b_{j-1}}\]</div>
+<p>把 <span class="arithmatex">\(a_j+b_{j-1}\)</span> 换成 <span class="arithmatex">\(b_j\)</span>（中间那坨因为换不换耦合度一样就不管它了）：</p>
+<div class="arithmatex">\[\dfrac{a_l^2}{b_{u-1}b_{v-1}}\prod\limits_{i=l+1}^{u-1}\dfrac{2a_i+b_{i-1}}{b_{i-1}}\prod\limits_{j=u+1}^{v-1}\dfrac{b_{j}}{b_{j-1}}\]</div>
+<p>对第二个 <span class="arithmatex">\(\prod\)</span> 约分：</p>
+<div class="arithmatex">\[\dfrac{a_l^2}{b_{u-1}b_{v-1}}\prod\limits_{i=l+1}^{u-1}\dfrac{2a_i+b_{i-1}}{b_{i-1}}\cdot\dfrac{b_{v-1}}{b_{u}}\]</div>
 <p>再约：</p>
-<p>$$\dfrac{a_l^2}{b_{u-1}b_{u}}\prod\limits_{i=l+1}^{u-1}\dfrac{2a_i+b_{i-1}}{b_{i-1}}$$</p>
-<p>后面这部分已经可以用前缀积处理了，设 $d_i=\prod\limits_{j=2}^{i}\frac{2a_i+b_{i-1}}{b_{i-1}}$：</p>
-<p>$$\dfrac{a_l^2}{b_{u-1}b_{u}}\cdot \dfrac{d_{u-1}}{d_l}$$</p>
-<p>发现这是一个只与 $u$ 和 $l$ 有关的式子，我们把它原式里与 $l$ 有关的部分拿过来（注意这是 $l \ne u$ 的情况）：</p>
-<p>$$\sum\limits_{l=1}^{u-1}\dfrac{a_l^2}{b_{u-1}b_{u}}\cdot \dfrac{d_{u-1}}{d_l}\cdot E(dpt_l)$$</p>
-<p>把 $u$ 和 $l$ 分开：</p>
-<p>$$\dfrac{d_{u-1}}{b_{u-1}b_u}\sum\limits_{l=1}^{u-1}\dfrac{a_l^2}{d_l}\cdot E(dpt_l)$$</p>
-<p>后面这个 $\sum$ 的限制里面的 $u$ 提不出来，但这个部分可以用前缀和维护，所以我们就优雅地处理完了这个子问题。</p>
+<div class="arithmatex">\[\dfrac{a_l^2}{b_{u-1}b_{u}}\prod\limits_{i=l+1}^{u-1}\dfrac{2a_i+b_{i-1}}{b_{i-1}}\]</div>
+<p>后面这部分已经可以用前缀积处理了，设 <span class="arithmatex">\(d_i=\prod\limits_{j=2}^{i}\frac{2a_i+b_{i-1}}{b_{i-1}}\)</span>：</p>
+<div class="arithmatex">\[\dfrac{a_l^2}{b_{u-1}b_{u}}\cdot \dfrac{d_{u-1}}{d_l}\]</div>
+<p>发现这是一个只与 <span class="arithmatex">\(u\)</span> 和 <span class="arithmatex">\(l\)</span> 有关的式子，我们把它原式里与 <span class="arithmatex">\(l\)</span> 有关的部分拿过来（注意这是 <span class="arithmatex">\(l \ne u\)</span> 的情况）：</p>
+<div class="arithmatex">\[\sum\limits_{l=1}^{u-1}\dfrac{a_l^2}{b_{u-1}b_{u}}\cdot \dfrac{d_{u-1}}{d_l}\cdot E(dpt_l)\]</div>
+<p>把 <span class="arithmatex">\(u\)</span> 和 <span class="arithmatex">\(l\)</span> 分开：</p>
+<div class="arithmatex">\[\dfrac{d_{u-1}}{b_{u-1}b_u}\sum\limits_{l=1}^{u-1}\dfrac{a_l^2}{d_l}\cdot E(dpt_l)\]</div>
+<p>后面这个 <span class="arithmatex">\(\sum\)</span> 的限制里面的 <span class="arithmatex">\(u\)</span> 提不出来，但这个部分可以用前缀和维护，所以我们就优雅地处理完了这个子问题。</p>
 <p>同样的，我把答案放在这里：</p>
-<p>$$\boxed{\sum\limits_{l=1}^{u}E(dpt_{l})P(l)=\dfrac{d_{u-1}}{b_{u-1}b_u}\sum\limits_{l=1}^{u-1}\dfrac{a_l^2}{d_l}\cdot E(dpt_l)}$$</p>
+<div class="arithmatex">\[\boxed{\sum\limits_{l=1}^{u}E(dpt_{l})P(l)=\dfrac{d_{u-1}}{b_{u-1}b_u}\sum\limits_{l=1}^{u-1}\dfrac{a_l^2}{d_l}\cdot E(dpt_l)}\]</div>
 <ul>
-<li>$l=u$</li>
+<li><span class="arithmatex">\(l=u\)</span></li>
 </ul>
 <p><img alt="" src="../../img/proof.png" /></p>
 <p>和上个情况几乎一样，甚至更简单，自己推一下。</p>
 <p>直接放答案（一定要自己推一下！！！！！！！！！！）：</p>
-<p>$$\boxed{P(u)=\dfrac{a_u}{b_u}}$$</p>
+<div class="arithmatex">\[\boxed{P(u)=\dfrac{a_u}{b_u}}\]</div>
 <h2 id="_3">总结</h2>
 <p>答案长这样：</p>
-<p>$$\boxed{c_1+c_u+2\sum\limits_{i=2}^{u-1}\dfrac{c_ia_i}{b_{i}}+c_1+c_v+2\sum\limits_{i=2}^{v-1}\dfrac{c_ia_i}{b_{i}}-2\dfrac{d_{u-1}}{b_{u-1}b_u}\sum\limits_{l=1}^{u-1}\dfrac{a_l^2}{d_l}\cdot \left(c_1+c_l+2\sum\limits_{i=2}^{l-1}\dfrac{c_ia_i}{b_{i}}\right)-2\dfrac{a_u}{b_u}\cdot\left(c_1+c_u+2\sum\limits_{i=2}^{u-1}\dfrac{c_ia_i}{b_{i}}\right)}$$</p>
-<p><del>很答辩对吧</del>，但假如我把 $E(dpt_i)$ 封装成函数 $dpt(i)$，用 $f$ 表示 $\frac{a_l^2}{d_l}\cdot E(dpt_l)$ 的前缀和，那么这个式子就可以优雅地写成这样：</p>
-<p>$$\boxed{dpt(u)+dpt(v)-2\dfrac{d_{u-1}}{b_{u-1}b_u}\cdot f_{u-1}-2\dfrac{a_u}{a_v}\cdot dpt(u)}$$</p>
-<p>容易发现这个式子只和 $u,v$ 有关，算上逆元可以 $O(\log mod)$ 求，其中 $mod$ 为模数。</p>
-<p>预处理各种前缀和是 $O(n\log mod)$ 的，貌似每次 $\frac{1}{b}$ 都用快速幂过不了，可以先预处理存起来，这样询问就变成 $O(1)$ 的了。</p>
-<p>另外有一个 $O(n+\log mod)$ 求一个序列所有数分别的逆元的<a href="https://www.cnblogs.com/Illyasviel/p/15054416.html">小 trick</a>，但是这道题如果你不卷最优解没必要写，我就没写。</p>
-<p>注意取模。另外官方题解错在完全没提 $l=u$ 的情况。</p>
+<div class="arithmatex">\[\boxed{c_1+c_u+2\sum\limits_{i=2}^{u-1}\dfrac{c_ia_i}{b_{i}}+c_1+c_v+2\sum\limits_{i=2}^{v-1}\dfrac{c_ia_i}{b_{i}}-2\dfrac{d_{u-1}}{b_{u-1}b_u}\sum\limits_{l=1}^{u-1}\dfrac{a_l^2}{d_l}\cdot \left(c_1+c_l+2\sum\limits_{i=2}^{l-1}\dfrac{c_ia_i}{b_{i}}\right)-2\dfrac{a_u}{b_u}\cdot\left(c_1+c_u+2\sum\limits_{i=2}^{u-1}\dfrac{c_ia_i}{b_{i}}\right)}\]</div>
+<p><del>很答辩对吧</del>，但假如我把 <span class="arithmatex">\(E(dpt_i)\)</span> 封装成函数 <span class="arithmatex">\(dpt(i)\)</span>，用 <span class="arithmatex">\(f\)</span> 表示 <span class="arithmatex">\(\frac{a_l^2}{d_l}\cdot E(dpt_l)\)</span> 的前缀和，那么这个式子就可以优雅地写成这样：</p>
+<div class="arithmatex">\[\boxed{dpt(u)+dpt(v)-2\dfrac{d_{u-1}}{b_{u-1}b_u}\cdot f_{u-1}-2\dfrac{a_u}{a_v}\cdot dpt(u)}\]</div>
+<p>容易发现这个式子只和 <span class="arithmatex">\(u,v\)</span> 有关，算上逆元可以 <span class="arithmatex">\(O(\log mod)\)</span> 求，其中 <span class="arithmatex">\(mod\)</span> 为模数。</p>
+<p>预处理各种前缀和是 <span class="arithmatex">\(O(n\log mod)\)</span> 的，貌似每次 <span class="arithmatex">\(\frac{1}{b}\)</span> 都用快速幂过不了，可以先预处理存起来，这样询问就变成 <span class="arithmatex">\(O(1)\)</span> 的了。</p>
+<p>另外有一个 <span class="arithmatex">\(O(n+\log mod)\)</span> 求一个序列所有数分别的逆元的<a href="https://www.cnblogs.com/Illyasviel/p/15054416.html">小 trick</a>，但是这道题如果你不卷最优解没必要写，我就没写。</p>
+<p>注意取模。另外官方题解错在完全没提 <span class="arithmatex">\(l=u\)</span> 的情况。</p>
 <h2 id="code">code</h2>
 <details class="success">
 <summary>code</summary>

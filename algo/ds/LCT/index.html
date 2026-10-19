@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6036,15 +6064,15 @@
 
 <h1 id="lct">LCT 学习笔记</h1>
 <h2 id="_1">前言</h2>
-<p>由于 Splay 除了写 LCT 少个 $\log$ 以外被 FHQ 全方面薄纱（常数，好写程度，易错率，还有不能可持久化），干脆就写一起了。</p>
+<p>由于 Splay 除了写 LCT 少个 <span class="arithmatex">\(\log\)</span> 以外被 FHQ 全方面薄纱（常数，好写程度，易错率，还有不能可持久化），干脆就写一起了。</p>
 <p>LCT 以前感觉巨大困难啊，但是熟悉了就简单了。</p>
 <h2 id="splay">Splay 树</h2>
 <p>先讲讲 LCT 所需要用到的 Splay 树部分。</p>
-<p>Splay 树是一种平衡树，核心在 splay（伸展）操作，利用伸展操作使得势能分析后复杂度是 $O(n\log n)$ 的。</p>
+<p>Splay 树是一种平衡树，核心在 splay（伸展）操作，利用伸展操作使得势能分析后复杂度是 <span class="arithmatex">\(O(n\log n)\)</span> 的。</p>
 <h3 id="_2">核心操作</h3>
 <p>splay 的实现基于 rotate 操作。rotate 操作类似于有旋 Treap 的 Zig/Zag 操作，可以在不改变 BST 性质的情况下改变树的形态：</p>
 <p><img alt="图示 1" src="../../../img/LCT_1.png" /></p>
-<p><code>rotate(x)</code> 的意思是“把 $x$ 向上旋转”。</p>
+<p><code>rotate(x)</code> 的意思是“把 <span class="arithmatex">\(x\)</span> 向上旋转”。</p>
 <p>实现比较简单：</p>
 <details open="open">
 <summary>参考实现</summary>
@@ -6058,23 +6086,23 @@
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p>然后就是 splay 操作。splay 操作的目的是通过若干次 <code>rotate</code> 操作把 $x$ 旋转到根，分三种情况（下文默认 $y=fa_x$）：</p>
+<p>然后就是 splay 操作。splay 操作的目的是通过若干次 <code>rotate</code> 操作把 <span class="arithmatex">\(x\)</span> 旋转到根，分三种情况（下文默认 <span class="arithmatex">\(y=fa_x\)</span>）：</p>
 <ol>
 <li>
-<p>$y$ 就是根：</p>
+<p><span class="arithmatex">\(y\)</span> 就是根：</p>
 <p>此时一次 rotate 就能旋到根：</p>
 <p>图就是上面那张，就不再放一遍了。</p>
 <p>这种操作叫 Zig/Zag。</p>
 </li>
 <li>
-<p>$y$ 和 $x$ 是父亲的同一个儿子</p>
+<p><span class="arithmatex">\(y\)</span> 和 <span class="arithmatex">\(x\)</span> 是父亲的同一个儿子</p>
 <p>就是这种情况：</p>
 <p><img alt="图示 2" src="../../../img/LCT_2.png" /></p>
 <p>这种情况先 <code>rotate(y)</code> 再 <code>rotate(x)</code>，据说在势能分析下很平衡。</p>
 <p>这种操作叫 Zig-Zig/Zag-Zag。</p>
 </li>
 <li>
-<p>$y$ 和 $x$ 是父亲的不同儿子</p>
+<p><span class="arithmatex">\(y\)</span> 和 <span class="arithmatex">\(x\)</span> 是父亲的不同儿子</p>
 <p>这种情况：</p>
 <p><img alt="图示 3" src="../../../img/LCT_3.png" /></p>
 <p>这种情况 <code>rotate(x)</code> 两次即可，看起来就很平衡。</p>
@@ -6122,7 +6150,7 @@
 <p>我们可以简单的把 LCT 理解成用一些 Splay 来维护动态的实链剖分，以期实现动态树上的区间操作。对于每条实链，我们建一个 Splay 来维护整个链的信息，其中 Splay 的中序遍历就是实链从上到下的路径。然后再连若干条虚边表示多条实链之间的相对关系。</p>
 <p>我们想要维护的大概是这么一个东西：</p>
 <p><img alt="图示 4" src="../../../img/LCT_4.png" /></p>
-<p>然而事实上不需要这么麻烦，注意到一棵 Splay 的根处的 $fa$ 是空的，那么可以考虑直接用根节点的 $fa$ 存储虚边。具体来说，对于每条 Splay 的根，我们将它的 $fa$ 赋为<strong>对应实链顶端结点的父亲</strong>。</p>
+<p>然而事实上不需要这么麻烦，注意到一棵 Splay 的根处的 <span class="arithmatex">\(fa\)</span> 是空的，那么可以考虑直接用根节点的 <span class="arithmatex">\(fa\)</span> 存储虚边。具体来说，对于每条 Splay 的根，我们将它的 <span class="arithmatex">\(fa\)</span> 赋为<strong>对应实链顶端结点的父亲</strong>。</p>
 <p>大概是这样（通常形态不唯一，这是一种可能的情况）：</p>
 <p><img alt="图示 5" src="../../../img/LCT_5.png" /></p>
 <p>注意<strong>虚边在父亲处不指向儿子</strong>！</p>
@@ -6160,14 +6188,14 @@
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p>首先是宏定义的 <code>isRoot</code> 函数。这个很简单，因为若 $x$ 的父亲两个儿子都不是它，说明这是一条虚边，即 $x$ 是所在 Splay 的根。</p>
-<p>然后 rotate 和 Splay 树差不多，注意要先特判 $y$ 是不是根（这个很重要，不然会把 $x$ 转到奇怪的地方）。</p>
+<p>首先是宏定义的 <code>isRoot</code> 函数。这个很简单，因为若 <span class="arithmatex">\(x\)</span> 的父亲两个儿子都不是它，说明这是一条虚边，即 <span class="arithmatex">\(x\)</span> 是所在 Splay 的根。</p>
+<p>然后 rotate 和 Splay 树差不多，注意要先特判 <span class="arithmatex">\(y\)</span> 是不是根（这个很重要，不然会把 <span class="arithmatex">\(x\)</span> 转到奇怪的地方）。</p>
 <p>最后是 splay 操作。由于<strong>任何树形数据结构</strong>下传标记都是<strong>从上到下</strong>的，但 LCT 会从下到上操作。那么就需要在操作前先行下放标记（就是 <code>Update</code> 函数）。</p>
 <ul>
 <li>access 操作</li>
 </ul>
-<p>access 操作的目的是将 $x$ 到所在连通块根节点的路径变为一条实链。</p>
-<p>具体如何操作呢？考虑辅助树上 $x$ 到根路径中的所有 Splay。</p>
+<p>access 操作的目的是将 <span class="arithmatex">\(x\)</span> 到所在连通块根节点的路径变为一条实链。</p>
+<p>具体如何操作呢？考虑辅助树上 <span class="arithmatex">\(x\)</span> 到根路径中的所有 Splay。</p>
 <p><img alt="图示 6" src="../../../img/LCT_6.png" /></p>
 <p>“变为一条实链”就等价于把路径上的虚边变成实边，并且删掉不需要的实边。</p>
 <p>考虑虚边在原树上的意义，那么变成的实边在辅助树上必定是若干个右儿子。那么我们可以把所有虚边连到的父亲 splay 到对应 Splay 的根：</p>
@@ -6189,11 +6217,11 @@
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p>这个返回值 $p$ 是这一棵 Splay 的根。</p>
+<p>这个返回值 <span class="arithmatex">\(p\)</span> 是这一棵 Splay 的根。</p>
 <ul>
 <li>makeroot 操作</li>
 </ul>
-<p>顾名思义，将 $x$ 变为<strong>对应连通块</strong>的根。</p>
+<p>顾名思义，将 <span class="arithmatex">\(x\)</span> 变为<strong>对应连通块</strong>的根。</p>
 <p>考虑换根会使哪些点的深浅相对关系改变，容易发现就是原来的根到新根的路径。</p>
 <p>那么 access 后进行平衡树的翻转操作即可。</p>
 <details class="success">
@@ -6240,7 +6268,7 @@
 <ul>
 <li>cut 操作</li>
 </ul>
-<p><code>MakeRoot(x)</code> 后 <code>Access(y)</code>，此时（如果该边存在）那么 $y$ 必定是 $x$ 的右儿子（显然），并且 $y$ 没有左儿子（否则说明 $x,y$ 之间还有其它结点）。那么把这条边删掉即可。</p>
+<p><code>MakeRoot(x)</code> 后 <code>Access(y)</code>，此时（如果该边存在）那么 <span class="arithmatex">\(y\)</span> 必定是 <span class="arithmatex">\(x\)</span> 的右儿子（显然），并且 <span class="arithmatex">\(y\)</span> 没有左儿子（否则说明 <span class="arithmatex">\(x,y\)</span> 之间还有其它结点）。那么把这条边删掉即可。</p>
 <details open="open">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">Cut</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">){</span>

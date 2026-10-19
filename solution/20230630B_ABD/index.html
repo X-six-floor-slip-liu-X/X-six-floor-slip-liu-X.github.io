@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5886,7 +5914,7 @@
 <p><a href="https://local.cwoi.com.cn:8443/contest/C0279">传送门</a></p>
 <h2 id="t1">T1</h2>
 <p>首先假如我们要判断某个序列能不能构成三角形，很显然只需要排个序然后判相邻三个了。</p>
-<p>那么假如我们要构造一个构不成三角形的单调不减序列 $s$ ，那么必定有 $s_{i} \ge s_{i-1}+s_{i-2}$。很显然能最小化 $s_n$ 的情况就是斐波那契数列。打表发现斐波那契数列的第 $45$ 项已经大于 $10^9$ 了。</p>
+<p>那么假如我们要构造一个构不成三角形的单调不减序列 <span class="arithmatex">\(s\)</span> ，那么必定有 <span class="arithmatex">\(s_{i} \ge s_{i-1}+s_{i-2}\)</span>。很显然能最小化 <span class="arithmatex">\(s_n\)</span> 的情况就是斐波那契数列。打表发现斐波那契数列的第 <span class="arithmatex">\(45\)</span> 项已经大于 <span class="arithmatex">\(10^9\)</span> 了。</p>
 <details class="example">
 <summary>打表参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5917,7 +5945,7 @@
 </span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p>那么长度大于 $45$ 的区间必定有解，小于 $45$ 的暴力即可，复杂度 $O(45n \log 45)$，常数不是过于夸张就能过。</p>
+<p>那么长度大于 <span class="arithmatex">\(45\)</span> 的区间必定有解，小于 <span class="arithmatex">\(45\)</span> 的暴力即可，复杂度 <span class="arithmatex">\(O(45n \log 45)\)</span>，常数不是过于夸张就能过。</p>
 <details>
 <summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5976,24 +6004,24 @@
 <summary>格雷码基本知识</summary>
 <details class="question">
 <summary>什么是格雷码</summary>
-<p>格雷码（Gray Code）是一种特殊的 $n$ 位二进制串排列法，它要求相邻的两个二进制串间恰好有一位不同，特别地，第一个串与最后一个串也算作相邻。</p>
-<p>格雷码的位数被称为“位”，比如二位格雷码就是 $00,01,11,10$。</p>
+<p>格雷码（Gray Code）是一种特殊的 <span class="arithmatex">\(n\)</span> 位二进制串排列法，它要求相邻的两个二进制串间恰好有一位不同，特别地，第一个串与最后一个串也算作相邻。</p>
+<p>格雷码的位数被称为“位”，比如二位格雷码就是 <span class="arithmatex">\(00,01,11,10\)</span>。</p>
 </details>
 <details class="question" open="open">
 <summary>如何构造格雷码</summary>
-<p>假如已经知道了 $x-1$ 位格雷码为 $s_1,s_2\dots,s_n$。</p>
-<p>容易得到 $x$ 位格雷码为 $s_1,s_2\dots,s_n,s_n+2^{x-1},s_{n-1}+2^{x-1},\dots,s_2+2^{x-1},s_1+2^{x-1}$。</p>
+<p>假如已经知道了 <span class="arithmatex">\(x-1\)</span> 位格雷码为 <span class="arithmatex">\(s_1,s_2\dots,s_n\)</span>。</p>
+<p>容易得到 <span class="arithmatex">\(x\)</span> 位格雷码为 <span class="arithmatex">\(s_1,s_2\dots,s_n,s_n+2^{x-1},s_{n-1}+2^{x-1},\dots,s_2+2^{x-1},s_1+2^{x-1}\)</span>。</p>
 </details>
 </details>
 <p>然后基本上知道上面这些对于这道题就够用了。</p>
-<p>首先 $u \to v$ 等价于 $0 \to v \oplus u$，其中 $\oplus$ 表示按位异或，然后为了方便我们可以算 $v \oplus u \to 0$ 然后 <code>reverse</code> 一下。令 $t=v\oplus u$。</p>
-<p>首先我们的目标是把 $t$ 中所有 $1$ 变成 $0$，考虑每次固定一个 $1$，不看这个 $1$，把剩下的位数按 $n-1$ 位格雷码遍历一遍（从格雷码上和原来的相等的位置断开然后顺着跑一遍），然后把这一位固定为 $0$，然后因为这一位固定为 $0$ 所以下一次就不能动这一位了，再另外固定一个 $1$，把剩下的位数按 $n-2$ 位格雷码遍历一遍。注意格雷码是一个环状的东西，也就是说遍历一遍后的最后一个和最开始的也只相差一位。所以每次遍历就相当于把一个固定的 $1$ 改成 $0$，然后把某个 $1$ 改成 $0$ 或者 $0$ 改成 $1$。容易发现这对 $1$ 的数量的奇偶性是没有影响的，所以最后必定会剩下一个或者两个 $1$。我们分开解决。</p>
+<p>首先 <span class="arithmatex">\(u \to v\)</span> 等价于 <span class="arithmatex">\(0 \to v \oplus u\)</span>，其中 <span class="arithmatex">\(\oplus\)</span> 表示按位异或，然后为了方便我们可以算 <span class="arithmatex">\(v \oplus u \to 0\)</span> 然后 <code>reverse</code> 一下。令 <span class="arithmatex">\(t=v\oplus u\)</span>。</p>
+<p>首先我们的目标是把 <span class="arithmatex">\(t\)</span> 中所有 <span class="arithmatex">\(1\)</span> 变成 <span class="arithmatex">\(0\)</span>，考虑每次固定一个 <span class="arithmatex">\(1\)</span>，不看这个 <span class="arithmatex">\(1\)</span>，把剩下的位数按 <span class="arithmatex">\(n-1\)</span> 位格雷码遍历一遍（从格雷码上和原来的相等的位置断开然后顺着跑一遍），然后把这一位固定为 <span class="arithmatex">\(0\)</span>，然后因为这一位固定为 <span class="arithmatex">\(0\)</span> 所以下一次就不能动这一位了，再另外固定一个 <span class="arithmatex">\(1\)</span>，把剩下的位数按 <span class="arithmatex">\(n-2\)</span> 位格雷码遍历一遍。注意格雷码是一个环状的东西，也就是说遍历一遍后的最后一个和最开始的也只相差一位。所以每次遍历就相当于把一个固定的 <span class="arithmatex">\(1\)</span> 改成 <span class="arithmatex">\(0\)</span>，然后把某个 <span class="arithmatex">\(1\)</span> 改成 <span class="arithmatex">\(0\)</span> 或者 <span class="arithmatex">\(0\)</span> 改成 <span class="arithmatex">\(1\)</span>。容易发现这对 <span class="arithmatex">\(1\)</span> 的数量的奇偶性是没有影响的，所以最后必定会剩下一个或者两个 <span class="arithmatex">\(1\)</span>。我们分开解决。</p>
 <h4 id="_2">剩下一个</h4>
-<p>在这种情况下可能还会剩一些位没有固定为 $0$，我们可以每次把某个没有固定的 $0$ 变成 $1$，把原来的 $1$ 固定，最终必定是只有一位没有固定，且它是 $1$，的情况，直接删除即可。</p>
-<p>容易发现这样遍历了全部 $2^n$ 个数，故路径长度为 $2^n-1$。</p>
+<p>在这种情况下可能还会剩一些位没有固定为 <span class="arithmatex">\(0\)</span>，我们可以每次把某个没有固定的 <span class="arithmatex">\(0\)</span> 变成 <span class="arithmatex">\(1\)</span>，把原来的 <span class="arithmatex">\(1\)</span> 固定，最终必定是只有一位没有固定，且它是 <span class="arithmatex">\(1\)</span>，的情况，直接删除即可。</p>
+<p>容易发现这样遍历了全部 <span class="arithmatex">\(2^n\)</span> 个数，故路径长度为 <span class="arithmatex">\(2^n-1\)</span>。</p>
 <h4 id="_3">剩下两个</h4>
-<p>这时候假如我们固定一位遍历格雷码可能会把另一个变成 $0$，这样显然是不好的，注意到格雷码是环形的（反复强调），所以我们只要反方向遍历即可。</p>
-<p>然后最后必定会剩下两位没固定为 $0$ 且均为 $1$ 的情况，我们直接构造为 $11\to 10 \to 00$ 即可，注意到这种情况下 $01$ 没有经过，故经过了 $2^n-1$ 个数，路径长度为 $2^n-2$。</p>
+<p>这时候假如我们固定一位遍历格雷码可能会把另一个变成 <span class="arithmatex">\(0\)</span>，这样显然是不好的，注意到格雷码是环形的（反复强调），所以我们只要反方向遍历即可。</p>
+<p>然后最后必定会剩下两位没固定为 <span class="arithmatex">\(0\)</span> 且均为 <span class="arithmatex">\(1\)</span> 的情况，我们直接构造为 <span class="arithmatex">\(11\to 10 \to 00\)</span> 即可，注意到这种情况下 <span class="arithmatex">\(01\)</span> 没有经过，故经过了 <span class="arithmatex">\(2^n-1\)</span> 个数，路径长度为 <span class="arithmatex">\(2^n-2\)</span>。</p>
 <details class="success">
 <summary>code</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6117,9 +6145,9 @@
 <ol>
 <li>知道格雷码填进原数</li>
 <li>知道原数求格雷码</li>
-<li>固定 $i$，遍历剩下没固定的</li>
-<li>先固定第 $i$ 为 $0$，后面加上即可</li>
-<li>保证绕一圈不变为 $0$</li>
+<li>固定 <span class="arithmatex">\(i\)</span>，遍历剩下没固定的</li>
+<li>先固定第 <span class="arithmatex">\(i\)</span> 为 <span class="arithmatex">\(0\)</span>，后面加上即可</li>
+<li>保证绕一圈不变为 <span class="arithmatex">\(0\)</span></li>
 <li>输出时记得异或回去</li>
 </ol>
 </details>

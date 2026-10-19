@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5829,14 +5857,14 @@
 <p>哈哈，A 题不会，预估 0+0+0，实际得分“选手未找到”。</p>
 <p><a href="../../files/20231202.rar">密码是通用密码</a></p>
 <h2 id="t1">T1</h2>
-<p>首先可以 $O(n)$ 地找到如果选了点 $i$，那么必须选的最大的点 $r_i$，和必须选的最小的点 $l_i$，具体实现大概就是个类似于 DP 的东西，很简单。</p>
-<p>然后再考虑怎么做，容易发现一个区间 $[L,R]$ 是好的当且仅当 $\max_{i=L}^R\begin{Bmatrix}r_i\end{Bmatrix}=R\land\min_{i=L}^R\begin{Bmatrix}l_i\end{Bmatrix}=L$，因为这样你就可以恰好只选这个区间内的点而不选其余点。</p>
+<p>首先可以 <span class="arithmatex">\(O(n)\)</span> 地找到如果选了点 <span class="arithmatex">\(i\)</span>，那么必须选的最大的点 <span class="arithmatex">\(r_i\)</span>，和必须选的最小的点 <span class="arithmatex">\(l_i\)</span>，具体实现大概就是个类似于 DP 的东西，很简单。</p>
+<p>然后再考虑怎么做，容易发现一个区间 <span class="arithmatex">\([L,R]\)</span> 是好的当且仅当 <span class="arithmatex">\(\max_{i=L}^R\begin{Bmatrix}r_i\end{Bmatrix}=R\land\min_{i=L}^R\begin{Bmatrix}l_i\end{Bmatrix}=L\)</span>，因为这样你就可以恰好只选这个区间内的点而不选其余点。</p>
 <p>两个限制不好做，考虑先解决一个再解决另一个，可以从右到左枚举左端点，对于左端点找所有合法的右端点。</p>
-<p>可以想到用单调栈维护能成为右端点的点，具体来说，对于一个 $i$，显然 $[i,r_i)$ 都不可能成为右端点，每次扫到一个 $i$ 后把这些弹出即可。</p>
-<p>现在我们就得到了一个 $R'$ 点集，假设现在左端点枚举到了 $L'$，那么 $\forall x\in R',\max_{i=L'}^x\begin{Bmatrix}r_i\end{Bmatrix}=x$，此时就只需要考虑左端点的条件了。</p>
-<p>容易发现，$\min_{i=L'}^y\begin{Bmatrix}l_i\end{Bmatrix}$ 随着 $y$ 的增加单调不增，那么二分找到第一个和最后一个这玩意等于 $L'$ 的位置，然后区间查 $R'$ 的个数即可。</p>
-<p>容易发现一个点 $i$ 能成为合法的 $L$ 的必要条件是 $l_i=i$（因为 $l_i\le i$，然后参考上面的限制），所以第一个那玩意等于 $L'$ 的位置必定是 $L'$，否则这个 $L'$ 就不可能成为合法区间的左端点。然后对 $R$ 也同理，可以当做一个小剪枝。</p>
-<p>复杂度 $O(n\log n)$，具体实现可以考虑 ST 表 $+$ 树状数组或者线段树上二分。</p>
+<p>可以想到用单调栈维护能成为右端点的点，具体来说，对于一个 <span class="arithmatex">\(i\)</span>，显然 <span class="arithmatex">\([i,r_i)\)</span> 都不可能成为右端点，每次扫到一个 <span class="arithmatex">\(i\)</span> 后把这些弹出即可。</p>
+<p>现在我们就得到了一个 <span class="arithmatex">\(R'\)</span> 点集，假设现在左端点枚举到了 <span class="arithmatex">\(L'\)</span>，那么 <span class="arithmatex">\(\forall x\in R',\max_{i=L'}^x\begin{Bmatrix}r_i\end{Bmatrix}=x\)</span>，此时就只需要考虑左端点的条件了。</p>
+<p>容易发现，<span class="arithmatex">\(\min_{i=L'}^y\begin{Bmatrix}l_i\end{Bmatrix}\)</span> 随着 <span class="arithmatex">\(y\)</span> 的增加单调不增，那么二分找到第一个和最后一个这玩意等于 <span class="arithmatex">\(L'\)</span> 的位置，然后区间查 <span class="arithmatex">\(R'\)</span> 的个数即可。</p>
+<p>容易发现一个点 <span class="arithmatex">\(i\)</span> 能成为合法的 <span class="arithmatex">\(L\)</span> 的必要条件是 <span class="arithmatex">\(l_i=i\)</span>（因为 <span class="arithmatex">\(l_i\le i\)</span>，然后参考上面的限制），所以第一个那玩意等于 <span class="arithmatex">\(L'\)</span> 的位置必定是 <span class="arithmatex">\(L'\)</span>，否则这个 <span class="arithmatex">\(L'\)</span> 就不可能成为合法区间的左端点。然后对 <span class="arithmatex">\(R\)</span> 也同理，可以当做一个小剪枝。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>，具体实现可以考虑 ST 表 <span class="arithmatex">\(+\)</span> 树状数组或者线段树上二分。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5928,23 +5956,23 @@
 </details>
 <h2 id="t2">T2</h2>
 <p>很神秘的一道题。</p>
-<p>容易发现（其实题目就是这样说的）一个合法序列相当于每次插空放同一种颜色的所有点，最后使得总共有 $n$ 个点。</p>
+<p>容易发现（其实题目就是这样说的）一个合法序列相当于每次插空放同一种颜色的所有点，最后使得总共有 <span class="arithmatex">\(n\)</span> 个点。</p>
 <p>但是这样还是不好做，一个很妙的想法是把同一种颜色的所有点作为一棵二叉树的一条左链（每个点向左儿子连边的一条链），然后每次插空就是把最右边的点作为对应空右边点的儿子。</p>
 <p>比如序列 <code>aabcbadda</code> 变成二叉树就是这样：</p>
 <p><img alt="图示 1" src="../../img/20231202A_ABC_1.png" /></p>
-<p>容易发现二叉树形态和序列是一一对应的，序列 $\to$ 二叉树很好想，二叉树 $\to$ 序列考虑优先右儿子的 dfs 序然后 <code>reverse</code> 一下。</p>
-<p>那么就可以通过计算对应二叉树的数量再乘以颜色的选取方案（如果二叉树上有 $i$ 条极长左链就是 $\binom{m}{i}\times i!$）来求出合法序列数量。</p>
-<p>可以枚举这个极长左链数量 $i$，问题就变成了求出 $n$ 个点有根无标号有 $i$ 条极长左链的二叉树数量。</p>
-<p>首先考虑把 $n$ 个点分成 $i$ 份，这个直接插板法，等于 $\binom{n-1}{i-1}$。</p>
-<p>然后考虑右儿子怎么取，一个简单的想法是从 $n$ 个点中选取 $i-1$ 个点，表示钦定这 $i-1$ 个点<strong>有右儿子</strong>，然后像括号序列一样维护“未匹配的游离的右儿子”，一条一条往前连。</p>
+<p>容易发现二叉树形态和序列是一一对应的，序列 <span class="arithmatex">\(\to\)</span> 二叉树很好想，二叉树 <span class="arithmatex">\(\to\)</span> 序列考虑优先右儿子的 dfs 序然后 <code>reverse</code> 一下。</p>
+<p>那么就可以通过计算对应二叉树的数量再乘以颜色的选取方案（如果二叉树上有 <span class="arithmatex">\(i\)</span> 条极长左链就是 <span class="arithmatex">\(\binom{m}{i}\times i!\)</span>）来求出合法序列数量。</p>
+<p>可以枚举这个极长左链数量 <span class="arithmatex">\(i\)</span>，问题就变成了求出 <span class="arithmatex">\(n\)</span> 个点有根无标号有 <span class="arithmatex">\(i\)</span> 条极长左链的二叉树数量。</p>
+<p>首先考虑把 <span class="arithmatex">\(n\)</span> 个点分成 <span class="arithmatex">\(i\)</span> 份，这个直接插板法，等于 <span class="arithmatex">\(\binom{n-1}{i-1}\)</span>。</p>
+<p>然后考虑右儿子怎么取，一个简单的想法是从 <span class="arithmatex">\(n\)</span> 个点中选取 <span class="arithmatex">\(i-1\)</span> 个点，表示钦定这 <span class="arithmatex">\(i-1\)</span> 个点<strong>有右儿子</strong>，然后像括号序列一样维护“未匹配的游离的右儿子”，一条一条往前连。</p>
 <p>显然有很多情况这样是行不通的，考虑如何去掉它们。</p>
-<p>容易发现这相当于是一个起点是 $1$ 终点是 $0$ 的括号序列，并且一个 $-1$ 和若干个 $+1$ 是绑定的，而除去绑定的块内部以外，中途其余地方都大于等于 $1$。</p>
-<p>那么又可以发现，对于一个合法的左链序列（包含“哪些点有右儿子”的信息），随便 <code>rotate</code> 一下使其换一个起点就会使它不合法，因为除起点外任意一个地方到达终点都至少 $-1$，那么在中途就会到达 $0$。</p>
-<p>并且对于任意一个左链序列，都能 <code>rotate</code> 得到一个合法的序列。由于恰有 $i$ 个 $-1$，$i-1$ 个 $+1$，故起点和终点的差一定是 $-1$，那么找到全序列第一个最小值，其余地方必定大于等于它，<code>rotate</code> 到它为起点就是一个合法的序列。</p>
-<p>容易发现，每一组能通过 <code>rotate</code> 得到的等价类都会出现恰好 $i$ 次，那么将之前提到的方案数除以 $i$ 即可。</p>
-<p>故对于一个固定的左链数量 $i$，二叉树数量是：</p>
-<p>$$\dbinom{n-1}{i-1}\dbinom{n}{i-1}\frac{1}{i}\times \dbinom{m}{i}i!$$</p>
-<p>那么总答案就是枚举 $i$ 加起来。预处理 $n$ 的下降幂可以做到 $O(\min(n,m))$。</p>
+<p>容易发现这相当于是一个起点是 <span class="arithmatex">\(1\)</span> 终点是 <span class="arithmatex">\(0\)</span> 的括号序列，并且一个 <span class="arithmatex">\(-1\)</span> 和若干个 <span class="arithmatex">\(+1\)</span> 是绑定的，而除去绑定的块内部以外，中途其余地方都大于等于 <span class="arithmatex">\(1\)</span>。</p>
+<p>那么又可以发现，对于一个合法的左链序列（包含“哪些点有右儿子”的信息），随便 <code>rotate</code> 一下使其换一个起点就会使它不合法，因为除起点外任意一个地方到达终点都至少 <span class="arithmatex">\(-1\)</span>，那么在中途就会到达 <span class="arithmatex">\(0\)</span>。</p>
+<p>并且对于任意一个左链序列，都能 <code>rotate</code> 得到一个合法的序列。由于恰有 <span class="arithmatex">\(i\)</span> 个 <span class="arithmatex">\(-1\)</span>，<span class="arithmatex">\(i-1\)</span> 个 <span class="arithmatex">\(+1\)</span>，故起点和终点的差一定是 <span class="arithmatex">\(-1\)</span>，那么找到全序列第一个最小值，其余地方必定大于等于它，<code>rotate</code> 到它为起点就是一个合法的序列。</p>
+<p>容易发现，每一组能通过 <code>rotate</code> 得到的等价类都会出现恰好 <span class="arithmatex">\(i\)</span> 次，那么将之前提到的方案数除以 <span class="arithmatex">\(i\)</span> 即可。</p>
+<p>故对于一个固定的左链数量 <span class="arithmatex">\(i\)</span>，二叉树数量是：</p>
+<div class="arithmatex">\[\dbinom{n-1}{i-1}\dbinom{n}{i-1}\frac{1}{i}\times \dbinom{m}{i}i!\]</div>
+<p>那么总答案就是枚举 <span class="arithmatex">\(i\)</span> 加起来。预处理 <span class="arithmatex">\(n\)</span> 的下降幂可以做到 <span class="arithmatex">\(O(\min(n,m))\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5998,11 +6026,11 @@
 </details>
 <h2 id="t3">T3</h2>
 <p>首先容易想到一个费用流。</p>
-<p>具体来说，设左部点代表 $a$，右部点代表 $b$，一个流的意义是选了一对 $a_i,b_j$。容易想到源点向左部点连费用为 $a_i$ 的边，右部点向汇点连费用为 $b_i$ 的边，然后中间每个左部点 $i$ 向所有 $j\ge i$ 的右部点 $j$ 连免费边即可。为了限制流量，可以建一个虚点代替原本的源点，然后源点连向这个虚点的边容量为 $k$ 即可。由于是向区间连边可以用线段树优化，据说可以得 $44pts$。</p>
+<p>具体来说，设左部点代表 <span class="arithmatex">\(a\)</span>，右部点代表 <span class="arithmatex">\(b\)</span>，一个流的意义是选了一对 <span class="arithmatex">\(a_i,b_j\)</span>。容易想到源点向左部点连费用为 <span class="arithmatex">\(a_i\)</span> 的边，右部点向汇点连费用为 <span class="arithmatex">\(b_i\)</span> 的边，然后中间每个左部点 <span class="arithmatex">\(i\)</span> 向所有 <span class="arithmatex">\(j\ge i\)</span> 的右部点 <span class="arithmatex">\(j\)</span> 连免费边即可。为了限制流量，可以建一个虚点代替原本的源点，然后源点连向这个虚点的边容量为 <span class="arithmatex">\(k\)</span> 即可。由于是向区间连边可以用线段树优化，据说可以得 <span class="arithmatex">\(44pts\)</span>。</p>
 <p>容易发现，根据我们费用流的过程，每次选代价最小的一条路增广。那么显然图像是下凸的，因为每次“代价最小的边”（就是每次的斜率）是单调不减得，考虑 wqs 二分。</p>
-<p>思考一下转化后的问题长什么样，即从 $a,b$ 中各选相同个数个点，使得权值和最小。这是一个经典的反悔贪心，具体来说，每次考虑把当前的 $b$ 和前面最小的没用过的 $a$ 匹配，如果两者的和小于 $0$ 就产生贡献（如果不小于 $0$ 显然不优），否则跳过。由于可能后面会有一个 $b'$ 和 $a$ 搭配更好，就考虑再加一个“反悔”的操作。这个可以用优先队列维护，反悔就压入一个权值为 $-b$ 的点即可。</p>
-<p>复杂度 $O(n\log n\log V)$，其中 $V$ 是 $a_i,b_i$ 的最大值，注意二分斜率的上限。</p>
-<p>另外这道题还有 $O(n\log n)$ 模拟费用流做法，但是 wqs 二分显然更简单吧？</p>
+<p>思考一下转化后的问题长什么样，即从 <span class="arithmatex">\(a,b\)</span> 中各选相同个数个点，使得权值和最小。这是一个经典的反悔贪心，具体来说，每次考虑把当前的 <span class="arithmatex">\(b\)</span> 和前面最小的没用过的 <span class="arithmatex">\(a\)</span> 匹配，如果两者的和小于 <span class="arithmatex">\(0\)</span> 就产生贡献（如果不小于 <span class="arithmatex">\(0\)</span> 显然不优），否则跳过。由于可能后面会有一个 <span class="arithmatex">\(b'\)</span> 和 <span class="arithmatex">\(a\)</span> 搭配更好，就考虑再加一个“反悔”的操作。这个可以用优先队列维护，反悔就压入一个权值为 <span class="arithmatex">\(-b\)</span> 的点即可。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n\log V)\)</span>，其中 <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(a_i,b_i\)</span> 的最大值，注意二分斜率的上限。</p>
+<p>另外这道题还有 <span class="arithmatex">\(O(n\log n)\)</span> 模拟费用流做法，但是 wqs 二分显然更简单吧？</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

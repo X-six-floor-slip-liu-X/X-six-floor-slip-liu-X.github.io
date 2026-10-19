@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5909,8 +5937,8 @@
 <p>因为黑树说最好不要放出来我就把搬运删掉了。</p>
 <h2 id="t1">T1 题解</h2>
 <p><del>这道题我赛时部分分炸掉了，所以我不会部分分。</del></p>
-<p>首先我们发现 $f(n)$ 非常难处理，我们考虑对每个不同的 $f(n)$ 分别计算。</p>
-<p>容易发现，$f(n)=x$ 的 $n$ 中，任意一个数都可以表示为 $p\cdot 2^x+c\cdot x$，其中 $p$ 是一个奇数，所以 $f=x$ 的第 $m$ 个数即可表示为 $(2m-1)\cdot 2^x+c\cdot x$，化简一下就是 $m\cdot 2^{x+1}-2^x+c\cdot x$，容易发现这是个关于 $m$ 的一次函数（由于是离散的所以其实也是个等差数列）的形式，我们可以二分第 $k$ 大的 $a$，对于每个 $f$，求出有几个 $a$ 大于它。得到答案后用等差数列求和解决，复杂度 $O(\log^2V)$，其中 $V$ 为值域。</p>
+<p>首先我们发现 <span class="arithmatex">\(f(n)\)</span> 非常难处理，我们考虑对每个不同的 <span class="arithmatex">\(f(n)\)</span> 分别计算。</p>
+<p>容易发现，<span class="arithmatex">\(f(n)=x\)</span> 的 <span class="arithmatex">\(n\)</span> 中，任意一个数都可以表示为 <span class="arithmatex">\(p\cdot 2^x+c\cdot x\)</span>，其中 <span class="arithmatex">\(p\)</span> 是一个奇数，所以 <span class="arithmatex">\(f=x\)</span> 的第 <span class="arithmatex">\(m\)</span> 个数即可表示为 <span class="arithmatex">\((2m-1)\cdot 2^x+c\cdot x\)</span>，化简一下就是 <span class="arithmatex">\(m\cdot 2^{x+1}-2^x+c\cdot x\)</span>，容易发现这是个关于 <span class="arithmatex">\(m\)</span> 的一次函数（由于是离散的所以其实也是个等差数列）的形式，我们可以二分第 <span class="arithmatex">\(k\)</span> 大的 <span class="arithmatex">\(a\)</span>，对于每个 <span class="arithmatex">\(f\)</span>，求出有几个 <span class="arithmatex">\(a\)</span> 大于它。得到答案后用等差数列求和解决，复杂度 <span class="arithmatex">\(O(\log^2V)\)</span>，其中 <span class="arithmatex">\(V\)</span> 为值域。</p>
 <h3 id="code">code</h3>
 <details class="success">
 <summary>code</summary>
@@ -6002,30 +6030,30 @@
 </details>
 <h2 id="t2">T2 题解</h2>
 <p><del>因为我赛时就切出来了所以我不知道部分分怎么写。</del></p>
-<p>由于三种手势是等价的所以只讲 $R$ 的情况。</p>
+<p>由于三种手势是等价的所以只讲 <span class="arithmatex">\(R\)</span> 的情况。</p>
 <p>首先假设不处理问号，即每个人的手势都是已知的。</p>
-<p>容易想到，两个相邻的 $R$ 之间要么没有元素，要么有至少一个 $S$，否则就要用中间的一个 $P$ 打败其中一个 $R$ 然后用旁边的另一个区间中的 $S$ 打败这里面的 $P$。</p>
-<p>这是一个贪心的思路，通俗点讲，我们要尽量使删除的 $R$ 最少，所以我们要让 $?$ 变成 $R$ 或 $S$。</p>
-<p>考虑从前向后 dp，$dp_{i,0/1}$ 表示考虑前 $i$ 位，前面还有没有未处理的 $P$ 需要在后面处理，所能剩下的最多的 $R$。但是这个做法转移有点复杂，我讲完这个做法贴一下官方题解。</p>
+<p>容易想到，两个相邻的 <span class="arithmatex">\(R\)</span> 之间要么没有元素，要么有至少一个 <span class="arithmatex">\(S\)</span>，否则就要用中间的一个 <span class="arithmatex">\(P\)</span> 打败其中一个 <span class="arithmatex">\(R\)</span> 然后用旁边的另一个区间中的 <span class="arithmatex">\(S\)</span> 打败这里面的 <span class="arithmatex">\(P\)</span>。</p>
+<p>这是一个贪心的思路，通俗点讲，我们要尽量使删除的 <span class="arithmatex">\(R\)</span> 最少，所以我们要让 <span class="arithmatex">\(?\)</span> 变成 <span class="arithmatex">\(R\)</span> 或 <span class="arithmatex">\(S\)</span>。</p>
+<p>考虑从前向后 dp，<span class="arithmatex">\(dp_{i,0/1}\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 位，前面还有没有未处理的 <span class="arithmatex">\(P\)</span> 需要在后面处理，所能剩下的最多的 <span class="arithmatex">\(R\)</span>。但是这个做法转移有点复杂，我讲完这个做法贴一下官方题解。</p>
 <ul>
-<li>假如 $s_i=R$，$dp_{i,1}=dp_{i-1,1},dp_{i,0}=dp_{i-1,0}+1$。</li>
+<li>假如 <span class="arithmatex">\(s_i=R\)</span>，<span class="arithmatex">\(dp_{i,1}=dp_{i-1,1},dp_{i,0}=dp_{i-1,0}+1\)</span>。</li>
 </ul>
-<p>这很好理解，如果前面有未处理的 $P$，那么在被处理前他将会杀穿，所以中间的 $R$ 都不会造成贡献。</p>
+<p>这很好理解，如果前面有未处理的 <span class="arithmatex">\(P\)</span>，那么在被处理前他将会杀穿，所以中间的 <span class="arithmatex">\(R\)</span> 都不会造成贡献。</p>
 <ul>
-<li>假如 $s_i=P$，我们设 $ns$ 为 $1\le j &lt; i$ 中，$s_j=S$ 的最大的 $j$（这可以在扫到它的时候存下来），$nq$ 表示最大的 $s_j=?$，假如这两个均存在（如果不存在特判即可），转移方程如下：</li>
+<li>假如 <span class="arithmatex">\(s_i=P\)</span>，我们设 <span class="arithmatex">\(ns\)</span> 为 <span class="arithmatex">\(1\le j &lt; i\)</span> 中，<span class="arithmatex">\(s_j=S\)</span> 的最大的 <span class="arithmatex">\(j\)</span>（这可以在扫到它的时候存下来），<span class="arithmatex">\(nq\)</span> 表示最大的 <span class="arithmatex">\(s_j=?\)</span>，假如这两个均存在（如果不存在特判即可），转移方程如下：</li>
 </ul>
-<p>$$dp_{i,1}=\max{dp_{i-1,0},dp_{i-1,1}}$$
-$$dp_{i,0}=\max{dp_{ns,0},dp_{nq-1,0},dp_{nq-1,1}}$$</p>
-<p>首先，第二维为 $1$ 的很好理解，因为无论前面有没有 $P$ 到这里总归有一个，取较大的。为 $0$ 的比较复杂，为了不留后患，需要从前面找一个能处理它的，我刚才说过，这是个贪心的过程，显然我们找最靠后的 $?$ 或 $S$ 来处理会比较好，由于 $?$ 有可能在转移时提供了贡献，所以要从 $nq-1$ 转移。</p>
+<div class="arithmatex">\[dp_{i,1}=\max\{dp_{i-1,0},dp_{i-1,1}\}$$
+$$dp_{i,0}=\max\{dp_{ns,0},dp_{nq-1,0},dp_{nq-1,1}\}\]</div>
+<p>首先，第二维为 <span class="arithmatex">\(1\)</span> 的很好理解，因为无论前面有没有 <span class="arithmatex">\(P\)</span> 到这里总归有一个，取较大的。为 <span class="arithmatex">\(0\)</span> 的比较复杂，为了不留后患，需要从前面找一个能处理它的，我刚才说过，这是个贪心的过程，显然我们找最靠后的 <span class="arithmatex">\(?\)</span> 或 <span class="arithmatex">\(S\)</span> 来处理会比较好，由于 <span class="arithmatex">\(?\)</span> 有可能在转移时提供了贡献，所以要从 <span class="arithmatex">\(nq-1\)</span> 转移。</p>
 <ul>
-<li>假如 $s_i=S$，那 $dp_{i,0}=\max{dp_{i-1,0},dp_{i-1,1}},dp_{i,1}=-\infty$。</li>
+<li>假如 <span class="arithmatex">\(s_i=S\)</span>，那 <span class="arithmatex">\(dp_{i,0}=\max\{dp_{i-1,0},dp_{i-1,1}\},dp_{i,1}=-\infty\)</span>。</li>
 </ul>
-<p>显然，由于 $S$ 是有能力处理 $P$ 的，所以这里可以直接取最大值，但是由于前面的 $P$ 必定被处理了（由于要构造最优解），所以 $dp_{i,1}$ 就不存在了。</p>
+<p>显然，由于 <span class="arithmatex">\(S\)</span> 是有能力处理 <span class="arithmatex">\(P\)</span> 的，所以这里可以直接取最大值，但是由于前面的 <span class="arithmatex">\(P\)</span> 必定被处理了（由于要构造最优解），所以 <span class="arithmatex">\(dp_{i,1}\)</span> 就不存在了。</p>
 <ul>
-<li>假如 $s_i=?$，$dp_{i,0}=\max{dp_{i-1,0}+1,dp_{i-1,1}},dp_{i,1}=-\infty$。</li>
+<li>假如 <span class="arithmatex">\(s_i=?\)</span>，<span class="arithmatex">\(dp_{i,0}=\max\{dp_{i-1,0}+1,dp_{i-1,1}\},dp_{i,1}=-\infty\)</span>。</li>
 </ul>
-<p>大体思路和 $S$ 的一样就不多赘述，需要注意如果前面没有需要处理的 $P$，那么 $?$ 是可以做出贡献的，加个一。</p>
-<p>另外容易发现每次 $dp_{i}$ 都是从 $dp_{i-1}$ 或者 $ns,nq$ 转移过来的，所以我们可以把 $i$ 这一维压掉，卷空间和长度最优解。</p>
+<p>大体思路和 <span class="arithmatex">\(S\)</span> 的一样就不多赘述，需要注意如果前面没有需要处理的 <span class="arithmatex">\(P\)</span>，那么 <span class="arithmatex">\(?\)</span> 是可以做出贡献的，加个一。</p>
+<p>另外容易发现每次 <span class="arithmatex">\(dp_{i}\)</span> 都是从 <span class="arithmatex">\(dp_{i-1}\)</span> 或者 <span class="arithmatex">\(ns,nq\)</span> 转移过来的，所以我们可以把 <span class="arithmatex">\(i\)</span> 这一维压掉，卷空间和长度最优解。</p>
 <h3 id="code_1">code</h3>
 <details class="success">
 <summary>code</summary>
@@ -6069,13 +6097,13 @@ $$dp_{i,0}=\max{dp_{ns,0},dp_{nq-1,0},dp_{nq-1,1}}$$</p>
 <p>附件：<a href="https://cdn.luogu.com.cn/upload/image_hosting/w2ga96ie.png">官方题解</a>。</p>
 <h2 id="t3">T3 题解</h2>
 <p>首先不考虑删除操作，这道题应该怎么做。</p>
-<p>容易发现，每个数最后一次修改为 $0$ 之前的所有操作都不会有贡献，所以每个数对最大值的贡献就是它最后一次修改为 $0$ 后，所有操作 $2$ 的最大值。换言之，即为操作队列的后缀最大值。但是有些数从头到尾都没有被赋为 $0$ 过，为了解决这个问题，我们可以再开头加 $2n$ 个操作代替数组的初始化。</p>
+<p>容易发现，每个数最后一次修改为 <span class="arithmatex">\(0\)</span> 之前的所有操作都不会有贡献，所以每个数对最大值的贡献就是它最后一次修改为 <span class="arithmatex">\(0\)</span> 后，所有操作 <span class="arithmatex">\(2\)</span> 的最大值。换言之，即为操作队列的后缀最大值。但是有些数从头到尾都没有被赋为 <span class="arithmatex">\(0\)</span> 过，为了解决这个问题，我们可以再开头加 <span class="arithmatex">\(2n\)</span> 个操作代替数组的初始化。</p>
 <p>接下来考虑如何维护删除。发现维护删除非常麻烦，但是我们可以先加入所有没被删除过的操作，然后按删除的倒序加入操作，每加入一个统计答案，这就比较好处理。</p>
-<p>考虑只加操作一的情况，容易发现每次增加操作一其实就是把当前位置的贡献改为另一个位置的后缀最大值，这启发我们用某种方法维护后缀最大值来处理操作 $2$。</p>
-<p>容易想到在操作序列上维护一颗线段树，维护区间（操作 $2$ 的）<strong>后缀最大值</strong>最大值，区间<strong>操作一的数量</strong>（最后<strong>产生贡献的那个</strong>），区间<strong>操作一位置上的后缀最大值</strong>之和。（黑体是为了帮助断句）</p>
-<p>对于操作二，假如当前要增加的操作为 <code>2 v</code>，由于后缀最大值显然是单调不增的，所以我们只要在线段树上二分找到最后一个大于 $v$ 的位置，然后将这一整段的后缀最大值修改为 $v$ 即可注意维护其他变量，具体看代码。</p>
+<p>考虑只加操作一的情况，容易发现每次增加操作一其实就是把当前位置的贡献改为另一个位置的后缀最大值，这启发我们用某种方法维护后缀最大值来处理操作 <span class="arithmatex">\(2\)</span>。</p>
+<p>容易想到在操作序列上维护一颗线段树，维护区间（操作 <span class="arithmatex">\(2\)</span> 的）<strong>后缀最大值</strong>最大值，区间<strong>操作一的数量</strong>（最后<strong>产生贡献的那个</strong>），区间<strong>操作一位置上的后缀最大值</strong>之和。（黑体是为了帮助断句）</p>
+<p>对于操作二，假如当前要增加的操作为 <code>2 v</code>，由于后缀最大值显然是单调不增的，所以我们只要在线段树上二分找到最后一个大于 <span class="arithmatex">\(v\)</span> 的位置，然后将这一整段的后缀最大值修改为 <span class="arithmatex">\(v\)</span> 即可注意维护其他变量，具体看代码。</p>
 <p>操作一十分简单，假如比原来位置靠前就不动，靠后就先减去原来的再加上新的就行了。</p>
-<p>复杂度就是线段树模板的复杂度，完全能过，需要注意空间要开三倍（因为最开始要加 $2n$ 个操作）。</p>
+<p>复杂度就是线段树模板的复杂度，完全能过，需要注意空间要开三倍（因为最开始要加 <span class="arithmatex">\(2n\)</span> 个操作）。</p>
 <h3 id="code_2">code</h3>
 <details class="success">
 <summary>code</summary>

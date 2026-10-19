@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6094,28 +6122,28 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>在无限大的二维平面中有 $N$ 个黑点：$(x_1,y_1),(x_2,y_2),\dots,(x_N,y_N)$，剩余的点均为白点，你可以按以下规则进行无限次操作：
-    - 选择一个边长为 $D$ 的正方形，并将其四个角上的点进行旋转，具体来说选择了一个左下角 $(x,y)$ 的正方形，会按以下顺序旋转：$(x,y)\rightarrow(x+D,y)\rightarrow(x+D,y+D)\rightarrow(x,y+D)\rightarrow(x,y)$</li>
+<li>在无限大的二维平面中有 <span class="arithmatex">\(N\)</span> 个黑点：<span class="arithmatex">\((x_1,y_1),(x_2,y_2),\dots,(x_N,y_N)\)</span>，剩余的点均为白点，你可以按以下规则进行无限次操作：
+    - 选择一个边长为 <span class="arithmatex">\(D\)</span> 的正方形，并将其四个角上的点进行旋转，具体来说选择了一个左下角 <span class="arithmatex">\((x,y)\)</span> 的正方形，会按以下顺序旋转：<span class="arithmatex">\((x,y)\rightarrow(x+D,y)\rightarrow(x+D,y+D)\rightarrow(x,y+D)\rightarrow(x,y)\)</span></li>
 <li>你需要通过任意次操作使得平面上切比雪夫距离最远的两黑点的距离最小，并输出这一最小距离。</li>
-<li>$2\le N\le 10^5,1\le D\le 1000$</li>
+<li><span class="arithmatex">\(2\le N\le 10^5,1\le D\le 1000\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>妙妙题。</p>
 <p>乍一看一点思路都没有，考虑手模一下。</p>
-<p>容易发现，这个修改方式只限制了每个点 $(x,y)$ 只能移动到 $(x',y')$ 满足 $x'\equiv x\pmod D,y'\equiv y\pmod D$，在满足这个条件的情况下是可以随便动的。具体构造考虑先把点移到充分远的地方，然后一个一个挪过来。</p>
+<p>容易发现，这个修改方式只限制了每个点 <span class="arithmatex">\((x,y)\)</span> 只能移动到 <span class="arithmatex">\((x',y')\)</span> 满足 <span class="arithmatex">\(x'\equiv x\pmod D,y'\equiv y\pmod D\)</span>，在满足这个条件的情况下是可以随便动的。具体构造考虑先把点移到充分远的地方，然后一个一个挪过来。</p>
 <p>那么我们就只关心每个同余类有多少个黑点了。</p>
 <p>容易发现这是一个<strong>最小化最大值</strong>的问题，考虑二分答案。那么思考如何 check。</p>
 <p>首先切比雪夫距离最小可以认为是用一个正方形把所有点框住，考虑枚举正方形的左下角。</p>
-<p>容易发现，同一个同余类在正方形中的出现次数只有三种（设正方形边长为 $L$，那么分别是 $\left\lfloor\frac{(L+1)}{D}\right\rfloor^2,(\left\lfloor\frac{(L+1)}{D}\right\rfloor+1)^2,\left\lfloor\frac{(L+1)}{D}\right\rfloor\times (\left\lfloor\frac{(L+1)}{D}\right\rfloor+1)$），并且三种分别是四个连续的矩形。于是容易想到用前缀和维护矩形内满足条件的同余类个数。</p>
-<p>于是做完了，复杂度 $O(N+D^2\log V)$，其中 $V$ 是值域。这个已经能过了。</p>
+<p>容易发现，同一个同余类在正方形中的出现次数只有三种（设正方形边长为 <span class="arithmatex">\(L\)</span>，那么分别是 <span class="arithmatex">\(\left\lfloor\frac{(L+1)}{D}\right\rfloor^2,(\left\lfloor\frac{(L+1)}{D}\right\rfloor+1)^2,\left\lfloor\frac{(L+1)}{D}\right\rfloor\times (\left\lfloor\frac{(L+1)}{D}\right\rfloor+1)\)</span>），并且三种分别是四个连续的矩形。于是容易想到用前缀和维护矩形内满足条件的同余类个数。</p>
+<p>于是做完了，复杂度 <span class="arithmatex">\(O(N+D^2\log V)\)</span>，其中 <span class="arithmatex">\(V\)</span> 是值域。这个已经能过了。</p>
 <p>有没有更强力的做法？</p>
-<p>考虑 $(\left\lfloor\frac{(L+1)}{D}\right\rfloor+1)^2$ 必须大于等于出现最多的同余类出现次数，而 $\left\lfloor\frac{(L+1)}{D}\right\rfloor^2$ 必定能小于等于出现最多的同余类出现次数，那么不妨设正方形边长为 $aD+b$，其中 $0\le b&lt; D,a=\left\lceil\sqrt{mx}\right\rceil-1$，其中 $mx$ 是出现次数最多的同余类出现次数。</p>
-<p>然后容易发现那个前缀和就不会变了，只是每次找的四个矩形会变。于是可以考虑先把 $b$ 赋为 $D-1$，枚举左下角然后每次尝试缩小 $b$，复杂度就缩到了 $O(N+D^2)$（注意到 $b$ 只会缩 $D$ 次，小于 $O(D^2)$）。</p>
+<p>考虑 <span class="arithmatex">\((\left\lfloor\frac{(L+1)}{D}\right\rfloor+1)^2\)</span> 必须大于等于出现最多的同余类出现次数，而 <span class="arithmatex">\(\left\lfloor\frac{(L+1)}{D}\right\rfloor^2\)</span> 必定能小于等于出现最多的同余类出现次数，那么不妨设正方形边长为 <span class="arithmatex">\(aD+b\)</span>，其中 <span class="arithmatex">\(0\le b&lt; D,a=\left\lceil\sqrt{mx}\right\rceil-1\)</span>，其中 <span class="arithmatex">\(mx\)</span> 是出现次数最多的同余类出现次数。</p>
+<p>然后容易发现那个前缀和就不会变了，只是每次找的四个矩形会变。于是可以考虑先把 <span class="arithmatex">\(b\)</span> 赋为 <span class="arithmatex">\(D-1\)</span>，枚举左下角然后每次尝试缩小 <span class="arithmatex">\(b\)</span>，复杂度就缩到了 <span class="arithmatex">\(O(N+D^2)\)</span>（注意到 <span class="arithmatex">\(b\)</span> 只会缩 <span class="arithmatex">\(D\)</span> 次，小于 <span class="arithmatex">\(O(D^2)\)</span>）。</p>
 <details class="success">
 <summary>参考代码</summary>
-<p>$O(N+D^2\log V)$</p>
+<p><span class="arithmatex">\(O(N+D^2\log V)\)</span></p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#define mem(a,b) memset(a,b,sizeof(a))</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cp">#define forup(i,s,e) for(int i=(s);i&lt;=(e);i++)</span>
@@ -6191,7 +6219,7 @@
 </span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">ll</span><span class="p">);</span>
 </span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>$O(N+D^2)$</p>
+<p><span class="arithmatex">\(O(N+D^2)\)</span></p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="cp">#define mem(a,b) memset(a,b,sizeof(a))</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="cp">#define forup(i,s,e) for(int i=(s);i&lt;=(e);i++)</span>
@@ -6263,9 +6291,9 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>你有一个区间 $[0,X)$，还有 $n$ 个黑色纸条，第 $i$ 个纸条长度为 $l_i$。</li>
-<li>一张纸条可以覆盖一段 $[j,j+l_i)$ 的区间，纸条间可以重合。问有多少把所有纸条放完的方案能覆盖整个区间。</li>
-<li>$1\le n\le 100,1\le X\le 500$，对 $10^9+7$ 取模。</li>
+<li>你有一个区间 <span class="arithmatex">\([0,X)\)</span>，还有 <span class="arithmatex">\(n\)</span> 个黑色纸条，第 <span class="arithmatex">\(i\)</span> 个纸条长度为 <span class="arithmatex">\(l_i\)</span>。</li>
+<li>一张纸条可以覆盖一段 <span class="arithmatex">\([j,j+l_i)\)</span> 的区间，纸条间可以重合。问有多少把所有纸条放完的方案能覆盖整个区间。</li>
+<li><span class="arithmatex">\(1\le n\le 100,1\le X\le 500\)</span>，对 <span class="arithmatex">\(10^9+7\)</span> 取模。</li>
 </ul>
 <blockquote>
 <p>题解</p>
@@ -6274,15 +6302,15 @@
 <p>首先这种放若干个区间的可以考虑从长的开始放。这样就不会有后面的把前面的完全覆盖掉（恰好等长不算）的情况了。</p>
 <p>那么任意一个时刻，显然纸条都会连成若干个连续块。</p>
 <p>因为最后一定是连成一坨的，我们其实可以不关心每个纸条在序列上的具体位置，只用关心每个连续块内纸条的相对位置以及连续块的顺序。</p>
-<p>那么容易想到一个 DP，设 $f_{i,j,k}$ 表示考虑前 $i$ 个（从大到小排序）纸条，形成了 $j$ 个连续块，总长度为 $k$ 的方案数。</p>
+<p>那么容易想到一个 DP，设 <span class="arithmatex">\(f_{i,j,k}\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 个（从大到小排序）纸条，形成了 <span class="arithmatex">\(j\)</span> 个连续块，总长度为 <span class="arithmatex">\(k\)</span> 的方案数。</p>
 <p>然后分四种情况转移：</p>
 <ul>
-<li>完全放在之前一块内：每一块都有 $l_i-1$ 个位置不能放，于是 $f_{i,j,k}\gets f_{i-1,j,k}\times (k-j(l_i-1))$。</li>
-<li>与之前任何一块都不相交（挨着也算相交）：有 $j$ 个空格可以塞，于是 $f_{i,j,k}\gets f_{i-1,j-1,k-l_i}\times j$</li>
-<li>与之前某一块相交：先枚举将那个块延长了多少，每一块可以向左或向右延长，于是 $f_{i,j,k}\gets \sum_{t=1}^{l_i}f_{i-1,j,k-t}\times 2(j-1)$。</li>
-<li>将两块连在一起：还是枚举连起来两个块的距离，然后容易发现对于距离为 $t$，有 $l_i-t+1$ 种不同的放法，于是 $f_{i,j,k}\gets \sum_{t=1}^{l_i}f_{i-1,j+1,k-t}\times (j-1)(l_i-t+1)$。</li>
+<li>完全放在之前一块内：每一块都有 <span class="arithmatex">\(l_i-1\)</span> 个位置不能放，于是 <span class="arithmatex">\(f_{i,j,k}\gets f_{i-1,j,k}\times (k-j(l_i-1))\)</span>。</li>
+<li>与之前任何一块都不相交（挨着也算相交）：有 <span class="arithmatex">\(j\)</span> 个空格可以塞，于是 <span class="arithmatex">\(f_{i,j,k}\gets f_{i-1,j-1,k-l_i}\times j\)</span></li>
+<li>与之前某一块相交：先枚举将那个块延长了多少，每一块可以向左或向右延长，于是 <span class="arithmatex">\(f_{i,j,k}\gets \sum_{t=1}^{l_i}f_{i-1,j,k-t}\times 2(j-1)\)</span>。</li>
+<li>将两块连在一起：还是枚举连起来两个块的距离，然后容易发现对于距离为 <span class="arithmatex">\(t\)</span>，有 <span class="arithmatex">\(l_i-t+1\)</span> 种不同的放法，于是 <span class="arithmatex">\(f_{i,j,k}\gets \sum_{t=1}^{l_i}f_{i-1,j+1,k-t}\times (j-1)(l_i-t+1)\)</span>。</li>
 </ul>
-<p>然后容易发现对于 $l_i$，最多有 $\left\lfloor\frac{x}{l_i}\right\rfloor$ 段，原因是之前每一段长度都大于等于 $l_i$，DP 第一维有 $n$ 种，第二维有 $\left\lfloor\frac{x}{l_i}\right\rfloor$ 种，第三维有 $x$ 种，转移复杂度为 $l_i$，于是总复杂度 $O(nX^2)$。</p>
+<p>然后容易发现对于 <span class="arithmatex">\(l_i\)</span>，最多有 <span class="arithmatex">\(\left\lfloor\frac{x}{l_i}\right\rfloor\)</span> 段，原因是之前每一段长度都大于等于 <span class="arithmatex">\(l_i\)</span>，DP 第一维有 <span class="arithmatex">\(n\)</span> 种，第二维有 <span class="arithmatex">\(\left\lfloor\frac{x}{l_i}\right\rfloor\)</span> 种，第三维有 <span class="arithmatex">\(x\)</span> 种，转移复杂度为 <span class="arithmatex">\(l_i\)</span>，于是总复杂度 <span class="arithmatex">\(O(nX^2)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6336,22 +6364,22 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>有一个机器人，要执行 $n$ 条指令，每条指令形如向左/右拐弯后，前进若干步。</li>
-<li>现在给你每条指令的限制，每个限制形如 $(D,L,R)$，其中 $D$ 是一个字符表示拐弯的方向（'L' 表示左拐，'R' 表示右拐，'?' 表示没有限制），$[L,R]$ 为这一步长度的范围。</li>
-<li>初始在 $(0,0)$ 问能否在 $n$ 步后恰好走到 $(X,Y)$。</li>
-<li>$1\le n\le 50$，保证无论怎么走坐标都不会超过 $32$ 位整数范围，$|X|,|Y|\le 10^9$</li>
+<li>有一个机器人，要执行 <span class="arithmatex">\(n\)</span> 条指令，每条指令形如向左/右拐弯后，前进若干步。</li>
+<li>现在给你每条指令的限制，每个限制形如 <span class="arithmatex">\((D,L,R)\)</span>，其中 <span class="arithmatex">\(D\)</span> 是一个字符表示拐弯的方向（'L' 表示左拐，'R' 表示右拐，'?' 表示没有限制），<span class="arithmatex">\([L,R]\)</span> 为这一步长度的范围。</li>
+<li>初始在 <span class="arithmatex">\((0,0)\)</span> 问能否在 <span class="arithmatex">\(n\)</span> 步后恰好走到 <span class="arithmatex">\((X,Y)\)</span>。</li>
+<li><span class="arithmatex">\(1\le n\le 50\)</span>，保证无论怎么走坐标都不会超过 <span class="arithmatex">\(32\)</span> 位整数范围，<span class="arithmatex">\(|X|,|Y|\le 10^9\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>这种题也能做的？（小豆泥大小眼 .png）。</p>
-<p>观察数据范围，容易想到大概是 $O(n^5)$ 附近复杂度的暴力算法或者 $O(2^{\frac{n}{2}})$ meet-in-middle。</p>
-<p>$O(n^5)$ 不是容易想的，考虑 meet-in-middle。</p>
+<p>观察数据范围，容易想到大概是 <span class="arithmatex">\(O(n^5)\)</span> 附近复杂度的暴力算法或者 <span class="arithmatex">\(O(2^{\frac{n}{2}})\)</span> meet-in-middle。</p>
+<p><span class="arithmatex">\(O(n^5)\)</span> 不是容易想的，考虑 meet-in-middle。</p>
 <p>容易发现，在确定每个操作的方向后，终点横坐标只和下标为偶数的操作有关，纵坐标只和下标为奇数的操作有关。考虑能不能把这两部分分开考虑。因为确定下标的奇偶就能确定横纵方向，所以下文讨论方向只讨论正负。</p>
-<p>在确定每个操作的方向后，容易得到终点的横坐标是一段区间，纵坐标也是一段区间。两边分别找这段区间里面有没有 $(X,Y)$ 即可。考虑如何确定每个 <code>?</code> 的方向。</p>
-<p>容易发现，若一个 <code>?</code> 后面也是 <code>?</code>，那么无论它把方向变成正的还是负的并不影响下一步方向的正负。但是若一个 <code>?</code> 后面是一个字母，这个 <code>?</code> 就会影响后面连续一块字符的正负了。容易想到把这两种分开。第一种 <code>?</code> 里面奇偶下标是完全独立的，奇下标只会影响纵坐标，偶下标只会影响横坐标。第二种相当于一个 <code>?</code> 既影响了横坐标，又影响了纵坐标。设第二种问号有 $a$ 个，第一种里面的奇下标有 $b$ 个，偶下标有 $c$ 个。</p>
-<p>那么先 $2^a$ 枚举第二种 <code>?</code>，显然有 $a\le \frac{n}{2}$，然后再分别 $2^b,2^c$ 枚举终点横纵坐标区间（可以先预处理每一个 bitmask 能得到的最大值和最小值，因为剩下的横纵坐标是互不干扰的所以可以分开枚举），如果包含 $(X,Y)$ 就输出答案。复杂度 $O(2^a(2^b+2^c))$。</p>
-<p>因为 $\max(b,c)\le n-2a$，于是这个复杂度是 $O(2^{\frac{n}{2}})$ 的。注意预处理复杂度不要写假了。</p>
+<p>在确定每个操作的方向后，容易得到终点的横坐标是一段区间，纵坐标也是一段区间。两边分别找这段区间里面有没有 <span class="arithmatex">\((X,Y)\)</span> 即可。考虑如何确定每个 <code>?</code> 的方向。</p>
+<p>容易发现，若一个 <code>?</code> 后面也是 <code>?</code>，那么无论它把方向变成正的还是负的并不影响下一步方向的正负。但是若一个 <code>?</code> 后面是一个字母，这个 <code>?</code> 就会影响后面连续一块字符的正负了。容易想到把这两种分开。第一种 <code>?</code> 里面奇偶下标是完全独立的，奇下标只会影响纵坐标，偶下标只会影响横坐标。第二种相当于一个 <code>?</code> 既影响了横坐标，又影响了纵坐标。设第二种问号有 <span class="arithmatex">\(a\)</span> 个，第一种里面的奇下标有 <span class="arithmatex">\(b\)</span> 个，偶下标有 <span class="arithmatex">\(c\)</span> 个。</p>
+<p>那么先 <span class="arithmatex">\(2^a\)</span> 枚举第二种 <code>?</code>，显然有 <span class="arithmatex">\(a\le \frac{n}{2}\)</span>，然后再分别 <span class="arithmatex">\(2^b,2^c\)</span> 枚举终点横纵坐标区间（可以先预处理每一个 bitmask 能得到的最大值和最小值，因为剩下的横纵坐标是互不干扰的所以可以分开枚举），如果包含 <span class="arithmatex">\((X,Y)\)</span> 就输出答案。复杂度 <span class="arithmatex">\(O(2^a(2^b+2^c))\)</span>。</p>
+<p>因为 <span class="arithmatex">\(\max(b,c)\le n-2a\)</span>，于是这个复杂度是 <span class="arithmatex">\(O(2^{\frac{n}{2}})\)</span> 的。注意预处理复杂度不要写假了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6599,25 +6627,25 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>用一个长度为 $n$ 的正整数序列 $D$ 代表一个 $n$ 面骰，即其中每个数等概率投出。</li>
-<li>现在有一种游戏，双方各投一次骰子，若数字不同则更大者获得 $1$ 分，否则两边各获得 $0.5$ 分。</li>
-<li>令 $S(D_1,D_2)$ 表示用 $D_1$ 和 $D_2$ 比赛时，$D_1$ 的期望得分。若 $S(D_1,D_2)\ge 0.5$ 则称 $D_1$ 对 $D_2$ 有优势。</li>
-<li>现在给你两个骰子 $A,B$，面数分别为 $n,m$，你需要先找出其中有优势的那个（保证 $S(A,B)\ne 0.5$）。钦定 $A$ 表示其中有优势的那个。找到满足 $S(D_3,A)\ge 0.5$ 的 $D_3$ 中 $S(D_3,B)$ 的最小值。以及满足 $S(D_4,A)\le 0.5$ 的 $D_4$ 中 $S(D_4,B)$ 最大的。</li>
-<li>$1\le n,m\le 10^5$，所有数据在 $32$ 位整数内。</li>
+<li>用一个长度为 <span class="arithmatex">\(n\)</span> 的正整数序列 <span class="arithmatex">\(D\)</span> 代表一个 <span class="arithmatex">\(n\)</span> 面骰，即其中每个数等概率投出。</li>
+<li>现在有一种游戏，双方各投一次骰子，若数字不同则更大者获得 <span class="arithmatex">\(1\)</span> 分，否则两边各获得 <span class="arithmatex">\(0.5\)</span> 分。</li>
+<li>令 <span class="arithmatex">\(S(D_1,D_2)\)</span> 表示用 <span class="arithmatex">\(D_1\)</span> 和 <span class="arithmatex">\(D_2\)</span> 比赛时，<span class="arithmatex">\(D_1\)</span> 的期望得分。若 <span class="arithmatex">\(S(D_1,D_2)\ge 0.5\)</span> 则称 <span class="arithmatex">\(D_1\)</span> 对 <span class="arithmatex">\(D_2\)</span> 有优势。</li>
+<li>现在给你两个骰子 <span class="arithmatex">\(A,B\)</span>，面数分别为 <span class="arithmatex">\(n,m\)</span>，你需要先找出其中有优势的那个（保证 <span class="arithmatex">\(S(A,B)\ne 0.5\)</span>）。钦定 <span class="arithmatex">\(A\)</span> 表示其中有优势的那个。找到满足 <span class="arithmatex">\(S(D_3,A)\ge 0.5\)</span> 的 <span class="arithmatex">\(D_3\)</span> 中 <span class="arithmatex">\(S(D_3,B)\)</span> 的最小值。以及满足 <span class="arithmatex">\(S(D_4,A)\le 0.5\)</span> 的 <span class="arithmatex">\(D_4\)</span> 中 <span class="arithmatex">\(S(D_4,B)\)</span> 最大的。</li>
+<li><span class="arithmatex">\(1\le n,m\le 10^5\)</span>，所有数据在 <span class="arithmatex">\(32\)</span> 位整数内。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>神秘趣味题。</p>
 <p>首先比较两个骰子是简单的，就不多赘述了。</p>
-<p>考虑平局要算分，赢了要算分，输了不算分是不符合直觉的。为了更符合直觉不妨进行一些转化：把分数减去 $0.5$ 再乘二。就变成了赢了记 $1$ 分输了扣一分平局不算分。最后输出答案的时候变换一下就行了。</p>
-<p>只考虑第一问（第二问同理），容易想到二分答案。那么考虑如何判断答案能否小于等于 $mid$。</p>
-<p>首先显然的，可以对骰面进行离散化（注意可能选到原有的数 $\pm 1$），那么考虑每个数的贡献。</p>
-<p>考虑 $x$ 对 $S(D_3,A)$ 的贡献。容易发现就是 $A$ 中严格小于 $x$ 的数量减去严格大于 $x$ 的数量。设这个数为 $a_x$。同理有 $b_x$。</p>
-<p>设 $D_3$ 有 $p$ 面。容易发现 $S(D_3,A)=\frac{\sum a_x}{p\cdot n}\ge 0$，$S(D_3,B)=\frac{\sum b_x}{p\cdot m}\le mid$，考虑 $01$ 分数规划套路，易得 $\sum b_x-mid\cdot m\le 0$，且 $\sum a_x\ge 0$。</p>
-<p>首先若存在 $a_x\ge 0,b_x-mid\cdot m\le 0$，那么直接选它就可以了。</p>
-<p>但对于其它情况要 DP 吗？并不需要，因为你可以选无限个，所以考虑选两个最优的把它们拼起来即可。容易想到选 $a_x&gt;0,b_x-m\cdot mid&gt;0$ 的里面 $\frac{b_x-m\cdot mid}{a_x}$ 最小的以及负的里面最大的。由于 $a$ 是整数直接取到两个 $a$ 的 $\mathrm{lcm}$ 显然不劣。</p>
-<p>然后就做完了，复杂度 $O(n\log V)$（假设 $n,m$ 同阶），其中 $V=eps^{-1}$。</p>
+<p>考虑平局要算分，赢了要算分，输了不算分是不符合直觉的。为了更符合直觉不妨进行一些转化：把分数减去 <span class="arithmatex">\(0.5\)</span> 再乘二。就变成了赢了记 <span class="arithmatex">\(1\)</span> 分输了扣一分平局不算分。最后输出答案的时候变换一下就行了。</p>
+<p>只考虑第一问（第二问同理），容易想到二分答案。那么考虑如何判断答案能否小于等于 <span class="arithmatex">\(mid\)</span>。</p>
+<p>首先显然的，可以对骰面进行离散化（注意可能选到原有的数 <span class="arithmatex">\(\pm 1\)</span>），那么考虑每个数的贡献。</p>
+<p>考虑 <span class="arithmatex">\(x\)</span> 对 <span class="arithmatex">\(S(D_3,A)\)</span> 的贡献。容易发现就是 <span class="arithmatex">\(A\)</span> 中严格小于 <span class="arithmatex">\(x\)</span> 的数量减去严格大于 <span class="arithmatex">\(x\)</span> 的数量。设这个数为 <span class="arithmatex">\(a_x\)</span>。同理有 <span class="arithmatex">\(b_x\)</span>。</p>
+<p>设 <span class="arithmatex">\(D_3\)</span> 有 <span class="arithmatex">\(p\)</span> 面。容易发现 <span class="arithmatex">\(S(D_3,A)=\frac{\sum a_x}{p\cdot n}\ge 0\)</span>，<span class="arithmatex">\(S(D_3,B)=\frac{\sum b_x}{p\cdot m}\le mid\)</span>，考虑 <span class="arithmatex">\(01\)</span> 分数规划套路，易得 <span class="arithmatex">\(\sum b_x-mid\cdot m\le 0\)</span>，且 <span class="arithmatex">\(\sum a_x\ge 0\)</span>。</p>
+<p>首先若存在 <span class="arithmatex">\(a_x\ge 0,b_x-mid\cdot m\le 0\)</span>，那么直接选它就可以了。</p>
+<p>但对于其它情况要 DP 吗？并不需要，因为你可以选无限个，所以考虑选两个最优的把它们拼起来即可。容易想到选 <span class="arithmatex">\(a_x&gt;0,b_x-m\cdot mid&gt;0\)</span> 的里面 <span class="arithmatex">\(\frac{b_x-m\cdot mid}{a_x}\)</span> 最小的以及负的里面最大的。由于 <span class="arithmatex">\(a\)</span> 是整数直接取到两个 <span class="arithmatex">\(a\)</span> 的 <span class="arithmatex">\(\mathrm{lcm}\)</span> 显然不劣。</p>
+<p>然后就做完了，复杂度 <span class="arithmatex">\(O(n\log V)\)</span>（假设 <span class="arithmatex">\(n,m\)</span> 同阶），其中 <span class="arithmatex">\(V=eps^{-1}\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6760,20 +6788,20 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>你有一个长度为 $n+2$ 的序列 $a$，其中 $a_1=a_{n+1}=0$，其余元素均给定。</li>
+<li>你有一个长度为 <span class="arithmatex">\(n+2\)</span> 的序列 <span class="arithmatex">\(a\)</span>，其中 <span class="arithmatex">\(a_1=a_{n+1}=0\)</span>，其余元素均给定。</li>
 <li>你可以按任何顺序进行以下操作任意次：
     1. 找到序列中的第一个最大值，把它变成它之前的前缀最大值。
     2. 找到序列中的最后一个最大值，把它变成它之后的后缀最大值。</li>
-<li>问把 $a$ 变成全 $0$ 序列最少需要操作多少次。</li>
+<li>问把 <span class="arithmatex">\(a\)</span> 变成全 <span class="arithmatex">\(0\)</span> 序列最少需要操作多少次。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>水黑。</p>
-<p>考虑计算每个点需要操作多少次，容易想到一个贪心：每一次对 $a_i$ 的操作都尽可能把 $a_i$ 变得更小。显然正确，因为将同一个位置的一个更小的数变成 $0$ 需要的次数显然不多于一个更大的数。</p>
-<p>考虑怎么做，一个简单做法是从大到小扫值域，然后用线段树维护前缀/后缀最大值再操作，也是能对的。复杂度 $O(n\log n)$。</p>
+<p>考虑计算每个点需要操作多少次，容易想到一个贪心：每一次对 <span class="arithmatex">\(a_i\)</span> 的操作都尽可能把 <span class="arithmatex">\(a_i\)</span> 变得更小。显然正确，因为将同一个位置的一个更小的数变成 <span class="arithmatex">\(0\)</span> 需要的次数显然不多于一个更大的数。</p>
+<p>考虑怎么做，一个简单做法是从大到小扫值域，然后用线段树维护前缀/后缀最大值再操作，也是能对的。复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <p>但是有一个更好写的做法。</p>
-<p>仍然考虑从大到小扫，显然刚碰到某个数 $x$ 的时候是不知道它要取操作 $1$ 还是 $2$，那么把它标记为<strong>待定</strong>。容易发现，当扫第一次到一个更小的数 $y$ 时，若它最左边的点为 $L$，最右边为 $R$，$R$ 右边的的全取操作 $2$（右边的比 $y$ 还小），$L$ 左边的全取操作 $1$（同理），中间的取操作 $1,2$ 都会变成 $y$，那么它们又变成待定的了。容易发现任意时刻被标记为操作 $1$，操作 $2$ 的待定的必然是三段连续的区间。考虑维护中间待定的区间，用树状数组维护每次把多少个数变成 $y$ 了即可（分两种情况，待定区间和 $[L,R]$ 有/无交）。注意变成 $y$ 的数全都会变成待定的，实现时需注意。</p>
+<p>仍然考虑从大到小扫，显然刚碰到某个数 <span class="arithmatex">\(x\)</span> 的时候是不知道它要取操作 <span class="arithmatex">\(1\)</span> 还是 <span class="arithmatex">\(2\)</span>，那么把它标记为<strong>待定</strong>。容易发现，当扫第一次到一个更小的数 <span class="arithmatex">\(y\)</span> 时，若它最左边的点为 <span class="arithmatex">\(L\)</span>，最右边为 <span class="arithmatex">\(R\)</span>，<span class="arithmatex">\(R\)</span> 右边的的全取操作 <span class="arithmatex">\(2\)</span>（右边的比 <span class="arithmatex">\(y\)</span> 还小），<span class="arithmatex">\(L\)</span> 左边的全取操作 <span class="arithmatex">\(1\)</span>（同理），中间的取操作 <span class="arithmatex">\(1,2\)</span> 都会变成 <span class="arithmatex">\(y\)</span>，那么它们又变成待定的了。容易发现任意时刻被标记为操作 <span class="arithmatex">\(1\)</span>，操作 <span class="arithmatex">\(2\)</span> 的待定的必然是三段连续的区间。考虑维护中间待定的区间，用树状数组维护每次把多少个数变成 <span class="arithmatex">\(y\)</span> 了即可（分两种情况，待定区间和 <span class="arithmatex">\([L,R]\)</span> 有/无交）。注意变成 <span class="arithmatex">\(y\)</span> 的数全都会变成待定的，实现时需注意。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6838,18 +6866,18 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>有一张 $n$ 个点 $m$ 条边的无向连通图，其中每个点的序号就是它的权值。</li>
-<li>有 $q$ 个询问，每个询问问你从 $E$ 出发只走权值小于等于 $R$ 的点和从 $S$ 出发只走权值大于等于 $L$ 的点（保证 $E\le R,L\le S,L\le R$）所得到的两点集是否有交。</li>
-<li>$1\le n\le 2\times 10^5,n-1\le m\le 4\times 10^5$，注意数据下标从 $0$ 开始（我代码里全部 $+1$ 了）。</li>
+<li>有一张 <span class="arithmatex">\(n\)</span> 个点 <span class="arithmatex">\(m\)</span> 条边的无向连通图，其中每个点的序号就是它的权值。</li>
+<li>有 <span class="arithmatex">\(q\)</span> 个询问，每个询问问你从 <span class="arithmatex">\(E\)</span> 出发只走权值小于等于 <span class="arithmatex">\(R\)</span> 的点和从 <span class="arithmatex">\(S\)</span> 出发只走权值大于等于 <span class="arithmatex">\(L\)</span> 的点（保证 <span class="arithmatex">\(E\le R,L\le S,L\le R\)</span>）所得到的两点集是否有交。</li>
+<li><span class="arithmatex">\(1\le n\le 2\times 10^5,n-1\le m\le 4\times 10^5\)</span>，注意数据下标从 <span class="arithmatex">\(0\)</span> 开始（我代码里全部 <span class="arithmatex">\(+1\)</span> 了）。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>唐，写了 90min，其中想了 1h，其中有 50min 在思考怎么写码量最小（简而言之就是目光呆滞，玩维玩的）。</p>
-<p>首先容易发现能试做每个时间加入一个点，然后看从小到大加入的 $R$ 时刻 $E$ 所在连通块与从大到小加入 $L$ 时刻 $S$ 所在连通块是否有交。</p>
-<p>容易想到广义 Kruskal 重构树（从小到大得到 $T_1$，从大到小得到 $T_2$），对 $T_2$ 求 dfs 序，每次询问就是先倍增跳到最高的能到的位置，然后查 $T_1$ 的对应子树有没有 $T_2$ 的一个 dfn 区间中的任意点。</p>
+<p>首先容易发现能试做每个时间加入一个点，然后看从小到大加入的 <span class="arithmatex">\(R\)</span> 时刻 <span class="arithmatex">\(E\)</span> 所在连通块与从大到小加入 <span class="arithmatex">\(L\)</span> 时刻 <span class="arithmatex">\(S\)</span> 所在连通块是否有交。</p>
+<p>容易想到广义 Kruskal 重构树（从小到大得到 <span class="arithmatex">\(T_1\)</span>，从大到小得到 <span class="arithmatex">\(T_2\)</span>），对 <span class="arithmatex">\(T_2\)</span> 求 dfs 序，每次询问就是先倍增跳到最高的能到的位置，然后查 <span class="arithmatex">\(T_1\)</span> 的对应子树有没有 <span class="arithmatex">\(T_2\)</span> 的一个 dfn 区间中的任意点。</p>
 <p>然后方法就多了，在线可以主席树或者线段树的可持久化合并，离线可以 DSU on tree 或者启发式合并或者线段树合并或者扫描线。我写的线段树合并。</p>
-<p>复杂度 $O(n\log n)$（容易发现线段树合并总复杂度 $O(n\log n)$，然后每次查询是倍增跳 $+$ 线段树区间查，为 $O(\log n)$）。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>（容易发现线段树合并总复杂度 <span class="arithmatex">\(O(n\log n)\)</span>，然后每次查询是倍增跳 <span class="arithmatex">\(+\)</span> 线段树区间查，为 <span class="arithmatex">\(O(\log n)\)</span>）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7003,23 +7031,23 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>有一张坐标轴，上面有 $n$ 红点与 $n$ 个蓝点，其中红点横坐标均严格小于 $0$，蓝点横坐标均严格大于 $0$。每个点有点权 $w_i$</li>
-<li>有 $m$ 个询问，每个询问形如 $L,R$，求一个点对 $i,j$ 其中 $i$ 是红点，$j$ 是蓝点，满足：
-    - $y_i<y_j$
-    - $(x_i > L\land x_j &lt; R)\lor(x_i &lt; L\land x_j &gt; R)$</li>
-<li>求 $w_i+w_j$ 的最大值。</li>
-<li>$1\le n\le 10^5,1\le q \le 5\times 10^5$，其余数据在 $[-10^9,10^9]$ 之内，保证所有横坐标与 $L,R$ 两两不同，所有纵坐标两两不同</li>
+<li>有一张坐标轴，上面有 <span class="arithmatex">\(n\)</span> 红点与 <span class="arithmatex">\(n\)</span> 个蓝点，其中红点横坐标均严格小于 <span class="arithmatex">\(0\)</span>，蓝点横坐标均严格大于 <span class="arithmatex">\(0\)</span>。每个点有点权 <span class="arithmatex">\(w_i\)</span></li>
+<li>有 <span class="arithmatex">\(m\)</span> 个询问，每个询问形如 <span class="arithmatex">\(L,R\)</span>，求一个点对 <span class="arithmatex">\(i,j\)</span> 其中 <span class="arithmatex">\(i\)</span> 是红点，<span class="arithmatex">\(j\)</span> 是蓝点，满足：
+    - <span class="arithmatex">\(y_i&lt;y_j\)</span>
+    - <span class="arithmatex">\((x_i &gt; L\land x_j &lt; R)\lor(x_i &lt; L\land x_j &gt; R)\)</span></li>
+<li>求 <span class="arithmatex">\(w_i+w_j\)</span> 的最大值。</li>
+<li><span class="arithmatex">\(1\le n\le 10^5,1\le q \le 5\times 10^5\)</span>，其余数据在 <span class="arithmatex">\([-10^9,10^9]\)</span> 之内，保证所有横坐标与 <span class="arithmatex">\(L,R\)</span> 两两不同，所有纵坐标两两不同</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>显然可以先离散化。</p>
-<p>首先有两个限制就很不好搞，考虑消去一个。可以将 $y_i&lt;y_j$ 这个限制对纵坐标分治消去。</p>
-<p>那么每层就是把左边的红点和右边的蓝点取出来配至多 $n^2$ 对，这样第二个限制就能简单二维数点做了。</p>
+<p>首先有两个限制就很不好搞，考虑消去一个。可以将 <span class="arithmatex">\(y_i&lt;y_j\)</span> 这个限制对纵坐标分治消去。</p>
+<p>那么每层就是把左边的红点和右边的蓝点取出来配至多 <span class="arithmatex">\(n^2\)</span> 对，这样第二个限制就能简单二维数点做了。</p>
 <p>容易发现分治的每一层中每一对可能成为答案的要么左边是对应的最大值，要么右边是对应的最大值。</p>
-<p>首先对于一个询问，钦定答案在这一层分治中产生。那么根据 $L$ 把左边的红点分成两个集合 $L_1,L_2$，表示横坐标小于 $L$ 的点集和大于 $L$ 的。同理有 $R_1,R_2$。</p>
-<p>容易发现答案要么是 $L_1,R_2$ 中各选一个，要么是 $L_2,R_1$ 中各选一个。假如都在 $1$（或者都在 $2$）里面显然两种都能取到其中一边的最大值。假如一个在 $1$ 里一个在 $2$ 里那么取两个最大值的显然比另一个优。</p>
-<p>因此我们就只需要保留 $O(n\log n)$ 个点对了。加上二维数点复杂度 $O(n\log^2 n)$。</p>
+<p>首先对于一个询问，钦定答案在这一层分治中产生。那么根据 <span class="arithmatex">\(L\)</span> 把左边的红点分成两个集合 <span class="arithmatex">\(L_1,L_2\)</span>，表示横坐标小于 <span class="arithmatex">\(L\)</span> 的点集和大于 <span class="arithmatex">\(L\)</span> 的。同理有 <span class="arithmatex">\(R_1,R_2\)</span>。</p>
+<p>容易发现答案要么是 <span class="arithmatex">\(L_1,R_2\)</span> 中各选一个，要么是 <span class="arithmatex">\(L_2,R_1\)</span> 中各选一个。假如都在 <span class="arithmatex">\(1\)</span>（或者都在 <span class="arithmatex">\(2\)</span>）里面显然两种都能取到其中一边的最大值。假如一个在 <span class="arithmatex">\(1\)</span> 里一个在 <span class="arithmatex">\(2\)</span> 里那么取两个最大值的显然比另一个优。</p>
+<p>因此我们就只需要保留 <span class="arithmatex">\(O(n\log n)\)</span> 个点对了。加上二维数点复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7133,37 +7161,37 @@
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定两个环状数组 $x_i,y_i$，和两个整数 $X,Y$，以及一个限制 $k$。</li>
-<li>求出最小的 $m$，满足存在两数组 $x_i',y_i'$（这个就不是环状的了），使得 $\forall i\in[0,m),|x_i'|+|y_i'|\le k$，且 $\sum_{i=0}^{m-1} x_i+x_i'=X,\sum_{i=0}^{m-1} y_i+y_i'=Y$，无解输出 $-1$。</li>
-<li>有多测，$\sum n\le 10^6$，其余数据均小于等于 $10^8$。</li>
+<li>给定两个环状数组 <span class="arithmatex">\(x_i,y_i\)</span>，和两个整数 <span class="arithmatex">\(X,Y\)</span>，以及一个限制 <span class="arithmatex">\(k\)</span>。</li>
+<li>求出最小的 <span class="arithmatex">\(m\)</span>，满足存在两数组 <span class="arithmatex">\(x_i',y_i'\)</span>（这个就不是环状的了），使得 <span class="arithmatex">\(\forall i\in[0,m),|x_i'|+|y_i'|\le k\)</span>，且 <span class="arithmatex">\(\sum_{i=0}^{m-1} x_i+x_i'=X,\sum_{i=0}^{m-1} y_i+y_i'=Y\)</span>，无解输出 <span class="arithmatex">\(-1\)</span>。</li>
+<li>有多测，<span class="arithmatex">\(\sum n\le 10^6\)</span>，其余数据均小于等于 <span class="arithmatex">\(10^8\)</span>。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>傻逼 C++ 整数除法向 $0$ 取整。</p>
+<p>傻逼 C++ 整数除法向 <span class="arithmatex">\(0\)</span> 取整。</p>
 <p>首先容易发现这个限制等价于：</p>
-<p>$$
+<div class="arithmatex">\[
 |X-\sum_{i=0}^{m-1}x_i|+|Y-\sum_{i=0}^{m-1}y_i|\le mk
-$$</p>
-<p>考虑拆绝对值。看到有个 $\le$ 符号那么考虑拆成 $\max$ 的形式，于是：</p>
-<p>$$
+\]</div>
+<p>考虑拆绝对值。看到有个 <span class="arithmatex">\(\le\)</span> 符号那么考虑拆成 <span class="arithmatex">\(\max\)</span> 的形式，于是：</p>
+<div class="arithmatex">\[
 \max(X-\sum_{i=0}^{m-1}x_i,-X+\sum_{i=0}^{m-1}x_i)+\max(Y-\sum_{i=0}^{m-1}y_i,-Y+\sum_{i=0}^{m-1}y_i)\le mk
-$$</p>
-<p>也就是说四种搭配方式的最大值小于等于 $mk$。那么显然四个都要小于等于 $mk$。</p>
+\]</div>
+<p>也就是说四种搭配方式的最大值小于等于 <span class="arithmatex">\(mk\)</span>。那么显然四个都要小于等于 <span class="arithmatex">\(mk\)</span>。</p>
 <p>化一下式子，可以得到：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 \sum_{i=0}^{m-1}(-x_i-y_i-k)&amp;\le -X-Y\\
 \sum_{i=0}^{m-1}(x_i-y_i-k)&amp;\le X-Y\\
 \sum_{i=0}^{m-1}(-x_i+y_i-k)&amp;\le -X+Y\\
 \sum_{i=0}^{m-1}(x_i+y_i-k)&amp;\le X+Y\\
 \end{aligned}
-$$</p>
+\]</div>
 <p>这样四个不等关系。</p>
-<p>下面讨论最后一种 $\sum_{i=0}^{m-1}(x_i+y_i-k)\le X+Y$，设 $s_j=\sum_{i=0}^{j}(x_i+y_i-k)$（这里钦定 $j&lt;n$）。</p>
-<p>容易想到 $\sum_{i=0}^{m-1}$ 相当于在环状数组上绕了完整的若干圈再走了最后一圈的一部分。那么不妨枚举最后一圈走了多少，这样答案就是一个 $s_i+t\times s_{n-1}$ 的形式。带入上面的不等式易得到 $t$ 的上界（或者下界，当 $s_n&lt;0$ 时）。四个合起来就能得到 $t$ 的取值区间。那么假如区间非空就能得到 $t$ 的最小值。对每个 $i$ 求出这个最小值再汇总即可。</p>
-<p>注意 C++ 整数除法向 $0$ 取整，考虑用浮点除法算出来再用 <code>floor/ceil</code> 做上下取整。</p>
-<p>复杂度 $O(n)$。</p>
+<p>下面讨论最后一种 <span class="arithmatex">\(\sum_{i=0}^{m-1}(x_i+y_i-k)\le X+Y\)</span>，设 <span class="arithmatex">\(s_j=\sum_{i=0}^{j}(x_i+y_i-k)\)</span>（这里钦定 <span class="arithmatex">\(j&lt;n\)</span>）。</p>
+<p>容易想到 <span class="arithmatex">\(\sum_{i=0}^{m-1}\)</span> 相当于在环状数组上绕了完整的若干圈再走了最后一圈的一部分。那么不妨枚举最后一圈走了多少，这样答案就是一个 <span class="arithmatex">\(s_i+t\times s_{n-1}\)</span> 的形式。带入上面的不等式易得到 <span class="arithmatex">\(t\)</span> 的上界（或者下界，当 <span class="arithmatex">\(s_n&lt;0\)</span> 时）。四个合起来就能得到 <span class="arithmatex">\(t\)</span> 的取值区间。那么假如区间非空就能得到 <span class="arithmatex">\(t\)</span> 的最小值。对每个 <span class="arithmatex">\(i\)</span> 求出这个最小值再汇总即可。</p>
+<p>注意 C++ 整数除法向 <span class="arithmatex">\(0\)</span> 取整，考虑用浮点除法算出来再用 <code>floor/ceil</code> 做上下取整。</p>
+<p>复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7253,14 +7281,14 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>有一个长度为 $n$ 的区间，初始为颜色 $0$。有 $m$ 个染色操作，每次操作的区间随机给出（这个相当于随机吧），第 $i$ 次将一个区间染成颜色 $i$。</li>
+<li>有一个长度为 <span class="arithmatex">\(n\)</span> 的区间，初始为颜色 <span class="arithmatex">\(0\)</span>。有 <span class="arithmatex">\(m\)</span> 个染色操作，每次操作的区间随机给出（这个相当于随机吧），第 <span class="arithmatex">\(i\)</span> 次将一个区间染成颜色 <span class="arithmatex">\(i\)</span>。</li>
 <li>问最终的序列颜色。</li>
-<li>$1\le n\le 10^6,1\le m\le 10^7$</li>
+<li><span class="arithmatex">\(1\le n\le 10^6,1\le m\le 10^7\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>套路地，考虑将操作序列倒过来，这样每个点就只会被染一遍了。那么可以考虑用并查集维护连续的被染过的区间，每次就能 $O(\alpha(n))$ 地跳到下一个没染过地位置。于是做完了，复杂度 $O(m\alpha(n))$（其中 $\alpha$ 是反阿克曼函数，就是并查集的复杂度）。</p>
+<p>套路地，考虑将操作序列倒过来，这样每个点就只会被染一遍了。那么可以考虑用并查集维护连续的被染过的区间，每次就能 <span class="arithmatex">\(O(\alpha(n))\)</span> 地跳到下一个没染过地位置。于是做完了，复杂度 <span class="arithmatex">\(O(m\alpha(n))\)</span>（其中 <span class="arithmatex">\(\alpha\)</span> 是反阿克曼函数，就是并查集的复杂度）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7327,24 +7355,24 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>你有一个初始全为 $0$ 的序列 $a_i$，长度为 $n$。有两个操作共 $m$ 次：
-    - 给 $[l,r)$ 区间内所有点加 $v$。
-    - 查询在 $[l,r]$ 内等概率随机选两个点 $u,v$（你可以认为 $u&lt;v$），计算从 $u$ 到 $v$ 费用的期望，以最简分数形式输出。</li>
-<li>其中，从 $i$ 走到 $i+1$ 的费用为 $a_i$，从 $u$ 到 $v$ 的费用即中间每一步的费用之和。</li>
-<li>$1\le n,m\le 10^5$，其余数据在合理范围内，任意时刻有 $0\le a_i\le 10^4$。</li>
+<li>你有一个初始全为 <span class="arithmatex">\(0\)</span> 的序列 <span class="arithmatex">\(a_i\)</span>，长度为 <span class="arithmatex">\(n\)</span>。有两个操作共 <span class="arithmatex">\(m\)</span> 次：
+    - 给 <span class="arithmatex">\([l,r)\)</span> 区间内所有点加 <span class="arithmatex">\(v\)</span>。
+    - 查询在 <span class="arithmatex">\([l,r]\)</span> 内等概率随机选两个点 <span class="arithmatex">\(u,v\)</span>（你可以认为 <span class="arithmatex">\(u&lt;v\)</span>），计算从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 费用的期望，以最简分数形式输出。</li>
+<li>其中，从 <span class="arithmatex">\(i\)</span> 走到 <span class="arithmatex">\(i+1\)</span> 的费用为 <span class="arithmatex">\(a_i\)</span>，从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的费用即中间每一步的费用之和。</li>
+<li><span class="arithmatex">\(1\le n,m\le 10^5\)</span>，其余数据在合理范围内，任意时刻有 <span class="arithmatex">\(0\le a_i\le 10^4\)</span>。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>首先期望可以用总费用除以方案数算出，这个就简单 $\gcd$ 即可。</p>
-<p>考虑如何计算总费用，即总共的 $\binom{r-l+1}{2}$ 种方案的费用和。</p>
-<p>考虑拆分贡献，即计算每个 $a_i$ 会贡献多少次。容易发现对于一个 $i\in[l,r]$，它会在 $(i-l+1)\times (r-i)$ 个区间中产生贡献。</p>
+<p>首先期望可以用总费用除以方案数算出，这个就简单 <span class="arithmatex">\(\gcd\)</span> 即可。</p>
+<p>考虑如何计算总费用，即总共的 <span class="arithmatex">\(\binom{r-l+1}{2}\)</span> 种方案的费用和。</p>
+<p>考虑拆分贡献，即计算每个 <span class="arithmatex">\(a_i\)</span> 会贡献多少次。容易发现对于一个 <span class="arithmatex">\(i\in[l,r]\)</span>，它会在 <span class="arithmatex">\((i-l+1)\times (r-i)\)</span> 个区间中产生贡献。</p>
 <p>那么这个东西怎么维护呢？考虑线段树。</p>
 <p>首先假设两个子结点都做完了，考虑应该怎么合并。</p>
-<p>容易发现答案就是两子结点的答案加上横跨两区间的路径的贡献。对于所有左儿子区间内的点，容易发现新路径的终点数量是相同的（即右区间的长度），那么考虑维护每个点的点权乘以它左边（$\le i$）的起点数的总和，同理对于右区间应维护它右边（$ &gt; i$）的终点数的总和（注意一个是小于等于一个是严格大于）。</p>
+<p>容易发现答案就是两子结点的答案加上横跨两区间的路径的贡献。对于所有左儿子区间内的点，容易发现新路径的终点数量是相同的（即右区间的长度），那么考虑维护每个点的点权乘以它左边（<span class="arithmatex">\(\le i\)</span>）的起点数的总和，同理对于右区间应维护它右边（<span class="arithmatex">\( &gt; i\)</span>）的终点数的总和（注意一个是小于等于一个是严格大于）。</p>
 <p>然后在合并时还要维护这两个东西。只说点权乘以左侧点数的（另一个同理）。容易发现对于左区间是没有变化的。右区间除去原有贡献以外，每个点的“左边的点”数量都增加了左区间长度，那么加上左区间长度乘以总和即可。</p>
 <p>这样就处理完每个区间的贡献了，考虑怎么维护跨区间的贡献（妈的写蠢了，其实可以直接把上面这个东西封装一下直接用，但是无所谓了）。</p>
-<p>对于一个线段树结点（被查询区间严格包含，即会完全产生贡献），内部的点除去原有贡献以外，还有区间外路径的贡献。容易发现确定 $L,R$ 后，起点终点都不在区间内的路径会使区间内每个点都产生一次贡献，而其中有一个在区间内的贡献做法和刚才类似，于是做完了，复杂度 $O(n\log n)$。</p>
+<p>对于一个线段树结点（被查询区间严格包含，即会完全产生贡献），内部的点除去原有贡献以外，还有区间外路径的贡献。容易发现确定 <span class="arithmatex">\(L,R\)</span> 后，起点终点都不在区间内的路径会使区间内每个点都产生一次贡献，而其中有一个在区间内的贡献做法和刚才类似，于是做完了，复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <p>/// ddetails | 参考代码
     open: False
     type: success</p>
@@ -7447,20 +7475,20 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>有一个长度为 $n$ 的序列，有 $m$ 个操作，操作有两种区间加斐波拉契数列（从 $1$ 开始），区间求和。</li>
-<li>$1\le n,m\le 3\times 10^5$，对 $10^9+9$ 取模。</li>
+<li>有一个长度为 <span class="arithmatex">\(n\)</span> 的序列，有 <span class="arithmatex">\(m\)</span> 个操作，操作有两种区间加斐波拉契数列（从 <span class="arithmatex">\(1\)</span> 开始），区间求和。</li>
+<li><span class="arithmatex">\(1\le n,m\le 3\times 10^5\)</span>，对 <span class="arithmatex">\(10^9+9\)</span> 取模。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>斐波拉契数列的通项公式为：</p>
-<p>$$
+<div class="arithmatex">\[
 f_n=\frac{1}{\sqrt{5}}\left(\left(\frac{1+\sqrt{5}}{2}\right)^n-\left(\frac{1-\sqrt{5}}{2}\right)^n\right)
-$$</p>
+\]</div>
 <p>那么就转化成两个区间加等比数列（并且公比分别固定）了。</p>
-<p>注意到要求 $5$ 的二次剩余，这个可以直接暴力枚举打表，很快就能跑出来，其中一个是 $383008016$。</p>
+<p>注意到要求 <span class="arithmatex">\(5\)</span> 的二次剩余，这个可以直接暴力枚举打表，很快就能跑出来，其中一个是 <span class="arithmatex">\(383008016\)</span>。</p>
 <p>容易发现对于一个完整区间，我们只需要维护它的首项就能得到整个区间的和，所以懒标记只需记录首项就能正常下传了。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7582,16 +7610,16 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一个长度为 $n$ 的排列，求其中是否有长度大于等于三的子序列是等差数列。</li>
-<li>$1\le n\le 5\times 10^5$</li>
+<li>给定一个长度为 <span class="arithmatex">\(n\)</span> 的排列，求其中是否有长度大于等于三的子序列是等差数列。</li>
+<li><span class="arithmatex">\(1\le n\le 5\times 10^5\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>首先这个条件等价于找有没有长度恰好等于三的子序列是等差数列。</p>
-<p>容易想到找中间项 $a_i$，看存不存在一个 $k$，使得 $a_i+k,a_i-k$ 分别在 $i$ 的两边。</p>
-<p>发现“存在一对分别在 $i$ 的两边”是不好维护的。正难则反，考虑反过来能不能维护，即维护“全都在 $i$ 的同一边”。</p>
-<p>我们可以从小到大遍历序列（注意遍历序列而非数轴），容易发现<strong>不存在</strong>这样的 $k$ 当且仅当从 $a_i$ 处对折所有被遍历过的点都能对上另一个遍历过的点（或者超出数轴）。考虑哈希维护，做区间哈希可以线段树。复杂度 $O(n\log n)$。</p>
+<p>容易想到找中间项 <span class="arithmatex">\(a_i\)</span>，看存不存在一个 <span class="arithmatex">\(k\)</span>，使得 <span class="arithmatex">\(a_i+k,a_i-k\)</span> 分别在 <span class="arithmatex">\(i\)</span> 的两边。</p>
+<p>发现“存在一对分别在 <span class="arithmatex">\(i\)</span> 的两边”是不好维护的。正难则反，考虑反过来能不能维护，即维护“全都在 <span class="arithmatex">\(i\)</span> 的同一边”。</p>
+<p>我们可以从小到大遍历序列（注意遍历序列而非数轴），容易发现<strong>不存在</strong>这样的 <span class="arithmatex">\(k\)</span> 当且仅当从 <span class="arithmatex">\(a_i\)</span> 处对折所有被遍历过的点都能对上另一个遍历过的点（或者超出数轴）。考虑哈希维护，做区间哈希可以线段树。复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7706,18 +7734,18 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一个长度为 $n$ 的序列 $a_i$，有 $m$ 次查询，每次查询有四个参数 $b,x,l,r$，表示你需要输出 $\max_{i=l}^r\begin{Bmatrix}b\oplus(a_i+x)\end{Bmatrix}$，其中 $\oplus$ 表示按位异或。</li>
-<li>$1\le n \le 2\times 10^5,1\le a_i,b,x\le10^5,1\le l\le r\le n,1\le m\le 10^5$</li>
+<li>给定一个长度为 <span class="arithmatex">\(n\)</span> 的序列 <span class="arithmatex">\(a_i\)</span>，有 <span class="arithmatex">\(m\)</span> 次查询，每次查询有四个参数 <span class="arithmatex">\(b,x,l,r\)</span>，表示你需要输出 <span class="arithmatex">\(\max_{i=l}^r\begin{Bmatrix}b\oplus(a_i+x)\end{Bmatrix}\)</span>，其中 <span class="arithmatex">\(\oplus\)</span> 表示按位异或。</li>
+<li><span class="arithmatex">\(1\le n \le 2\times 10^5,1\le a_i,b,x\le10^5,1\le l\le r\le n,1\le m\le 10^5\)</span></li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>比较套路，不要想复杂了。</p>
-<p>首先这种最大化异或和的题根据套路，从大到小看每一位能不能为 $1$。</p>
-<p>如果没有 $+x$ 的影响。相当于每次查询值域上一个长度为 $2^w$ 的区间 $[l,r]$ 内有没有值（就是这一位尽量和 $b$ 不同）。</p>
-<p>有了 $+x$ 的影响就转化为查询区间 $[l-x,r-x]$ 了。</p>
+<p>首先这种最大化异或和的题根据套路，从大到小看每一位能不能为 <span class="arithmatex">\(1\)</span>。</p>
+<p>如果没有 <span class="arithmatex">\(+x\)</span> 的影响。相当于每次查询值域上一个长度为 <span class="arithmatex">\(2^w\)</span> 的区间 <span class="arithmatex">\([l,r]\)</span> 内有没有值（就是这一位尽量和 <span class="arithmatex">\(b\)</span> 不同）。</p>
+<p>有了 <span class="arithmatex">\(+x\)</span> 的影响就转化为查询区间 <span class="arithmatex">\([l-x,r-x]\)</span> 了。</p>
 <p>对于查询序列上一段区间内有没有某个值，可以用主席树实现。</p>
-<p>于是做完了，复杂度 $O(n\log^2 n)$。</p>
+<p>于是做完了，复杂度 <span class="arithmatex">\(O(n\log^2 n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7809,18 +7837,18 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>你是一个蔬菜商，有 $n$ 种蔬菜，第 $i$ 种蔬菜初始有 $c_i$ 个，单价 $a_i$，假如你卖出至少一个就会额外获得 $s_i$ 的收益。每天有 $x_i$ 个蔬菜会腐烂（你可以先把会烂的卖了，剩下的这一天就不会烂了），烂了就不能卖了。你一天最多卖 $m$ 个蔬菜。</li>
-<li>$k$ 次询问，问你前 $p$ 天最多能赚多少钱。</li>
-<li>$1\le n,k\le 10^5,1\le m\le 10,1\le p\le 10^5$，其余数据在 $32$ 位整数范围内。</li>
+<li>你是一个蔬菜商，有 <span class="arithmatex">\(n\)</span> 种蔬菜，第 <span class="arithmatex">\(i\)</span> 种蔬菜初始有 <span class="arithmatex">\(c_i\)</span> 个，单价 <span class="arithmatex">\(a_i\)</span>，假如你卖出至少一个就会额外获得 <span class="arithmatex">\(s_i\)</span> 的收益。每天有 <span class="arithmatex">\(x_i\)</span> 个蔬菜会腐烂（你可以先把会烂的卖了，剩下的这一天就不会烂了），烂了就不能卖了。你一天最多卖 <span class="arithmatex">\(m\)</span> 个蔬菜。</li>
+<li><span class="arithmatex">\(k\)</span> 次询问，问你前 <span class="arithmatex">\(p\)</span> 天最多能赚多少钱。</li>
+<li><span class="arithmatex">\(1\le n,k\le 10^5,1\le m\le 10,1\le p\le 10^5\)</span>，其余数据在 <span class="arithmatex">\(32\)</span> 位整数范围内。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>首先每天菜会腐烂是不好做的。不妨倒过来变成每天会“长出”菜。这样菜就不会腐烂了。那显然每一天都卖最贵的 $m$ 个是不劣的，因为假如你今天没卖后面任意时刻都能卖。</p>
-<p>这样就能 $O(p\log n)$ 地做一个询问了。具体来说对于每种菜先存维护它在什么时候长出第一个（如果 $x_i=0$ 就认为是在最终时刻长出来的），然后用一个堆维护最贵的菜，每次取出最贵的 $m$ 个计入答案。计算完一天后如果还有剩（就是 $c_i$ 个没用完）就压回去。这样就能很简单地维护出每个菜卖了几个了。</p>
+<p>首先每天菜会腐烂是不好做的。不妨倒过来变成每天会“长出”菜。这样菜就不会腐烂了。那显然每一天都卖最贵的 <span class="arithmatex">\(m\)</span> 个是不劣的，因为假如你今天没卖后面任意时刻都能卖。</p>
+<p>这样就能 <span class="arithmatex">\(O(p\log n)\)</span> 地做一个询问了。具体来说对于每种菜先存维护它在什么时候长出第一个（如果 <span class="arithmatex">\(x_i=0\)</span> 就认为是在最终时刻长出来的），然后用一个堆维护最贵的菜，每次取出最贵的 <span class="arithmatex">\(m\)</span> 个计入答案。计算完一天后如果还有剩（就是 <span class="arithmatex">\(c_i\)</span> 个没用完）就压回去。这样就能很简单地维护出每个菜卖了几个了。</p>
 <p>但是多组询问。怎么办呢？</p>
-<p>容易想到 $p+1$ 的答案和 $p$ 的答案有很大的相关性。容易发现 $p$ 时刻的蔬菜集合严格包含 $p+1$ 的蔬菜集合。也就是说 $p+1$ 决策集合中的所有菜都能存在于 $p$ 的决策集合中。那么显然直接用 $p+1$ 的决策集合删除最便宜的 $m$ 个菜是不劣的（有一些边界情况，实现时注意）。</p>
-<p>复杂度 $O(n\log n)$（毕竟那几个数同阶懒得细分了）。</p>
+<p>容易想到 <span class="arithmatex">\(p+1\)</span> 的答案和 <span class="arithmatex">\(p\)</span> 的答案有很大的相关性。容易发现 <span class="arithmatex">\(p\)</span> 时刻的蔬菜集合严格包含 <span class="arithmatex">\(p+1\)</span> 的蔬菜集合。也就是说 <span class="arithmatex">\(p+1\)</span> 决策集合中的所有菜都能存在于 <span class="arithmatex">\(p\)</span> 的决策集合中。那么显然直接用 <span class="arithmatex">\(p+1\)</span> 的决策集合删除最便宜的 <span class="arithmatex">\(m\)</span> 个菜是不劣的（有一些边界情况，实现时注意）。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>（毕竟那几个数同阶懒得细分了）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -7929,18 +7957,18 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定一棵 $n$ 个点的树，其上有 $k$ 个关键点，每个关键点有颜色（即原题意中 $a_i$ 的下标 $i$）。</li>
-<li>现给定与每个点相距最近的关键点的颜色 $f_u$（若有多个距离相同，则取其中最小的 $i$），问有多少种不同的关键点方案（称两个方案不同当且仅当某个点在两方案中涂色情况不同）。</li>
-<li>$1\le k\le n\le 3000$，有多测。</li>
+<li>给定一棵 <span class="arithmatex">\(n\)</span> 个点的树，其上有 <span class="arithmatex">\(k\)</span> 个关键点，每个关键点有颜色（即原题意中 <span class="arithmatex">\(a_i\)</span> 的下标 <span class="arithmatex">\(i\)</span>）。</li>
+<li>现给定与每个点相距最近的关键点的颜色 <span class="arithmatex">\(f_u\)</span>（若有多个距离相同，则取其中最小的 <span class="arithmatex">\(i\)</span>），问有多少种不同的关键点方案（称两个方案不同当且仅当某个点在两方案中涂色情况不同）。</li>
+<li><span class="arithmatex">\(1\le k\le n\le 3000\)</span>，有多测。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
-<p>首先容易发现关键点的 $f_u$ 肯定是它自己的颜色，并且同一个颜色的所有点必定是一个连通块（考虑假设某颜色分成了两个连通块，其中一个连通块肯定离另一种颜色更近），这就能判掉一些不好搞的无解情况了。</p>
-<p>然后考虑刻画两颜色连通块的边界。容易发现对应颜色的关键点离边界的距离必定相等（或者相差 $1$，但这个属于细节问题）。</p>
+<p>首先容易发现关键点的 <span class="arithmatex">\(f_u\)</span> 肯定是它自己的颜色，并且同一个颜色的所有点必定是一个连通块（考虑假设某颜色分成了两个连通块，其中一个连通块肯定离另一种颜色更近），这就能判掉一些不好搞的无解情况了。</p>
+<p>然后考虑刻画两颜色连通块的边界。容易发现对应颜色的关键点离边界的距离必定相等（或者相差 <span class="arithmatex">\(1\)</span>，但这个属于细节问题）。</p>
 <p>也就是说，我们假设确定了某个连通块内的关键点，我们就能得到其周围所有关键点的合法点集。</p>
-<p>那么考虑一个 DP，设 $dp_i$ 表示 $i$ 所在连通块的关键点为 $i$ 的方案数。这玩意显然不能做，因为所有状态都是对全图定义的。考虑能不能把它变成一个类似于树形 DP，每个状态只概括一部分点。</p>
-<p>容易想到，由于每种颜色都是一个连通块，而连通块之间也是一个树形结构！所以可以把 $dp_i$ 的定义改成“考虑 $i$ 所在连通块及其在连通块树上的子树，$i$ 所在连通块关键点为 $i$ 的方案数”，这样就能很简单地 $O(n^2)$ 做了。</p>
+<p>那么考虑一个 DP，设 <span class="arithmatex">\(dp_i\)</span> 表示 <span class="arithmatex">\(i\)</span> 所在连通块的关键点为 <span class="arithmatex">\(i\)</span> 的方案数。这玩意显然不能做，因为所有状态都是对全图定义的。考虑能不能把它变成一个类似于树形 DP，每个状态只概括一部分点。</p>
+<p>容易想到，由于每种颜色都是一个连通块，而连通块之间也是一个树形结构！所以可以把 <span class="arithmatex">\(dp_i\)</span> 的定义改成“考虑 <span class="arithmatex">\(i\)</span> 所在连通块及其在连通块树上的子树，<span class="arithmatex">\(i\)</span> 所在连通块关键点为 <span class="arithmatex">\(i\)</span> 的方案数”，这样就能很简单地 <span class="arithmatex">\(O(n^2)\)</span> 做了。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -8072,17 +8100,17 @@ $$</p>
 <p>题意</p>
 </blockquote>
 <ul>
-<li>给定 $n$ 个数 $s_i$，有 $m$ 次询问。第 $i$ 次询问给定 $c_i$ 个质数 $p_{i,j}$，问有多少种选择 $s_i$ 的方法，使得你选出来的数乘积是那几个质数的公倍数。</li>
-<li>$1\le s_i,p_{i,j}\le 2000,1\le c_i,\sum c_i\le 18000,1\le n\le 10^6,1\le m\le 1500$，$p_{i,j}$ 均为质数。</li>
+<li>给定 <span class="arithmatex">\(n\)</span> 个数 <span class="arithmatex">\(s_i\)</span>，有 <span class="arithmatex">\(m\)</span> 次询问。第 <span class="arithmatex">\(i\)</span> 次询问给定 <span class="arithmatex">\(c_i\)</span> 个质数 <span class="arithmatex">\(p_{i,j}\)</span>，问有多少种选择 <span class="arithmatex">\(s_i\)</span> 的方法，使得你选出来的数乘积是那几个质数的公倍数。</li>
+<li><span class="arithmatex">\(1\le s_i,p_{i,j}\le 2000,1\le c_i,\sum c_i\le 18000,1\le n\le 10^6,1\le m\le 1500\)</span>，<span class="arithmatex">\(p_{i,j}\)</span> 均为质数。</li>
 </ul>
 <blockquote>
 <p>题解</p>
 </blockquote>
 <p>充分利用质数的性质。</p>
-<p>首先这道题就相当于让你的在每个质数的倍数中至少选一个数。那么容易想到 $2^{c_i}$ 容斥，具体式子略。</p>
-<p>但是 $2000$ 以内有 $303$ 个质数，显然要爆啊。考虑一些更神秘的性质。根据经典性质，一个 $2000$ 以内的数至多只有一个大于 $\sqrt{2000}$ 的质因子。打表可以发现小于等于 $\sqrt{2000}$ 的质数只有 $14$ 个（但是注意到 $43\times 47=2021&gt;2000$，所以其实也可以把 $43$ 归为大于 $\sqrt{2000}$ 的那一类，就只有 $13$ 个了）。这个是支持指数复杂度的。</p>
-<p>那么把全集按大于等于 $43$ 的质因子划分为若干个不交的集合 $B_i$。对询问中小于 $43$ 的质数暴力容斥，那么可以维护每个 $B_i$ 中不含某 $msk$（小于 $43$ 的质数的某集合）的数有多少个。如果询问中有 $B_i$ 那么这些中至少要选一个，方案就是 $2^k-1$，否则就是 $2^k$。为了防止复杂度爆炸，可以遍历询问中有的 $B_i$ 把 $2^K-1$ 乘进去，再数出有多少个可选可不选的数，一次性乘 $2^k$ 即可。具体细节见代码。</p>
-<p>复杂度 $O(2^{13}(m+\sum c))$。</p>
+<p>首先这道题就相当于让你的在每个质数的倍数中至少选一个数。那么容易想到 <span class="arithmatex">\(2^{c_i}\)</span> 容斥，具体式子略。</p>
+<p>但是 <span class="arithmatex">\(2000\)</span> 以内有 <span class="arithmatex">\(303\)</span> 个质数，显然要爆啊。考虑一些更神秘的性质。根据经典性质，一个 <span class="arithmatex">\(2000\)</span> 以内的数至多只有一个大于 <span class="arithmatex">\(\sqrt{2000}\)</span> 的质因子。打表可以发现小于等于 <span class="arithmatex">\(\sqrt{2000}\)</span> 的质数只有 <span class="arithmatex">\(14\)</span> 个（但是注意到 <span class="arithmatex">\(43\times 47=2021&gt;2000\)</span>，所以其实也可以把 <span class="arithmatex">\(43\)</span> 归为大于 <span class="arithmatex">\(\sqrt{2000}\)</span> 的那一类，就只有 <span class="arithmatex">\(13\)</span> 个了）。这个是支持指数复杂度的。</p>
+<p>那么把全集按大于等于 <span class="arithmatex">\(43\)</span> 的质因子划分为若干个不交的集合 <span class="arithmatex">\(B_i\)</span>。对询问中小于 <span class="arithmatex">\(43\)</span> 的质数暴力容斥，那么可以维护每个 <span class="arithmatex">\(B_i\)</span> 中不含某 <span class="arithmatex">\(msk\)</span>（小于 <span class="arithmatex">\(43\)</span> 的质数的某集合）的数有多少个。如果询问中有 <span class="arithmatex">\(B_i\)</span> 那么这些中至少要选一个，方案就是 <span class="arithmatex">\(2^k-1\)</span>，否则就是 <span class="arithmatex">\(2^k\)</span>。为了防止复杂度爆炸，可以遍历询问中有的 <span class="arithmatex">\(B_i\)</span> 把 <span class="arithmatex">\(2^K-1\)</span> 乘进去，再数出有多少个可选可不选的数，一次性乘 <span class="arithmatex">\(2^k\)</span> 即可。具体细节见代码。</p>
+<p>复杂度 <span class="arithmatex">\(O(2^{13}(m+\sum c))\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

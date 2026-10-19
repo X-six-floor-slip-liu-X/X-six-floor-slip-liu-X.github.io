@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5851,11 +5879,11 @@
 <p>这道题 T1 赛后大家想出一个神逼错误做法，贼好笑，我要分享给全世界。</p>
 <p><a href="../../files/20231024.rar">密码是通用密码</a></p>
 <h2 id="t1">T1</h2>
-<p>首先，这道题做法比较符合直觉。为方便叙述，设当前小王手上有 $x$ 块钱。</p>
-<p>考虑若 $2x&lt;B$，那么为了赢你至少要先达到 $2x$，如果你把 $x$ 分成 $t$ 份那么（在这一步）赢的概率就是 $p^t$，显然最优决策是分成一份全投进去。</p>
-<p>但是若 $2x\ge B$，类似的，最优决策也是一份投进去，那么显然投完是不好的，只需要投 $B-x$ 即可。</p>
-<p>那么假如你把每个 $x$ 和可能的下一个 $x$ 连有向边，那么除去连向 $0$ 和 $B$ 的边之外（因为这两个状态的值是已知的，可以直接计算出来），出度全为 $1$，也就是说它是一个内向基环森林的形式。考虑对于一个环如何算答案，容易发现如果你沿着一个环走完整的一圈，那么你会得到一个 $x=kx+b$ 的形式，直接解方程即可（就省去了高斯消元）。</p>
-<p>复杂度 $O(B\log B)$（因为要算逆元，说不定可以去掉，另外这个上界比较松，说不定有更紧的上界）。</p>
+<p>首先，这道题做法比较符合直觉。为方便叙述，设当前小王手上有 <span class="arithmatex">\(x\)</span> 块钱。</p>
+<p>考虑若 <span class="arithmatex">\(2x&lt;B\)</span>，那么为了赢你至少要先达到 <span class="arithmatex">\(2x\)</span>，如果你把 <span class="arithmatex">\(x\)</span> 分成 <span class="arithmatex">\(t\)</span> 份那么（在这一步）赢的概率就是 <span class="arithmatex">\(p^t\)</span>，显然最优决策是分成一份全投进去。</p>
+<p>但是若 <span class="arithmatex">\(2x\ge B\)</span>，类似的，最优决策也是一份投进去，那么显然投完是不好的，只需要投 <span class="arithmatex">\(B-x\)</span> 即可。</p>
+<p>那么假如你把每个 <span class="arithmatex">\(x\)</span> 和可能的下一个 <span class="arithmatex">\(x\)</span> 连有向边，那么除去连向 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(B\)</span> 的边之外（因为这两个状态的值是已知的，可以直接计算出来），出度全为 <span class="arithmatex">\(1\)</span>，也就是说它是一个内向基环森林的形式。考虑对于一个环如何算答案，容易发现如果你沿着一个环走完整的一圈，那么你会得到一个 <span class="arithmatex">\(x=kx+b\)</span> 的形式，直接解方程即可（就省去了高斯消元）。</p>
+<p>复杂度 <span class="arithmatex">\(O(B\log B)\)</span>（因为要算逆元，说不定可以去掉，另外这个上界比较松，说不定有更紧的上界）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5930,17 +5958,17 @@
 </details>
 <p>另外我们的神逼做法是这样的：</p>
 <p>假如你每次只拿一半的钱，你就永远不会输。</p>
-<p>那么最终状态显然只有赢和输两种，只要你一直不输，你就一定会赢。所以答案是 $1$。</p>
+<p>那么最终状态显然只有赢和输两种，只要你一直不输，你就一定会赢。所以答案是 <span class="arithmatex">\(1\)</span>。</p>
 <p><del>当然这是错的。</del></p>
 <h2 id="t2">T2</h2>
 <p>我赛时唯一做出来的题。</p>
-<p>首先考虑这个保证 $p_x=y$ 或 $p_y=x$ 的条件。容易发现它等价于在置换环上 $x,y$ 之间必须连一条有向边。那么这时候就能判无解了，即有某个点度数大于 $2$，因为置换环上每个点出度入度都必须为 $1$（算上自环）。</p>
-<p>那么现在的问题就是你有一些游离的入度和出度需要匹配，然后每条链和环有两个方向，那直接一个阶乘乘上 $2$ 的多少次方就搞定了。</p>
+<p>首先考虑这个保证 <span class="arithmatex">\(p_x=y\)</span> 或 <span class="arithmatex">\(p_y=x\)</span> 的条件。容易发现它等价于在置换环上 <span class="arithmatex">\(x,y\)</span> 之间必须连一条有向边。那么这时候就能判无解了，即有某个点度数大于 <span class="arithmatex">\(2\)</span>，因为置换环上每个点出度入度都必须为 <span class="arithmatex">\(1\)</span>（算上自环）。</p>
+<p>那么现在的问题就是你有一些游离的入度和出度需要匹配，然后每条链和环有两个方向，那直接一个阶乘乘上 <span class="arithmatex">\(2\)</span> 的多少次方就搞定了。</p>
 <p>但是有个问题，就是形如这样的东西：</p>
 <p><img alt="图示 1" src="../../img/20231024B_ABCD_1.png" /></p>
 <p>容易发现右边两种情况本质是相同的，但是会被算两次，怎么办呢？</p>
 <p>其实这就是一个简单的容斥，大概是<strong>钦定偶数组只有一种连法的方案数</strong>减去<strong>钦定奇数组只有一种连法的方案数</strong>，具体式子很好推，不展开讲了。</p>
-<p>复杂度 $O(n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6038,9 +6066,9 @@
 </details>
 <h2 id="t3">T3</h2>
 <p>首先，容易发现如果你想以最小代价把书搬完，那么每个点作为搬书区间左端点/右端点的次数是很好求的。那么这个问题其实就和最优化没什么关系了。</p>
-<p>然后考虑怎么用线段树维护询问，其实爆简单。若左儿子右端点与右儿子左端点颜色不同，新区间代价就是两边简单相加。否则就把尽量多左儿子的后缀与右儿子的前缀合并，减去 $\min(a_{mid},a_{mid+1})\times(w_{mid}+w_{mid+1})$。然后就可以直接维护了，比较简单（但是我赛时脑子抽了）。</p>
+<p>然后考虑怎么用线段树维护询问，其实爆简单。若左儿子右端点与右儿子左端点颜色不同，新区间代价就是两边简单相加。否则就把尽量多左儿子的后缀与右儿子的前缀合并，减去 <span class="arithmatex">\(\min(a_{mid},a_{mid+1})\times(w_{mid}+w_{mid+1})\)</span>。然后就可以直接维护了，比较简单（但是我赛时脑子抽了）。</p>
 <p>为了维护区间涂色，还要额外维护一个“如果区间是同一个颜色，答案是多少”。</p>
-<p>复杂度 $O(n\log n)$。</p>
+<p>复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6167,20 +6195,20 @@
 </details>
 <h2 id="t4">T4</h2>
 <p>最小割建模，赛时做不出来情有可原，NOIP 后要多看看网络流建模技巧了。</p>
-<p>考虑问题的转化。发现题目上有一个“替换后，$C,D$ 都是 $n$ 阶排列”的条件，这其实就相当于你一次替换必须替换整个置换环。也就是说这是个决策<strong>是否替换某个置换环</strong>的问题，貌似是经典最小割建模的设问类型。</p>
-<p>为方便叙述，记 $x_i$ 表示 $A_i$ 所在置换环是否被替换，$y_i$ 表示 $B_i$ 所在置换环是否被替换。分情况讨论一下每个 $i$ 何时会做贡献。</p>
+<p>考虑问题的转化。发现题目上有一个“替换后，<span class="arithmatex">\(C,D\)</span> 都是 <span class="arithmatex">\(n\)</span> 阶排列”的条件，这其实就相当于你一次替换必须替换整个置换环。也就是说这是个决策<strong>是否替换某个置换环</strong>的问题，貌似是经典最小割建模的设问类型。</p>
+<p>为方便叙述，记 <span class="arithmatex">\(x_i\)</span> 表示 <span class="arithmatex">\(A_i\)</span> 所在置换环是否被替换，<span class="arithmatex">\(y_i\)</span> 表示 <span class="arithmatex">\(B_i\)</span> 所在置换环是否被替换。分情况讨论一下每个 <span class="arithmatex">\(i\)</span> 何时会做贡献。</p>
 <ol>
-<li>$A_i=i,B_i=i$：无论如何都会产生贡献，直接统计答案，不加入网络流图。</li>
-<li>$A_i\ne i,B_i=i$：当 $x_i=0$ 时会产生贡献。</li>
-<li>$A_i=i,B_i\ne i$：同理。</li>
-<li>$A_i\ne i,B_i\ne i,A_i\ne B_i$：在 $x_i\lor y_i$ 时不会产生贡献。</li>
-<li>$A_i\ne i,B_i\ne i,A_i = B_i$：在 $x_i\oplus y_i$ 时不会产生贡献，其中 $\oplus$ 表示异或。</li>
+<li><span class="arithmatex">\(A_i=i,B_i=i\)</span>：无论如何都会产生贡献，直接统计答案，不加入网络流图。</li>
+<li><span class="arithmatex">\(A_i\ne i,B_i=i\)</span>：当 <span class="arithmatex">\(x_i=0\)</span> 时会产生贡献。</li>
+<li><span class="arithmatex">\(A_i=i,B_i\ne i\)</span>：同理。</li>
+<li><span class="arithmatex">\(A_i\ne i,B_i\ne i,A_i\ne B_i\)</span>：在 <span class="arithmatex">\(x_i\lor y_i\)</span> 时不会产生贡献。</li>
+<li><span class="arithmatex">\(A_i\ne i,B_i\ne i,A_i = B_i\)</span>：在 <span class="arithmatex">\(x_i\oplus y_i\)</span> 时不会产生贡献，其中 <span class="arithmatex">\(\oplus\)</span> 表示异或。</li>
 </ol>
-<p>那么考虑如何建模。首先容易想到源点向 $A$ 中所有置换环连边，$B$ 中所有置换环向汇点连边。然后令割开后，$A$ 在 $S$ 集合中的置换环是被替换的，$B$ 在 $T$ 集合中的置换环是被替换的。</p>
-<p>为方便叙述，记 $A_i$ 所在的置换环为 $c(A_i)$。</p>
-<p>首先情况 $2$，容易发现会在 $S\to c(A_i)$ 被割掉后产生贡献，即使 $S\to c(A_i)$ 的容量 $+1$。情况 $3$ 同理。</p>
-<p>然后考虑情况 $4$，容易发现它在 $c(A_i)\in T，c(B_i)\in S$ 的时候产生贡献，那么连一条 $c(B_i)\to c(A_i)$ 的边，容量为 $1$ 即可。</p>
-<p>最后考虑最复杂的情况 $5$，他在  $c(A_i)\in T\land c(B_i)\in S$ 或 $c(A_i)\notin T\land c(B_i)\notin S$ 时产生贡献。那么连一条 $c(A_i)\to c(B_i)$ 的容量为 $1$ 的边，再连一条 $c(B_i)\to c(A_i)$ 的容量为 $1$ 的边。它们其中之一被割掉都会产生贡献。</p>
+<p>那么考虑如何建模。首先容易想到源点向 <span class="arithmatex">\(A\)</span> 中所有置换环连边，<span class="arithmatex">\(B\)</span> 中所有置换环向汇点连边。然后令割开后，<span class="arithmatex">\(A\)</span> 在 <span class="arithmatex">\(S\)</span> 集合中的置换环是被替换的，<span class="arithmatex">\(B\)</span> 在 <span class="arithmatex">\(T\)</span> 集合中的置换环是被替换的。</p>
+<p>为方便叙述，记 <span class="arithmatex">\(A_i\)</span> 所在的置换环为 <span class="arithmatex">\(c(A_i)\)</span>。</p>
+<p>首先情况 <span class="arithmatex">\(2\)</span>，容易发现会在 <span class="arithmatex">\(S\to c(A_i)\)</span> 被割掉后产生贡献，即使 <span class="arithmatex">\(S\to c(A_i)\)</span> 的容量 <span class="arithmatex">\(+1\)</span>。情况 <span class="arithmatex">\(3\)</span> 同理。</p>
+<p>然后考虑情况 <span class="arithmatex">\(4\)</span>，容易发现它在 <span class="arithmatex">\(c(A_i)\in T，c(B_i)\in S\)</span> 的时候产生贡献，那么连一条 <span class="arithmatex">\(c(B_i)\to c(A_i)\)</span> 的边，容量为 <span class="arithmatex">\(1\)</span> 即可。</p>
+<p>最后考虑最复杂的情况 <span class="arithmatex">\(5\)</span>，他在  <span class="arithmatex">\(c(A_i)\in T\land c(B_i)\in S\)</span> 或 <span class="arithmatex">\(c(A_i)\notin T\land c(B_i)\notin S\)</span> 时产生贡献。那么连一条 <span class="arithmatex">\(c(A_i)\to c(B_i)\)</span> 的容量为 <span class="arithmatex">\(1\)</span> 的边，再连一条 <span class="arithmatex">\(c(B_i)\to c(A_i)\)</span> 的容量为 <span class="arithmatex">\(1\)</span> 的边。它们其中之一被割掉都会产生贡献。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

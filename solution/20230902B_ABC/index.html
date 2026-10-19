@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5836,12 +5864,12 @@
 <p>恭喜你，获得一百分。</p>
 <p>考虑证明结论（或者构造方案）。</p>
 <p>首先，假设数列不动，是一个指针在动（其实是等价的，但这样更好理解）。</p>
-<p>如果全是 $0$，Alice 直接就获胜了，所以我们只考虑有 $1$ 的情况。</p>
-<p>那么容易发现，假如数列中有且仅有一段连续的 $1$，那么在这一段 $1$ 之前 Bob 不得不翻转一个 $0$，不然 Alice 直接就赢了。</p>
-<p>那么 Alice 可以每次只留第一段 $1$，把后面的全变成 $0$，这样下一轮 Bob 就不得不在这一段 $1$ 之前放一个 $1$。</p>
-<p>容易发现假如把数列看成一个二进制数，那么每两轮这个数必定增加一定值。最终到达全 $1$ 状态。</p>
-<p>但全 $1$ 状态 Alice 就可以一波全翻转直接获胜了。</p>
-<p>所以所有 $2^n$ 种情况均为 Alice 获胜。</p>
+<p>如果全是 <span class="arithmatex">\(0\)</span>，Alice 直接就获胜了，所以我们只考虑有 <span class="arithmatex">\(1\)</span> 的情况。</p>
+<p>那么容易发现，假如数列中有且仅有一段连续的 <span class="arithmatex">\(1\)</span>，那么在这一段 <span class="arithmatex">\(1\)</span> 之前 Bob 不得不翻转一个 <span class="arithmatex">\(0\)</span>，不然 Alice 直接就赢了。</p>
+<p>那么 Alice 可以每次只留第一段 <span class="arithmatex">\(1\)</span>，把后面的全变成 <span class="arithmatex">\(0\)</span>，这样下一轮 Bob 就不得不在这一段 <span class="arithmatex">\(1\)</span> 之前放一个 <span class="arithmatex">\(1\)</span>。</p>
+<p>容易发现假如把数列看成一个二进制数，那么每两轮这个数必定增加一定值。最终到达全 <span class="arithmatex">\(1\)</span> 状态。</p>
+<p>但全 <span class="arithmatex">\(1\)</span> 状态 Alice 就可以一波全翻转直接获胜了。</p>
+<p>所以所有 <span class="arithmatex">\(2^n\)</span> 种情况均为 Alice 获胜。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5877,7 +5905,7 @@
 <h2 id="t2">T2</h2>
 <p>考虑建图。</p>
 <p>具体来说，把每个数当成一个结点，然后把每张扑克牌当成一条边，每条边表示“在每条边的两个端点里选其中一个”，那么容易发现，建出来的图是若干个连通块，而一个连通块假如不是树，那么必然每个点都能选（因为边数大于等于点数，而每条边都有一个名额），反之，如果是树，那么整个连通块中有一个点是选不了的。容易发现这个点取树中的最大值或最小值是必定不劣的。</p>
-<p>那么把每棵树的最大最小值对 $(x,y)$ 单独存起来，就成了一个区间覆盖问题，假如询问区间 $[l,r]$ 包含了任何一对 $(x,y)$（即 $l\le x &lt; y \le r$），那么答案就是 No，反之就是 Yes。</p>
+<p>那么把每棵树的最大最小值对 <span class="arithmatex">\((x,y)\)</span> 单独存起来，就成了一个区间覆盖问题，假如询问区间 <span class="arithmatex">\([l,r]\)</span> 包含了任何一对 <span class="arithmatex">\((x,y)\)</span>（即 <span class="arithmatex">\(l\le x &lt; y \le r\)</span>），那么答案就是 No，反之就是 Yes。</p>
 <p>做法有很多，再次略过了，最优能做到线性。</p>
 <details class="success">
 <summary>参考代码（非最优）</summary>
@@ -5974,14 +6002,14 @@
 </details>
 <h2 id="t3">T3</h2>
 <p>四元环计数变种。</p>
-<p>首先考虑类似于 Meet In Middle 的做法，现枚举一个点 $u$，然后找所有由 $u$ 出发的长度为 $2$ 的路径，然后假如两条路径终点相同就统计答案，因为每个环会被统计四次所以最后除以 $4$，复杂度上界大概是 $O(n^2)$。</p>
+<p>首先考虑类似于 Meet In Middle 的做法，现枚举一个点 <span class="arithmatex">\(u\)</span>，然后找所有由 <span class="arithmatex">\(u\)</span> 出发的长度为 <span class="arithmatex">\(2\)</span> 的路径，然后假如两条路径终点相同就统计答案，因为每个环会被统计四次所以最后除以 <span class="arithmatex">\(4\)</span>，复杂度上界大概是 <span class="arithmatex">\(O(n^2)\)</span>。</p>
 <p>考虑优化，发现每个环会被统计四次很不好，那么我们将点按边权从大到小排序，然后统计一个点删一个点，这样就不会重复了。假如你把这份代码交上去，恭喜你，通过此题。</p>
-<p>乂？刚刚不是只优化了常数吗，为什么能 $n$ 方过十万。</p>
+<p>乂？刚刚不是只优化了常数吗，为什么能 <span class="arithmatex">\(n\)</span> 方过十万。</p>
 <p>因为其实这个上界过于松了，考虑算一个更紧的上界，用类似整除分块的思路。</p>
-<p>具体来说，设点 $i$ 的度数为 $d_i$，考虑分 $d_i&gt;\sqrt{m}$ 和 $d_i \le \sqrt{m}$ 考虑。</p>
-<p>首先每个点计算次数就是 $d_i^2$（这个显然吧？考虑每个点作为路径中间点会被 $d_i$ 个起点访问，然后访问 $d_i$ 个终点）</p>
-<p>对于 $d_i\le\sqrt{m}$，显然有 $\sum d_i\le 2m$（因为只有 $m$ 条边，一条边提供 $2$ 的度数），那么 $\sum d_i^2\le\left(\sum d_i\right)\max\begin{Bmatrix}d_i\end{Bmatrix}\le 2m\sqrt{m}$，就是 $O(m\sqrt{m})$ 级别的。</p>
-<p>然后对于 $d_i&gt;\sqrt{m}$，由于同样有 $\sum d_i\le 2m$，所以这样的点至多有 $\sqrt{m}$ 个，然后考虑一条路径 $a\to b \to c$ 中，假如这样的店作为 $b$，那么 $c$ 的度数显然也大于 $\sqrt{m}$，所以也属于这样的点，至多有 $\sqrt{m}$ 个，然后边 $b\to c$ 至多有 $2m$ 条，对应 $\sqrt{m}$ 个点 $c$，复杂度也是 $O(m\sqrt{m})$。</p>
+<p>具体来说，设点 <span class="arithmatex">\(i\)</span> 的度数为 <span class="arithmatex">\(d_i\)</span>，考虑分 <span class="arithmatex">\(d_i&gt;\sqrt{m}\)</span> 和 <span class="arithmatex">\(d_i \le \sqrt{m}\)</span> 考虑。</p>
+<p>首先每个点计算次数就是 <span class="arithmatex">\(d_i^2\)</span>（这个显然吧？考虑每个点作为路径中间点会被 <span class="arithmatex">\(d_i\)</span> 个起点访问，然后访问 <span class="arithmatex">\(d_i\)</span> 个终点）</p>
+<p>对于 <span class="arithmatex">\(d_i\le\sqrt{m}\)</span>，显然有 <span class="arithmatex">\(\sum d_i\le 2m\)</span>（因为只有 <span class="arithmatex">\(m\)</span> 条边，一条边提供 <span class="arithmatex">\(2\)</span> 的度数），那么 <span class="arithmatex">\(\sum d_i^2\le\left(\sum d_i\right)\max\begin{Bmatrix}d_i\end{Bmatrix}\le 2m\sqrt{m}\)</span>，就是 <span class="arithmatex">\(O(m\sqrt{m})\)</span> 级别的。</p>
+<p>然后对于 <span class="arithmatex">\(d_i&gt;\sqrt{m}\)</span>，由于同样有 <span class="arithmatex">\(\sum d_i\le 2m\)</span>，所以这样的点至多有 <span class="arithmatex">\(\sqrt{m}\)</span> 个，然后考虑一条路径 <span class="arithmatex">\(a\to b \to c\)</span> 中，假如这样的店作为 <span class="arithmatex">\(b\)</span>，那么 <span class="arithmatex">\(c\)</span> 的度数显然也大于 <span class="arithmatex">\(\sqrt{m}\)</span>，所以也属于这样的点，至多有 <span class="arithmatex">\(\sqrt{m}\)</span> 个，然后边 <span class="arithmatex">\(b\to c\)</span> 至多有 <span class="arithmatex">\(2m\)</span> 条，对应 <span class="arithmatex">\(\sqrt{m}\)</span> 个点 <span class="arithmatex">\(c\)</span>，复杂度也是 <span class="arithmatex">\(O(m\sqrt{m})\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>

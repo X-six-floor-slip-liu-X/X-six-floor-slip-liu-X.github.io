@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5891,7 +5919,7 @@
 <p>为了方便叙述，我们就 <a href="https://www.luogu.com.cn/problem/P5787">P5787 二分图 /【模板】线段树分治</a> 来说，但是语言还是会很泛化。</p>
 <p>既然你的每条边有加入删除两种操作，那么在时间轴上，它存在的时间就是一个区间。</p>
 <p>我们可以立刻想到一个暴力，维护每个时间点上有哪些信息存在，就是对每个时间点开个 <code>vector</code> 存有哪些边，然后对每个时间点求解。</p>
-<p>但是直接暴力这样显然时间空间都会爆掉，那么可以考虑像线段树一样，把每个区间分为 $\log n$ 个区间，对线段树上的每个结点维护一个 <code>vector</code>，然后利用类似标记永久化的思路遍历线段树，由于退出结点时需要删除，可以用可撤销并查集维护。这样遍历线段树的时间复杂度为 $O(n+m\log n)$（因为每个区间会被分为 $\log n$ 个区间），然后可撤销并查集的复杂度为 $O(\log m)$（因为每条边只会同时存在一个），总复杂度 $O(m\log n\log m)$，空间复杂度 $O(n+m)$。</p>
+<p>但是直接暴力这样显然时间空间都会爆掉，那么可以考虑像线段树一样，把每个区间分为 <span class="arithmatex">\(\log n\)</span> 个区间，对线段树上的每个结点维护一个 <code>vector</code>，然后利用类似标记永久化的思路遍历线段树，由于退出结点时需要删除，可以用可撤销并查集维护。这样遍历线段树的时间复杂度为 <span class="arithmatex">\(O(n+m\log n)\)</span>（因为每个区间会被分为 <span class="arithmatex">\(\log n\)</span> 个区间），然后可撤销并查集的复杂度为 <span class="arithmatex">\(O(\log m)\)</span>（因为每条边只会同时存在一个），总复杂度 <span class="arithmatex">\(O(m\log n\log m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n+m)\)</span>。</p>
 <h2 id="_5">例题</h2>
 <h3 id="p5787">P5787 二分图 /【模板】线段树分治</h3>
 <p><a href="https://www.luogu.com.cn/problem/P5787">传送门</a></p>
@@ -5899,9 +5927,9 @@
 <h3 id="p7470-noi-online-2021">P7470 [NOI Online 2021 提高组] 岛屿探险</h3>
 <p><a href="https://www.luogu.com.cn/problem/P7470">传送门</a></p>
 <p>这道题虽然每个岛不会出现和消失，但是我们分析一下：</p>
-<p>对于 $d&lt;b$ 很简单，要计算的就是 $a\oplus c\le d$，把 $a$ 插入 01Trie 后用二元组 $(c,d)$ 去查询。</p>
-<p>对于 $d\ge b$ 要计算的就是 $c\oplus a\le b$，发现和上面是对称的，可以把 $c$ 全部插入 01Trie 后用二元组 $(a,b)$ 去给 Trie 打标记，然后再用 $c$ 去统计。</p>
-<p>容易发现在对称情况下，每个 $c$ 是会被添加和消除的。由于计数具有可减性，我们可以直接拆成 $[1,l-1],[1,r]$ 两个区间后用 CDQ 分治做（就是一个二维偏序）。但是我们也可以线段树分治后在每个结点上转化为一维偏序。两种方法复杂度均为 $O(n\log n\log V)$（但是有一说一这道题 cdq 要好写一点）。</p>
+<p>对于 <span class="arithmatex">\(d&lt;b\)</span> 很简单，要计算的就是 <span class="arithmatex">\(a\oplus c\le d\)</span>，把 <span class="arithmatex">\(a\)</span> 插入 01Trie 后用二元组 <span class="arithmatex">\((c,d)\)</span> 去查询。</p>
+<p>对于 <span class="arithmatex">\(d\ge b\)</span> 要计算的就是 <span class="arithmatex">\(c\oplus a\le b\)</span>，发现和上面是对称的，可以把 <span class="arithmatex">\(c\)</span> 全部插入 01Trie 后用二元组 <span class="arithmatex">\((a,b)\)</span> 去给 Trie 打标记，然后再用 <span class="arithmatex">\(c\)</span> 去统计。</p>
+<p>容易发现在对称情况下，每个 <span class="arithmatex">\(c\)</span> 是会被添加和消除的。由于计数具有可减性，我们可以直接拆成 <span class="arithmatex">\([1,l-1],[1,r]\)</span> 两个区间后用 CDQ 分治做（就是一个二维偏序）。但是我们也可以线段树分治后在每个结点上转化为一维偏序。两种方法复杂度均为 <span class="arithmatex">\(O(n\log n\log V)\)</span>（但是有一说一这道题 cdq 要好写一点）。</p>
 
 
 

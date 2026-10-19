@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6332,19 +6360,19 @@
 <ul>
 <li><strong>网络</strong>的定义：</li>
 </ul>
-<p>网络是指一个有向图 $G=(V,E)$。</p>
-<p>每条边 $(u,v)\in E$ 都有一个权值 $c(u,v)$，称之为容量（Capacity），当 $(u,v)\notin E$ 时有 $c(u,v)=0$。</p>
-<p>其中有两个特殊的点：源点（Source）$s\in V$ 和汇点（Sink）$t\in V$,($s\neq t$)。</p>
+<p>网络是指一个有向图 <span class="arithmatex">\(G=(V,E)\)</span>。</p>
+<p>每条边 <span class="arithmatex">\((u,v)\in E\)</span> 都有一个权值 <span class="arithmatex">\(c(u,v)\)</span>，称之为容量（Capacity），当 <span class="arithmatex">\((u,v)\notin E\)</span> 时有 <span class="arithmatex">\(c(u,v)=0\)</span>。</p>
+<p>其中有两个特殊的点：源点（Source）<span class="arithmatex">\(s\in V\)</span> 和汇点（Sink）<span class="arithmatex">\(t\in V\)</span>,(<span class="arithmatex">\(s\neq t\)</span>)。</p>
 <ul>
 <li><strong>流</strong>的定义</li>
 </ul>
-<p>设 $f(u,v)$ 定义在二元组 ($u\in V,v\in V$) 上的实数函数且满足</p>
+<p>设 <span class="arithmatex">\(f(u,v)\)</span> 定义在二元组 (<span class="arithmatex">\(u\in V,v\in V\)</span>) 上的实数函数且满足</p>
 <ul>
-<li>容量限制：对于每条边，流经该边的流量不得超过该边的容量，即，$f(u,v)\leq c(u,v)$。</li>
-<li>斜对称性：每条边的流量与其相反边的流量之和为 0，即 $f(u,v)=-f(v,u)$。</li>
-<li>流守恒性：从源点流出的流量等于汇点流入的流量，即 $\forall x\in V-{s,t},\sum_{(u,x)\in E}f(u,x)=\sum_{(x,v)\in E}f(x,v)$，并且出去源汇外每个点的流入流量和流出流量相同。</li>
+<li>容量限制：对于每条边，流经该边的流量不得超过该边的容量，即，<span class="arithmatex">\(f(u,v)\leq c(u,v)\)</span>。</li>
+<li>斜对称性：每条边的流量与其相反边的流量之和为 0，即 <span class="arithmatex">\(f(u,v)=-f(v,u)\)</span>。</li>
+<li>流守恒性：从源点流出的流量等于汇点流入的流量，即 <span class="arithmatex">\(\forall x\in V-\{s,t\},\sum_{(u,x)\in E}f(u,x)=\sum_{(x,v)\in E}f(x,v)\)</span>，并且出去源汇外每个点的流入流量和流出流量相同。</li>
 </ul>
-<p>那么 f 称为网络 G 的流函数。对于 $(u,v)\in E，f(u,v)$ 称为边的<strong>流量</strong>，$c(u,v)-f(u,v)$ 称为边的<strong>剩余容量</strong>。整个网络的流量为 $\sum_{(s,v)\in E}f(s,v)$，即 从源点发出的所有流量之和。</p>
+<p>那么 f 称为网络 G 的流函数。对于 <span class="arithmatex">\((u,v)\in E，f(u,v)\)</span> 称为边的<strong>流量</strong>，<span class="arithmatex">\(c(u,v)-f(u,v)\)</span> 称为边的<strong>剩余容量</strong>。整个网络的流量为 <span class="arithmatex">\(\sum_{(s,v)\in E}f(s,v)\)</span>，即 从源点发出的所有流量之和。</p>
 <p>一般而言也可以把网络流理解为整个图的流量。而这个流量必满足上述三个性质，我们称满足这三个性质的流为<strong>可行流</strong>。</p>
 <p>摘自 <a href="https://oi-wiki.org/graph/flow/">OI Wiki</a></p>
 </div>
@@ -6362,35 +6390,35 @@
 <p>FF 算法的核心在于找增广路，何为增广路？</p>
 <div class="admonition quote">
 <p class="admonition-title">增广路的定义</p>
-<p>增广路，是从源点到汇点的路径，其上所有边的残余容量均大于 $0$。FF 算法就是不断寻找增广路，直到找不到为止。</p>
+<p>增广路，是从源点到汇点的路径，其上所有边的残余容量均大于 <span class="arithmatex">\(0\)</span>。FF 算法就是不断寻找增广路，直到找不到为止。</p>
 </div>
-<p>什么是残余容量？首先每条边最初的残余容量就是它的容量 $c(u,v)$，然后流了一段时间后，这条边的流量为 $f(u,v)$，那么这条边的残余流量就是 $c(u,v)-f(u,v)$。通俗来讲，残余容量就是一条边还能容纳多少流量。残余容量组成的网络叫<strong>残量网络</strong>。</p>
+<p>什么是残余容量？首先每条边最初的残余容量就是它的容量 <span class="arithmatex">\(c(u,v)\)</span>，然后流了一段时间后，这条边的流量为 <span class="arithmatex">\(f(u,v)\)</span>，那么这条边的残余流量就是 <span class="arithmatex">\(c(u,v)-f(u,v)\)</span>。通俗来讲，残余容量就是一条边还能容纳多少流量。残余容量组成的网络叫<strong>残量网络</strong>。</p>
 <p>FF 算法的过程就是每次找一条增广路，然后流满这条路的流量，一直到找不到为止。</p>
 <p>那么，这个算法一定是对的吗？ <del>明明都说了是最基础的算法怎么可能是错的。</del></p>
 <p>确实不一定是对的。</p>
 <p><img alt="图示 1" src="../../../img/graph_flow_1.png" /></p>
-<p>假如我们有这么一个网络，原点 $s=1$，汇点 $t=4$，要求它的最大流。</p>
-<p>假如我们第一次找到增广路 $1 \to 2 \to 3 \to 4$，容易发现这样就找不到第二条增广路了。但实际上这张图可以有两条增广路为 $1 \to 2 \to 4$ 和 $1 \to 3 \to 4$。</p>
+<p>假如我们有这么一个网络，原点 <span class="arithmatex">\(s=1\)</span>，汇点 <span class="arithmatex">\(t=4\)</span>，要求它的最大流。</p>
+<p>假如我们第一次找到增广路 <span class="arithmatex">\(1 \to 2 \to 3 \to 4\)</span>，容易发现这样就找不到第二条增广路了。但实际上这张图可以有两条增广路为 <span class="arithmatex">\(1 \to 2 \to 4\)</span> 和 <span class="arithmatex">\(1 \to 3 \to 4\)</span>。</p>
 <p>为了解决这个问题，我们引入了<strong>反向边</strong>，来维护一个类似于“反悔”的过程。</p>
 <p><img alt="图示 2" src="../../../img/graph_flow_2.png" /></p>
-<p>反向边 $(v,u)$ 的残量永远为 $f(u,v)$，即相应的正向边的流量。每次假如有流量经过反向边，那么相当于对对应正向边的流量做<strong>撤销</strong>操作。</p>
-<p>比如上一张图，假如我们找到了一条流量为 $1$ 的增广路 $1 \to 2 \to 3 \to 4$，那么残量网络就会变成这样：</p>
+<p>反向边 <span class="arithmatex">\((v,u)\)</span> 的残量永远为 <span class="arithmatex">\(f(u,v)\)</span>，即相应的正向边的流量。每次假如有流量经过反向边，那么相当于对对应正向边的流量做<strong>撤销</strong>操作。</p>
+<p>比如上一张图，假如我们找到了一条流量为 <span class="arithmatex">\(1\)</span> 的增广路 <span class="arithmatex">\(1 \to 2 \to 3 \to 4\)</span>，那么残量网络就会变成这样：</p>
 <p><img alt="图示 3" src="../../../img/graph_flow_3.png" /></p>
-<p>这时候我们就能找到另一条流量为 $1$ 的增广路 $1 \to 3 \to 2 \to 4$。</p>
-<p>在程序眼里，我们走的两条增广路分别是 $1 \to 2 \to 3 \to 4$ 和 $1 \to 3 \to 2 \to 4$，其实我们自己分析一下会发现这样等价于走 $1 \to 2 \to 4$ 和 $1 \to 3 \to 4$，中间的 $3 \to 2$ 相当于撤销了 $2 \to 3$ 的流量。</p>
+<p>这时候我们就能找到另一条流量为 <span class="arithmatex">\(1\)</span> 的增广路 <span class="arithmatex">\(1 \to 3 \to 2 \to 4\)</span>。</p>
+<p>在程序眼里，我们走的两条增广路分别是 <span class="arithmatex">\(1 \to 2 \to 3 \to 4\)</span> 和 <span class="arithmatex">\(1 \to 3 \to 2 \to 4\)</span>，其实我们自己分析一下会发现这样等价于走 <span class="arithmatex">\(1 \to 2 \to 4\)</span> 和 <span class="arithmatex">\(1 \to 3 \to 4\)</span>，中间的 <span class="arithmatex">\(3 \to 2\)</span> 相当于撤销了 <span class="arithmatex">\(2 \to 3\)</span> 的流量。</p>
 <p>这样建边后，一个非常重要的性质是<strong>当前流是最大流当且仅当不存在增广路</strong>。</p>
 <div class="admonition quote">
 <p class="admonition-title">证明</p>
 <ul>
-<li>充分性（是最大流 $\Rightarrow$ 不存在增广路）：</li>
+<li>充分性（是最大流 <span class="arithmatex">\(\Rightarrow\)</span> 不存在增广路）：</li>
 </ul>
 <p>考虑逆否命题：若存在增广路则不是最大流。</p>
-<p>显然，因为还能增加至少 $1$ 流量。</p>
+<p>显然，因为还能增加至少 <span class="arithmatex">\(1\)</span> 流量。</p>
 <ul>
-<li>必要性（不存在增广路 $\Rightarrow$ 是最大流）</li>
+<li>必要性（不存在增广路 <span class="arithmatex">\(\Rightarrow\)</span> 是最大流）</li>
 </ul>
 <p>下面的证明和后文有关，初学者请忽略。</p>
-<p>当不存在增广路时，显然在残量网络上 $s$ 不能到达 $t$。那么将 $s$ 能到达的点集视为 $S$，剩下的视为 $T$。就存在一个割 $(S,T)$。根据后文“最大流最小割定理”的引理，流小于等于割。显然这个割的容量恰好就是当前的流量。故当前为最大流。</p>
+<p>当不存在增广路时，显然在残量网络上 <span class="arithmatex">\(s\)</span> 不能到达 <span class="arithmatex">\(t\)</span>。那么将 <span class="arithmatex">\(s\)</span> 能到达的点集视为 <span class="arithmatex">\(S\)</span>，剩下的视为 <span class="arithmatex">\(T\)</span>。就存在一个割 <span class="arithmatex">\((S,T)\)</span>。根据后文“最大流最小割定理”的引理，流小于等于割。显然这个割的容量恰好就是当前的流量。故当前为最大流。</p>
 </div>
 <p>值得一提的是，虽然在理论上反向边和正向边是不同的，实际在程序实现上它们并没有什么特别大的差异。</p>
 <details class="success">
@@ -6435,15 +6463,15 @@
 </span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="p">}</span><span class="n">mf</span><span class="p">;</span>
 </span></code></pre></div>
 <ol>
-<li><code>cnte</code> 一定要从 $1$ 开始，后面会解释（其实任何正奇数和 $-1$ 都可以，但是不能为 $0$）。</li>
+<li><code>cnte</code> 一定要从 <span class="arithmatex">\(1\)</span> 开始，后面会解释（其实任何正奇数和 <span class="arithmatex">\(-1\)</span> 都可以，但是不能为 <span class="arithmatex">\(0\)</span>）。</li>
 <li>如果增广路走到汇点直接返回流量。</li>
-<li>因为 <code>cnte</code> 从 $1$ 开始，又由于每条边和反向边是相邻的，所以每条边和其反向边相异或必定为 $1$。</li>
-<li>无法到达汇点，返回 $-1$。</li>
+<li>因为 <code>cnte</code> 从 <span class="arithmatex">\(1\)</span> 开始，又由于每条边和反向边是相邻的，所以每条边和其反向边相异或必定为 <span class="arithmatex">\(1\)</span>。</li>
+<li>无法到达汇点，返回 <span class="arithmatex">\(-1\)</span>。</li>
 <li>一直重复到找不到增广路为止。</li>
 </ol>
 </details>
-<p>FF 算法的复杂度上界为 $O(ef)$，其中 $e$ 为边数，$f$ 为最大流，证明显然，假设每次遍历所有边找到一条流量为 $1$ 的增广路。</p>
-<p>在<a href="https://www.luogu.com.cn/problem/P3376">洛谷模板题</a>上可以获得 $84pts$ 的高分。</p>
+<p>FF 算法的复杂度上界为 <span class="arithmatex">\(O(ef)\)</span>，其中 <span class="arithmatex">\(e\)</span> 为边数，<span class="arithmatex">\(f\)</span> 为最大流，证明显然，假设每次遍历所有边找到一条流量为 <span class="arithmatex">\(1\)</span> 的增广路。</p>
+<p>在<a href="https://www.luogu.com.cn/problem/P3376">洛谷模板题</a>上可以获得 <span class="arithmatex">\(84pts\)</span> 的高分。</p>
 <p><img alt="图示 4" src="../../../img/graph_flow_4.png" /></p>
 <h4 id="ek">EK 算法</h4>
 <p>EK（Edmond-Karp）算法的核心也是找增广路，只不过它是用 BFS 实现的。它可以保证每次找到的都是最短的增广路。</p>
@@ -6483,12 +6511,12 @@
 </span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
-<li>假如这条边还有残量并且 $v$ 没被访问过。</li>
+<li>假如这条边还有残量并且 <span class="arithmatex">\(v\)</span> 没被访问过。</li>
 <li>能否到达汇点。</li>
 <li>从汇点出发更新残量。</li>
 </ol>
 </details>
-<p>EK 算法的复杂度上限为 $O(ve^2)$，其中 $v$ 为点数。证明可以参考<a href="https://www.cnblogs.com/uid001/p/10465580.html">这篇文章</a>。这个算法已经能通过洛谷模板题了。</p>
+<p>EK 算法的复杂度上限为 <span class="arithmatex">\(O(ve^2)\)</span>，其中 <span class="arithmatex">\(v\)</span> 为点数。证明可以参考<a href="https://www.cnblogs.com/uid001/p/10465580.html">这篇文章</a>。这个算法已经能通过洛谷模板题了。</p>
 <p><img alt="图示 5" src="../../../img/graph_flow_5.png" /></p>
 <h4 id="dinic">dinic 算法</h4>
 <p>事实上，dinic 算法才是广大 OIer 写最大流最常用的算法，据传言提高组出题人中有一个不成文的规定：出最大流题可以卡 EK 算法，但不能卡 dinic 算法。</p>
@@ -6544,25 +6572,25 @@
 </span></code></pre></div>
 <ol>
 <li>当前弧优化，假设（在当前分层方法下）某条边已经跑满了，那后面它必不可能成为增广路中的边，我们可以复制一份 <code>head</code> 数组（即本代码中的 <code>cur</code> 数组）来存储第一条还有残量的边。</li>
-<li>多路增广，只有在没有剩余流量时才退出，假如 $s \to x$ 还有剩余流量就继续找增广路尽可能把流量流完。</li>
+<li>多路增广，只有在没有剩余流量时才退出，假如 <span class="arithmatex">\(s \to x\)</span> 还有剩余流量就继续找增广路尽可能把流量流完。</li>
 <li>注意每次循环都要更新层数和 <code>cur</code> 数组，因为在不同的残量网络上分层可能不同。</li>
 <li>如果这条边还有残量且下一个点没被访问过。</li>
 </ol>
 </details>
-<p>dinic 的复杂度上界是 $O(v^2e)$，但是据 <a href="https://oi-wiki.org/graph/flow/max-flow/#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90_1">OI Wiki</a> 说基本不可能卡到这个上界，在提高组范围内可以看做 $O(\text{能过})$。</p>
+<p>dinic 的复杂度上界是 <span class="arithmatex">\(O(v^2e)\)</span>，但是据 <a href="https://oi-wiki.org/graph/flow/max-flow/#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90_1">OI Wiki</a> 说基本不可能卡到这个上界，在提高组范围内可以看做 <span class="arithmatex">\(O(\text{能过})\)</span>。</p>
 <p>在洛谷模板题上跑得飞快。</p>
 <p><img alt="图示 6" src="../../../img/graph_flow_6.png" /></p>
 <details class="quote">
 <summary>关于 dinic 的复杂度问题</summary>
 <p>此段更新于 2024.6.4。</p>
 <p>好嘛，现在不是提高组范围了，我们来考虑一下复杂度的证明。</p>
-<p>dinic 复杂度由两部分构成，每次增广复杂度 $O(nm)$，增广轮数上界 $O(n)$，复杂度 $O(n^2m)$。</p>
+<p>dinic 复杂度由两部分构成，每次增广复杂度 <span class="arithmatex">\(O(nm)\)</span>，增广轮数上界 <span class="arithmatex">\(O(n)\)</span>，复杂度 <span class="arithmatex">\(O(n^2m)\)</span>。</p>
 <ul>
-<li>每轮增广复杂度证明：<p>考虑每次会花至多 $O(n)$ 的时间找到一条路径，它要么是增广路，那么其中饱和边的 $cur$ 会跳转。要么因为结尾被阻塞而不是增广路，那么路径末端的 $cur$ 会跳转。每找到一条路径 $cur$ 都会跳转一次，最多跳转 $m$ 次，于是每次增广复杂度是 $O(nm)$ 的。</p>
+<li>每轮增广复杂度证明：<p>考虑每次会花至多 <span class="arithmatex">\(O(n)\)</span> 的时间找到一条路径，它要么是增广路，那么其中饱和边的 <span class="arithmatex">\(cur\)</span> 会跳转。要么因为结尾被阻塞而不是增广路，那么路径末端的 <span class="arithmatex">\(cur\)</span> 会跳转。每找到一条路径 <span class="arithmatex">\(cur\)</span> 都会跳转一次，最多跳转 <span class="arithmatex">\(m\)</span> 次，于是每次增广复杂度是 <span class="arithmatex">\(O(nm)\)</span> 的。</p>
 </li>
 </ul>
 <ul>
-<li>增广轮数上界证明：<p>当前层次图增广完成后，$s\rightsquigarrow t$ 的最短路必定会经过至少一条不在层次图上的边（不然就还能再增广），不在层次图上的边必定会指向同一层或者更底层的边，那么这条路径长度至少会增加 $1$，于是至多增加 $n$ 次，所以是 $O(n)$ 的。</p>
+<li>增广轮数上界证明：<p>当前层次图增广完成后，<span class="arithmatex">\(s\rightsquigarrow t\)</span> 的最短路必定会经过至少一条不在层次图上的边（不然就还能再增广），不在层次图上的边必定会指向同一层或者更底层的边，那么这条路径长度至少会增加 <span class="arithmatex">\(1\)</span>，于是至多增加 <span class="arithmatex">\(n\)</span> 次，所以是 <span class="arithmatex">\(O(n)\)</span> 的。</p>
 </li>
 </ul>
 <details class="example">
@@ -6570,82 +6598,82 @@
 <p>阅读此段前，请确保你已经了解了<strong>割的定义</strong>。</p>
 <ol>
 <li>
-<p>单位容量网络中，单轮增广复杂度为 $O(m)$。</p>
+<p>单位容量网络中，单轮增广复杂度为 <span class="arithmatex">\(O(m)\)</span>。</p>
 <p>证明：一条边无论有没有流都会跳转当前弧，那么单轮增广每条边都只会被访问一次。</p>
 </li>
 <li>
-<p>单位容量网络中，增广轮数不超过 $O(\sqrt{m})$。</p>
-<p>证明：增广 $\sqrt{m}$ 轮后，层次图至少有 $\sqrt{m}$ 层，根据抽屉原理，至少存在一个 $i$ 使得 $i$ 到 $i+1$ 层的边数不超过 $\sqrt{m}$，且这显然是一个割，那么剩下的残量网络最大流不会超过 $\sqrt{m}$（根据下文最大流最小割定理），那么至多再增广 $\sqrt{m}$ 轮。</p>
+<p>单位容量网络中，增广轮数不超过 <span class="arithmatex">\(O(\sqrt{m})\)</span>。</p>
+<p>证明：增广 <span class="arithmatex">\(\sqrt{m}\)</span> 轮后，层次图至少有 <span class="arithmatex">\(\sqrt{m}\)</span> 层，根据抽屉原理，至少存在一个 <span class="arithmatex">\(i\)</span> 使得 <span class="arithmatex">\(i\)</span> 到 <span class="arithmatex">\(i+1\)</span> 层的边数不超过 <span class="arithmatex">\(\sqrt{m}\)</span>，且这显然是一个割，那么剩下的残量网络最大流不会超过 <span class="arithmatex">\(\sqrt{m}\)</span>（根据下文最大流最小割定理），那么至多再增广 <span class="arithmatex">\(\sqrt{m}\)</span> 轮。</p>
 </li>
 <li>
-<p>无重边的单位容量网络中，增广轮数不超过 $O(n^{\frac{2}{3}})$。</p>
-<p>证明：类似吧，增广 $2n^{\frac{2}{3}}$ 轮后，层次图至少有 $2n^{\frac{2}{3}}$ 轮，每相邻两层分一组，根据抽屉原理，至少有一组组内点数不超过 $n^{\frac{1}{3}}$，那么该组内边数不超过 $n^{\frac{2}{3}}$，则至多再增广 $O(n^{\frac{2}{3}})$ 轮。</p>
+<p>无重边的单位容量网络中，增广轮数不超过 <span class="arithmatex">\(O(n^{\frac{2}{3}})\)</span>。</p>
+<p>证明：类似吧，增广 <span class="arithmatex">\(2n^{\frac{2}{3}}\)</span> 轮后，层次图至少有 <span class="arithmatex">\(2n^{\frac{2}{3}}\)</span> 轮，每相邻两层分一组，根据抽屉原理，至少有一组组内点数不超过 <span class="arithmatex">\(n^{\frac{1}{3}}\)</span>，那么该组内边数不超过 <span class="arithmatex">\(n^{\frac{2}{3}}\)</span>，则至多再增广 <span class="arithmatex">\(O(n^{\frac{2}{3}})\)</span> 轮。</p>
 </li>
 <li>
-<p>任意网络中，设 $C$ 为容量总和，复杂度不会超过 $O(C\sqrt{C})$。</p>
+<p>任意网络中，设 <span class="arithmatex">\(C\)</span> 为容量总和，复杂度不会超过 <span class="arithmatex">\(O(C\sqrt{C})\)</span>。</p>
 <p>证明：肯定不会比拆成一条一条的单位网络更劣。</p>
 </li>
 <li>
-<p>任意网络中，增广轮数不超过 $O(\sqrt{S})$。</p>
-<p>用 $in_u,out_u$ 分别代表 $u$ 入边和出边的容量和，其中 $S=\sum_{u\in V\setminus\begin{Bmatrix}s,t\end{Bmatrix}}\min(in_u,out_u)$</p>
-<p>证明：增广 $\sqrt{S}$ 轮后，除源汇以外的点 $in_u,out_u$ 均不变（考虑增广路进入这个点和走出这个点的边相互抵消），此时增广路至少有 $\sqrt{S}$ 层，那么残量网络每单位流至少经过 $\sqrt{S}$ 个点，而所有点能经过的流总数不超过 $S$，于是残量网络的最大流不超过 $\sqrt{S}$，至多再增广 $\sqrt{S}$ 轮。</p>
+<p>任意网络中，增广轮数不超过 <span class="arithmatex">\(O(\sqrt{S})\)</span>。</p>
+<p>用 <span class="arithmatex">\(in_u,out_u\)</span> 分别代表 <span class="arithmatex">\(u\)</span> 入边和出边的容量和，其中 <span class="arithmatex">\(S=\sum_{u\in V\setminus\begin{Bmatrix}s,t\end{Bmatrix}}\min(in_u,out_u)\)</span></p>
+<p>证明：增广 <span class="arithmatex">\(\sqrt{S}\)</span> 轮后，除源汇以外的点 <span class="arithmatex">\(in_u,out_u\)</span> 均不变（考虑增广路进入这个点和走出这个点的边相互抵消），此时增广路至少有 <span class="arithmatex">\(\sqrt{S}\)</span> 层，那么残量网络每单位流至少经过 <span class="arithmatex">\(\sqrt{S}\)</span> 个点，而所有点能经过的流总数不超过 <span class="arithmatex">\(S\)</span>，于是残量网络的最大流不超过 <span class="arithmatex">\(\sqrt{S}\)</span>，至多再增广 <span class="arithmatex">\(\sqrt{S}\)</span> 轮。</p>
 </li>
 <li>
-<p>任意网络中，加了多路增广的 dinic 复杂度不超过 $O(np+nm)$，其中 $p$ 是增广路条数总和。</p>
+<p>任意网络中，加了多路增广的 dinic 复杂度不超过 <span class="arithmatex">\(O(np+nm)\)</span>，其中 <span class="arithmatex">\(p\)</span> 是增广路条数总和。</p>
 <p>证明：</p>
 <p>考虑之前的复杂度证明中有这么一句话：</p>
 <blockquote>
-<p>每次会花至多 $O(n)$ 的时间找到一条路径。</p>
+<p>每次会花至多 <span class="arithmatex">\(O(n)\)</span> 的时间找到一条路径。</p>
 </blockquote>
-<p>但是根据刚才的几次分析，容易发现每次至多会花 $O(d)$（其中 $d$ 是层次图层数）的时间找到一条路。并且如果用了多路增广，相当于遇到阻塞流后只花了 $O(1)$ 的时间就找到了下一条路径，也就是说只花了 $O(1)$ 的时间就使 $cur$ 跳转了一下。</p>
-<p>那么每一轮增广的复杂度上界为 $O(d\times t+m)$，其中 $d$ 为层次图层数，$t$ 为形成阻塞流的增广路条数。</p>
-<p>那么总复杂度不超过 $O(np+nm)$，其中 $p$ 是增广路总数，因为每条增广路若形成阻塞流会贡献至多 $n$ 的复杂度，否则会算到后面的 $m$ 里。后面的 $nm$ 是好理解的。</p>
+<p>但是根据刚才的几次分析，容易发现每次至多会花 <span class="arithmatex">\(O(d)\)</span>（其中 <span class="arithmatex">\(d\)</span> 是层次图层数）的时间找到一条路。并且如果用了多路增广，相当于遇到阻塞流后只花了 <span class="arithmatex">\(O(1)\)</span> 的时间就找到了下一条路径，也就是说只花了 <span class="arithmatex">\(O(1)\)</span> 的时间就使 <span class="arithmatex">\(cur\)</span> 跳转了一下。</p>
+<p>那么每一轮增广的复杂度上界为 <span class="arithmatex">\(O(d\times t+m)\)</span>，其中 <span class="arithmatex">\(d\)</span> 为层次图层数，<span class="arithmatex">\(t\)</span> 为形成阻塞流的增广路条数。</p>
+<p>那么总复杂度不超过 <span class="arithmatex">\(O(np+nm)\)</span>，其中 <span class="arithmatex">\(p\)</span> 是增广路总数，因为每条增广路若形成阻塞流会贡献至多 <span class="arithmatex">\(n\)</span> 的复杂度，否则会算到后面的 <span class="arithmatex">\(m\)</span> 里。后面的 <span class="arithmatex">\(nm\)</span> 是好理解的。</p>
 </li>
 <li>
-<p>任意网络中，总复杂度不超过 $O(mf)$，其中 $f$ 为最大流流量。</p>
-<p>证明：增广路总条数和增广轮数均不超过 $f$，加上结论 $6$ 可以推出应是 $O(nf+mf)$。又由于 $n\le m$，于是 $O(mf)$。</p>
+<p>任意网络中，总复杂度不超过 <span class="arithmatex">\(O(mf)\)</span>，其中 <span class="arithmatex">\(f\)</span> 为最大流流量。</p>
+<p>证明：增广路总条数和增广轮数均不超过 <span class="arithmatex">\(f\)</span>，加上结论 <span class="arithmatex">\(6\)</span> 可以推出应是 <span class="arithmatex">\(O(nf+mf)\)</span>。又由于 <span class="arithmatex">\(n\le m\)</span>，于是 <span class="arithmatex">\(O(mf)\)</span>。</p>
 </li>
 <li>
-<p>任意网络中，总复杂度不会超过 $O(mS^{\frac{2}{3}})$，$S$ 定义见上文。</p>
-<p>证明：增广 $S^{\frac{1}{3}}$ 轮后层次图层数至少为 $S^{\frac{1}{3}}$，这一部分每一轮复杂度为 $O(mS^{\frac{1}{3}})$，于是总复杂度为 $O(mS^{\frac{2}{3}})$。残量网络中，每条增广路至少经过 $S^{\frac{1}{3}}$ 个点，与之前的同理，残量网络的最大流不超过 $S^{\frac{2}{3}}$，根据结论 $7$，剩下的复杂度为 $O(mS^{\frac{2}{3}})$。</p>
+<p>任意网络中，总复杂度不会超过 <span class="arithmatex">\(O(mS^{\frac{2}{3}})\)</span>，<span class="arithmatex">\(S\)</span> 定义见上文。</p>
+<p>证明：增广 <span class="arithmatex">\(S^{\frac{1}{3}}\)</span> 轮后层次图层数至少为 <span class="arithmatex">\(S^{\frac{1}{3}}\)</span>，这一部分每一轮复杂度为 <span class="arithmatex">\(O(mS^{\frac{1}{3}})\)</span>，于是总复杂度为 <span class="arithmatex">\(O(mS^{\frac{2}{3}})\)</span>。残量网络中，每条增广路至少经过 <span class="arithmatex">\(S^{\frac{1}{3}}\)</span> 个点，与之前的同理，残量网络的最大流不超过 <span class="arithmatex">\(S^{\frac{2}{3}}\)</span>，根据结论 <span class="arithmatex">\(7\)</span>，剩下的复杂度为 <span class="arithmatex">\(O(mS^{\frac{2}{3}})\)</span>。</p>
 </li>
 <li>
-<p>任意网络中，总复杂度不会超过 $O(\sqrt[3]{n^2mS^2}+m\sqrt{S})$。</p>
+<p>任意网络中，总复杂度不会超过 <span class="arithmatex">\(O(\sqrt[3]{n^2mS^2}+m\sqrt{S})\)</span>。</p>
 <p>妈的怎么越来越复杂了。</p>
 <p>证明：</p>
-<p>设一个阈值 $B$，先增广 $B$ 轮，此时层次图轮数至少为 $B$，复杂度为 $O(mB^2)$，此时残量网络最大流不会超过 $\frac{S}{B}$，又因为最多增广 $O(\sqrt{S})$ 轮，根据结论 $6$ 剩下的时间复杂度为 $O(\frac{nS}{B}+m\sqrt{S})$。</p>
-<p>二者相加，得复杂度为 $O(mB^2+\frac{nS}{B}+m\sqrt{S})$。取 $B=O(\sqrt[3]{\frac{nS}{m}})$，得复杂度为 $O(\sqrt[3]{n^2mS^2}+m\sqrt{S})$。</p>
+<p>设一个阈值 <span class="arithmatex">\(B\)</span>，先增广 <span class="arithmatex">\(B\)</span> 轮，此时层次图轮数至少为 <span class="arithmatex">\(B\)</span>，复杂度为 <span class="arithmatex">\(O(mB^2)\)</span>，此时残量网络最大流不会超过 <span class="arithmatex">\(\frac{S}{B}\)</span>，又因为最多增广 <span class="arithmatex">\(O(\sqrt{S})\)</span> 轮，根据结论 <span class="arithmatex">\(6\)</span> 剩下的时间复杂度为 <span class="arithmatex">\(O(\frac{nS}{B}+m\sqrt{S})\)</span>。</p>
+<p>二者相加，得复杂度为 <span class="arithmatex">\(O(mB^2+\frac{nS}{B}+m\sqrt{S})\)</span>。取 <span class="arithmatex">\(B=O(\sqrt[3]{\frac{nS}{m}})\)</span>，得复杂度为 <span class="arithmatex">\(O(\sqrt[3]{n^2mS^2}+m\sqrt{S})\)</span>。</p>
 </li>
 </ol>
 <ul>
-<li>总结：<p>设 $c$ 为单条边的容量上界，不难发现有 $S\le C\le mc$。</p>
+<li>总结：<p>设 <span class="arithmatex">\(c\)</span> 为单条边的容量上界，不难发现有 <span class="arithmatex">\(S\le C\le mc\)</span>。</p>
 <table>
 <thead>
 <tr>
 <th style="text-align: center;">通式</th>
-<th style="text-align: center;">$O(C\sqrt{C})$（结论 $4$）</th>
-<th style="text-align: center;">$O(nm\sqrt{S})$（结论 $5$）</th>
-<th style="text-align: center;">$O(\sqrt[3]{n^2mS^2}+m\sqrt{S})$（结论 $9$）</th>
+<th style="text-align: center;"><span class="arithmatex">\(O(C\sqrt{C})\)</span>（结论 <span class="arithmatex">\(4\)</span>）</th>
+<th style="text-align: center;"><span class="arithmatex">\(O(nm\sqrt{S})\)</span>（结论 <span class="arithmatex">\(5\)</span>）</th>
+<th style="text-align: center;"><span class="arithmatex">\(O(\sqrt[3]{n^2mS^2}+m\sqrt{S})\)</span>（结论 <span class="arithmatex">\(9\)</span>）</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;">用 $c$ 表示</td>
-<td style="text-align: center;">$O(mc\sqrt{mc})$</td>
-<td style="text-align: center;">$O(nm\sqrt{mc})$</td>
-<td style="text-align: center;">$O(m(\sqrt[3]{n^2c^2}+\sqrt{mc}))$</td>
+<td style="text-align: center;">用 <span class="arithmatex">\(c\)</span> 表示</td>
+<td style="text-align: center;"><span class="arithmatex">\(O(mc\sqrt{mc})\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(O(nm\sqrt{mc})\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(O(m(\sqrt[3]{n^2c^2}+\sqrt{mc}))\)</span></td>
 </tr>
 <tr>
-<td style="text-align: center;">$n,m,c$ 同阶（稀疏图）</td>
-<td style="text-align: center;">$O(n^3)$</td>
-<td style="text-align: center;">$O(n^3)$</td>
-<td style="text-align: center;">$O(n^{\frac{7}{3}})$</td>
+<td style="text-align: center;"><span class="arithmatex">\(n,m,c\)</span> 同阶（稀疏图）</td>
+<td style="text-align: center;"><span class="arithmatex">\(O(n^3)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(O(n^3)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(O(n^{\frac{7}{3}})\)</span></td>
 </tr>
 <tr>
-<td style="text-align: center;">$n,c$ 同阶（稠密图,$m\approx n^2$）</td>
-<td style="text-align: center;">$O(n^{\frac{9}{2}})&gt;O(n^2m)$</td>
-<td style="text-align: center;">$O(n^{\frac{9}{2}})&gt;O(n^2m)$</td>
-<td style="text-align: center;">$O(n^{\frac{7}{2}})$</td>
+<td style="text-align: center;"><span class="arithmatex">\(n,c\)</span> 同阶（稠密图,<span class="arithmatex">\(m\approx n^2\)</span>）</td>
+<td style="text-align: center;"><span class="arithmatex">\(O(n^{\frac{9}{2}})&gt;O(n^2m)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(O(n^{\frac{9}{2}})&gt;O(n^2m)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(O(n^{\frac{7}{2}})\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -6660,15 +6688,15 @@
 <ul>
 <li><strong>定义</strong></li>
 </ul>
-<p>对于一个网络流图 $G=(V,E)$，其<strong>割</strong>的定义为一种<strong>点的划分方式</strong>：将所有的点划分为 $S$ 和 $T=V-S$ 两个集合，其中源点 $s\in S$，汇点 $t\in T$。</p>
+<p>对于一个网络流图 <span class="arithmatex">\(G=(V,E)\)</span>，其<strong>割</strong>的定义为一种<strong>点的划分方式</strong>：将所有的点划分为 <span class="arithmatex">\(S\)</span> 和 <span class="arithmatex">\(T=V-S\)</span> 两个集合，其中源点 <span class="arithmatex">\(s\in S\)</span>，汇点 <span class="arithmatex">\(t\in T\)</span>。</p>
 <ul>
 <li>割的<strong>容量</strong></li>
 </ul>
-<p>我们的定义割 $(S,T)$ 的容量 $c(S,T)$ 表示所有从 $S$ 到 $T$ 的边的容量之和，即 $c(S,T)=\sum_{u\in S,v\in T,(u,v)\in E}c(u,v)$。当然我们也可以用 $c(s,t)$ 表示 $c(S,T)$。</p>
+<p>我们的定义割 <span class="arithmatex">\((S,T)\)</span> 的容量 <span class="arithmatex">\(c(S,T)\)</span> 表示所有从 <span class="arithmatex">\(S\)</span> 到 <span class="arithmatex">\(T\)</span> 的边的容量之和，即 <span class="arithmatex">\(c(S,T)=\sum_{u\in S,v\in T,(u,v)\in E}c(u,v)\)</span>。当然我们也可以用 <span class="arithmatex">\(c(s,t)\)</span> 表示 <span class="arithmatex">\(c(S,T)\)</span>。</p>
 <ul>
 <li>最小割</li>
 </ul>
-<p>最小割就是求得一个割 $(S,T)$ 使得割的容量 $c(S,T)$ 最小。</p>
+<p>最小割就是求得一个割 <span class="arithmatex">\((S,T)\)</span> 使得割的容量 <span class="arithmatex">\(c(S,T)\)</span> 最小。</p>
 <p>摘自 <a href="https://oi-wiki.org/graph/flow/min-cut/#%E6%A6%82%E5%BF%B5">OI Wiki</a>。</p>
 </div>
 <p>如何求最小割呢？我们有一个非常强的定理。</p>
@@ -6676,50 +6704,50 @@
 <p>这个定理的内容非常简单：最大流等于最小割。</p>
 <details class="note" open="open">
 <summary>证明</summary>
-<p>形式化地，$f_{\max}(s,t)=c_{\min}(s,t)$</p>
-<p>对于任意一个可行流 $f(s,t)$ 的任意一个割 $(S,T)$，我们可以得到：</p>
-<p>$$f(s,t) = \sum_{u\in S, v\in T,(u,v)\in E}f(u,v)-\sum_{u\in T, v\in S,(u,v)\in E}f(u,v)$$</p>
-<p>就是从 $s$ 到 $t$ 的总量等于流过去的减去流回来的。</p>
-<p>由于可行流的性质，上面这玩意儿显然小于等于 $\sum_{u\in S,v\in T,(u,v)\in E}c(u,v)$，所以流小于等于割。</p>
-<p>将网络跑出最大流后，可以构造出一个割：把 $s$ 能通过残量网络到的点集设为 $S$，其余设为 $T$， 作为割 $(S,T)$， 从 $S$ 到 $T$ 的边必然满流， 从 $T$ 到 $S$ 的边必然 $0$ 流， 所以这个割的容量就是最大流的流量，根据流小于等于割这个割就是最小割。</p>
-<p>由于 $s$ 能通过残量网络到的点集为 $S$，所以 $S$ 到 $T$ 显然满流，那么 $T$ 到 $S$ 为什么必定 $0$ 流呢？ <del>这不是显然吗</del> 但并没有这样一个定理。我们可以用反证法，假设有一条从 $T$ 到 $S$ 的边不 $0$ 流，即 $f(u\in T,v\in S)&gt; 0$，那么对于它的反向边 $(v,u)$，有 $f(v,u)&lt;c(v,u)$，即 $(v,u)$ 不满流，与假设 $u \in T,v\in S$ 矛盾，故从 $T$ 到 $S$ 的边必定 $0$ 流。</p>
+<p>形式化地，<span class="arithmatex">\(f_{\max}(s,t)=c_{\min}(s,t)\)</span></p>
+<p>对于任意一个可行流 <span class="arithmatex">\(f(s,t)\)</span> 的任意一个割 <span class="arithmatex">\((S,T)\)</span>，我们可以得到：</p>
+<div class="arithmatex">\[f(s,t) = \sum_{u\in S, v\in T,(u,v)\in E}f(u,v)-\sum_{u\in T, v\in S,(u,v)\in E}f(u,v)\]</div>
+<p>就是从 <span class="arithmatex">\(s\)</span> 到 <span class="arithmatex">\(t\)</span> 的总量等于流过去的减去流回来的。</p>
+<p>由于可行流的性质，上面这玩意儿显然小于等于 <span class="arithmatex">\(\sum_{u\in S,v\in T,(u,v)\in E}c(u,v)\)</span>，所以流小于等于割。</p>
+<p>将网络跑出最大流后，可以构造出一个割：把 <span class="arithmatex">\(s\)</span> 能通过残量网络到的点集设为 <span class="arithmatex">\(S\)</span>，其余设为 <span class="arithmatex">\(T\)</span>， 作为割 <span class="arithmatex">\((S,T)\)</span>， 从 <span class="arithmatex">\(S\)</span> 到 <span class="arithmatex">\(T\)</span> 的边必然满流， 从 <span class="arithmatex">\(T\)</span> 到 <span class="arithmatex">\(S\)</span> 的边必然 <span class="arithmatex">\(0\)</span> 流， 所以这个割的容量就是最大流的流量，根据流小于等于割这个割就是最小割。</p>
+<p>由于 <span class="arithmatex">\(s\)</span> 能通过残量网络到的点集为 <span class="arithmatex">\(S\)</span>，所以 <span class="arithmatex">\(S\)</span> 到 <span class="arithmatex">\(T\)</span> 显然满流，那么 <span class="arithmatex">\(T\)</span> 到 <span class="arithmatex">\(S\)</span> 为什么必定 <span class="arithmatex">\(0\)</span> 流呢？ <del>这不是显然吗</del> 但并没有这样一个定理。我们可以用反证法，假设有一条从 <span class="arithmatex">\(T\)</span> 到 <span class="arithmatex">\(S\)</span> 的边不 <span class="arithmatex">\(0\)</span> 流，即 <span class="arithmatex">\(f(u\in T,v\in S)&gt; 0\)</span>，那么对于它的反向边 <span class="arithmatex">\((v,u)\)</span>，有 <span class="arithmatex">\(f(v,u)&lt;c(v,u)\)</span>，即 <span class="arithmatex">\((v,u)\)</span> 不满流，与假设 <span class="arithmatex">\(u \in T,v\in S\)</span> 矛盾，故从 <span class="arithmatex">\(T\)</span> 到 <span class="arithmatex">\(S\)</span> 的边必定 <span class="arithmatex">\(0\)</span> 流。</p>
 </details>
-<p>所以求最小割也是跑一遍 dinic 就行了，甚至还能算出方案，只要遍历一下在残量网络上 $s$ 能到达的所有结点即可。</p>
+<p>所以求最小割也是跑一遍 dinic 就行了，甚至还能算出方案，只要遍历一下在残量网络上 <span class="arithmatex">\(s\)</span> 能到达的所有结点即可。</p>
 <h4 id="_8">必割边与可行边</h4>
 <p>在有些时候，最小割题会需要你求出满足某些条件的割边（或其存在性）。这种时候就需要知道在最小割中哪些边是必须割的，哪些边是可以割的。下面所有条件都是在跑完最大流的残量网络上叙述的。</p>
 <blockquote>
 <p>可行边</p>
 </blockquote>
-<p>$u\to v$ 是可行边的必要条件：
+<p><span class="arithmatex">\(u\to v\)</span> 是可行边的必要条件：
 1. 满流
-2. 在残量网络中找不到 $u\rightsquigarrow v$ 的路径。</p>
+2. 在残量网络中找不到 <span class="arithmatex">\(u\rightsquigarrow v\)</span> 的路径。</p>
 <p>首先不满流显然不能割，根据最小割性质所有割边必须满流。</p>
-<p>另一个条件考虑证必要性，若 $u\to v$ 是割边，且存在 $u\rightsquigarrow v$ 的路径，又由于不存在增广路（最大流已经跑完），残量网络上每条边均固定，那么无论怎么分 $u\rightsquigarrow v$ 路径上的点，残量网络上都至少会有一条 $S\to T$ 的边，不满足割的性质。</p>
+<p>另一个条件考虑证必要性，若 <span class="arithmatex">\(u\to v\)</span> 是割边，且存在 <span class="arithmatex">\(u\rightsquigarrow v\)</span> 的路径，又由于不存在增广路（最大流已经跑完），残量网络上每条边均固定，那么无论怎么分 <span class="arithmatex">\(u\rightsquigarrow v\)</span> 路径上的点，残量网络上都至少会有一条 <span class="arithmatex">\(S\to T\)</span> 的边，不满足割的性质。</p>
 <p>另一种理解是假如退掉若干流量，那么这些流量可以不走这条边补回来。</p>
-<p>具体求法可以考虑跑 SCC。若 $u$ 能到 $v$ 那么 $u,v$ 就在同一个强连通分量里面（因为残量网络上有 $v\to u$ 的边）。</p>
+<p>具体求法可以考虑跑 SCC。若 <span class="arithmatex">\(u\)</span> 能到 <span class="arithmatex">\(v\)</span> 那么 <span class="arithmatex">\(u,v\)</span> 就在同一个强连通分量里面（因为残量网络上有 <span class="arithmatex">\(v\to u\)</span> 的边）。</p>
 <blockquote>
 <p>必割边</p>
 </blockquote>
-<p>$u\to v$ 是必割边的充要条件：
+<p><span class="arithmatex">\(u\to v\)</span> 是必割边的充要条件：
 1. 满流
-2. 残量网络上 $s$ 能到 $u$,$v$ 能到 $t$。</p>
+2. 残量网络上 <span class="arithmatex">\(s\)</span> 能到 <span class="arithmatex">\(u\)</span>,<span class="arithmatex">\(v\)</span> 能到 <span class="arithmatex">\(t\)</span>。</p>
 <p>容易发现这个条件严格包含“可行边”的条件（不然就有增广路）。</p>
 <p>增大此边后最小割必定会变大，说明最小割必定包含这条边。</p>
 <h4 id="_9">最大权闭合子图</h4>
 <p>此段为 2024.1.31 更新。</p>
 <p>起因是在专题里面找到一道题，归约成了<strong>看起来能用最小割做</strong>的样子，但不知道怎么建模。询问 LCX 后得知是板，遂学习。</p>
-<p>问题描述：给定一个点带权（有正有负）的有向图 $G=\begin{Bmatrix}V,E\end{Bmatrix}$，求出一个子图 $G'=\begin{Bmatrix}V',E'\end{Bmatrix}(V'\subseteq V,E'\subseteq E)$，满足 $\forall (u,v)\in E$，若 $u\in V'$，则 $v\in V'$（我们称这样的图为闭合子图，其实就是从某一些点开始能走到的所有点）。最大化集合 $V'$ 的点权和。</p>
+<p>问题描述：给定一个点带权（有正有负）的有向图 <span class="arithmatex">\(G=\begin{Bmatrix}V,E\end{Bmatrix}\)</span>，求出一个子图 <span class="arithmatex">\(G'=\begin{Bmatrix}V',E'\end{Bmatrix}(V'\subseteq V,E'\subseteq E)\)</span>，满足 <span class="arithmatex">\(\forall (u,v)\in E\)</span>，若 <span class="arithmatex">\(u\in V'\)</span>，则 <span class="arithmatex">\(v\in V'\)</span>（我们称这样的图为闭合子图，其实就是从某一些点开始能走到的所有点）。最大化集合 <span class="arithmatex">\(V'\)</span> 的点权和。</p>
 <p>直接给出建模：</p>
 <ol>
-<li>$\forall (u,v)\in E$，连边 $(u,v,+\inf)$。</li>
-<li>$\forall u,val_{u}\ge 0$，连边 $(s,u,val_u)$。</li>
-<li>$\forall u,val_{u}&lt; 0$，连边 $(u,t,-val_u)$。</li>
+<li><span class="arithmatex">\(\forall (u,v)\in E\)</span>，连边 <span class="arithmatex">\((u,v,+\inf)\)</span>。</li>
+<li><span class="arithmatex">\(\forall u,val_{u}\ge 0\)</span>，连边 <span class="arithmatex">\((s,u,val_u)\)</span>。</li>
+<li><span class="arithmatex">\(\forall u,val_{u}&lt; 0\)</span>，连边 <span class="arithmatex">\((u,t,-val_u)\)</span>。</li>
 </ol>
-<p>然后最大权闭合子图权值和就是正权点点权和减去最小割。对应结点就是与 $s$ 连通的部分。</p>
+<p>然后最大权闭合子图权值和就是正权点点权和减去最小割。对应结点就是与 <span class="arithmatex">\(s\)</span> 连通的部分。</p>
 <div class="admonition info">
 <p class="admonition-title">正确性证明</p>
-<p>由于最小割的性质，除去割边以外，和 $s$ 相连的那一个部分不能有边指向另一个部分，又由于能割掉的边只有与 $s,t$ 相连的边，因为中间的边权为正无穷，显然与 $s$ 相连的必定是闭合子图。</p>
-<p>假设一开始所有正权点都在闭合子图中，若割掉某正权点与 $s$ 的连边，说明它被踢出了闭合子图，权值减小 $val_u$。对于负权点，若割掉与 $t$ 的连边说明它被加入了闭合子图。</p>
+<p>由于最小割的性质，除去割边以外，和 <span class="arithmatex">\(s\)</span> 相连的那一个部分不能有边指向另一个部分，又由于能割掉的边只有与 <span class="arithmatex">\(s,t\)</span> 相连的边，因为中间的边权为正无穷，显然与 <span class="arithmatex">\(s\)</span> 相连的必定是闭合子图。</p>
+<p>假设一开始所有正权点都在闭合子图中，若割掉某正权点与 <span class="arithmatex">\(s\)</span> 的连边，说明它被踢出了闭合子图，权值减小 <span class="arithmatex">\(val_u\)</span>。对于负权点，若割掉与 <span class="arithmatex">\(t\)</span> 的连边说明它被加入了闭合子图。</p>
 <p>故最大权闭合子图权值和就是正权点点权和减去最小割。</p>
 </div>
 <p>另外最大权闭合子图建模还有一些技巧：</p>
@@ -6728,9 +6756,9 @@
 <ul>
 <li>钦定选/不选某个点</li>
 </ul>
-<p>考虑新建两个点 $\inf,-\inf$，点权分别为正充分大值和负充分大值。</p>
-<p>如果必须选一个点，那么将它连在 $\inf$ 后面，因为 $\inf$ 这个点是必选的。</p>
-<p>如果必须不选某个点。那么将它连向 $-\inf$ 后面。因为 $-\inf$ 是必不选的，所以不能选它。</p>
+<p>考虑新建两个点 <span class="arithmatex">\(\inf,-\inf\)</span>，点权分别为正充分大值和负充分大值。</p>
+<p>如果必须选一个点，那么将它连在 <span class="arithmatex">\(\inf\)</span> 后面，因为 <span class="arithmatex">\(\inf\)</span> 这个点是必选的。</p>
+<p>如果必须不选某个点。那么将它连向 <span class="arithmatex">\(-\inf\)</span> 后面。因为 <span class="arithmatex">\(-\inf\)</span> 是必不选的，所以不能选它。</p>
 <ul>
 <li>最小权闭合子图</li>
 </ul>
@@ -6743,45 +6771,45 @@
 <ol>
 <li>核心性质</li>
 </ol>
-<p>对于图 $G$，构造一棵树 $T$，使得任意两点间在原图上的最小割就是树上两点间路径上的边权最小值。</p>
+<p>对于图 <span class="arithmatex">\(G\)</span>，构造一棵树 <span class="arithmatex">\(T\)</span>，使得任意两点间在原图上的最小割就是树上两点间路径上的边权最小值。</p>
 <ol start="2">
 <li>如何构造</li>
 </ol>
-<p>图中只有一个点时，最小割树就是单独这个点。否则任意选取两个不同的点，求出<strong>在原图上</strong>的最小割，在最小割树中的这两点间连上边权等于最小割容量的边，并根据最小割与当前集合的交划分出两个集合，递归在两个集合内进行构造。总共求 $n−1$ 次最小割，恰好连 $n-1$ 条边。</p>
+<p>图中只有一个点时，最小割树就是单独这个点。否则任意选取两个不同的点，求出<strong>在原图上</strong>的最小割，在最小割树中的这两点间连上边权等于最小割容量的边，并根据最小割与当前集合的交划分出两个集合，递归在两个集合内进行构造。总共求 <span class="arithmatex">\(n−1\)</span> 次最小割，恰好连 <span class="arithmatex">\(n-1\)</span> 条边。</p>
 <ol start="3">
 <li>正确性证明</li>
 </ol>
 <p>妈的网上找的免费内容没有一篇证明正确性的。还好有学长的课件。</p>
-<p>考虑归纳法，归纳证明任一点集 $R$ 都满足性质。为方便叙述，设 $u,v$ 间最小割容量为 $c(u,v)$，两点集 $S,T$ 中间的边权容量和表示为 $f(S,T)$。</p>
-<p>当 $|R|=1$，显然满足性质。</p>
-<p>当 $|R|\ne 1$，假设递归的两集合 $S,T$ 都是满足性质的。那么对于一点对 $(u,v)$，若 $u,v\in S$，则可直接套用 $S$ 部分的结论。$u,v\in T$ 同理。下面单独讨论 $u\in S,v\in T$ 的情况。</p>
-<p>设本层分治选取的点为 $s\in S,t\in T$，则 $u,v$ 在最小割树上的路径为 $u\rightsquigarrow s \to t \rightsquigarrow v$，由于 $S,T$ 内部结论均成立，故此时路径上权值的最小值为 $\min\begin{Bmatrix}c(u,s),c(s,t),c(t,v)\end{Bmatrix}$。</p>
-<p>那么考虑证明 $c(u,v)=\min\begin{Bmatrix}c(u,s),c(s,t),c(t,v)\end{Bmatrix}$，先考虑 $c(s,t)$ 的贡献</p>
+<p>考虑归纳法，归纳证明任一点集 <span class="arithmatex">\(R\)</span> 都满足性质。为方便叙述，设 <span class="arithmatex">\(u,v\)</span> 间最小割容量为 <span class="arithmatex">\(c(u,v)\)</span>，两点集 <span class="arithmatex">\(S,T\)</span> 中间的边权容量和表示为 <span class="arithmatex">\(f(S,T)\)</span>。</p>
+<p>当 <span class="arithmatex">\(|R|=1\)</span>，显然满足性质。</p>
+<p>当 <span class="arithmatex">\(|R|\ne 1\)</span>，假设递归的两集合 <span class="arithmatex">\(S,T\)</span> 都是满足性质的。那么对于一点对 <span class="arithmatex">\((u,v)\)</span>，若 <span class="arithmatex">\(u,v\in S\)</span>，则可直接套用 <span class="arithmatex">\(S\)</span> 部分的结论。<span class="arithmatex">\(u,v\in T\)</span> 同理。下面单独讨论 <span class="arithmatex">\(u\in S,v\in T\)</span> 的情况。</p>
+<p>设本层分治选取的点为 <span class="arithmatex">\(s\in S,t\in T\)</span>，则 <span class="arithmatex">\(u,v\)</span> 在最小割树上的路径为 <span class="arithmatex">\(u\rightsquigarrow s \to t \rightsquigarrow v\)</span>，由于 <span class="arithmatex">\(S,T\)</span> 内部结论均成立，故此时路径上权值的最小值为 <span class="arithmatex">\(\min\begin{Bmatrix}c(u,s),c(s,t),c(t,v)\end{Bmatrix}\)</span>。</p>
+<p>那么考虑证明 <span class="arithmatex">\(c(u,v)=\min\begin{Bmatrix}c(u,s),c(s,t),c(t,v)\end{Bmatrix}\)</span>，先考虑 <span class="arithmatex">\(c(s,t)\)</span> 的贡献</p>
 <div class="admonition quote">
 <p class="admonition-title">引理</p>
-<p>引理：$\forall a,b,c(a\ne b\ne c)$ 必然有 $c(a,b)\ge \min[c(a,c),c(c,b)]$</p>
+<p>引理：<span class="arithmatex">\(\forall a,b,c(a\ne b\ne c)\)</span> 必然有 <span class="arithmatex">\(c(a,b)\ge \min[c(a,c),c(c,b)]\)</span></p>
 <p>证明：</p>
-<p>考虑反证法，假设 $\exists a,b,c,$ 使得 $c(a,b)&lt; \min[c(a,c),c(c,b)]$。</p>
-<p>那么对于 $c(a,b)$，设对应两集合分别是 $A,B$。</p>
-<p>若 $c\in A$，则 $(A,B)$ 也是 $c,b$ 的一个割，故 $c(c,b)=c(a,b)$。</p>
-<p>若 $c\in A$，同理。</p>
-<p>则此时 $c(a,b)= \min[c(a,c),c(c,b)]$，与假设矛盾。</p>
-<p>综上，$c(a,b)\ge \min[c(a,c),c(c,b)]$。</p>
+<p>考虑反证法，假设 <span class="arithmatex">\(\exists a,b,c,\)</span> 使得 <span class="arithmatex">\(c(a,b)&lt; \min[c(a,c),c(c,b)]\)</span>。</p>
+<p>那么对于 <span class="arithmatex">\(c(a,b)\)</span>，设对应两集合分别是 <span class="arithmatex">\(A,B\)</span>。</p>
+<p>若 <span class="arithmatex">\(c\in A\)</span>，则 <span class="arithmatex">\((A,B)\)</span> 也是 <span class="arithmatex">\(c,b\)</span> 的一个割，故 <span class="arithmatex">\(c(c,b)=c(a,b)\)</span>。</p>
+<p>若 <span class="arithmatex">\(c\in A\)</span>，同理。</p>
+<p>则此时 <span class="arithmatex">\(c(a,b)= \min[c(a,c),c(c,b)]\)</span>，与假设矛盾。</p>
+<p>综上，<span class="arithmatex">\(c(a,b)\ge \min[c(a,c),c(c,b)]\)</span>。</p>
 </div>
-<p>由引理得 $c(u,v)\ge \min[c(u,t),c(t,v)]\ge \min\begin{Bmatrix}c(u,s),c(s,t),c(t,v)\end{Bmatrix}$，则当 $c(s,t)$ 产生贡献时必然正确。</p>
-<p>然后考虑 $c(u,s)$ 和 $c(t,v)$，考虑这样的构造：</p>
+<p>由引理得 <span class="arithmatex">\(c(u,v)\ge \min[c(u,t),c(t,v)]\ge \min\begin{Bmatrix}c(u,s),c(s,t),c(t,v)\end{Bmatrix}\)</span>，则当 <span class="arithmatex">\(c(s,t)\)</span> 产生贡献时必然正确。</p>
+<p>然后考虑 <span class="arithmatex">\(c(u,s)\)</span> 和 <span class="arithmatex">\(c(t,v)\)</span>，考虑这样的构造：</p>
 <p><img alt="图示 10" src="../../../img/graph_flow_10.png" /></p>
-<p>设 $s,u$ 的最小割为 $(A \cup B,C\cup D)$，$s,t$ 的最小割为 $(A\cup C,B\cup D)$，若 $t\in D$，则 $s,t$ 的最小割也是 $s,u$ 的割，此时 $c(s,t)&lt;c(s,u)$，$c(s,u)$，不会产生贡献。</p>
-<p>若 $t'\in B$，则 $(A\cup C\cup D,B)$ 也是一个 $s,t'$ 的割，又由于 $s,t'$ 的最小割为 $(A \cup B,C\cup D)$，有：</p>
-<p>$$f(A,B)+f(A,D)+f(C,B)+f(C,D)\le f(A,B)+f(C,B)+f(D,B)$$ </p>
-<p>故 $f(A,D)+f(C,D)\le f(D,B)$。对于 $s,u$ 同理可得 $f(A,D)+f(B,D)\le f(C,D)$。两式联立可得 $f(A,D)=0,f(C,D)=f(B,D)$。那么此时 $(A\cup B\cup D,C)$ 就是 $s,u$ 的最小割。又由于它也是 $(u,v)$ 的割，故 $c(u,v)\le c(s,u)$。</p>
-<p>同理可证：$c(u,v)\le c(s,u)$（前提是 $c(s,t)$ 不产生贡献）。</p>
+<p>设 <span class="arithmatex">\(s,u\)</span> 的最小割为 <span class="arithmatex">\((A \cup B,C\cup D)\)</span>，<span class="arithmatex">\(s,t\)</span> 的最小割为 <span class="arithmatex">\((A\cup C,B\cup D)\)</span>，若 <span class="arithmatex">\(t\in D\)</span>，则 <span class="arithmatex">\(s,t\)</span> 的最小割也是 <span class="arithmatex">\(s,u\)</span> 的割，此时 <span class="arithmatex">\(c(s,t)&lt;c(s,u)\)</span>，<span class="arithmatex">\(c(s,u)\)</span>，不会产生贡献。</p>
+<p>若 <span class="arithmatex">\(t'\in B\)</span>，则 <span class="arithmatex">\((A\cup C\cup D,B)\)</span> 也是一个 <span class="arithmatex">\(s,t'\)</span> 的割，又由于 <span class="arithmatex">\(s,t'\)</span> 的最小割为 <span class="arithmatex">\((A \cup B,C\cup D)\)</span>，有：</p>
+<div class="arithmatex">\[f(A,B)+f(A,D)+f(C,B)+f(C,D)\le f(A,B)+f(C,B)+f(D,B)\]</div>
+<p>故 <span class="arithmatex">\(f(A,D)+f(C,D)\le f(D,B)\)</span>。对于 <span class="arithmatex">\(s,u\)</span> 同理可得 <span class="arithmatex">\(f(A,D)+f(B,D)\le f(C,D)\)</span>。两式联立可得 <span class="arithmatex">\(f(A,D)=0,f(C,D)=f(B,D)\)</span>。那么此时 <span class="arithmatex">\((A\cup B\cup D,C)\)</span> 就是 <span class="arithmatex">\(s,u\)</span> 的最小割。又由于它也是 <span class="arithmatex">\((u,v)\)</span> 的割，故 <span class="arithmatex">\(c(u,v)\le c(s,u)\)</span>。</p>
+<p>同理可证：<span class="arithmatex">\(c(u,v)\le c(s,u)\)</span>（前提是 <span class="arithmatex">\(c(s,t)\)</span> 不产生贡献）。</p>
 <hr />
-<p>综上，若 $c(s,t) \le c(s,u),c(t,v)$，此时 $c(u,v)\le c(s,t)$，且 $c(u,v) \ge c(s,t)$。故 $c(u,v)=c(s,t)$。</p>
-<p>若 $c(s,t)$ 不是三者中的最小值，那么若 $c(s,u)\le c(t,v)$，则 $c(u,v)\ge c(s,u)$ 且 $c(u,v)\le c(s,u)$，此时 $c(u,v)=c(s,u)$，$c(s,u)&gt;c(t,v)$ 时同理。</p>
-<p>故 $c(u,v)=\min\begin{Bmatrix}c(u,s),c(s,t),c(t,v)\end{Bmatrix}$，得证。</p>
-<p>这样我们就证明了 $|R|\ne 1$ 时性质仍成立，故这样构造是正确的。</p>
-<p>复杂度是 $O(n^3m)$（dinic 复杂度乘以 $n$）。</p>
+<p>综上，若 <span class="arithmatex">\(c(s,t) \le c(s,u),c(t,v)\)</span>，此时 <span class="arithmatex">\(c(u,v)\le c(s,t)\)</span>，且 <span class="arithmatex">\(c(u,v) \ge c(s,t)\)</span>。故 <span class="arithmatex">\(c(u,v)=c(s,t)\)</span>。</p>
+<p>若 <span class="arithmatex">\(c(s,t)\)</span> 不是三者中的最小值，那么若 <span class="arithmatex">\(c(s,u)\le c(t,v)\)</span>，则 <span class="arithmatex">\(c(u,v)\ge c(s,u)\)</span> 且 <span class="arithmatex">\(c(u,v)\le c(s,u)\)</span>，此时 <span class="arithmatex">\(c(u,v)=c(s,u)\)</span>，<span class="arithmatex">\(c(s,u)&gt;c(t,v)\)</span> 时同理。</p>
+<p>故 <span class="arithmatex">\(c(u,v)=\min\begin{Bmatrix}c(u,s),c(s,t),c(t,v)\end{Bmatrix}\)</span>，得证。</p>
+<p>这样我们就证明了 <span class="arithmatex">\(|R|\ne 1\)</span> 时性质仍成立，故这样构造是正确的。</p>
+<p>复杂度是 <span class="arithmatex">\(O(n^3m)\)</span>（dinic 复杂度乘以 <span class="arithmatex">\(n\)</span>）。</p>
 <details class="success">
 <summary><a href="https://www.luogu.com.cn/problem/P4897">模板题</a>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -6953,9 +6981,9 @@
 <p>右转<a href="../planar_graph/">平面图性质</a>。</p>
 <h3 id="_11">费用流</h3>
 <p>费用流，全称<strong>最小费用最大流</strong>。我们学最大流时或多或少都会意识到一个网络取到最大流的流不止一个。再某些问题上，网络上的边会有使用代价（比如现实中自来水引水之类的问题），我们需要一种算法来解决在流量等于最大流的情况下，最小化费用的问题。</p>
-<p>形式化地，给定一个网络 $G=(V,E)$，每条边除了容量限制 $c(u,v)$，还有一个单位费用 $w(u,v)$，当 $(u,v)$ 的流量为 $f(u,v)$ 时，需要花费 $f(u,v)\times w(u,v)$ 的代价。</p>
-<p>则在该网络中总花费最小的最大流称为<strong>最小费用最大流</strong>，即在最大化 $\sum_{(s,v)\in E}f(s,v)$ 的前提下最小化 $\sum_{(u,v)\in E}f(u,v)\times w(u,v)$。</p>
-<p>然后反向边的费用为 $w(v,u)=-w(u,v)$，如果你理解了建反向边的意义这是显而易见的。</p>
+<p>形式化地，给定一个网络 <span class="arithmatex">\(G=(V,E)\)</span>，每条边除了容量限制 <span class="arithmatex">\(c(u,v)\)</span>，还有一个单位费用 <span class="arithmatex">\(w(u,v)\)</span>，当 <span class="arithmatex">\((u,v)\)</span> 的流量为 <span class="arithmatex">\(f(u,v)\)</span> 时，需要花费 <span class="arithmatex">\(f(u,v)\times w(u,v)\)</span> 的代价。</p>
+<p>则在该网络中总花费最小的最大流称为<strong>最小费用最大流</strong>，即在最大化 <span class="arithmatex">\(\sum_{(s,v)\in E}f(s,v)\)</span> 的前提下最小化 <span class="arithmatex">\(\sum_{(u,v)\in E}f(u,v)\times w(u,v)\)</span>。</p>
+<p>然后反向边的费用为 <span class="arithmatex">\(w(v,u)=-w(u,v)\)</span>，如果你理解了建反向边的意义这是显而易见的。</p>
 <p>用类似的算法还能求解最大费用最大流，方法是把费用取相反数。</p>
 <h4 id="_12">消圈定理</h4>
 <p>一个流是该流量下的最小费用流当且仅当残量网络无负圈。</p>
@@ -6964,12 +6992,12 @@
 <ul>
 <li>必要性：</li>
 </ul>
-<p>即“是最小费用流” $\Rightarrow$ “无负圈”。</p>
+<p>即“是最小费用流” <span class="arithmatex">\(\Rightarrow\)</span> “无负圈”。</p>
 <p>考虑逆否命题，容易发现若有负圈，当前的流加上负圈会得到更小费用的流，并且流量不变。</p>
 <ul>
 <li>充分性：</li>
 </ul>
-<p>即“无负圈” $\Rightarrow$ “是最小费用流”。</p>
+<p>即“无负圈” <span class="arithmatex">\(\Rightarrow\)</span> “是最小费用流”。</p>
 <p>仍然考虑逆否命题，若有更小费用的流，那么当前边权和最大的一条增广路的反向边在残量网络上除去和它的重边后必定会剩下至少一个负环。</p>
 </details>
 <h4 id="ssp">SSP 算法</h4>
@@ -6978,9 +7006,9 @@
 <details class="info">
 <summary>SSP 算法正确性证明</summary>
 <p>我们考虑使用数学归纳法与反证法。</p>
-<p>假设流量为 $i$ 最小费用为 $w_i$，由于图上没有负圈，所以 $w_0$ 只有一种取值为 $0$。</p>
-<p>假如现在费用为 $w_i$，我们找到了一条单位费用总和最小的增广路并增加了 $1$ 流量，那么新的费用就是 $w_{i+1}$，说明这条增广路的单位费用总和为 $w_{i+1}-w_{i}$。</p>
-<p>假如存在 $w_{i+1}'&lt;w_{i+1}$，那么肯定存在一条增广路单位费用为 $w_{i+1}'-w_i&lt;w_{i+1}-w_i$，与之前的“单位费用最小”矛盾，故 $w_{i+1}$ 为流量为 $i+1$ 的最小费用。</p>
+<p>假设流量为 <span class="arithmatex">\(i\)</span> 最小费用为 <span class="arithmatex">\(w_i\)</span>，由于图上没有负圈，所以 <span class="arithmatex">\(w_0\)</span> 只有一种取值为 <span class="arithmatex">\(0\)</span>。</p>
+<p>假如现在费用为 <span class="arithmatex">\(w_i\)</span>，我们找到了一条单位费用总和最小的增广路并增加了 <span class="arithmatex">\(1\)</span> 流量，那么新的费用就是 <span class="arithmatex">\(w_{i+1}\)</span>，说明这条增广路的单位费用总和为 <span class="arithmatex">\(w_{i+1}-w_{i}\)</span>。</p>
+<p>假如存在 <span class="arithmatex">\(w_{i+1}'&lt;w_{i+1}\)</span>，那么肯定存在一条增广路单位费用为 <span class="arithmatex">\(w_{i+1}'-w_i&lt;w_{i+1}-w_i\)</span>，与之前的“单位费用最小”矛盾，故 <span class="arithmatex">\(w_{i+1}\)</span> 为流量为 <span class="arithmatex">\(i+1\)</span> 的最小费用。</p>
 <p>证毕。</p>
 <p>一个更聪明的证法是考虑任意一条大于最短路的路径如果流过后它的反向边在残量网络上都会和最短路形成负环。</p>
 </details>
@@ -7082,7 +7110,7 @@
 </details>
 <p>能过模板题。</p>
 <p><img alt="图示 8" src="../../../img/graph_flow_8.png" /></p>
-<p>如果用 Bellman-Ford 求解，每次找增广路的复杂度是 $O(nm)$ 的，故复杂度上界是 $O(nmf)$，如果用 SPFA 就是 $O(nkf)$ 的， <del>可以证明 $k$ 通常不大于 $2$。</del></p>
+<p>如果用 Bellman-Ford 求解，每次找增广路的复杂度是 <span class="arithmatex">\(O(nm)\)</span> 的，故复杂度上界是 <span class="arithmatex">\(O(nmf)\)</span>，如果用 SPFA 就是 <span class="arithmatex">\(O(nkf)\)</span> 的， <del>可以证明 <span class="arithmatex">\(k\)</span> 通常不大于 <span class="arithmatex">\(2\)</span>。</del></p>
 <p>另外一个常数更小的写法是使用 EK 而非 dinic，复杂度上界不变，而且看起来没那么铸币。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -7137,21 +7165,21 @@
 </span></code></pre></div>
 </details>
 <h4 id="primal-dual">Primal-Dual 原始对偶算法</h4>
-<p>众所周知 Bellman-Ford 的复杂度为 $O(nm)$，SPFA 也能被卡到 $O(nm)$，在稀疏图和稠密图上都比不上优先队列优化的 Dijkstra 算法 $O(m \log m)$ 的复杂度，但假如一张图上存在负边权的边就不得不用。</p>
-<p>而在图论中，有一个叫 Johnson 全源最短路的算法，它求解全源最短路只跑一遍 SPFA，通过给每个点设置势能使得边权全变为正，然后用 Dijkstra 求解，这种算法效率非常高，是 $O(nm\log m)$ 的。</p>
+<p>众所周知 Bellman-Ford 的复杂度为 <span class="arithmatex">\(O(nm)\)</span>，SPFA 也能被卡到 <span class="arithmatex">\(O(nm)\)</span>，在稀疏图和稠密图上都比不上优先队列优化的 Dijkstra 算法 <span class="arithmatex">\(O(m \log m)\)</span> 的复杂度，但假如一张图上存在负边权的边就不得不用。</p>
+<p>而在图论中，有一个叫 Johnson 全源最短路的算法，它求解全源最短路只跑一遍 SPFA，通过给每个点设置势能使得边权全变为正，然后用 Dijkstra 求解，这种算法效率非常高，是 <span class="arithmatex">\(O(nm\log m)\)</span> 的。</p>
 <p>而在费用流中，我们同样需要多次求解最短路，是否有类似的算法呢？答案是肯定的：Primal-Dual 原始对偶算法（简称原始对偶算法）。</p>
-<p>首先跑一遍 SPFA 算出源点到每个点的初始距离 $h_i$ 作为改点的初始势能，接下来把每条边边权 $w(u,v)$ 重置为 $w(u,v)+h_u-h_v$，这样所有边权都变为非负的并且最短路一定对应原图的最短路，证明可以参考 <a href="https://oi-wiki.org/graph/shortest-path/#%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E_1">OI Wiki</a>，或者我未来的最短路文章。</p>
-<p>注意到一个问题，每轮增广后残量网络的形态会变化，相应的，势能也应该变化。但我们不可能重新跑一遍 SPFA <del>不然那还不如 SSP 算法</del> 。那具体如何更新呢？设增广后源点到 $i$ 号点的距离为 $d_i$（就是跑 Dijkstra 时求出来的），只需给 $h_i$ 加上 $d_i$ 即可。</p>
+<p>首先跑一遍 SPFA 算出源点到每个点的初始距离 <span class="arithmatex">\(h_i\)</span> 作为改点的初始势能，接下来把每条边边权 <span class="arithmatex">\(w(u,v)\)</span> 重置为 <span class="arithmatex">\(w(u,v)+h_u-h_v\)</span>，这样所有边权都变为非负的并且最短路一定对应原图的最短路，证明可以参考 <a href="https://oi-wiki.org/graph/shortest-path/#%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E_1">OI Wiki</a>，或者我未来的最短路文章。</p>
+<p>注意到一个问题，每轮增广后残量网络的形态会变化，相应的，势能也应该变化。但我们不可能重新跑一遍 SPFA <del>不然那还不如 SSP 算法</del> 。那具体如何更新呢？设增广后源点到 <span class="arithmatex">\(i\)</span> 号点的距离为 <span class="arithmatex">\(d_i\)</span>（就是跑 Dijkstra 时求出来的），只需给 <span class="arithmatex">\(h_i\)</span> 加上 <span class="arithmatex">\(d_i\)</span> 即可。</p>
 <div class="admonition info">
 <p class="admonition-title">正确性证明</p>
 <p>首先容易发现这样仍会使最短路对应原图的最短路，对势能分析即可。</p>
 <p>然后证明边权非负。</p>
-<p>首先这轮增广后，由于可能有一些增广前 $f(i,j)=0$ 在增广路上，残量网络上就会多出一些 $(j,i)$ 的边，一定会满足 $d_j=d_i+w(i,j)+h_i-h_j$，不然 $(i,j)$ 就不在会增广路上了，故 $w(i,j)+(h_i+d_i)-(h_j+d_j)=0$，非负。</p>
-<p>对于原有的边，$d_i+w(i,j)+h_i-h_j \ge d_j$，这由最短路“最短”的性质可以得到。故 $w(i,j)+(h_i+d_i)-(h_j+d_j) \ge 0$，同样非负。</p>
+<p>首先这轮增广后，由于可能有一些增广前 <span class="arithmatex">\(f(i,j)=0\)</span> 在增广路上，残量网络上就会多出一些 <span class="arithmatex">\((j,i)\)</span> 的边，一定会满足 <span class="arithmatex">\(d_j=d_i+w(i,j)+h_i-h_j\)</span>，不然 <span class="arithmatex">\((i,j)\)</span> 就不在会增广路上了，故 <span class="arithmatex">\(w(i,j)+(h_i+d_i)-(h_j+d_j)=0\)</span>，非负。</p>
+<p>对于原有的边，<span class="arithmatex">\(d_i+w(i,j)+h_i-h_j \ge d_j\)</span>，这由最短路“最短”的性质可以得到。故 <span class="arithmatex">\(w(i,j)+(h_i+d_i)-(h_j+d_j) \ge 0\)</span>，同样非负。</p>
 <p>故可以用 Dijkstra 算法正确地求出最短路。</p>
 </div>
-<p>关于值域问题，势能 $h_u$ 的值域与原边权 $s$ 到 $u$ 的最短路 $d_u$ 值域相同。始终有 $h_s=0$，
-证明考虑重置边权后每条边边权非负，$h_s+d_u−h_u \ge 0$，那么 $h_u ≤d_u$。</p>
+<p>关于值域问题，势能 <span class="arithmatex">\(h_u\)</span> 的值域与原边权 <span class="arithmatex">\(s\)</span> 到 <span class="arithmatex">\(u\)</span> 的最短路 <span class="arithmatex">\(d_u\)</span> 值域相同。始终有 <span class="arithmatex">\(h_s=0\)</span>，
+证明考虑重置边权后每条边边权非负，<span class="arithmatex">\(h_s+d_u−h_u \ge 0\)</span>，那么 <span class="arithmatex">\(h_u ≤d_u\)</span>。</p>
 <details class="success">
 <summary>原始对偶算法 +dinic 参考代码</summary>
 <div class="language-cpp highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
@@ -7330,22 +7358,22 @@
 <p>此段更新于 2024.6.7。</p>
 <p>他娘的，网络流还在追我。</p>
 <p>这个就不贴代码了，因为具体写法太多了。</p>
-<p>上下界网络流就是一般的网络流对每条边流量的限制从“小于等于容量 $c$”改为了“大于等于 $l$ 小于等于 $r$”。</p>
+<p>上下界网络流就是一般的网络流对每条边流量的限制从“小于等于容量 <span class="arithmatex">\(c\)</span>”改为了“大于等于 <span class="arithmatex">\(l\)</span> 小于等于 <span class="arithmatex">\(r\)</span>”。</p>
 <h4 id="_14">无源汇上下界可行流/最小费用可行流</h4>
-<p>给定无源汇流量网络 $G$，询问是否存在一种给每条边定容量的方式使得每条边容量在 $[l,r]$ 中，且每个点流入的容量与流出的容量相同。</p>
-<p>不妨先假设最初 $f(u,v)=l(u,v)$，再设每条边容量 $c(u,v)=r(u,v)-l(u,v)$，加上超级源汇点就能转化为我们熟悉的“初始流量为 $0$”的问题了。但是这张新图上的可行流直接加上 $l(u,v)$ 后显然不一定是可行流，考虑对它进行一些调整。</p>
-<p>现在考虑一个点，设它初始流入流量减去流出流量等于 $M$</p>
+<p>给定无源汇流量网络 <span class="arithmatex">\(G\)</span>，询问是否存在一种给每条边定容量的方式使得每条边容量在 <span class="arithmatex">\([l,r]\)</span> 中，且每个点流入的容量与流出的容量相同。</p>
+<p>不妨先假设最初 <span class="arithmatex">\(f(u,v)=l(u,v)\)</span>，再设每条边容量 <span class="arithmatex">\(c(u,v)=r(u,v)-l(u,v)\)</span>，加上超级源汇点就能转化为我们熟悉的“初始流量为 <span class="arithmatex">\(0\)</span>”的问题了。但是这张新图上的可行流直接加上 <span class="arithmatex">\(l(u,v)\)</span> 后显然不一定是可行流，考虑对它进行一些调整。</p>
+<p>现在考虑一个点，设它初始流入流量减去流出流量等于 <span class="arithmatex">\(M\)</span></p>
 <ul>
-<li>$M=0$，显然这个点它流量平衡，不额外连边。</li>
-<li>$M&gt;0$，这个点流入的大于流出的，新图上可行流直接加上 $l(u,v)$ 会导致这个点流入大于流出，所以要构造使得这个点流出流量多 $M$，那么超级源点 $S$ 向这个点连容量为 $M$ 的边。</li>
-<li>$M&lt;0$，同理，这个点向超级汇点 $T$ 连流量为 $-M$ 的边。</li>
+<li><span class="arithmatex">\(M=0\)</span>，显然这个点它流量平衡，不额外连边。</li>
+<li><span class="arithmatex">\(M&gt;0\)</span>，这个点流入的大于流出的，新图上可行流直接加上 <span class="arithmatex">\(l(u,v)\)</span> 会导致这个点流入大于流出，所以要构造使得这个点流出流量多 <span class="arithmatex">\(M\)</span>，那么超级源点 <span class="arithmatex">\(S\)</span> 向这个点连容量为 <span class="arithmatex">\(M\)</span> 的边。</li>
+<li><span class="arithmatex">\(M&lt;0\)</span>，同理，这个点向超级汇点 <span class="arithmatex">\(T\)</span> 连流量为 <span class="arithmatex">\(-M\)</span> 的边。</li>
 </ul>
 <p>显然，上面第二种情况连边流量和与第三种边的流量和相等，证明考虑每条边的流量对总流出量和总流入量的贡献相同。</p>
-<p>于是求出 $S\rightsquigarrow T$ 的最大流，如果与 $S$ 的连边恰好满流（显然此时与 $T$ 的连边也满流），就有解。并且原图上每条边的流量就是新图上流量加上 $l(u,v)$。</p>
+<p>于是求出 <span class="arithmatex">\(S\rightsquigarrow T\)</span> 的最大流，如果与 <span class="arithmatex">\(S\)</span> 的连边恰好满流（显然此时与 <span class="arithmatex">\(T\)</span> 的连边也满流），就有解。并且原图上每条边的流量就是新图上流量加上 <span class="arithmatex">\(l(u,v)\)</span>。</p>
 <p>最小费用可行流就把最大流改成费用流即可。看起来需要找负环，但容易发现若初始没有负环，那么跑完的残量网络上没有负环（这个证明直接消圈定理。若初始有负环那可能需要后文的有负环费用流算法，但转化后也没有负环），所以正确性显然。</p>
 <h4 id="_15">有源汇上下界可行流/最小费用可行流</h4>
-<p>即源点的 $M\in[-\inf,0]$，汇点的 $M\in[0,\inf]$，并且源点净流出量等于汇点净流入量，那么汇点向源点连容量充分大的边即可。</p>
-<p>那么多大是“充分大”呢？根据流的定义，容易发现这条边的流量就是 $s\to t$ 的流量。那么设为最大流上界就足够了。</p>
+<p>即源点的 <span class="arithmatex">\(M\in[-\inf,0]\)</span>，汇点的 <span class="arithmatex">\(M\in[0,\inf]\)</span>，并且源点净流出量等于汇点净流入量，那么汇点向源点连容量充分大的边即可。</p>
+<p>那么多大是“充分大”呢？根据流的定义，容易发现这条边的流量就是 <span class="arithmatex">\(s\to t\)</span> 的流量。那么设为最大流上界就足够了。</p>
 <p>还是可以换成费用流，看起来需要找一下有没有负权增广路，但容易发现负权增广路加上上面那条边就是负环，和上面的证明类似，也不需要。</p>
 <h4 id="_16">有源汇上下界最大流/费用流</h4>
 <p>先求可行流，然后去掉超级源汇点和那条新加的边在残量网络上跑最大流算法即可。因为显然所有可行流都能不断增广变成最大流。</p>
@@ -7354,7 +7382,7 @@
 <h4 id="_17">有源汇上下界最小流</h4>
 <p>这他妈是什么阴间算法。</p>
 <p>还是先求可行流。显然此时那条无限边上的流量就是那个可行流的流量。</p>
-<p>然后考虑把不需要的流退掉，那么去掉超级源汇和那条无限边后，跑一遍 $t\to s$ 的最大流即可。</p>
+<p>然后考虑把不需要的流退掉，那么去掉超级源汇和那条无限边后，跑一遍 <span class="arithmatex">\(t\to s\)</span> 的最大流即可。</p>
 <p>答案就是那条无限边减去这个最大流。</p>
 <p>注意到这一条没加“/费用流”，因为我不会。</p>
 <h4 id="_18">有负环的费用流</h4>
@@ -7362,7 +7390,7 @@
 <p>首先根据消圈定理，若初始无负环则整个费用流求解过程都必定没有负环。</p>
 <p>但是如果初始就有负环会导致大部分最短路算法死循环（应该没有最短路算法能处理负环吧？）。</p>
 <p>那么考虑进行一些转化使得初始图无负环。容易发现若初始没有负边则显然没有负环。</p>
-<p>可以把负费用的边 $(u,v,0,c,w)$（起点，终点，流量下界，容量，费用）视为 $(u,v,c,c,w)$ 和 $(v,u,0,c,-w)$ 两条边，就没有负环了。</p>
+<p>可以把负费用的边 <span class="arithmatex">\((u,v,0,c,w)\)</span>（起点，终点，流量下界，容量，费用）视为 <span class="arithmatex">\((u,v,c,c,w)\)</span> 和 <span class="arithmatex">\((v,u,0,c,-w)\)</span> 两条边，就没有负环了。</p>
 <p>另外还有一些神秘构造，比如让它“不要出现环”之类的。不过我还是觉得把负权边全去掉会比较简单。</p>
 <h2 id="_19">结语</h2>
 <p>这篇博客介绍了网络流比较基础的内容，与真正的网络流相比还只是冰山一角，这里引用一句经典的话：</p>

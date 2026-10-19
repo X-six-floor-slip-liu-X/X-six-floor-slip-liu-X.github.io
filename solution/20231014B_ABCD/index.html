@@ -1064,6 +1064,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/travels/2026CCPC_Changchun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026CCPC区域赛长春站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5853,9 +5881,9 @@
 <p><a href="https://local.cwoi.com.cn:8443/contest/C0342">忘记存文件了，挂个校内 OJ 地址</a></p>
 <h2 id="t1">T1</h2>
 <p>场上唯一做出来的题。</p>
-<p>容易发现他就是要求你 $T_1$ 中没有横叉边，$T_2$ 中没有前向边/返祖边。</p>
-<p>其实很简单，容易发现 $T_1$ 是 dfs 树，因为无向图的 dfs 树上显然没有横叉边。$T_2$ 是 bfs 树，因为 bfs 树上显然没有前向边，由于是无向图那么他显然同时也没有返祖边。</p>
-<p>复杂度 $O(n)$。</p>
+<p>容易发现他就是要求你 <span class="arithmatex">\(T_1\)</span> 中没有横叉边，<span class="arithmatex">\(T_2\)</span> 中没有前向边/返祖边。</p>
+<p>其实很简单，容易发现 <span class="arithmatex">\(T_1\)</span> 是 dfs 树，因为无向图的 dfs 树上显然没有横叉边。<span class="arithmatex">\(T_2\)</span> 是 bfs 树，因为 bfs 树上显然没有前向边，由于是无向图那么他显然同时也没有返祖边。</p>
+<p>复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5909,19 +5937,19 @@
 </span></code></pre></div>
 </details>
 <h2 id="t2">T2</h2>
-<p>首先，我们令一个<strong>数</strong> $p_i$ 的“权值”为 $\sum_{j=1}^{i-1}[p_j&gt;p_i]$。</p>
-<p>由于交换的次数最小，那么对于每次交换 $p_i,p_{i+1}$，显然有 $p_i&gt;p_{i+1}$。那么容易发现这对于 $p_i$ 的权值是没有影响的，我们可以视作这样一个交换为对 $p_{i+1}$ 进行了一次操作，使 $p_{i+1}$ 的权值减去 $1$。</p>
-<p>那么容易发现，只有在最终序列中权值<strong>恰好</strong>为 $k$ 的数是有可能被操作过的，因为如果加入进行了一系列操作后把一个大于 $k$ 的权值变成了等于 $k$ 的，那么你显然不会考虑把它变得更小，因为把它变小并不会影响其他位置的权值。</p>
-<p>那么只需要考虑这些权值为 $k$ 的位置<strong>初始权值</strong>有多少种可能就可以了…</p>
+<p>首先，我们令一个<strong>数</strong> <span class="arithmatex">\(p_i\)</span> 的“权值”为 <span class="arithmatex">\(\sum_{j=1}^{i-1}[p_j&gt;p_i]\)</span>。</p>
+<p>由于交换的次数最小，那么对于每次交换 <span class="arithmatex">\(p_i,p_{i+1}\)</span>，显然有 <span class="arithmatex">\(p_i&gt;p_{i+1}\)</span>。那么容易发现这对于 <span class="arithmatex">\(p_i\)</span> 的权值是没有影响的，我们可以视作这样一个交换为对 <span class="arithmatex">\(p_{i+1}\)</span> 进行了一次操作，使 <span class="arithmatex">\(p_{i+1}\)</span> 的权值减去 <span class="arithmatex">\(1\)</span>。</p>
+<p>那么容易发现，只有在最终序列中权值<strong>恰好</strong>为 <span class="arithmatex">\(k\)</span> 的数是有可能被操作过的，因为如果加入进行了一系列操作后把一个大于 <span class="arithmatex">\(k\)</span> 的权值变成了等于 <span class="arithmatex">\(k\)</span> 的，那么你显然不会考虑把它变得更小，因为把它变小并不会影响其他位置的权值。</p>
+<p>那么只需要考虑这些权值为 <span class="arithmatex">\(k\)</span> 的位置<strong>初始权值</strong>有多少种可能就可以了…</p>
 <p>吗？</p>
-<p>其实并不是，容易发现假如其他数相对位置不动，一个数 $x$ 在多个位置可能具有相同的权值，而排列更关注的其实是数的<strong>位置</strong>。</p>
-<p>比如在排列 <code>5,2,4,1,3</code>、<code>5,2,1,4,3</code>、<code>5,2,1,3,4</code> 中 $4$ 都具有相同的权值。</p>
+<p>其实并不是，容易发现假如其他数相对位置不动，一个数 <span class="arithmatex">\(x\)</span> 在多个位置可能具有相同的权值，而排列更关注的其实是数的<strong>位置</strong>。</p>
+<p>比如在排列 <code>5,2,4,1,3</code>、<code>5,2,1,4,3</code>、<code>5,2,1,3,4</code> 中 <span class="arithmatex">\(4\)</span> 都具有相同的权值。</p>
 <p>那么我们需要考虑的就是每个数的<strong>初始位置</strong>有多少种可能。</p>
-<p>容易发现，若最终排列中 $p_i$ 后面存在一个 $p_j&lt;p_i$ 就不太好构造。</p>
-<p>但是跳出思维的误区，由于 $p_i$ 的权值恰好是 $k$，若后面有一个 $p_j&lt;p_i$，那么 $p_j$ 的权值必然大于 $k$，说明 $p_i$ 后面必定全都严格大于 $p_i$，也就是说 $p_i$ 在后面的所有位置都必然有不同的权值！</p>
+<p>容易发现，若最终排列中 <span class="arithmatex">\(p_i\)</span> 后面存在一个 <span class="arithmatex">\(p_j&lt;p_i\)</span> 就不太好构造。</p>
+<p>但是跳出思维的误区，由于 <span class="arithmatex">\(p_i\)</span> 的权值恰好是 <span class="arithmatex">\(k\)</span>，若后面有一个 <span class="arithmatex">\(p_j&lt;p_i\)</span>，那么 <span class="arithmatex">\(p_j\)</span> 的权值必然大于 <span class="arithmatex">\(k\)</span>，说明 <span class="arithmatex">\(p_i\)</span> 后面必定全都严格大于 <span class="arithmatex">\(p_i\)</span>，也就是说 <span class="arithmatex">\(p_i\)</span> 在后面的所有位置都必然有不同的权值！</p>
 <p>那么我们又只需要求初始权值的可能性了。</p>
 <p>而显然，由于我们每个操作只影响一个权值，假如我们要倒回去构造，那么我们可以一个一个放到想要的权值的位置，也就是说如果只求方案数可以直接乘起来。</p>
-<p>然后最终序列上的权值可以树状数组维护，复杂度 $O(n\log n)$。</p>
+<p>然后最终序列上的权值可以树状数组维护，复杂度 <span class="arithmatex">\(O(n\log n)\)</span>。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
@@ -5959,9 +5987,9 @@
 <p>很有意思的一道题。</p>
 <p>首先考虑如果给你一些点，问包含这些所有点的连通块最小是多少应该怎么求。</p>
 <p>这个可以直接虚树秒掉，考虑把这些点拎出来建虚树，容易发现虚树上所有点和边都是必要的，那么虚树的点数就是最小连通块大小。</p>
-<p>而我们刚刚说的那个东西其实有更快速的求法，由于一棵树的点数等于边数 $+1$，那么考虑求边数，容易发现按 dfs 序排序后虚树上边数刚好是相邻两项的距离（加上首尾两个）之和的二分之一，证明类似建虚树的方法。</p>
-<p>那么容易想到用莫队维护区间内点按 dfs 序排序的序列（这个可以用 <code>set</code>），复杂度是 $O(n\sqrt{n}\log n)$，不太能过（听说写压位 Trie 能过）。</p>
-<p>容易发现在序列上删点是可以 $O(1)$ 的，但是加点不行。那么可以用只删的回滚莫队维护双向链表，复杂度 $O(n\sqrt{n})$。</p>
+<p>而我们刚刚说的那个东西其实有更快速的求法，由于一棵树的点数等于边数 <span class="arithmatex">\(+1\)</span>，那么考虑求边数，容易发现按 dfs 序排序后虚树上边数刚好是相邻两项的距离（加上首尾两个）之和的二分之一，证明类似建虚树的方法。</p>
+<p>那么容易想到用莫队维护区间内点按 dfs 序排序的序列（这个可以用 <code>set</code>），复杂度是 <span class="arithmatex">\(O(n\sqrt{n}\log n)\)</span>，不太能过（听说写压位 Trie 能过）。</p>
+<p>容易发现在序列上删点是可以 <span class="arithmatex">\(O(1)\)</span> 的，但是加点不行。那么可以用只删的回滚莫队维护双向链表，复杂度 <span class="arithmatex">\(O(n\sqrt{n})\)</span>。</p>
 <p>另外由于是只删的回滚莫队，左右端点在同一块的情况其实不需要特判。</p>
 <details class="success">
 <summary>参考代码</summary>
@@ -6122,31 +6150,31 @@
 </details>
 <h2 id="t4">T4</h2>
 <p>现在迎面向我们走来的是蒸批出的 T4（指题目背景）。</p>
-<p>由于题目非常贴心的让你把答案乘以 $M^K$，那么其实就是要求有多少个整数序列 $a$，满足 $\forall i\in[1,K],a_i\in[0,M-1],\prod_{i+1}^Ka_i\equiv N\pmod M$。</p>
+<p>由于题目非常贴心的让你把答案乘以 <span class="arithmatex">\(M^K\)</span>，那么其实就是要求有多少个整数序列 <span class="arithmatex">\(a\)</span>，满足 <span class="arithmatex">\(\forall i\in[1,K],a_i\in[0,M-1],\prod_{i+1}^Ka_i\equiv N\pmod M\)</span>。</p>
 <ol>
-<li>首先考虑若 $M$ 是质数应该怎么做。</li>
+<li>首先考虑若 <span class="arithmatex">\(M\)</span> 是质数应该怎么做。</li>
 </ol>
-<p>根据简化剩余系的知识，我们可以知道，当 $M$ 是质数时，若 $a\ne 0$，那么必然存在一个 $r$ 使得 $a\times r\equiv b\pmod M$，且对于不同的 $b$，$r$ 的取值必定不相同。</p>
-<p>也就是说，特判掉 $n=0$ 的情况后，只要前 $k-1$ 项的乘积不同余 $0$，那么必然存在一个唯一确定的第 $k$ 项能把 $n$ 构造出来，也就是说乘积为 $n$ 的序列数就是 $(M-1)^{k-1}$。</p>
-<p>关于 $n=0$ 的情况，简单容斥即可，大概就是总序列数减去不为 $0$ 的序列数。</p>
+<p>根据简化剩余系的知识，我们可以知道，当 <span class="arithmatex">\(M\)</span> 是质数时，若 <span class="arithmatex">\(a\ne 0\)</span>，那么必然存在一个 <span class="arithmatex">\(r\)</span> 使得 <span class="arithmatex">\(a\times r\equiv b\pmod M\)</span>，且对于不同的 <span class="arithmatex">\(b\)</span>，<span class="arithmatex">\(r\)</span> 的取值必定不相同。</p>
+<p>也就是说，特判掉 <span class="arithmatex">\(n=0\)</span> 的情况后，只要前 <span class="arithmatex">\(k-1\)</span> 项的乘积不同余 <span class="arithmatex">\(0\)</span>，那么必然存在一个唯一确定的第 <span class="arithmatex">\(k\)</span> 项能把 <span class="arithmatex">\(n\)</span> 构造出来，也就是说乘积为 <span class="arithmatex">\(n\)</span> 的序列数就是 <span class="arithmatex">\((M-1)^{k-1}\)</span>。</p>
+<p>关于 <span class="arithmatex">\(n=0\)</span> 的情况，简单容斥即可，大概就是总序列数减去不为 <span class="arithmatex">\(0\)</span> 的序列数。</p>
 <ol start="2">
-<li>然后考虑 $M=p^e$ 的情况，其中 $p$ 是一个质数。</li>
+<li>然后考虑 <span class="arithmatex">\(M=p^e\)</span> 的情况，其中 <span class="arithmatex">\(p\)</span> 是一个质数。</li>
 </ol>
-<p>此时，容易发现 $n$ 必然能拆成 $d\times p^r$，其中 $\gcd(d,p)=1$，另外由于 $n&lt;m$，必然有 $r&lt;e$，证明考虑分解质因数。</p>
-<p>那么显然 $d$ 在 $M$ 的简化剩余系内，可以套用之前的算法，然后考虑这 $r$ 个 $p$ 分给 $k$ 个位置的方案数，由于 $r&lt;e$，那么就是 $r$ 个小球放进 $k$ 个盒子，可以有空盒的方案数，这个很典，答案是 $\binom{r+k-1}{k-1}$。</p>
-<p>对于 $n=0$ 的情况，容斥变得稍微复杂了一点，但还是挺简单的，就是总序列数减去恰好有零个 $p$ 的序列数再减去恰好有一个 $p$ 的序列数再减恰好去有两个 $p$ 的序列数……减去恰好有 $e-1$ 个 $p$ 的序列数。</p>
+<p>此时，容易发现 <span class="arithmatex">\(n\)</span> 必然能拆成 <span class="arithmatex">\(d\times p^r\)</span>，其中 <span class="arithmatex">\(\gcd(d,p)=1\)</span>，另外由于 <span class="arithmatex">\(n&lt;m\)</span>，必然有 <span class="arithmatex">\(r&lt;e\)</span>，证明考虑分解质因数。</p>
+<p>那么显然 <span class="arithmatex">\(d\)</span> 在 <span class="arithmatex">\(M\)</span> 的简化剩余系内，可以套用之前的算法，然后考虑这 <span class="arithmatex">\(r\)</span> 个 <span class="arithmatex">\(p\)</span> 分给 <span class="arithmatex">\(k\)</span> 个位置的方案数，由于 <span class="arithmatex">\(r&lt;e\)</span>，那么就是 <span class="arithmatex">\(r\)</span> 个小球放进 <span class="arithmatex">\(k\)</span> 个盒子，可以有空盒的方案数，这个很典，答案是 <span class="arithmatex">\(\binom{r+k-1}{k-1}\)</span>。</p>
+<p>对于 <span class="arithmatex">\(n=0\)</span> 的情况，容斥变得稍微复杂了一点，但还是挺简单的，就是总序列数减去恰好有零个 <span class="arithmatex">\(p\)</span> 的序列数再减去恰好有一个 <span class="arithmatex">\(p\)</span> 的序列数再减恰好去有两个 <span class="arithmatex">\(p\)</span> 的序列数……减去恰好有 <span class="arithmatex">\(e-1\)</span> 个 <span class="arithmatex">\(p\)</span> 的序列数。</p>
 <ol start="3">
 <li>最后考虑一般情况</li>
 </ol>
-<p>根据唯一分解定理，$M=\prod p_i^{e_i}$，容易想到对于每个 $p_i^{e_i}$ 求出答案后通过某种方法得出最终答案。为方便叙述，设 $f(n,m,k)$ 表示 $N=n,M=m,K=k$ 时的答案。那么其实，$f(N,M,K)=\prod f(N\bmod p_i^{e_i},p_i^{e_i},K)$，证明如下：</p>
-<p>容易发现若每个 $f(N,M,K)$ 的答案与 $f(N\bmod p_i^{e_i},p_i^{e_i},K)$ 的答案组<strong>一一对应</strong>，那么上式正立。</p>
-<p>先证明一个 $f(N,M,K)$ 能对应一组 $f(N\bmod p_i^{e_i},p_i^{e_i},K)$ 的答案，考虑一个答案的形式，即 $\prod_{j=1}^K A_j\equiv N\pmod M$，那么对于每个小情况 $i$，就是 $\prod_{j=1}^K a_{i,j}\equiv n_i\pmod{m_i}$，容易发现可以取 $a_{i,j}=A_{j}\bmod m_i,n_{i}=N\bmod m_i$，显然能对应。</p>
-<p>然后考虑证明一组 $f(N\bmod p_i^{e_i},p_i^{e_i},K)$ 的答案能对应 $f(N,M,K)$ 的答案。其实也很简单，考虑他是数个 $a_{i,j}\equiv n_i\pmod{m_i}$ 的形式，这其实就是 CRT 的形式，由于 $p_i^{e_i}$ 显然两两互质（证明考虑唯一分解定理），那么对于一组 $a_j$，显然 $A_j$ 是唯一的。</p>
-<p>故 $f(N,M,K)$ 的答案与 $f(N\bmod p_i^{e_i},p_i^{e_i},K)$ 的答案形成了双射，可以用乘法原理直接乘起来。</p>
+<p>根据唯一分解定理，<span class="arithmatex">\(M=\prod p_i^{e_i}\)</span>，容易想到对于每个 <span class="arithmatex">\(p_i^{e_i}\)</span> 求出答案后通过某种方法得出最终答案。为方便叙述，设 <span class="arithmatex">\(f(n,m,k)\)</span> 表示 <span class="arithmatex">\(N=n,M=m,K=k\)</span> 时的答案。那么其实，<span class="arithmatex">\(f(N,M,K)=\prod f(N\bmod p_i^{e_i},p_i^{e_i},K)\)</span>，证明如下：</p>
+<p>容易发现若每个 <span class="arithmatex">\(f(N,M,K)\)</span> 的答案与 <span class="arithmatex">\(f(N\bmod p_i^{e_i},p_i^{e_i},K)\)</span> 的答案组<strong>一一对应</strong>，那么上式正立。</p>
+<p>先证明一个 <span class="arithmatex">\(f(N,M,K)\)</span> 能对应一组 <span class="arithmatex">\(f(N\bmod p_i^{e_i},p_i^{e_i},K)\)</span> 的答案，考虑一个答案的形式，即 <span class="arithmatex">\(\prod_{j=1}^K A_j\equiv N\pmod M\)</span>，那么对于每个小情况 <span class="arithmatex">\(i\)</span>，就是 <span class="arithmatex">\(\prod_{j=1}^K a_{i,j}\equiv n_i\pmod{m_i}\)</span>，容易发现可以取 <span class="arithmatex">\(a_{i,j}=A_{j}\bmod m_i,n_{i}=N\bmod m_i\)</span>，显然能对应。</p>
+<p>然后考虑证明一组 <span class="arithmatex">\(f(N\bmod p_i^{e_i},p_i^{e_i},K)\)</span> 的答案能对应 <span class="arithmatex">\(f(N,M,K)\)</span> 的答案。其实也很简单，考虑他是数个 <span class="arithmatex">\(a_{i,j}\equiv n_i\pmod{m_i}\)</span> 的形式，这其实就是 CRT 的形式，由于 <span class="arithmatex">\(p_i^{e_i}\)</span> 显然两两互质（证明考虑唯一分解定理），那么对于一组 <span class="arithmatex">\(a_j\)</span>，显然 <span class="arithmatex">\(A_j\)</span> 是唯一的。</p>
+<p>故 <span class="arithmatex">\(f(N,M,K)\)</span> 的答案与 <span class="arithmatex">\(f(N\bmod p_i^{e_i},p_i^{e_i},K)\)</span> 的答案形成了双射，可以用乘法原理直接乘起来。</p>
 <p>然后就做完了……</p>
 <p>吗？</p>
-<p>如果你真的认真想过，会发现情况 $2$ 中 $\binom{r+k-1}{k-1}$ 这个组合数算不了，因为 $k$ 是 $10^9$ 级别的，但是 $r$ 是 $\log M$ 级别的，那么上面的组合数其实等于 $\binom{r+k-1}{r}$，可以预处理一些逆元后暴力下降幂。</p>
-<p>复杂度 $O(\log K+\log M)$（快速幂和暴力下降幂）。</p>
+<p>如果你真的认真想过，会发现情况 <span class="arithmatex">\(2\)</span> 中 <span class="arithmatex">\(\binom{r+k-1}{k-1}\)</span> 这个组合数算不了，因为 <span class="arithmatex">\(k\)</span> 是 <span class="arithmatex">\(10^9\)</span> 级别的，但是 <span class="arithmatex">\(r\)</span> 是 <span class="arithmatex">\(\log M\)</span> 级别的，那么上面的组合数其实等于 <span class="arithmatex">\(\binom{r+k-1}{r}\)</span>，可以预处理一些逆元后暴力下降幂。</p>
+<p>复杂度 <span class="arithmatex">\(O(\log K+\log M)\)</span>（快速幂和暴力下降幂）。</p>
 <details class="success">
 <summary>参考代码</summary>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
