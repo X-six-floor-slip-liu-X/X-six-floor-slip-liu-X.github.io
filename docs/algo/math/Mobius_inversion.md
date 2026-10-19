@@ -97,9 +97,9 @@ $$
 $$
 \begin{aligned}
 h(a)h(b)
-&=\sum_{c\mid a}f(c)g(\frac{a}{c})\sum_{d\mid b}f(d)g(\frac{b}{d})\\\\
-&=\sum_{c\mid a}\sum_{d\mid b}f(cd)g(\frac{ab}{cd})\\\\
-&=\sum_{e|ab}f(e)g(\frac{ab}{e})\\\\
+&=\sum_{c\mid a}f(c)g(\frac{a}{c})\sum_{d\mid b}f(d)g(\frac{b}{d})\\
+&=\sum_{c\mid a}\sum_{d\mid b}f(cd)g(\frac{ab}{cd})\\
+&=\sum_{e|ab}f(e)g(\frac{ab}{e})\\
 &=h(ab)
 \end{aligned}
 $$
@@ -111,14 +111,14 @@ $$
 $$
 \begin{aligned}
 f^{-1}(nm)
-&=\frac{\varepsilon(nm)-\sum_{d\mid nm}^{d\ne 1}f(d)f^{-1}(\frac{nm}{d})}{f(1)}\\\\
-&=-\sum_{d\mid nm}^{d\ne 1}f(d)f^{-1}(\frac{nm}{d})\\\\
-&=-\sum_{a\mid n,b\mid m}^{ab\ne 1}f(ab)f^{-1}(\frac{nm}{ab})\\\\
-&=-\sum_{a\mid n,b\mid m}^{ab\ne 1}f(a)f(b)f^{-1}(\frac{n}{a})f^{-1}(\frac{m}{b})\\\\
-&=f(1)f(1)g(n)g(m)-\sum_{a\mid n,b\mid m}f(a)f(b)f^{-1}(\frac{n}{a})f^{-1}(\frac{m}{b})\\\\
-&=f(1)f(1)g(n)g(m)-\sum_{a\mid n}f(a)f^{-1}(\frac{n}{a})\sum_{b\mid m}f(b)f^{-1}(\frac{m}{b})\\\\
-&=f(1)f(1)g(n)g(m)-(f\ast f^{-1})(n)(f\ast f^{-1})(m)\\\\
-&=f^{-1}(n)f^{-1}(m)-\varepsilon(n)\varepsilon(m)\\\\
+&=\frac{\varepsilon(nm)-\sum_{d\mid nm}^{d\ne 1}f(d)f^{-1}(\frac{nm}{d})}{f(1)}\\
+&=-\sum_{d\mid nm}^{d\ne 1}f(d)f^{-1}(\frac{nm}{d})\\
+&=-\sum_{a\mid n,b\mid m}^{ab\ne 1}f(ab)f^{-1}(\frac{nm}{ab})\\
+&=-\sum_{a\mid n,b\mid m}^{ab\ne 1}f(a)f(b)f^{-1}(\frac{n}{a})f^{-1}(\frac{m}{b})\\
+&=f(1)f(1)g(n)g(m)-\sum_{a\mid n,b\mid m}f(a)f(b)f^{-1}(\frac{n}{a})f^{-1}(\frac{m}{b})\\
+&=f(1)f(1)g(n)g(m)-\sum_{a\mid n}f(a)f^{-1}(\frac{n}{a})\sum_{b\mid m}f(b)f^{-1}(\frac{m}{b})\\
+&=f(1)f(1)g(n)g(m)-(f\ast f^{-1})(n)(f\ast f^{-1})(m)\\
+&=f^{-1}(n)f^{-1}(m)-\varepsilon(n)\varepsilon(m)\\
 &=f^{-1}(n)f^{-1}(m)
 \end{aligned}
 $$
@@ -149,7 +149,7 @@ $$
 
 $$
 \mu(n)=\begin{cases}
-0&,\exists p,p^2\mid n\\\\
+0&,\exists p,p^2\mid n\\
 (-1)^k&,\text{$k$ 是 $n$ 的质因子个数}
 \end{cases}
 $$
@@ -183,10 +183,10 @@ $$
 $$
 \begin{aligned}
 f(n)
-&=\sum_{i}\mu(i)F(ni)\\\\
-&=\sum_{i}\mu(i)\sum_{j}f(nij)\\\\
-&=\sum_{k}f(nk)\sum_{d\mid k}\mu(k)\\\\
-&=\sum_{k}f(nk)\varepsilon(k)\\\\
+&=\sum_{i}\mu(i)F(ni)\\
+&=\sum_{i}\mu(i)\sum_{j}f(nij)\\
+&=\sum_{k}f(nk)\sum_{d\mid k}\mu(k)\\
+&=\sum_{k}f(nk)\varepsilon(k)\\
 &=f(n)
 \end{aligned}
 $$
@@ -221,12 +221,12 @@ $$
 
 $$
 \begin{aligned}
-&\sum_{i=1}^n\sum_{j=1}^m[\mathrm{lcm}(i,j)=ij]\\\\
-=&\sum_{i=1}^n\sum_{j=1}^m[\gcd(i,j)=1]\\\\
-=&\sum_{i=1}^n\sum_{j=1}^m\sum_{d\mid gcd(i,j)}\mu(d)\\\\
-=&\sum_{d=1}^{\min(n,m)}\sum_{d\mid i}^{i\le n}\sum_{d\mid j}^{j\le m}\mu(d)\\\\
-=&\sum_{d=1}^{\min(n,m)}\mu(d)\sum_{d\mid i}^{i\le n}\sum_{d\mid j}^{j\le m}1\\\\
-=&\sum_{d=1}^{\min(n,m)}\mu(d)\left\lfloor\frac{n}{d}\right\rfloor\left\lfloor\frac{m}{d}\right\rfloor\\\\
+&\sum_{i=1}^n\sum_{j=1}^m[\mathrm{lcm}(i,j)=ij]\\
+=&\sum_{i=1}^n\sum_{j=1}^m[\gcd(i,j)=1]\\
+=&\sum_{i=1}^n\sum_{j=1}^m\sum_{d\mid gcd(i,j)}\mu(d)\\
+=&\sum_{d=1}^{\min(n,m)}\sum_{d\mid i}^{i\le n}\sum_{d\mid j}^{j\le m}\mu(d)\\
+=&\sum_{d=1}^{\min(n,m)}\mu(d)\sum_{d\mid i}^{i\le n}\sum_{d\mid j}^{j\le m}1\\
+=&\sum_{d=1}^{\min(n,m)}\mu(d)\left\lfloor\frac{n}{d}\right\rfloor\left\lfloor\frac{m}{d}\right\rfloor\\
 \end{aligned}
 $$
 
@@ -328,9 +328,9 @@ signed main(){
 $$
 \begin{aligned}
 \sum_{k=0}^c\varphi(p^k)
-&=1+\sum_{k=1}^c p^{k-1}\cdot (p-1)\\\\
-&=1+\sum_{k=0}^{c-1} p^k\cdot (p-1)\\\\
-&=1+\frac{(p-1)(p^c-1)}{p-1}\\\\
+&=1+\sum_{k=1}^c p^{k-1}\cdot (p-1)\\
+&=1+\sum_{k=0}^{c-1} p^k\cdot (p-1)\\
+&=1+\frac{(p-1)(p^c-1)}{p-1}\\
 &=p^c
 \end{aligned}
 $$
@@ -346,10 +346,10 @@ $$
 $$
 \begin{aligned}
 \sum_{i=1}^n\sum_{j=1}^m\gcd(i,j)
-&=\sum_{t=1}^nt\sum_{i=1}^{\left\lfloor\frac{n}{t}\right\rfloor}\sum_{i=1}^{\left\lfloor\frac{m}{t}\right\rfloor}[\gcd(i,j)=1]\\\\
-&=\sum_{t=1}^nt\sum_{d=1}^{\left\lfloor\frac{n}{t}\right\rfloor}\mu(d)\left\lfloor\frac{n}{dt}\right\rfloor\left\lfloor\frac{m}{dt}\right\rfloor\\\\
-&=\sum_{t=1}^nt\sum_{t\mid T}^{T\le n}\mu(\frac{T}{t})\left\lfloor\frac{n}{T}\right\rfloor\left\lfloor\frac{m}{T}\right\rfloor\\\\
-&=\sum_{T=1}^{n}\left\lfloor\frac{n}{T}\right\rfloor\left\lfloor\frac{m}{T}\right\rfloor\sum_{t\mid T} id(t)\mu(\frac{T}{t})\\\\
+&=\sum_{t=1}^nt\sum_{i=1}^{\left\lfloor\frac{n}{t}\right\rfloor}\sum_{i=1}^{\left\lfloor\frac{m}{t}\right\rfloor}[\gcd(i,j)=1]\\
+&=\sum_{t=1}^nt\sum_{d=1}^{\left\lfloor\frac{n}{t}\right\rfloor}\mu(d)\left\lfloor\frac{n}{dt}\right\rfloor\left\lfloor\frac{m}{dt}\right\rfloor\\
+&=\sum_{t=1}^nt\sum_{t\mid T}^{T\le n}\mu(\frac{T}{t})\left\lfloor\frac{n}{T}\right\rfloor\left\lfloor\frac{m}{T}\right\rfloor\\
+&=\sum_{T=1}^{n}\left\lfloor\frac{n}{T}\right\rfloor\left\lfloor\frac{m}{T}\right\rfloor\sum_{t\mid T} id(t)\mu(\frac{T}{t})\\
 &=\sum_{T=1}^{n}\left\lfloor\frac{n}{T}\right\rfloor\left\lfloor\frac{m}{T}\right\rfloor\varphi(T)
 \end{aligned}
 $$

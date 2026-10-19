@@ -57,9 +57,9 @@ $$
 
 $$
 \begin{aligned}
-\sum_{i=1}^n(f\ast g)(i)&=\sum_{i=1}^ng(i)F(\left\lfloor\frac{n}{i}\right\rfloor)\\\\
-\sum_{i=1}^n(f\ast g)(i)-\sum_{i=2}^{n}g(i)F(\left\lfloor\frac{n}{i}\right\rfloor)&=g(1)F(n)\\\\
-\frac{\sum_{i=1}^n(f*g)(i)-\sum_{i=2}^{n}g(i)F(\left\lfloor\frac{n}{i}\right\rfloor)}{g(1)}&=F(n)\\\\
+\sum_{i=1}^n(f\ast g)(i)&=\sum_{i=1}^ng(i)F(\left\lfloor\frac{n}{i}\right\rfloor)\\
+\sum_{i=1}^n(f\ast g)(i)-\sum_{i=2}^{n}g(i)F(\left\lfloor\frac{n}{i}\right\rfloor)&=g(1)F(n)\\
+\frac{\sum_{i=1}^n(f*g)(i)-\sum_{i=2}^{n}g(i)F(\left\lfloor\frac{n}{i}\right\rfloor)}{g(1)}&=F(n)\\
 \end{aligned}
 $$
 

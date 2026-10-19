@@ -19,25 +19,7 @@
         "panel": "dedicated",
         "clear": true,
         "showReuseMessage": false
-      },
-      "problemMatcher": [
-        {
-          "owner": "mkdocs",
-          "source": "mkdocs",
-          "fileLocation": ["relative", "${workspaceFolder}/docs"],
-          "pattern": {
-            "regexp": "^\\s*(?:DEBUG|INFO|WARNING|ERROR|CRITICAL)\\s+-\\s+(?:\\[\\d{2}:\\d{2}:\\d{2}\\]\\s+)?Doc file '([^']+)'\\s+(.*)$",
-            "file": 1,
-            "message": 2,
-            "severity": 1
-          },
-          "background": {
-            "activeOnStart": true,
-            "beginsPattern": "Building documentation",
-            "endsPattern": "Documentation built in"
-          }
-        }
-      ]
+      }
     }
   ]
 }

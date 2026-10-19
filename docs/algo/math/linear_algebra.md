@@ -137,8 +137,8 @@
 
     $$
     \begin{cases}
-    a_{1,1}x_1+a_{1,2}x_2+a_{1,3}x_3=b_1\\\\
-    a_{2,1}x_1+a_{2,2}x_2+a_{2,3}x_3=b_2\\\\
+    a_{1,1}x_1+a_{1,2}x_2+a_{1,3}x_3=b_1\\
+    a_{2,1}x_1+a_{2,2}x_2+a_{2,3}x_3=b_2\\
     a_{3,1}x_1+a_{3,2}x_2+a_{3,3}x_3=b_3
     \end{cases}
     $$
@@ -147,8 +147,8 @@
 
     $$
     \begin{cases}
-    (a_{1,1},a_{1,2},a_{1,3})\cdot \vec{x}=b_1\\\\
-    (a_{2,1},a_{2,2},a_{2,3})\cdot \vec{x}=b_2\\\\
+    (a_{1,1},a_{1,2},a_{1,3})\cdot \vec{x}=b_1\\
+    (a_{2,1},a_{2,2},a_{2,3})\cdot \vec{x}=b_2\\
     (a_{3,1},a_{3,2},a_{3,3})\cdot \vec{x}=b_3
     \end{cases}
     $$
@@ -157,18 +157,18 @@
 
     $$
     \begin{pmatrix}
-    a_{1,1},&a_{1,2},&a_{1,3}\\\\
-    a_{2,1},&a_{2,2},&a_{2,3}\\\\
+    a_{1,1},&a_{1,2},&a_{1,3}\\
+    a_{2,1},&a_{2,2},&a_{2,3}\\
     a_{3,1},&a_{3,2},&a_{3,3}
     \end{pmatrix}
     \begin{pmatrix}
-    x_1\\\\
-    x_2\\\\
+    x_1\\
+    x_2\\
     x_3
     \end{pmatrix}=
     \begin{pmatrix}
-    b_1\\\\
-    b_2\\\\
+    b_1\\
+    b_2\\
     b_3
     \end{pmatrix}
     $$
@@ -189,7 +189,7 @@
 
     为了方便表述，我在矩阵 $A$ 中使用其它矩阵 $B$ 意味着“这个矩阵 $A$ 的某一部分和 $B$ 一样”。
 
-    比如 $\begin{pmatrix}I_2&\\\\ & 0\end{pmatrix}$ 代表 $\begin{pmatrix}1&0&0\\\\ 0 &1 &0\\\\ 0&0&0\end{pmatrix}$，其中空置部分默认为全 $0$ 矩阵。
+    比如 $\begin{pmatrix}I_2&\\ & 0\end{pmatrix}$ 代表 $\begin{pmatrix}1&0&0\\ 0 &1 &0\\ 0&0&0\end{pmatrix}$，其中空置部分默认为全 $0$ 矩阵。
 
 - 矩阵等价
 
@@ -211,9 +211,9 @@
 
     $$
     \begin{aligned}
-    &((AB)C)\_{i,j}\\\\
-    =&\sum_{k=1}^{y}(AB)\_{i,k}C_{k,j}\\\\
-    =&\sum_{k=1}^{y}\left(\sum_{p=1}^nA_{i,p}\times B_{p,k}\right)C_{k,j}\\\\
+    &((AB)C)_{i,j}\\
+    =&\sum_{k=1}^{y}(AB)_{i,k}C_{k,j}\\
+    =&\sum_{k=1}^{y}\left(\sum_{p=1}^nA_{i,p}\times B_{p,k}\right)C_{k,j}\\
     =&\sum_{k=1}^{y}\sum_{p=1}^nA_{i,p}\times B_{p,k}\times C_{k,j}
     \end{aligned}
     $$
@@ -252,7 +252,7 @@
 
     设一个待定矩阵（此处指方阵，后文应该会频繁出现矩阵方阵混用的情况）$B$，那么我们需要构造矩阵 $B$，使得 $(f_{i-1},f_{i})\times B=(f_{i},f_{i+1})=(f_{i},f_{i-1}+f_{i})$。
 
-    容易构造出 $B=\begin{pmatrix}0,&1\\\\1,&1\end{pmatrix}$。
+    容易构造出 $B=\begin{pmatrix}0,&1\\1,&1\end{pmatrix}$。
 
     那么我们可以发现 $f_n(n\ge 1)$ 就是 $(1,1)\times B^{n-1}$ 的前一项。因为矩阵乘法具有结合律，所以 $B^{n-1}$ 可以使用矩阵快速幂求得。
 
@@ -316,12 +316,12 @@
 
     $$
     \begin{aligned}
-    B_1=\begin{pmatrix}1,&0,&0,&0\\\\ 1,&1,&0,&0\\\\ 0,&0,&1,&0\\\\ 0,&0,&0,&1\end{pmatrix}\\\\
-    B_2=\begin{pmatrix}1,&0,&0,&0\\\\ 0,&1,&0,&0\\\\ 0,&1,&1,&0\\\\ 0,&0,&0,&1\end{pmatrix}\\\\
-    B_3=\begin{pmatrix}1,&0,&1,&0\\\\ 0,&1,&0,&0\\\\ 0,&0,&1,&0\\\\ 0,&0,&0,&1\end{pmatrix}\\\\
-    B_4=\begin{pmatrix}1,&0,&0,&0\\\\ 0,&1,&0,&0\\\\ 0,&0,&1,&0\\\\ v,&0,&0,&1\end{pmatrix}\\\\
-    B_5=\begin{pmatrix}1,&0,&0,&0\\\\ 0,&v,&0,&0\\\\ 0,&0,&1,&0\\\\ 0,&0,&0,&1\end{pmatrix}\\\\
-    B_6=\begin{pmatrix}1,&0,&0,&0\\\\ 0,&1,&0,&0\\\\ 0,&0,&0,&0\\\\ 0,&0,&v,&1\end{pmatrix}\\\\
+    B_1=\begin{pmatrix}1,&0,&0,&0\\ 1,&1,&0,&0\\ 0,&0,&1,&0\\ 0,&0,&0,&1\end{pmatrix}\\
+    B_2=\begin{pmatrix}1,&0,&0,&0\\ 0,&1,&0,&0\\ 0,&1,&1,&0\\ 0,&0,&0,&1\end{pmatrix}\\
+    B_3=\begin{pmatrix}1,&0,&1,&0\\ 0,&1,&0,&0\\ 0,&0,&1,&0\\ 0,&0,&0,&1\end{pmatrix}\\
+    B_4=\begin{pmatrix}1,&0,&0,&0\\ 0,&1,&0,&0\\ 0,&0,&1,&0\\ v,&0,&0,&1\end{pmatrix}\\
+    B_5=\begin{pmatrix}1,&0,&0,&0\\ 0,&v,&0,&0\\ 0,&0,&1,&0\\ 0,&0,&0,&1\end{pmatrix}\\
+    B_6=\begin{pmatrix}1,&0,&0,&0\\ 0,&1,&0,&0\\ 0,&0,&0,&0\\ 0,&0,&v,&1\end{pmatrix}\\
     \end{aligned} 
     $$
 
@@ -508,9 +508,9 @@
 
 $$
 \det A=\begin{vmatrix}
-A_{1,1} &A_{1,2} &\cdots  &A_{1,n}\\\\
-A_{2,1} &A_{2,2} &\cdots  &A_{2,n}\\\\
-\vdots  &\vdots  &\ddots  &\vdots\\\\
+A_{1,1} &A_{1,2} &\cdots  &A_{1,n}\\
+A_{2,1} &A_{2,2} &\cdots  &A_{2,n}\\
+\vdots  &\vdots  &\ddots  &\vdots\\
 A_{n,1} &A_{n,2} &\cdots  &A_{n,n}
 \end{vmatrix}
 $$
@@ -577,11 +577,11 @@ $n$ 阶矩阵的行列式是从每一行每一列各选一个元素得到的 $n!
 
     $$
     P_{ij}=\begin{pmatrix}
-    I_{i-1} &  &  &  & \\\\
-    & 0 &  & 1 & \\\\
-    &  & I_{j-i-1} &  & \\\\
-    & 1 &  & 0 & \\\\
-    &  &  &  & I_{n-j}\\\\
+    I_{i-1} &  &  &  & \\
+    & 0 &  & 1 & \\
+    &  & I_{j-i-1} &  & \\
+    & 1 &  & 0 & \\
+    &  &  &  & I_{n-j}\\
     \end{pmatrix}
     $$
 
@@ -595,13 +595,13 @@ $n$ 阶矩阵的行列式是从每一行每一列各选一个元素得到的 $n!
 
     $$
     T_{ij}(k)=\begin{pmatrix}
-    1 &  &  &  &  &  & \\\\
-    & \ddots &  &  &  &  & \\\\
-    &  & 1 & \cdots & k &  & \\\\
-    &  &  & \ddots & \vdots &  & \\\\
-    &  &  &  & 1 &  & \\\\
-    &  &  &  &  & \ddots & \\\\
-    &  &  &  &  &  & 1\\\\
+    1 &  &  &  &  &  & \\
+    & \ddots &  &  &  &  & \\
+    &  & 1 & \cdots & k &  & \\
+    &  &  & \ddots & \vdots &  & \\
+    &  &  &  & 1 &  & \\
+    &  &  &  &  & \ddots & \\
+    &  &  &  &  &  & 1\\
     \end{pmatrix}
     $$
 
@@ -631,9 +631,9 @@ $n$ 阶矩阵的行列式是从每一行每一列各选一个元素得到的 $n!
 
     $$
     \begin{aligned}
-    &\det(A)\det(B)\\\\
-    =&\left(\sum_{p}(-1)^{\pi(p)}\prod_{i=1}^nA_{i,p_i}\right)\times \left(\sum_{q}(-1)^{\pi(q)}\prod_{i=1}^nB_{i,q_i}\right)\\\\
-    =&\sum_{p}\sum_{q}(-1)^{\pi(p)+\pi(q)}\prod_{i=1}^nA_{i,p_i}\prod_{i=1}^nB_{i,q_i}\\\\
+    &\det(A)\det(B)\\
+    =&\left(\sum_{p}(-1)^{\pi(p)}\prod_{i=1}^nA_{i,p_i}\right)\times \left(\sum_{q}(-1)^{\pi(q)}\prod_{i=1}^nB_{i,q_i}\right)\\
+    =&\sum_{p}\sum_{q}(-1)^{\pi(p)+\pi(q)}\prod_{i=1}^nA_{i,p_i}\prod_{i=1}^nB_{i,q_i}\\
     \end{aligned}
     $$
 
@@ -641,20 +641,20 @@ $n$ 阶矩阵的行列式是从每一行每一列各选一个元素得到的 $n!
 
     $$
     \begin{aligned}
-    &\sum_{q}\sum_{p}(-1)^{\pi(p)+\pi(q)}\prod_{i=1}^nA_{i,p_i}B_{p_i,h_i}\\\\
+    &\sum_{q}\sum_{p}(-1)^{\pi(p)+\pi(q)}\prod_{i=1}^nA_{i,p_i}B_{p_i,h_i}\\
     \end{aligned}
     $$
 
-    容易发现 $\prod$ 中连乘的东西来自 $AB$ 矩阵的不同元素 $(AB)\_{i,h_i}$，并且显然固定 $i,h_i$ 时中间的 $p_i$ 是可以取遍全排列的，即从 $AB$ 每一行每一列的 $n$ 个 $A_{i,k}\times B_{k,j}$ 中各选一个相乘。
+    容易发现 $\prod$ 中连乘的东西来自 $AB$ 矩阵的不同元素 $(AB)_{i,h_i}$，并且显然固定 $i,h_i$ 时中间的 $p_i$ 是可以取遍全排列的，即从 $AB$ 每一行每一列的 $n$ 个 $A_{i,k}\times B_{k,j}$ 中各选一个相乘。
 
     考虑从另一边化一下：
 
     $$
     \begin{aligned}
     &\det(AB)\\
-    =&\sum_{h}(-1)^{\pi(h)}\prod_{i=1}^n(AB)\_{i,h_i}\\\\
-    =&\sum_{h}(-1)^{\pi(h)}\prod_{i=1}^n\sum_{k=1}^nA_{i,k}B_{k,h_i}\\\\
-    =&\sum_{h}\sum_{s}(-1)^{\pi(h)}\prod_{i=1}^nA_{i,s_i}B_{s_i,h_i}\\\\
+    =&\sum_{h}(-1)^{\pi(h)}\prod_{i=1}^n(AB)_{i,h_i}\\
+    =&\sum_{h}(-1)^{\pi(h)}\prod_{i=1}^n\sum_{k=1}^nA_{i,k}B_{k,h_i}\\
+    =&\sum_{h}\sum_{s}(-1)^{\pi(h)}\prod_{i=1}^nA_{i,s_i}B_{s_i,h_i}\\
     \end{aligned}
     $$
 
@@ -709,10 +709,10 @@ $n$ 阶矩阵的行列式是从每一行每一列各选一个元素得到的 $n!
 
 $$
 M=\begin{pmatrix}
-e(A_1,B_1) &e(A_1,B_2) &\dots &e(A_1,B_n)\\\\
-e(A_2,B_1) &e(A_2,B_2) &\dots &e(A_2,B_n)\\\\
-\vdots &\vdots &\ddots &\vdots\\\\
-e(A_n,B_1) &e(A_n,B_2) &\dots &e(A_n,B_n)\\\\
+e(A_1,B_1) &e(A_1,B_2) &\dots &e(A_1,B_n)\\
+e(A_2,B_1) &e(A_2,B_2) &\dots &e(A_2,B_n)\\
+\vdots &\vdots &\ddots &\vdots\\
+e(A_n,B_1) &e(A_n,B_2) &\dots &e(A_n,B_n)\\
 \end{pmatrix}
 $$
 
@@ -744,9 +744,9 @@ $$
 
 $$
 \begin{cases}
-a_{1,1}x_0+a_{1,1}x_1+\cdots+a_{1,m}x_{m}=b_1\\\\
-a_{2,1}x_0+a_{2,1}x_1+\cdots+a_{2,m}x_{m}=b_2\\\\
-\vdots\\\\
+a_{1,1}x_0+a_{1,1}x_1+\cdots+a_{1,m}x_{m}=b_1\\
+a_{2,1}x_0+a_{2,1}x_1+\cdots+a_{2,m}x_{m}=b_2\\
+\vdots\\
 a_{n,1}x_0+a_{n,2}x_1+\cdots+a_{n,m}x_{m}=b_{n}
 \end{cases}
 $$
@@ -909,7 +909,7 @@ $$
 注意到线性组合的定义是一个线性运算的形式，所以我们可以用矩阵乘法概括，根据习惯，我们通常写成一个由向量构成的行向量和标量构成的列向量相乘的形式：
 
 $$
-\beta=\sum_{i=1}^nk_ia_i=\begin{pmatrix}a_1,a_2,\cdots,a_n\end{pmatrix}\begin{pmatrix}k_1\\\\k_2\\\\\vdots\\\\k_n\end{pmatrix}
+\beta=\sum_{i=1}^nk_ia_i=\begin{pmatrix}a_1,a_2,\cdots,a_n\end{pmatrix}\begin{pmatrix}k_1\\k_2\\\vdots\\k_n\end{pmatrix}
 $$
 
 ##### 性质
@@ -1034,7 +1034,7 @@ OI 中有关线性基的应用一般只涉及两类线性空间：$n$ 维实线�
 
 $$
 \begin{aligned}
-(a_1,\dots,a_n)+(b_1,\dots,b_n)&:=(a_1\oplus b_1,\dots,a_n\oplus b_n)\\\\
+(a_1,\dots,a_n)+(b_1,\dots,b_n)&:=(a_1\oplus b_1,\dots,a_n\oplus b_n)\\
 k\cdot(a_1,\dots,a_n)&:=(k\And a_1,\dots,k\And a_n)
 \end{aligned}
 $$

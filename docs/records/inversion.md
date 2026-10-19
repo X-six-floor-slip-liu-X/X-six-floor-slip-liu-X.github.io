@@ -17,10 +17,10 @@
 
 $$
 \begin{aligned}
-&\sum_{p\in prime}^{p\le \min(n,m)}\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{p}\right\rfloor}[\gcd(i,j)=1]\\\\
-=&\sum_{p\in prime}^{p\le \min(n,m)}\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{p}\right\rfloor}\sum_{d\mid \gcd(i,j)}\mu(d)\\\\
-=&\sum_{p\in prime}^{p\le \min(n,m)}\sum_{d=1}^{d\le \min(\left\lfloor\frac{n}{p}\right\rfloor,\left\lfloor\frac{m}{p}\right\rfloor)}\mu(d)\sum_{d\mid i}^{i\le \left\lfloor\frac{n}{p}\right\rfloor}\sum_{d\mid j}^{j\le \left\lfloor\frac{m}{p}\right\rfloor}1\\\\
-=&\sum_{p\in prime}^{p\le \min(n,m)}\sum_{d=1}^{d\le \min(\left\lfloor\frac{n}{p}\right\rfloor,\left\lfloor\frac{m}{p}\right\rfloor)}\mu(d)\left\lfloor\frac{n}{p\cdot d}\right\rfloor\left\lfloor\frac{m}{p\cdot d}\right\rfloor\\\\
+&\sum_{p\in prime}^{p\le \min(n,m)}\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{p}\right\rfloor}[\gcd(i,j)=1]\\
+=&\sum_{p\in prime}^{p\le \min(n,m)}\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{p}\right\rfloor}\sum_{d\mid \gcd(i,j)}\mu(d)\\
+=&\sum_{p\in prime}^{p\le \min(n,m)}\sum_{d=1}^{d\le \min(\left\lfloor\frac{n}{p}\right\rfloor,\left\lfloor\frac{m}{p}\right\rfloor)}\mu(d)\sum_{d\mid i}^{i\le \left\lfloor\frac{n}{p}\right\rfloor}\sum_{d\mid j}^{j\le \left\lfloor\frac{m}{p}\right\rfloor}1\\
+=&\sum_{p\in prime}^{p\le \min(n,m)}\sum_{d=1}^{d\le \min(\left\lfloor\frac{n}{p}\right\rfloor,\left\lfloor\frac{m}{p}\right\rfloor)}\mu(d)\left\lfloor\frac{n}{p\cdot d}\right\rfloor\left\lfloor\frac{m}{p\cdot d}\right\rfloor\\
 \end{aligned}
 $$
 
@@ -29,8 +29,8 @@ $$
 
 $$
 \begin{aligned}
-&\sum_{p\in prime}^{p\le \min(n,m)}\sum_{d=1}^{d\le \min(\left\lfloor\frac{n}{p}\right\rfloor,\left\lfloor\frac{m}{p}\right\rfloor)}\mu(d)\left\lfloor\frac{n}{p\cdot d}\right\rfloor\left\lfloor\frac{m}{p\cdot d}\right\rfloor\\\\
-=&\sum_{T=1}^{\min(n,m)}\left\lfloor\frac{n}{T}\right\rfloor\left\lfloor\frac{m}{T}\right\rfloor\sum_{p\in prime}^{p\mid T}\mu(\frac{T}{p})\\\\
+&\sum_{p\in prime}^{p\le \min(n,m)}\sum_{d=1}^{d\le \min(\left\lfloor\frac{n}{p}\right\rfloor,\left\lfloor\frac{m}{p}\right\rfloor)}\mu(d)\left\lfloor\frac{n}{p\cdot d}\right\rfloor\left\lfloor\frac{m}{p\cdot d}\right\rfloor\\
+=&\sum_{T=1}^{\min(n,m)}\left\lfloor\frac{n}{T}\right\rfloor\left\lfloor\frac{m}{T}\right\rfloor\sum_{p\in prime}^{p\mid T}\mu(\frac{T}{p})\\
 \end{aligned}
 $$
 
@@ -115,10 +115,10 @@ signed main(){
 
 $$
 \begin{aligned}
-&\sum_{i=a}^b\sum_{j=c}^d[\gcd(i,j)=1]\\\\
-=&\sum_{i=a}^b\sum_{j=c}^d\sum_{t\mid \gcd(i,j)}\mu(t)\\\\
-=&\sum_{t}\mu(t)\sum_{t\mid i}^{a\le i\le b}\sum_{t\mid j}^{c\le j\le d}1\\\\
-=&\sum_{t}\mu(t)(\left\lfloor\frac{b}{t}\right\rfloor-\left\lfloor\frac{a-1}{t}\right\rfloor)(\left\lfloor\frac{d}{t}\right\rfloor-\left\lfloor\frac{c-1}{t}\right\rfloor)\\\\
+&\sum_{i=a}^b\sum_{j=c}^d[\gcd(i,j)=1]\\
+=&\sum_{i=a}^b\sum_{j=c}^d\sum_{t\mid \gcd(i,j)}\mu(t)\\
+=&\sum_{t}\mu(t)\sum_{t\mid i}^{a\le i\le b}\sum_{t\mid j}^{c\le j\le d}1\\
+=&\sum_{t}\mu(t)(\left\lfloor\frac{b}{t}\right\rfloor-\left\lfloor\frac{a-1}{t}\right\rfloor)(\left\lfloor\frac{d}{t}\right\rfloor-\left\lfloor\frac{c-1}{t}\right\rfloor)\\
 \end{aligned}
 $$
 
@@ -177,7 +177,7 @@ void solve(){
 
 $$
 \begin{aligned}
-&\left(\sum_{a=1,2\mid a}^{n}\frac{\tau(\frac{a^2}{4})-1}{2}\right)+\left(\sum_{a=1,2\nmid a}^n\frac{\tau(a)-1}{2}\right)\\\\
+&\left(\sum_{a=1,2\mid a}^{n}\frac{\tau(\frac{a^2}{4})-1}{2}\right)+\left(\sum_{a=1,2\nmid a}^n\frac{\tau(a)-1}{2}\right)\\
 =&\dfrac{\left(\sum_{i=1}^{\frac{n}{2}}\tau(i^2)\right)-\left\lfloor\frac{n}{2}\right\rfloor+\left(\sum_{i=1,2\nmid i}^{n}\tau(i^2)\right)-\left\lceil\frac{n}{2}\right\rceil}{2}
 \end{aligned}
 $$
@@ -193,14 +193,14 @@ $$
 $$
 \begin{aligned}
 \sum_{i=1}^{n}\tau(i^2)
-&=\sum_{i=1}^n\sum_{x\mid i}\sum_{y\mid i}[\gcd(x,y)=1]\\\\
-&=\sum_{x=1}^n\sum_{y=1}^n[\gcd(x,y)=1]\sum_{\mathrm{lcm}(x,y)\mid i}^{i\le n}1\\\\
-&=\sum_{x=1}^n\sum_{y=1}^n[\gcd(x,y)=1]\left\lfloor\frac{n}{\mathrm{lcm}(x,y)}\right\rfloor\\\\
-&=\sum_{x=1}^n\sum_{y=1}^n[\gcd(x,y)=1]\left\lfloor\frac{n}{xy}\right\rfloor\\\\
-&=\sum_{x=1}^n\sum_{y=1}^n\left\lfloor\frac{n}{xy}\right\rfloor\sum_{d\mid \gcd(x,y)}\mu(d)\\\\
-&=\sum_{d=1}^n\mu(d)\sum_{d\mid x}\sum_{d\mid y}\left\lfloor\frac{n}{xy}\right\rfloor\\\\
-&=\sum_{d=1}^n\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\left\lfloor\frac{n}{(i\times d)(j\times d)}\right\rfloor\\\\
-&=\sum_{d=1}^{\left\lfloor\sqrt{n}\right\rfloor}\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\left\lfloor\frac{n}{ij\times d^2}\right\rfloor\\\\
+&=\sum_{i=1}^n\sum_{x\mid i}\sum_{y\mid i}[\gcd(x,y)=1]\\
+&=\sum_{x=1}^n\sum_{y=1}^n[\gcd(x,y)=1]\sum_{\mathrm{lcm}(x,y)\mid i}^{i\le n}1\\
+&=\sum_{x=1}^n\sum_{y=1}^n[\gcd(x,y)=1]\left\lfloor\frac{n}{\mathrm{lcm}(x,y)}\right\rfloor\\
+&=\sum_{x=1}^n\sum_{y=1}^n[\gcd(x,y)=1]\left\lfloor\frac{n}{xy}\right\rfloor\\
+&=\sum_{x=1}^n\sum_{y=1}^n\left\lfloor\frac{n}{xy}\right\rfloor\sum_{d\mid \gcd(x,y)}\mu(d)\\
+&=\sum_{d=1}^n\mu(d)\sum_{d\mid x}\sum_{d\mid y}\left\lfloor\frac{n}{xy}\right\rfloor\\
+&=\sum_{d=1}^n\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\left\lfloor\frac{n}{(i\times d)(j\times d)}\right\rfloor\\
+&=\sum_{d=1}^{\left\lfloor\sqrt{n}\right\rfloor}\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\left\lfloor\frac{n}{ij\times d^2}\right\rfloor\\
 &=\sum_{d=1}^{\left\lfloor\sqrt{n}\right\rfloor}\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\left\lfloor\frac{\left\lfloor\frac{n}{i\times d^2}\right\rfloor}{j}\right\rfloor
 \end{aligned}
 $$
@@ -217,7 +217,7 @@ $$
 
 $$
 \begin{aligned}
-&\sum_{d=1,2\nmid d}^{\left\lfloor\sqrt{n}\right\rfloor}\mu(d)\sum_{i=1,2\nmid i}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\sum_{j=1,2\nmid j}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\left\lceil\frac{\left\lfloor\frac{\left\lfloor\frac{n}{i\times d^2}\right\rfloor}{j}\right\rfloor}{2}\right\rceil\\\\
+&\sum_{d=1,2\nmid d}^{\left\lfloor\sqrt{n}\right\rfloor}\mu(d)\sum_{i=1,2\nmid i}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\sum_{j=1,2\nmid j}^{\left\lfloor\frac{n}{d^2}\right\rfloor}\left\lceil\frac{\left\lfloor\frac{\left\lfloor\frac{n}{i\times d^2}\right\rfloor}{j}\right\rfloor}{2}\right\rceil\\
 \end{aligned}
 $$
 
@@ -667,13 +667,13 @@ signed main(){
 
 $$
 \begin{aligned}
-&\sum_{i=1}^n\sum_{j=1}^m\tau(i\times j)\\\\
-=&\sum_{i=1}^n\sum_{j=1}^m\sum_{x\mid i}\sum_{y\mid j}[\gcd(x,y)=1]\\\\
-=&\sum_{i=1}^n\sum_{j=1}^m\sum_{x\mid i}\sum_{y\mid j}\sum_{d\mid \gcd(x,y)}\mu(d)\\\\
-=&\sum_{d=1}^n\mu(d)\sum_{d\mid x}^{x\le n}\sum_{d\mid y}^{y\le m}\sum_{x\mid i}^{i\le n}\sum_{y\mid j}^{j\le m}1\\\\
-=&\sum_{d=1}^n\mu(d)\sum_{x=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{y=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\sum_{i=1}^{\left\lfloor\frac{n}{x\times d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{y\times d}\right\rfloor}1\\\\
-=&\sum_{d=1}^n\mu(d)\sum_{x=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\left\lfloor\frac{n}{x\times d}\right\rfloor\sum_{y=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\left\lfloor\frac{m}{y\times d}\right\rfloor\\\\
-=&\sum_{d=1}^n\mu(d)\sum_{x=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\tau(x)\sum_{y=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\tau(y)\\\\
+&\sum_{i=1}^n\sum_{j=1}^m\tau(i\times j)\\
+=&\sum_{i=1}^n\sum_{j=1}^m\sum_{x\mid i}\sum_{y\mid j}[\gcd(x,y)=1]\\
+=&\sum_{i=1}^n\sum_{j=1}^m\sum_{x\mid i}\sum_{y\mid j}\sum_{d\mid \gcd(x,y)}\mu(d)\\
+=&\sum_{d=1}^n\mu(d)\sum_{d\mid x}^{x\le n}\sum_{d\mid y}^{y\le m}\sum_{x\mid i}^{i\le n}\sum_{y\mid j}^{j\le m}1\\
+=&\sum_{d=1}^n\mu(d)\sum_{x=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{y=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\sum_{i=1}^{\left\lfloor\frac{n}{x\times d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{y\times d}\right\rfloor}1\\
+=&\sum_{d=1}^n\mu(d)\sum_{x=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\left\lfloor\frac{n}{x\times d}\right\rfloor\sum_{y=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\left\lfloor\frac{m}{y\times d}\right\rfloor\\
+=&\sum_{d=1}^n\mu(d)\sum_{x=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\tau(x)\sum_{y=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\tau(y)\\
 \end{aligned}
 $$
 
@@ -775,11 +775,11 @@ signed main(){
 
 $$
 \begin{aligned}
-&\sum_{i=1}^n\sum_{j=1}^m\mathrm{lca}(i,j)\\\\
-=&\sum_{d=1}^n d\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}[\gcd(i,j)=1]ij\\\\
-=&\sum_{d=1}^n d\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}ij\sum_{t\mid \gcd(i,j)}\mu(t)\\\\
-=&\sum_{d=1}^n d\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)\sum_{i=1}^{\left\lfloor\frac{n}{d\times t}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d\times t}\right\rfloor}(i\cdot t)(j\cdot t)\\\\
-=&\sum_{d=1}^n d\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)t^2\left(\sum_{i=1}^{\left\lfloor\frac{n}{d\times t}\right\rfloor}i\right)\left(\sum_{j=1}^{\left\lfloor\frac{m}{d\times t}\right\rfloor}j\right)\\\\
+&\sum_{i=1}^n\sum_{j=1}^m\mathrm{lca}(i,j)\\
+=&\sum_{d=1}^n d\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}[\gcd(i,j)=1]ij\\
+=&\sum_{d=1}^n d\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}ij\sum_{t\mid \gcd(i,j)}\mu(t)\\
+=&\sum_{d=1}^n d\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)\sum_{i=1}^{\left\lfloor\frac{n}{d\times t}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d\times t}\right\rfloor}(i\cdot t)(j\cdot t)\\
+=&\sum_{d=1}^n d\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)t^2\left(\sum_{i=1}^{\left\lfloor\frac{n}{d\times t}\right\rfloor}i\right)\left(\sum_{j=1}^{\left\lfloor\frac{m}{d\times t}\right\rfloor}j\right)\\
 \end{aligned}
 $$
 
@@ -875,19 +875,19 @@ signed main(){
 
 $$
 \begin{aligned}
-&\sum_{i=1}^n\sum_{j=1}^nij\gcd(i,j)\\\\
-=&\sum_{p=1}^np\sum_{p\mid i}\sum_{p\mid j}ij[\gcd(i/p,j/p)=1]\\\\
-=&\sum_{p=1}^np\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{p}\right\rfloor}ip\times jp\times [\gcd(i,j)=1]\\\\
-=&\sum_{p=1}^np^3\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{p}\right\rfloor}ij\times [\gcd(i,j)=1]\\\\
-=&\sum_{p=1}^np^3\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{p}\right\rfloor}ij\sum_{d\mid \gcd(i,j)}\mu(d)\\\\
-=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}id\times jd\\\\
-=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}d^2\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i\sum_{j=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}j\\\\
-=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}d^2\mu(d)\left(\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i\right)^2\\\\
-=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}d^2\mu(d)\left(\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i^3\right)\\\\
-=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)\sum_{p\mid T}p^3\left(\frac{T}{p}\right)^2\mu(\frac{T}{p})\\\\
-=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)T^2\sum_{p\mid T}p\mu(\frac{T}{p})\\\\
-=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)T^2(id\ast\mu)(T)\\\\
-=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)T^2\varphi(T)\\\\
+&\sum_{i=1}^n\sum_{j=1}^nij\gcd(i,j)\\
+=&\sum_{p=1}^np\sum_{p\mid i}\sum_{p\mid j}ij[\gcd(i/p,j/p)=1]\\
+=&\sum_{p=1}^np\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{p}\right\rfloor}ip\times jp\times [\gcd(i,j)=1]\\
+=&\sum_{p=1}^np^3\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{p}\right\rfloor}ij\times [\gcd(i,j)=1]\\
+=&\sum_{p=1}^np^3\sum_{i=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{p}\right\rfloor}ij\sum_{d\mid \gcd(i,j)}\mu(d)\\
+=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}id\times jd\\
+=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}d^2\mu(d)\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i\sum_{j=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}j\\
+=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}d^2\mu(d)\left(\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i\right)^2\\
+=&\sum_{p=1}^np^3\sum_{d=1}^{\left\lfloor\frac{n}{p}\right\rfloor}d^2\mu(d)\left(\sum_{i=1}^{\left\lfloor\frac{n}{dp}\right\rfloor}i^3\right)\\
+=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)\sum_{p\mid T}p^3\left(\frac{T}{p}\right)^2\mu(\frac{T}{p})\\
+=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)T^2\sum_{p\mid T}p\mu(\frac{T}{p})\\
+=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)T^2(id\ast\mu)(T)\\
+=&\sum_{T=1}^n\left(\sum_{i=1}^{\left\lfloor\frac{n}{T}\right\rfloor}i^3\right)T^2\varphi(T)\\
 \end{aligned}
 $$
 
@@ -1021,16 +1021,16 @@ signed main(){
 
 $$
 \begin{aligned}
-h(1)&=1\\\\
-h(p)&=0\\\\
-h(p^2)&=p^2(p^2-1)-p^{2\times 2-1}(p-1)h(1)\\\\
-	  &=p^3-p^2\\\\
-h(p^3)&=p^3(p^3-1)-p^{1\times 2-1}(p-1)h(p^2)-p^{3\times 2-1}(p-1)h(1)\\\\
-	  &=p^3(p^3-1)-p(p-1)(p^3-p^2)-p^{5}(p-1)\\\\
-	  &=2(p^4-p^3)\\\\
-h(p^4)&=p^4(p^4-1)-p^{1\times 2-1}(p-1)h(p^3)-p^{2\times 2-1}(p-1)h(p^2)-p^{4\times 2-1}(p-1)h(1)\\\\
-	  &=p^4(p^4-1)-p(p-1)2(p^4-p^3)-p^{3}(p-1)(p^3-p^2)-p^{7}(p-1)\\\\
-	  &=3(p^5-p^4)\\\\
+h(1)&=1\\
+h(p)&=0\\
+h(p^2)&=p^2(p^2-1)-p^{2\times 2-1}(p-1)h(1)\\
+	  &=p^3-p^2\\
+h(p^3)&=p^3(p^3-1)-p^{1\times 2-1}(p-1)h(p^2)-p^{3\times 2-1}(p-1)h(1)\\
+	  &=p^3(p^3-1)-p(p-1)(p^3-p^2)-p^{5}(p-1)\\
+	  &=2(p^4-p^3)\\
+h(p^4)&=p^4(p^4-1)-p^{1\times 2-1}(p-1)h(p^3)-p^{2\times 2-1}(p-1)h(p^2)-p^{4\times 2-1}(p-1)h(1)\\
+	  &=p^4(p^4-1)-p(p-1)2(p^4-p^3)-p^{3}(p-1)(p^3-p^2)-p^{7}(p-1)\\
+	  &=3(p^5-p^4)\\
 \end{aligned}
 $$
 
@@ -1044,11 +1044,11 @@ $$
 
 $$
 \begin{aligned}
-h(p^k)&=p^2(h(p^{k-1})-p^{k-1}(p^{k-1}-1))+p^k(p^k-1)-p(p-1)h(p^{k-1})\\\\
-&=(p^2-p^2+p)h(k-1)-p^{k+1}(p^{k-1}-1)+p^k(p^k-1)\\\\
-&=p\cdot h(k-1)-p^{2k}+p^{k+1}+p^{2k}-p^k\\\\
-&=p(k-2)(p^k-p^{k-1})+p^{k+1}-p^{k}\\\\
-&=(k-2)(p^{k+1}-p^k)+(p^{k+1}-p^k)\\\\
+h(p^k)&=p^2(h(p^{k-1})-p^{k-1}(p^{k-1}-1))+p^k(p^k-1)-p(p-1)h(p^{k-1})\\
+&=(p^2-p^2+p)h(k-1)-p^{k+1}(p^{k-1}-1)+p^k(p^k-1)\\
+&=p\cdot h(k-1)-p^{2k}+p^{k+1}+p^{2k}-p^k\\
+&=p(k-2)(p^k-p^{k-1})+p^{k+1}-p^{k}\\
+&=(k-2)(p^{k+1}-p^k)+(p^{k+1}-p^k)\\
 &=(k-1)(p^{k+1}-p^k)
 \end{aligned}
 $$
@@ -1175,7 +1175,7 @@ signed main(){
 
 $$
 g(n)=\begin{cases}
-\varphi(n)&,n\bmod 2=1\\\\
+\varphi(n)&,n\bmod 2=1\\
 3\varphi(n)&,n\bmod 2=0
 \end{cases}
 $$
@@ -1311,9 +1311,9 @@ signed main(){
 
 $$
 \begin{aligned}
-&\prod_{i=1}^n\prod_{j=1}^mf(\gcd(i,j))\\\\
-=&\prod_{d=1}^nf(d)^{\sum_{i=1}^n\sum_{j=1}^m[\gcd(i,j)=d]}\\\\
-=&\prod_{d=1}^nf(d)^{\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}[\gcd(i,j)=1]}\\\\
+&\prod_{i=1}^n\prod_{j=1}^mf(\gcd(i,j))\\
+=&\prod_{d=1}^nf(d)^{\sum_{i=1}^n\sum_{j=1}^m[\gcd(i,j)=d]}\\
+=&\prod_{d=1}^nf(d)^{\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}[\gcd(i,j)=1]}\\
 =&\prod_{d=1}^nf(d)^{\sum_{t=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\mu(t)\left\lfloor\frac{n}{d\cdot t}\right\rfloor\left\lfloor\frac{m}{d\cdot t}\right\rfloor}
 \end{aligned}
 $$
@@ -1322,8 +1322,8 @@ $$
 
 $$
 \begin{aligned}
-=&\sum_{p=1}^n\sum_{d\mid p}f(d)^{\mu(\frac{p}{d})\left\lfloor\frac{n}{p}\right\rfloor\left\lfloor\frac{m}{p}\right\rfloor}\\\\
-=&\sum_{p=1}^n\left(\sum_{d\mid p}f(d)^{\mu(\frac{p}{d})}\right)^{\left\lfloor\frac{n}{p}\right\rfloor\left\lfloor\frac{m}{p}\right\rfloor}\\\\
+=&\sum_{p=1}^n\sum_{d\mid p}f(d)^{\mu(\frac{p}{d})\left\lfloor\frac{n}{p}\right\rfloor\left\lfloor\frac{m}{p}\right\rfloor}\\
+=&\sum_{p=1}^n\left(\sum_{d\mid p}f(d)^{\mu(\frac{p}{d})}\right)^{\left\lfloor\frac{n}{p}\right\rfloor\left\lfloor\frac{m}{p}\right\rfloor}\\
 \end{aligned}
 $$
 
@@ -1459,9 +1459,9 @@ signed main(){
 
 $$
 \begin{aligned}
-G(n)&=\sum_{i=1}^ni^d[\gcd(n,i)=1]\\\\
-	&=\sum_{i=1}^ni^d\sum_{k\mid \gcd(n,i)}\mu(k)\\\\
-	&=\sum_{k\mid n}\mu(k)\sum_{k\mid i}^{i\le n}i^d\\\\
+G(n)&=\sum_{i=1}^ni^d[\gcd(n,i)=1]\\
+	&=\sum_{i=1}^ni^d\sum_{k\mid \gcd(n,i)}\mu(k)\\
+	&=\sum_{k\mid n}\mu(k)\sum_{k\mid i}^{i\le n}i^d\\
 	&=\sum_{k\mid n}\mu(k)k^d\sum_{i=1}^{\frac{n}{d}}i^d
 \end{aligned}
 $$
@@ -1470,7 +1470,7 @@ $$
 
 $$
 \begin{aligned}
-&=\sum_{k\mid n}\mu(k)k^d\sum_{i=0}^{d+1}f_i(\frac{n}{d})^i\\\\
+&=\sum_{k\mid n}\mu(k)k^d\sum_{i=0}^{d+1}f_i(\frac{n}{d})^i\\
 &=\sum_{i=0}^{d+1}f_in^i\sum_{k\mid n}\mu(k)k^{d-i}
 \end{aligned}
 $$
@@ -1479,7 +1479,7 @@ $$
 
 $$
 \begin{aligned}
-&=\sum_{i=0}^{d+1}f_in^i\sum_{k\mid n}\prod_{j=1}^w\mu(p_j^{e_j})p_j^{e_j(d-i)}\\\\
+&=\sum_{i=0}^{d+1}f_in^i\sum_{k\mid n}\prod_{j=1}^w\mu(p_j^{e_j})p_j^{e_j(d-i)}\\
 &=\sum_{i=0}^{d+1}f_in^i\prod_{j=1}^w\sum_{e=0}^{a_j}\mu(p_j^e)p_j^{e(d-i)}
 \end{aligned}
 $$

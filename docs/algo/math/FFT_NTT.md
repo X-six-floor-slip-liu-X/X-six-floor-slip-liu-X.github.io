@@ -73,7 +73,7 @@ $a\mid b$ 表示存在整数 $k$ 使得 $ak=b$。
 
 $$
 \begin{aligned}
-F(\omega_n^k)&=F_0\left(\left(\omega_n^k\right)^2\right)+\omega_n^kF_1\left(\left(\omega_n^k\right)^2\right)&=F_0\left(\omega_{\frac{n}{2}}^k\right)+\omega_n^kF_1\left(\omega_{\frac{n}{2}}^k\right)\\\\
+F(\omega_n^k)&=F_0\left(\left(\omega_n^k\right)^2\right)+\omega_n^kF_1\left(\left(\omega_n^k\right)^2\right)&=F_0\left(\omega_{\frac{n}{2}}^k\right)+\omega_n^kF_1\left(\omega_{\frac{n}{2}}^k\right)\\
 F(\omega_n^{k'})&=F_0\left(\left(\omega_n^{k'}\right)^2\right)+\omega_n^{k'}F_1\left(\left(\omega_n^{k'}\right)^2\right)&=F_0\left(\omega_{\frac{n}{2}}^k\right)-\omega_n^kF_1\left(\omega_{\frac{n}{2}}^k\right)
 \end{aligned}
 $$
@@ -114,11 +114,11 @@ a[0] | a[4] | a[2] | a[6] | a[1] | a[5] | a[3] | a[7]
 
 根据 $F(\omega_{n}^i)=\sum_{j=0}^{n-1}a_j\omega_n^{ij}$，容易发现这玩意是个线性变换。
 
-那么就能写成矩阵 $\mathbf{y}=\mathbf{a}\times \mathbf{V_{\mathit{n}}}$，其中 $(\mathbf{V_{\mathit{n}}})\_{i,j}=\omega_{n}^{ij}$。
+那么就能写成矩阵 $\mathbf{y}=\mathbf{a}\times \mathbf{V_{\mathit{n}}}$，其中 $(\mathbf{V_{\mathit{n}}})_{i,j}=\omega_{n}^{ij}$。
 
 然后用神秘方法就能得到 $\mathbf{V_{\mathit{n}}}^{-1}$，使得 $\mathbf{a}=\mathbf{y}\times\mathbf{V_{\mathit{n}}}^{-1}$。
 
-直接说结论 $(\mathbf{V_{\mathit{n}}}^{-1})\_{i,j}=\frac{\omega_{n}^{-ij}}{n}$。 ~~因为我不会证~~
+直接说结论 $(\mathbf{V_{\mathit{n}}}^{-1})_{i,j}=\frac{\omega_{n}^{-ij}}{n}$。 ~~因为我不会证~~
 
 以及容易发现，$\omega_{n}^{-1}=\cos(\frac{2\pi}{n})+\sin(-\frac{2\pi}{n})i$（考虑 $\omega_{n}^{-1}\times \omega_{n}=1$，模长相乘辐角相加）。然后其余部分和 FFT 完全相同，最后除以 $n$（注意这个 “$n$” 是前文所说 $2^k$）即可。
 
@@ -241,7 +241,7 @@ $998244353$ 有非常好的性质：
 
 $$
 \begin{aligned}
-F(g_n^k)&=F_0\left(\left(g_n^k\right)^2\right)+g_n^kF_1\left(\left(g_n^k\right)^2\right)&=F_0\left(g_{\frac{n}{2}}^k\right)+g_n^kF_1\left(g_{\frac{n}{2}}^k\right)\\\\
+F(g_n^k)&=F_0\left(\left(g_n^k\right)^2\right)+g_n^kF_1\left(\left(g_n^k\right)^2\right)&=F_0\left(g_{\frac{n}{2}}^k\right)+g_n^kF_1\left(g_{\frac{n}{2}}^k\right)\\
 F(g_n^{k'})&=F_0\left(\left(g_n^{k'}\right)^2\right)+g_n^{k'}F_1\left(\left(g_n^{k'}\right)^2\right)&=F_0\left(g_{\frac{n}{2}}^k\right)+g^{\frac{p-1}{2}}g_n^kF_1\left(g_{\frac{n}{2}}^k\right)
 \end{aligned}
 $$
@@ -290,7 +290,7 @@ void trans(int *f,int type){
 
 $$
 f(n)=\begin{cases}
-c&,n=0\\\\
+c&,n=0\\
 \sum_{j=1}^if(i-j)g(j)&,n\ge 1
 \end{cases}
 $$

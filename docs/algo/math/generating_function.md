@@ -119,8 +119,8 @@ $F(x)\to F^{(n)}(x)$
 
 $$
 f_i=\begin{cases}
-0&,i=0\\\\
-1&,i=1\\\\
+0&,i=0\\
+1&,i=1\\
 f_{i-1}+f_{i-2}&,i\ge 2
 \end{cases}
 $$
@@ -129,8 +129,8 @@ $$
 
 $$
 \begin{aligned}
-F(x)&=\sum_{i\ge 0}x^if_i\\\\
-    &=x+\sum_{i\ge 2}x^i(f_{i-1}+f_{i-2})\\\\
+F(x)&=\sum_{i\ge 0}x^if_i\\
+    &=x+\sum_{i\ge 2}x^i(f_{i-1}+f_{i-2})\\
     &=x+\left(x\sum_{i\ge 1}x^if_i\right)+\left(x^2\sum_{i\ge 0}x^if_i\right)
 \end{aligned}
 $$
@@ -139,9 +139,9 @@ $$
 
 $$
 \begin{aligned}
-F(x)&=x+xF(x)+x^2F(x)\\\\
-(1-x-x^2)F(x)&=x\\\\
-F(x)&=\frac{x}{1-x-x^2}\\\\
+F(x)&=x+xF(x)+x^2F(x)\\
+(1-x-x^2)F(x)&=x\\
+F(x)&=\frac{x}{1-x-x^2}\\
 \end{aligned}
 $$
 
@@ -153,10 +153,10 @@ $$
 
 $$
 \begin{aligned}
-&\frac{A}{x-x_1}+\frac{B}{x-x_2}=\frac{x}{1-x-x^2}\\\\
-\Leftrightarrow&A(x-x_2)+B(x-x_1)=x\\\\
+&\frac{A}{x-x_1}+\frac{B}{x-x_2}=\frac{x}{1-x-x^2}\\
+\Leftrightarrow&A(x-x_2)+B(x-x_1)=x\\
 \Leftrightarrow&\begin{cases}
-Ax+Bx=x\\\\
+Ax+Bx=x\\
 Ax_2+Bx_1=0
 \end{cases}
 \end{aligned}
@@ -166,7 +166,7 @@ $$
 
 $$
 \begin{cases}
-A=\frac{5-\sqrt{5}}{10}\\\\
+A=\frac{5-\sqrt{5}}{10}\\
 B=\frac{5+\sqrt{5}}{10}
 \end{cases}
 $$
@@ -175,8 +175,8 @@ $$
 
 $$
 \begin{aligned}
-F(x)&=\frac{A}{x-x_1}+\frac{B}{x-x_2}\\\\
-    &=\frac{\frac{A}{x_1}}{\frac{x}{x_1}-1}+\frac{\frac{A}{x_2}}{\frac{x}{x_2}-1}\\\\
+F(x)&=\frac{A}{x-x_1}+\frac{B}{x-x_2}\\
+    &=\frac{\frac{A}{x_1}}{\frac{x}{x_1}-1}+\frac{\frac{A}{x_2}}{\frac{x}{x_2}-1}\\
     &=-\left(\frac{\frac{A}{x_1}}{1-\frac{x}{x_1}}+\frac{\frac{A}{x_2}}{1-\frac{x}{x_2}}\right)
 \end{aligned}
 $$
@@ -193,7 +193,7 @@ $$
 
 $$
 \begin{aligned}
-f_i&=-(\frac{A}{x_1^{i+1}}+\frac{B}{x_2^{i+1}})\\\\
+f_i&=-(\frac{A}{x_1^{i+1}}+\frac{B}{x_2^{i+1}})\\
    &=\frac{\sqrt{5}}{5}\left(\left(\frac{1+\sqrt{5}}{2}\right)^n-\left(\frac{1-\sqrt{5}}{2}\right)^n\right)
 \end{aligned}
 $$
@@ -206,8 +206,8 @@ $$
 
 $$
 \begin{aligned}
-F(x)&=\sum_{i\ge 0}x^ia_i\\\\
-    &=a_0+\sum_{i\ge 1}x^i(8a_{i-1}+10^{i-1})\\\\
+F(x)&=\sum_{i\ge 0}x^ia_i\\
+    &=a_0+\sum_{i\ge 1}x^i(8a_{i-1}+10^{i-1})\\
     &=1+\left(8x\sum_{i\ge 0}x^ia_i\right)+\left(x\sum_{i\ge 0}x^i10^{i}\right)
 \end{aligned}
 $$
@@ -218,8 +218,8 @@ $$
 
 $$
 \begin{aligned}
-F(x)&=1+8xF(x)+\frac{x}{1-10x}\\\\
-(1-8x)F(x)&=\frac{1-9x}{1-10x}\\\\
+F(x)&=1+8xF(x)+\frac{x}{1-10x}\\
+(1-8x)F(x)&=\frac{1-9x}{1-10x}\\
 F(x)&=\frac{1-9x}{(1-8x)(1-10x)}
 \end{aligned}
 $$
@@ -234,7 +234,7 @@ $$
 
 $$
 h_n=\begin{cases}
-\sum_{i=0}^{n-1}h_ih_{n-i-1} &,n\ge 1\\\\
+\sum_{i=0}^{n-1}h_ih_{n-i-1} &,n\ge 1\\
 1 &,n=0
 \end{cases}
 $$
@@ -245,9 +245,9 @@ $$
 
 $$
 \begin{aligned}
-F(x)&=1+\sum_{i\ge 1}x^i\sum_{j=0}^{i-1}h_jh_{i-j-1}\\\\
-    &=1+\sum_{i\ge 1}x\sum_{j=0}^{i-1}h_jx^jh_{i-j-1}x^{i-j-1}\\\\
-    &=1+x\sum_{j\ge 0}h_jx^j\sum_{k\ge 0}h_{k}x^{k}\\\\
+F(x)&=1+\sum_{i\ge 1}x^i\sum_{j=0}^{i-1}h_jh_{i-j-1}\\
+    &=1+\sum_{i\ge 1}x\sum_{j=0}^{i-1}h_jx^jh_{i-j-1}x^{i-j-1}\\
+    &=1+x\sum_{j\ge 0}h_jx^j\sum_{k\ge 0}h_{k}x^{k}\\
     &=1+xF(x)^2
 \end{aligned}
 $$
@@ -268,7 +268,7 @@ $\lim\limits_{x\to 0}\frac{1-\sqrt{1-4x}}{2x}=1$，上下均为无穷小。
 
 $$
 \begin{aligned}
-(1-4x)^{\frac{1}{2}}&=\sum_{n\ge 0}\binom{\frac{1}{2}}{n}(-4x)^n\\\\
+(1-4x)^{\frac{1}{2}}&=\sum_{n\ge 0}\binom{\frac{1}{2}}{n}(-4x)^n\\
 &=1+\sum_{n\ge 1}\frac{(\frac{1}{2})^{\underline{n}}}{n!}(-4x)^n
 \end{aligned}
 $$
@@ -277,9 +277,9 @@ $$
 
 $$
 \begin{aligned}
-\left(\frac{1}{2}\right)^{\underline{n}}&=\frac{1}{2}\times \frac{-1}{2}\times \frac{-3}{2}\times \cdots \times \frac{-(2n-3)}{2}\\\\
-&=\frac{(-1)^{n-1}(2n-3)!!}{2^n}\\\\
-&=\frac{(-1)^{n-1}(2n-2)!}{2^n(2n-2)!!}\\\\
+\left(\frac{1}{2}\right)^{\underline{n}}&=\frac{1}{2}\times \frac{-1}{2}\times \frac{-3}{2}\times \cdots \times \frac{-(2n-3)}{2}\\
+&=\frac{(-1)^{n-1}(2n-3)!!}{2^n}\\
+&=\frac{(-1)^{n-1}(2n-2)!}{2^n(2n-2)!!}\\
 &=\frac{(-1)^{n-1}(2n-2)!}{2^{2n-1}(n-1)!}
 \end{aligned}
 $$
@@ -288,10 +288,10 @@ $$
 
 $$
 \begin{aligned}
-&=1+\sum_{n\ge 1}\frac{(-1)^{n-1}(2n-2)!}{n!(n-1)!2^{2n-1}}(-4x)^n\\\\
-&=1-\sum_{n\ge 1}\frac{(2n-2)!}{(n-1)!n!}\frac{4^n}{2^{2n-1}}x^n\\\\
-&=1-\sum_{n\ge 1}\frac{(2n-2)!}{(n-1)!n!}2x^n\\\\
-&=1-\sum_{n\ge 1}\dbinom{2n-1}{n}\frac{1}{2n-1}2x^n\\\\
+&=1+\sum_{n\ge 1}\frac{(-1)^{n-1}(2n-2)!}{n!(n-1)!2^{2n-1}}(-4x)^n\\
+&=1-\sum_{n\ge 1}\frac{(2n-2)!}{(n-1)!n!}\frac{4^n}{2^{2n-1}}x^n\\
+&=1-\sum_{n\ge 1}\frac{(2n-2)!}{(n-1)!n!}2x^n\\
+&=1-\sum_{n\ge 1}\dbinom{2n-1}{n}\frac{1}{2n-1}2x^n\\
 \end{aligned}
 $$
 
@@ -299,13 +299,13 @@ $$
 
 $$
 \begin{aligned}
-F(x)&=\frac{1+\sqrt{1-4x}}{2x}\\\\
-    &=\frac{1}{2x}\left(1-1+\sum_{n\ge 1}\dbinom{2n-1}{n}\frac{1}{2n-1}2x^n\right)\\\\
-    &=\sum_{n\ge 1}\dbinom{2n-1}{n}\frac{1}{2n-1}x^{n-1}\\\\
-    &=\sum_{n\ge 0}\dbinom{2n+1}{n+1}\frac{1}{2n+1}x^n\\\\
-    &=\sum_{n\ge 0}\frac{(2n+1)!}{(n+1)!n!}\frac{1}{2n+1}x^n\\\\
-    &=\sum_{n\ge 0}\frac{(2n)!}{n!n!}\frac{1}{n+1}x^n\\\\
-    &=\sum_{n\ge 0}\dbinom{2n}{n}\frac{1}{n+1}x^n\\\\
+F(x)&=\frac{1+\sqrt{1-4x}}{2x}\\
+    &=\frac{1}{2x}\left(1-1+\sum_{n\ge 1}\dbinom{2n-1}{n}\frac{1}{2n-1}2x^n\right)\\
+    &=\sum_{n\ge 1}\dbinom{2n-1}{n}\frac{1}{2n-1}x^{n-1}\\
+    &=\sum_{n\ge 0}\dbinom{2n+1}{n+1}\frac{1}{2n+1}x^n\\
+    &=\sum_{n\ge 0}\frac{(2n+1)!}{(n+1)!n!}\frac{1}{2n+1}x^n\\
+    &=\sum_{n\ge 0}\frac{(2n)!}{n!n!}\frac{1}{n+1}x^n\\
+    &=\sum_{n\ge 0}\dbinom{2n}{n}\frac{1}{n+1}x^n\\
 \end{aligned}
 $$
 
@@ -329,8 +329,8 @@ $$
 
 $$
 \begin{aligned}
-\frac{c_n}{n!}&=\sum_{i+j=n}\frac{a_i}{i!}\frac{b_j}{j!}\\\\
-c_n&=\sum_{i+j=n}\frac{n!}{i!j!}a_ib_j\\\\
+\frac{c_n}{n!}&=\sum_{i+j=n}\frac{a_i}{i!}\frac{b_j}{j!}\\
+c_n&=\sum_{i+j=n}\frac{n!}{i!j!}a_ib_j\\
 c_n&=\sum_{i+j=n}\dbinom{n}{i}a_ib_j
 \end{aligned}
 $$

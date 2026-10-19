@@ -146,11 +146,11 @@ $$
 
 $$
 \begin{aligned}
-G(H)&\equiv G(H_{\ast})+G'(H_{\ast})(H-H_{\ast}) &\pmod{x^n}\\\\
-G'(H_{\ast})H&\equiv G(H)-G(H_{\ast})+G'(H_{\ast})H_{\ast} &\pmod{x^n}\\\\
-H&\equiv \frac{G(H)-G(H_{\ast})+G'(H_{\ast})H_{\ast}}{G'(H_{\ast})} &\pmod{x^n}\\\\
-H&\equiv H_{\ast}+\frac{G(H)-G(H_{\ast})}{G'(H_{\ast})} &\pmod{x^n}\\\\
-H&\equiv H_{\ast}+\frac{G(H)-G(H_{\ast})}{G'(H_{\ast})} &\pmod{x^n}\\\\
+G(H)&\equiv G(H_{\ast})+G'(H_{\ast})(H-H_{\ast}) &\pmod{x^n}\\
+G'(H_{\ast})H&\equiv G(H)-G(H_{\ast})+G'(H_{\ast})H_{\ast} &\pmod{x^n}\\
+H&\equiv \frac{G(H)-G(H_{\ast})+G'(H_{\ast})H_{\ast}}{G'(H_{\ast})} &\pmod{x^n}\\
+H&\equiv H_{\ast}+\frac{G(H)-G(H_{\ast})}{G'(H_{\ast})} &\pmod{x^n}\\
+H&\equiv H_{\ast}+\frac{G(H)-G(H_{\ast})}{G'(H_{\ast})} &\pmod{x^n}\\
 \end{aligned}
 $$
 
@@ -158,7 +158,7 @@ $$
 
 $$
 \begin{aligned}
-H&\equiv H_{\ast}-\frac{G(H_{\ast})}{G'(H_{\ast})} &\pmod{x^n}\\\\
+H&\equiv H_{\ast}-\frac{G(H_{\ast})}{G'(H_{\ast})} &\pmod{x^n}\\
 \end{aligned}
 $$
 
@@ -178,7 +178,7 @@ $$
 
 $$
 \begin{aligned}
-F^{-1}&\equiv F_{\ast}^{-1}-\frac{G(F_{\ast}^{-1})}{G'(F_{\ast}^{-1})} &\pmod{x^n}\\\\
+F^{-1}&\equiv F_{\ast}^{-1}-\frac{G(F_{\ast}^{-1})}{G'(F_{\ast}^{-1})} &\pmod{x^n}\\
 F^{-1}&\equiv F_{\ast}^{-1}-\frac{F\times F_{\ast}^{-1}-1}{G'(F_{\ast}^{-1})} &\pmod{x^n}
 \end{aligned}
 $$
@@ -187,7 +187,7 @@ $$
 
 $$
 \begin{aligned}
-F^{-1}&\equiv F_{\ast}^{-1}-\frac{F\times F_{\ast}^{-1}-1}{F} &\pmod{x^n}\\\\
+F^{-1}&\equiv F_{\ast}^{-1}-\frac{F\times F_{\ast}^{-1}-1}{F} &\pmod{x^n}\\
 F^{-1}&\equiv F_{\ast}^{-1}-F^{-1}(F\times F_{\ast}^{-1}-1) &\pmod{x^n}
 \end{aligned}
 $$
@@ -196,8 +196,8 @@ $$
 
 $$
 \begin{aligned}
-F^{-1}&\equiv F_{\ast}^{-1}-F_{\ast}^{-1}(F\times F_{\ast}^{-1}-1) &\pmod{x^n}\\\\
-F^{-1}&\equiv F_{\ast}^{-1}(2-F\times F_{\ast}^{-1}) &\pmod{x^n}\\\\
+F^{-1}&\equiv F_{\ast}^{-1}-F_{\ast}^{-1}(F\times F_{\ast}^{-1}-1) &\pmod{x^n}\\
+F^{-1}&\equiv F_{\ast}^{-1}(2-F\times F_{\ast}^{-1}) &\pmod{x^n}\\
 \end{aligned}
 $$
 
@@ -312,9 +312,9 @@ $\exp$ 是 $\ln$ 的逆运算，所以考虑牛顿迭代（下文 $A,B$ 均为 $
 
 $$
 \begin{aligned}
-B &\equiv B_{\ast}-\frac{G(B_{\ast})}{G'(B_{\ast})} &\pmod{x^n}\\\\
-B &\equiv B_{\ast}-(\ln B_{\ast}-A)B_{\ast} &\pmod{x^n}\\\\
-B &\equiv (1-\ln B_{\ast}+A)B_{\ast} &\pmod{x^n}\\\\
+B &\equiv B_{\ast}-\frac{G(B_{\ast})}{G'(B_{\ast})} &\pmod{x^n}\\
+B &\equiv B_{\ast}-(\ln B_{\ast}-A)B_{\ast} &\pmod{x^n}\\
+B &\equiv (1-\ln B_{\ast}+A)B_{\ast} &\pmod{x^n}\\
 \end{aligned}
 $$
 

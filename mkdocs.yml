@@ -99,6 +99,11 @@ extra_javascript:
 # Extensions 不能改
 markdown_extensions:
   - admonition
+  # 公式保护：把数学段从 Markdown 解析里摘出来，跨行公式直接写 \\（不再需要四个斜杠）
+  # smart_dollar 关掉，保持和原来一样「所有 $...$ 都算公式」，避免渲染结果变化
+  - pymdownx.arithmatex:
+      generic: true
+      smart_dollar: false
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.highlight:
@@ -158,6 +163,7 @@ nav:
       - 2025 CQBZ 集训: misc/travels/2025CQBZ.md
       - SCOI2025: misc/travels/SCOI2025.md
       - HUST 报到: misc/travels/2026HUST_registration.md
+      - 2026CCPC区域赛长春站: misc/travels/2026CCPC_Changchun.md
     - 日记:
       - 2026 年 10 月: misc/diaries/2026Oct.md
     - P:

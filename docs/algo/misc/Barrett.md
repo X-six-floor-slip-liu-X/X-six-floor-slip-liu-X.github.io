@@ -25,7 +25,7 @@ $$\left\lfloor\dfrac{a}{P}\right\rfloor\approx\left\lfloor\dfrac{am}{2^k}\right\
 
 $$
 \left\lfloor\dfrac{a}{P}-\dfrac{a\lambda}{2^k}\right\rfloor=\begin{cases}
-\left\lfloor\dfrac{a}{P}\right\rfloor, &\dfrac{a}{P}-\dfrac{a\lambda}{2^k}\ge\left\lfloor\dfrac{a}{P}\right\rfloor\\\\
+\left\lfloor\dfrac{a}{P}\right\rfloor, &\dfrac{a}{P}-\dfrac{a\lambda}{2^k}\ge\left\lfloor\dfrac{a}{P}\right\rfloor\\
 \left\lfloor\dfrac{a}{P}\right\rfloor-1,&\dfrac{a}{P}-\dfrac{a\lambda}{2^k}<\left\lfloor\dfrac{a}{P}\right\rfloor
 \end{cases}
 $$
@@ -34,7 +34,7 @@ $$
 
 $$
 a-P\left\lfloor\dfrac{a}{P}-\dfrac{a\lambda}{2^k}\right\rfloor=\begin{cases}
-a-P\left\lfloor\dfrac{a}{P}\right\rfloor=a\bmod P, &\dfrac{a}{P}-\dfrac{a\lambda}{2^k}\ge\left\lfloor\dfrac{a}{P}\right\rfloor\\\\
+a-P\left\lfloor\dfrac{a}{P}\right\rfloor=a\bmod P, &\dfrac{a}{P}-\dfrac{a\lambda}{2^k}\ge\left\lfloor\dfrac{a}{P}\right\rfloor\\
 a-P\left(\left\lfloor\dfrac{a}{P}\right\rfloor-1\right)=a\bmod P+P,&\dfrac{a}{P}-\dfrac{a\lambda}{2^k}<\left\lfloor\dfrac{a}{P}\right\rfloor
 \end{cases}
 $$

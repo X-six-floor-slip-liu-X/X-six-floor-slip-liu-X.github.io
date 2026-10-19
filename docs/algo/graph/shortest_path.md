@@ -298,7 +298,7 @@ forup(k,1,n){
 
 $$
 \begin{aligned}
-D_{s,t}'&=\sum_{i=0}^{k-1}h_{p_i}+w(p_i,p_{i+1})-h_{p_{i+1}}\\\\
+D_{s,t}'&=\sum_{i=0}^{k-1}h_{p_i}+w(p_i,p_{i+1})-h_{p_{i+1}}\\
 &=h_{p_0}+h_{p_k}+\sum_{i=0}^{k-1}w(p_i,p_{i+1})
 \end{aligned}
 $$

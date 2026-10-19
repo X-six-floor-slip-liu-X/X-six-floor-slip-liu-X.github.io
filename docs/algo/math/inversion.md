@@ -41,11 +41,11 @@ $$
 
 $$
 \begin{aligned}
- &(T\times T)\_{i,j}\\\\
-=&\sum_{k=0}^nT_{i,k}\times T_{k,j}\\\\
-=&\sum_{k=j}^i(-1)^k\binom{i}{k}(-1)^j\binom{k}{j}\\\\
-=&(-1)^j\sum_{k=j}^i(-1)^k\binom{i}{j}\binom{i-j}{k-j}\\\\
-=&(-1)^j\binom{i}{j}\sum_{k=j}^i(-1)^k\binom{i-j}{k-j}\\\\
+ &(T\times T)_{i,j}\\
+=&\sum_{k=0}^nT_{i,k}\times T_{k,j}\\
+=&\sum_{k=j}^i(-1)^k\binom{i}{k}(-1)^j\binom{k}{j}\\
+=&(-1)^j\sum_{k=j}^i(-1)^k\binom{i}{j}\binom{i-j}{k-j}\\
+=&(-1)^j\binom{i}{j}\sum_{k=j}^i(-1)^k\binom{i-j}{k-j}\\
 \end{aligned}
 $$
 
@@ -53,11 +53,12 @@ $$
 
 容易发现 $\sum_{k=j}^i(-1)^k\binom{i-j}{k-j}$ 是杨辉三角第 $i-j$ 这一整行中偶数列减去奇数列。根据经典结论，这个东西不等于 $0$ 当且仅当 $i-j=0$，原因是当 $i-j> 0$ 时杨辉三角前一行每个数都能对这一行的奇数之和和偶数之和各产生一次贡献。
 
-于是容易发现 $(T\times T)\_{i,j}=I$，故 $T$ 和自己互为反演关系，于是能得到这样的式子：
+于是容易发现 $(T\times T)_{i,j}=I$，故 $T$ 和自己互为反演关系，于是能得到这样的式子：
 
 $$
 G(n)=\sum_{i=0}^n(-1)^i\dbinom{n}{i}F(i)
 $$
+
 $$
 F(n)=\sum_{i=0}^n(-1)^i\dbinom{n}{i}G(i)
 $$
@@ -66,8 +67,8 @@ $$
 
 $$
 \begin{aligned}
-F(n)&=\sum_{i=0}^n(-1)^i\dbinom{n}{i}G(i)\\\\
-(-1)^{-n}F(n)&=\sum_{i=0}^n(-1)^{i-n}\binom{n}{i}G(i)\\\\
+F(n)&=\sum_{i=0}^n(-1)^i\dbinom{n}{i}G(i)\\
+(-1)^{-n}F(n)&=\sum_{i=0}^n(-1)^{i-n}\binom{n}{i}G(i)\\
 (-1)^nF(n)&=\sum_{i=0}^n(-1)^{n-i}\binom{n}{i}G(i)
 \end{aligned}
 $$
@@ -79,6 +80,7 @@ $$
 $$
 G(n)=\sum_{i=0}^n\binom{n}{i}H(i)
 $$
+
 $$
 H(n)=\sum_{i=0}^n(-1)^{n-i}\binom{n}{i}G(i)
 $$
@@ -92,6 +94,7 @@ $$
 $$
 G(n)=\sum_{i\ge n}\binom{i}{n}H(i)
 $$
+
 $$
 H(n)=\sum_{i\ge n}(-1)^{i-n}\binom{i}{n}G(i)
 $$
@@ -112,9 +115,9 @@ $$
 
 $$
 \begin{aligned}
-H(n)&=\sum_{i=0}^n(-1)^{n-i}\binom{n}{i}G(i)\\\\
-    &=\sum_{i=0}^n(-1)^{n-i}\frac{n!}{i!(n-i)!}i!\\\\
-    &=n!\sum_{i=0}^n\frac{(-1)^{i}}{i!}\\\\
+H(n)&=\sum_{i=0}^n(-1)^{n-i}\binom{n}{i}G(i)\\
+    &=\sum_{i=0}^n(-1)^{n-i}\frac{n!}{i!(n-i)!}i!\\
+    &=n!\sum_{i=0}^n\frac{(-1)^{i}}{i!}\\
 \end{aligned}
 $$
 
@@ -129,6 +132,7 @@ $$
 $$
 G(A)=\sum_{B\subseteq A}H(B)
 $$
+
 $$
 H(A)=\sum_{B\subseteq A}(-1)^{|A|-|B|}G(B)
 $$
@@ -139,8 +143,8 @@ $$
 
 $$
 \begin{aligned}
-H(A)&=\sum_{B\subseteq A}(-1)^{|A|-|B|}G(B)\\\\
-    &=\sum_{B\subseteq A}(-1)^{|A|-|B|}\sum_{C\subseteq B}H(C)\\\\
+H(A)&=\sum_{B\subseteq A}(-1)^{|A|-|B|}G(B)\\
+    &=\sum_{B\subseteq A}(-1)^{|A|-|B|}\sum_{C\subseteq B}H(C)\\
     &=\sum_{C\subseteq A}H(C)\sum_{C\subseteq B\subseteq A}(-1)^{|A|-|B|}
 \end{aligned}
 $$
@@ -158,10 +162,11 @@ $$
 斯特林反演形如以下式子：
 
 $$
-G(n)=\sum_{i=0}^n\begin{Bmatrix}n\\\\i\end{Bmatrix}F(i)
+G(n)=\sum_{i=0}^n\begin{Bmatrix}n\\i\end{Bmatrix}F(i)
 $$
+
 $$
-F(n)=\sum_{i=0}^n(-1)^{n-i}\begin{bmatrix}n\\\\i\end{bmatrix}G(i)
+F(n)=\sum_{i=0}^n(-1)^{n-i}\begin{bmatrix}n\\i\end{bmatrix}G(i)
 $$
 
 证明非常神秘：
@@ -170,47 +175,49 @@ $$
 
 $$
 \begin{aligned}
- &(T\times T')\_{i,j}\\\\
-=&\sum_{k=0}^nT_{i,k}\cdot T_{k,j}'\\\\
-=&\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\\\k\end{Bmatrix}\begin{bmatrix}k\\\\j\end{bmatrix}\\\\
+ &(T\times T')_{i,j}\\
+=&\sum_{k=0}^nT_{i,k}\cdot T_{k,j}'\\
+=&\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\k\end{Bmatrix}\begin{bmatrix}k\\j\end{bmatrix}\\
 \end{aligned}
 $$
 
-我们希望证明 $\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\\\k\end{Bmatrix}\begin{bmatrix}k\\\\j\end{bmatrix}=[i=j]$
+我们希望证明 $\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\k\end{Bmatrix}\begin{bmatrix}k\\j\end{bmatrix}=[i=j]$
 
 根据经典结论，有：
 
 $$
 \begin{aligned}
-m^{\underline{n}}&=\sum_{i=0}^n(-1)^{n-i}\begin{bmatrix}n\\\\i\end{bmatrix}m^i\\\\
-                 &=\sum_{i=0}^n(-1)^{n-i}\begin{bmatrix}n\\\\i\end{bmatrix}\sum_{j=0}^i\begin{Bmatrix}i\\\\j\end{Bmatrix}m^{\underline{j}}\\\\
-                 &=\sum_{i=0}^nm^{\underline{i}}\sum_{j=i}^n(-1)^{n-j}\begin{bmatrix}n\\\\j\end{bmatrix}\begin{Bmatrix}j\\\\i\end{Bmatrix}
+m^{\underline{n}}&=\sum_{i=0}^n(-1)^{n-i}\begin{bmatrix}n\\i\end{bmatrix}m^i\\
+                 &=\sum_{i=0}^n(-1)^{n-i}\begin{bmatrix}n\\i\end{bmatrix}\sum_{j=0}^i\begin{Bmatrix}i\\j\end{Bmatrix}m^{\underline{j}}\\
+                 &=\sum_{i=0}^nm^{\underline{i}}\sum_{j=i}^n(-1)^{n-j}\begin{bmatrix}n\\j\end{bmatrix}\begin{Bmatrix}j\\i\end{Bmatrix}
 \end{aligned}
 $$
 
-那么显然当 $i\ne n$ 时，$\sum_{j=i}^n(-1)^{n-j}\begin{bmatrix}n\\\\j\end{bmatrix}\begin{Bmatrix}j\\\\i\end{Bmatrix}=0$，否则等号无法成立。
+那么显然当 $i\ne n$ 时，$\sum_{j=i}^n(-1)^{n-j}\begin{bmatrix}n\\j\end{bmatrix}\begin{Bmatrix}j\\i\end{Bmatrix}=0$，否则等号无法成立。
 
-则 $\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\\\k\end{Bmatrix}\begin{bmatrix}k\\\\j\end{bmatrix}=[i=j]$，得证。
+则 $\sum_{k=j}^i(-1)^{k-j}\begin{Bmatrix}i\\k\end{Bmatrix}\begin{bmatrix}k\\j\end{bmatrix}=[i=j]$，得证。
 
 另外斯特林反演也有 $i\ge n$ 版本，长这样：
 
 $$
-G(n)=\sum_{i\ge n}\begin{Bmatrix}i\\\\n\end{Bmatrix}F(i)
-$$
-$$
-F(n)=\sum_{i\ge n}(-1)^{n-i}\begin{bmatrix}i\\\\n\end{bmatrix}G(i)
+G(n)=\sum_{i\ge n}\begin{Bmatrix}i\\n\end{Bmatrix}F(i)
 $$
 
-证明和上面类似，但要证的是 $\sum_{k=j}^i(-1)^{k-j}\begin{bmatrix}i\\\\k\end{bmatrix}\begin{Bmatrix}k\\\\j\end{Bmatrix}=[i=j]$，先把普通幂换成第二类斯特林数和下降幂的积，再把下降幂换成第一类斯特林数即可。
+$$
+F(n)=\sum_{i\ge n}(-1)^{n-i}\begin{bmatrix}i\\n\end{bmatrix}G(i)
+$$
+
+证明和上面类似，但要证的是 $\sum_{k=j}^i(-1)^{k-j}\begin{bmatrix}i\\k\end{bmatrix}\begin{Bmatrix}k\\j\end{Bmatrix}=[i=j]$，先把普通幂换成第二类斯特林数和下降幂的积，再把下降幂换成第一类斯特林数即可。
 
 然后和二项式反演相同，我们可以移动 $(-1)^{n-i}$ 的位置（取 $F_{\ast}(n)=(-1)^{-n}F(n)=(-1)^{n}F(n),G_{\ast}(n)=(-1)^{-n}G(n)=(-1)^nG(n)$）。于是：
 
 
 $$
-G_{\ast}(n)=\sum_{i=0}^n(-1)^{n-i}\begin{Bmatrix}n\\\\i\end{Bmatrix}F_{\ast}(i)
+G_{\ast}(n)=\sum_{i=0}^n(-1)^{n-i}\begin{Bmatrix}n\\i\end{Bmatrix}F_{\ast}(i)
 $$
+
 $$
-F_{\ast}(n)=\sum_{i=0}^n\begin{bmatrix}n\\\\i\end{bmatrix}G_{\ast}(i)
+F_{\ast}(n)=\sum_{i=0}^n\begin{bmatrix}n\\i\end{bmatrix}G_{\ast}(i)
 $$
 
 常用做法还是用来做计数题。

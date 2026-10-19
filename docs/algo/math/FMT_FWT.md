@@ -16,9 +16,9 @@
 $$
 \begin{aligned}
 \hat{f}(x)\times\hat{g}(x)
-&=\left(\sum_{y\;\mathrm{or}\; x=x}f(y)\right)\times \left(\sum_{y\;\mathrm{or}\; x=x}g(y)\right)\\\\
-&=\sum_{y\;\mathrm{or}\; x=x}\sum_{z\;\mathrm{or}\; x=x} f(y)g(z)\\\\
-&=\sum_{(y\;\mathrm{or}\; z)\;\mathrm{or}\; x=x} f(y)g(z)\\\\
+&=\left(\sum_{y\;\mathrm{or}\; x=x}f(y)\right)\times \left(\sum_{y\;\mathrm{or}\; x=x}g(y)\right)\\
+&=\sum_{y\;\mathrm{or}\; x=x}\sum_{z\;\mathrm{or}\; x=x} f(y)g(z)\\
+&=\sum_{(y\;\mathrm{or}\; z)\;\mathrm{or}\; x=x} f(y)g(z)\\
 &=\hat{h}(x)
 \end{aligned}
 $$
@@ -42,10 +42,10 @@ FWT 也能处理与卷积和或卷积，但是显然不如 FMT 好写。所以�
 $$
 \begin{aligned}
 \hat{f}(x)\times \hat{g}(y)
-&=\left(\sum_{x\odot y=0}f(y)-\sum_{x\odot y=1}f(y)\right)\times \left(\sum_{x\odot y=0}g(y)-\sum_{x\odot y=1}g(y)\right)\\\\
-&=\left(\sum_{x\odot y=0}f(y)\sum_{x\odot z=0}g(z)+\sum_{x\odot y=1}f(y)\sum_{x\odot z=1}g(z)\right)-\left(\sum_{x\odot y=0}f(y)\sum_{x\odot z=1}g(z)+\sum_{x\odot y=1}f(y)\sum_{x\odot z=0}g(z)\right)\\\\
-&=\sum_{(x\odot y)\;\mathrm{xor}\;(x\odot z)=0}f(y)g(z)-\sum_{(x\odot y)\;\mathrm{xor}\;(x\odot z)=1}f(y)g(z)\\\\
-&=\sum_{x\odot (y\;\mathrm{xor}\;z)=0}f(y)g(z)-\sum_{x\odot (y\;\mathrm{xor}\;z)=1}f(y)g(z)\\\\
+&=\left(\sum_{x\odot y=0}f(y)-\sum_{x\odot y=1}f(y)\right)\times \left(\sum_{x\odot y=0}g(y)-\sum_{x\odot y=1}g(y)\right)\\
+&=\left(\sum_{x\odot y=0}f(y)\sum_{x\odot z=0}g(z)+\sum_{x\odot y=1}f(y)\sum_{x\odot z=1}g(z)\right)-\left(\sum_{x\odot y=0}f(y)\sum_{x\odot z=1}g(z)+\sum_{x\odot y=1}f(y)\sum_{x\odot z=0}g(z)\right)\\
+&=\sum_{(x\odot y)\;\mathrm{xor}\;(x\odot z)=0}f(y)g(z)-\sum_{(x\odot y)\;\mathrm{xor}\;(x\odot z)=1}f(y)g(z)\\
+&=\sum_{x\odot (y\;\mathrm{xor}\;z)=0}f(y)g(z)-\sum_{x\odot (y\;\mathrm{xor}\;z)=1}f(y)g(z)\\
 &=\hat{h}(x)
 \end{aligned}
 $$
