@@ -81,7 +81,7 @@ f(l,r,m)=\begin{cases}
 \end{cases}
 $$
 - 求 $\sum\limits_{1\leq l < r \leq n}\sum\limits_{2\leq m \leq M}f(l,r,m)$
-- $1\leq n\leq 5\times 10^5,0\leq a_i\leq M,2\leq M\leq 10^6$
+- $1\leq n\leq 8000,0\leq a_i\leq M,2\leq M\leq 10^6$
 
 注意到使两个整数 $x,y$ 同余的最大模数是 $\left|x-y\right|$，而其余模数都是它的因数。（是的三个人赛时 $0$ 人看出这个性质）
 
