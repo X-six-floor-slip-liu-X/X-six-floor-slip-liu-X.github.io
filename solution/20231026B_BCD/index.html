@@ -30,7 +30,7 @@
         <link rel="alternate" type="application/rss+xml" title="已更新内容的 RSS 订阅" href="../../feed_rss_updated.xml">
       
       <link rel="icon" href="../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
 	<meta name="format-detection" content="telephone=no">
 	<script>
@@ -50,10 +50,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -5874,7 +5874,7 @@
 <p>并且如果你不算初始的平面的话，<span class="arithmatex">\(V+F-E\)</span> 就是<strong>平面图连通块个数</strong>！</p>
 <p>注意到题目对于连通块的定义是<strong>四连通块</strong>，即每个黑色方格向上下左右黑色方格连边组成的连通块，恰好符合平面图的定义。那么我们可以考虑维护 <span class="arithmatex">\(V+F-E\)</span> 来判断矩阵内连通块个数。</p>
 <p>回到我们的核心思路，即我们在<strong>固定 <span class="arithmatex">\(x_1,x_2\)</span> 后求出有多少个 <span class="arithmatex">\(y_2\)</span> 能和枚举的 <span class="arithmatex">\(y_1\)</span> 匹配</strong>。由于固定了 <span class="arithmatex">\(x_1,x_2\)</span>，那么久只需要处理一个一维的问题了，很容易想到维护前缀和。</p>
-<p>首先对于一个前缀，边和点的数量是好统计的，但是面的数量不好做，怎么办呢？注意到合法区间是没有空穴的，而除去空穴，**所有的面都是 <span class="arithmatex">\(2\times 2\)</span> 的矩形！**这就非常好做了。设 <span class="arithmatex">\(v_i\)</span> 为 <span class="arithmatex">\(1\sim i\)</span> 的前缀点的个数（即黑色方格的个数）。为方便前缀和，边要统计两种，设 <span class="arithmatex">\(e1_i\)</span> 为竖着的边的个数（即 <span class="arithmatex">\(a_{x,y}=1\)</span> 且 <span class="arithmatex">\(a_{x+1,y}=1\)</span>，并且都在 <span class="arithmatex">\(x_1,x_2\)</span> 范围内），<span class="arithmatex">\(e2_i\)</span> 为横着的边的个数（即 <span class="arithmatex">\(a_{x,y}=1\)</span> 且 <span class="arithmatex">\(a_{x,y-1}=1\)</span>，并且 <span class="arithmatex">\(y\le i\)</span>，即往前统计）。然后类似于 <span class="arithmatex">\(e2\)</span>，我们定义 <span class="arithmatex">\(f_i\)</span> 为 <span class="arithmatex">\(2\times 2\)</span> 面的个数，并且同样是往前统计。</p>
+<p>首先对于一个前缀，边和点的数量是好统计的，但是面的数量不好做，怎么办呢？注意到合法区间是没有空穴的，而除去空穴，<strong>所有的面都是 <span class="arithmatex">\(2\times 2\)</span> 的矩形！</strong>这就非常好做了。设 <span class="arithmatex">\(v_i\)</span> 为 <span class="arithmatex">\(1\sim i\)</span> 的前缀点的个数（即黑色方格的个数）。为方便前缀和，边要统计两种，设 <span class="arithmatex">\(e1_i\)</span> 为竖着的边的个数（即 <span class="arithmatex">\(a_{x,y}=1\)</span> 且 <span class="arithmatex">\(a_{x+1,y}=1\)</span>，并且都在 <span class="arithmatex">\(x_1,x_2\)</span> 范围内），<span class="arithmatex">\(e2_i\)</span> 为横着的边的个数（即 <span class="arithmatex">\(a_{x,y}=1\)</span> 且 <span class="arithmatex">\(a_{x,y-1}=1\)</span>，并且 <span class="arithmatex">\(y\le i\)</span>，即往前统计）。然后类似于 <span class="arithmatex">\(e2\)</span>，我们定义 <span class="arithmatex">\(f_i\)</span> 为 <span class="arithmatex">\(2\times 2\)</span> 面的个数，并且同样是往前统计。</p>
 <p>那么一个 <span class="arithmatex">\(y_2\)</span> 能和 <span class="arithmatex">\(y_1\)</span> 匹配，当且仅当 <span class="arithmatex">\((v_{y_2}-v_{y_1-1})+(f_{y_2}-f_{y_1})-(e1_{y_2}-e1_{y_1-1})-(e2_{y_2}-e2_{y_1})=1\)</span>（注意有哪些下标是 <span class="arithmatex">\(y_1\)</span>，哪些是 <span class="arithmatex">\(y_1-1\)</span>），即 <span class="arithmatex">\((v_{y_2}+f_{y_2}-e1_{y_2}-e2_{y_2})-(v_{y_1-1}+f_{y_1}-e1_{y_1-}-e2_{y_1})=1\)</span>，且 <span class="arithmatex">\(y_2&lt;lim_{x_1,x_2,y_2}\)</span>。</p>
 <p>容易发现，随着 <span class="arithmatex">\(y_1\)</span> 的减小，<span class="arithmatex">\(lim_{x_1,x_2,y_2}\)</span> 是单调不增的，那么可以类似于滑动窗口的做，由于 <span class="arithmatex">\(v_{y_2}+f_{y_2}-e1_{y_2}-e2_{y_2}\)</span> 的值域大约是 <span class="arithmatex">\([-n^2,2n^2]\)</span>，你可以直接开个数组记每个值出现了多少次，复杂度 <span class="arithmatex">\(O(n^3)\)</span>。</p>
 <p>注意 <span class="arithmatex">\(v,f,e1,e2\)</span> 每次单独求复杂度是错的，可以考虑先纵向求出每一列的答案然后每次扫的时候再拼成前缀和。</p>
@@ -6346,10 +6346,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
       
         <script src="../../js/mathjax/tex-chtml.js"></script>
       
